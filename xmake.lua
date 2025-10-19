@@ -33,11 +33,11 @@ target("swiftlys2")
     add_files({
         "src/**/*.cpp",
 
-        sdk_path.."/tier1/keyvalues3.cpp",
-        sdk_path.."/entity2/entitysystem.cpp",
-        sdk_path.."/entity2/entityidentity.cpp",
-        sdk_path.."/tier1/convar.cpp",
-        sdk_path.."/entity2/entitykeyvalues.cpp",
+        sdk_path.."/public/tier1/keyvalues3.cpp",
+        sdk_path.."/public/entity2/entitysystem.cpp",
+        sdk_path.."/public/entity2/entityidentity.cpp",
+        sdk_path.."/public/tier1/convar.cpp",
+        sdk_path.."/public/entity2/entitykeyvalues.cpp",
         sdk_path.."/public/tier0/memoverride.cpp",
     }, { cxxflags = "-rdynamic -g1" })
 
