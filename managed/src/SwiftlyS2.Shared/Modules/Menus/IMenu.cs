@@ -15,8 +15,9 @@ public interface IMenu
     public bool? ShouldFreeze { get; set; }
     public bool? CloseOnSelect { get; set; }
     public Color RenderColor { get; set; }
-    public IMenuManager MenuManager { get; }
+    public IMenuManager MenuManager { get; set; }
     public float AutoCloseAfter { get; set; }
+    public IMenuBuilder Builder { get; }
 
     event Action<IPlayer>? OnOpen;
     event Action<IPlayer>? OnClose;

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Text;
 using SwiftlyS2.Core.Menu.Options;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Menus;
@@ -22,9 +23,10 @@ internal class Menu : IMenu
     public bool? CloseOnSelect { get; set; } = false;
     public Color RenderColor { get; set; } = new(255, 255, 255, 255);
 
-    public IMenuManager MenuManager { get; private set; }
+    public IMenuManager MenuManager { get; set; }
 
     public float AutoCloseAfter { get; set; } = 0.0f;
+    public IMenuBuilder Builder => new MenuBuilder().SetMenu(this);
 
     public event Action<IPlayer>? OnOpen;
     public event Action<IPlayer>? OnClose;
@@ -41,6 +43,7 @@ internal class Menu : IMenu
     {
         NativePlayer.ClearCenterMenuRender(player.PlayerID);
         OnClose?.Invoke(player);
+        if (ShouldFreeze == true) SetFreezeState(player, false);
     }
 
     public void MoveSelection(IPlayer player, int offset)
@@ -65,15 +68,97 @@ internal class Menu : IMenu
     {
         BeforeRender?.Invoke(player);
 
+        var visibleOptions = Options.Where(option => option.ShouldShow(player)).ToList();
+
+        var maxVisibleOptions = MaxVisibleOptions;
+        var totalOptions = visibleOptions.Count;
+
+        if (SelectedIndex[player] < 0 && totalOptions > 0)
+        {
+            for (int i = 0; i < totalOptions; i++)
+            {
+                if (IsOptionSelectable(visibleOptions[i]))
+                {
+                    SelectedIndex[player] = i;
+                    break;
+                }
+            }
+        }
+
+        var startIndex = SelectedIndex[player];
+        var endIndex = Math.Min(startIndex + maxVisibleOptions, Options.Count);
+
+        var html = new StringBuilder();
+
+        html.Append($"<font class='fontSize-m' color='#{RenderColor.ToHex(true)}'>{Title}</font>");
+
+        if (totalOptions > maxVisibleOptions)
+        {
+            html.Append($"<font class='fontSize-s' color='#FFFFFF'> [{SelectedIndex[player] + 1}/{Options.Count}]</font>");
+        }
+
+        html.Append("<font color='#FFFFFF' class='fontSize-sm'><br>");
+
+        for (int i = startIndex; i < endIndex; i++)
+        {
+            var option = visibleOptions[i];
+            var isSelected = i == SelectedIndex[player];
+            var arrowSizeClass = MenuSizeHelper.GetSizeClass(option.GetTextSize());
+
+            if (isSelected)
+            {
+                html.Append($"<font color='#{RenderColor.ToHex(true)}' class='{arrowSizeClass}'>{MenuManager.Settings.NavigationPrefix} </font>");
+            }
+            else
+            {
+                html.Append("\u00A0\u00A0\u00A0 ");
+            }
+
+            html.Append(option.GetDisplayText(player));
+
+            html.Append("<br>");
+        }
+
+        html.Append("<br>");
+
+        html.Append(BuildFooter(Parent != null));
+
+        html.Append("</font>");
+
+        RenderedText[player] = html.ToString();
+
         NativePlayer.SetCenterMenuRender(player.PlayerID, RenderedText[player]);
 
         AfterRender?.Invoke(player);
+    }
+    
+    private string BuildFooter(bool isSubmenu)
+    {
+        var footer = new StringBuilder("<font color='#ffffff' class='fontSize-s'>");
+
+        var isWASD = MenuManager.Settings.InputMode == "wasd";
+        var selectDisplay = isWASD ? "D" : MenuManager.Settings.ButtonsUse.ToUpper();
+        var scrollDisplay = isWASD ? "W/S" : MenuManager.Settings.ButtonsScroll.ToUpper();
+        var exitDisplay = isWASD ? "A" : MenuManager.Settings.ButtonsExit.ToUpper();
+
+        footer.Append($"Move: <font color='#{RenderColor.ToHex(true)}'>{scrollDisplay}</font>");
+
+        if (isSubmenu)
+        {
+            footer.Append($" | Use: <font color='#{RenderColor.ToHex(true)}'>{selectDisplay}</font>");
+        }
+
+        footer.Append($" | Exit: <font color='#{RenderColor.ToHex(true)}'>{exitDisplay}</font>");
+
+        footer.Append("</font><br>");
+        return footer.ToString();
     }
 
     public void Show(IPlayer player)
     {
         Rerender(player);
         OnOpen?.Invoke(player);
+        if (ShouldFreeze == true) SetFreezeState(player, true);
     }
 
     public void UseSelection(IPlayer player)
@@ -174,6 +259,11 @@ internal class Menu : IMenu
     public bool IsCurrentOptionSelectable(IPlayer player)
     {
         var option = Options[SelectedIndex[player]];
+        return IsOptionSelectable(option);
+    }
+
+    public bool IsOptionSelectable(IOption option)
+    {
         return option is ButtonMenuOption ||
                option is ToggleMenuOption ||
                option is SliderMenuButton ||

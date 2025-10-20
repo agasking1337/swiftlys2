@@ -5,6 +5,7 @@ namespace SwiftlyS2.Shared.Menus;
 
 public interface IMenuBuilder
 {
+    IMenuBuilder SetMenu(IMenu menu);
     IMenuBuilder AddButton(string text, Action<IPlayer>? onClick = null, IMenuTextSize size = IMenuTextSize.Medium);
     IMenuBuilder AddToggle(string text, bool defaultValue = false, Action<IPlayer, bool>? onToggle = null, IMenuTextSize size = IMenuTextSize.Medium);
     IMenuBuilder AddSlider(string text, float min, float max, float defaultValue, float step = 1, Action<IPlayer, float>? onChange = null, IMenuTextSize size = IMenuTextSize.Medium);
