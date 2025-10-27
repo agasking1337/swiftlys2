@@ -6,8 +6,11 @@ namespace SwiftlyS2.Shared.Natives;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct CCommand
 {
-    private const int COMMAND_MAX_ARGC = 64;
-    private const int COMMAND_MAX_LENGTH = 512;
+    private enum COMMAND : int
+    {
+        MAX_ARGC = 64,
+        MAX_LENGTH = 512,
+    };
 
     private int _argv0Size;
     private CUtlVectorFixedGrowable<byte> _argSBuffer;
@@ -17,9 +20,9 @@ public unsafe struct CCommand
     public CCommand()
     {
         _argv0Size = 0;
-        _argSBuffer = new CUtlVectorFixedGrowable<byte>(COMMAND_MAX_LENGTH);
-        _argvBuffer = new CUtlVectorFixedGrowable<byte>(COMMAND_MAX_LENGTH);
-        _args = new CUtlVectorFixedGrowable<nint>(COMMAND_MAX_ARGC);
+        _argSBuffer = new CUtlVectorFixedGrowable<byte>((int)COMMAND.MAX_LENGTH);
+        _argvBuffer = new CUtlVectorFixedGrowable<byte>((int)COMMAND.MAX_LENGTH);
+        _args = new CUtlVectorFixedGrowable<nint>((int)COMMAND.MAX_ARGC);
         EnsureBuffers();
         Reset();
     }
@@ -27,9 +30,9 @@ public unsafe struct CCommand
     public CCommand(int argc, nint ppArgV)
     {
         _argv0Size = 0;
-        _argSBuffer = new CUtlVectorFixedGrowable<byte>(COMMAND_MAX_LENGTH);
-        _argvBuffer = new CUtlVectorFixedGrowable<byte>(COMMAND_MAX_LENGTH);
-        _args = new CUtlVectorFixedGrowable<nint>(COMMAND_MAX_ARGC);
+        _argSBuffer = new CUtlVectorFixedGrowable<byte>((int)COMMAND.MAX_LENGTH);
+        _argvBuffer = new CUtlVectorFixedGrowable<byte>((int)COMMAND.MAX_LENGTH);
+        _args = new CUtlVectorFixedGrowable<nint>((int)COMMAND.MAX_ARGC);
         EnsureBuffers();
         Reset();
 
@@ -170,7 +173,7 @@ public unsafe struct CCommand
 
     public static int MaxCommandLength()
     {
-        return COMMAND_MAX_LENGTH - 1;
+        return (int)COMMAND.MAX_LENGTH - 1;
     }
 
     public static characterset_t* DefaultBreakSet()
