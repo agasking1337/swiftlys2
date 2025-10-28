@@ -81,6 +81,7 @@ internal class CoreHookService : IDisposable
         {
           ItemServices = itemServices,
           EconItemView = econItemView,
+          WeaponVData = _Core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
           AcquireMethod = (AcquireMethod)acquireMethod,
           OriginalResult = (AcquireResult)result
         };
