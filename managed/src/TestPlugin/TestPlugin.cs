@@ -457,7 +457,7 @@ public class TestPlugin : BasePlugin
 
     var filter = new CTraceFilter
     {
-      unk01 = 1,
+      // unk01 = 1,
       IterateEntities = true,
       QueryShapeAttributes = new RnQueryShapeAttr_t
       {
@@ -466,21 +466,21 @@ public class TestPlugin : BasePlugin
         InteractsAs = MaskTrace.Empty,
         CollisionGroup = CollisionGroup.Default,
         ObjectSetMask = RnQueryObjectSet.AllGameEntities,
-        HitSolid = true,
-        HitTrigger = false,
-        HitSolidRequiresGenerateContacts = false,
-        ShouldIgnoreDisabledPairs = true,
-        IgnoreIfBothInteractWithHitboxes = true,
+        // HitSolid = true,
+        // HitTrigger = false,
+        // HitSolidRequiresGenerateContacts = false,
+        // ShouldIgnoreDisabledPairs = true,
+        // IgnoreIfBothInteractWithHitboxes = true,
         ForceHitEverything = true
       }
     };
 
-    filter.QueryShapeAttributes.EntityIdsToIgnore[0] = unchecked((uint)-1);
-    filter.QueryShapeAttributes.EntityIdsToIgnore[1] = unchecked((uint)-1);
-    filter.QueryShapeAttributes.OwnerIdsToIgnore[0] = unchecked((uint)-1);
-    filter.QueryShapeAttributes.OwnerIdsToIgnore[1] = unchecked((uint)-1);
-    filter.QueryShapeAttributes.HierarchyIds[0] = 0;
-    filter.QueryShapeAttributes.HierarchyIds[1] = 0;
+    // filter.QueryShapeAttributes.EntityIdsToIgnore[0] = unchecked((uint)-1);
+    // filter.QueryShapeAttributes.EntityIdsToIgnore[1] = unchecked((uint)-1);
+    // filter.QueryShapeAttributes.OwnerIdsToIgnore[0] = unchecked((uint)-1);
+    // filter.QueryShapeAttributes.OwnerIdsToIgnore[1] = unchecked((uint)-1);
+    // filter.QueryShapeAttributes.HierarchyIds[0] = 0;
+    // filter.QueryShapeAttributes.HierarchyIds[1] = 0;
 
     var trace = new CGameTrace();
     Core.Trace.TraceShape(origin, targetOrigin, ray, filter, ref trace);
