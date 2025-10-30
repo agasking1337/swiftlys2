@@ -57,7 +57,8 @@ public class TestPlugin : BasePlugin
   public TestPlugin(ISwiftlyCore core) : base(core)
   {
     Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-
+    // Console.WriteLine($"sizeof(bool): {sizeof(bool)}");
+    // Console.WriteLine($"Marshal.SizeOf<bool>: {Marshal.SizeOf<bool>()}");
     Core.Event.OnWeaponServicesCanUseHook += (@event) =>
     {
       // Console.WriteLine($"WeaponServicesCanUse: {@event.Weapon.WeaponBaseVData.AttackMovespeedFactor} {@event.OriginalResult}");
@@ -442,6 +443,12 @@ public class TestPlugin : BasePlugin
   [Command("tt8")]
   public unsafe void TestCommand8(ICommandContext context)
   {
+    Core.EntitySystem.GetAllEntitiesByDesignerName<CBuyZone>("func_buyzone").ToList().ForEach(zone =>
+    {
+      if (!(zone?.IsValid ?? false)) return;
+      zone.Despawn();
+    });
+
     var sender = context.Sender!;
     var target = Core.PlayerManager.GetAllPlayers().FirstOrDefault(p => p.PlayerID != sender.PlayerID)!;
 
@@ -463,17 +470,17 @@ public class TestPlugin : BasePlugin
       IterateEntities = true,
       QueryShapeAttributes = new RnQueryShapeAttr_t
       {
-        InteractsWith = MaskTrace.Player,
+        InteractsWith = MaskTrace.Player | MaskTrace.Solid | MaskTrace.Hitbox | MaskTrace.Npc,
         InteractsExclude = MaskTrace.Empty,
-        InteractsAs = MaskTrace.Empty,
-        CollisionGroup = CollisionGroup.Default,
+        InteractsAs = MaskTrace.Player,
+        CollisionGroup = CollisionGroup.PlayerMovement,
         ObjectSetMask = RnQueryObjectSet.AllGameEntities,
-        // HitSolid = true,
+        HitSolid = true,
         // HitTrigger = false,
         // HitSolidRequiresGenerateContacts = false,
         // ShouldIgnoreDisabledPairs = true,
         // IgnoreIfBothInteractWithHitboxes = true,
-        ForceHitEverything = true
+        // ForceHitEverything = true
       }
     };
 
