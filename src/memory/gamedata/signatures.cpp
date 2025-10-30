@@ -84,7 +84,7 @@ void GameDataSignatures::Load(const std::string& game)
                 logger->Info("GameData", fmt::format("Searching for signature '{}'...\n", key));
 
                 void* sig = nullptr;
-                if (signature.at(0) == '@') s2binlib_find_symbol(lib.c_str(), signature.substr(1).c_str(), &sig);
+                if (signature.at(0) == '@' && signature.find(" ") == std::string::npos) s2binlib_find_symbol(lib.c_str(), signature.substr(1).c_str(), &sig);
                 else sig = FindSignature(lib, signature);
 
                 if (!sig)

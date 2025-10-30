@@ -16,6 +16,11 @@ public interface IOnItemServicesCanAcquireHookEvent {
   public CEconItemView EconItemView { get; }
 
   /// <summary>
+  /// The weapon vdata if found, otherwise null.
+  /// </summary>
+  public CCSWeaponBaseVData? WeaponVData { get; }
+
+  /// <summary>
   /// The acquire method.
   /// </summary>
   public AcquireMethod AcquireMethod { get; }

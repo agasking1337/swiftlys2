@@ -185,7 +185,12 @@ bool CPlayer::IsAuthorized()
 bool CPlayer::IsFakeClient()
 {
     auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return (*(uint32_t*)schema->GetPropPtr(GetController(), CBaseEntity_m_fFlags)) & Flags_t::FL_FAKECLIENT;
+    if (!GetController()) return true;
+
+    uint32_t* flagsPtr = (uint32_t*)schema->GetPropPtr(GetController(), CBaseEntity_m_fFlags);
+    if (flagsPtr == nullptr) return true;
+
+    return (*flagsPtr & Flags_t::FL_FAKECLIENT);
 }
 
 uint32_t CPlayer::GetConnectedTime()
