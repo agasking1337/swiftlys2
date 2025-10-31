@@ -109,6 +109,28 @@ public class TestPlugin : BasePlugin
     //   if (@event.HookMode == HookMode.Pre) return;
     //   Core.Logger.LogInformation("CommandExecute: {name} with {args}", @event.Command[0], @event.Command.ArgS);
     // };
+
+    Core.Event.OnEntityTouchHook += (@event) =>
+    {
+      switch (@event.TouchType)
+      {
+        case EntityTouchType.StartTouch:
+          Console.WriteLine($"EntityStartTouch: {@event.Entity.Entity?.DesignerName} -> {@event.OtherEntity.Entity?.DesignerName}");
+          break;
+        case EntityTouchType.Touch:
+          break;
+        case EntityTouchType.EndTouch:
+          if (@event.Entity.Entity?.DesignerName != "player" || @event.OtherEntity.Entity?.DesignerName != "player")
+          {
+            return;
+          }
+          var player = @event.Entity.As<CCSPlayerPawn>();
+          var otherPlayer = @event.OtherEntity.As<CCSPlayerPawn>();
+          Console.WriteLine($"EntityEndTouch: {(player.Controller.Value?.PlayerName ?? string.Empty)} -> {(otherPlayer.Controller.Value?.PlayerName ?? string.Empty)}");
+          break;
+      }
+    };
+
     Core.Engine.ExecuteCommandWithBuffer("@ping", (buffer) =>
     {
       Console.WriteLine($"pong: {buffer}");
@@ -411,6 +433,12 @@ public class TestPlugin : BasePlugin
   [Command("tt3")]
   public void TestCommand33(ICommandContext context)
   {
+    var ent = Core.EntitySystem.CreateEntity<CPhysicsPropOverride>();
+    using CEntityKeyValues kv = new();
+    kv.Set<uint>("m_spawnflags", 256);
+    ent.DispatchSpawn(kv);
+    ent.SetModel("weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl");
+    ent.Teleport(new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
   }
 
   [Command("tt4")]
