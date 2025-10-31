@@ -99,7 +99,7 @@ public class TestPlugin : BasePlugin
     //   return HookResult.Continue;
     // });
     
-    Core.Event.OnConsoleOutput += (@event) =>
+    // Core.Event.OnConsoleOutput += (@event) =>
     // {
     //   Console.WriteLine($"[TestPlugin] ConsoleOutput: {@event.Message}");
     // };
@@ -112,7 +112,7 @@ public class TestPlugin : BasePlugin
 
     // Core.Event.OnEntityStartTouchHook += (@event) =>
     // {
-    //   // Console.WriteLine($"EntityStartTouch: {@event.Entity.Entity?.DesignerName} {@event.OtherEntity.Entity?.DesignerName}");
+    //   Console.WriteLine($"EntityStartTouch: {@event.Entity.Entity?.DesignerName} {@event.OtherEntity.Entity?.DesignerName}");
     // };
 
     // Core.Event.OnEntityTouchHook += (@event) =>
@@ -128,7 +128,7 @@ public class TestPlugin : BasePlugin
     //   }
     //   var player = @event.Entity.As<CCSPlayerPawn>();
     //   var otherPlayer = @event.OtherEntity.As<CCSPlayerPawn>();
-    //   // Console.WriteLine($"EntityTouch: {(player.Controller.Value?.PlayerName ?? string.Empty)} -> {(otherPlayer.Controller.Value?.PlayerName ?? string.Empty)}");
+    //   Console.WriteLine($"EntityTouch: {(player.Controller.Value?.PlayerName ?? string.Empty)} -> {(otherPlayer.Controller.Value?.PlayerName ?? string.Empty)}");
     // };
 
     Core.Engine.ExecuteCommandWithBuffer("@ping", (buffer) =>
