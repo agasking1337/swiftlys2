@@ -294,6 +294,11 @@ public interface IMenuBuilder
     /// </summary>
     /// <param name="count">The maximum number of visible items.</param>
     /// <returns>The current menu builder instance for method chaining.</returns>
+    /// <remarks>
+    /// If the provided count is less than 1, it will be clamped to 1.
+    /// If the provided count is greater than 5, it will be clamped to 5.
+    /// A warning will be logged when clamping occurs.
+    /// </remarks>
     IMenuBuilder MaxVisibleItems(int count);
 
     /// <summary>

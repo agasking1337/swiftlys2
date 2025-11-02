@@ -561,6 +561,8 @@ public class TestPlugin : BasePlugin
 
     IMenu settingsMenu = Core.Menus.CreateMenu("Settings");
 
+    settingsMenu.Builder.MaxVisibleItems(Random.Shared.Next(-2, 8));
+
     if (!int.TryParse(context.Args[0], out int type)) type = 0;
 
     settingsMenu.Builder.SetScrollStyle(type switch

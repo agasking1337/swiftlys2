@@ -307,7 +307,11 @@ internal class MenuBuilder : IMenuBuilder
 
     public IMenuBuilder MaxVisibleItems(int count)
     {
-        _menu!.MaxVisibleOptions = Math.Max(1, count);
+        if (count < 1 || count > 5)
+        {
+            Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(count), $"MaxVisibleItems: value {count} is out of range [1, 5]."));
+        }
+        _menu!.MaxVisibleOptions = Math.Clamp(count, 1, 5);
         return this;
     }
 
