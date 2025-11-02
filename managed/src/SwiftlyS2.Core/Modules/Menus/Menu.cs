@@ -127,72 +127,34 @@ internal class Menu : IMenu
                 var selectedIdx = SelectedIndex[player];
                 var halfVisible = maxVisibleOptions / 2;
 
-                int startIndex;
-                int arrowPosition;
+                var (startIndex, arrowPosition) = ScrollStyle switch
+                {
+                    MenuScrollStyle.WaitingCenter when selectedIdx < halfVisible
+                        => (0, selectedIdx),                                                                        // WaitingCenter: (Near top) start from 0, arrow at selected
+                    MenuScrollStyle.WaitingCenter when selectedIdx >= totalOptions - halfVisible
+                        => (totalOptions - maxVisibleOptions, selectedIdx - (totalOptions - maxVisibleOptions)),    // WaitingCenter: (Near bottom) show last items, adjust arrow
+                    MenuScrollStyle.WaitingCenter
+                        => (selectedIdx - halfVisible, halfVisible),                                                // WaitingCenter: (Middle) center selected item, arrow at middle
 
-                if (ScrollStyle == MenuScrollStyle.WaitingCenter)
-                {
-                    if (selectedIdx < halfVisible)
-                    {
-                        startIndex = 0;
-                        arrowPosition = selectedIdx;
-                    }
-                    else if (selectedIdx >= totalOptions - halfVisible)
-                    {
-                        startIndex = totalOptions - maxVisibleOptions;
-                        arrowPosition = selectedIdx - startIndex;
-                    }
-                    else
-                    {
-                        startIndex = selectedIdx - halfVisible;
-                        arrowPosition = halfVisible;
-                    }
-                }
-                else if (ScrollStyle == MenuScrollStyle.LinearScroll)
-                {
-                    if (maxVisibleOptions == 1)
-                    {
-                        startIndex = selectedIdx;
-                        arrowPosition = 0;
-                    }
-                    else if (selectedIdx < maxVisibleOptions - 1)
-                    {
-                        startIndex = 0;
-                        arrowPosition = selectedIdx;
-                    }
-                    else if (selectedIdx >= totalOptions - (maxVisibleOptions - 1))
-                    {
-                        startIndex = totalOptions - maxVisibleOptions;
-                        arrowPosition = selectedIdx - startIndex;
-                    }
-                    else
-                    {
-                        startIndex = selectedIdx - (maxVisibleOptions - 2);
-                        arrowPosition = selectedIdx - startIndex;
-                    }
-                }
-                else
-                {
-                    arrowPosition = halfVisible;
-                    startIndex = -1;
-                }
+                    MenuScrollStyle.LinearScroll when maxVisibleOptions == 1
+                        => (selectedIdx, 0),                                                                                // LinearScroll: (Only one visible) show selected item, arrow at top
+
+                    MenuScrollStyle.LinearScroll when selectedIdx < maxVisibleOptions - 1
+                        => (0, selectedIdx),                                                                                // LinearScroll: (Near top) start from 0, arrow at selected
+                    MenuScrollStyle.LinearScroll when selectedIdx >= totalOptions - (maxVisibleOptions - 1)
+                        => (totalOptions - maxVisibleOptions, selectedIdx - (totalOptions - maxVisibleOptions)),            // LinearScroll: (Near bottom) show last items, adjust arrow
+                    MenuScrollStyle.LinearScroll
+                        => (selectedIdx - (maxVisibleOptions - 2), selectedIdx - (selectedIdx - (maxVisibleOptions - 2))),  // LinearScroll: (Middle) scroll with selection, keep arrow near bottom
+
+                    _
+                        => (-1, halfVisible)    // CenterFixed: no scroll, arrow at middle
+                };
 
                 for (int i = 0; i < maxVisibleOptions; i++)
                 {
-                    int actualIndex;
-                    bool isSelected;
-
-                    if (ScrollStyle == MenuScrollStyle.CenterFixed)
-                    {
-                        var offset = i - halfVisible;
-                        actualIndex = (selectedIdx + offset + totalOptions) % totalOptions;
-                        isSelected = offset == 0;
-                    }
-                    else
-                    {
-                        actualIndex = startIndex + i;
-                        isSelected = i == arrowPosition;
-                    }
+                    var (actualIndex, isSelected) = ScrollStyle == MenuScrollStyle.CenterFixed
+                        ? ((selectedIdx + i - halfVisible + totalOptions) % totalOptions, i == halfVisible) // CenterFixed: circular wrap, arrow at center
+                        : (startIndex + i, i == arrowPosition);                                             // WaitingCenter / LinearScroll: linear offset, arrow at position
 
                     var option = visibleOptions[actualIndex];
                     var arrowSizeClass = MenuSizeHelper.GetSizeClass(option.GetTextSize());

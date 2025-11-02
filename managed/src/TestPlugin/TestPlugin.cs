@@ -561,7 +561,7 @@ public class TestPlugin : BasePlugin
 
     IMenu settingsMenu = Core.Menus.CreateMenu("Settings");
 
-    settingsMenu.Builder.MaxVisibleItems(1);
+    settingsMenu.Builder.MaxVisibleItems(5);
     // settingsMenu.Builder.MaxVisibleItems(Random.Shared.Next(-2, 8));
 
     if (!int.TryParse(context.Args[0], out int type)) type = 0;
@@ -596,8 +596,10 @@ public class TestPlugin : BasePlugin
     settingsMenu.Builder.AddText("5. Text");
     settingsMenu.Builder.AddText("6. Text");
     settingsMenu.Builder.AddText("7. Text");
+    settingsMenu.Builder.AddText("8. Text");
+    settingsMenu.Builder.AddText("9. Text");
 
-    settingsMenu.Builder.AddProgressBar("8. ProgressBar", () => 0.5f);
+    // settingsMenu.Builder.AddProgressBar("8. ProgressBar", () => 0.5f);
 
     Core.Menus.OpenMenu(player, settingsMenu);
   }
