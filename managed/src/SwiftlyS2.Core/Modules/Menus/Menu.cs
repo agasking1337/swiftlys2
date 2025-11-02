@@ -150,19 +150,26 @@ internal class Menu : IMenu
                 }
                 else if (ScrollStyle == MenuScrollStyle.LinearScroll)
                 {
-                    if (selectedIdx < maxVisibleOptions - 1)
+                    if (maxVisibleOptions == 1)
+                    {
+                        startIndex = selectedIdx;
+                        arrowPosition = 0;
+                    }
+                    else if (selectedIdx < maxVisibleOptions - 1)
                     {
                         startIndex = 0;
+                        arrowPosition = selectedIdx;
                     }
                     else if (selectedIdx >= totalOptions - (maxVisibleOptions - 1))
                     {
                         startIndex = totalOptions - maxVisibleOptions;
+                        arrowPosition = selectedIdx - startIndex;
                     }
                     else
                     {
                         startIndex = selectedIdx - (maxVisibleOptions - 2);
+                        arrowPosition = selectedIdx - startIndex;
                     }
-                    arrowPosition = selectedIdx - startIndex;
                 }
                 else
                 {
