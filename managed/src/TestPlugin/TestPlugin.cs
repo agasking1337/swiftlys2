@@ -563,7 +563,7 @@ public class TestPlugin : BasePlugin
 
     settingsMenu.Builder.Design
       .MaxVisibleItems(5)
-      .SetGlobalHorizontalStyle(MenuHorizontalStyle.ScrollLeftFade(26f));
+      .SetGlobalHorizontalStyle(MenuHorizontalStyle.ScrollLeftLoop(26f));
 
     // settingsMenu.Builder.Design.MaxVisibleItems(Random.Shared.Next(-2, 8));
 

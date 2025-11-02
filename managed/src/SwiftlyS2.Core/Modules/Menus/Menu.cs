@@ -424,8 +424,8 @@ internal class Menu : IMenu
             MenuHorizontalOverflowStyle.TruncateBothEnds => TruncateTextBothEnds(text, HorizontalStyle.Value.MaxWidth),
             MenuHorizontalOverflowStyle.ScrollLeftFade => ScrollTextWithFade(text, HorizontalStyle.Value.MaxWidth, true),
             MenuHorizontalOverflowStyle.ScrollRightFade => ScrollTextWithFade(text, HorizontalStyle.Value.MaxWidth, false),
-            MenuHorizontalOverflowStyle.ScrollLeftLoop => text,
-            MenuHorizontalOverflowStyle.ScrollRightLoop => text,
+            MenuHorizontalOverflowStyle.ScrollLeftLoop => ScrollTextWithLoop($"{text.TrimEnd()} ", HorizontalStyle.Value.MaxWidth, true),
+            MenuHorizontalOverflowStyle.ScrollRightLoop => ScrollTextWithLoop($" {text.TrimStart()}", HorizontalStyle.Value.MaxWidth, false),
             _ => text
         };
     }
@@ -484,34 +484,73 @@ internal class Menu : IMenu
             startIndex = 0;
 
         var result = new StringBuilder();
-        // var fadeZone = Math.Max(1, visibleChars / 5);
 
         for (var i = 0; i < visibleChars && startIndex + i < text.Length; i++)
         {
             var ch = text[startIndex + i];
-
-            // var opacity = 1.0;
-
-            // if (scrollLeft && i < fadeZone)
-            // {
-            //     opacity = (double)i / fadeZone;
-            // }
-            // else if (!scrollLeft && i >= visibleChars - fadeZone)
-            // {
-            //     opacity = (double)(visibleChars - i) / fadeZone;
-            // }
-
-            // if (opacity < 1.0)
-            // {
-            //     var alpha = (int)(opacity * 255);
-            //     result.Append($"<font color='#{alpha:X2}FFFFFF'>{ch}</font>");
-            // }
-            // else
-            // {
-            //     result.Append(ch);
-            // }
-
             result.Append(ch);
+        }
+
+        return result.ToString();
+    }
+
+    private string ScrollTextWithLoop(string text, float maxWidth, bool scrollLeft)
+    {
+        var textKey = $"{text}_{scrollLeft}";
+
+        if (!ScrollOffsets.ContainsKey(textKey))
+            ScrollOffsets[textKey] = 0;
+
+        if (!ScrollCallCounts.ContainsKey(textKey))
+            ScrollCallCounts[textKey] = 0;
+
+        ScrollCallCounts[textKey]++;
+
+        if (ScrollCallCounts[textKey] >= 16)
+        {
+            ScrollCallCounts[textKey] = 0;
+            ScrollOffsets[textKey] = (ScrollOffsets[textKey] + 1) % text.Length;
+        }
+
+        var offset = ScrollOffsets[textKey];
+
+        static float GetCharWidth(char c) => c switch
+        {
+            >= '\u4E00' and <= '\u9FFF' => 2.0f,
+            >= '\u3000' and <= '\u303F' => 2.0f,
+            >= '\uFF00' and <= '\uFFEF' => 2.0f,
+            >= 'A' and <= 'Z' => 1.2f,
+            >= 'a' and <= 'z' => 1.0f,
+            >= '0' and <= '9' => 1.0f,
+            ' ' => 0.5f,
+            >= '!' and <= '/' => 0.8f,
+            >= ':' and <= '@' => 0.8f,
+            >= '[' and <= '`' => 0.8f,
+            >= '{' and <= '~' => 0.8f,
+            _ => 1.0f
+        };
+
+        var currentWidth = 0f;
+        var visibleChars = 0;
+
+        for (var i = 0; i < text.Length && currentWidth < maxWidth; i++)
+        {
+            currentWidth += GetCharWidth(text[i]);
+            if (currentWidth <= maxWidth)
+                visibleChars++;
+        }
+
+        if (visibleChars >= text.Length)
+            return text;
+
+        var result = new StringBuilder();
+
+        for (var i = 0; i < visibleChars; i++)
+        {
+            var charIndex = scrollLeft
+                ? (offset + i) % text.Length
+                : (text.Length - offset + i) % text.Length;
+            result.Append(text[charIndex]);
         }
 
         return result.ToString();
