@@ -43,6 +43,7 @@ internal partial class Menu : IMenu
     private List<IPlayer> PlayersWithMenuOpen { get; set; } = new();
     private ConcurrentDictionary<string, int> ScrollOffsets { get; set; } = new();
     private ConcurrentDictionary<string, int> ScrollCallCounts { get; set; } = new();
+    private ConcurrentDictionary<string, int> ScrollPauseCounts { get; set; } = new();
     internal ISwiftlyCore _Core { get; set; }
     public bool HasSound { get; set; } = true;
     public bool RenderOntick { get; set; } = false;
@@ -76,6 +77,7 @@ internal partial class Menu : IMenu
 
         ScrollOffsets.Clear();
         ScrollCallCounts.Clear();
+        ScrollPauseCounts.Clear();
     }
 
     public void MoveSelection(IPlayer player, int offset)
@@ -292,6 +294,7 @@ internal partial class Menu : IMenu
 
         ScrollOffsets.Clear();
         ScrollCallCounts.Clear();
+        ScrollPauseCounts.Clear();
     }
 
     public void UseSelection(IPlayer player)
@@ -873,12 +876,31 @@ internal partial class Menu
         var key = $"{plainText}_{scrollLeft}";
         ScrollOffsets.TryAdd(key, 0);
         ScrollCallCounts.TryAdd(key, 0);
+        ScrollPauseCounts.TryAdd(key, 0);
 
         var ticksPerScroll = style?.TicksPerScroll ?? HorizontalStyle?.TicksPerScroll ?? 16;
+        var pauseTicks = style?.PauseTicks ?? HorizontalStyle?.PauseTicks ?? 0;
+
+        // If currently pausing, decrement pause counter and maintain current offset
+        if (ScrollPauseCounts[key] > 0)
+        {
+            ScrollPauseCounts[key]--;
+            return ScrollOffsets[key];
+        }
+
+        // Increment call count and scroll when threshold is reached
         if (++ScrollCallCounts[key] >= ticksPerScroll)
         {
             ScrollCallCounts[key] = 0;
-            ScrollOffsets[key] = (ScrollOffsets[key] + 1) % wrapLength;
+            var newOffset = (ScrollOffsets[key] + 1) % wrapLength;
+
+            // When completing a full loop (offset returns to 0), start pause if configured
+            if (newOffset == 0 && pauseTicks > 0)
+            {
+                ScrollPauseCounts[key] = pauseTicks;
+            }
+
+            ScrollOffsets[key] = newOffset;
         }
 
         return ScrollOffsets[key];
