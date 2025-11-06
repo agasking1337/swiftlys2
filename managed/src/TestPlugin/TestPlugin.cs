@@ -327,7 +327,9 @@ public class TestPlugin : BasePlugin
     public void TestCommand1( ICommandContext context )
     {
         var ret = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
-        Console.WriteLine(Core.Engine.ServerIP);
+        Console.WriteLine(SteamGameServer.GetPublicIP().ToIPAddress());
+
+
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -544,7 +546,7 @@ public class TestPlugin : BasePlugin
 
     public void AuthResponse( ValidateAuthTicketResponse_t param )
     {
-        Console.WriteLine($"AuthResponse: {param.m_eAuthSessionResponse} -> {param.m_SteamID.m_SteamID}");
+        Console.WriteLine($"AuthResponse {param.m_eAuthSessionResponse} -> {param.m_SteamID.m_SteamID}");
     }
 
     [Command("getip")]
