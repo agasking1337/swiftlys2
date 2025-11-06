@@ -1,0 +1,139 @@
+using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Players;
+
+namespace SwiftlyS2.Shared.Menus;
+
+/// <summary>
+/// Defines configuration settings that control menu behavior.
+/// </summary>
+public record class MenuConfiguration
+{
+    /// <summary>
+    /// Whether to play sounds when players interact with the menu.
+    /// </summary>
+    public bool PlaySound { get; set; } = true;
+
+    /// <summary>
+    /// Maximum number of menu options displayed on screen at once.
+    /// </summary>
+    public int MaxVisibleItems { get; set; } = 5;
+
+    /// <summary>
+    /// Whether to freeze player movement while the menu is open.
+    /// </summary>
+    public bool FreezePlayer { get; set; } = false;
+
+    /// <summary>
+    /// Whether the menu automatically closes after the player selects an option.
+    /// </summary>
+    public bool CloseOnSelect { get; set; } = false;
+
+    /// <summary>
+    /// The color used to render the menu interface.
+    /// </summary>
+    public Color RenderColor { get; set; } = default;
+
+    /// <summary>
+    /// Time in seconds before the menu automatically closes. Set to 0 or less to disable auto-close.
+    /// </summary>
+    public float AutoCloseAfter { get; set; } = 0f;
+}
+
+/// <summary>
+/// Provides event data for menu-related events.
+/// </summary>
+public sealed class MenuOptionEventArgs : EventArgs
+{
+    /// <summary>
+    /// The player who triggered this menu event.
+    /// </summary>
+    public IPlayer? Player { get; init; }
+
+    /// <summary>
+    /// The menu option involved in this event, or null for lifecycle events like opening or closing the menu.
+    /// </summary>
+    public IMenuOption? Option { get; init; }
+}
+
+/// <summary>
+/// Represents an interactive menu that can be displayed to players.
+/// </summary>
+public interface IMenuAPI
+{
+    /// <summary>
+    /// Configuration settings for this menu.
+    /// </summary>
+    public MenuConfiguration Configuration { get; }
+
+    /// <summary>
+    /// The parent menu in a hierarchical menu structure, or null if this is a top-level menu.
+    /// </summary>
+    public IMenuAPI? Parent { get; }
+
+    /// <summary>
+    /// The menu title displayed to players.
+    /// </summary>
+    public string Title { get; }
+
+    /// <summary>
+    /// Read-only collection of all options in this menu.
+    /// </summary>
+    public IReadOnlyList<IMenuOption> Options { get; }
+
+    /// <summary>
+    /// The builder used to construct and configure this menu.
+    /// </summary>
+    public IMenuBuilderAPI Builder { get; }
+
+    /// <summary>
+    /// Fired when a player navigates to a different menu option.
+    /// </summary>
+    public event EventHandler<MenuOptionEventArgs>? SelectionMoved;
+
+    /// <summary>
+    /// Fired when a player selects a menu option. The Option property contains the selected option.
+    /// </summary>
+    public event EventHandler<MenuOptionEventArgs>? OptionSelected;
+
+    /// <summary>
+    /// Fired just before the menu is displayed to a player.
+    /// </summary>
+    public event EventHandler<MenuOptionEventArgs>? BeforeRender;
+
+    /// <summary>
+    /// Fired after the menu has been displayed to a player.
+    /// </summary>
+    public event EventHandler<MenuOptionEventArgs>? AfterRender;
+
+    /// <summary>
+    /// Displays this menu to the specified player.
+    /// </summary>
+    /// <param name="player">The player who will see the menu.</param>
+    public void Show( IPlayer player );
+
+    /// <summary>
+    /// Closes this menu for the specified player.
+    /// </summary>
+    /// <param name="player">The player whose menu will be closed.</param>
+    public void Close( IPlayer player );
+
+    /// <summary>
+    /// Adds a new option to this menu.
+    /// </summary>
+    /// <param name="option">The menu option to add.</param>
+    public void AddOption( IMenuOption option );
+
+    /// <summary>
+    /// Removes an option from this menu.
+    /// </summary>
+    /// <param name="option">The menu option to remove.</param>
+    /// <returns>True if the option was successfully removed; false if the option was not found.</returns>
+    public bool RemoveOption( IMenuOption option );
+
+    /// <summary>
+    /// Gets the menu option currently highlighted by the specified player.
+    /// </summary>
+    /// <param name="player">The player whose current selection to retrieve.</param>
+    /// <returns>The currently selected option, or null if nothing is selected.</returns>
+    public IMenuOption? GetCurrentOption( IPlayer player );
+}
