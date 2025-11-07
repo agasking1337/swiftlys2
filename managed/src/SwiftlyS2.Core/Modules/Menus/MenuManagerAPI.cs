@@ -1,12 +1,11 @@
-using System.Collections.Concurrent;
 using System.Globalization;
-using SwiftlyS2.Core.Menu.Options;
+using System.Collections.Concurrent;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Menus;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Sounds;
+using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Menus;
 
@@ -28,34 +27,32 @@ internal class MenuManagerAPI : IMenuManagerAPI
     public event EventHandler<MenuManagerEventArgs>? MenuOpened;
 
     private readonly ISwiftlyCore core;
-
-    private static readonly Dictionary<string, KeyKind> StringToKeyKind = new()
-    {
-        { "mouse1", KeyKind.Mouse1 },
-        { "mouse2", KeyKind.Mouse2 },
-        { "space", KeyKind.Space },
-        { "ctrl", KeyKind.Ctrl },
-        { "w", KeyKind.W },
-        { "a", KeyKind.A },
-        { "s", KeyKind.S },
-        { "d", KeyKind.D },
-        { "e", KeyKind.E },
-        { "esc", KeyKind.Esc },
-        { "r", KeyKind.R },
-        { "alt", KeyKind.Alt },
-        { "shift", KeyKind.Shift },
-        { "weapon1", KeyKind.Weapon1 },
-        { "weapon2", KeyKind.Weapon2 },
-        { "grenade1", KeyKind.Grenade1 },
-        { "grenade2", KeyKind.Grenade2 },
-        { "tab", KeyKind.Tab },
-        { "f", KeyKind.F },
-    };
-
     private readonly ConcurrentDictionary<IPlayer, IMenuAPI> openMenus = new();
-    private SoundEvent useSound = new();
-    private SoundEvent exitSound = new();
-    private SoundEvent scrollSound = new();
+    private readonly SoundEvent useSound = new();
+    private readonly SoundEvent exitSound = new();
+    private readonly SoundEvent scrollSound = new();
+
+    private static readonly Dictionary<string, KeyKind> StringToKeyKind = new() {
+        ["mouse1"] = KeyKind.Mouse1,
+        ["mouse2"] = KeyKind.Mouse2,
+        ["space"] = KeyKind.Space,
+        ["ctrl"] = KeyKind.Ctrl,
+        ["w"] = KeyKind.W,
+        ["a"] = KeyKind.A,
+        ["s"] = KeyKind.S,
+        ["d"] = KeyKind.D,
+        ["e"] = KeyKind.E,
+        ["esc"] = KeyKind.Esc,
+        ["r"] = KeyKind.R,
+        ["alt"] = KeyKind.Alt,
+        ["shift"] = KeyKind.Shift,
+        ["weapon1"] = KeyKind.Weapon1,
+        ["weapon2"] = KeyKind.Weapon2,
+        ["grenade1"] = KeyKind.Grenade1,
+        ["grenade2"] = KeyKind.Grenade2,
+        ["tab"] = KeyKind.Tab,
+        ["f"] = KeyKind.F,
+    };
 
     public MenuManagerAPI( ISwiftlyCore core )
     {
@@ -101,12 +98,12 @@ internal class MenuManagerAPI : IMenuManagerAPI
         core.Event.OnMapUnload -= OnMapUnload;
     }
 
-    void KeyStateChange( IOnClientKeyStateChangedEvent @event )
+    private void KeyStateChange( IOnClientKeyStateChangedEvent @event )
     {
         var player = core.PlayerManager.GetPlayer(@event.PlayerId);
         var menu = GetCurrentMenu(player);
 
-        if (menu == null || !player.IsValid || player.IsFakeClient || !@event.Pressed)
+        if (menu is null || !player.IsValid || player.IsFakeClient || !@event.Pressed)
         {
             return;
         }
@@ -118,7 +115,7 @@ internal class MenuManagerAPI : IMenuManagerAPI
             var exitKey = menu.KeybindOverrides.Exit ?? StringToKeyKind.GetValueOrDefault(Configuration.ButtonsExit);
             var useKey = menu.KeybindOverrides.Select ?? StringToKeyKind.GetValueOrDefault(Configuration.ButtonsUse);
 
-            new Dictionary<string, KeyKind> { { "Scroll", scrollKey }, { "ScrollBack", scrollBackKey }, { "Exit", exitKey }, { "Use", useKey } }
+            new Dictionary<string, KeyKind> { ["Scroll"] = scrollKey, ["ScrollBack"] = scrollBackKey, ["Exit"] = exitKey, ["Use"] = useKey }
                 .GroupBy(kvp => kvp.Value)
                 .Where(g => g.Count() > 1 && @event.Key.HasFlag(g.Key))
                 .ToList()
@@ -247,15 +244,13 @@ internal class MenuManagerAPI : IMenuManagerAPI
     private void OnClientDisconnected( IOnClientDisconnectedEvent @event )
     {
         var player = core.PlayerManager.GetPlayer(@event.PlayerId);
-        if (player == null)
+        if (player != null)
         {
-            return;
+            openMenus
+                .Where(kvp => kvp.Key == player)
+                .ToList()
+                .ForEach(kvp => CloseMenuForPlayer(player, kvp.Value));
         }
-
-        openMenus.Where(kvp => kvp.Key == player).ToList().ForEach(kvp =>
-        {
-            CloseMenuForPlayer(player, kvp.Value);
-        });
     }
 
     private void OnMapUnload( IOnMapUnloadEvent _ )
@@ -277,7 +272,10 @@ internal class MenuManagerAPI : IMenuManagerAPI
 
     public void OpenMenu( IMenuAPI menu )
     {
-        core.PlayerManager.GetAllPlayers().ToList().ForEach(player => OpenMenuForPlayer(player, menu));
+        core.PlayerManager
+            .GetAllPlayers()
+            .ToList()
+            .ForEach(player => OpenMenuForPlayer(player, menu));
     }
 
     public void OpenMenuForPlayer( IPlayer player, IMenuAPI menu )
@@ -287,22 +285,26 @@ internal class MenuManagerAPI : IMenuManagerAPI
             CloseMenuForPlayer(player, GetCurrentMenu(player)!);
         }
 
-        openMenus.AddOrUpdate(player, menu, ( key, oldValue ) => menu);
+        _ = openMenus.AddOrUpdate(player, _ => menu, ( _, _ ) => menu);
         menu.Show(player);
-        MenuOpened?.Invoke(this, new MenuManagerEventArgs() { Player = player, Menu = menu });
+        MenuOpened?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = menu });
     }
 
     public void CloseMenu( IMenuAPI menu )
     {
-        core.PlayerManager.GetAllPlayers().ToList().ForEach(player => CloseMenuForPlayer(player, menu));
+        core.PlayerManager
+            .GetAllPlayers()
+            .ToList()
+            .ForEach(player => CloseMenuForPlayer(player, menu));
     }
 
     public void CloseMenuForPlayer( IPlayer player, IMenuAPI menu )
     {
-        if (openMenus.TryRemove(player, out var currentMenu))
+        if (openMenus.TryRemove(player, out _))
         {
             menu.Close(player);
-            MenuClosed?.Invoke(this, new MenuManagerEventArgs() { Player = player, Menu = menu });
+            MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = menu });
+
             if (menu.Parent != null)
             {
                 OpenMenuForPlayer(player, menu.Parent);
@@ -312,17 +314,16 @@ internal class MenuManagerAPI : IMenuManagerAPI
 
     public void CloseAllMenus()
     {
-        foreach (var kvp in openMenus)
+        openMenus.ToList().ForEach(kvp =>
         {
-            var player = kvp.Key;
             var currentMenu = kvp.Value;
             while (currentMenu != null)
             {
-                currentMenu.Close(player);
-                MenuClosed?.Invoke(this, new MenuManagerEventArgs() { Player = player, Menu = currentMenu });
+                currentMenu.Close(kvp.Key);
+                MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = kvp.Key, Menu = currentMenu });
                 currentMenu = currentMenu.Parent;
             }
-        }
-        openMenus.Clear();
+            _ = openMenus.TryRemove(kvp.Key, out _);
+        });
     }
 }
