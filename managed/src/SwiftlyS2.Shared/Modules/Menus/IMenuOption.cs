@@ -14,6 +14,9 @@ public delegate ValueTask AsyncEventHandler<TEventArgs>( object? sender, TEventA
 /// <summary>
 /// Provides event data for menu option events.
 /// </summary>
+/// <remarks>
+/// The Player property will be null for this event since it's a global property change.
+/// </remarks>
 public sealed class MenuOptionEventArgs : EventArgs
 {
     /// <summary>
@@ -40,7 +43,7 @@ public sealed class MenuOptionFormattingEventArgs : EventArgs
     /// <summary>
     /// The menu option being formatted.
     /// </summary>
-    public IMenuOption? Option { get; init; }
+    public required IMenuOption Option { get; init; }
 
     /// <summary>
     /// Gets or sets custom text to use instead of the default text during HTML assembly.
@@ -61,7 +64,7 @@ public sealed class MenuOptionValidatingEventArgs : EventArgs
     /// <summary>
     /// The menu option being validated.
     /// </summary>
-    public IMenuOption? Option { get; init; }
+    public required IMenuOption Option { get; init; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the interaction should be canceled.
@@ -87,7 +90,7 @@ public sealed class MenuOptionClickEventArgs : EventArgs
     /// <summary>
     /// The menu option that was clicked.
     /// </summary>
-    public IMenuOption? Option { get; init; }
+    public required IMenuOption Option { get; init; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the menu should be closed after handling the click.
@@ -101,24 +104,33 @@ public sealed class MenuOptionClickEventArgs : EventArgs
 public interface IMenuOption
 {
     /// <summary>
+    /// Gets or sets the menu that this option belongs to.
+    /// </summary>
+    public IMenuAPI? Menu { get; }
+
+    /// <summary>
     /// Gets or sets the text content displayed for this menu option.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public string Text { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this option is visible in the menu.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public bool Visible { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this option can be interacted with.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public bool Enabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets the menu that this option belongs to.
-    /// </summary>
-    public IMenuAPI? Menu { get; set; }
 
     /// <summary>
     /// Gets or sets an object that contains data about this option.

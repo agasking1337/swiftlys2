@@ -47,12 +47,12 @@ public sealed class MenuEventArgs : EventArgs
     /// <summary>
     /// The player who triggered this menu event.
     /// </summary>
-    public IPlayer? Player { get; init; }
+    public required IPlayer Player { get; init; }
 
     /// <summary>
     /// The menu option involved in this event, or null for lifecycle events like opening or closing the menu.
     /// </summary>
-    public IMenuOption? Option { get; init; }
+    public required IMenuOption Option { get; init; }
 }
 
 /// <summary>

@@ -12,8 +12,16 @@ public abstract class MenuOptionBase : IMenuOption
     private bool enabled = true;
 
     /// <summary>
+    /// Gets or sets the menu that this option belongs to.
+    /// </summary>
+    public IMenuAPI? Menu { get; init; }
+
+    /// <summary>
     /// Gets or sets the text content displayed for this menu option.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public string Text {
         get => text;
         set {
@@ -30,6 +38,9 @@ public abstract class MenuOptionBase : IMenuOption
     /// <summary>
     /// Gets or sets a value indicating whether this option is visible in the menu.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public bool Visible {
         get => visible;
         set {
@@ -46,6 +57,9 @@ public abstract class MenuOptionBase : IMenuOption
     /// <summary>
     /// Gets or sets a value indicating whether this option can be interacted with.
     /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
     public bool Enabled {
         get => enabled;
         set {
@@ -58,11 +72,6 @@ public abstract class MenuOptionBase : IMenuOption
             OnEnabledChanged(new MenuOptionEventArgs { Player = null!, Option = this });
         }
     }
-
-    /// <summary>
-    /// Gets or sets the menu that this option belongs to.
-    /// </summary>
-    public IMenuAPI? Menu { get; set; }
 
     /// <summary>
     /// Gets or sets an object that contains data about this option.
