@@ -22,7 +22,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Register a callback handler
     /// </summary>
-    internal static unsafe void RegisterCallback<T>(ICallbackHandler<T> handler) where T : struct
+    internal static unsafe void RegisterCallback<T>( ICallbackHandler<T> handler ) where T : struct
     {
         var callbackId = CallbackIdentities.GetCallbackIdentity(typeof(T));
 
@@ -30,7 +30,7 @@ public static class CallbackDispatcher
         s_callbackHandlers.AddOrUpdate(
             callbackId,
             _ => [handler],
-            (_, list) => { list.Add(handler); return list; }
+            ( _, list ) => { list.Add(handler); return list; }
         );
 
         // Register with Steam if this is the first handler for this callback
@@ -40,8 +40,8 @@ public static class CallbackDispatcher
             var pCallback = Marshal.AllocHGlobal(Marshal.SizeOf<CCallbackBase>());
             var callback = (CCallbackBase*)pCallback;
 
-            callback->m_vfptr = CCallbackBaseVTable.VTablePtr;
-            callback->m_nCallbackFlags = 0;
+            callback->m_vfptr = CCallbackBaseVTable.CallbackVTablePtr;
+            callback->m_nCallbackFlags = 0x02; // k_ECallbackFlagsGameServer
             callback->m_iCallback = callbackId;
 
             // Register with Steam API
@@ -55,7 +55,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Unregister a callback handler
     /// </summary>
-    internal static unsafe void UnregisterCallback<T>(ICallbackHandler<T> handler) where T : struct
+    internal static unsafe void UnregisterCallback<T>( ICallbackHandler<T> handler ) where T : struct
     {
         var callbackId = CallbackIdentities.GetCallbackIdentity(typeof(T));
 
@@ -80,7 +80,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Register a call result handler
     /// </summary>
-    internal static unsafe void RegisterCallResult<T>(ulong hAPICall, ICallResultHandler<T> handler) where T : struct
+    internal static unsafe void RegisterCallResult<T>( ulong hAPICall, ICallResultHandler<T> handler ) where T : struct
     {
         var callbackId = CallbackIdentities.GetCallbackIdentity(typeof(T));
 
@@ -91,8 +91,8 @@ public static class CallbackDispatcher
         var pCallback = Marshal.AllocHGlobal(Marshal.SizeOf<CCallbackBase>());
         var callback = (CCallbackBase*)pCallback;
 
-        callback->m_vfptr = CCallbackBaseVTable.VTablePtr;
-        callback->m_nCallbackFlags = 1; // Flag indicating this is a call result
+        callback->m_vfptr = CCallbackBaseVTable.CallResultVTablePtr;
+        callback->m_nCallbackFlags = 0x02; // k_ECallbackFlagsGameServer
         callback->m_iCallback = callbackId;
 
         // Register with Steam API
@@ -105,7 +105,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Unregister a call result
     /// </summary>
-    internal static unsafe void UnregisterCallResult(ulong hAPICall, IntPtr pCallback)
+    internal static unsafe void UnregisterCallResult( ulong hAPICall, IntPtr pCallback )
     {
         _ = s_callResultHandlers.TryRemove(hAPICall, out _);
 
@@ -119,7 +119,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Internal method called from VTable Run function
     /// </summary>
-    internal static unsafe void DispatchCallback(int callbackId, void* param)
+    internal static unsafe void DispatchCallback( int callbackId, void* param )
     {
         if (s_callbackHandlers.TryGetValue(callbackId, out var handlers))
         {
@@ -140,7 +140,7 @@ public static class CallbackDispatcher
     /// <summary>
     /// Internal method called from VTable RunCallResult function
     /// </summary>
-    internal static unsafe void DispatchCallResult(void* param, bool ioFailure, ulong hAPICall)
+    internal static unsafe void DispatchCallResult( void* param, bool ioFailure, ulong hAPICall )
     {
         if (s_callResultHandlers.TryRemove(hAPICall, out var handler))
         {
@@ -150,7 +150,7 @@ public static class CallbackDispatcher
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error dispatching call result {hAPICall}: {ex}");
+                Console.WriteLine($"Error dispatching call result: {ex}");
             }
         }
     }
@@ -161,7 +161,7 @@ public static class CallbackDispatcher
 /// </summary>
 internal interface ICallbackHandler
 {
-    internal unsafe void Run(void* param);
+    internal unsafe void Run( void* param );
 }
 
 /// <summary>
@@ -176,8 +176,8 @@ internal interface ICallbackHandler<T> : ICallbackHandler where T : struct
 /// </summary>
 internal interface ICallResultHandler
 {
-    internal unsafe void Run(void* param, bool ioFailure);
-    internal void SetAPICall(ulong hAPICall, IntPtr pCallback);
+    internal unsafe void Run( void* param, bool ioFailure );
+    internal void SetAPICall( ulong hAPICall, IntPtr pCallback );
 }
 
 /// <summary>
@@ -196,7 +196,7 @@ public sealed class Callback<T> : ICallbackHandler<T>, IDisposable where T : str
     private bool _isRegistered;
     private bool _disposed;
 
-    private Callback(Action<T> callback)
+    private Callback( Action<T> callback )
     {
         _callback = callback;
     }
@@ -204,7 +204,7 @@ public sealed class Callback<T> : ICallbackHandler<T>, IDisposable where T : str
     /// <summary>
     /// Create and register a new callback
     /// </summary>
-    public static Callback<T> Create(Action<T> callback)
+    public static Callback<T> Create( Action<T> callback )
     {
         var instance = new Callback<T>(callback);
         instance.Register();
@@ -229,7 +229,7 @@ public sealed class Callback<T> : ICallbackHandler<T>, IDisposable where T : str
         }
     }
 
-    unsafe void ICallbackHandler.Run(void* param)
+    unsafe void ICallbackHandler.Run( void* param )
     {
         if (_callback != null && !_disposed)
         {
@@ -265,7 +265,7 @@ public sealed class CallResult<T> : ICallResultHandler<T>, IDisposable where T :
     private IntPtr _pCallback;
     private bool _disposed;
 
-    private CallResult(Action<T, bool> callback)
+    private CallResult( Action<T, bool> callback )
     {
         _callback = callback;
     }
@@ -273,7 +273,7 @@ public sealed class CallResult<T> : ICallResultHandler<T>, IDisposable where T :
     /// <summary>
     /// Create and register a new call result
     /// </summary>
-    public static CallResult<T> Create(ulong hAPICall, Action<T, bool> callback)
+    public static CallResult<T> Create( ulong hAPICall, Action<T, bool> callback )
     {
         var instance = new CallResult<T>(callback);
         instance.Set(hAPICall);
@@ -283,7 +283,7 @@ public sealed class CallResult<T> : ICallResultHandler<T>, IDisposable where T :
     /// <summary>
     /// Set or change the API call to wait for
     /// </summary>
-    public void Set(ulong hAPICall)
+    public void Set( ulong hAPICall )
     {
         if (_disposed)
             return;
@@ -302,13 +302,13 @@ public sealed class CallResult<T> : ICallResultHandler<T>, IDisposable where T :
         }
     }
 
-    void ICallResultHandler.SetAPICall(ulong hAPICall, IntPtr pCallback)
+    void ICallResultHandler.SetAPICall( ulong hAPICall, IntPtr pCallback )
     {
         _hAPICall = hAPICall;
         _pCallback = pCallback;
     }
 
-    unsafe void ICallResultHandler.Run(void* param, bool ioFailure)
+    unsafe void ICallResultHandler.Run( void* param, bool ioFailure )
     {
         if (_callback != null && !_disposed)
         {
@@ -346,7 +346,7 @@ public sealed class CallResult<T> : ICallResultHandler<T>, IDisposable where T :
 /// Native callback structure that matches C++ CCallbackBase layout
 /// This structure is passed to SteamAPI_RegisterCallback
 /// </summary>
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential, Pack = 4)]
 internal unsafe struct CCallbackBase
 {
     public IntPtr m_vfptr;
@@ -359,24 +359,31 @@ internal unsafe struct CCallbackBase
 /// </summary>
 internal static class CCallbackBaseVTable
 {
-    public static IntPtr VTablePtr { get; private set; }
+    public static IntPtr CallbackVTablePtr { get; private set; }
+    public static IntPtr CallResultVTablePtr { get; private set; }
 
     static unsafe CCallbackBaseVTable()
     {
         // Allocate VTable with 3 function pointers
-        VTablePtr = Marshal.AllocHGlobal(IntPtr.Size * 3);
-        Span<IntPtr> vtable = new((void*)VTablePtr, 3);
+        CallbackVTablePtr = Marshal.AllocHGlobal(IntPtr.Size * 3);
+        CallResultVTablePtr = Marshal.AllocHGlobal(IntPtr.Size * 3);
+        Span<IntPtr> vtable = new((void*)CallbackVTablePtr, 3);
+        Span<IntPtr> callResultVtable = new((void*)CallResultVTablePtr, 3);
 
-        vtable[0] = (IntPtr)(delegate* unmanaged<CCallbackBase*, void*, void>)&Run;
-        vtable[1] = (IntPtr)(delegate* unmanaged<CCallbackBase*, void*, bool, ulong, void>)&RunCallResult;
-        vtable[2] = (IntPtr)(delegate* unmanaged<CCallbackBase*, int>)&GetCallbackSizeBytes;
+        vtable[0] = (IntPtr)(delegate* unmanaged< CCallbackBase*, void*, void >)&RunCallback;
+        vtable[1] = (IntPtr)(delegate* unmanaged< CCallbackBase*, void*, byte, ulong, void >)&RunCallbackOverload;
+        vtable[2] = (IntPtr)(delegate* unmanaged< CCallbackBase*, int >)&GetCallbackSizeBytes;
+
+        callResultVtable[0] = (IntPtr)(delegate* unmanaged< CCallbackBase*, void*, void >)&RunCallResult;
+        callResultVtable[1] = (IntPtr)(delegate* unmanaged< CCallbackBase*, void*, byte, ulong, void >)&RunCallResultOverload;
+        callResultVtable[2] = (IntPtr)(delegate* unmanaged< CCallbackBase*, int >)&GetCallbackSizeBytes;
     }
 
     /// <summary>
     /// Called by Steam when a callback is triggered
     /// </summary>
     [UnmanagedCallersOnly]
-    private static unsafe void Run(CCallbackBase* self, void* param)
+    private static unsafe void RunCallback( CCallbackBase* self, void* param )
     {
         try
         {
@@ -389,15 +396,40 @@ internal static class CCallbackBaseVTable
         }
     }
 
+
+    /// <summary>
+    /// Called by Steam when a callback is triggered, overload version
+    /// </summary>
+    [UnmanagedCallersOnly]
+    private static unsafe void RunCallbackOverload( CCallbackBase* self, void* param, byte ioFailure, ulong hAPICall )
+    {
+        try
+        {
+            var callbackId = self->m_iCallback;
+            CallbackDispatcher.DispatchCallback(callbackId, param);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in CCallbackBase.RunCallResult: {ex}");
+        }
+    }
+
+    [UnmanagedCallersOnly]
+    private static unsafe void RunCallResult( CCallbackBase* self, void* param )
+    {
+        throw new NotImplementedException("Shouldn't be called.");
+    }
+
+
     /// <summary>
     /// Called by Steam when a call result is ready
     /// </summary>
     [UnmanagedCallersOnly]
-    private static unsafe void RunCallResult(CCallbackBase* self, void* param, bool ioFailure, ulong hAPICall)
+    private static unsafe void RunCallResultOverload( CCallbackBase* self, void* param, byte ioFailure, ulong hAPICall )
     {
         try
         {
-            CallbackDispatcher.DispatchCallResult(param, ioFailure, hAPICall);
+            CallbackDispatcher.DispatchCallResult(param, ioFailure == 1, hAPICall);
         }
         catch (Exception ex)
         {
@@ -409,8 +441,9 @@ internal static class CCallbackBaseVTable
     /// Returns the size of the callback structure
     /// </summary>
     [UnmanagedCallersOnly]
-    private static unsafe int GetCallbackSizeBytes(CCallbackBase* self)
+    private static unsafe int GetCallbackSizeBytes( CCallbackBase* self )
     {
+        Console.WriteLine($"GetCallbackSizeBytes");
         try
         {
             int callbackId = self->m_iCallback;
