@@ -1,6 +1,7 @@
+using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
 
-namespace SwiftlyS2.Shared.Menus;
+namespace SwiftlyS2.Core.Menus.OptionsBase;
 
 /// <summary>
 /// Provides a base implementation for menu options with event-driven behavior.
@@ -92,6 +93,11 @@ public abstract class MenuOptionBase : IMenuOption
     /// Gets or sets the text size for this option.
     /// </summary>
     public MenuOptionTextSize TextSize { get; set; } = MenuOptionTextSize.Medium;
+
+    /// <summary>
+    /// Gets or sets the text overflow style for this option.
+    /// </summary>
+    public MenuOptionTextStyle TextStyle { get; set; } = MenuOptionTextStyle.TruncateEnd;
 
     /// <summary>
     /// Gets or sets a value indicating whether a sound should play when this option is selected.

@@ -153,6 +153,11 @@ public interface IMenuOption
     public MenuOptionTextSize TextSize { get; set; }
 
     /// <summary>
+    /// Gets or sets the text overflow style for this option.
+    /// </summary>
+    public MenuOptionTextStyle TextStyle { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether a sound should play when this option is selected.
     /// </summary>
     public bool PlaySound { get; set; }
