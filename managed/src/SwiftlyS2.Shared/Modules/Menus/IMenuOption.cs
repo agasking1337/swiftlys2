@@ -150,7 +150,7 @@ public interface IMenuOption
     /// <summary>
     /// Gets or sets the text size for this option.
     /// </summary>
-    public IMenuOptionTextSize TextSize { get; set; }
+    public MenuOptionTextSize TextSize { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether a sound should play when this option is selected.
@@ -274,7 +274,7 @@ public interface IMenuOption
 /// <summary>
 /// Defines the available text size options for menu items.
 /// </summary>
-public enum IMenuOptionTextSize
+public enum MenuOptionTextSize
 {
     /// <summary>
     /// Extra small text size (fontSize-xs).

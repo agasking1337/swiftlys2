@@ -91,7 +91,7 @@ public abstract class MenuOptionBase : IMenuOption
     /// <summary>
     /// Gets or sets the text size for this option.
     /// </summary>
-    public IMenuOptionTextSize TextSize { get; set; } = IMenuOptionTextSize.Medium;
+    public MenuOptionTextSize TextSize { get; set; } = MenuOptionTextSize.Medium;
 
     /// <summary>
     /// Gets or sets a value indicating whether a sound should play when this option is selected.
@@ -342,16 +342,16 @@ public abstract class MenuOptionBase : IMenuOption
     //     Hover?.Invoke(this, new MenuOptionEventArgs { Player = player, Option = this });
     // }
 
-    private static string GetSizeClass( IMenuOptionTextSize size )
+    private static string GetSizeClass( MenuOptionTextSize size )
     {
         return size switch {
-            IMenuOptionTextSize.ExtraSmall => "fontSize-xs",
-            IMenuOptionTextSize.Small => "fontSize-s",
-            IMenuOptionTextSize.SmallMedium => "fontSize-sm",
-            IMenuOptionTextSize.Medium => "fontSize-m",
-            IMenuOptionTextSize.MediumLarge => "fontSize-ml",
-            IMenuOptionTextSize.Large => "fontSize-l",
-            IMenuOptionTextSize.ExtraLarge => "fontSize-xl",
+            MenuOptionTextSize.ExtraSmall => "fontSize-xs",
+            MenuOptionTextSize.Small => "fontSize-s",
+            MenuOptionTextSize.SmallMedium => "fontSize-sm",
+            MenuOptionTextSize.Medium => "fontSize-m",
+            MenuOptionTextSize.MediumLarge => "fontSize-ml",
+            MenuOptionTextSize.Large => "fontSize-l",
+            MenuOptionTextSize.ExtraLarge => "fontSize-xl",
             _ => "fontSize-m"
         };
     }

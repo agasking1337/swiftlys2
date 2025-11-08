@@ -216,7 +216,7 @@ public interface IMenu
 /// <summary>
 /// Defines the vertical scroll behavior style for menu navigation.
 /// </summary>
-[Obsolete("MenuVerticalScrollStyle will be deprecared at the release of SwiftlyS2. Please use MenuVerticalStyle instead")]
+[Obsolete("MenuVerticalScrollStyle will be deprecared at the release of SwiftlyS2. Please use OptionScrollStyle instead")]
 public enum MenuVerticalScrollStyle
 {
     /// <summary>

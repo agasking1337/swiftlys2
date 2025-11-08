@@ -6,11 +6,13 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
 {
     private readonly MenuConfiguration configuration;
     private readonly IMenuBuilderAPI builder;
+    private MenuOptionScrollStyle optionScrollStyle;
 
-    public MenuDesignAPI( MenuConfiguration configuration, IMenuBuilderAPI builder )
+    public MenuDesignAPI( MenuConfiguration configuration, IMenuBuilderAPI builder, ref MenuOptionScrollStyle optionScrollStyle )
     {
         this.configuration = configuration;
         this.builder = builder;
+        this.optionScrollStyle = optionScrollStyle;
     }
 
     public IMenuBuilderAPI SetMenuTitle( string? title = null )
@@ -32,6 +34,12 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
             Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(count), $"MaxVisibleItems: value {count} is out of range [1, 5]."));
         }
         configuration.MaxVisibleItems = Math.Clamp(count, 1, 5);
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetGlobalOptionScrollStyle( MenuOptionScrollStyle style )
+    {
+        optionScrollStyle = style;
         return builder;
     }
 }

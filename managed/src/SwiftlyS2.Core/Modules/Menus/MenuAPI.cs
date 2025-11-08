@@ -25,6 +25,11 @@ internal sealed class MenuAPI : IMenuAPI
     public MenuKeybindOverrides KeybindOverrides { get; init; }
 
     /// <summary>
+    /// The scroll style for this menu.
+    /// </summary>
+    public MenuOptionScrollStyle OptionScrollStyle { get; init; }
+
+    /// <summary>
     /// The parent menu in a hierarchical menu structure, or null if this is a top-level menu.
     /// </summary>
     public IMenuAPI? Parent { get; init; } = null;
@@ -78,11 +83,12 @@ internal sealed class MenuAPI : IMenuAPI
     private readonly ConcurrentDictionary<IPlayer, CancellationTokenSource> autoCloseCancelTokens = new();
 
     // [SetsRequiredMembers]
-    public MenuAPI( ISwiftlyCore core, MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuBuilderAPI? builder = null, IMenuAPI? parent = null )
+    public MenuAPI( ISwiftlyCore core, MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, MenuOptionScrollStyle optionScrollStyle, IMenuBuilderAPI? builder = null, IMenuAPI? parent = null )
     {
         this.core = core;
         Configuration = configuration;
         KeybindOverrides = keybindOverrides;
+        OptionScrollStyle = optionScrollStyle;
         Builder = builder;
         Parent = parent;
 

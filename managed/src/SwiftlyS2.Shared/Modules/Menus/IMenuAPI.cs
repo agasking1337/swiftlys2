@@ -112,6 +112,11 @@ public interface IMenuAPI
     public MenuKeybindOverrides KeybindOverrides { get; }
 
     /// <summary>
+    /// The scroll style for this menu.
+    /// </summary>
+    public MenuOptionScrollStyle OptionScrollStyle { get; }
+
+    /// <summary>
     /// The parent menu in a hierarchical menu structure, or null if this is a top-level menu.
     /// </summary>
     public IMenuAPI? Parent { get; }
@@ -207,4 +212,28 @@ public interface IMenuAPI
     /// <param name="player">The player whose current selection display line to retrieve.</param>
     /// <returns>The display line index of the currently selected option, or -1 if nothing is selected.</returns>
     public int GetCurrentOptionDisplayLine( IPlayer player );
+}
+
+/// <summary>
+/// Defines how the menu scrolls when navigating between options.
+/// </summary>
+public enum MenuOptionScrollStyle
+{
+    /// <summary>
+    /// The selection indicator moves up and down through the visible menu area.
+    /// The menu content stays fixed until the indicator reaches the edge.
+    /// </summary>
+    LinearScroll,
+
+    /// <summary>
+    /// The selection indicator always stays in the center position.
+    /// Menu options scroll circularly around it, wrapping from bottom to top (e.g., ...7, 8, 1, 2, 3...).
+    /// </summary>
+    CenterFixed,
+
+    /// <summary>
+    /// The selection indicator moves until it reaches the center, then stays there.
+    /// At the top and bottom edges, the indicator can move away from center.
+    /// </summary>
+    WaitingCenter
 }
