@@ -33,5 +33,5 @@ public interface IConVarService {
   /// <param name="minValue">The min value of the convar.</param>
   /// <param name="maxValue">The max value of the convar.</param>
   /// <returns>The created convar.</returns>
-  IConVar<T> Create<T>(string name, string helpMessage, T defaultValue, T? minValue = null, T? maxValue = null, ConvarFlags flags = ConvarFlags.NONE) where T: unmanaged;
+  IConVar<T> Create<T>(string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE) where T: unmanaged;
 }

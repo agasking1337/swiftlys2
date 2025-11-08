@@ -17,6 +17,8 @@
  ************************************************************************************************/
 
 #include <api/interfaces/manager.h>
+#include <public/tier1/convar.h>
+#include <public/tier1/utlstring.h>
 #include <scripting/scripting.h>
 
 #include <optional>
@@ -463,28 +465,16 @@ void Bridge_Convars_SetClientConvarValueString(int playerid, const char* convarN
     convarmanager->SetClientConvar(playerid, convarName, std::string(value));
 }
 
-void Bridge_Convars_AddFlags(const char* cvarName, uint64_t flags)
-{
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    cvarmanager->AddFlags(cvarName, flags);
-}
-
-void Bridge_Convars_RemoveFlags(const char* cvarName, uint64_t flags)
-{
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    cvarmanager->RemoveFlags(cvarName, flags);
-}
-
-void Bridge_Convars_ClearFlags(const char* cvarName)
-{
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    cvarmanager->ClearFlags(cvarName);
-}
-
 uint64_t Bridge_Convars_GetFlags(const char* cvarName)
 {
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    return cvarmanager->GetFlags(cvarName);
+    ConVarRefAbstract cvar(cvarName);
+    return cvar.GetConVarData()->m_nFlags;
+}
+
+void Bridge_Convars_SetFlags(const char* cvarName, uint64_t flags)
+{
+    ConVarRefAbstract cvar(cvarName);
+    cvar.GetConVarData()->m_nFlags = flags;
 }
 
 uint64_t Bridge_Convars_AddGlobalChangeListener(void* callback)
@@ -527,6 +517,44 @@ void Bridge_Convars_RemoveConCommandCreatedListener(uint64_t listenerID)
 {
     auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
     cvarmanager->RemoveConCommandCreatedListener(listenerID);
+}
+
+void* Bridge_Convars_GetMinValuePtrPtr(const char* cvarName)
+{
+    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
+    return cvarmanager->GetMinValuePtrPtr(cvarName);
+}
+
+void* Bridge_Convars_GetMaxValuePtrPtr(const char* cvarName)
+{
+    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
+    return cvarmanager->GetMaxValuePtrPtr(cvarName);
+}
+
+bool Bridge_Convars_HasDefaultValue(const char* cvarName)
+{
+    ConVarRefAbstract cvar(cvarName);
+    return cvar.HasDefault();
+}
+
+void* Bridge_Convars_GetDefaultValuePtr(const char* cvarName)
+{
+    ConVarRefAbstract cvar(cvarName);
+    return cvar.GetConVarData()->DefaultValue();
+}
+
+void Bridge_Convars_SetDefaultValue(const char* cvarName, void* defaultValue)
+{
+    ConVarRefAbstract cvar(cvarName);
+    cvar.GetConVarData()->SetDefaultValue((CVValue_t*)defaultValue);
+}
+
+void Bridge_Convars_SetDefaultValueString(const char* cvarName, const char* defaultValue)
+{
+    ConVarRefAbstract cvar(cvarName);
+    CUtlString string(defaultValue);
+    CVValue_t value(string);
+    cvar.GetConVarData()->SetDefaultValue(&value);
 }
 
 DEFINE_NATIVE("Convars.QueryClientConvar", Bridge_Convars_QueryClientConvar);
@@ -602,7 +630,11 @@ DEFINE_NATIVE("Convars.SetClientConvarValueVector", Bridge_Convars_SetClientConv
 DEFINE_NATIVE("Convars.SetClientConvarValueVector4D", Bridge_Convars_SetClientConvarValueVector4D);
 DEFINE_NATIVE("Convars.SetClientConvarValueQAngle", Bridge_Convars_SetClientConvarValueQAngle);
 DEFINE_NATIVE("Convars.SetClientConvarValueString", Bridge_Convars_SetClientConvarValueString);
-DEFINE_NATIVE("Convars.AddFlags", Bridge_Convars_AddFlags);
-DEFINE_NATIVE("Convars.RemoveFlags", Bridge_Convars_RemoveFlags);
-DEFINE_NATIVE("Convars.ClearFlags", Bridge_Convars_ClearFlags);
 DEFINE_NATIVE("Convars.GetFlags", Bridge_Convars_GetFlags);
+DEFINE_NATIVE("Convars.SetFlags", Bridge_Convars_SetFlags);
+DEFINE_NATIVE("Convars.GetMinValuePtrPtr", Bridge_Convars_GetMinValuePtrPtr);
+DEFINE_NATIVE("Convars.GetMaxValuePtrPtr", Bridge_Convars_GetMaxValuePtrPtr);
+DEFINE_NATIVE("Convars.HasDefaultValue", Bridge_Convars_HasDefaultValue);
+DEFINE_NATIVE("Convars.GetDefaultValuePtr", Bridge_Convars_GetDefaultValuePtr);
+DEFINE_NATIVE("Convars.SetDefaultValue", Bridge_Convars_SetDefaultValue);
+DEFINE_NATIVE("Convars.SetDefaultValueString", Bridge_Convars_SetDefaultValueString);

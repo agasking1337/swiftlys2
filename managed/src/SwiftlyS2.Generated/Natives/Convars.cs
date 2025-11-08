@@ -1135,48 +1135,6 @@ internal static class NativeConvars {
     }
   }
 
-  private unsafe static delegate* unmanaged<byte*, ulong, void> _AddFlags;
-
-  public unsafe static void AddFlags(string cvarName, ulong flags) {
-    var pool = ArrayPool<byte>.Shared;
-    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
-    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
-    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
-    cvarNameBuffer[cvarNameLength] = 0;
-    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
-      _AddFlags(cvarNameBufferPtr, flags);
-      pool.Return(cvarNameBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<byte*, ulong, void> _RemoveFlags;
-
-  public unsafe static void RemoveFlags(string cvarName, ulong flags) {
-    var pool = ArrayPool<byte>.Shared;
-    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
-    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
-    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
-    cvarNameBuffer[cvarNameLength] = 0;
-    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
-      _RemoveFlags(cvarNameBufferPtr, flags);
-      pool.Return(cvarNameBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<byte*, void> _ClearFlags;
-
-  public unsafe static void ClearFlags(string cvarName) {
-    var pool = ArrayPool<byte>.Shared;
-    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
-    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
-    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
-    cvarNameBuffer[cvarNameLength] = 0;
-    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
-      _ClearFlags(cvarNameBufferPtr);
-      pool.Return(cvarNameBuffer);
-    }
-  }
-
   private unsafe static delegate* unmanaged<byte*, ulong> _GetFlags;
 
   public unsafe static ulong GetFlags(string cvarName) {
@@ -1189,6 +1147,115 @@ internal static class NativeConvars {
       var ret = _GetFlags(cvarNameBufferPtr);
       pool.Return(cvarNameBuffer);
       return ret;
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, ulong, void> _SetFlags;
+
+  public unsafe static void SetFlags(string cvarName, ulong flags) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      _SetFlags(cvarNameBufferPtr, flags);
+      pool.Return(cvarNameBuffer);
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, nint> _GetMinValuePtrPtr;
+
+  public unsafe static nint GetMinValuePtrPtr(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetMinValuePtrPtr(cvarNameBufferPtr);
+      pool.Return(cvarNameBuffer);
+      return ret;
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, nint> _GetMaxValuePtrPtr;
+
+  public unsafe static nint GetMaxValuePtrPtr(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetMaxValuePtrPtr(cvarNameBufferPtr);
+      pool.Return(cvarNameBuffer);
+      return ret;
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte> _HasDefaultValue;
+
+  public unsafe static bool HasDefaultValue(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _HasDefaultValue(cvarNameBufferPtr);
+      pool.Return(cvarNameBuffer);
+      return ret == 1;
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, nint> _GetDefaultValuePtr;
+
+  public unsafe static nint GetDefaultValuePtr(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetDefaultValuePtr(cvarNameBufferPtr);
+      pool.Return(cvarNameBuffer);
+      return ret;
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, nint, void> _SetDefaultValue;
+
+  public unsafe static void SetDefaultValue(string cvarName, nint defaultValue) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      _SetDefaultValue(cvarNameBufferPtr, defaultValue);
+      pool.Return(cvarNameBuffer);
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, void> _SetDefaultValueString;
+
+  public unsafe static void SetDefaultValueString(string cvarName, string defaultValue) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var defaultValueLength = Encoding.UTF8.GetByteCount(defaultValue);
+    var defaultValueBuffer = pool.Rent(defaultValueLength + 1);
+    Encoding.UTF8.GetBytes(defaultValue, defaultValueBuffer);
+    defaultValueBuffer[defaultValueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* defaultValueBufferPtr = defaultValueBuffer) {
+        _SetDefaultValueString(cvarNameBufferPtr, defaultValueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(defaultValueBuffer);
+      }
     }
   }
 }

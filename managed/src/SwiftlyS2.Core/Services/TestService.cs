@@ -37,6 +37,16 @@ internal class TestService {
     _Core = core;
     _Logger = logger;
 
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+    _Logger.LogWarning("TestService created");
+
     Test();
   }
 
@@ -44,9 +54,22 @@ internal class TestService {
   public void Test()
   {
     _Core.Command.RegisterCommand("rrr", (context) => {
-      _Core.Engine.ExecuteCommandWithBuffer("echo 1", (buffer) => {
-        Console.WriteLine(buffer);
-      });
+
+      var a = _Core.ConVar.Create("test_convar", "Test convar", 123);
+
+      Console.WriteLine(a.Flags.HasFlag(ConvarFlags.DEVELOPMENT_ONLY));
+
+      // setting this to DEVELOPMENT_ONLY will cause a crash later
+      // because if its development only, the ConVarRefAbstract will not be able to find the ConvarData
+      // eventually return a nullptr in GetConvarData
+      a.Flags |= ConvarFlags.REPLICATED;
+
+      Console.WriteLine(a.Flags.HasFlag(ConvarFlags.REPLICATED));
+      Console.WriteLine(a.Flags.HasFlag(ConvarFlags.CHEAT));
+
+      Console.WriteLine(a.DefaultValue);
+      a.DefaultValue = 234;
+      Console.WriteLine(a.DefaultValue);
     });
     // _Core.Event.OnItemServicesCanAcquireHook += (@event) => {
     //   Console.WriteLine(@event.EconItemView.ItemDefinitionIndex);

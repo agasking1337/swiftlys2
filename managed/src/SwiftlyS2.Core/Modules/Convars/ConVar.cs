@@ -3,6 +3,7 @@ using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace SwiftlyS2.Core.Convars;
 
@@ -13,35 +14,69 @@ internal class ConVar<T> : IConVar<T>{
   private Dictionary<int, ConVarCallbackDelegate> _callbacks = new();
   private object _lock = new();
 
+  private nint _minValuePtrPtr => NativeConvars.GetMinValuePtrPtr(Name);
+  private nint _maxValuePtrPtr => NativeConvars.GetMaxValuePtrPtr(Name);
+
+  public EConVarType Type => (EConVarType)NativeConvars.GetConvarType(Name);
+
+  private bool IsValidType => Type > EConVarType.EConVarType_Invalid && Type < EConVarType.EConVarType_MAX;
+
+  // im not sure
+  private bool IsMinMaxType => IsValidType && Type != EConVarType.EConVarType_String && Type != EConVarType.EConVarType_Color;
+
+  public T MinValue { 
+    get => GetMinValue();
+    set => SetMinValue(value);
+  }
+  public T MaxValue { 
+    get => GetMaxValue();
+    set => SetMaxValue(value);
+  }
+
+  public T DefaultValue {
+    get => GetDefaultValue();
+    set => SetDefaultValue(value);
+  }
+
+  public ConvarFlags Flags {
+    get => (ConvarFlags)NativeConvars.GetFlags(Name);
+    set => NativeConvars.SetFlags(Name, (ulong)value);
+  }
+
+  public bool HasDefaultValue => NativeConvars.HasDefaultValue(Name);
+
+  public bool HasMinValue => _minValuePtrPtr.Read<nint>() != 0;
+  public bool HasMaxValue => _maxValuePtrPtr.Read<nint>() != 0;
+
   public string Name { get; set; }
 
   internal ConVar(string name) {
     Name = name;
+
+    ValidateType();
   }
 
-  public void AddFlags(ConvarFlags flags)
+  public void ValidateType()
   {
-    NativeConvars.AddFlags(Name, (ulong)flags);
-  }
-
-  public void RemoveFlags(ConvarFlags flags)
-  {
-    NativeConvars.RemoveFlags(Name, (ulong)flags);
-  }
-
-  public void ClearFlags()
-  {
-    NativeConvars.ClearFlags(Name);
-  }
-
-  public ConvarFlags GetFlags()
-  {
-    return (ConvarFlags)NativeConvars.GetFlags(Name);
-  }
-
-  public bool HasFlags(ConvarFlags flags)
-  {
-    return (GetFlags() & flags) == flags;
+    if (
+      (typeof(T) == typeof(bool) && Type != EConVarType.EConVarType_Bool) ||
+      (typeof(T) == typeof(short) && Type != EConVarType.EConVarType_Int16) ||
+      (typeof(T) == typeof(ushort) && Type != EConVarType.EConVarType_UInt16) ||
+      (typeof(T) == typeof(int) && Type != EConVarType.EConVarType_Int32) ||
+      (typeof(T) == typeof(uint) && Type != EConVarType.EConVarType_UInt32) ||
+      (typeof(T) == typeof(float) && Type != EConVarType.EConVarType_Float32) ||
+      (typeof(T) == typeof(long) && Type != EConVarType.EConVarType_Int64) ||
+      (typeof(T) == typeof(ulong) && Type != EConVarType.EConVarType_UInt64) ||
+      (typeof(T) == typeof(double) && Type != EConVarType.EConVarType_Float64) ||
+      (typeof(T) == typeof(Color) && Type != EConVarType.EConVarType_Color) ||
+      (typeof(T) == typeof(QAngle) && Type != EConVarType.EConVarType_Qangle) ||
+      (typeof(T) == typeof(Vector) && Type != EConVarType.EConVarType_Vector3) ||
+      (typeof(T) == typeof(Vector2D) && Type != EConVarType.EConVarType_Vector2) ||
+      (typeof(T) == typeof(Vector4D) && Type != EConVarType.EConVarType_Vector4) ||
+      (typeof(T) == typeof(string) && Type != EConVarType.EConVarType_String)
+    ) {
+      throw new Exception($"Type mismatch for convar {Name}. The real type is {Type}.");
+    }
   }
 
   public T Value {
@@ -327,4 +362,89 @@ internal class ConVar<T> : IConVar<T>{
     NativeConvars.QueryClientConvar(clientId, Name);
   }
 
+  public T GetMinValue()
+  {
+    if (!IsMinMaxType) {
+      throw new Exception($"Convar {Name} is not a min/max type.");
+    }
+    if (!HasMinValue) {
+      throw new Exception($"Convar {Name} doesn't have a min value.");
+    }
+    unsafe {
+      return **(T**)_minValuePtrPtr;
+    }
+  }
+
+  public T GetMaxValue()
+  {
+    if (!IsMinMaxType) {
+      throw new Exception($"Convar {Name} is not a min/max type.");
+    }
+    if (!HasMaxValue) {
+      throw new Exception($"Convar {Name} doesn't have a max value.");
+    }
+    unsafe {
+      return **(T**)_maxValuePtrPtr;
+    }
+  }
+  public void SetMinValue(T minValue)
+  {
+    if (!IsMinMaxType) {
+      throw new Exception($"Convar {Name} is not a min/max type.");
+    }
+    unsafe
+    {
+      if (_minValuePtrPtr.Read<nint>() == nint.Zero) {
+        _minValuePtrPtr.Write(NativeAllocator.Alloc(16));
+      }
+      **(T**)_minValuePtrPtr = minValue;
+    }
+  }
+
+  public void SetMaxValue(T maxValue)
+  {
+    if (!IsMinMaxType) {
+      throw new Exception($"Convar {Name} is not a min/max type.");
+    }
+    unsafe
+    {
+      if (_maxValuePtrPtr.Read<nint>() == nint.Zero)
+      {
+        _maxValuePtrPtr.Write(NativeAllocator.Alloc(16));
+      }
+      **(T**)_maxValuePtrPtr = maxValue;
+    }
+  }
+
+  public T GetDefaultValue()
+  {
+    unsafe {
+      var ptr = NativeConvars.GetDefaultValuePtr(Name);
+      if (ptr == nint.Zero) {
+        throw new Exception($"Convar {Name} doesn't have a default value.");
+      }
+      if (Type != EConVarType.EConVarType_String) {
+        return *(T*)ptr;
+      }
+      else {
+        return (T)(object)(*(CUtlString*)ptr).Value;
+      }
+    }
+  }
+
+  public void SetDefaultValue(T defaultValue)
+  {
+    unsafe {
+      var ptr = NativeConvars.GetDefaultValuePtr(Name);
+      if (ptr == nint.Zero) {
+        throw new Exception($"Convar {Name} doesn't have a default value.");
+      }
+      if (Type != EConVarType.EConVarType_String) {
+        *(T*)NativeConvars.GetDefaultValuePtr(Name) = defaultValue;
+      }
+      else {
+        NativeConvars.GetDefaultValuePtr(Name).Write(StringPool.Allocate((string)(object)defaultValue));
+      }
+    }
+  }
 }

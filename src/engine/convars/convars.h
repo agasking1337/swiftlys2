@@ -20,6 +20,7 @@
 #define src_engine_convars_convars_h
 
 #include <api/engine/convars/convars.h>
+#include <public/tier1/convar.h>
 #include <optional>
 
 class CConvarManager : public IConvarManager
@@ -37,6 +38,9 @@ public:
     virtual void DeleteConvar(std::string cvar_name) override;
     virtual bool ExistsConvar(std::string cvar_name) override;
     virtual EConVarType GetConvarType(std::string cvar_name) override;
+
+    virtual CVValue_t** GetMinValuePtrPtr(std::string cvar_name) override;
+    virtual CVValue_t** GetMaxValuePtrPtr(std::string cvar_name) override;
 
     virtual void* GetConvarDataAddress(std::string cvar_name) override;
     virtual ConvarValue GetConvarValue(std::string cvar_name) override;
