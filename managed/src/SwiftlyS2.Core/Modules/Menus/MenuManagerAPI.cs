@@ -255,7 +255,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         CloseAllMenus();
     }
 
-    public IMenuAPI CreateMenu( MenuConfiguration configuration, IMenuKeybindOverrides keybindOverrides, IMenuAPI? parent = null )
+    public IMenuAPI CreateMenu( MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuAPI? parent = null )
     {
         var bindingList = new Dictionary<string, KeyBind> {
             ["Scroll"] = keybindOverrides.Move ?? buttonsScroll,

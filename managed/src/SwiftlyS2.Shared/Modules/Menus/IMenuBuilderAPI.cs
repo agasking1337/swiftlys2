@@ -47,24 +47,47 @@ public interface IMenuBuilderAPI
     public IMenuBuilderAPI AutoClose( float seconds = 0f );
 
     /// <summary>
-    /// Customizes which button(s) players press to select menu options.
+    /// Overrides the key binding for selecting menu options.
     /// </summary>
-    /// <param name="keyBind">Key bind for selection.</param>
+    /// <param name="keyBind">The key binding to use.</param>
     /// <returns>This builder for method chaining.</returns>
+    /// <remarks>
+    /// Supports multiple key bindings using the bitwise OR operator.
+    /// Example: <c>KeyBind.Mouse1 | KeyBind.E</c> allows either Mouse1 or E to select options.
+    /// </remarks>
     public IMenuBuilderAPI OverrideSelectButton( KeyBind keyBind );
 
     /// <summary>
-    /// Customizes which button(s) players press to navigate through menu options.
+    /// Overrides the key binding for moving forward through menu options.
     /// </summary>
-    /// <param name="keyBind">Key bind for navigation.</param>
+    /// <param name="keyBind">The key binding to use.</param>
     /// <returns>This builder for method chaining.</returns>
+    /// <remarks>
+    /// Supports multiple key bindings using the bitwise OR operator.
+    /// Example: <c>KeyBind.W | KeyBind.Mouse1</c> allows either W or Mouse1 to move forward.
+    /// </remarks>
     public IMenuBuilderAPI OverrideMoveButton( KeyBind keyBind );
 
     /// <summary>
-    /// Customizes which button(s) players press to close the menu.
+    /// Overrides the key binding for moving backward through menu options.
     /// </summary>
-    /// <param name="keyBind">Key bind for closing the menu.</param>
+    /// <param name="keyBind">The key binding to use.</param>
     /// <returns>This builder for method chaining.</returns>
+    /// <remarks>
+    /// Supports multiple key bindings using the bitwise OR operator.
+    /// Example: <c>KeyBind.S | KeyBind.Mouse2</c> allows either S or Mouse2 to move backward.
+    /// </remarks>
+    public IMenuBuilderAPI OverrideMoveBackButton( KeyBind keyBind );
+
+    /// <summary>
+    /// Overrides the key binding for closing the menu.
+    /// </summary>
+    /// <param name="keyBind">The key binding to use.</param>
+    /// <returns>This builder for method chaining.</returns>
+    /// <remarks>
+    /// Supports multiple key bindings using the bitwise OR operator.
+    /// Example: <c>KeyBind.Esc | KeyBind.A</c> allows either Esc or A to close the menu.
+    /// </remarks>
     public IMenuBuilderAPI OverrideExitButton( KeyBind keyBind );
 
     /// <summary>

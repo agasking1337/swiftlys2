@@ -49,6 +49,33 @@ public record class MenuConfiguration
 }
 
 /// <summary>
+/// Custom key bindings for menu actions.
+/// Each property can be set to override the default bindings, or left null to use defaults.
+/// </summary>
+public readonly record struct MenuKeybindOverrides
+{
+    /// <summary>
+    /// Key binding for selecting or activating the highlighted menu option.
+    /// </summary>
+    public KeyBind? Select { get; init; }
+
+    /// <summary>
+    /// Key binding for moving forward through menu options.
+    /// </summary>
+    public KeyBind? Move { get; init; }
+
+    /// <summary>
+    /// Key binding for moving backward through menu options.
+    /// </summary>
+    public KeyBind? MoveBack { get; init; }
+
+    /// <summary>
+    /// Key binding for closing the menu.
+    /// </summary>
+    public KeyBind? Exit { get; init; }
+}
+
+/// <summary>
 /// Provides event data for menu-related events.
 /// </summary>
 public sealed class MenuEventArgs : EventArgs
@@ -82,7 +109,7 @@ public interface IMenuAPI
     /// <summary>
     /// Keybind overrides for this menu.
     /// </summary>
-    public IMenuKeybindOverrides KeybindOverrides { get; }
+    public MenuKeybindOverrides KeybindOverrides { get; }
 
     /// <summary>
     /// The parent menu in a hierarchical menu structure, or null if this is a top-level menu.

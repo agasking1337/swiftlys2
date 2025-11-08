@@ -22,7 +22,7 @@ internal sealed class MenuAPI : IMenuAPI
     /// <summary>
     /// Keybind overrides for this menu.
     /// </summary>
-    public IMenuKeybindOverrides KeybindOverrides { get; init; }
+    public MenuKeybindOverrides KeybindOverrides { get; init; }
 
     /// <summary>
     /// The parent menu in a hierarchical menu structure, or null if this is a top-level menu.
@@ -73,7 +73,7 @@ internal sealed class MenuAPI : IMenuAPI
     private readonly ConcurrentDictionary<IPlayer, CancellationTokenSource> autoCloseCancelTokens = new();
 
     // [SetsRequiredMembers]
-    public MenuAPI( ISwiftlyCore core, MenuConfiguration configuration, IMenuKeybindOverrides keybindOverrides, IMenuBuilderAPI? builder = null, IMenuAPI? parent = null )
+    public MenuAPI( ISwiftlyCore core, MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuBuilderAPI? builder = null, IMenuAPI? parent = null )
     {
         this.core = core;
         Configuration = configuration;
