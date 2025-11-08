@@ -206,19 +206,42 @@ public interface IMenuOption
     /// <returns>True if the option is enabled for the player; otherwise, false.</returns>
     public bool GetEnabled( IPlayer player );
 
-    /// <summary>
-    /// Gets the text to display for this option for the specified player.
-    /// </summary>
-    /// <param name="player">The player requesting the text.</param>
-    /// <returns>The text to display.</returns>
-    public string GetText( IPlayer player );
+    // /// <summary>
+    // /// Gets the text to display for this option for the specified player.
+    // /// </summary>
+    // /// <param name="player">The player requesting the text.</param>
+    // /// <returns>The text to display.</returns>
+    // public string GetText( IPlayer player );
+
+    // /// <summary>
+    // /// Gets the formatted HTML markup for this option.
+    // /// </summary>
+    // /// <param name="player">The player to format for.</param>
+    // /// <returns>The formatted HTML string.</returns>
+    // public string GetFormattedHtmlText( IPlayer player );
 
     /// <summary>
-    /// Gets the formatted HTML markup for this option.
+    /// Gets the display text for this option as it should appear to the specified player.
     /// </summary>
-    /// <param name="player">The player to format for.</param>
-    /// <returns>The formatted HTML string.</returns>
-    public string GetFormattedHtmlText( IPlayer player );
+    /// <param name="player">The player requesting the display text.</param>
+    /// <param name="displayLine">The display line index of the option.</param>
+    /// <returns>The formatted display text for the option.</returns>
+    /// <remarks>
+    /// When a menu option occupies multiple lines, MenuAPI may only need to display a specific line of that option.
+    /// <list type="bullet">
+    /// <item>When <c>LineCount=1</c>: The <c>displayLine</c> parameter is not needed; return the HTML-formatted string directly.</item>
+    /// <item>When <c>LineCount>=2</c>: Check the <c>displayLine</c> parameter:
+    ///   <list type="bullet">
+    ///   <item><c>displayLine=0</c>: Return all content</item>
+    ///   <item><c>displayLine=1</c>: Return only the first line content</item>
+    ///   <item><c>displayLine=2</c>: Return only the second line content</item>
+    ///   <item>And so on...</item>
+    ///   </list>
+    /// </item>
+    /// </list>
+    /// Note: MenuAPI ensures that the <c>displayLine</c> parameter will not exceed the option's <c>LineCount</c>.
+    /// </remarks>
+    public string GetDisplayText( IPlayer player, int displayLine = 0 );
 
     /// <summary>
     /// Validates whether the specified player can interact with this option.
