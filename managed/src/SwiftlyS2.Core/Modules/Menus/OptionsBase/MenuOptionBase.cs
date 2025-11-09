@@ -236,6 +236,7 @@ public abstract class MenuOptionBase : IMenuOption
 
         return args.CustomText;
     }
+
     /// <summary>
     /// Validates whether the specified player can interact with this option.
     /// </summary>

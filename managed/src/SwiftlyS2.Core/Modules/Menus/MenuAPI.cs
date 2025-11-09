@@ -271,11 +271,11 @@ internal sealed class MenuAPI : IMenuAPI
         {
             _ = autoCloseCancelTokens.AddOrUpdate(
                 player,
-                _ => core.Scheduler.DelayBySeconds(Configuration.AutoCloseAfter, () => CloseForPlayer(player)),
+                _ => core.Scheduler.DelayBySeconds(Configuration.AutoCloseAfter, () => core.MenusAPI.CloseMenuForPlayer(player, this)),
                 ( _, oldToken ) =>
                 {
                     oldToken.Cancel();
-                    return core.Scheduler.DelayBySeconds(Configuration.AutoCloseAfter, () => CloseForPlayer(player));
+                    return core.Scheduler.DelayBySeconds(Configuration.AutoCloseAfter, () => core.MenusAPI.CloseMenuForPlayer(player, this));
                 }
             );
         }
