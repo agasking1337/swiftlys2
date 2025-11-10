@@ -170,18 +170,6 @@ void* Bridge_EngineHelpers_GetGlobalVars()
     return engine->GetServerGlobals();
 }
 
-int Bridge_EngineHelpers_GetServerIP(char* out)
-{
-    auto networkServiceSystem = g_ifaceService.FetchInterface<INetworkSystem>(NETWORKSYSTEM_INTERFACE_VERSION);
-
-    auto& publicAdr = networkServiceSystem->GetPublicAdr();
-    std::string ip = fmt::format("{}.{}.{}.{}", publicAdr.ip[0], publicAdr.ip[1], publicAdr.ip[2], publicAdr.ip[3]);
-
-    if (out != nullptr) strcpy(out, ip.c_str());
-    return ip.size();
-}
-
-DEFINE_NATIVE("EngineHelpers.GetServerIP", Bridge_EngineHelpers_GetServerIP);
 DEFINE_NATIVE("EngineHelpers.IsMapValid", Bridge_EngineHelpers_IsMapValid);
 DEFINE_NATIVE("EngineHelpers.ExecuteCommand", Bridge_EngineHelpers_ExecuteCommand);
 DEFINE_NATIVE("EngineHelpers.FindGameSystemByName", Bridge_EngineHelpers_FindGameSystemByName);

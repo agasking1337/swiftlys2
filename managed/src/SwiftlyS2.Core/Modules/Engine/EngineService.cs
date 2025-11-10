@@ -18,7 +18,19 @@ internal class EngineService : IEngineService
         this._commandTrackedManager = commandTrackedManager;
     }
 
-    public string? ServerIP => NativeEngineHelpers.GetServerIP();
+    public string? ServerIP {
+        get {
+            try
+            {
+                return SteamGameServer.GetPublicIP().ToString();
+            }
+            catch (Exception e)
+            {
+                AnsiConsole.WriteException(e);
+                return null;
+            }
+        }
+    }
 
     public ref CGlobalVars GlobalVars => ref NativeEngineHelpers.GetGlobalVars().AsRef<CGlobalVars>();
 
