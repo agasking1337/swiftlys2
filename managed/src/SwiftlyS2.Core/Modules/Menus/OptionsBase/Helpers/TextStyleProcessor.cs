@@ -6,9 +6,36 @@ using SwiftlyS2.Shared.Menus;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase.Helpers;
 
-internal sealed partial class TextStyleProcessor
+internal sealed partial class TextStyleProcessor : IDisposable
 {
     private readonly ConcurrentDictionary<string, int> scrollOffsets = new();
+
+    private volatile bool disposed;
+
+    public TextStyleProcessor()
+    {
+        disposed = false;
+        scrollOffsets.Clear();
+    }
+
+    ~TextStyleProcessor()
+    {
+        Dispose();
+    }
+
+    public void Dispose()
+    {
+        if (disposed)
+        {
+            return;
+        }
+
+        // Console.WriteLine($"{GetType().Name} has been disposed.");
+        scrollOffsets.Clear();
+
+        disposed = true;
+        GC.SuppressFinalize(this);
+    }
 
     [GeneratedRegex("<.*?>")]
     private static partial Regex HtmlTagRegex();
@@ -28,11 +55,6 @@ internal sealed partial class TextStyleProcessor
                     MenuOptionTextStyle.ScrollRightLoop => ScrollTextWithLoop($" {text.TrimStart()}", maxWidth, false),
                     _ => (text, -1)
                 };
-    }
-
-    public void ClearScrollOffsets()
-    {
-        scrollOffsets.Clear();
     }
 
     private (string styledText, int scrollOffset) ScrollTextWithFade( string text, float maxWidth, bool scrollLeft )

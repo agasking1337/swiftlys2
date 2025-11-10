@@ -16,7 +16,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     private MenuOptionTextStyle textStyle = MenuOptionTextStyle.TruncateEnd;
     private bool visible = true;
     private bool enabled = true;
-    private readonly TextStyleProcessor? textStyleProcessor;
     private readonly DynamicTextUpdater? dynamicTextUpdater;
 
     private volatile bool disposed;
@@ -30,6 +29,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// </remarks>
     protected MenuOptionBase()
     {
+        disposed = false;
     }
 
     /// <summary>
@@ -44,6 +44,8 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// </remarks>
     protected MenuOptionBase( int updateIntervalMs, int pauseIntervalMs )
     {
+        disposed = false;
+
         if (updateIntervalMs < (int)(1 / 64f * 1000))
         {
             Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(updateIntervalMs), $"updateIntervalMs: value {updateIntervalMs} is out of range."));
@@ -54,15 +56,13 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(pauseIntervalMs), $"pauseIntervalMs: value {pauseIntervalMs} is out of range."));
         }
 
-        textStyleProcessor = new();
         dynamicTextUpdater = new DynamicTextUpdater(
-            processor: textStyleProcessor,
-            getSourceText: () => text,
-            getTextStyle: () => textStyle,
-            getMaxWidth: () => maxWidth,
-            setDynamicText: value => dynamicText = value,
-            updateIntervalMs: Math.Max((int)(1 / 64f * 1000), updateIntervalMs),
-            pauseIntervalMs: Math.Max((int)(1 / 64f * 1000), pauseIntervalMs)
+            () => text,
+            () => textStyle,
+            () => maxWidth,
+            value => dynamicText = value,
+            Math.Max((int)(1 / 64f * 1000), updateIntervalMs),
+            Math.Max((int)(1 / 64f * 1000), pauseIntervalMs)
         );
     }
 
@@ -80,7 +80,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
         // Console.WriteLine($"{GetType().Name} has been disposed.");
         dynamicTextUpdater?.Dispose();
-        textStyleProcessor?.ClearScrollOffsets();
 
         disposed = true;
         GC.SuppressFinalize(this);
@@ -111,9 +110,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             text = value;
-            dynamicText = null;
-
-            textStyleProcessor?.ClearScrollOffsets();
+            // dynamicText = null;
 
             TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
         }
@@ -136,9 +133,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             maxWidth = Math.Max(value, 1f);
-            dynamicText = null;
-
-            textStyleProcessor?.ClearScrollOffsets();
+            // dynamicText = null;
         }
     }
 
@@ -207,9 +202,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             textStyle = value;
-            dynamicText = null;
-
-            textStyleProcessor?.ClearScrollOffsets();
+            // dynamicText = null;
         }
     }
 
@@ -338,7 +331,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
         BeforeFormat?.Invoke(this, args);
 
-        var displayText = args.CustomText ?? (dynamicText == null ? Text : (dynamicText ?? string.Empty));
+        var displayText = args.CustomText ?? dynamicText ?? Text;
 
         if (displayLine > 0)
         {
@@ -359,6 +352,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
         var colorStyle = isEnabled ? string.Empty : " color='#CCCCCC'";
         var result = $"<font class='{sizeClass}'{colorStyle}>{displayText}</font>";
+        // Console.WriteLine($"displayText: {displayText}");
 
         args.CustomText = result;
         AfterFormat?.Invoke(this, args);

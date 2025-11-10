@@ -94,6 +94,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     // [SetsRequiredMembers]
     public MenuAPI( ISwiftlyCore core, MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuBuilderAPI? builder = null, IMenuAPI? parent = null, MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed/*, MenuOptionTextStyle optionTextStyle = MenuOptionTextStyle.TruncateEnd*/ )
     {
+        disposed = false;
+
         this.core = core;
         Configuration = configuration;
         KeybindOverrides = keybindOverrides;
@@ -359,7 +361,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             token.Cancel();
         }
 
-        if (selectedOptionIndex.IsEmpty && desiredOptionIndex.IsEmpty)
+        if (!selectedOptionIndex.Any(kvp => !kvp.Key.IsFakeClient) && !desiredOptionIndex.Any(kvp => !kvp.Key.IsFakeClient))
         {
             Dispose();
         }

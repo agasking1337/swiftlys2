@@ -621,17 +621,18 @@ public class TestPlugin : BasePlugin
         myText.Click += ( sender, args ) =>
         {
             // myText.Visible = false;
-            myText.Enabled = false;
+            // myText.Enabled = false;
             // myText.TextStyle = MenuOptionTextStyle.ScrollRightFade;
-            // myText.Text = Regex.Match(myText.Text, @"^(.*)#(\d+)$") is { Success: true } m
-            //     ? $"{m.Groups[1].Value}#{int.Parse(m.Groups[2].Value) + 1}"
-            //     : $"{myText.Text}#1";
-            _ = Task.Run(async () =>
-            {
-                await Task.Delay(1000);
-                // myText.Visible = true;
-                myText.Enabled = true;
-            });
+            myText.Text = Regex.Match(myText.Text, @"^(.*)#(\d+)$") is { Success: true } m
+                ? $"{m.Groups[1].Value}#{int.Parse(m.Groups[2].Value) + 1}"
+                : $"{myText.Text}#1";
+            // myText.MaxWidth -= 1f;
+            // _ = Task.Run(async () =>
+            // {
+            //     await Task.Delay(1000);
+            //     // myText.Visible = true;
+            //     myText.Enabled = true;
+            // });
             return ValueTask.CompletedTask;
         };
 
@@ -656,7 +657,7 @@ public class TestPlugin : BasePlugin
             .AddOption(new TextMenuOption("12345"))
             .AddOption(new TextMenuOption("123456"))
             .AddOption(new TextMenuOption("1234567"))
-            .AddOption(new TextMenuOption("12345678"))
+            .AddOption(new TextMenuOption("12345678", textStyle: MenuOptionTextStyle.ScrollLeftLoop))
             .AddOption(new TextMenuOption("123456789"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(myText)
@@ -668,7 +669,7 @@ public class TestPlugin : BasePlugin
             // .AddOption(new TextMenuOption("Swiftlys2 sendas korajn salutojn al ĉi tiu mirinda mondo"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(new TextMenuOption("123456789"))
-            .AddOption(new TextMenuOption("12345678"))
+            .AddOption(new TextMenuOption("12345678", textStyle: MenuOptionTextStyle.ScrollRightLoop))
             .AddOption(new TextMenuOption("1234567"))
             .AddOption(new TextMenuOption("123456"))
             .AddOption(new TextMenuOption("12345"))

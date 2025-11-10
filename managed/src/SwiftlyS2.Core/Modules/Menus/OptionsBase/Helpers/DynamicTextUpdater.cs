@@ -14,7 +14,6 @@ internal sealed class DynamicTextUpdater : IDisposable
     private volatile bool disposed;
 
     public DynamicTextUpdater(
-        TextStyleProcessor processor,
         Func<string> getSourceText,
         Func<MenuOptionTextStyle> getTextStyle,
         Func<float> getMaxWidth,
@@ -22,13 +21,15 @@ internal sealed class DynamicTextUpdater : IDisposable
         int updateIntervalMs = 120,
         int pauseIntervalMs = 1000 )
     {
-        this.processor = processor;
+        disposed = false;
+
         this.getSourceText = getSourceText;
         this.getTextStyle = getTextStyle;
         this.getMaxWidth = getMaxWidth;
         this.setDynamicText = setDynamicText;
 
-        cancellationTokenSource = new CancellationTokenSource();
+        processor = new();
+        cancellationTokenSource = new();
         _ = Task.Run(() => UpdateLoopAsync(updateIntervalMs, pauseIntervalMs, cancellationTokenSource.Token), cancellationTokenSource.Token);
     }
 
@@ -45,8 +46,10 @@ internal sealed class DynamicTextUpdater : IDisposable
         }
 
         // Console.WriteLine($"{GetType().Name} has been disposed.");
-        cancellationTokenSource?.Cancel();
-        cancellationTokenSource?.Dispose();
+        cancellationTokenSource.Cancel();
+        cancellationTokenSource.Dispose();
+
+        processor.Dispose();
 
         disposed = true;
         GC.SuppressFinalize(this);
