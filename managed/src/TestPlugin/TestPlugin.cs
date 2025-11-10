@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.GameEventDefinitions;
@@ -31,6 +32,8 @@ using BenchmarkDotNet.Loggers;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
+using System.Collections.Concurrent;
+using Dia2Lib;
 
 namespace TestPlugin;
 
@@ -614,16 +617,34 @@ public class TestPlugin : BasePlugin
     [Command("rmt")]
     public void RefactoredMenuTestCommand( ICommandContext context )
     {
+        var myText = new TextMenuOption($"<b>{HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")}</b>", textStyle: MenuOptionTextStyle.ScrollLeftLoop);
+        myText.Click += ( sender, args ) =>
+        {
+            // myText.Visible = false;
+            myText.Enabled = false;
+            // myText.TextStyle = MenuOptionTextStyle.TruncateEnd;
+            // myText.Text = Regex.Match(myText.Text, @"^(.*)#(\d+)$") is { Success: true } m
+            //     ? $"{m.Groups[1].Value}#{int.Parse(m.Groups[2].Value) + 1}"
+            //     : $"{myText.Text}#1";
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                // myText.Visible = true;
+                myText.Enabled = true;
+            });
+            return ValueTask.CompletedTask;
+        };
+
         var player = context.Sender!;
         var menu = Core.MenusAPI
             .CreateBuilder()
             .FreezePlayer(false)
-            .AutoClose(15f)
+            // .AutoClose(15f)
             .Design.MaxVisibleItems(5)
             .Design.SetMenuTitle("Refactored Menu")
             .Design.HideMenuTitle(false)
             .Design.SetGlobalOptionScrollStyle(MenuOptionScrollStyle.WaitingCenter)
-            .AddOption(new TextMenuOption("1"))
+            .AddOption(new TextMenuOption("1") { Visible = false })
             .AddOption(new TextMenuOption("12"))
             .AddOption(new TextMenuOption("123"))
             .AddOption(new TextMenuOption("1234"))
@@ -632,15 +653,15 @@ public class TestPlugin : BasePlugin
             .AddOption(new TextMenuOption("1234567"))
             .AddOption(new TextMenuOption("12345678"))
             .AddOption(new TextMenuOption("123456789"))
-            .AddOption(new TextMenuOption("1234567890"))
-            .AddOption(new TextMenuOption($"<b>{HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")}</b>", textStyle: MenuOptionTextStyle.ScrollLeftLoop))
+            .AddOption(new TextMenuOption("1234567890") { Visible = false })
+            .AddOption(myText)
             .AddOption(new TextMenuOption($"<b>{HtmlGradient.GenerateGradientText("Swiftlys2 からこの広大なる世界へ温かい挨拶を", "#FFE5CC", "#FFAB91", "#FF7043")}</b>", textStyle: MenuOptionTextStyle.ScrollRightLoop))
             .AddOption(new TextMenuOption($"<b>{HtmlGradient.GenerateGradientText("Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다", "#E6E6FA", "#00FFFF", "#FF1493")}</b>", textStyle: MenuOptionTextStyle.ScrollLeftFade))
             .AddOption(new TextMenuOption($"<b>{HtmlGradient.GenerateGradientText("Swiftlys2 приветствует этот прекрасный мир", "#AFEEEE", "#7FFFD4", "#40E0D0")}</b>", textStyle: MenuOptionTextStyle.ScrollRightFade))
-            .AddOption(new TextMenuOption("<font color='#F5FFFA'><b><garbage><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</garbage></b></font>", textStyle: MenuOptionTextStyle.TruncateEnd))
-            .AddOption(new TextMenuOption("<font color='#00FA9A'><b><garbage><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</garbage></b></font>", textStyle: MenuOptionTextStyle.TruncateBothEnds))
+            .AddOption(new TextMenuOption("<font color='#F5FFFA'><b><invalid><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</invalid></b></font>", textStyle: MenuOptionTextStyle.TruncateEnd))
+            .AddOption(new TextMenuOption("<font color='#00FA9A'><b><invalid><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</invalid></b></font>", textStyle: MenuOptionTextStyle.TruncateBothEnds))
             // .AddOption(new TextMenuOption("Swiftlys2 sendas korajn salutojn al ĉi tiu mirinda mondo"))
-            .AddOption(new TextMenuOption("1234567890"))
+            .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(new TextMenuOption("123456789"))
             .AddOption(new TextMenuOption("12345678"))
             .AddOption(new TextMenuOption("1234567"))
@@ -649,7 +670,7 @@ public class TestPlugin : BasePlugin
             .AddOption(new TextMenuOption("1234"))
             .AddOption(new TextMenuOption("123"))
             .AddOption(new TextMenuOption("12"))
-            .AddOption(new TextMenuOption("1"))
+            .AddOption(new TextMenuOption("1") { Visible = false })
             .Build();
 
         Core.MenusAPI.OpenMenuForPlayer(player, menu);

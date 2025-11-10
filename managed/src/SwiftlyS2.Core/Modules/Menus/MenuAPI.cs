@@ -276,7 +276,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     {
         var titleSection = Configuration.HideTitle
             ? string.Empty
-            : $"<font class='fontSize-m' color='#FFFFFF'>{Configuration.Title}</font>" + (maxOptions > maxVisibleItems ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font>" : string.Empty);
+            : $"<font class='fontSize-m' color='#FFFFFF'>{Configuration.Title}</font>" +
+                (maxOptions > maxVisibleItems ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font><br>" : "<br>");
 
         var menuItems = visibleOptions.Select(( option, index ) =>
         {
@@ -288,9 +289,9 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
         return string.Concat(
             titleSection,
-            "<font color='#FFFFFF' class='fontSize-sm'><br>",
+            "<font color='#FFFFFF' class='fontSize-sm'>",
             string.Join("<br>", menuItems),
-            "<br></font>"
+            "</font>"
         );
     }
 

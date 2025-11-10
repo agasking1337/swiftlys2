@@ -349,10 +349,15 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
         }
 
-        var isEnabled = GetEnabled(player);
+        var isEnabled = Enabled && GetEnabled(player);
         var sizeClass = TextSize.ToCssClass();
 
-        var colorStyle = isEnabled ? string.Empty : " color='grey'";
+        if (!isEnabled)
+        {
+            displayText = ColorTagRegex().Replace(displayText, string.Empty);
+        }
+
+        var colorStyle = isEnabled ? string.Empty : " color='#CCCCCC'";
         var result = $"<font class='{sizeClass}'{colorStyle}>{displayText}</font>";
 
         args.CustomText = result;
@@ -453,4 +458,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
     [GeneratedRegex(@"<[/\\]*br[/\\]*>", RegexOptions.IgnoreCase)]
     private static partial Regex BrTagRegex();
+
+    [GeneratedRegex(@"\scolor\s*=\s*['""]{1}#[0-9A-Fa-f]{6}['""]{1}", RegexOptions.IgnoreCase)]
+    private static partial Regex ColorTagRegex();
 }
