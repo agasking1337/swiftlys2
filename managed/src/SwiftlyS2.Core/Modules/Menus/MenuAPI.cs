@@ -295,8 +295,12 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     {
         var titleSection = Configuration.HideTitle
             ? string.Empty
-            : $"<font class='fontSize-m' color='#FFFFFF'>{Configuration.Title}</font>" +
-                (maxOptions > maxVisibleItems ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font><br>" : "<br>");
+            : string.Concat(
+                $"<font class='fontSize-m' color='#FFFFFF'>{Configuration.Title}</font>",
+                maxOptions > maxVisibleItems
+                    ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font><br><font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font><br>"
+                    : "<br><font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font><br>"
+            );
 
         var menuItems = visibleOptions.Select(( option, index ) =>
         {
@@ -312,7 +316,12 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             var moveKey = isWasd ? "W/S" : $"{KeybindOverrides.Move?.ToString() ?? core.MenusAPI.Configuration.ButtonsScroll.ToUpper()}/{KeybindOverrides.MoveBack?.ToString() ?? core.MenusAPI.Configuration.ButtonsScrollBack.ToUpper()}";
             var useKey = isWasd ? "D" : (KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse).ToUpper();
             var exitKey = isWasd ? "A" : (KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit).ToUpper();
-            return $"<br><font class='fontSize-s' color='#FFFFFF'><font color='#FF0000'>Move:</font> {moveKey} | <font color='#FF0000'>Use:</font> {useKey} | <font color='#FF0000'>Exit:</font> {exitKey}</font>";
+            return string.Concat(
+                $"<br>",
+                $"<font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font>",
+                $"<br>",
+                $"<font class='fontSize-s' color='#FFFFFF'><font color='#FF0000'>Move:</font> {moveKey} | <font color='#FF0000'>Use:</font> {useKey} | <font color='#FF0000'>Exit:</font> {exitKey}</font>"
+            );
         })();
 
         return string.Concat(

@@ -183,7 +183,7 @@ public interface IMenuOption : IDisposable
     public event EventHandler<MenuOptionEventArgs>? TextChanged;
 
     /// <summary>
-    /// Occurs before a click is processed, allowing validation and cancellation.
+    /// Occurs before a <see cref="Click"/> event is processed, allowing validation and cancellation.
     /// </summary>
     public event EventHandler<MenuOptionValidatingEventArgs>? Validating;
 
