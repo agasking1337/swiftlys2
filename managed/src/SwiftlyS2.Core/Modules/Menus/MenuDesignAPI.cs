@@ -95,6 +95,24 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
         return builder;
     }
 
+    public IMenuBuilderAPI SetVisualGuideLineColor( string? hexColor = null )
+    {
+        configuration.VisualGuideLineColor = hexColor;
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetVisualGuideLineColor( Shared.Natives.Color color )
+    {
+        configuration.VisualGuideLineColor = color.ToHex();
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetVisualGuideLineColor( System.Drawing.Color color )
+    {
+        configuration.VisualGuideLineColor = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        return builder;
+    }
+
     // public IMenuBuilderAPI SetGlobalOptionTextStyle( MenuOptionTextStyle style )
     // {
     //     setTextStyle(style);

@@ -14,6 +14,7 @@ public record class MenuConfiguration
     private int maxVisibleItems = -1;
     private string? navigationMarkerColor = null;
     private string? footerColor = null;
+    private string? visualGuideLineColor = null;
 
     /// <summary>
     /// The title of the menu.
@@ -117,6 +118,27 @@ public record class MenuConfiguration
             else
             {
                 footerColor = value;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The color of visual guide lines in hex format.
+    /// </summary>
+    /// <remarks>
+    /// Supports "#RGB", "#RGBA", "#RRGGBB", and "#RRGGBBAA" formats.
+    /// </remarks>
+    public string? VisualGuideLineColor {
+        get => visualGuideLineColor;
+        set {
+            if (string.IsNullOrWhiteSpace(value) || Helper.ParseHexColor(value) is not (not null, not null, not null, _))
+            {
+                Spectre.Console.AnsiConsole.WriteException(new ArgumentException($"VisualGuideLineColor: '{value}' is not a valid hex color format. Expected '#RRGGBB'.", nameof(value)));
+                visualGuideLineColor = null;
+            }
+            else
+            {
+                visualGuideLineColor = value;
             }
         }
     }

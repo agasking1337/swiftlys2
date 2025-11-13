@@ -323,8 +323,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             : string.Concat(
                 $"<font class='fontSize-m' color='#FFFFFF'>{Configuration.Title}</font>",
                 maxOptions > maxVisibleItems
-                    ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font><br><font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font><br>"
-                    : "<br><font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font><br>"
+                    ? $"<font class='fontSize-s' color='#FFFFFF'> [{selectedIndex + 1}/{maxOptions}]</font><br><font class='fontSize-s' color='{Configuration.VisualGuideLineColor ?? "#FFFFFF"}'>──────────────────────────</font><br>"
+                    : $"<br><font class='fontSize-s' color='{Configuration.VisualGuideLineColor ?? "#FFFFFF"}'>──────────────────────────</font><br>"
             );
 
         var menuItems = visibleOptions.Select(( option, index ) =>
@@ -343,7 +343,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             var exitKey = isWasd ? "A" : (KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit).ToUpper();
             return string.Concat(
                 $"<br>",
-                $"<font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font>",
+                $"<font class='fontSize-s' color='{Configuration.VisualGuideLineColor ?? "#FFFFFF"}'>──────────────────────────</font>",
                 $"<br>",
                 $"<font class='fontSize-s' color='#FFFFFF'><font color='{Configuration.FooterColor ?? "#FF0000"}'>Move:</font> {moveKey} | <font color='{Configuration.FooterColor ?? "#FF0000"}'>Use:</font> {useKey} | <font color='{Configuration.FooterColor ?? "#FF0000"}'>Exit:</font> {exitKey}</font>"
             );
