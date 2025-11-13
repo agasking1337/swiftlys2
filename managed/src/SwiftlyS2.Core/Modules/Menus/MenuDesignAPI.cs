@@ -59,6 +59,42 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
         return builder;
     }
 
+    public IMenuBuilderAPI SetNavigationMarkerColor( string? hexColor = null )
+    {
+        configuration.NavigationMarkerColor = hexColor;
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetNavigationMarkerColor( Shared.Natives.Color color )
+    {
+        configuration.NavigationMarkerColor = color.ToHex();
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetNavigationMarkerColor( System.Drawing.Color color )
+    {
+        configuration.NavigationMarkerColor = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetMenuFooterColor( string? hexColor = null )
+    {
+        configuration.FooterColor = hexColor;
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetMenuFooterColor( Shared.Natives.Color color )
+    {
+        configuration.FooterColor = color.ToHex();
+        return builder;
+    }
+
+    public IMenuBuilderAPI SetMenuFooterColor( System.Drawing.Color color )
+    {
+        configuration.FooterColor = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        return builder;
+    }
+
     // public IMenuBuilderAPI SetGlobalOptionTextStyle( MenuOptionTextStyle style )
     // {
     //     setTextStyle(style);

@@ -60,6 +60,48 @@ public interface IMenuDesignAPI
     /// </remarks>
     public IMenuBuilderAPI SetGlobalScrollStyle( MenuOptionScrollStyle style );
 
+    /// <summary>
+    /// Sets the color of the navigation markers using hex color format.
+    /// </summary>
+    /// <param name="hexColor">The color in hex format (e.g., "#FF0000" for red). Pass null to reset to default.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetNavigationMarkerColor( string? hexColor = null );
+
+    /// <summary>
+    /// Sets the color of the navigation markers using SwiftlyS2 native color.
+    /// </summary>
+    /// <param name="color">The SwiftlyS2 native color to apply to the navigation markers.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetNavigationMarkerColor( Natives.Color color );
+
+    /// <summary>
+    /// Sets the color of the navigation markers using System.Drawing color.
+    /// </summary>
+    /// <param name="color">The System.Drawing color to apply to the navigation markers.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetNavigationMarkerColor( System.Drawing.Color color );
+
+    /// <summary>
+    /// Sets the color of the menu footer using hex color format.
+    /// </summary>
+    /// <param name="hexColor">The color in hex format (e.g., "#00FF00" for green). Pass null to reset to default.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetMenuFooterColor( string? hexColor = null );
+
+    /// <summary>
+    /// Sets the color of the menu footer using SwiftlyS2 native color.
+    /// </summary>
+    /// <param name="color">The SwiftlyS2 native color to apply to the footer.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetMenuFooterColor( Natives.Color color );
+
+    /// <summary>
+    /// Sets the color of the menu footer using System.Drawing color.
+    /// </summary>
+    /// <param name="color">The System.Drawing color to apply to the footer.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetMenuFooterColor( System.Drawing.Color color );
+
     // /// <summary>
     // /// Sets the global option text style for the menu.
     // /// </summary>

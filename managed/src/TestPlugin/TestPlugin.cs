@@ -644,6 +644,8 @@ public class TestPlugin : BasePlugin
             .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("Redesigned Menu", "#00FA9A", "#F5FFFA")}")
             .Design.SetMenuTitleVisible(true)
             .Design.SetMenuFooterVisible(true)
+            .Design.SetMenuFooterColor("#0F0")
+            .Design.SetNavigationMarkerColor("#00FF00FF")
             .Design.EnableAutoAdjustVisibleItems()
             .Design.SetGlobalScrollStyle(MenuOptionScrollStyle.WaitingCenter)
             .AddOption(new TextMenuOption("1") { Visible = false })

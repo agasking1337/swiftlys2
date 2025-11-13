@@ -330,7 +330,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         var menuItems = visibleOptions.Select(( option, index ) =>
         {
             var prefix = index == arrowPosition
-                ? $"<font color='#FFFFFF' class='fontSize-sm'>{core.MenusAPI.Configuration.NavigationPrefix} </font>"
+                ? $"<font color='{Configuration.NavigationMarkerColor ?? "#FFFFFF"}' class='fontSize-sm'>{core.MenusAPI.Configuration.NavigationPrefix} </font>"
                 : "\u00A0\u00A0\u00A0 ";
             return $"{prefix}{option.GetDisplayText(player, 0)}";
         });
@@ -345,7 +345,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 $"<br>",
                 $"<font class='fontSize-s' color='#FFFFFF'>──────────────────────────</font>",
                 $"<br>",
-                $"<font class='fontSize-s' color='#FFFFFF'><font color='#FF0000'>Move:</font> {moveKey} | <font color='#FF0000'>Use:</font> {useKey} | <font color='#FF0000'>Exit:</font> {exitKey}</font>"
+                $"<font class='fontSize-s' color='#FFFFFF'><font color='{Configuration.FooterColor ?? "#FF0000"}'>Move:</font> {moveKey} | <font color='{Configuration.FooterColor ?? "#FF0000"}'>Use:</font> {useKey} | <font color='{Configuration.FooterColor ?? "#FF0000"}'>Exit:</font> {exitKey}</font>"
             );
         })();
 

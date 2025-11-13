@@ -117,7 +117,5 @@ public static class HtmlGradient
     }
 
     private static (int R, int G, int B) ParseHexColor( string hex ) =>
-        hex.TrimStart('#') is { Length: 6 } h
-            ? (Convert.ToInt32(h[..2], 16), Convert.ToInt32(h[2..4], 16), Convert.ToInt32(h[4..6], 16))
-            : (255, 255, 255);
+        Helper.ParseHexColor(hex) is var (r, g, b, _) ? (r ?? 255, g ?? 255, b ?? 255) : (255, 255, 255);
 }
