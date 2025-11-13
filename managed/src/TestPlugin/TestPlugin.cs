@@ -35,6 +35,7 @@ using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Collections.Concurrent;
 using Dia2Lib;
+using System.Reflection.Metadata;
 
 namespace TestPlugin;
 
@@ -636,6 +637,12 @@ public class TestPlugin : BasePlugin
             return ValueTask.CompletedTask;
         };
 
+        var toggle = new ToggleMenuOption("12");
+        toggle.ValueChanged += ( sender, args ) =>
+        {
+            args.Player.SendChat($"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
+        };
+
         var player = context.Sender!;
         var menu = Core.MenusAPI
             .CreateBuilder()
@@ -651,7 +658,7 @@ public class TestPlugin : BasePlugin
             .Design.EnableAutoAdjustVisibleItems()
             .Design.SetGlobalScrollStyle(MenuOptionScrollStyle.WaitingCenter)
             .AddOption(new TextMenuOption("1") { Visible = false })
-            .AddOption(new ToggleMenuOption("12"))
+            .AddOption(toggle)
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
             .AddOption(new SliderMenuOption("1234"))
             .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
@@ -691,7 +698,7 @@ public class TestPlugin : BasePlugin
             .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
             .AddOption(new SliderMenuOption("1234"))
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
-            .AddOption(new ToggleMenuOption("12"))
+            .AddOption(new ToggleMenuOption("12", false, "O", "X"))
             .AddOption(new TextMenuOption("1") { Visible = false })
             .Build();
 
