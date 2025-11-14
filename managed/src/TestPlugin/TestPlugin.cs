@@ -654,7 +654,15 @@ public class TestPlugin : BasePlugin
             .AddOption(new SubmenuMenuOption("Item 4", confirmMenu))
             .Build();
 
-        Core.MenusAPI.OpenMenuForPlayer(context.Sender!, menu);
+        Core.MenusAPI.OpenMenu(menu, ( player, menu ) =>
+        {
+            Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
+        });
+
+        // Core.MenusAPI.OpenMenuForPlayer(context.Sender!, menu, ( player, menu ) =>
+        // {
+        //     Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
+        // });
 
         // Core.MenusAPI.MenuClosed += ( sender, args ) =>
         // {
