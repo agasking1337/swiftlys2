@@ -36,6 +36,7 @@ using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Collections.Concurrent;
 using Dia2Lib;
 using System.Reflection.Metadata;
+using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
 
 namespace TestPlugin;
 
@@ -631,6 +632,12 @@ public class TestPlugin : BasePlugin
 
     //     Core.Menus.OpenMenu(player, settingsMenu);
     // }
+    [Command("ed")]
+    public void EndRoundCommand( ICommandContext _ )
+    {
+        var gameRules = Core.EntitySystem.GetGameRules()!;
+        gameRules.TerminateRound(RoundEndReason.CTsWin, 10.0f);
+    }
 
     [Command("tm")]
     public void TestMenuCommand( ICommandContext context )
@@ -656,16 +663,42 @@ public class TestPlugin : BasePlugin
             .AddOption(new ButtonMenuOption("Cancel") { CloseAfterClick = true })
             .Build();
 
-        var menu = Core.MenusAPI
+        var shopMenu = Core.MenusAPI
             .CreateBuilder()
             .Design.SetMenuTitle("Shop Menu")
-            .AddOption(new SubmenuMenuOption("Item 1", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 2", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 3", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 4", confirmMenu))
+            .AddOption(new SubmenuMenuOption("Item 1", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 2", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 3", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 4", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
             .Build();
 
-        Core.MenusAPI.OpenMenu(menu, ( player, menu ) =>
+        var mainMenu = Core.MenusAPI
+            .CreateBuilder()
+            .Design.SetMenuTitle("Menu")
+            .AddOption(new SubmenuMenuOption("Shop", async () =>
+            {
+                await Task.Delay(100);
+                return shopMenu;
+            }))
+            .Build();
+
+        Core.MenusAPI.OpenMenu(mainMenu, ( player, menu ) =>
         {
             Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
         });
