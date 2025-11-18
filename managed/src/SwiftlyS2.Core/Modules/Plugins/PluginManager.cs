@@ -186,7 +186,7 @@ internal class PluginManager
         {
             if (!silent)
             {
-                logger.LogWarning("Failed to find plugin  by name: {DllName}", dllName);
+                logger.LogWarning("Failed to find plugin by name: {DllName}", dllName);
             }
             return false;
         }
@@ -413,7 +413,7 @@ internal class PluginManager
         plugins
             .Where(p => p.Status == PluginStatus.Loaded)
             .ToList()
-            .ForEach(p => p.Plugin!.OnAllPluginsLoaded());
+            .ForEach(p => p.Plugin?.OnAllPluginsLoaded());
     }
 
     private PluginContext? LoadPlugin( string dir, bool hotReload, bool silent = false )
