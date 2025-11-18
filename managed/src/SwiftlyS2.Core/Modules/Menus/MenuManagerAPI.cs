@@ -145,7 +145,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -156,18 +156,18 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
             else if (exitKey.HasFlag(@event.Key.ToKeyBind()))
             {
-                CloseMenuForPlayer(player, menu);
+                CloseMenuForPlayerInternal(player, menu, true);
 
                 if (menu.Configuration.PlaySound)
                 {
                     exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    exitSound.Emit();
+                    _ = exitSound.Emit();
                     exitSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -181,7 +181,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     if (menu.Configuration.PlaySound && option.PlaySound)
                     {
                         useSound.Recipients.AddRecipient(@event.PlayerId);
-                        useSound.Emit();
+                        _ = useSound.Emit();
                         useSound.Recipients.RemoveRecipient(@event.PlayerId);
                     }
                 }
@@ -196,7 +196,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -207,17 +207,17 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
             else if (KeyBind.A.HasFlag(@event.Key.ToKeyBind()))
             {
-                CloseMenuForPlayer(player, menu);
+                CloseMenuForPlayerInternal(player, menu, true);
                 if (menu.Configuration.PlaySound)
                 {
                     exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    exitSound.Emit();
+                    _ = exitSound.Emit();
                     exitSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -231,7 +231,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     if (menu.Configuration.PlaySound && option.PlaySound)
                     {
                         useSound.Recipients.AddRecipient(@event.PlayerId);
-                        useSound.Emit();
+                        _ = useSound.Emit();
                         useSound.Recipients.RemoveRecipient(@event.PlayerId);
                     }
                 }
@@ -247,7 +247,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             openMenus
                 .Where(kvp => kvp.Key == player)
                 .ToList()
-                .ForEach(kvp => CloseMenuForPlayer(player, kvp.Value));
+                .ForEach(kvp => CloseMenuForPlayerInternal(player, kvp.Value, true));
         }
     }
 
@@ -322,7 +322,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             if (menu.Parent.ParentMenu == currentMenu)
             {
                 // We are transitioning from the current menu to one of its submenus.
-                // To show the submenu, we first need to close the current (parent) menu, see CloseMenuForPlayer.
+                // To show the submenu, we first need to close the current (parent) menu.
                 // The parent menu may have an onClosed callback registered in onClosedCallbacks.
                 // If we do not remove that callback temporarily, closing the parent menu here
                 // would incorrectly invoke the callback even though the user is only navigating
@@ -333,12 +333,12 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 //   3. Re-register the callback so it will only be invoked later, when the
                 //      logical end of the menu flow is reached and the menu is truly closed.
                 _ = onClosedCallbacks.TryRemove((player, currentMenu), out var callback);
-                CloseMenuForPlayer(player, currentMenu);
+                CloseMenuForPlayerInternal(player, currentMenu, false);
                 _ = onClosedCallbacks.AddOrUpdate((player, currentMenu), callback, ( _, _ ) => callback);
             }
             else
             {
-                CloseMenuForPlayer(player, currentMenu);
+                CloseMenuForPlayerInternal(player, currentMenu, false);
             }
         }
 
@@ -358,30 +358,12 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         Core.PlayerManager
             .GetAllPlayers()
             .ToList()
-            .ForEach(player => CloseMenuForPlayer(player, menu));
+            .ForEach(player => CloseMenuForPlayerInternal(player, menu, true));
     }
 
     public void CloseMenuForPlayer( IPlayer player, IMenuAPI menu )
     {
-        if (!openMenus.TryGetValue(player, out var currentMenu) || currentMenu != menu)
-        {
-            return;
-        }
-        if (onClosedCallbacks.TryRemove((player, menu), out var onClosed) && onClosed != null)
-        {
-            onClosed(player, menu);
-        }
-
-        if (openMenus.TryRemove(player, out _))
-        {
-            menu.HideForPlayer(player);
-            MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = menu });
-
-            if (menu.Parent.ParentMenu != null)
-            {
-                OpenMenuForPlayer(player, menu.Parent.ParentMenu);
-            }
-        }
+        CloseMenuForPlayerInternal(player, menu, true);
     }
 
     public void CloseAllMenus()
@@ -397,5 +379,29 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
             _ = openMenus.TryRemove(kvp.Key, out _);
         });
+    }
+
+    private void CloseMenuForPlayerInternal( IPlayer player, IMenuAPI menu, bool reopenParent )
+    {
+        if (!openMenus.TryGetValue(player, out var currentMenu) || currentMenu != menu)
+        {
+            return;
+        }
+
+        if (onClosedCallbacks.TryRemove((player, menu), out var onClosed) && onClosed != null)
+        {
+            onClosed(player, menu);
+        }
+
+        if (openMenus.TryRemove(player, out _))
+        {
+            menu.HideForPlayer(player);
+            MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = menu });
+
+            if (reopenParent && menu.Parent.ParentMenu != null)
+            {
+                OpenMenuForPlayer(player, menu.Parent.ParentMenu);
+            }
+        }
     }
 }
