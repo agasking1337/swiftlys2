@@ -26,12 +26,13 @@ internal class CoreHookService : IDisposable
         this.core = core;
 
         HookExecuteCommand();
-        HookFindConCommand();
+        HookFindConCommandTemplate();
         HookCCSPlayerItemServicesCanAcquire();
         HookCCSPlayerWeaponServicesCanUse();
-        HookTouch();
+        HookCBaseEntityTouchTemplate();
         HookSteamServerAPIActivated();
         HookCPlayerMovementServicesRunCommand();
+        HookCCSPlayerPawnPostThink();
     }
 
     /*
@@ -66,6 +67,7 @@ internal class CoreHookService : IDisposable
     private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
     private delegate void SteamServerAPIActivated( nint pServer );
     private delegate nint CPlayerMovementServicesRunCommand( nint pMovementServices, nint pUserCmd );
+    private delegate void CCSPlayerPawnPostThink( nint pPlayerPawn );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
@@ -86,161 +88,8 @@ internal class CoreHookService : IDisposable
     private Guid steamServerAPIActivatedGuid;
     private IUnmanagedFunction<CPlayerMovementServicesRunCommand>? movementServiceRunCommand;
     private Guid movementServiceRunCommandGuid;
-
-    private void HookSteamServerAPIActivated()
-    {
-        var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CSource2Server");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CSource2Server vtable.");
-            return;
-        }
-
-        steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(pVtable!.Value, offset);
-        logger.LogInformation("Hooking IServerGameDLL::GameServerSteamAPIActivated at {Address}", steamServerAPIActivated.Address);
-        steamServerAPIActivatedGuid = steamServerAPIActivated.AddHook(next =>
-        {
-            return ( pServer ) =>
-            {
-                if (!CSteamGameServerAPIContext.Init())
-                {
-                    logger.LogError("Failed to initialize Steamworks GameServer API context.");
-                    return;
-                }
-
-                EventPublisher.InvokeOnSteamAPIActivatedHook();
-                next()(pServer);
-            };
-        });
-    }
-
-    private void HookCCSPlayerWeaponServicesCanUse()
-    {
-        var offset = core.GameData.GetOffset("CCSPlayer_WeaponServices::CanUse");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CCSPlayer_WeaponServices vtable.");
-            return;
-        }
-        weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(pVtable!.Value, offset);
-        logger.LogInformation("Hooking CCSPlayer_WeaponServices::CanUse at {Address}", weaponServicesCanUse.Address);
-        weaponServicesCanUseGuid = weaponServicesCanUse.AddHook(next =>
-        {
-            return ( pWeaponServices, pBasePlayerWeapon ) =>
-            {
-                var result = next()(pWeaponServices, pBasePlayerWeapon);
-
-                var weaponServices = new CCSPlayer_WeaponServicesImpl(pWeaponServices);
-                var basePlayerWeapon = new CCSWeaponBaseImpl(pBasePlayerWeapon);
-
-                var @event = new OnWeaponServicesCanUseHookEvent {
-                    WeaponServices = weaponServices,
-                    Weapon = basePlayerWeapon,
-                    OriginalResult = result != 0
-                };
-                EventPublisher.InvokeOnWeaponServicesCanUseHook(@event);
-
-                return @event.Intercepted ? @event.OriginalResult ? (byte)1 : (byte)0 : result;
-            };
-        });
-    }
-
-    private void HookTouch()
-    {
-        var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
-        var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
-        var endTouchOffset = core.GameData.GetOffset("CBaseEntity::EndTouch");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CBaseEntity");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CBaseEntity vtable.");
-            return;
-        }
-        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, startTouchOffset);
-        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, touchOffset);
-        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, endTouchOffset);
-        logger.LogInformation("Hooking CBaseEntity::StartTouch at {Address}", entityStartTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::Touch at {Address}", entityTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::EndTouch at {Address}", entityEndTouch.Address);
-
-        entityStartTouchGuid = entityStartTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = new CBaseEntityImpl(pBaseEntity);
-                var otherEntity = new CBaseEntityImpl(pOtherEntity);
-                EventPublisher.InvokeOnEntityStartTouch(new OnEntityStartTouchEvent { Entity = entity, OtherEntity = otherEntity });
-                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.StartTouch });
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityTouchGuid = entityTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = new CBaseEntityImpl(pBaseEntity);
-                var otherEntity = new CBaseEntityImpl(pOtherEntity);
-                EventPublisher.InvokeOnEntityTouch(new OnEntityTouchEvent { Entity = entity, OtherEntity = otherEntity });
-                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.Touch });
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityEndTouchGuid = entityEndTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = new CBaseEntityImpl(pBaseEntity);
-                var otherEntity = new CBaseEntityImpl(pOtherEntity);
-                EventPublisher.InvokeOnEntityEndTouch(new OnEntityEndTouchEvent { Entity = entity, OtherEntity = otherEntity });
-                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.EndTouch });
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-    }
-
-    private void HookCCSPlayerItemServicesCanAcquire()
-    {
-        var address = core.GameData.GetSignature("CCSPlayer_ItemServices::CCSPlayerItemServicesCanAcquire");
-
-        logger.LogInformation("Hooking CCSPlayer_ItemServices::CCSPlayerItemServicesCanAcquire at {Address}", address);
-
-        itemServicesCanAcquire = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerItemServicesCanAcquire>(address);
-        itemServicesCanAcquireGuid = itemServicesCanAcquire.AddHook(next =>
-        {
-            return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
-            {
-                var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
-
-                var itemServices = core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
-                var econItemView = core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
-
-                var @event = new OnItemServicesCanAcquireHookEvent {
-                    ItemServices = itemServices,
-                    EconItemView = econItemView,
-                    WeaponVData = core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
-                    AcquireMethod = (AcquireMethod)acquireMethod,
-                    OriginalResult = (AcquireResult)result
-                };
-
-                EventPublisher.InvokeOnCanAcquireHook(@event);
-
-                if (@event.Intercepted)
-                {
-                    // original result is modified here.
-                    return (int)@event.OriginalResult;
-                }
-
-                return result;
-            };
-        });
-    }
+    private IUnmanagedFunction<CCSPlayerPawnPostThink>? playerPawnPostThink;
+    private Guid playerPawnPostThinkGuid;
 
     private void HookExecuteCommand()
     {
@@ -273,7 +122,7 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookFindConCommand()
+    private void HookFindConCommandTemplate()
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
@@ -335,6 +184,161 @@ internal class CoreHookService : IDisposable
         }
     }
 
+    private void HookCCSPlayerItemServicesCanAcquire()
+    {
+        var address = core.GameData.GetSignature("CCSPlayer_ItemServices::CanAcquire");
+
+        logger.LogInformation("Hooking CCSPlayer_ItemServices::CanAcquire at {Address}", address);
+
+        itemServicesCanAcquire = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerItemServicesCanAcquire>(address);
+        itemServicesCanAcquireGuid = itemServicesCanAcquire.AddHook(next =>
+        {
+            return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
+            {
+                var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
+
+                var itemServices = core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
+                var econItemView = core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
+
+                var @event = new OnItemServicesCanAcquireHookEvent {
+                    ItemServices = itemServices,
+                    EconItemView = econItemView,
+                    WeaponVData = core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
+                    AcquireMethod = (AcquireMethod)acquireMethod,
+                    OriginalResult = (AcquireResult)result
+                };
+
+                EventPublisher.InvokeOnCanAcquireHook(@event);
+
+                if (@event.Intercepted)
+                {
+                    // original result is modified here.
+                    return (int)@event.OriginalResult;
+                }
+
+                return result;
+            };
+        });
+    }
+
+    private void HookCCSPlayerWeaponServicesCanUse()
+    {
+        var offset = core.GameData.GetOffset("CCSPlayer_WeaponServices::CanUse");
+        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices");
+
+        if (pVtable == null)
+        {
+            logger.LogError("Failed to get CCSPlayer_WeaponServices vtable.");
+            return;
+        }
+        weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(pVtable!.Value, offset);
+        logger.LogInformation("Hooking CCSPlayer_WeaponServices::CanUse at {Address}", weaponServicesCanUse.Address);
+        weaponServicesCanUseGuid = weaponServicesCanUse.AddHook(next =>
+        {
+            return ( pWeaponServices, pBasePlayerWeapon ) =>
+            {
+                var result = next()(pWeaponServices, pBasePlayerWeapon);
+
+                var weaponServices = new CCSPlayer_WeaponServicesImpl(pWeaponServices);
+                var basePlayerWeapon = new CCSWeaponBaseImpl(pBasePlayerWeapon);
+
+                var @event = new OnWeaponServicesCanUseHookEvent {
+                    WeaponServices = weaponServices,
+                    Weapon = basePlayerWeapon,
+                    OriginalResult = result != 0
+                };
+                EventPublisher.InvokeOnWeaponServicesCanUseHook(@event);
+
+                return @event.Intercepted ? @event.OriginalResult ? (byte)1 : (byte)0 : result;
+            };
+        });
+    }
+
+    private void HookCBaseEntityTouchTemplate()
+    {
+        var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
+        var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
+        var endTouchOffset = core.GameData.GetOffset("CBaseEntity::EndTouch");
+        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CBaseEntity");
+
+        if (pVtable == null)
+        {
+            logger.LogError("Failed to get CBaseEntity vtable.");
+            return;
+        }
+        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, startTouchOffset);
+        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, touchOffset);
+        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, endTouchOffset);
+        logger.LogInformation("Hooking CBaseEntity::StartTouch at {Address}", entityStartTouch.Address);
+        logger.LogInformation("Hooking CBaseEntity::Touch at {Address}", entityTouch.Address);
+        logger.LogInformation("Hooking CBaseEntity::EndTouch at {Address}", entityEndTouch.Address);
+
+        entityStartTouchGuid = entityStartTouch.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = new CBaseEntityImpl(pBaseEntity);
+                var otherEntity = new CBaseEntityImpl(pOtherEntity);
+                EventPublisher.InvokeOnEntityStartTouch(new OnEntityStartTouchEvent { Entity = entity, OtherEntity = otherEntity });
+                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.StartTouch });
+                return next()(pBaseEntity, pOtherEntity);
+            };
+        });
+
+        entityTouchGuid = entityTouch.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = new CBaseEntityImpl(pBaseEntity);
+                var otherEntity = new CBaseEntityImpl(pOtherEntity);
+                EventPublisher.InvokeOnEntityTouch(new OnEntityTouchEvent { Entity = entity, OtherEntity = otherEntity });
+                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.Touch });
+                return next()(pBaseEntity, pOtherEntity);
+            };
+        });
+
+        entityEndTouchGuid = entityEndTouch.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = new CBaseEntityImpl(pBaseEntity);
+                var otherEntity = new CBaseEntityImpl(pOtherEntity);
+                EventPublisher.InvokeOnEntityEndTouch(new OnEntityEndTouchEvent { Entity = entity, OtherEntity = otherEntity });
+                EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.EndTouch });
+                return next()(pBaseEntity, pOtherEntity);
+            };
+        });
+    }
+
+    private void HookSteamServerAPIActivated()
+    {
+        var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
+        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CSource2Server");
+
+        if (pVtable == null)
+        {
+            logger.LogError("Failed to get CSource2Server vtable.");
+            return;
+        }
+
+        steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(pVtable!.Value, offset);
+        logger.LogInformation("Hooking IServerGameDLL::GameServerSteamAPIActivated at {Address}", steamServerAPIActivated.Address);
+        steamServerAPIActivatedGuid = steamServerAPIActivated.AddHook(next =>
+        {
+            return ( pServer ) =>
+            {
+                if (!CSteamGameServerAPIContext.Init())
+                {
+                    logger.LogError("Failed to initialize Steamworks GameServer API context.");
+                    return;
+                }
+
+                EventPublisher.InvokeOnSteamAPIActivatedHook();
+                next()(pServer);
+            };
+        });
+    }
+
     private void HookCPlayerMovementServicesRunCommand()
     {
         var offset = core.GameData.GetOffset("CPlayer_MovementServices::RunCommand");
@@ -367,17 +371,41 @@ internal class CoreHookService : IDisposable
         });
     }
 
+    private void HookCCSPlayerPawnPostThink()
+    {
+        var address = core.GameData.GetSignature("CCSPlayerPawn::PostThink");
+
+        logger.LogInformation("Hooking CCSPlayerPawn::PostThink at {Address}", address);
+
+        playerPawnPostThink = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerPawnPostThink>(address);
+        playerPawnPostThinkGuid = playerPawnPostThink.AddHook(( next ) =>
+        {
+            return ( pPlayerPawn ) =>
+            {
+                var playerPawn = new CCSPlayerPawnImpl(pPlayerPawn);
+
+                var @event = new OnPlayerPawnPostThinkHookEvent {
+                    PlayerPawn = playerPawn
+                };
+                EventPublisher.InvokeOnPlayerPawnPostThinkHook(@event);
+
+                next()(pPlayerPawn);
+            };
+        });
+    }
+
     public void Dispose()
     {
-        executeCommand!.RemoveHook(executeCommandGuid);
+        executeCommand?.RemoveHook(executeCommandGuid);
         findConCommandWindows?.RemoveHook(findConCommandGuid);
         findConCommandLinux?.RemoveHook(findConCommandGuid);
-        itemServicesCanAcquire!.RemoveHook(itemServicesCanAcquireGuid);
-        weaponServicesCanUse!.RemoveHook(weaponServicesCanUseGuid);
-        entityStartTouch!.RemoveHook(entityStartTouchGuid);
-        entityTouch!.RemoveHook(entityTouchGuid);
-        entityEndTouch!.RemoveHook(entityEndTouchGuid);
+        itemServicesCanAcquire?.RemoveHook(itemServicesCanAcquireGuid);
+        weaponServicesCanUse?.RemoveHook(weaponServicesCanUseGuid);
+        entityStartTouch?.RemoveHook(entityStartTouchGuid);
+        entityTouch?.RemoveHook(entityTouchGuid);
+        entityEndTouch?.RemoveHook(entityEndTouchGuid);
         steamServerAPIActivated?.RemoveHook(steamServerAPIActivatedGuid);
         movementServiceRunCommand?.RemoveHook(movementServiceRunCommandGuid);
+        playerPawnPostThink?.RemoveHook(playerPawnPostThinkGuid);
     }
 }
