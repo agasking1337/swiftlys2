@@ -393,7 +393,7 @@ internal class CoreCommandService
                 }
                 break;
             case "unload":
-                if (ValidatePluginId(args, "unload", "<pluginId>/<dllName>"))
+                if (ValidatePluginId(args, "unload", "<pluginId|dllName>"))
                 {
                     Console.WriteLine("\n");
                     if (pluginManager.UnloadPluginById(args[2], true) || pluginManager.UnloadPluginByDllName(args[2], true))
@@ -408,7 +408,7 @@ internal class CoreCommandService
                 }
                 break;
             case "reload":
-                if (ValidatePluginId(args, "reload", "<pluginId>/<dllName>"))
+                if (ValidatePluginId(args, "reload", "<pluginId|dllName>"))
                 {
                     Console.WriteLine("\n");
                     if (pluginManager.ReloadPluginById(args[2], true) || pluginManager.ReloadPluginByDllName(args[2], true))
