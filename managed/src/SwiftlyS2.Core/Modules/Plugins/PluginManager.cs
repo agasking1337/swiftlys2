@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.Loader;
+using System.Collections.Concurrent;
 using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
@@ -7,7 +8,6 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Core.Modules.Plugins;
-using System.Collections.Concurrent;
 
 namespace SwiftlyS2.Core.Plugins;
 
@@ -39,8 +39,8 @@ internal class PluginManager
         this.logger = logger;
 
         this.interfaceManager = new();
-        this.sharedTypes = new List<Type>();
-        this.plugins = new List<PluginContext>();
+        this.sharedTypes = [];
+        this.plugins = [];
         this.fileLastChange = new ConcurrentDictionary<string, DateTime>();
         this.fileReloadTokens = new ConcurrentDictionary<string, CancellationTokenSource>();
 
