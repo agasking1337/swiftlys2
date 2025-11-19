@@ -642,7 +642,19 @@ public class TestPlugin : BasePlugin
     public void EndRoundCommand( ICommandContext _ )
     {
         var gameRules = Core.EntitySystem.GetGameRules()!;
-        gameRules.TerminateRound(RoundEndReason.CTsWin, 10.0f);
+        // gameRules.TerminateRound(RoundEndReason.CTsWin, 10.0f);
+        // gameRules.AddTerroristWins(1, 7.0f);
+        // gameRules.AddCTWins(1, 7.0f);
+        Core.Game.AddCTWins(1);
+        gameRules.TerminateRound(RoundEndReason.AllHostageRescued, 7.0f);
+    }
+
+    [Command("ss")]
+    public void SwapScoresCommand( ICommandContext _ )
+    {
+        Core.PlayerManager.SendChat($"Before: {Core.Game.MatchData}");
+        Core.Game.SwapTeamScores();
+        Core.PlayerManager.SendChat($"After: {Core.Game.MatchData}");
     }
 
     [Command("sizecheck")]

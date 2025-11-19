@@ -1,8 +1,7 @@
-using System.Buffers;
 using System.Text;
+using System.Buffers;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
-
 namespace SwiftlyS2.Core.Natives;
 
 internal static class GameFunctions
@@ -16,8 +15,8 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, nint, float, void > pSetOrAddAttribute;
     public static unsafe delegate* unmanaged< int, nint, nint > pGetWeaponCSDataFromKey;
     public static unsafe delegate* unmanaged< nint, uint, nint, byte, CUtlSymbolLarge, byte, int, nint, nint, void > pDispatchParticleEffect;
-    public static unsafe delegate* unmanaged< nint, uint, float, nint, byte, void > pTerminateRoundLinux;
-    public static unsafe delegate* unmanaged< nint, float, uint, nint, byte, void > pTerminateRoundWindows;
+    public static unsafe delegate* unmanaged< nint, uint, nint, uint, float, void > pTerminateRoundLinux;
+    public static unsafe delegate* unmanaged< nint, float, uint, nint, uint, void > pTerminateRoundWindows;
     public static unsafe delegate* unmanaged< nint, Vector*, QAngle*, Vector*, void > pTeleport;
     public static int TeleportOffset => NativeOffsets.Fetch("CBaseEntity::Teleport");
     public static int CommitSuicideOffset => NativeOffsets.Fetch("CBasePlayerPawn::CommitSuicide");
@@ -46,42 +45,20 @@ internal static class GameFunctions
             pDispatchParticleEffect = (delegate* unmanaged< nint, uint, nint, byte, CUtlSymbolLarge, byte, int, nint, nint, void >)NativeSignatures.Fetch("DispatchParticleEffect");
             if (IsWindows)
             {
-                pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, byte, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+                pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, uint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
             }
             else
             {
-                pTerminateRoundLinux = (delegate* unmanaged< nint, uint, float, nint, byte, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+                pTerminateRoundLinux = (delegate* unmanaged< nint, uint, nint, uint, float, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
             }
             pTeleport = (delegate* unmanaged< nint, Vector*, QAngle*, Vector*, void >)((void**)NativeMemoryHelpers.GetVirtualTableAddress("server", "CBaseEntity"))[TeleportOffset];
         }
     }
 
-    public unsafe static void* GetVirtualFunction( nint handle, int offset )
+    public static unsafe void* GetVirtualFunction( nint handle, int offset )
     {
         var ppVTable = (void***)handle;
         return *(*ppVTable + offset);
-    }
-
-    public static void TerminateRound( nint gameRules, uint reason, float delay )
-    {
-        try
-        {
-            unsafe
-            {
-                if (IsWindows)
-                {
-                    pTerminateRoundWindows(gameRules, delay, reason, 0, 0);
-                }
-                else
-                {
-                    pTerminateRoundLinux(gameRules, reason, delay, 0, 0);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            AnsiConsole.WriteException(e);
-        }
     }
 
     public static void DispatchParticleEffect( string particleName, uint attachmentType, nint entity, byte attachmentPoint, CUtlSymbolLarge attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, CRecipientFilter filter )
@@ -108,6 +85,28 @@ internal static class GameFunctions
         }
     }
 
+    public static void TerminateRound( nint gameRules, uint reason, float delay, uint teamId, uint unk01 )
+    {
+        try
+        {
+            unsafe
+            {
+                if (IsWindows)
+                {
+                    pTerminateRoundWindows(gameRules, delay, reason, teamId > 0 ? (nint)(&teamId) : 0, unk01);
+                }
+                else
+                {
+                    pTerminateRoundLinux(gameRules, reason, teamId > 0 ? (nint)(&teamId) : 0, unk01, delay);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
     public static nint GetWeaponCSDataFromKey( int unknown, string key )
     {
         try
@@ -117,7 +116,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var keyLength = Encoding.UTF8.GetByteCount(key);
                 var keyBuffer = pool.Rent(keyLength + 1);
-                Encoding.UTF8.GetBytes(key, keyBuffer);
+                _ = Encoding.UTF8.GetBytes(key, keyBuffer);
                 keyBuffer[keyLength] = 0;
                 fixed (byte* pKey = keyBuffer)
                 {
@@ -166,7 +165,7 @@ internal static class GameFunctions
         return 0;
     }
 
-    public unsafe static void PawnCommitSuicide( nint pPawn, bool bExplode, bool bForce )
+    public static unsafe void PawnCommitSuicide( nint pPawn, bool bExplode, bool bForce )
     {
         try
         {
@@ -182,7 +181,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetPlayerControllerPawn( nint pController, nint pPawn, bool b1, bool b2, bool b3, bool b4 )
+    public static unsafe void SetPlayerControllerPawn( nint pController, nint pPawn, bool b1, bool b2, bool b3, bool b4 )
     {
         try
         {
@@ -197,7 +196,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetModel( nint pEntity, string model )
+    public static unsafe void SetModel( nint pEntity, string model )
     {
         try
         {
@@ -206,7 +205,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var modelLength = Encoding.UTF8.GetByteCount(model);
                 var modelBuffer = pool.Rent(modelLength + 1);
-                Encoding.UTF8.GetBytes(model, modelBuffer);
+                _ = Encoding.UTF8.GetBytes(model, modelBuffer);
                 modelBuffer[modelLength] = 0;
                 fixed (byte* pModel = modelBuffer)
                 {
@@ -221,12 +220,12 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void Teleport(
-    nint pEntity,
-    Vector* vecPosition,
-    QAngle* vecAngle,
-    Vector* vecVelocity
-  )
+    public static unsafe void Teleport(
+        nint pEntity,
+        Vector* vecPosition,
+        QAngle* vecAngle,
+        Vector* vecVelocity
+    )
     {
         try
         {
@@ -241,7 +240,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void TracePlayerBBox(
+    public static unsafe void TracePlayerBBox(
       Vector vecStart,
       Vector vecEnd,
       BBox_t bounds,
@@ -262,7 +261,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void TraceShape(
+    public static unsafe void TraceShape(
       nint pEngineTrace,
       Ray_t* ray,
       Vector vecStart,
@@ -284,7 +283,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CTakeDamageInfoConstructor(
+    public static unsafe void CTakeDamageInfoConstructor(
       CTakeDamageInfo* pThis,
       nint pInflictor,
       nint pAttacker,
@@ -310,7 +309,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_ItemServices_RemoveWeapons( nint pThis )
+    public static unsafe void CCSPlayer_ItemServices_RemoveWeapons( nint pThis )
     {
         try
         {
@@ -326,18 +325,18 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static nint CCSPlayer_ItemServices_GiveNamedItem( nint pThis, string name )
+    public static unsafe nint CCSPlayer_ItemServices_GiveNamedItem( nint pThis, string name )
     {
         try
         {
             unsafe
             {
-                void*** ppVTable = (void***)pThis;
+                var ppVTable = (void***)pThis;
                 var pGiveNamedItem = (delegate* unmanaged< nint, nint, nint >)ppVTable[0][GiveNamedItemOffset];
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {
@@ -352,7 +351,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_ItemServices_DropActiveItem( nint pThis, Vector momentum )
+    public static unsafe void CCSPlayer_ItemServices_DropActiveItem( nint pThis, Vector momentum )
     {
         try
         {
@@ -368,7 +367,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_WeaponServices_DropWeapon( nint pThis, nint pWeapon )
+    public static unsafe void CCSPlayer_WeaponServices_DropWeapon( nint pThis, nint pWeapon )
     {
         try
         {
@@ -384,7 +383,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_WeaponServices_SelectWeapon( nint pThis, nint pWeapon )
+    public static unsafe void CCSPlayer_WeaponServices_SelectWeapon( nint pThis, nint pWeapon )
     {
         try
         {
@@ -400,7 +399,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CEntityResourceManifest_AddResource( nint pThis, string path )
+    public static unsafe void CEntityResourceManifest_AddResource( nint pThis, string path )
     {
         try
         {
@@ -409,7 +408,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var pathLength = Encoding.UTF8.GetByteCount(path);
                 var pathBuffer = pool.Rent(pathLength + 1);
-                Encoding.UTF8.GetBytes(path, pathBuffer);
+                _ = Encoding.UTF8.GetBytes(path, pathBuffer);
                 pathBuffer[pathLength] = 0;
                 var pAddResource = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, AddResourceOffset);
                 fixed (byte* pPath = pathBuffer)
@@ -425,7 +424,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetOrAddAttribute( nint handle, string name, float value )
+    public static unsafe void SetOrAddAttribute( nint handle, string name, float value )
     {
         try
         {
@@ -434,7 +433,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {
@@ -449,7 +448,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CBaseEntity_CollisionRulesChanged( nint pThis )
+    public static unsafe void CBaseEntity_CollisionRulesChanged( nint pThis )
     {
         try
         {
@@ -465,7 +464,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayerController_Respawn( nint pThis )
+    public static unsafe void CCSPlayerController_Respawn( nint pThis )
     {
         try
         {
