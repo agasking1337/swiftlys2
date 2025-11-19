@@ -18,4 +18,12 @@ public struct CCSMatch
     public short TerroristScoreTotal;
     public short Unknown;
     public int Phase;
+
+    /// <summary>
+    /// Returns a formatted string representation of the match data.
+    /// </summary>
+    public override readonly string ToString()
+    {
+        return $"Match [Round {ActualRoundsPlayed}] T: {TerroristScoreTotal} ({TerroristScoreFirstHalf}/{TerroristScoreSecondHalf}/{TerroristScoreOvertime}) vs CT: {CTScoreTotal} ({CTScoreFirstHalf}/{CTScoreSecondHalf}/{CTScoreOvertime}) | OT: {NOvertimePlaying} | Phase: {Phase}";
+    }
 }

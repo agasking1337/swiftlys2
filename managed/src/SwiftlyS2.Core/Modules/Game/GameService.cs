@@ -20,7 +20,7 @@ internal class GameService : IGameService
         this.entitySystemService = entitySystemService;
     }
 
-    public unsafe CCSMatch MatchData => *GetCCSMatchPtr();
+    public unsafe ref readonly CCSMatch MatchData => ref *GetCCSMatchPtr();
 
     public unsafe void Reset()
     {

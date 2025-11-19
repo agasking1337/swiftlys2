@@ -6,9 +6,9 @@ namespace SwiftlyS2.Shared.Services;
 public interface IGameService
 {
     /// <summary>
-    /// Gets the current match data.
+    /// Gets a read-only reference to the current match data.
     /// </summary>
-    CCSMatch MatchData { get; }
+    ref readonly CCSMatch MatchData { get; }
 
     /// <summary>
     /// Resets all match data to initial state.

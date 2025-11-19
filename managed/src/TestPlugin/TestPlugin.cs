@@ -652,7 +652,9 @@ public class TestPlugin : BasePlugin
     [Command("ss")]
     public void SwapScoresCommand( ICommandContext _ )
     {
+        Core.PlayerManager.SendChat($"Before: {Core.Game.MatchData}");
         Core.Game.SwapTeamScores();
+        Core.PlayerManager.SendChat($"After: {Core.Game.MatchData}");
     }
 
     [Command("sizecheck")]
