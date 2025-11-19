@@ -15,7 +15,7 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, nint, float, void > pSetOrAddAttribute;
     public static unsafe delegate* unmanaged< int, nint, nint > pGetWeaponCSDataFromKey;
     public static unsafe delegate* unmanaged< nint, uint, nint, byte, CUtlSymbolLarge, byte, int, nint, nint, void > pDispatchParticleEffect;
-    public static unsafe delegate* unmanaged< nint, uint, float, nint, uint, void > pTerminateRoundLinux;
+    public static unsafe delegate* unmanaged< nint, uint, nint, uint, float, void > pTerminateRoundLinux;
     public static unsafe delegate* unmanaged< nint, float, uint, nint, uint, void > pTerminateRoundWindows;
     public static unsafe delegate* unmanaged< nint, short, void > pAddTerroristWins;
     public static unsafe delegate* unmanaged< nint, short, void > pAddCTWins;
@@ -52,7 +52,7 @@ internal static class GameFunctions
             }
             else
             {
-                pTerminateRoundLinux = (delegate* unmanaged< nint, uint, float, nint, uint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+                pTerminateRoundLinux = (delegate* unmanaged< nint, uint, nint, uint, float, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
             }
             pAddTerroristWins = (delegate* unmanaged< nint, short, void >)NativeSignatures.Fetch("CGameRules::AddTerroristWins");
             pAddCTWins = (delegate* unmanaged< nint, short, void >)NativeSignatures.Fetch("CGameRules::AddCTWins");
@@ -102,7 +102,7 @@ internal static class GameFunctions
                 }
                 else
                 {
-                    pTerminateRoundLinux(gameRules, reason, delay, teamId > 0 ? (nint)(&teamId) : 0, unk01);
+                    pTerminateRoundLinux(gameRules, reason, teamId > 0 ? (nint)(&teamId) : 0, unk01, delay);
                 }
             }
         }
