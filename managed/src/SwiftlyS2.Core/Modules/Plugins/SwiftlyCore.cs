@@ -224,12 +224,12 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     // [Obsolete("MenuManager will be deprecared at the release of SwiftlyS2. Please use MenuManagerAPI instead")]
     // IMenuManager ISwiftlyCore.Menus => MenuManager;
     IMenuManagerAPI ISwiftlyCore.MenusAPI => MenuManagerAPI;
-    string ISwiftlyCore.PluginPath => ContextBasePath;
-    string ISwiftlyCore.CSGODirectory => NativeEngineHelpers.GetCSGODirectoryPath();
-    string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
     ICommandLine ISwiftlyCore.CommandLine => CommandLineService;
     IHelpers ISwiftlyCore.Helpers => Helpers;
     IGameService ISwiftlyCore.Game => GameService;
     IGameFileSystem ISwiftlyCore.GameFileSystem => GameFileSystem;
+    string ISwiftlyCore.PluginPath => ContextBasePath;
     string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
+    string ISwiftlyCore.CSGODirectory => NativeEngineHelpers.GetCSGODirectoryPath();
+    string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
 }

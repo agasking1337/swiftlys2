@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.CommandLine;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.ConsoleOutput;
@@ -92,7 +91,6 @@ public interface ISwiftlyCore
     /// </summary>
     public IPlayerManagerService PlayerManager { get; }
 
-
     /// <summary>
     /// Memory service.
     /// </summary>
@@ -165,6 +163,11 @@ public interface ISwiftlyCore
     public ICommandLine CommandLine { get; }
 
     /// <summary>
+    /// Game file system interface.
+    /// </summary>
+    public IGameFileSystem GameFileSystem { get; }
+
+    /// <summary>
     /// Gets the file path to the plugin directory.
     /// </summary>
     public string PluginPath { get; }
@@ -184,9 +187,4 @@ public interface ISwiftlyCore
     /// This directory is ensured to exist by the framework.
     /// </summary>
     public string PluginDataDirectory { get; }
-
-    /// <summary>
-    /// Game file system interface.
-    /// </summary>
-    public IGameFileSystem GameFileSystem { get; }
 }
