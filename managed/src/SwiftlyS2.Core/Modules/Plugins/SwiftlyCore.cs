@@ -75,6 +75,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public MenuManagerAPI MenuManagerAPI { get; init; }
     public CommandLineService CommandLineService { get; init; }
     public HelpersService Helpers { get; init; }
+    public GameService GameService { get; init; }
     public string ContextBasePath { get; init; }
     public string PluginDataDirectory { get; init; }
     public GameFileSystem GameFileSystem { get; init; }
@@ -120,6 +121,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<MenuManagerAPI>()
             .AddSingleton<CommandLineService>()
             .AddSingleton<HelpersService>()
+            .AddSingleton<GameService>()
             .AddSingleton<IPermissionManager>(provider => provider.GetRequiredService<PermissionManager>())
 
             .AddSingleton<IEventSubscriber>(provider => provider.GetRequiredService<EventSubscriber>())
@@ -145,6 +147,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<IMenuManagerAPI>(provider => provider.GetRequiredService<MenuManagerAPI>())
             .AddSingleton<ICommandLine>(provider => provider.GetRequiredService<CommandLineService>())
             .AddSingleton<IHelpers>(provider => provider.GetRequiredService<HelpersService>())
+            .AddSingleton<IGameService>(provider => provider.GetRequiredService<GameService>())
             .AddSingleton<IGameFileSystem>(provider => provider.GetRequiredService<GameFileSystem>())
 
             .AddLogging(builder => builder.AddProvider(new SwiftlyLoggerProvider(id.Name)))
@@ -176,6 +179,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         MenuManagerAPI = serviceProvider.GetRequiredService<MenuManagerAPI>();
         CommandLineService = serviceProvider.GetRequiredService<CommandLineService>();
         Helpers = serviceProvider.GetRequiredService<HelpersService>();
+        GameService = serviceProvider.GetRequiredService<GameService>();
         Logger = LoggerFactory.CreateLogger(contextType);
         GameFileSystem = serviceProvider.GetRequiredService<GameFileSystem>();
     }
@@ -225,5 +229,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
     ICommandLine ISwiftlyCore.CommandLine => CommandLineService;
     IHelpers ISwiftlyCore.Helpers => Helpers;
+    IGameService ISwiftlyCore.Game => GameService;
     IGameFileSystem ISwiftlyCore.GameFileSystem => GameFileSystem;
+    string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
 }

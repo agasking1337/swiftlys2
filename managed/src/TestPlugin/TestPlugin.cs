@@ -647,6 +647,12 @@ public class TestPlugin : BasePlugin
         // gameRules.AddCTWins(1, 7.0f);
     }
 
+    [Command("ss")]
+    public void SwapScoresCommand( ICommandContext _ )
+    {
+        Core.Game.SwapTeamScores();
+    }
+
     [Command("sizecheck")]
     public void SizeCheckCommand( ICommandContext _ )
     {

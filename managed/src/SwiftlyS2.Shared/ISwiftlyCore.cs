@@ -53,6 +53,11 @@ public interface ISwiftlyCore
     public IHelpers Helpers { get; }
 
     /// <summary>
+    /// Game service.
+    /// </summary>
+    public IGameService Game { get; }
+
+    /// <summary>
     /// Command service.
     /// </summary>
     public ICommandService Command { get; }
