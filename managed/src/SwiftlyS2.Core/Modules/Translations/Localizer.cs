@@ -10,7 +10,7 @@ internal class Localizer : ILocalizer
 
 
 
-  public Localizer(Dictionary<string, string> resource, Dictionary<string, string> defaultResource)
+  public Localizer( Dictionary<string, string> resource, Dictionary<string, string> defaultResource )
   {
     _Resource = resource;
     _DefaultResource = defaultResource;
@@ -20,14 +20,16 @@ internal class Localizer : ILocalizer
 
   public string this[string key, params object[] args] => string.Format(this[key], args);
 
-  public string Get(string key)
+  public string Get( string key )
   {
-    if (_Resource.ContainsKey(key)) {
-      return _Resource[key];
+    if (_Resource.TryGetValue(key, out var value))
+    {
+      return value;
     }
 
-    if (_DefaultResource.ContainsKey(key)) {
-      return _DefaultResource[key];
+    if (_DefaultResource.TryGetValue(key, out var defaultValue))
+    {
+      return defaultValue;
     }
 
     throw new Exception($"Translation key {key} not found.");

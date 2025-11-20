@@ -641,12 +641,7 @@ public class TestPlugin : BasePlugin
     [Command("ed")]
     public void EndRoundCommand( ICommandContext _ )
     {
-        var gameRules = Core.EntitySystem.GetGameRules()!;
-        // gameRules.TerminateRound(RoundEndReason.CTsWin, 10.0f);
-        // gameRules.AddTerroristWins(1, 7.0f);
-        // gameRules.AddCTWins(1, 7.0f);
-        Core.Game.AddCTWins(1);
-        gameRules.TerminateRound(RoundEndReason.AllHostageRescued, 7.0f);
+        var smoke = CSmokeGrenadeProjectile.EmitGrenade(new(0, 0, 0), new(0, 0, 0), new(0, 0, 0), Team.CT, null);
     }
 
     [Command("ss")]
