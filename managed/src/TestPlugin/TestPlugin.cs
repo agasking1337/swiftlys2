@@ -36,6 +36,7 @@ using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Collections.Concurrent;
 using Dia2Lib;
 using System.Reflection.Metadata;
+using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
 
 namespace TestPlugin;
 
@@ -56,7 +57,7 @@ public class InProcessConfig : ManualConfig
     }
 }
 
-[PluginMetadata(Id = "testplugin", Version = "1.0.0")]
+[PluginMetadata(Id = "sw2.testplugin", Version = "1.0.0")]
 public class TestPlugin : BasePlugin
 {
     public TestPlugin( ISwiftlyCore core ) : base(core)
@@ -137,6 +138,11 @@ public class TestPlugin : BasePlugin
         //       Console.WriteLine($"EntityEndTouch: {(player.Controller.Value?.PlayerName ?? string.Empty)} -> {(otherPlayer.Controller.Value?.PlayerName ?? string.Empty)}");
         //       break;
         //   }
+        // };
+
+        // Core.Event.OnPlayerPawnPostThink += ( @event ) =>
+        // {
+        //     Console.WriteLine($"PostThink -> {@event.PlayerPawn.OriginalController.Value?.PlayerName}");
         // };
 
         Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
@@ -245,9 +251,20 @@ public class TestPlugin : BasePlugin
         {
             Console.WriteLine("TestPlugin OnClientDisconnected " + @event.PlayerId);
         };
+
+        var convar = Core.ConVar.Find<float>("sv_cs_player_speed_has_hostage");
         Core.Event.OnTick += () =>
         {
-            int i = 0;
+            var players = Core.PlayerManager.GetAllPlayers();
+            foreach (var player in players)
+            {
+                Core.Profiler.StartRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
+                for (int i = 0; i < 1024; i++)
+                {
+                    convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
+                }
+                Core.Profiler.StopRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
+            }
         };
 
         // Core.Event.OnClientProcessUsercmds += (@event) => {
@@ -621,6 +638,37 @@ public class TestPlugin : BasePlugin
     //     Core.Menus.OpenMenu(player, settingsMenu);
     // }
 
+    [Command("ed")]
+    public void EndRoundCommand( ICommandContext _ )
+    {
+        var smoke = CSmokeGrenadeProjectile.EmitGrenade(new(0, 0, 0), new(0, 0, 0), new(0, 0, 0), Team.CT, null);
+    }
+
+    [Command("ss")]
+    public void SwapScoresCommand( ICommandContext _ )
+    {
+        Core.PlayerManager.SendChat($"Before: {Core.Game.MatchData}");
+        Core.Game.SwapTeamScores();
+        Core.PlayerManager.SendChat($"After: {Core.Game.MatchData}");
+    }
+
+    [Command("sizecheck")]
+    public void SizeCheckCommand( ICommandContext _ )
+    {
+        unsafe
+        {
+            var moveDataSize = sizeof(CMoveData);
+            var moveDataBaseSize = sizeof(CMoveDataBase);
+            var subtickMoveSize = sizeof(SubtickMove);
+            var touchListSize = sizeof(TouchListT);
+
+            Console.WriteLine($"CMoveData size: {moveDataSize} bytes");
+            Console.WriteLine($"CMoveDataBase size: {moveDataBaseSize} bytes");
+            Console.WriteLine($"SubtickMove size: {subtickMoveSize} bytes");
+            Console.WriteLine($"TouchListT size: {touchListSize} bytes");
+        }
+    }
+
     [Command("tm")]
     public void TestMenuCommand( ICommandContext context )
     {
@@ -645,16 +693,42 @@ public class TestPlugin : BasePlugin
             .AddOption(new ButtonMenuOption("Cancel") { CloseAfterClick = true })
             .Build();
 
-        var menu = Core.MenusAPI
+        var shopMenu = Core.MenusAPI
             .CreateBuilder()
             .Design.SetMenuTitle("Shop Menu")
-            .AddOption(new SubmenuMenuOption("Item 1", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 2", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 3", confirmMenu))
-            .AddOption(new SubmenuMenuOption("Item 4", confirmMenu))
+            .AddOption(new SubmenuMenuOption("Item 1", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 2", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 3", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
+            .AddOption(new SubmenuMenuOption("Item 4", async () =>
+            {
+                await Task.Delay(100);
+                return confirmMenu;
+            }))
             .Build();
 
-        Core.MenusAPI.OpenMenu(menu, ( player, menu ) =>
+        var mainMenu = Core.MenusAPI
+            .CreateBuilder()
+            .Design.SetMenuTitle("Menu")
+            .AddOption(new SubmenuMenuOption("Shop", async () =>
+            {
+                await Task.Delay(100);
+                return shopMenu;
+            }))
+            .Build();
+
+        Core.MenusAPI.OpenMenu(mainMenu, ( player, menu ) =>
         {
             Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
         });

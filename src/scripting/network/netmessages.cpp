@@ -904,6 +904,8 @@ void Bridge_NetMessages_ClearRepeatedField(void* pmsg, const char* fieldName)
     msg->GetReflection()->ClearField(msg, field);
 }
 
+extern bool bypassPostEventAbstractHook;
+
 void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 {
     CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
@@ -913,8 +915,12 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
     auto netmsg = networkMessages->FindNetworkMessageById(msgid);
     if (!netmsg) return;
 
+    bypassPostEventAbstractHook = true;
+
     CSingleRecipientFilter filter(playerid);
     gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+
+    bypassPostEventAbstractHook = false;
 }
 
 void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t playermask)
@@ -926,12 +932,18 @@ void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t pla
     auto netmsg = networkMessages->FindNetworkMessageById(msgid);
     if (!netmsg) return;
 
+    bypassPostEventAbstractHook = true;
+
     CRecipientFilter filter;
-    for (int i = 0; i < 64; i++)
-        if (playermask & (1ULL << i))
-            filter.AddRecipient(i);
+    auto& recipients = filter.GetRecipients();
+
+    // because recipients are only 64, we can cast the base array pointer from being base[0] and base[1], 
+    // each having 4 bytes, to a single base with 8 bytes 
+    *(uint64_t*)(recipients.Base()) = playermask;
 
     gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+
+    bypassPostEventAbstractHook = false;
 }
 
 uint64_t Bridge_NetMessages_AddNetMessageServerHook(void* callback_ptr)
@@ -940,7 +952,7 @@ uint64_t Bridge_NetMessages_AddNetMessageServerHook(void* callback_ptr)
 
     return netmessages->AddServerMessageSendCallback([callback_ptr](uint64_t* clients, int messageid, void* msg) {
         return ((int(*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg);
-    });
+        });
 }
 
 void Bridge_NetMessages_RemoveNetMessageServerHook(uint64_t callbackID)
@@ -955,7 +967,7 @@ uint64_t Bridge_NetMessages_AddNetMessageClientHook(void* callback_ptr)
 
     return netmessages->AddClientMessageSendCallback([callback_ptr](int playerid, int messageid, void* msg) {
         return ((int(*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
-    });
+        });
 }
 
 void Bridge_NetMessages_RemoveNetMessageClientHook(uint64_t callbackID)

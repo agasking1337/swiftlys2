@@ -105,10 +105,21 @@ internal class MemoryService : IMemoryService, IDisposable
 
   public nint? GetVTableAddress( string library, string vtableName )
   {
-    var ptr = NativeMemoryHelpers.GetVirtualTableAddress(library, vtableName);
-    if (ptr == 0)
+    var classes = vtableName.Split("::");
+    nint? ptr;
+    if (classes.Length == 1)
     {
-      return null;
+      ptr = NativeMemoryHelpers.GetVirtualTableAddress(library, vtableName);
+    } 
+    else if (classes.Length == 2)
+    {
+      ptr = NativeMemoryHelpers.GetVirtualTableAddressNested2(library, classes[0], classes[1]);
+    }
+    else {
+      throw new ArgumentException("Vtable has too many nested classes, which is not supported for now.");
+    }
+    if (ptr == 0) {
+      ptr = null;
     }
     return ptr;
   }
@@ -138,6 +149,21 @@ internal class MemoryService : IMemoryService, IDisposable
   public T ToSchemaClass<T>( nint address ) where T : class, ISchemaClass<T>
   {
     return T.From(address);
+  }
+
+  public nint Alloc(ulong size)
+  {
+    return NativeAllocator.Alloc(size);
+  }
+
+  public void Free(nint pointer)
+  {
+    NativeAllocator.Free(pointer);
+  }
+
+  public nint Resize(nint pointer, ulong newSize)
+  {
+    return NativeAllocator.Resize(pointer, newSize);
   }
 
   public void Dispose()

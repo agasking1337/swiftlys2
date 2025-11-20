@@ -89,6 +89,16 @@ public static class Helper
     }
 
     /// <summary>
+    /// Get the size of a schema class.
+    /// </summary>
+    /// <typeparam name="T">The schema class to get the size of.</typeparam>
+    /// <returns>The size of the schema class.</returns>
+    public static int GetSchemaSize<T>() where T : ISchemaClass<T>
+    {
+        return T.Size;
+    }
+
+    /// <summary>
     /// Estimates the display width of a character based on its type.
     /// Inspired by: https://github.com/spectreconsole/wcwidth
     /// </summary>

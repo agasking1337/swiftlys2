@@ -1,13 +1,13 @@
-using System.Buffers;
 using System.Text;
+using System.Buffers;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
-
+using SwiftlyS2.Shared.Players;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class GameFunctions
 {
+    private static readonly bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
     public static unsafe delegate* unmanaged< nint, Ray_t*, Vector, Vector, CTraceFilter*, CGameTrace*, void > pTraceShape;
     public static unsafe delegate* unmanaged< Vector, Vector, BBox_t, CTraceFilter*, CGameTrace*, void > pTracePlayerBBox;
@@ -16,8 +16,14 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, nint, float, void > pSetOrAddAttribute;
     public static unsafe delegate* unmanaged< int, nint, nint > pGetWeaponCSDataFromKey;
     public static unsafe delegate* unmanaged< nint, uint, nint, byte, CUtlSymbolLarge, byte, int, nint, nint, void > pDispatchParticleEffect;
-    public static unsafe delegate* unmanaged< nint, uint, float, nint, byte, void > pTerminateRound;
+    public static unsafe delegate* unmanaged< nint, uint, nint, uint, float, void > pTerminateRoundLinux;
+    public static unsafe delegate* unmanaged< nint, float, uint, nint, uint, void > pTerminateRoundWindows;
     public static unsafe delegate* unmanaged< nint, Vector*, QAngle*, Vector*, void > pTeleport;
+    public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, int, nint > pCSmokeGrenadeProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCFlashbangProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCHEGrenadeProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCDecoyProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCMolotovProjectileEmitGrenade;
     public static int TeleportOffset => NativeOffsets.Fetch("CBaseEntity::Teleport");
     public static int CommitSuicideOffset => NativeOffsets.Fetch("CBasePlayerPawn::CommitSuicide");
     public static int GetSkeletonInstanceOffset => NativeOffsets.Fetch("CGameSceneNode::GetSkeletonInstance");
@@ -43,30 +49,27 @@ internal static class GameFunctions
             pSetOrAddAttribute = (delegate* unmanaged< nint, IntPtr, float, void >)NativeSignatures.Fetch("CAttributeList::SetOrAddAttributeValueByName");
             pGetWeaponCSDataFromKey = (delegate* unmanaged< int, nint, nint >)NativeSignatures.Fetch("GetWeaponCSDataFromKey");
             pDispatchParticleEffect = (delegate* unmanaged< nint, uint, nint, byte, CUtlSymbolLarge, byte, int, nint, nint, void >)NativeSignatures.Fetch("DispatchParticleEffect");
-            pTerminateRound = (delegate* unmanaged< nint, uint, float, nint, byte, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+            if (IsWindows)
+            {
+                pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, uint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+            }
+            else
+            {
+                pTerminateRoundLinux = (delegate* unmanaged< nint, uint, nint, uint, float, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
+            }
             pTeleport = (delegate* unmanaged< nint, Vector*, QAngle*, Vector*, void >)((void**)NativeMemoryHelpers.GetVirtualTableAddress("server", "CBaseEntity"))[TeleportOffset];
+            pCSmokeGrenadeProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, int, nint >)NativeSignatures.Fetch("CSmokeGrenadeProjectile::EmitGrenade");
+            pCFlashbangProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CFlashbangProjectile::EmitGrenade");
+            pCHEGrenadeProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CHEGrenadeProjectile::EmitGrenade");
+            pCDecoyProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CDecoyProjectile::EmitGrenade");
+            pCMolotovProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CMolotovProjectile::EmitGrenade");
         }
     }
 
-    public unsafe static void* GetVirtualFunction( nint handle, int offset )
+    public static unsafe void* GetVirtualFunction( nint handle, int offset )
     {
         var ppVTable = (void***)handle;
         return *(*ppVTable + offset);
-    }
-
-    public static void TerminateRound( nint gameRules, uint reason, float delay )
-    {
-        try
-        {
-            unsafe
-            {
-                pTerminateRound(gameRules, reason, delay, 0, 0);
-            }
-        }
-        catch (Exception e)
-        {
-            AnsiConsole.WriteException(e);
-        }
     }
 
     public static void DispatchParticleEffect( string particleName, uint attachmentType, nint entity, byte attachmentPoint, CUtlSymbolLarge attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, CRecipientFilter filter )
@@ -93,6 +96,28 @@ internal static class GameFunctions
         }
     }
 
+    public static void TerminateRound( nint gameRules, uint reason, float delay, uint teamId, uint unk01 )
+    {
+        try
+        {
+            unsafe
+            {
+                if (IsWindows)
+                {
+                    pTerminateRoundWindows(gameRules, delay, reason, teamId > 0 ? (nint)(&teamId) : 0, unk01);
+                }
+                else
+                {
+                    pTerminateRoundLinux(gameRules, reason, teamId > 0 ? (nint)(&teamId) : 0, unk01, delay);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
     public static nint GetWeaponCSDataFromKey( int unknown, string key )
     {
         try
@@ -102,7 +127,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var keyLength = Encoding.UTF8.GetByteCount(key);
                 var keyBuffer = pool.Rent(keyLength + 1);
-                Encoding.UTF8.GetBytes(key, keyBuffer);
+                _ = Encoding.UTF8.GetBytes(key, keyBuffer);
                 keyBuffer[keyLength] = 0;
                 fixed (byte* pKey = keyBuffer)
                 {
@@ -151,7 +176,7 @@ internal static class GameFunctions
         return 0;
     }
 
-    public unsafe static void PawnCommitSuicide( nint pPawn, bool bExplode, bool bForce )
+    public static unsafe void PawnCommitSuicide( nint pPawn, bool bExplode, bool bForce )
     {
         try
         {
@@ -167,7 +192,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetPlayerControllerPawn( nint pController, nint pPawn, bool b1, bool b2, bool b3, bool b4 )
+    public static unsafe void SetPlayerControllerPawn( nint pController, nint pPawn, bool b1, bool b2, bool b3, bool b4 )
     {
         try
         {
@@ -182,7 +207,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetModel( nint pEntity, string model )
+    public static unsafe void SetModel( nint pEntity, string model )
     {
         try
         {
@@ -191,7 +216,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var modelLength = Encoding.UTF8.GetByteCount(model);
                 var modelBuffer = pool.Rent(modelLength + 1);
-                Encoding.UTF8.GetBytes(model, modelBuffer);
+                _ = Encoding.UTF8.GetBytes(model, modelBuffer);
                 modelBuffer[modelLength] = 0;
                 fixed (byte* pModel = modelBuffer)
                 {
@@ -206,12 +231,12 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void Teleport(
-    nint pEntity,
-    Vector* vecPosition,
-    QAngle* vecAngle,
-    Vector* vecVelocity
-  )
+    public static unsafe void Teleport(
+        nint pEntity,
+        Vector* vecPosition,
+        QAngle* vecAngle,
+        Vector* vecVelocity
+    )
     {
         try
         {
@@ -226,7 +251,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void TracePlayerBBox(
+    public static unsafe void TracePlayerBBox(
       Vector vecStart,
       Vector vecEnd,
       BBox_t bounds,
@@ -247,7 +272,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void TraceShape(
+    public static unsafe void TraceShape(
       nint pEngineTrace,
       Ray_t* ray,
       Vector vecStart,
@@ -269,7 +294,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CTakeDamageInfoConstructor(
+    public static unsafe void CTakeDamageInfoConstructor(
       CTakeDamageInfo* pThis,
       nint pInflictor,
       nint pAttacker,
@@ -295,7 +320,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_ItemServices_RemoveWeapons( nint pThis )
+    public static unsafe void CCSPlayer_ItemServices_RemoveWeapons( nint pThis )
     {
         try
         {
@@ -311,18 +336,18 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static nint CCSPlayer_ItemServices_GiveNamedItem( nint pThis, string name )
+    public static unsafe nint CCSPlayer_ItemServices_GiveNamedItem( nint pThis, string name )
     {
         try
         {
             unsafe
             {
-                void*** ppVTable = (void***)pThis;
+                var ppVTable = (void***)pThis;
                 var pGiveNamedItem = (delegate* unmanaged< nint, nint, nint >)ppVTable[0][GiveNamedItemOffset];
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {
@@ -337,7 +362,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_ItemServices_DropActiveItem( nint pThis, Vector momentum )
+    public static unsafe void CCSPlayer_ItemServices_DropActiveItem( nint pThis, Vector momentum )
     {
         try
         {
@@ -353,14 +378,14 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_WeaponServices_DropWeapon( nint pThis, nint pWeapon )
+    public static unsafe void CCSPlayer_WeaponServices_DropWeapon( nint pThis, nint pWeapon )
     {
         try
         {
             unsafe
             {
-                var pDropWeapon = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, DropWeaponOffset);
-                pDropWeapon(pThis, pWeapon);
+                var pDropWeapon = (delegate* unmanaged< nint, nint, nint, nint, void >)GetVirtualFunction(pThis, DropWeaponOffset);
+                pDropWeapon(pThis, pWeapon, 0, 0);
             }
         }
         catch (Exception e)
@@ -369,7 +394,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayer_WeaponServices_SelectWeapon( nint pThis, nint pWeapon )
+    public static unsafe void CCSPlayer_WeaponServices_SelectWeapon( nint pThis, nint pWeapon )
     {
         try
         {
@@ -385,7 +410,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CEntityResourceManifest_AddResource( nint pThis, string path )
+    public static unsafe void CEntityResourceManifest_AddResource( nint pThis, string path )
     {
         try
         {
@@ -394,7 +419,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var pathLength = Encoding.UTF8.GetByteCount(path);
                 var pathBuffer = pool.Rent(pathLength + 1);
-                Encoding.UTF8.GetBytes(path, pathBuffer);
+                _ = Encoding.UTF8.GetBytes(path, pathBuffer);
                 pathBuffer[pathLength] = 0;
                 var pAddResource = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, AddResourceOffset);
                 fixed (byte* pPath = pathBuffer)
@@ -410,7 +435,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void SetOrAddAttribute( nint handle, string name, float value )
+    public static unsafe void SetOrAddAttribute( nint handle, string name, float value )
     {
         try
         {
@@ -419,7 +444,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {
@@ -434,7 +459,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CBaseEntity_CollisionRulesChanged( nint pThis )
+    public static unsafe void CBaseEntity_CollisionRulesChanged( nint pThis )
     {
         try
         {
@@ -450,7 +475,7 @@ internal static class GameFunctions
         }
     }
 
-    public unsafe static void CCSPlayerController_Respawn( nint pThis )
+    public static unsafe void CCSPlayerController_Respawn( nint pThis )
     {
         try
         {
@@ -463,6 +488,86 @@ internal static class GameFunctions
         catch (Exception e)
         {
             AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static nint CSmokeGrenadeProjectile_EmitGrenade( Vector pos, QAngle angle, Vector velocity, nint owner, Team team, uint itemdefindex )
+    {
+        try
+        {
+            unsafe
+            {
+                return pCSmokeGrenadeProjectileEmitGrenade(&pos, &angle, &velocity, &velocity, owner, itemdefindex, (int)team);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
+    public static nint CFlashbangProjectile_EmitGrenade( Vector pos, QAngle angle, Vector velocity, nint owner, uint itemdefindex )
+    {
+        try
+        {
+            unsafe
+            {
+                return pCFlashbangProjectileEmitGrenade(&pos, &angle, &velocity, &velocity, owner, itemdefindex);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
+    public static nint CHEGrenadeProjectile_EmitGrenade( Vector pos, QAngle angle, Vector velocity, nint owner, uint itemdefindex )
+    {
+        try
+        {
+            unsafe
+            {
+                return pCHEGrenadeProjectileEmitGrenade(&pos, &angle, &velocity, &velocity, owner, itemdefindex);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
+    public static nint CDecoyProjectile_EmitGrenade( Vector pos, QAngle angle, Vector velocity, nint owner, uint itemdefindex )
+    {
+        try
+        {
+            unsafe
+            {
+                return pCDecoyProjectileEmitGrenade(&pos, &angle, &velocity, &velocity, owner, itemdefindex);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
+    public static nint CMolotovProjectile_EmitGrenade( Vector pos, QAngle angle, Vector velocity, nint owner, uint itemdefindex )
+    {
+        try
+        {
+            unsafe
+            {
+                return pCMolotovProjectileEmitGrenade(&pos, &angle, &velocity, &velocity, owner, itemdefindex);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
         }
     }
 }

@@ -218,6 +218,7 @@ namespace SwiftlyS2.Shared.SteamAPI
 			return (EUniverse)((m_SteamID >> 56) & 0xFFul);
 		}
 
+
 		public bool IsValid()
 		{
 			if (GetEAccountType() <= EAccountType.k_EAccountTypeInvalid || GetEAccountType() >= EAccountType.k_EAccountTypeMax)

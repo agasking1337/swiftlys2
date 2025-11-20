@@ -27,6 +27,7 @@
 #include <public/filesystem.h>
 #include <public/steam/isteamgameserver.h>
 #include <public/tier0/platform.h>
+#include <public/iserver.h>
 #include <igamesystemfactory.h>
 
 #include <core/bridge/metamod.h>
@@ -53,7 +54,7 @@ bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
         engine->IsMapValid(map_name) ||
         Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
         Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
-    );
+        );
 }
 
 void Bridge_EngineHelpers_ExecuteCommand(const char* command)
@@ -182,6 +183,15 @@ int Bridge_EngineHelpers_GetIP(char* out)
     return s.size();
 }
 
+extern std::string workshop_map;
+
+int Bridge_EngineHelpers_GetWorkshopId(char* out)
+{
+    if (out != nullptr) strcpy(out, workshop_map.c_str());
+
+    return workshop_map.size();
+}
+
 DEFINE_NATIVE("EngineHelpers.GetIP", Bridge_EngineHelpers_GetIP);
 DEFINE_NATIVE("EngineHelpers.IsMapValid", Bridge_EngineHelpers_IsMapValid);
 DEFINE_NATIVE("EngineHelpers.ExecuteCommand", Bridge_EngineHelpers_ExecuteCommand);
@@ -194,3 +204,4 @@ DEFINE_NATIVE("EngineHelpers.GetMenuSettings", Bridge_EngineHelpers_GetMenuSetti
 DEFINE_NATIVE("EngineHelpers.GetGlobalVars", Bridge_EngineHelpers_GetGlobalVars);
 DEFINE_NATIVE("EngineHelpers.GetCSGODirectoryPath", Bridge_EngineHelpers_GetCSGODirectoryPath);
 DEFINE_NATIVE("EngineHelpers.GetGameDirectoryPath", Bridge_EngineHelpers_GetGameDirectoryPath);
+DEFINE_NATIVE("EngineHelpers.GetWorkshopId", Bridge_EngineHelpers_GetWorkshopId);
