@@ -119,6 +119,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
     // private readonly ConcurrentDictionary<int, string> renderCache = new();
     private readonly CancellationTokenSource renderLoopCancellationTokenSource = new();
+    private readonly Lock viewerCountLock = new();
+    private int viewerCount = 0;
 
     private volatile bool disposed;
 
@@ -447,6 +449,18 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             return;
         }
 
+        // Increment viewer count, resume animations if first viewer
+        lock (viewerCountLock)
+        {
+            if (++viewerCount >= 1)
+            {
+                lock (optionsLock)
+                {
+                    options.OfType<OptionsBase.MenuOptionBase>().ToList().ForEach(option => option.ResumeTextAnimation());
+                }
+            }
+        }
+
         SetFreezeState(player, Configuration.FreezePlayer);
 
         if (Configuration.AutoCloseAfter > 0)
@@ -480,6 +494,20 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         {
             NativePlayer.ClearCenterMenuRender(player.PlayerID);
             core.Scheduler.NextTick(() => NativePlayer.ClearCenterMenuRender(player.PlayerID));
+
+            // Decrement viewer count, pause animations if no viewers left
+            lock (viewerCountLock)
+            {
+                viewerCount = Math.Max(0, viewerCount - 1);
+
+                if (viewerCount == 0)
+                {
+                    lock (optionsLock)
+                    {
+                        options.OfType<OptionsBase.MenuOptionBase>().ToList().ForEach(option => option.PauseTextAnimation());
+                    }
+                }
+            }
         }
 
         SetFreezeState(player, false);

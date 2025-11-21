@@ -90,6 +90,22 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     }
 
     /// <summary>
+    /// Pauses the dynamic text animation.
+    /// </summary>
+    public void PauseTextAnimation()
+    {
+        dynamicTextUpdater?.Pause();
+    }
+
+    /// <summary>
+    /// Resumes the dynamic text animation.
+    /// </summary>
+    public void ResumeTextAnimation()
+    {
+        dynamicTextUpdater?.Resume();
+    }
+
+    /// <summary>
     /// Gets or sets the menu that this option belongs to.
     /// </summary>
     /// <remarks>
