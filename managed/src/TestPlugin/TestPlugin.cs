@@ -97,6 +97,21 @@ public class TestPlugin : BasePlugin
 
     public override void Load( bool hotReload )
     {
+        // Setup mid-hook for signature pattern
+        var targetAddress = Core.Memory.GetAddressBySignature(Library.Server, "48 85 C9 0F 84 ? ? ? ? 48 63 B5");
+        if (targetAddress.HasValue)
+        {
+            var unmanagedMemory = Core.Memory.GetUnmanagedMemoryByAddress(targetAddress.Value);
+            var hookId = unmanagedMemory.AddHook(( ref MidHookContext context ) =>
+            {
+                Console.WriteLine($"Mid-hook triggered at 0x{targetAddress.Value:X}");
+                Console.WriteLine($"RAX: 0x{context.RAX:X}, RCX: 0x{context.RCX:X}, RDX: 0x{context.RDX:X}");
+                // You can modify registers here if needed
+                // context.RAX = newValue;
+            });
+            Console.WriteLine($"Mid-hook installed successfully at 0x{targetAddress.Value:X} with ID: {hookId}");
+        }
+
         // Core.Command.HookClientCommand((playerId, commandLine) =>
         // {
         //   Console.WriteLine("TestPlugin HookClientCommand " + playerId + " " + commandLine);
@@ -1000,6 +1015,17 @@ public class TestPlugin : BasePlugin
         }
 
         Core.MenusAPI.OpenMenuForPlayer(context.Sender!, mainMenu.Build());
+    }
+
+    [Command("tb2m")]
+    public void TeleportBotToMeCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+        Core.PlayerManager.GetAllPlayers()
+            .Where(p => p.IsValid && p.IsFakeClient)
+            .ToList()
+            .FirstOrDefault()
+            ?.Teleport(player.PlayerPawn!.AbsOrigin!.Value, player.PlayerPawn!.EyeAngles, Vector.Zero);
     }
 
     public override void Unload()
