@@ -152,6 +152,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
         maxOptions = 0;
         // maxDisplayLines = 0;
+
+        // core.Event.OnTick += OnTick;
     }
 
     ~MenuAPI()
@@ -196,6 +198,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
         maxOptions = 0;
         // maxDisplayLines = 0;
+
+        // core.Event.OnTick -= OnTick;
 
         renderLoopTasks.Keys.ToList().ForEach(task =>
         {
@@ -471,7 +475,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
                 var cts = new CancellationTokenSource();
                 var token = cts.Token;
-                var delayMilliseconds = (int)(1000f / 64f / 2f);
+                var delayMilliseconds = (int)(1000f / 64f);
                 var task = Task.Run(async () =>
                 {
                     while (!token.IsCancellationRequested && !disposed)
