@@ -97,8 +97,7 @@ public class TestPlugin : BasePlugin
 
     public override void Load( bool hotReload )
     {
-        // Setup mid-hook for signature pattern
-        var targetAddress = Core.Memory.GetAddressBySignature(Library.Server, "48 85 C9 0F 84 ? ? ? ? 48 63 B5");
+        var targetAddress = Core.Memory.GetAddressBySignature(Library.Server, "E8 ? ? ? ? 48 8B 46 ? 48 85 DB");
         if (targetAddress.HasValue)
         {
             var unmanagedMemory = Core.Memory.GetUnmanagedMemoryByAddress(targetAddress.Value);
@@ -106,10 +105,7 @@ public class TestPlugin : BasePlugin
             {
                 Console.WriteLine($"Mid-hook triggered at 0x{targetAddress.Value:X}");
                 Console.WriteLine($"RAX: 0x{context.RAX:X}, RCX: 0x{context.RCX:X}, RDX: 0x{context.RDX:X}");
-                // You can modify registers here if needed
-                // context.RAX = newValue;
             });
-            Console.WriteLine($"Mid-hook installed successfully at 0x{targetAddress.Value:X} with ID: {hookId}");
         }
 
         // Core.Command.HookClientCommand((playerId, commandLine) =>
