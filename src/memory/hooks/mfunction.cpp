@@ -17,22 +17,55 @@
  ************************************************************************************************/
 
 #include "mfunction.h"
+#include <Windows.h>
+#include <cstdio>
+
+MFunctionHook* MFunctionHook::s_currentInstance = nullptr;
+
+static void CppMidHookWrapper(safetyhook::Context& ctx)
+{
+    if (!MFunctionHook::s_currentInstance || !MFunctionHook::s_currentInstance->m_userCallback)
+    {
+        return;
+    }
+
+    __try
+    {
+        auto callback = (void (*)(void*))MFunctionHook::s_currentInstance->m_userCallback;
+        callback(&ctx);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        printf("[MFunctionHook::CppWrapper] EXCEPTION during callback! Code: 0x%X\n", GetExceptionCode());
+    }
+}
 
 void MFunctionHook::SetHookFunction(void* addr, void* callback)
 {
-    if (!addr || !callback) return;
+    if (!addr || !callback)
+    {
+        return;
+    }
 
-    m_oHook = safetyhook::create_mid(addr, (safetyhook::MidHookFn)callback, safetyhook::MidHook::StartDisabled);
+    m_userCallback = callback;
+    s_currentInstance = this;
+    m_oHook = safetyhook::create_mid(addr, CppMidHookWrapper, safetyhook::MidHook::StartDisabled);
 }
 
 void MFunctionHook::Enable()
 {
-    if (m_oHook.enabled()) return;
-    m_oHook.enable();
+    if (m_oHook.enabled())
+    {
+        return;
+    }
+
+    auto result = m_oHook.enable();
 }
+
 void MFunctionHook::Disable()
 {
-    if (!m_oHook.enabled()) return;
+    if (!m_oHook.enabled())
+        return;
 
     m_oHook.disable();
 }

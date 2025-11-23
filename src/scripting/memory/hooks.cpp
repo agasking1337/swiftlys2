@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/manager.h>
+#include <cstdio>
 #include <scripting/scripting.h>
 
 void* Bridge_Hooks_AllocateHook()
@@ -34,7 +35,8 @@ void* Bridge_Hooks_AllocateVHook()
 void* Bridge_Hooks_AllocateMHook()
 {
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    return hooksmanager->CreateMFunctionHook();
+    auto result = hooksmanager->CreateMFunctionHook();
+    return result;
 }
 
 void Bridge_Hooks_DeallocateHook(void* hook)

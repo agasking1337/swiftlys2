@@ -32,6 +32,9 @@ public:
 
     virtual bool IsEnabled() override;
 
+    static MFunctionHook* s_currentInstance;
+    void* m_userCallback = nullptr;
+
 private:
     SafetyHookMid m_oHook;
 };
