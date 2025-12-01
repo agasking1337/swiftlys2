@@ -17,25 +17,45 @@ internal partial class CSpotlightEndImpl : CBaseModelEntityImpl, CSpotlightEnd {
   public CSpotlightEndImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LightScaleOffset = new(() => Schema.GetOffset(0x49085AA3E5A1295D), LazyThreadSafetyMode.None);
+  private static nint? _LightScaleOffset;
 
   public ref float LightScale {
-    get => ref _Handle.AsRef<float>(_LightScaleOffset.Value);
+    get {
+      if (_LightScaleOffset == null) {
+        _LightScaleOffset = Schema.GetOffset(0x49085AA3E5A1295D);
+      }
+      return ref _Handle.AsRef<float>(_LightScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0x49085AA37C5B0533), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0x49085AA37C5B0533);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpotlightDirOffset = new(() => Schema.GetOffset(0x49085AA3EE68984A), LazyThreadSafetyMode.None);
+  private static nint? _SpotlightDirOffset;
 
   public ref Vector SpotlightDir {
-    get => ref _Handle.AsRef<Vector>(_SpotlightDirOffset.Value);
+    get {
+      if (_SpotlightDirOffset == null) {
+        _SpotlightDirOffset = Schema.GetOffset(0x49085AA3EE68984A);
+      }
+      return ref _Handle.AsRef<Vector>(_SpotlightDirOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpotlightOrgOffset = new(() => Schema.GetOffset(0x49085AA34C84B367), LazyThreadSafetyMode.None);
+  private static nint? _SpotlightOrgOffset;
 
   public ref Vector SpotlightOrg {
-    get => ref _Handle.AsRef<Vector>(_SpotlightOrgOffset.Value);
+    get {
+      if (_SpotlightOrgOffset == null) {
+        _SpotlightOrgOffset = Schema.GetOffset(0x49085AA34C84B367);
+      }
+      return ref _Handle.AsRef<Vector>(_SpotlightOrgOffset!.Value);
+    }
   }
 
   public void LightScaleUpdated() {

@@ -17,81 +17,153 @@ internal partial class PulseScriptedSequenceData_tImpl : SchemaClass, PulseScrip
   public PulseScriptedSequenceData_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ActorIDOffset = new(() => Schema.GetOffset(0x7C7814728383E163), LazyThreadSafetyMode.None);
+  private static nint? _ActorIDOffset;
 
   public ref int ActorID {
-    get => ref _Handle.AsRef<int>(_ActorIDOffset.Value);
+    get {
+      if (_ActorIDOffset == null) {
+        _ActorIDOffset = Schema.GetOffset(0x7C7814728383E163);
+      }
+      return ref _Handle.AsRef<int>(_ActorIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PreIdleSequenceOffset = new(() => Schema.GetOffset(0x7C781472672B317E), LazyThreadSafetyMode.None);
+  private static nint? _PreIdleSequenceOffset;
 
   public string PreIdleSequence {
     get {
-      var ptr = _Handle.Read<nint>(_PreIdleSequenceOffset.Value);
+      if (_PreIdleSequenceOffset == null) {
+        _PreIdleSequenceOffset = Schema.GetOffset(0x7C781472672B317E);
+      }
+      var ptr = _Handle.Read<nint>(_PreIdleSequenceOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _PreIdleSequenceOffset.Value, value);
+    set {
+      if (_PreIdleSequenceOffset == null) {
+        _PreIdleSequenceOffset = Schema.GetOffset(0x7C781472672B317E);
+      }
+      Schema.SetString(_Handle, _PreIdleSequenceOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _EntrySequenceOffset = new(() => Schema.GetOffset(0x7C7814722635E511), LazyThreadSafetyMode.None);
+  private static nint? _EntrySequenceOffset;
 
   public string EntrySequence {
     get {
-      var ptr = _Handle.Read<nint>(_EntrySequenceOffset.Value);
+      if (_EntrySequenceOffset == null) {
+        _EntrySequenceOffset = Schema.GetOffset(0x7C7814722635E511);
+      }
+      var ptr = _Handle.Read<nint>(_EntrySequenceOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _EntrySequenceOffset.Value, value);
+    set {
+      if (_EntrySequenceOffset == null) {
+        _EntrySequenceOffset = Schema.GetOffset(0x7C7814722635E511);
+      }
+      Schema.SetString(_Handle, _EntrySequenceOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _SequenceOffset = new(() => Schema.GetOffset(0x7C78147209FFA3B5), LazyThreadSafetyMode.None);
+  private static nint? _SequenceOffset;
 
   public string Sequence {
     get {
-      var ptr = _Handle.Read<nint>(_SequenceOffset.Value);
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0x7C78147209FFA3B5);
+      }
+      var ptr = _Handle.Read<nint>(_SequenceOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SequenceOffset.Value, value);
+    set {
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0x7C78147209FFA3B5);
+      }
+      Schema.SetString(_Handle, _SequenceOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ExitSequenceOffset = new(() => Schema.GetOffset(0x7C7814725F482845), LazyThreadSafetyMode.None);
+  private static nint? _ExitSequenceOffset;
 
   public string ExitSequence {
     get {
-      var ptr = _Handle.Read<nint>(_ExitSequenceOffset.Value);
+      if (_ExitSequenceOffset == null) {
+        _ExitSequenceOffset = Schema.GetOffset(0x7C7814725F482845);
+      }
+      var ptr = _Handle.Read<nint>(_ExitSequenceOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ExitSequenceOffset.Value, value);
+    set {
+      if (_ExitSequenceOffset == null) {
+        _ExitSequenceOffset = Schema.GetOffset(0x7C7814725F482845);
+      }
+      Schema.SetString(_Handle, _ExitSequenceOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _MoveToOffset = new(() => Schema.GetOffset(0x7C781472A9282EB9), LazyThreadSafetyMode.None);
+  private static nint? _MoveToOffset;
 
   public ref ScriptedMoveTo_t MoveTo {
-    get => ref _Handle.AsRef<ScriptedMoveTo_t>(_MoveToOffset.Value);
+    get {
+      if (_MoveToOffset == null) {
+        _MoveToOffset = Schema.GetOffset(0x7C781472A9282EB9);
+      }
+      return ref _Handle.AsRef<ScriptedMoveTo_t>(_MoveToOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveToGaitOffset = new(() => Schema.GetOffset(0x7C7814721217E084), LazyThreadSafetyMode.None);
+  private static nint? _MoveToGaitOffset;
 
   public ref SharedMovementGait_t MoveToGait {
-    get => ref _Handle.AsRef<SharedMovementGait_t>(_MoveToGaitOffset.Value);
+    get {
+      if (_MoveToGaitOffset == null) {
+        _MoveToGaitOffset = Schema.GetOffset(0x7C7814721217E084);
+      }
+      return ref _Handle.AsRef<SharedMovementGait_t>(_MoveToGaitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeldWeaponBehaviorOffset = new(() => Schema.GetOffset(0x7C781472D545A524), LazyThreadSafetyMode.None);
+  private static nint? _HeldWeaponBehaviorOffset;
 
   public ref ScriptedHeldWeaponBehavior_t HeldWeaponBehavior {
-    get => ref _Handle.AsRef<ScriptedHeldWeaponBehavior_t>(_HeldWeaponBehaviorOffset.Value);
+    get {
+      if (_HeldWeaponBehaviorOffset == null) {
+        _HeldWeaponBehaviorOffset = Schema.GetOffset(0x7C781472D545A524);
+      }
+      return ref _Handle.AsRef<ScriptedHeldWeaponBehavior_t>(_HeldWeaponBehaviorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopPreIdleSequenceOffset = new(() => Schema.GetOffset(0x7C7814728649E65F), LazyThreadSafetyMode.None);
+  private static nint? _LoopPreIdleSequenceOffset;
 
   public ref bool LoopPreIdleSequence {
-    get => ref _Handle.AsRef<bool>(_LoopPreIdleSequenceOffset.Value);
+    get {
+      if (_LoopPreIdleSequenceOffset == null) {
+        _LoopPreIdleSequenceOffset = Schema.GetOffset(0x7C7814728649E65F);
+      }
+      return ref _Handle.AsRef<bool>(_LoopPreIdleSequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopActionSequenceOffset = new(() => Schema.GetOffset(0x7C78147242C7CFA4), LazyThreadSafetyMode.None);
+  private static nint? _LoopActionSequenceOffset;
 
   public ref bool LoopActionSequence {
-    get => ref _Handle.AsRef<bool>(_LoopActionSequenceOffset.Value);
+    get {
+      if (_LoopActionSequenceOffset == null) {
+        _LoopActionSequenceOffset = Schema.GetOffset(0x7C78147242C7CFA4);
+      }
+      return ref _Handle.AsRef<bool>(_LoopActionSequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopPostIdleSequenceOffset = new(() => Schema.GetOffset(0x7C781472C17036CA), LazyThreadSafetyMode.None);
+  private static nint? _LoopPostIdleSequenceOffset;
 
   public ref bool LoopPostIdleSequence {
-    get => ref _Handle.AsRef<bool>(_LoopPostIdleSequenceOffset.Value);
+    get {
+      if (_LoopPostIdleSequenceOffset == null) {
+        _LoopPostIdleSequenceOffset = Schema.GetOffset(0x7C781472C17036CA);
+      }
+      return ref _Handle.AsRef<bool>(_LoopPostIdleSequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IgnoreLookAtOffset = new(() => Schema.GetOffset(0x7C781472ECC380B5), LazyThreadSafetyMode.None);
+  private static nint? _IgnoreLookAtOffset;
 
   public ref bool IgnoreLookAt {
-    get => ref _Handle.AsRef<bool>(_IgnoreLookAtOffset.Value);
+    get {
+      if (_IgnoreLookAtOffset == null) {
+        _IgnoreLookAtOffset = Schema.GetOffset(0x7C781472ECC380B5);
+      }
+      return ref _Handle.AsRef<bool>(_IgnoreLookAtOffset!.Value);
+    }
   }
 
 

@@ -17,30 +17,55 @@ internal partial class VMixShaperDesc_tImpl : SchemaClass, VMixShaperDesc_t {
   public VMixShaperDesc_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ShapeOffset = new(() => Schema.GetOffset(0x80E2A73621208A02), LazyThreadSafetyMode.None);
+  private static nint? _ShapeOffset;
 
   public ref int Shape {
-    get => ref _Handle.AsRef<int>(_ShapeOffset.Value);
+    get {
+      if (_ShapeOffset == null) {
+        _ShapeOffset = Schema.GetOffset(0x80E2A73621208A02);
+      }
+      return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FldbDriveOffset = new(() => Schema.GetOffset(0x80E2A7360E12679B), LazyThreadSafetyMode.None);
+  private static nint? _FldbDriveOffset;
 
   public ref float FldbDrive {
-    get => ref _Handle.AsRef<float>(_FldbDriveOffset.Value);
+    get {
+      if (_FldbDriveOffset == null) {
+        _FldbDriveOffset = Schema.GetOffset(0x80E2A7360E12679B);
+      }
+      return ref _Handle.AsRef<float>(_FldbDriveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FldbOutputGainOffset = new(() => Schema.GetOffset(0x80E2A73667F97C23), LazyThreadSafetyMode.None);
+  private static nint? _FldbOutputGainOffset;
 
   public ref float FldbOutputGain {
-    get => ref _Handle.AsRef<float>(_FldbOutputGainOffset.Value);
+    get {
+      if (_FldbOutputGainOffset == null) {
+        _FldbOutputGainOffset = Schema.GetOffset(0x80E2A73667F97C23);
+      }
+      return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WetMixOffset = new(() => Schema.GetOffset(0x80E2A736D5453C15), LazyThreadSafetyMode.None);
+  private static nint? _WetMixOffset;
 
   public ref float WetMix {
-    get => ref _Handle.AsRef<float>(_WetMixOffset.Value);
+    get {
+      if (_WetMixOffset == null) {
+        _WetMixOffset = Schema.GetOffset(0x80E2A736D5453C15);
+      }
+      return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OversampleFactorOffset = new(() => Schema.GetOffset(0x80E2A736142D0AF2), LazyThreadSafetyMode.None);
+  private static nint? _OversampleFactorOffset;
 
   public ref int OversampleFactor {
-    get => ref _Handle.AsRef<int>(_OversampleFactorOffset.Value);
+    get {
+      if (_OversampleFactorOffset == null) {
+        _OversampleFactorOffset = Schema.GetOffset(0x80E2A736142D0AF2);
+      }
+      return ref _Handle.AsRef<int>(_OversampleFactorOffset!.Value);
+    }
   }
 
 

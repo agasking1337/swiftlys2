@@ -17,78 +17,149 @@ internal partial class CPhysMotorImpl : CLogicalEntityImpl, CPhysMotor {
   public CPhysMotorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameAttachOffset = new(() => Schema.GetOffset(0x88C095BFBECAEF3F), LazyThreadSafetyMode.None);
+  private static nint? _NameAttachOffset;
 
   public string NameAttach {
     get {
-      var ptr = _Handle.Read<nint>(_NameAttachOffset.Value);
+      if (_NameAttachOffset == null) {
+        _NameAttachOffset = Schema.GetOffset(0x88C095BFBECAEF3F);
+      }
+      var ptr = _Handle.Read<nint>(_NameAttachOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameAttachOffset.Value, value);
+    set {
+      if (_NameAttachOffset == null) {
+        _NameAttachOffset = Schema.GetOffset(0x88C095BFBECAEF3F);
+      }
+      Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _NameAnchorOffset = new(() => Schema.GetOffset(0x88C095BFAD43DD27), LazyThreadSafetyMode.None);
+  private static nint? _NameAnchorOffset;
 
   public string NameAnchor {
     get {
-      var ptr = _Handle.Read<nint>(_NameAnchorOffset.Value);
+      if (_NameAnchorOffset == null) {
+        _NameAnchorOffset = Schema.GetOffset(0x88C095BFAD43DD27);
+      }
+      var ptr = _Handle.Read<nint>(_NameAnchorOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameAnchorOffset.Value, value);
+    set {
+      if (_NameAnchorOffset == null) {
+        _NameAnchorOffset = Schema.GetOffset(0x88C095BFAD43DD27);
+      }
+      Schema.SetString(_Handle, _NameAnchorOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AttachedObjectOffset = new(() => Schema.GetOffset(0x88C095BF5B0EDB58), LazyThreadSafetyMode.None);
+  private static nint? _AttachedObjectOffset;
 
   public ref CHandle<CBaseEntity> AttachedObject {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset.Value);
+    get {
+      if (_AttachedObjectOffset == null) {
+        _AttachedObjectOffset = Schema.GetOffset(0x88C095BF5B0EDB58);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnchorObjectOffset = new(() => Schema.GetOffset(0x88C095BFDE8F702D), LazyThreadSafetyMode.None);
+  private static nint? _AnchorObjectOffset;
 
   public ref CHandle<CBaseEntity> AnchorObject {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_AnchorObjectOffset.Value);
+    get {
+      if (_AnchorObjectOffset == null) {
+        _AnchorObjectOffset = Schema.GetOffset(0x88C095BFDE8F702D);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AnchorObjectOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinUpOffset = new(() => Schema.GetOffset(0x88C095BFB2CBE21C), LazyThreadSafetyMode.None);
+  private static nint? _SpinUpOffset;
 
   public ref float SpinUp {
-    get => ref _Handle.AsRef<float>(_SpinUpOffset.Value);
+    get {
+      if (_SpinUpOffset == null) {
+        _SpinUpOffset = Schema.GetOffset(0x88C095BFB2CBE21C);
+      }
+      return ref _Handle.AsRef<float>(_SpinUpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinDownOffset = new(() => Schema.GetOffset(0x88C095BF5AA77109), LazyThreadSafetyMode.None);
+  private static nint? _SpinDownOffset;
 
   public ref float SpinDown {
-    get => ref _Handle.AsRef<float>(_SpinDownOffset.Value);
+    get {
+      if (_SpinDownOffset == null) {
+        _SpinDownOffset = Schema.GetOffset(0x88C095BF5AA77109);
+      }
+      return ref _Handle.AsRef<float>(_SpinDownOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorFrictionOffset = new(() => Schema.GetOffset(0x88C095BF36C3170E), LazyThreadSafetyMode.None);
+  private static nint? _MotorFrictionOffset;
 
   public ref float MotorFriction {
-    get => ref _Handle.AsRef<float>(_MotorFrictionOffset.Value);
+    get {
+      if (_MotorFrictionOffset == null) {
+        _MotorFrictionOffset = Schema.GetOffset(0x88C095BF36C3170E);
+      }
+      return ref _Handle.AsRef<float>(_MotorFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AdditionalAccelerationOffset = new(() => Schema.GetOffset(0x88C095BF60106F50), LazyThreadSafetyMode.None);
+  private static nint? _AdditionalAccelerationOffset;
 
   public ref float AdditionalAcceleration {
-    get => ref _Handle.AsRef<float>(_AdditionalAccelerationOffset.Value);
+    get {
+      if (_AdditionalAccelerationOffset == null) {
+        _AdditionalAccelerationOffset = Schema.GetOffset(0x88C095BF60106F50);
+      }
+      return ref _Handle.AsRef<float>(_AdditionalAccelerationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularAccelerationOffset = new(() => Schema.GetOffset(0x88C095BFEB676AF1), LazyThreadSafetyMode.None);
+  private static nint? _AngularAccelerationOffset;
 
   public ref float AngularAcceleration {
-    get => ref _Handle.AsRef<float>(_AngularAccelerationOffset.Value);
+    get {
+      if (_AngularAccelerationOffset == null) {
+        _AngularAccelerationOffset = Schema.GetOffset(0x88C095BFEB676AF1);
+      }
+      return ref _Handle.AsRef<float>(_AngularAccelerationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TorqueScaleOffset = new(() => Schema.GetOffset(0x88C095BF50218E89), LazyThreadSafetyMode.None);
+  private static nint? _TorqueScaleOffset;
 
   public ref float TorqueScale {
-    get => ref _Handle.AsRef<float>(_TorqueScaleOffset.Value);
+    get {
+      if (_TorqueScaleOffset == null) {
+        _TorqueScaleOffset = Schema.GetOffset(0x88C095BF50218E89);
+      }
+      return ref _Handle.AsRef<float>(_TorqueScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetSpeedOffset = new(() => Schema.GetOffset(0x88C095BF9C627845), LazyThreadSafetyMode.None);
+  private static nint? _TargetSpeedOffset;
 
   public ref float TargetSpeed {
-    get => ref _Handle.AsRef<float>(_TargetSpeedOffset.Value);
+    get {
+      if (_TargetSpeedOffset == null) {
+        _TargetSpeedOffset = Schema.GetOffset(0x88C095BF9C627845);
+      }
+      return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedWhenSpinUpOrSpinDownStartedOffset = new(() => Schema.GetOffset(0x88C095BF86577537), LazyThreadSafetyMode.None);
+  private static nint? _SpeedWhenSpinUpOrSpinDownStartedOffset;
 
   public ref float SpeedWhenSpinUpOrSpinDownStarted {
-    get => ref _Handle.AsRef<float>(_SpeedWhenSpinUpOrSpinDownStartedOffset.Value);
+    get {
+      if (_SpeedWhenSpinUpOrSpinDownStartedOffset == null) {
+        _SpeedWhenSpinUpOrSpinDownStartedOffset = Schema.GetOffset(0x88C095BF86577537);
+      }
+      return ref _Handle.AsRef<float>(_SpeedWhenSpinUpOrSpinDownStartedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorOffset = new(() => Schema.GetOffset(0x88C095BF373E4F92), LazyThreadSafetyMode.None);
+  private static nint? _MotorOffset;
 
   public CMotorController Motor {
-    get => new CMotorControllerImpl(_Handle + _MotorOffset.Value);
+    get {
+      if (_MotorOffset == null) {
+        _MotorOffset = Schema.GetOffset(0x88C095BF373E4F92);
+      }
+      return new CMotorControllerImpl(_Handle + _MotorOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class CSolveIKChainUpdateNodeImpl : CUnaryUpdateNodeImpl, CSolv
   public CSolveIKChainUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetHandlesOffset = new(() => Schema.GetOffset(0xE78F1D1F98E248F7), LazyThreadSafetyMode.None);
+  private static nint? _TargetHandlesOffset;
 
   public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles {
-    get => ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset.Value);
+    get {
+      if (_TargetHandlesOffset == null) {
+        _TargetHandlesOffset = Schema.GetOffset(0xE78F1D1F98E248F7);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OpFixedDataOffset = new(() => Schema.GetOffset(0xE78F1D1F6960AF8C), LazyThreadSafetyMode.None);
+  private static nint? _OpFixedDataOffset;
 
   public SolveIKChainPoseOpFixedSettings_t OpFixedData {
-    get => new SolveIKChainPoseOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset.Value);
+    get {
+      if (_OpFixedDataOffset == null) {
+        _OpFixedDataOffset = Schema.GetOffset(0xE78F1D1F6960AF8C);
+      }
+      return new SolveIKChainPoseOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    }
   }
 
 

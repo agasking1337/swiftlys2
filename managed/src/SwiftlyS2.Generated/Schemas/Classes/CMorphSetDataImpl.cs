@@ -17,45 +17,85 @@ internal partial class CMorphSetDataImpl : SchemaClass, CMorphSetData {
   public CMorphSetDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WidthOffset = new(() => Schema.GetOffset(0xE777C2D4119108BB), LazyThreadSafetyMode.None);
+  private static nint? _WidthOffset;
 
   public ref int Width {
-    get => ref _Handle.AsRef<int>(_WidthOffset.Value);
+    get {
+      if (_WidthOffset == null) {
+        _WidthOffset = Schema.GetOffset(0xE777C2D4119108BB);
+      }
+      return ref _Handle.AsRef<int>(_WidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeightOffset = new(() => Schema.GetOffset(0xE777C2D4CAB61C56), LazyThreadSafetyMode.None);
+  private static nint? _HeightOffset;
 
   public ref int Height {
-    get => ref _Handle.AsRef<int>(_HeightOffset.Value);
+    get {
+      if (_HeightOffset == null) {
+        _HeightOffset = Schema.GetOffset(0xE777C2D4CAB61C56);
+      }
+      return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BundleTypesOffset = new(() => Schema.GetOffset(0xE777C2D4B233045A), LazyThreadSafetyMode.None);
+  private static nint? _BundleTypesOffset;
 
   public ref CUtlVector<MorphBundleType_t> BundleTypes {
-    get => ref _Handle.AsRef<CUtlVector<MorphBundleType_t>>(_BundleTypesOffset.Value);
+    get {
+      if (_BundleTypesOffset == null) {
+        _BundleTypesOffset = Schema.GetOffset(0xE777C2D4B233045A);
+      }
+      return ref _Handle.AsRef<CUtlVector<MorphBundleType_t>>(_BundleTypesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MorphDatasOffset = new(() => Schema.GetOffset(0xE777C2D4C1280FA2), LazyThreadSafetyMode.None);
+  private static nint? _MorphDatasOffset;
 
   public ref CUtlVector<CMorphData> MorphDatas {
-    get => ref _Handle.AsRef<CUtlVector<CMorphData>>(_MorphDatasOffset.Value);
+    get {
+      if (_MorphDatasOffset == null) {
+        _MorphDatasOffset = Schema.GetOffset(0xE777C2D4C1280FA2);
+      }
+      return ref _Handle.AsRef<CUtlVector<CMorphData>>(_MorphDatasOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureAtlasOffset = new(() => Schema.GetOffset(0xE777C2D4B63CAC4D), LazyThreadSafetyMode.None);
+  private static nint? _TextureAtlasOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureAtlasOffset.Value);
+    get {
+      if (_TextureAtlasOffset == null) {
+        _TextureAtlasOffset = Schema.GetOffset(0xE777C2D4B63CAC4D);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureAtlasOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlexDescOffset = new(() => Schema.GetOffset(0xE777C2D4D73F3393), LazyThreadSafetyMode.None);
+  private static nint? _FlexDescOffset;
 
   public ref CUtlVector<CFlexDesc> FlexDesc {
-    get => ref _Handle.AsRef<CUtlVector<CFlexDesc>>(_FlexDescOffset.Value);
+    get {
+      if (_FlexDescOffset == null) {
+        _FlexDescOffset = Schema.GetOffset(0xE777C2D4D73F3393);
+      }
+      return ref _Handle.AsRef<CUtlVector<CFlexDesc>>(_FlexDescOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlexControllersOffset = new(() => Schema.GetOffset(0xE777C2D4ABE5EBBB), LazyThreadSafetyMode.None);
+  private static nint? _FlexControllersOffset;
 
   public ref CUtlVector<CFlexController> FlexControllers {
-    get => ref _Handle.AsRef<CUtlVector<CFlexController>>(_FlexControllersOffset.Value);
+    get {
+      if (_FlexControllersOffset == null) {
+        _FlexControllersOffset = Schema.GetOffset(0xE777C2D4ABE5EBBB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CFlexController>>(_FlexControllersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlexRulesOffset = new(() => Schema.GetOffset(0xE777C2D47FE50585), LazyThreadSafetyMode.None);
+  private static nint? _FlexRulesOffset;
 
   public ref CUtlVector<CFlexRule> FlexRules {
-    get => ref _Handle.AsRef<CUtlVector<CFlexRule>>(_FlexRulesOffset.Value);
+    get {
+      if (_FlexRulesOffset == null) {
+        _FlexRulesOffset = Schema.GetOffset(0xE777C2D47FE50585);
+      }
+      return ref _Handle.AsRef<CUtlVector<CFlexRule>>(_FlexRulesOffset!.Value);
+    }
   }
 
 

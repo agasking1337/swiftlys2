@@ -17,40 +17,75 @@ internal partial class C_INIT_VelocityRandomImpl : CParticleFunctionInitializerI
   public C_INIT_VelocityRandomImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0xFCCBA9E3F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0xFCCBA9E3F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMinOffset = new(() => Schema.GetOffset(0xFCCBA9EB989E1F8), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMinOffset;
 
   public CPerParticleFloatInput SpeedMin {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset.Value);
+    get {
+      if (_SpeedMinOffset == null) {
+        _SpeedMinOffset = Schema.GetOffset(0xFCCBA9EB989E1F8);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMaxOffset = new(() => Schema.GetOffset(0xFCCBA9ECF9D8C52), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMaxOffset;
 
   public CPerParticleFloatInput SpeedMax {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset.Value);
+    get {
+      if (_SpeedMaxOffset == null) {
+        _SpeedMaxOffset = Schema.GetOffset(0xFCCBA9ECF9D8C52);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordinateSystemSpeedMinOffset = new(() => Schema.GetOffset(0xFCCBA9EA4A0F1AE), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordinateSystemSpeedMinOffset;
 
   public CPerParticleVecInput LocalCoordinateSystemSpeedMin {
-    get => new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMinOffset.Value);
+    get {
+      if (_LocalCoordinateSystemSpeedMinOffset == null) {
+        _LocalCoordinateSystemSpeedMinOffset = Schema.GetOffset(0xFCCBA9EA4A0F1AE);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordinateSystemSpeedMaxOffset = new(() => Schema.GetOffset(0xFCCBA9E968D53EC), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordinateSystemSpeedMaxOffset;
 
   public CPerParticleVecInput LocalCoordinateSystemSpeedMax {
-    get => new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMaxOffset.Value);
+    get {
+      if (_LocalCoordinateSystemSpeedMaxOffset == null) {
+        _LocalCoordinateSystemSpeedMaxOffset = Schema.GetOffset(0xFCCBA9E968D53EC);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IgnoreDTOffset = new(() => Schema.GetOffset(0xFCCBA9E530C3863), LazyThreadSafetyMode.None);
+  private static nint? _IgnoreDTOffset;
 
   public ref bool IgnoreDT {
-    get => ref _Handle.AsRef<bool>(_IgnoreDTOffset.Value);
+    get {
+      if (_IgnoreDTOffset == null) {
+        _IgnoreDTOffset = Schema.GetOffset(0xFCCBA9E530C3863);
+      }
+      return ref _Handle.AsRef<bool>(_IgnoreDTOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomnessParametersOffset = new(() => Schema.GetOffset(0xFCCBA9E7EDF50AD), LazyThreadSafetyMode.None);
+  private static nint? _RandomnessParametersOffset;
 
   public CRandomNumberGeneratorParameters RandomnessParameters {
-    get => new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset.Value);
+    get {
+      if (_RandomnessParametersOffset == null) {
+        _RandomnessParametersOffset = Schema.GetOffset(0xFCCBA9E7EDF50AD);
+      }
+      return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+    }
   }
 
 

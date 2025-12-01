@@ -17,25 +17,45 @@ internal partial class CNmIDToFloatNode__CDefinitionImpl : CNmFloatValueNode__CD
   public CNmIDToFloatNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueNodeIdxOffset = new(() => Schema.GetOffset(0x9F6F687D95E89F27), LazyThreadSafetyMode.None);
+  private static nint? _InputValueNodeIdxOffset;
 
   public ref short InputValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_InputValueNodeIdxOffset.Value);
+    get {
+      if (_InputValueNodeIdxOffset == null) {
+        _InputValueNodeIdxOffset = Schema.GetOffset(0x9F6F687D95E89F27);
+      }
+      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultValueOffset = new(() => Schema.GetOffset(0x9F6F687DBBE0341F), LazyThreadSafetyMode.None);
+  private static nint? _DefaultValueOffset;
 
   public ref float DefaultValue {
-    get => ref _Handle.AsRef<float>(_DefaultValueOffset.Value);
+    get {
+      if (_DefaultValueOffset == null) {
+        _DefaultValueOffset = Schema.GetOffset(0x9F6F687DBBE0341F);
+      }
+      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IDsOffset = new(() => Schema.GetOffset(0x9F6F687D0C180009), LazyThreadSafetyMode.None);
+  private static nint? _IDsOffset;
 
   public SchemaUntypedField IDs {
-    get => new SchemaUntypedField(_Handle + _IDsOffset.Value);
+    get {
+      if (_IDsOffset == null) {
+        _IDsOffset = Schema.GetOffset(0x9F6F687D0C180009);
+      }
+      return new SchemaUntypedField(_Handle + _IDsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ValuesOffset = new(() => Schema.GetOffset(0x9F6F687DFBEDDADB), LazyThreadSafetyMode.None);
+  private static nint? _ValuesOffset;
 
   public SchemaUntypedField Values {
-    get => new SchemaUntypedField(_Handle + _ValuesOffset.Value);
+    get {
+      if (_ValuesOffset == null) {
+        _ValuesOffset = Schema.GetOffset(0x9F6F687DFBEDDADB);
+      }
+      return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+    }
   }
 
 

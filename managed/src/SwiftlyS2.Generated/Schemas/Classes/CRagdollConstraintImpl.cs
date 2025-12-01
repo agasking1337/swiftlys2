@@ -17,50 +17,95 @@ internal partial class CRagdollConstraintImpl : CPhysConstraintImpl, CRagdollCon
   public CRagdollConstraintImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _XminOffset = new(() => Schema.GetOffset(0xF36946DA76E67DC1), LazyThreadSafetyMode.None);
+  private static nint? _XminOffset;
 
   public ref float Xmin {
-    get => ref _Handle.AsRef<float>(_XminOffset.Value);
+    get {
+      if (_XminOffset == null) {
+        _XminOffset = Schema.GetOffset(0xF36946DA76E67DC1);
+      }
+      return ref _Handle.AsRef<float>(_XminOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XmaxOffset = new(() => Schema.GetOffset(0xF36946DA68F9EF6F), LazyThreadSafetyMode.None);
+  private static nint? _XmaxOffset;
 
   public ref float Xmax {
-    get => ref _Handle.AsRef<float>(_XmaxOffset.Value);
+    get {
+      if (_XmaxOffset == null) {
+        _XmaxOffset = Schema.GetOffset(0xF36946DA68F9EF6F);
+      }
+      return ref _Handle.AsRef<float>(_XmaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YminOffset = new(() => Schema.GetOffset(0xF36946DACE2F1828), LazyThreadSafetyMode.None);
+  private static nint? _YminOffset;
 
   public ref float Ymin {
-    get => ref _Handle.AsRef<float>(_YminOffset.Value);
+    get {
+      if (_YminOffset == null) {
+        _YminOffset = Schema.GetOffset(0xF36946DACE2F1828);
+      }
+      return ref _Handle.AsRef<float>(_YminOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YmaxOffset = new(() => Schema.GetOffset(0xF36946DAC4429022), LazyThreadSafetyMode.None);
+  private static nint? _YmaxOffset;
 
   public ref float Ymax {
-    get => ref _Handle.AsRef<float>(_YmaxOffset.Value);
+    get {
+      if (_YmaxOffset == null) {
+        _YmaxOffset = Schema.GetOffset(0xF36946DAC4429022);
+      }
+      return ref _Handle.AsRef<float>(_YmaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ZminOffset = new(() => Schema.GetOffset(0xF36946DAC34E881F), LazyThreadSafetyMode.None);
+  private static nint? _ZminOffset;
 
   public ref float Zmin {
-    get => ref _Handle.AsRef<float>(_ZminOffset.Value);
+    get {
+      if (_ZminOffset == null) {
+        _ZminOffset = Schema.GetOffset(0xF36946DAC34E881F);
+      }
+      return ref _Handle.AsRef<float>(_ZminOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ZmaxOffset = new(() => Schema.GetOffset(0xF36946DAD13B1671), LazyThreadSafetyMode.None);
+  private static nint? _ZmaxOffset;
 
   public ref float Zmax {
-    get => ref _Handle.AsRef<float>(_ZmaxOffset.Value);
+    get {
+      if (_ZmaxOffset == null) {
+        _ZmaxOffset = Schema.GetOffset(0xF36946DAD13B1671);
+      }
+      return ref _Handle.AsRef<float>(_ZmaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XfrictionOffset = new(() => Schema.GetOffset(0xF36946DA08758E19), LazyThreadSafetyMode.None);
+  private static nint? _XfrictionOffset;
 
   public ref float Xfriction {
-    get => ref _Handle.AsRef<float>(_XfrictionOffset.Value);
+    get {
+      if (_XfrictionOffset == null) {
+        _XfrictionOffset = Schema.GetOffset(0xF36946DA08758E19);
+      }
+      return ref _Handle.AsRef<float>(_XfrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YfrictionOffset = new(() => Schema.GetOffset(0xF36946DAEFC8C6C6), LazyThreadSafetyMode.None);
+  private static nint? _YfrictionOffset;
 
   public ref float Yfriction {
-    get => ref _Handle.AsRef<float>(_YfrictionOffset.Value);
+    get {
+      if (_YfrictionOffset == null) {
+        _YfrictionOffset = Schema.GetOffset(0xF36946DAEFC8C6C6);
+      }
+      return ref _Handle.AsRef<float>(_YfrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ZfrictionOffset = new(() => Schema.GetOffset(0xF36946DA5587BDC3), LazyThreadSafetyMode.None);
+  private static nint? _ZfrictionOffset;
 
   public ref float Zfriction {
-    get => ref _Handle.AsRef<float>(_ZfrictionOffset.Value);
+    get {
+      if (_ZfrictionOffset == null) {
+        _ZfrictionOffset = Schema.GetOffset(0xF36946DA5587BDC3);
+      }
+      return ref _Handle.AsRef<float>(_ZfrictionOffset!.Value);
+    }
   }
 
 

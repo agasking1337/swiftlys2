@@ -17,25 +17,45 @@ internal partial class C_INIT_RemapInitialTransformDirectionToRotationImpl : CPa
   public C_INIT_RemapInitialTransformDirectionToRotationImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0x5301B477B3FDC289), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0x5301B477B3FDC289);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x5301B477E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x5301B477E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetRotOffset = new(() => Schema.GetOffset(0x5301B477B414F849), LazyThreadSafetyMode.None);
+  private static nint? _OffsetRotOffset;
 
   public ref float OffsetRot {
-    get => ref _Handle.AsRef<float>(_OffsetRotOffset.Value);
+    get {
+      if (_OffsetRotOffset == null) {
+        _OffsetRotOffset = Schema.GetOffset(0x5301B477B414F849);
+      }
+      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ComponentOffset = new(() => Schema.GetOffset(0x5301B477BFD0952C), LazyThreadSafetyMode.None);
+  private static nint? _ComponentOffset;
 
   public ref int Component {
-    get => ref _Handle.AsRef<int>(_ComponentOffset.Value);
+    get {
+      if (_ComponentOffset == null) {
+        _ComponentOffset = Schema.GetOffset(0x5301B477BFD0952C);
+      }
+      return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+    }
   }
 
 

@@ -17,30 +17,55 @@ internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseY
   public CPulseCell_Step_CallExternalMethodImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MethodNameOffset = new(() => Schema.GetOffset(0x6A5B3EF57D863B13), LazyThreadSafetyMode.None);
+  private static nint? _MethodNameOffset;
 
   public SchemaUntypedField MethodName {
-    get => new SchemaUntypedField(_Handle + _MethodNameOffset.Value);
+    get {
+      if (_MethodNameOffset == null) {
+        _MethodNameOffset = Schema.GetOffset(0x6A5B3EF57D863B13);
+      }
+      return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GameBlackboardOffset = new(() => Schema.GetOffset(0x6A5B3EF536FB1236), LazyThreadSafetyMode.None);
+  private static nint? _GameBlackboardOffset;
 
   public SchemaUntypedField GameBlackboard {
-    get => new SchemaUntypedField(_Handle + _GameBlackboardOffset.Value);
+    get {
+      if (_GameBlackboardOffset == null) {
+        _GameBlackboardOffset = Schema.GetOffset(0x6A5B3EF536FB1236);
+      }
+      return new SchemaUntypedField(_Handle + _GameBlackboardOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExpectedArgsOffset = new(() => Schema.GetOffset(0x6A5B3EF594EB10E8), LazyThreadSafetyMode.None);
+  private static nint? _ExpectedArgsOffset;
 
   public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs {
-    get => ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset.Value);
+    get {
+      if (_ExpectedArgsOffset == null) {
+        _ExpectedArgsOffset = Schema.GetOffset(0x6A5B3EF594EB10E8);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AsyncCallModeOffset = new(() => Schema.GetOffset(0x6A5B3EF535F27204), LazyThreadSafetyMode.None);
+  private static nint? _AsyncCallModeOffset;
 
   public ref PulseMethodCallMode_t AsyncCallMode {
-    get => ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset.Value);
+    get {
+      if (_AsyncCallModeOffset == null) {
+        _AsyncCallModeOffset = Schema.GetOffset(0x6A5B3EF535F27204);
+      }
+      return ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnFinishedOffset = new(() => Schema.GetOffset(0x6A5B3EF58D903E5E), LazyThreadSafetyMode.None);
+  private static nint? _OnFinishedOffset;
 
   public CPulse_ResumePoint OnFinished {
-    get => new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset.Value);
+    get {
+      if (_OnFinishedOffset == null) {
+        _OnFinishedOffset = Schema.GetOffset(0x6A5B3EF58D903E5E);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    }
   }
 
 

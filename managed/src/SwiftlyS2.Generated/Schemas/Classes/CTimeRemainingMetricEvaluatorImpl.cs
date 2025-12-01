@@ -17,25 +17,45 @@ internal partial class CTimeRemainingMetricEvaluatorImpl : CMotionMetricEvaluato
   public CTimeRemainingMetricEvaluatorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MatchByTimeRemainingOffset = new(() => Schema.GetOffset(0xAB802C86BB70462E), LazyThreadSafetyMode.None);
+  private static nint? _MatchByTimeRemainingOffset;
 
   public ref bool MatchByTimeRemaining {
-    get => ref _Handle.AsRef<bool>(_MatchByTimeRemainingOffset.Value);
+    get {
+      if (_MatchByTimeRemainingOffset == null) {
+        _MatchByTimeRemainingOffset = Schema.GetOffset(0xAB802C86BB70462E);
+      }
+      return ref _Handle.AsRef<bool>(_MatchByTimeRemainingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxTimeRemainingOffset = new(() => Schema.GetOffset(0xAB802C8686818AD6), LazyThreadSafetyMode.None);
+  private static nint? _MaxTimeRemainingOffset;
 
   public ref float MaxTimeRemaining {
-    get => ref _Handle.AsRef<float>(_MaxTimeRemainingOffset.Value);
+    get {
+      if (_MaxTimeRemainingOffset == null) {
+        _MaxTimeRemainingOffset = Schema.GetOffset(0xAB802C8686818AD6);
+      }
+      return ref _Handle.AsRef<float>(_MaxTimeRemainingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FilterByTimeRemainingOffset = new(() => Schema.GetOffset(0xAB802C8668E9E5BD), LazyThreadSafetyMode.None);
+  private static nint? _FilterByTimeRemainingOffset;
 
   public ref bool FilterByTimeRemaining {
-    get => ref _Handle.AsRef<bool>(_FilterByTimeRemainingOffset.Value);
+    get {
+      if (_FilterByTimeRemainingOffset == null) {
+        _FilterByTimeRemainingOffset = Schema.GetOffset(0xAB802C8668E9E5BD);
+      }
+      return ref _Handle.AsRef<bool>(_FilterByTimeRemainingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinTimeRemainingOffset = new(() => Schema.GetOffset(0xAB802C8604DD377C), LazyThreadSafetyMode.None);
+  private static nint? _MinTimeRemainingOffset;
 
   public ref float MinTimeRemaining {
-    get => ref _Handle.AsRef<float>(_MinTimeRemainingOffset.Value);
+    get {
+      if (_MinTimeRemainingOffset == null) {
+        _MinTimeRemainingOffset = Schema.GetOffset(0xAB802C8604DD377C);
+      }
+      return ref _Handle.AsRef<float>(_MinTimeRemainingOffset!.Value);
+    }
   }
 
 

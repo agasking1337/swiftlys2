@@ -17,40 +17,75 @@ internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseT
   public CBaseTrailRendererImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OrientationTypeOffset = new(() => Schema.GetOffset(0x2FCF7FA6931FA045), LazyThreadSafetyMode.None);
+  private static nint? _OrientationTypeOffset;
 
   public ref ParticleOrientationChoiceList_t OrientationType {
-    get => ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset.Value);
+    get {
+      if (_OrientationTypeOffset == null) {
+        _OrientationTypeOffset = Schema.GetOffset(0x2FCF7FA6931FA045);
+      }
+      return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OrientationControlPointOffset = new(() => Schema.GetOffset(0x2FCF7FA655B5B328), LazyThreadSafetyMode.None);
+  private static nint? _OrientationControlPointOffset;
 
   public ref int OrientationControlPoint {
-    get => ref _Handle.AsRef<int>(_OrientationControlPointOffset.Value);
+    get {
+      if (_OrientationControlPointOffset == null) {
+        _OrientationControlPointOffset = Schema.GetOffset(0x2FCF7FA655B5B328);
+      }
+      return ref _Handle.AsRef<int>(_OrientationControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinSizeOffset = new(() => Schema.GetOffset(0x2FCF7FA6BDC3B198), LazyThreadSafetyMode.None);
+  private static nint? _MinSizeOffset;
 
   public ref float MinSize {
-    get => ref _Handle.AsRef<float>(_MinSizeOffset.Value);
+    get {
+      if (_MinSizeOffset == null) {
+        _MinSizeOffset = Schema.GetOffset(0x2FCF7FA6BDC3B198);
+      }
+      return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSizeOffset = new(() => Schema.GetOffset(0x2FCF7FA68CA4E6BE), LazyThreadSafetyMode.None);
+  private static nint? _MaxSizeOffset;
 
   public ref float MaxSize {
-    get => ref _Handle.AsRef<float>(_MaxSizeOffset.Value);
+    get {
+      if (_MaxSizeOffset == null) {
+        _MaxSizeOffset = Schema.GetOffset(0x2FCF7FA68CA4E6BE);
+      }
+      return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartFadeSizeOffset = new(() => Schema.GetOffset(0x2FCF7FA6BA251D92), LazyThreadSafetyMode.None);
+  private static nint? _StartFadeSizeOffset;
 
   public CParticleCollectionRendererFloatInput StartFadeSize {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset.Value);
+    get {
+      if (_StartFadeSizeOffset == null) {
+        _StartFadeSizeOffset = Schema.GetOffset(0x2FCF7FA6BA251D92);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndFadeSizeOffset = new(() => Schema.GetOffset(0x2FCF7FA62D3FD423), LazyThreadSafetyMode.None);
+  private static nint? _EndFadeSizeOffset;
 
   public CParticleCollectionRendererFloatInput EndFadeSize {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset.Value);
+    get {
+      if (_EndFadeSizeOffset == null) {
+        _EndFadeSizeOffset = Schema.GetOffset(0x2FCF7FA62D3FD423);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClampVOffset = new(() => Schema.GetOffset(0x2FCF7FA6D02C13FE), LazyThreadSafetyMode.None);
+  private static nint? _ClampVOffset;
 
   public ref bool ClampV {
-    get => ref _Handle.AsRef<bool>(_ClampVOffset.Value);
+    get {
+      if (_ClampVOffset == null) {
+        _ClampVOffset = Schema.GetOffset(0x2FCF7FA6D02C13FE);
+      }
+      return ref _Handle.AsRef<bool>(_ClampVOffset!.Value);
+    }
   }
 
 

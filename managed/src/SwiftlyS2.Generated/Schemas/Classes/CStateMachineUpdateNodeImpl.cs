@@ -17,35 +17,65 @@ internal partial class CStateMachineUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CS
   public CStateMachineUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StateMachineOffset = new(() => Schema.GetOffset(0xE2E7B91DBB7EEF2F), LazyThreadSafetyMode.None);
+  private static nint? _StateMachineOffset;
 
   public CAnimStateMachineUpdater StateMachine {
-    get => new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset.Value);
+    get {
+      if (_StateMachineOffset == null) {
+        _StateMachineOffset = Schema.GetOffset(0xE2E7B91DBB7EEF2F);
+      }
+      return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StateDataOffset = new(() => Schema.GetOffset(0xE2E7B91D765EA6D6), LazyThreadSafetyMode.None);
+  private static nint? _StateDataOffset;
 
   public ref CUtlVector<CStateNodeStateData> StateData {
-    get => ref _Handle.AsRef<CUtlVector<CStateNodeStateData>>(_StateDataOffset.Value);
+    get {
+      if (_StateDataOffset == null) {
+        _StateDataOffset = Schema.GetOffset(0xE2E7B91D765EA6D6);
+      }
+      return ref _Handle.AsRef<CUtlVector<CStateNodeStateData>>(_StateDataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionDataOffset = new(() => Schema.GetOffset(0xE2E7B91D730EEA72), LazyThreadSafetyMode.None);
+  private static nint? _TransitionDataOffset;
 
   public ref CUtlVector<CStateNodeTransitionData> TransitionData {
-    get => ref _Handle.AsRef<CUtlVector<CStateNodeTransitionData>>(_TransitionDataOffset.Value);
+    get {
+      if (_TransitionDataOffset == null) {
+        _TransitionDataOffset = Schema.GetOffset(0xE2E7B91D730EEA72);
+      }
+      return ref _Handle.AsRef<CUtlVector<CStateNodeTransitionData>>(_TransitionDataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlockWaningTagsOffset = new(() => Schema.GetOffset(0xE2E7B91DB6999F75), LazyThreadSafetyMode.None);
+  private static nint? _BlockWaningTagsOffset;
 
   public ref bool BlockWaningTags {
-    get => ref _Handle.AsRef<bool>(_BlockWaningTagsOffset.Value);
+    get {
+      if (_BlockWaningTagsOffset == null) {
+        _BlockWaningTagsOffset = Schema.GetOffset(0xE2E7B91DB6999F75);
+      }
+      return ref _Handle.AsRef<bool>(_BlockWaningTagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LockStateWhenWaningOffset = new(() => Schema.GetOffset(0xE2E7B91D105A8C95), LazyThreadSafetyMode.None);
+  private static nint? _LockStateWhenWaningOffset;
 
   public ref bool LockStateWhenWaning {
-    get => ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset.Value);
+    get {
+      if (_LockStateWhenWaningOffset == null) {
+        _LockStateWhenWaningOffset = Schema.GetOffset(0xE2E7B91D105A8C95);
+      }
+      return ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetWhenActivatedOffset = new(() => Schema.GetOffset(0xE2E7B91DE7055CF7), LazyThreadSafetyMode.None);
+  private static nint? _ResetWhenActivatedOffset;
 
   public ref bool ResetWhenActivated {
-    get => ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset.Value);
+    get {
+      if (_ResetWhenActivatedOffset == null) {
+        _ResetWhenActivatedOffset = Schema.GetOffset(0xE2E7B91DE7055CF7);
+      }
+      return ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset!.Value);
+    }
   }
 
 

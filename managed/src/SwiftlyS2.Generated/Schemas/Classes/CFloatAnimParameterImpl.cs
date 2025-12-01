@@ -17,25 +17,45 @@ internal partial class CFloatAnimParameterImpl : CConcreteAnimParameterImpl, CFl
   public CFloatAnimParameterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DefaultValueOffset = new(() => Schema.GetOffset(0x6CE7934089D370B3), LazyThreadSafetyMode.None);
+  private static nint? _DefaultValueOffset;
 
   public ref float DefaultValue {
-    get => ref _Handle.AsRef<float>(_DefaultValueOffset.Value);
+    get {
+      if (_DefaultValueOffset == null) {
+        _DefaultValueOffset = Schema.GetOffset(0x6CE7934089D370B3);
+      }
+      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinValueOffset = new(() => Schema.GetOffset(0x6CE79340AD86BD50), LazyThreadSafetyMode.None);
+  private static nint? _MinValueOffset;
 
   public ref float MinValue {
-    get => ref _Handle.AsRef<float>(_MinValueOffset.Value);
+    get {
+      if (_MinValueOffset == null) {
+        _MinValueOffset = Schema.GetOffset(0x6CE79340AD86BD50);
+      }
+      return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxValueOffset = new(() => Schema.GetOffset(0x6CE79340DB7358B2), LazyThreadSafetyMode.None);
+  private static nint? _MaxValueOffset;
 
   public ref float MaxValue {
-    get => ref _Handle.AsRef<float>(_MaxValueOffset.Value);
+    get {
+      if (_MaxValueOffset == null) {
+        _MaxValueOffset = Schema.GetOffset(0x6CE79340DB7358B2);
+      }
+      return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolateOffset = new(() => Schema.GetOffset(0x6CE79340F6607650), LazyThreadSafetyMode.None);
+  private static nint? _InterpolateOffset;
 
   public ref bool Interpolate {
-    get => ref _Handle.AsRef<bool>(_InterpolateOffset.Value);
+    get {
+      if (_InterpolateOffset == null) {
+        _InterpolateOffset = Schema.GetOffset(0x6CE79340F6607650);
+      }
+      return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
+    }
   }
 
 

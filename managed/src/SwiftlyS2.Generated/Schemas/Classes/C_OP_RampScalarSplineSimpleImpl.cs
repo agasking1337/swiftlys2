@@ -17,30 +17,55 @@ internal partial class C_OP_RampScalarSplineSimpleImpl : CParticleFunctionOperat
   public C_OP_RampScalarSplineSimpleImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RateOffset = new(() => Schema.GetOffset(0xA8BA5EF2EC3280E7), LazyThreadSafetyMode.None);
+  private static nint? _RateOffset;
 
   public ref float Rate {
-    get => ref _Handle.AsRef<float>(_RateOffset.Value);
+    get {
+      if (_RateOffset == null) {
+        _RateOffset = Schema.GetOffset(0xA8BA5EF2EC3280E7);
+      }
+      return ref _Handle.AsRef<float>(_RateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0xA8BA5EF267FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public ref float StartTime {
-    get => ref _Handle.AsRef<float>(_StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0xA8BA5EF267FE9DC4);
+      }
+      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndTimeOffset = new(() => Schema.GetOffset(0xA8BA5EF22041DF9D), LazyThreadSafetyMode.None);
+  private static nint? _EndTimeOffset;
 
   public ref float EndTime {
-    get => ref _Handle.AsRef<float>(_EndTimeOffset.Value);
+    get {
+      if (_EndTimeOffset == null) {
+        _EndTimeOffset = Schema.GetOffset(0xA8BA5EF22041DF9D);
+      }
+      return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOffset = new(() => Schema.GetOffset(0xA8BA5EF2C257B93B), LazyThreadSafetyMode.None);
+  private static nint? _FieldOffset;
 
   public ParticleAttributeIndex_t Field {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset.Value);
+    get {
+      if (_FieldOffset == null) {
+        _FieldOffset = Schema.GetOffset(0xA8BA5EF2C257B93B);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EaseOutOffset = new(() => Schema.GetOffset(0xA8BA5EF28E58B9D1), LazyThreadSafetyMode.None);
+  private static nint? _EaseOutOffset;
 
   public ref bool EaseOut {
-    get => ref _Handle.AsRef<bool>(_EaseOutOffset.Value);
+    get {
+      if (_EaseOutOffset == null) {
+        _EaseOutOffset = Schema.GetOffset(0xA8BA5EF28E58B9D1);
+      }
+      return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+    }
   }
 
 

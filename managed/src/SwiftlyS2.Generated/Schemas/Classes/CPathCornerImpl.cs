@@ -17,20 +17,35 @@ internal partial class CPathCornerImpl : CPointEntityImpl, CPathCorner {
   public CPathCornerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WaitOffset = new(() => Schema.GetOffset(0xF74EA45499A062B6), LazyThreadSafetyMode.None);
+  private static nint? _WaitOffset;
 
   public ref float Wait {
-    get => ref _Handle.AsRef<float>(_WaitOffset.Value);
+    get {
+      if (_WaitOffset == null) {
+        _WaitOffset = Schema.GetOffset(0xF74EA45499A062B6);
+      }
+      return ref _Handle.AsRef<float>(_WaitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0xF74EA4545ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0xF74EA4545ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnPassOffset = new(() => Schema.GetOffset(0xF74EA4549B527249), LazyThreadSafetyMode.None);
+  private static nint? _OnPassOffset;
 
   public CEntityIOOutput OnPass {
-    get => new CEntityIOOutputImpl(_Handle + _OnPassOffset.Value);
+    get {
+      if (_OnPassOffset == null) {
+        _OnPassOffset = Schema.GetOffset(0xF74EA4549B527249);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnPassOffset!.Value);
+    }
   }
 
 

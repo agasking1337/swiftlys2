@@ -17,65 +17,125 @@ internal partial class VPhysXBodyPart_tImpl : SchemaClass, VPhysXBodyPart_t {
   public VPhysXBodyPart_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x53DE59CDCE6E9C28), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x53DE59CDCE6E9C28);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MassOffset = new(() => Schema.GetOffset(0x53DE59CDCD83D263), LazyThreadSafetyMode.None);
+  private static nint? _MassOffset;
 
   public ref float Mass {
-    get => ref _Handle.AsRef<float>(_MassOffset.Value);
+    get {
+      if (_MassOffset == null) {
+        _MassOffset = Schema.GetOffset(0x53DE59CDCD83D263);
+      }
+      return ref _Handle.AsRef<float>(_MassOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RnShapeOffset = new(() => Schema.GetOffset(0x53DE59CDD69E7012), LazyThreadSafetyMode.None);
+  private static nint? _RnShapeOffset;
 
   public VPhysics2ShapeDef_t RnShape {
-    get => new VPhysics2ShapeDef_tImpl(_Handle + _RnShapeOffset.Value);
+    get {
+      if (_RnShapeOffset == null) {
+        _RnShapeOffset = Schema.GetOffset(0x53DE59CDD69E7012);
+      }
+      return new VPhysics2ShapeDef_tImpl(_Handle + _RnShapeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CollisionAttributeIndexOffset = new(() => Schema.GetOffset(0x53DE59CDC7B64DF7), LazyThreadSafetyMode.None);
+  private static nint? _CollisionAttributeIndexOffset;
 
   public ref ushort CollisionAttributeIndex {
-    get => ref _Handle.AsRef<ushort>(_CollisionAttributeIndexOffset.Value);
+    get {
+      if (_CollisionAttributeIndexOffset == null) {
+        _CollisionAttributeIndexOffset = Schema.GetOffset(0x53DE59CDC7B64DF7);
+      }
+      return ref _Handle.AsRef<ushort>(_CollisionAttributeIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReservedOffset = new(() => Schema.GetOffset(0x53DE59CD94BD4B01), LazyThreadSafetyMode.None);
+  private static nint? _ReservedOffset;
 
   public ref ushort Reserved {
-    get => ref _Handle.AsRef<ushort>(_ReservedOffset.Value);
+    get {
+      if (_ReservedOffset == null) {
+        _ReservedOffset = Schema.GetOffset(0x53DE59CD94BD4B01);
+      }
+      return ref _Handle.AsRef<ushort>(_ReservedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InertiaScaleOffset = new(() => Schema.GetOffset(0x53DE59CD4E6CAB2F), LazyThreadSafetyMode.None);
+  private static nint? _InertiaScaleOffset;
 
   public ref float InertiaScale {
-    get => ref _Handle.AsRef<float>(_InertiaScaleOffset.Value);
+    get {
+      if (_InertiaScaleOffset == null) {
+        _InertiaScaleOffset = Schema.GetOffset(0x53DE59CD4E6CAB2F);
+      }
+      return ref _Handle.AsRef<float>(_InertiaScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearDampingOffset = new(() => Schema.GetOffset(0x53DE59CD4E6B7F64), LazyThreadSafetyMode.None);
+  private static nint? _LinearDampingOffset;
 
   public ref float LinearDamping {
-    get => ref _Handle.AsRef<float>(_LinearDampingOffset.Value);
+    get {
+      if (_LinearDampingOffset == null) {
+        _LinearDampingOffset = Schema.GetOffset(0x53DE59CD4E6B7F64);
+      }
+      return ref _Handle.AsRef<float>(_LinearDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularDampingOffset = new(() => Schema.GetOffset(0x53DE59CD0E32E897), LazyThreadSafetyMode.None);
+  private static nint? _AngularDampingOffset;
 
   public ref float AngularDamping {
-    get => ref _Handle.AsRef<float>(_AngularDampingOffset.Value);
+    get {
+      if (_AngularDampingOffset == null) {
+        _AngularDampingOffset = Schema.GetOffset(0x53DE59CD0E32E897);
+      }
+      return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearDragOffset = new(() => Schema.GetOffset(0x53DE59CDB3D686BC), LazyThreadSafetyMode.None);
+  private static nint? _LinearDragOffset;
 
   public ref float LinearDrag {
-    get => ref _Handle.AsRef<float>(_LinearDragOffset.Value);
+    get {
+      if (_LinearDragOffset == null) {
+        _LinearDragOffset = Schema.GetOffset(0x53DE59CDB3D686BC);
+      }
+      return ref _Handle.AsRef<float>(_LinearDragOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularDragOffset = new(() => Schema.GetOffset(0x53DE59CDDCE9A7D1), LazyThreadSafetyMode.None);
+  private static nint? _AngularDragOffset;
 
   public ref float AngularDrag {
-    get => ref _Handle.AsRef<float>(_AngularDragOffset.Value);
+    get {
+      if (_AngularDragOffset == null) {
+        _AngularDragOffset = Schema.GetOffset(0x53DE59CDDCE9A7D1);
+      }
+      return ref _Handle.AsRef<float>(_AngularDragOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OverrideMassCenterOffset = new(() => Schema.GetOffset(0x53DE59CD19E47DF8), LazyThreadSafetyMode.None);
+  private static nint? _OverrideMassCenterOffset;
 
   public ref bool OverrideMassCenter {
-    get => ref _Handle.AsRef<bool>(_OverrideMassCenterOffset.Value);
+    get {
+      if (_OverrideMassCenterOffset == null) {
+        _OverrideMassCenterOffset = Schema.GetOffset(0x53DE59CD19E47DF8);
+      }
+      return ref _Handle.AsRef<bool>(_OverrideMassCenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MassCenterOverrideOffset = new(() => Schema.GetOffset(0x53DE59CD7249FAE4), LazyThreadSafetyMode.None);
+  private static nint? _MassCenterOverrideOffset;
 
   public ref Vector MassCenterOverride {
-    get => ref _Handle.AsRef<Vector>(_MassCenterOverrideOffset.Value);
+    get {
+      if (_MassCenterOverrideOffset == null) {
+        _MassCenterOverrideOffset = Schema.GetOffset(0x53DE59CD7249FAE4);
+      }
+      return ref _Handle.AsRef<Vector>(_MassCenterOverrideOffset!.Value);
+    }
   }
 
 

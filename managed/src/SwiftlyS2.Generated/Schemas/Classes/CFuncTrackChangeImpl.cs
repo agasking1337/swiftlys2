@@ -17,71 +17,119 @@ internal partial class CFuncTrackChangeImpl : CFuncPlatRotImpl, CFuncTrackChange
   public CFuncTrackChangeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TrackTopOffset = new(() => Schema.GetOffset(0x25A8A26FF7C2CCBF), LazyThreadSafetyMode.None);
+  private static nint? _TrackTopOffset;
 
   public CPathTrack? TrackTop {
     get {
-      var ptr = _Handle.Read<nint>(_TrackTopOffset.Value);
+      if (_TrackTopOffset == null) {
+        _TrackTopOffset = Schema.GetOffset(0x25A8A26FF7C2CCBF);
+      }
+      var ptr = _Handle.Read<nint>(_TrackTopOffset!.Value);
       return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _TrackBottomOffset = new(() => Schema.GetOffset(0x25A8A26F37EC7637), LazyThreadSafetyMode.None);
+  private static nint? _TrackBottomOffset;
 
   public CPathTrack? TrackBottom {
     get {
-      var ptr = _Handle.Read<nint>(_TrackBottomOffset.Value);
+      if (_TrackBottomOffset == null) {
+        _TrackBottomOffset = Schema.GetOffset(0x25A8A26F37EC7637);
+      }
+      var ptr = _Handle.Read<nint>(_TrackBottomOffset!.Value);
       return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _TrainOffset = new(() => Schema.GetOffset(0x25A8A26FB8642689), LazyThreadSafetyMode.None);
+  private static nint? _TrainOffset;
 
   public CFuncTrackTrain? Train {
     get {
-      var ptr = _Handle.Read<nint>(_TrainOffset.Value);
+      if (_TrainOffset == null) {
+        _TrainOffset = Schema.GetOffset(0x25A8A26FB8642689);
+      }
+      var ptr = _Handle.Read<nint>(_TrainOffset!.Value);
       return ptr.IsValidPtr() ? new CFuncTrackTrainImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _TrackTopNameOffset = new(() => Schema.GetOffset(0x25A8A26FF9BD489C), LazyThreadSafetyMode.None);
+  private static nint? _TrackTopNameOffset;
 
   public string TrackTopName {
     get {
-      var ptr = _Handle.Read<nint>(_TrackTopNameOffset.Value);
+      if (_TrackTopNameOffset == null) {
+        _TrackTopNameOffset = Schema.GetOffset(0x25A8A26FF9BD489C);
+      }
+      var ptr = _Handle.Read<nint>(_TrackTopNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TrackTopNameOffset.Value, value);
+    set {
+      if (_TrackTopNameOffset == null) {
+        _TrackTopNameOffset = Schema.GetOffset(0x25A8A26FF9BD489C);
+      }
+      Schema.SetString(_Handle, _TrackTopNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TrackBottomNameOffset = new(() => Schema.GetOffset(0x25A8A26F7F34C2D4), LazyThreadSafetyMode.None);
+  private static nint? _TrackBottomNameOffset;
 
   public string TrackBottomName {
     get {
-      var ptr = _Handle.Read<nint>(_TrackBottomNameOffset.Value);
+      if (_TrackBottomNameOffset == null) {
+        _TrackBottomNameOffset = Schema.GetOffset(0x25A8A26F7F34C2D4);
+      }
+      var ptr = _Handle.Read<nint>(_TrackBottomNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TrackBottomNameOffset.Value, value);
+    set {
+      if (_TrackBottomNameOffset == null) {
+        _TrackBottomNameOffset = Schema.GetOffset(0x25A8A26F7F34C2D4);
+      }
+      Schema.SetString(_Handle, _TrackBottomNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TrainNameOffset = new(() => Schema.GetOffset(0x25A8A26FA3DC4C82), LazyThreadSafetyMode.None);
+  private static nint? _TrainNameOffset;
 
   public string TrainName {
     get {
-      var ptr = _Handle.Read<nint>(_TrainNameOffset.Value);
+      if (_TrainNameOffset == null) {
+        _TrainNameOffset = Schema.GetOffset(0x25A8A26FA3DC4C82);
+      }
+      var ptr = _Handle.Read<nint>(_TrainNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TrainNameOffset.Value, value);
+    set {
+      if (_TrainNameOffset == null) {
+        _TrainNameOffset = Schema.GetOffset(0x25A8A26FA3DC4C82);
+      }
+      Schema.SetString(_Handle, _TrainNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _CodeOffset = new(() => Schema.GetOffset(0x25A8A26FB70C9D94), LazyThreadSafetyMode.None);
+  private static nint? _CodeOffset;
 
   public ref TRAIN_CODE Code {
-    get => ref _Handle.AsRef<TRAIN_CODE>(_CodeOffset.Value);
+    get {
+      if (_CodeOffset == null) {
+        _CodeOffset = Schema.GetOffset(0x25A8A26FB70C9D94);
+      }
+      return ref _Handle.AsRef<TRAIN_CODE>(_CodeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetStateOffset = new(() => Schema.GetOffset(0x25A8A26F9EA3444D), LazyThreadSafetyMode.None);
+  private static nint? _TargetStateOffset;
 
   public ref int TargetState {
-    get => ref _Handle.AsRef<int>(_TargetStateOffset.Value);
+    get {
+      if (_TargetStateOffset == null) {
+        _TargetStateOffset = Schema.GetOffset(0x25A8A26F9EA3444D);
+      }
+      return ref _Handle.AsRef<int>(_TargetStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseOffset = new(() => Schema.GetOffset(0x25A8A26F45B2B614), LazyThreadSafetyMode.None);
+  private static nint? _UseOffset;
 
   public ref int Use {
-    get => ref _Handle.AsRef<int>(_UseOffset.Value);
+    get {
+      if (_UseOffset == null) {
+        _UseOffset = Schema.GetOffset(0x25A8A26F45B2B614);
+      }
+      return ref _Handle.AsRef<int>(_UseOffset!.Value);
+    }
   }
 
 

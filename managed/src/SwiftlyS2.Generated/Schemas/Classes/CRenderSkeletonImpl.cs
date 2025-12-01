@@ -17,20 +17,35 @@ internal partial class CRenderSkeletonImpl : SchemaClass, CRenderSkeleton {
   public CRenderSkeletonImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BonesOffset = new(() => Schema.GetOffset(0xBF0A83950FDA60D4), LazyThreadSafetyMode.None);
+  private static nint? _BonesOffset;
 
   public ref CUtlVector<RenderSkeletonBone_t> Bones {
-    get => ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset.Value);
+    get {
+      if (_BonesOffset == null) {
+        _BonesOffset = Schema.GetOffset(0xBF0A83950FDA60D4);
+      }
+      return ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneParentsOffset = new(() => Schema.GetOffset(0xBF0A839571828F04), LazyThreadSafetyMode.None);
+  private static nint? _BoneParentsOffset;
 
   public ref CUtlVector<int> BoneParents {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset.Value);
+    get {
+      if (_BoneParentsOffset == null) {
+        _BoneParentsOffset = Schema.GetOffset(0xBF0A839571828F04);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneWeightCountOffset = new(() => Schema.GetOffset(0xBF0A839508029166), LazyThreadSafetyMode.None);
+  private static nint? _BoneWeightCountOffset;
 
   public ref int BoneWeightCount {
-    get => ref _Handle.AsRef<int>(_BoneWeightCountOffset.Value);
+    get {
+      if (_BoneWeightCountOffset == null) {
+        _BoneWeightCountOffset = Schema.GetOffset(0xBF0A839508029166);
+      }
+      return ref _Handle.AsRef<int>(_BoneWeightCountOffset!.Value);
+    }
   }
 
 

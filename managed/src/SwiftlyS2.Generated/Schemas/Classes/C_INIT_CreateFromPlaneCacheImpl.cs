@@ -17,20 +17,35 @@ internal partial class C_INIT_CreateFromPlaneCacheImpl : CParticleFunctionInitia
   public C_INIT_CreateFromPlaneCacheImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OffsetMinOffset = new(() => Schema.GetOffset(0x349002765EE9C8FE), LazyThreadSafetyMode.None);
+  private static nint? _OffsetMinOffset;
 
   public ref Vector OffsetMin {
-    get => ref _Handle.AsRef<Vector>(_OffsetMinOffset.Value);
+    get {
+      if (_OffsetMinOffset == null) {
+        _OffsetMinOffset = Schema.GetOffset(0x349002765EE9C8FE);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetMaxOffset = new(() => Schema.GetOffset(0x3490027670D65D9C), LazyThreadSafetyMode.None);
+  private static nint? _OffsetMaxOffset;
 
   public ref Vector OffsetMax {
-    get => ref _Handle.AsRef<Vector>(_OffsetMaxOffset.Value);
+    get {
+      if (_OffsetMaxOffset == null) {
+        _OffsetMaxOffset = Schema.GetOffset(0x3490027670D65D9C);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseNormalOffset = new(() => Schema.GetOffset(0x349002769FA2D197), LazyThreadSafetyMode.None);
+  private static nint? _UseNormalOffset;
 
   public ref bool UseNormal {
-    get => ref _Handle.AsRef<bool>(_UseNormalOffset.Value);
+    get {
+      if (_UseNormalOffset == null) {
+        _UseNormalOffset = Schema.GetOffset(0x349002769FA2D197);
+      }
+      return ref _Handle.AsRef<bool>(_UseNormalOffset!.Value);
+    }
   }
 
 

@@ -17,70 +17,135 @@ internal partial class CBaseCSGrenadeImpl : CCSWeaponBaseImpl, CBaseCSGrenade {
   public CBaseCSGrenadeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RedrawOffset = new(() => Schema.GetOffset(0x8680ADED612F4EB2), LazyThreadSafetyMode.None);
+  private static nint? _RedrawOffset;
 
   public ref bool Redraw {
-    get => ref _Handle.AsRef<bool>(_RedrawOffset.Value);
+    get {
+      if (_RedrawOffset == null) {
+        _RedrawOffset = Schema.GetOffset(0x8680ADED612F4EB2);
+      }
+      return ref _Handle.AsRef<bool>(_RedrawOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsHeldByPlayerOffset = new(() => Schema.GetOffset(0x8680ADED5FB07B26), LazyThreadSafetyMode.None);
+  private static nint? _IsHeldByPlayerOffset;
 
   public ref bool IsHeldByPlayer {
-    get => ref _Handle.AsRef<bool>(_IsHeldByPlayerOffset.Value);
+    get {
+      if (_IsHeldByPlayerOffset == null) {
+        _IsHeldByPlayerOffset = Schema.GetOffset(0x8680ADED5FB07B26);
+      }
+      return ref _Handle.AsRef<bool>(_IsHeldByPlayerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PinPulledOffset = new(() => Schema.GetOffset(0x8680ADEDB3D8AABA), LazyThreadSafetyMode.None);
+  private static nint? _PinPulledOffset;
 
   public ref bool PinPulled {
-    get => ref _Handle.AsRef<bool>(_PinPulledOffset.Value);
+    get {
+      if (_PinPulledOffset == null) {
+        _PinPulledOffset = Schema.GetOffset(0x8680ADEDB3D8AABA);
+      }
+      return ref _Handle.AsRef<bool>(_PinPulledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _JumpThrowOffset = new(() => Schema.GetOffset(0x8680ADED3202A7A7), LazyThreadSafetyMode.None);
+  private static nint? _JumpThrowOffset;
 
   public ref bool JumpThrow {
-    get => ref _Handle.AsRef<bool>(_JumpThrowOffset.Value);
+    get {
+      if (_JumpThrowOffset == null) {
+        _JumpThrowOffset = Schema.GetOffset(0x8680ADED3202A7A7);
+      }
+      return ref _Handle.AsRef<bool>(_JumpThrowOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ThrowAnimatingOffset = new(() => Schema.GetOffset(0x8680ADEDB2614685), LazyThreadSafetyMode.None);
+  private static nint? _ThrowAnimatingOffset;
 
   public ref bool ThrowAnimating {
-    get => ref _Handle.AsRef<bool>(_ThrowAnimatingOffset.Value);
+    get {
+      if (_ThrowAnimatingOffset == null) {
+        _ThrowAnimatingOffset = Schema.GetOffset(0x8680ADEDB2614685);
+      }
+      return ref _Handle.AsRef<bool>(_ThrowAnimatingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ThrowTimeOffset = new(() => Schema.GetOffset(0x8680ADED57C1B8DA), LazyThreadSafetyMode.None);
+  private static nint? _ThrowTimeOffset;
 
   public GameTime_t ThrowTime {
-    get => new GameTime_tImpl(_Handle + _ThrowTimeOffset.Value);
+    get {
+      if (_ThrowTimeOffset == null) {
+        _ThrowTimeOffset = Schema.GetOffset(0x8680ADED57C1B8DA);
+      }
+      return new GameTime_tImpl(_Handle + _ThrowTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ThrowStrengthOffset = new(() => Schema.GetOffset(0x8680ADEDF4D38CF4), LazyThreadSafetyMode.None);
+  private static nint? _ThrowStrengthOffset;
 
   public ref float ThrowStrength {
-    get => ref _Handle.AsRef<float>(_ThrowStrengthOffset.Value);
+    get {
+      if (_ThrowStrengthOffset == null) {
+        _ThrowStrengthOffset = Schema.GetOffset(0x8680ADEDF4D38CF4);
+      }
+      return ref _Handle.AsRef<float>(_ThrowStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DropTimeOffset = new(() => Schema.GetOffset(0x8680ADED2DE88B09), LazyThreadSafetyMode.None);
+  private static nint? _DropTimeOffset;
 
   public GameTime_t DropTime {
-    get => new GameTime_tImpl(_Handle + _DropTimeOffset.Value);
+    get {
+      if (_DropTimeOffset == null) {
+        _DropTimeOffset = Schema.GetOffset(0x8680ADED2DE88B09);
+      }
+      return new GameTime_tImpl(_Handle + _DropTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PinPullTimeOffset = new(() => Schema.GetOffset(0x8680ADEDFCD7B2E6), LazyThreadSafetyMode.None);
+  private static nint? _PinPullTimeOffset;
 
   public GameTime_t PinPullTime {
-    get => new GameTime_tImpl(_Handle + _PinPullTimeOffset.Value);
+    get {
+      if (_PinPullTimeOffset == null) {
+        _PinPullTimeOffset = Schema.GetOffset(0x8680ADEDFCD7B2E6);
+      }
+      return new GameTime_tImpl(_Handle + _PinPullTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _JustPulledPinOffset = new(() => Schema.GetOffset(0x8680ADEDDA12F260), LazyThreadSafetyMode.None);
+  private static nint? _JustPulledPinOffset;
 
   public ref bool JustPulledPin {
-    get => ref _Handle.AsRef<bool>(_JustPulledPinOffset.Value);
+    get {
+      if (_JustPulledPinOffset == null) {
+        _JustPulledPinOffset = Schema.GetOffset(0x8680ADEDDA12F260);
+      }
+      return ref _Handle.AsRef<bool>(_JustPulledPinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextHoldTickOffset = new(() => Schema.GetOffset(0x8680ADEDDB254738), LazyThreadSafetyMode.None);
+  private static nint? _NextHoldTickOffset;
 
   public GameTick_t NextHoldTick {
-    get => new GameTick_tImpl(_Handle + _NextHoldTickOffset.Value);
+    get {
+      if (_NextHoldTickOffset == null) {
+        _NextHoldTickOffset = Schema.GetOffset(0x8680ADEDDB254738);
+      }
+      return new GameTick_tImpl(_Handle + _NextHoldTickOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextHoldFracOffset = new(() => Schema.GetOffset(0x8680ADED09F02BB7), LazyThreadSafetyMode.None);
+  private static nint? _NextHoldFracOffset;
 
   public ref float NextHoldFrac {
-    get => ref _Handle.AsRef<float>(_NextHoldFracOffset.Value);
+    get {
+      if (_NextHoldFracOffset == null) {
+        _NextHoldFracOffset = Schema.GetOffset(0x8680ADED09F02BB7);
+      }
+      return ref _Handle.AsRef<float>(_NextHoldFracOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SwitchToWeaponAfterThrowOffset = new(() => Schema.GetOffset(0x8680ADED72CB2A60), LazyThreadSafetyMode.None);
+  private static nint? _SwitchToWeaponAfterThrowOffset;
 
   public ref CHandle<CCSWeaponBase> SwitchToWeaponAfterThrow {
-    get => ref _Handle.AsRef<CHandle<CCSWeaponBase>>(_SwitchToWeaponAfterThrowOffset.Value);
+    get {
+      if (_SwitchToWeaponAfterThrowOffset == null) {
+        _SwitchToWeaponAfterThrowOffset = Schema.GetOffset(0x8680ADED72CB2A60);
+      }
+      return ref _Handle.AsRef<CHandle<CCSWeaponBase>>(_SwitchToWeaponAfterThrowOffset!.Value);
+    }
   }
 
   public void RedrawUpdated() {

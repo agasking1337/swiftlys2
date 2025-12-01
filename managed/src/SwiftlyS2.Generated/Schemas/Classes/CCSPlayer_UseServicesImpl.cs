@@ -17,20 +17,35 @@ internal partial class CCSPlayer_UseServicesImpl : CPlayer_UseServicesImpl, CCSP
   public CCSPlayer_UseServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LastKnownUseEntityOffset = new(() => Schema.GetOffset(0xE5F718912806F946), LazyThreadSafetyMode.None);
+  private static nint? _LastKnownUseEntityOffset;
 
   public ref CHandle<CBaseEntity> LastKnownUseEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset.Value);
+    get {
+      if (_LastKnownUseEntityOffset == null) {
+        _LastKnownUseEntityOffset = Schema.GetOffset(0xE5F718912806F946);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastUseTimeStampOffset = new(() => Schema.GetOffset(0xE5F7189104BF376E), LazyThreadSafetyMode.None);
+  private static nint? _LastUseTimeStampOffset;
 
   public GameTime_t LastUseTimeStamp {
-    get => new GameTime_tImpl(_Handle + _LastUseTimeStampOffset.Value);
+    get {
+      if (_LastUseTimeStampOffset == null) {
+        _LastUseTimeStampOffset = Schema.GetOffset(0xE5F7189104BF376E);
+      }
+      return new GameTime_tImpl(_Handle + _LastUseTimeStampOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeLastUsedWindowOffset = new(() => Schema.GetOffset(0xE5F7189165762AEB), LazyThreadSafetyMode.None);
+  private static nint? _TimeLastUsedWindowOffset;
 
   public GameTime_t TimeLastUsedWindow {
-    get => new GameTime_tImpl(_Handle + _TimeLastUsedWindowOffset.Value);
+    get {
+      if (_TimeLastUsedWindowOffset == null) {
+        _TimeLastUsedWindowOffset = Schema.GetOffset(0xE5F7189165762AEB);
+      }
+      return new GameTime_tImpl(_Handle + _TimeLastUsedWindowOffset!.Value);
+    }
   }
 
 

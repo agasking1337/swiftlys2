@@ -17,34 +17,62 @@ internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntr
   public CPulseCell_Inflow_MethodImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MethodNameOffset = new(() => Schema.GetOffset(0xFB5926557D863B13), LazyThreadSafetyMode.None);
+  private static nint? _MethodNameOffset;
 
   public SchemaUntypedField MethodName {
-    get => new SchemaUntypedField(_Handle + _MethodNameOffset.Value);
+    get {
+      if (_MethodNameOffset == null) {
+        _MethodNameOffset = Schema.GetOffset(0xFB5926557D863B13);
+      }
+      return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DescriptionOffset = new(() => Schema.GetOffset(0xFB592655678744E9), LazyThreadSafetyMode.None);
+  private static nint? _DescriptionOffset;
 
   public string Description {
     get {
-      var ptr = _Handle.Read<nint>(_DescriptionOffset.Value);
+      if (_DescriptionOffset == null) {
+        _DescriptionOffset = Schema.GetOffset(0xFB592655678744E9);
+      }
+      var ptr = _Handle.Read<nint>(_DescriptionOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _DescriptionOffset.Value, value);
+    set {
+      if (_DescriptionOffset == null) {
+        _DescriptionOffset = Schema.GetOffset(0xFB592655678744E9);
+      }
+      Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _IsPublicOffset = new(() => Schema.GetOffset(0xFB592655BAE30B50), LazyThreadSafetyMode.None);
+  private static nint? _IsPublicOffset;
 
   public ref bool IsPublic {
-    get => ref _Handle.AsRef<bool>(_IsPublicOffset.Value);
+    get {
+      if (_IsPublicOffset == null) {
+        _IsPublicOffset = Schema.GetOffset(0xFB592655BAE30B50);
+      }
+      return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReturnTypeOffset = new(() => Schema.GetOffset(0xFB59265566333D67), LazyThreadSafetyMode.None);
+  private static nint? _ReturnTypeOffset;
 
   public SchemaUntypedField ReturnType {
-    get => new SchemaUntypedField(_Handle + _ReturnTypeOffset.Value);
+    get {
+      if (_ReturnTypeOffset == null) {
+        _ReturnTypeOffset = Schema.GetOffset(0xFB59265566333D67);
+      }
+      return new SchemaUntypedField(_Handle + _ReturnTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ArgsOffset = new(() => Schema.GetOffset(0xFB592655DAB98BBC), LazyThreadSafetyMode.None);
+  private static nint? _ArgsOffset;
 
   public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
-    get => ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset.Value);
+    get {
+      if (_ArgsOffset == null) {
+        _ArgsOffset = Schema.GetOffset(0xFB592655DAB98BBC);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class CInfoDynamicShadowHintBoxImpl : CInfoDynamicShadowHintImp
   public CInfoDynamicShadowHintBoxImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoxMinsOffset = new(() => Schema.GetOffset(0xFD9FEBD8201373), LazyThreadSafetyMode.None);
+  private static nint? _BoxMinsOffset;
 
   public ref Vector BoxMins {
-    get => ref _Handle.AsRef<Vector>(_BoxMinsOffset.Value);
+    get {
+      if (_BoxMinsOffset == null) {
+        _BoxMinsOffset = Schema.GetOffset(0xFD9FEBD8201373);
+      }
+      return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoxMaxsOffset = new(() => Schema.GetOffset(0xFD9FEB817A3B31), LazyThreadSafetyMode.None);
+  private static nint? _BoxMaxsOffset;
 
   public ref Vector BoxMaxs {
-    get => ref _Handle.AsRef<Vector>(_BoxMaxsOffset.Value);
+    get {
+      if (_BoxMaxsOffset == null) {
+        _BoxMaxsOffset = Schema.GetOffset(0xFD9FEB817A3B31);
+      }
+      return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+    }
   }
 
 

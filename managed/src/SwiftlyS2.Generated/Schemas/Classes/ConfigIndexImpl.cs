@@ -17,15 +17,25 @@ internal partial class ConfigIndexImpl : SchemaClass, ConfigIndex {
   public ConfigIndexImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _GroupOffset = new(() => Schema.GetOffset(0x193FE40D0CD16308), LazyThreadSafetyMode.None);
+  private static nint? _GroupOffset;
 
   public ref ushort Group {
-    get => ref _Handle.AsRef<ushort>(_GroupOffset.Value);
+    get {
+      if (_GroupOffset == null) {
+        _GroupOffset = Schema.GetOffset(0x193FE40D0CD16308);
+      }
+      return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConfigOffset = new(() => Schema.GetOffset(0x193FE40D8BD1DF73), LazyThreadSafetyMode.None);
+  private static nint? _ConfigOffset;
 
   public ref ushort Config {
-    get => ref _Handle.AsRef<ushort>(_ConfigOffset.Value);
+    get {
+      if (_ConfigOffset == null) {
+        _ConfigOffset = Schema.GetOffset(0x193FE40D8BD1DF73);
+      }
+      return ref _Handle.AsRef<ushort>(_ConfigOffset!.Value);
+    }
   }
 
 

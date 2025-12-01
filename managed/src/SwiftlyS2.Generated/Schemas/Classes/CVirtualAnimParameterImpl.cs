@@ -17,19 +17,32 @@ internal partial class CVirtualAnimParameterImpl : CAnimParameterBaseImpl, CVirt
   public CVirtualAnimParameterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ExpressionStringOffset = new(() => Schema.GetOffset(0x3D45915B3039426E), LazyThreadSafetyMode.None);
+  private static nint? _ExpressionStringOffset;
 
   public string ExpressionString {
     get {
-      var ptr = _Handle.Read<nint>(_ExpressionStringOffset.Value);
+      if (_ExpressionStringOffset == null) {
+        _ExpressionStringOffset = Schema.GetOffset(0x3D45915B3039426E);
+      }
+      var ptr = _Handle.Read<nint>(_ExpressionStringOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ExpressionStringOffset.Value, value);
+    set {
+      if (_ExpressionStringOffset == null) {
+        _ExpressionStringOffset = Schema.GetOffset(0x3D45915B3039426E);
+      }
+      Schema.SetString(_Handle, _ExpressionStringOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ParamTypeOffset = new(() => Schema.GetOffset(0x3D45915BF05DFDD9), LazyThreadSafetyMode.None);
+  private static nint? _ParamTypeOffset;
 
   public ref AnimParamType_t ParamType {
-    get => ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset.Value);
+    get {
+      if (_ParamTypeOffset == null) {
+        _ParamTypeOffset = Schema.GetOffset(0x3D45915BF05DFDD9);
+      }
+      return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+    }
   }
 
 

@@ -17,10 +17,15 @@ internal partial class CBtActionParachutePositioningImpl : CBtNodeImpl, CBtActio
   public CBtActionParachutePositioningImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ActionTimerOffset = new(() => Schema.GetOffset(0x132D0F5E8777F414), LazyThreadSafetyMode.None);
+  private static nint? _ActionTimerOffset;
 
   public CountdownTimer ActionTimer {
-    get => new CountdownTimerImpl(_Handle + _ActionTimerOffset.Value);
+    get {
+      if (_ActionTimerOffset == null) {
+        _ActionTimerOffset = Schema.GetOffset(0x132D0F5E8777F414);
+      }
+      return new CountdownTimerImpl(_Handle + _ActionTimerOffset!.Value);
+    }
   }
 
 

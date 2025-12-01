@@ -17,34 +17,62 @@ internal partial class ScriptInfo_tImpl : SchemaClass, ScriptInfo_t {
   public ScriptInfo_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CodeOffset = new(() => Schema.GetOffset(0xDB402399B70C9D94), LazyThreadSafetyMode.None);
+  private static nint? _CodeOffset;
 
   public string Code {
     get {
-      var ptr = _Handle.Read<nint>(_CodeOffset.Value);
+      if (_CodeOffset == null) {
+        _CodeOffset = Schema.GetOffset(0xDB402399B70C9D94);
+      }
+      var ptr = _Handle.Read<nint>(_CodeOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _CodeOffset.Value, value);
+    set {
+      if (_CodeOffset == null) {
+        _CodeOffset = Schema.GetOffset(0xDB402399B70C9D94);
+      }
+      Schema.SetString(_Handle, _CodeOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ParamsModifiedOffset = new(() => Schema.GetOffset(0xDB402399E9EAFC30), LazyThreadSafetyMode.None);
+  private static nint? _ParamsModifiedOffset;
 
   public ref CUtlVector<CAnimParamHandle> ParamsModified {
-    get => ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsModifiedOffset.Value);
+    get {
+      if (_ParamsModifiedOffset == null) {
+        _ParamsModifiedOffset = Schema.GetOffset(0xDB402399E9EAFC30);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsModifiedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProxyReadParamsOffset = new(() => Schema.GetOffset(0xDB40239944FCCB9D), LazyThreadSafetyMode.None);
+  private static nint? _ProxyReadParamsOffset;
 
   public ref CUtlVector<int> ProxyReadParams {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_ProxyReadParamsOffset.Value);
+    get {
+      if (_ProxyReadParamsOffset == null) {
+        _ProxyReadParamsOffset = Schema.GetOffset(0xDB40239944FCCB9D);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_ProxyReadParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProxyWriteParamsOffset = new(() => Schema.GetOffset(0xDB4023993EAFD134), LazyThreadSafetyMode.None);
+  private static nint? _ProxyWriteParamsOffset;
 
   public ref CUtlVector<int> ProxyWriteParams {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_ProxyWriteParamsOffset.Value);
+    get {
+      if (_ProxyWriteParamsOffset == null) {
+        _ProxyWriteParamsOffset = Schema.GetOffset(0xDB4023993EAFD134);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_ProxyWriteParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptTypeOffset = new(() => Schema.GetOffset(0xDB40239949576EFB), LazyThreadSafetyMode.None);
+  private static nint? _ScriptTypeOffset;
 
   public ref AnimScriptType ScriptType {
-    get => ref _Handle.AsRef<AnimScriptType>(_ScriptTypeOffset.Value);
+    get {
+      if (_ScriptTypeOffset == null) {
+        _ScriptTypeOffset = Schema.GetOffset(0xDB40239949576EFB);
+      }
+      return ref _Handle.AsRef<AnimScriptType>(_ScriptTypeOffset!.Value);
+    }
   }
 
 

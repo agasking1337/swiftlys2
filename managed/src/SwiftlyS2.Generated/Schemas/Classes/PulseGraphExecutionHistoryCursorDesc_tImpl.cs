@@ -17,30 +17,55 @@ internal partial class PulseGraphExecutionHistoryCursorDesc_tImpl : SchemaClass,
   public PulseGraphExecutionHistoryCursorDesc_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AncestorCursorIDsOffset = new(() => Schema.GetOffset(0xC94C4C1C39FD1094), LazyThreadSafetyMode.None);
+  private static nint? _AncestorCursorIDsOffset;
 
   public ref CUtlVector<PulseCursorID_t> AncestorCursorIDs {
-    get => ref _Handle.AsRef<CUtlVector<PulseCursorID_t>>(_AncestorCursorIDsOffset.Value);
+    get {
+      if (_AncestorCursorIDsOffset == null) {
+        _AncestorCursorIDsOffset = Schema.GetOffset(0xC94C4C1C39FD1094);
+      }
+      return ref _Handle.AsRef<CUtlVector<PulseCursorID_t>>(_AncestorCursorIDsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpawnNodeIDOffset = new(() => Schema.GetOffset(0xC94C4C1C95FE4E15), LazyThreadSafetyMode.None);
+  private static nint? _SpawnNodeIDOffset;
 
   public PulseDocNodeID_t SpawnNodeID {
-    get => new PulseDocNodeID_tImpl(_Handle + _SpawnNodeIDOffset.Value);
+    get {
+      if (_SpawnNodeIDOffset == null) {
+        _SpawnNodeIDOffset = Schema.GetOffset(0xC94C4C1C95FE4E15);
+      }
+      return new PulseDocNodeID_tImpl(_Handle + _SpawnNodeIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RetiredAtNodeIDOffset = new(() => Schema.GetOffset(0xC94C4C1C7FD10E42), LazyThreadSafetyMode.None);
+  private static nint? _RetiredAtNodeIDOffset;
 
   public PulseDocNodeID_t RetiredAtNodeID {
-    get => new PulseDocNodeID_tImpl(_Handle + _RetiredAtNodeIDOffset.Value);
+    get {
+      if (_RetiredAtNodeIDOffset == null) {
+        _RetiredAtNodeIDOffset = Schema.GetOffset(0xC94C4C1C7FD10E42);
+      }
+      return new PulseDocNodeID_tImpl(_Handle + _RetiredAtNodeIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastReferencedOffset = new(() => Schema.GetOffset(0xC94C4C1C22F5B0C8), LazyThreadSafetyMode.None);
+  private static nint? _LastReferencedOffset;
 
   public ref float LastReferenced {
-    get => ref _Handle.AsRef<float>(_LastReferencedOffset.Value);
+    get {
+      if (_LastReferencedOffset == null) {
+        _LastReferencedOffset = Schema.GetOffset(0xC94C4C1C22F5B0C8);
+      }
+      return ref _Handle.AsRef<float>(_LastReferencedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastValidEntryIdxOffset = new(() => Schema.GetOffset(0xC94C4C1CBFAF995E), LazyThreadSafetyMode.None);
+  private static nint? _LastValidEntryIdxOffset;
 
   public ref int LastValidEntryIdx {
-    get => ref _Handle.AsRef<int>(_LastValidEntryIdxOffset.Value);
+    get {
+      if (_LastValidEntryIdxOffset == null) {
+        _LastValidEntryIdxOffset = Schema.GetOffset(0xC94C4C1CBFAF995E);
+      }
+      return ref _Handle.AsRef<int>(_LastValidEntryIdxOffset!.Value);
+    }
   }
 
 

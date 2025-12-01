@@ -17,35 +17,65 @@ internal partial class CSAdditionalPerRoundStats_tImpl : SchemaClass, CSAddition
   public CSAdditionalPerRoundStats_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NumChickensKilledOffset = new(() => Schema.GetOffset(0x719C617993548CDE), LazyThreadSafetyMode.None);
+  private static nint? _NumChickensKilledOffset;
 
   public ref int NumChickensKilled {
-    get => ref _Handle.AsRef<int>(_NumChickensKilledOffset.Value);
+    get {
+      if (_NumChickensKilledOffset == null) {
+        _NumChickensKilledOffset = Schema.GetOffset(0x719C617993548CDE);
+      }
+      return ref _Handle.AsRef<int>(_NumChickensKilledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _KillsWhileBlindOffset = new(() => Schema.GetOffset(0x719C61794FEC6186), LazyThreadSafetyMode.None);
+  private static nint? _KillsWhileBlindOffset;
 
   public ref int KillsWhileBlind {
-    get => ref _Handle.AsRef<int>(_KillsWhileBlindOffset.Value);
+    get {
+      if (_KillsWhileBlindOffset == null) {
+        _KillsWhileBlindOffset = Schema.GetOffset(0x719C61794FEC6186);
+      }
+      return ref _Handle.AsRef<int>(_KillsWhileBlindOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BombCarrierkillsOffset = new(() => Schema.GetOffset(0x719C617913457A30), LazyThreadSafetyMode.None);
+  private static nint? _BombCarrierkillsOffset;
 
   public ref int BombCarrierkills {
-    get => ref _Handle.AsRef<int>(_BombCarrierkillsOffset.Value);
+    get {
+      if (_BombCarrierkillsOffset == null) {
+        _BombCarrierkillsOffset = Schema.GetOffset(0x719C617913457A30);
+      }
+      return ref _Handle.AsRef<int>(_BombCarrierkillsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BurnDamageInflictedOffset = new(() => Schema.GetOffset(0x719C6179ADDF061F), LazyThreadSafetyMode.None);
+  private static nint? _BurnDamageInflictedOffset;
 
   public ref float BurnDamageInflicted {
-    get => ref _Handle.AsRef<float>(_BurnDamageInflictedOffset.Value);
+    get {
+      if (_BurnDamageInflictedOffset == null) {
+        _BurnDamageInflictedOffset = Schema.GetOffset(0x719C6179ADDF061F);
+      }
+      return ref _Handle.AsRef<float>(_BurnDamageInflictedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlastDamageInflictedOffset = new(() => Schema.GetOffset(0x719C6179FDBAB060), LazyThreadSafetyMode.None);
+  private static nint? _BlastDamageInflictedOffset;
 
   public ref float BlastDamageInflicted {
-    get => ref _Handle.AsRef<float>(_BlastDamageInflictedOffset.Value);
+    get {
+      if (_BlastDamageInflictedOffset == null) {
+        _BlastDamageInflictedOffset = Schema.GetOffset(0x719C6179FDBAB060);
+      }
+      return ref _Handle.AsRef<float>(_BlastDamageInflictedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DinksOffset = new(() => Schema.GetOffset(0x719C617910BCE83D), LazyThreadSafetyMode.None);
+  private static nint? _DinksOffset;
 
   public ref int Dinks {
-    get => ref _Handle.AsRef<int>(_DinksOffset.Value);
+    get {
+      if (_DinksOffset == null) {
+        _DinksOffset = Schema.GetOffset(0x719C617910BCE83D);
+      }
+      return ref _Handle.AsRef<int>(_DinksOffset!.Value);
+    }
   }
 
 

@@ -17,35 +17,65 @@ internal partial class CRemapValueUpdateItemImpl : SchemaClass, CRemapValueUpdat
   public CRemapValueUpdateItemImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ParamInOffset = new(() => Schema.GetOffset(0x93C5E8D6ED40E37B), LazyThreadSafetyMode.None);
+  private static nint? _ParamInOffset;
 
   public CAnimParamHandle ParamIn {
-    get => new CAnimParamHandleImpl(_Handle + _ParamInOffset.Value);
+    get {
+      if (_ParamInOffset == null) {
+        _ParamInOffset = Schema.GetOffset(0x93C5E8D6ED40E37B);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamOutOffset = new(() => Schema.GetOffset(0x93C5E8D6AA5799A8), LazyThreadSafetyMode.None);
+  private static nint? _ParamOutOffset;
 
   public CAnimParamHandle ParamOut {
-    get => new CAnimParamHandleImpl(_Handle + _ParamOutOffset.Value);
+    get {
+      if (_ParamOutOffset == null) {
+        _ParamOutOffset = Schema.GetOffset(0x93C5E8D6AA5799A8);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinInputValueOffset = new(() => Schema.GetOffset(0x93C5E8D6BDB4BC64), LazyThreadSafetyMode.None);
+  private static nint? _MinInputValueOffset;
 
   public ref float MinInputValue {
-    get => ref _Handle.AsRef<float>(_MinInputValueOffset.Value);
+    get {
+      if (_MinInputValueOffset == null) {
+        _MinInputValueOffset = Schema.GetOffset(0x93C5E8D6BDB4BC64);
+      }
+      return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxInputValueOffset = new(() => Schema.GetOffset(0x93C5E8D63EF75C2A), LazyThreadSafetyMode.None);
+  private static nint? _MaxInputValueOffset;
 
   public ref float MaxInputValue {
-    get => ref _Handle.AsRef<float>(_MaxInputValueOffset.Value);
+    get {
+      if (_MaxInputValueOffset == null) {
+        _MaxInputValueOffset = Schema.GetOffset(0x93C5E8D63EF75C2A);
+      }
+      return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinOutputValueOffset = new(() => Schema.GetOffset(0x93C5E8D6F63C7011), LazyThreadSafetyMode.None);
+  private static nint? _MinOutputValueOffset;
 
   public ref float MinOutputValue {
-    get => ref _Handle.AsRef<float>(_MinOutputValueOffset.Value);
+    get {
+      if (_MinOutputValueOffset == null) {
+        _MinOutputValueOffset = Schema.GetOffset(0x93C5E8D6F63C7011);
+      }
+      return ref _Handle.AsRef<float>(_MinOutputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxOutputValueOffset = new(() => Schema.GetOffset(0x93C5E8D6A91B71B3), LazyThreadSafetyMode.None);
+  private static nint? _MaxOutputValueOffset;
 
   public ref float MaxOutputValue {
-    get => ref _Handle.AsRef<float>(_MaxOutputValueOffset.Value);
+    get {
+      if (_MaxOutputValueOffset == null) {
+        _MaxOutputValueOffset = Schema.GetOffset(0x93C5E8D6A91B71B3);
+      }
+      return ref _Handle.AsRef<float>(_MaxOutputValueOffset!.Value);
+    }
   }
 
 

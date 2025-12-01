@@ -17,40 +17,75 @@ internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperat
   public C_OP_MaintainSequentialPathImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MaxDistanceOffset = new(() => Schema.GetOffset(0x3F7004B8844E396A), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceOffset;
 
   public ref float MaxDistance {
-    get => ref _Handle.AsRef<float>(_MaxDistanceOffset.Value);
+    get {
+      if (_MaxDistanceOffset == null) {
+        _MaxDistanceOffset = Schema.GetOffset(0x3F7004B8844E396A);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumToAssignOffset = new(() => Schema.GetOffset(0x3F7004B8F73366BD), LazyThreadSafetyMode.None);
+  private static nint? _NumToAssignOffset;
 
   public ref float NumToAssign {
-    get => ref _Handle.AsRef<float>(_NumToAssignOffset.Value);
+    get {
+      if (_NumToAssignOffset == null) {
+        _NumToAssignOffset = Schema.GetOffset(0x3F7004B8F73366BD);
+      }
+      return ref _Handle.AsRef<float>(_NumToAssignOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CohesionStrengthOffset = new(() => Schema.GetOffset(0x3F7004B8A5A506EA), LazyThreadSafetyMode.None);
+  private static nint? _CohesionStrengthOffset;
 
   public ref float CohesionStrength {
-    get => ref _Handle.AsRef<float>(_CohesionStrengthOffset.Value);
+    get {
+      if (_CohesionStrengthOffset == null) {
+        _CohesionStrengthOffset = Schema.GetOffset(0x3F7004B8A5A506EA);
+      }
+      return ref _Handle.AsRef<float>(_CohesionStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ToleranceOffset = new(() => Schema.GetOffset(0x3F7004B88C29728E), LazyThreadSafetyMode.None);
+  private static nint? _ToleranceOffset;
 
   public ref float Tolerance {
-    get => ref _Handle.AsRef<float>(_ToleranceOffset.Value);
+    get {
+      if (_ToleranceOffset == null) {
+        _ToleranceOffset = Schema.GetOffset(0x3F7004B88C29728E);
+      }
+      return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopOffset = new(() => Schema.GetOffset(0x3F7004B8C668A4CB), LazyThreadSafetyMode.None);
+  private static nint? _LoopOffset;
 
   public ref bool Loop {
-    get => ref _Handle.AsRef<bool>(_LoopOffset.Value);
+    get {
+      if (_LoopOffset == null) {
+        _LoopOffset = Schema.GetOffset(0x3F7004B8C668A4CB);
+      }
+      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseParticleCountOffset = new(() => Schema.GetOffset(0x3F7004B8D4DA0515), LazyThreadSafetyMode.None);
+  private static nint? _UseParticleCountOffset;
 
   public ref bool UseParticleCount {
-    get => ref _Handle.AsRef<bool>(_UseParticleCountOffset.Value);
+    get {
+      if (_UseParticleCountOffset == null) {
+        _UseParticleCountOffset = Schema.GetOffset(0x3F7004B8D4DA0515);
+      }
+      return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathParamsOffset = new(() => Schema.GetOffset(0x3F7004B83C10092C), LazyThreadSafetyMode.None);
+  private static nint? _PathParamsOffset;
 
   public CPathParameters PathParams {
-    get => new CPathParametersImpl(_Handle + _PathParamsOffset.Value);
+    get {
+      if (_PathParamsOffset == null) {
+        _PathParamsOffset = Schema.GetOffset(0x3F7004B83C10092C);
+      }
+      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    }
   }
 
 

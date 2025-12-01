@@ -20,25 +20,45 @@ internal partial class FeRodConstraint_tImpl : SchemaClass, FeRodConstraint_t {
   public ISchemaFixedArray<ushort> Node {
     get => new SchemaFixedArray<ushort>(_Handle, 0xC672146DCD6694B9, 2, 2, 2);
   }
-  private static readonly Lazy<nint> _MaxDistOffset = new(() => Schema.GetOffset(0xC672146DC9FFDD57), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistOffset;
 
   public ref float MaxDist {
-    get => ref _Handle.AsRef<float>(_MaxDistOffset.Value);
+    get {
+      if (_MaxDistOffset == null) {
+        _MaxDistOffset = Schema.GetOffset(0xC672146DC9FFDD57);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinDistOffset = new(() => Schema.GetOffset(0xC672146D2C1C02AD), LazyThreadSafetyMode.None);
+  private static nint? _MinDistOffset;
 
   public ref float MinDist {
-    get => ref _Handle.AsRef<float>(_MinDistOffset.Value);
+    get {
+      if (_MinDistOffset == null) {
+        _MinDistOffset = Schema.GetOffset(0xC672146D2C1C02AD);
+      }
+      return ref _Handle.AsRef<float>(_MinDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Weight0Offset = new(() => Schema.GetOffset(0xC672146D65561D21), LazyThreadSafetyMode.None);
+  private static nint? _Weight0Offset;
 
   public ref float Weight0 {
-    get => ref _Handle.AsRef<float>(_Weight0Offset.Value);
+    get {
+      if (_Weight0Offset == null) {
+        _Weight0Offset = Schema.GetOffset(0xC672146D65561D21);
+      }
+      return ref _Handle.AsRef<float>(_Weight0Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RelaxationFactorOffset = new(() => Schema.GetOffset(0xC672146D357F3BFF), LazyThreadSafetyMode.None);
+  private static nint? _RelaxationFactorOffset;
 
   public ref float RelaxationFactor {
-    get => ref _Handle.AsRef<float>(_RelaxationFactorOffset.Value);
+    get {
+      if (_RelaxationFactorOffset == null) {
+        _RelaxationFactorOffset = Schema.GetOffset(0xC672146D357F3BFF);
+      }
+      return ref _Handle.AsRef<float>(_RelaxationFactorOffset!.Value);
+    }
   }
 
 

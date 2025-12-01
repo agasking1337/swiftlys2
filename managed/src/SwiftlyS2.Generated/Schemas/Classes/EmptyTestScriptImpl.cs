@@ -17,10 +17,15 @@ internal partial class EmptyTestScriptImpl : CAnimScriptBaseImpl, EmptyTestScrip
   public EmptyTestScriptImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TestOffset = new(() => Schema.GetOffset(0xB7F6B6D5FAAC6DA3), LazyThreadSafetyMode.None);
+  private static nint? _TestOffset;
 
   public SchemaUntypedField Test {
-    get => new SchemaUntypedField(_Handle + _TestOffset.Value);
+    get {
+      if (_TestOffset == null) {
+        _TestOffset = Schema.GetOffset(0xB7F6B6D5FAAC6DA3);
+      }
+      return new SchemaUntypedField(_Handle + _TestOffset!.Value);
+    }
   }
 
 

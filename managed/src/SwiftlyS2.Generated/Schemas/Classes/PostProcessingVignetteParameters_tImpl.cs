@@ -17,35 +17,65 @@ internal partial class PostProcessingVignetteParameters_tImpl : SchemaClass, Pos
   public PostProcessingVignetteParameters_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _VignetteStrengthOffset = new(() => Schema.GetOffset(0xC31FEB45110C062C), LazyThreadSafetyMode.None);
+  private static nint? _VignetteStrengthOffset;
 
   public ref float VignetteStrength {
-    get => ref _Handle.AsRef<float>(_VignetteStrengthOffset.Value);
+    get {
+      if (_VignetteStrengthOffset == null) {
+        _VignetteStrengthOffset = Schema.GetOffset(0xC31FEB45110C062C);
+      }
+      return ref _Handle.AsRef<float>(_VignetteStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CenterOffset = new(() => Schema.GetOffset(0xC31FEB45C82A5908), LazyThreadSafetyMode.None);
+  private static nint? _CenterOffset;
 
   public ref Vector2D Center {
-    get => ref _Handle.AsRef<Vector2D>(_CenterOffset.Value);
+    get {
+      if (_CenterOffset == null) {
+        _CenterOffset = Schema.GetOffset(0xC31FEB45C82A5908);
+      }
+      return ref _Handle.AsRef<Vector2D>(_CenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0xC31FEB455ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0xC31FEB455ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RoundnessOffset = new(() => Schema.GetOffset(0xC31FEB453987DB42), LazyThreadSafetyMode.None);
+  private static nint? _RoundnessOffset;
 
   public ref float Roundness {
-    get => ref _Handle.AsRef<float>(_RoundnessOffset.Value);
+    get {
+      if (_RoundnessOffset == null) {
+        _RoundnessOffset = Schema.GetOffset(0xC31FEB453987DB42);
+      }
+      return ref _Handle.AsRef<float>(_RoundnessOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FeatherOffset = new(() => Schema.GetOffset(0xC31FEB455070E146), LazyThreadSafetyMode.None);
+  private static nint? _FeatherOffset;
 
   public ref float Feather {
-    get => ref _Handle.AsRef<float>(_FeatherOffset.Value);
+    get {
+      if (_FeatherOffset == null) {
+        _FeatherOffset = Schema.GetOffset(0xC31FEB455070E146);
+      }
+      return ref _Handle.AsRef<float>(_FeatherOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorTintOffset = new(() => Schema.GetOffset(0xC31FEB45569A6EA9), LazyThreadSafetyMode.None);
+  private static nint? _ColorTintOffset;
 
   public ref Vector ColorTint {
-    get => ref _Handle.AsRef<Vector>(_ColorTintOffset.Value);
+    get {
+      if (_ColorTintOffset == null) {
+        _ColorTintOffset = Schema.GetOffset(0xC31FEB45569A6EA9);
+      }
+      return ref _Handle.AsRef<Vector>(_ColorTintOffset!.Value);
+    }
   }
 
 

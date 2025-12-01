@@ -17,25 +17,45 @@ internal partial class FeNodeIntegrator_tImpl : SchemaClass, FeNodeIntegrator_t 
   public FeNodeIntegrator_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PointDampingOffset = new(() => Schema.GetOffset(0x64217E4215738003), LazyThreadSafetyMode.None);
+  private static nint? _PointDampingOffset;
 
   public ref float PointDamping {
-    get => ref _Handle.AsRef<float>(_PointDampingOffset.Value);
+    get {
+      if (_PointDampingOffset == null) {
+        _PointDampingOffset = Schema.GetOffset(0x64217E4215738003);
+      }
+      return ref _Handle.AsRef<float>(_PointDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnimationForceAttractionOffset = new(() => Schema.GetOffset(0x64217E423D09A7B3), LazyThreadSafetyMode.None);
+  private static nint? _AnimationForceAttractionOffset;
 
   public ref float AnimationForceAttraction {
-    get => ref _Handle.AsRef<float>(_AnimationForceAttractionOffset.Value);
+    get {
+      if (_AnimationForceAttractionOffset == null) {
+        _AnimationForceAttractionOffset = Schema.GetOffset(0x64217E423D09A7B3);
+      }
+      return ref _Handle.AsRef<float>(_AnimationForceAttractionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnimationVertexAttractionOffset = new(() => Schema.GetOffset(0x64217E424E9EA4DC), LazyThreadSafetyMode.None);
+  private static nint? _AnimationVertexAttractionOffset;
 
   public ref float AnimationVertexAttraction {
-    get => ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset.Value);
+    get {
+      if (_AnimationVertexAttractionOffset == null) {
+        _AnimationVertexAttractionOffset = Schema.GetOffset(0x64217E424E9EA4DC);
+      }
+      return ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GravityOffset = new(() => Schema.GetOffset(0x64217E4289B3B847), LazyThreadSafetyMode.None);
+  private static nint? _GravityOffset;
 
   public ref float Gravity {
-    get => ref _Handle.AsRef<float>(_GravityOffset.Value);
+    get {
+      if (_GravityOffset == null) {
+        _GravityOffset = Schema.GetOffset(0x64217E4289B3B847);
+      }
+      return ref _Handle.AsRef<float>(_GravityOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class CAnimSequenceParamsImpl : SchemaClass, CAnimSequenceParam
   public CAnimSequenceParamsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FadeInTimeOffset = new(() => Schema.GetOffset(0x651691F81F0255B3), LazyThreadSafetyMode.None);
+  private static nint? _FadeInTimeOffset;
 
   public ref float FadeInTime {
-    get => ref _Handle.AsRef<float>(_FadeInTimeOffset.Value);
+    get {
+      if (_FadeInTimeOffset == null) {
+        _FadeInTimeOffset = Schema.GetOffset(0x651691F81F0255B3);
+      }
+      return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FadeOutTimeOffset = new(() => Schema.GetOffset(0x651691F8E86D2FC2), LazyThreadSafetyMode.None);
+  private static nint? _FadeOutTimeOffset;
 
   public ref float FadeOutTime {
-    get => ref _Handle.AsRef<float>(_FadeOutTimeOffset.Value);
+    get {
+      if (_FadeOutTimeOffset == null) {
+        _FadeOutTimeOffset = Schema.GetOffset(0x651691F8E86D2FC2);
+      }
+      return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
+    }
   }
 
 

@@ -17,35 +17,65 @@ internal partial class CTurnHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CTurnHe
   public CTurnHelperUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FacingTargetOffset = new(() => Schema.GetOffset(0xDEC0FADCED73C452), LazyThreadSafetyMode.None);
+  private static nint? _FacingTargetOffset;
 
   public ref AnimValueSource FacingTarget {
-    get => ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset.Value);
+    get {
+      if (_FacingTargetOffset == null) {
+        _FacingTargetOffset = Schema.GetOffset(0xDEC0FADCED73C452);
+      }
+      return ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnStartTimeOffsetOffset = new(() => Schema.GetOffset(0xDEC0FADC9A7910D0), LazyThreadSafetyMode.None);
+  private static nint? _TurnStartTimeOffsetOffset;
 
   public ref float TurnStartTimeOffset {
-    get => ref _Handle.AsRef<float>(_TurnStartTimeOffsetOffset.Value);
+    get {
+      if (_TurnStartTimeOffsetOffset == null) {
+        _TurnStartTimeOffsetOffset = Schema.GetOffset(0xDEC0FADC9A7910D0);
+      }
+      return ref _Handle.AsRef<float>(_TurnStartTimeOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnDurationOffset = new(() => Schema.GetOffset(0xDEC0FADC879BD946), LazyThreadSafetyMode.None);
+  private static nint? _TurnDurationOffset;
 
   public ref float TurnDuration {
-    get => ref _Handle.AsRef<float>(_TurnDurationOffset.Value);
+    get {
+      if (_TurnDurationOffset == null) {
+        _TurnDurationOffset = Schema.GetOffset(0xDEC0FADC879BD946);
+      }
+      return ref _Handle.AsRef<float>(_TurnDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MatchChildDurationOffset = new(() => Schema.GetOffset(0xDEC0FADC6B6788BC), LazyThreadSafetyMode.None);
+  private static nint? _MatchChildDurationOffset;
 
   public ref bool MatchChildDuration {
-    get => ref _Handle.AsRef<bool>(_MatchChildDurationOffset.Value);
+    get {
+      if (_MatchChildDurationOffset == null) {
+        _MatchChildDurationOffset = Schema.GetOffset(0xDEC0FADC6B6788BC);
+      }
+      return ref _Handle.AsRef<bool>(_MatchChildDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ManualTurnOffsetOffset = new(() => Schema.GetOffset(0xDEC0FADC61F53BBB), LazyThreadSafetyMode.None);
+  private static nint? _ManualTurnOffsetOffset;
 
   public ref float ManualTurnOffset {
-    get => ref _Handle.AsRef<float>(_ManualTurnOffsetOffset.Value);
+    get {
+      if (_ManualTurnOffsetOffset == null) {
+        _ManualTurnOffsetOffset = Schema.GetOffset(0xDEC0FADC61F53BBB);
+      }
+      return ref _Handle.AsRef<float>(_ManualTurnOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseManualTurnOffsetOffset = new(() => Schema.GetOffset(0xDEC0FADC9290C2BE), LazyThreadSafetyMode.None);
+  private static nint? _UseManualTurnOffsetOffset;
 
   public ref bool UseManualTurnOffset {
-    get => ref _Handle.AsRef<bool>(_UseManualTurnOffsetOffset.Value);
+    get {
+      if (_UseManualTurnOffsetOffset == null) {
+        _UseManualTurnOffsetOffset = Schema.GetOffset(0xDEC0FADC9290C2BE);
+      }
+      return ref _Handle.AsRef<bool>(_UseManualTurnOffsetOffset!.Value);
+    }
   }
 
 

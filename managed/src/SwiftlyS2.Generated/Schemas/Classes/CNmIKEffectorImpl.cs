@@ -17,30 +17,55 @@ internal partial class CNmIKEffectorImpl : SchemaClass, CNmIKEffector {
   public CNmIKEffectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BodyIndexOffset = new(() => Schema.GetOffset(0xA45D61F2B50B497), LazyThreadSafetyMode.None);
+  private static nint? _BodyIndexOffset;
 
   public ref int BodyIndex {
-    get => ref _Handle.AsRef<int>(_BodyIndexOffset.Value);
+    get {
+      if (_BodyIndexOffset == null) {
+        _BodyIndexOffset = Schema.GetOffset(0xA45D61F2B50B497);
+      }
+      return ref _Handle.AsRef<int>(_BodyIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledOffset = new(() => Schema.GetOffset(0xA45D61F6154EB7E), LazyThreadSafetyMode.None);
+  private static nint? _EnabledOffset;
 
   public ref bool Enabled {
-    get => ref _Handle.AsRef<bool>(_EnabledOffset.Value);
+    get {
+      if (_EnabledOffset == null) {
+        _EnabledOffset = Schema.GetOffset(0xA45D61F6154EB7E);
+      }
+      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetPositionOffset = new(() => Schema.GetOffset(0xA45D61FF028CBBF), LazyThreadSafetyMode.None);
+  private static nint? _TargetPositionOffset;
 
   public ref Vector TargetPosition {
-    get => ref _Handle.AsRef<Vector>(_TargetPositionOffset.Value);
+    get {
+      if (_TargetPositionOffset == null) {
+        _TargetPositionOffset = Schema.GetOffset(0xA45D61FF028CBBF);
+      }
+      return ref _Handle.AsRef<Vector>(_TargetPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetOrientationOffset = new(() => Schema.GetOffset(0xA45D61FED14ED41), LazyThreadSafetyMode.None);
+  private static nint? _TargetOrientationOffset;
 
   public ref Quaternion TargetOrientation {
-    get => ref _Handle.AsRef<Quaternion>(_TargetOrientationOffset.Value);
+    get {
+      if (_TargetOrientationOffset == null) {
+        _TargetOrientationOffset = Schema.GetOffset(0xA45D61FED14ED41);
+      }
+      return ref _Handle.AsRef<Quaternion>(_TargetOrientationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WeightOffset = new(() => Schema.GetOffset(0xA45D61F7B81E7AB), LazyThreadSafetyMode.None);
+  private static nint? _WeightOffset;
 
   public ref float Weight {
-    get => ref _Handle.AsRef<float>(_WeightOffset.Value);
+    get {
+      if (_WeightOffset == null) {
+        _WeightOffset = Schema.GetOffset(0xA45D61F7B81E7AB);
+      }
+      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    }
   }
 
 

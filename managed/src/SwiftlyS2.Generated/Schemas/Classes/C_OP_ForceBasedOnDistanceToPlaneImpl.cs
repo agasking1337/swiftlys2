@@ -17,40 +17,75 @@ internal partial class C_OP_ForceBasedOnDistanceToPlaneImpl : CParticleFunctionF
   public C_OP_ForceBasedOnDistanceToPlaneImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinDistOffset = new(() => Schema.GetOffset(0x41A5EAC25219494D), LazyThreadSafetyMode.None);
+  private static nint? _MinDistOffset;
 
   public ref float MinDist {
-    get => ref _Handle.AsRef<float>(_MinDistOffset.Value);
+    get {
+      if (_MinDistOffset == null) {
+        _MinDistOffset = Schema.GetOffset(0x41A5EAC25219494D);
+      }
+      return ref _Handle.AsRef<float>(_MinDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceAtMinDistOffset = new(() => Schema.GetOffset(0x41A5EAC23BD9C5EB), LazyThreadSafetyMode.None);
+  private static nint? _ForceAtMinDistOffset;
 
   public ref Vector ForceAtMinDist {
-    get => ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset.Value);
+    get {
+      if (_ForceAtMinDistOffset == null) {
+        _ForceAtMinDistOffset = Schema.GetOffset(0x41A5EAC23BD9C5EB);
+      }
+      return ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistOffset = new(() => Schema.GetOffset(0x41A5EAC2EFFD23F7), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistOffset;
 
   public ref float MaxDist {
-    get => ref _Handle.AsRef<float>(_MaxDistOffset.Value);
+    get {
+      if (_MaxDistOffset == null) {
+        _MaxDistOffset = Schema.GetOffset(0x41A5EAC2EFFD23F7);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceAtMaxDistOffset = new(() => Schema.GetOffset(0x41A5EAC24119AAF9), LazyThreadSafetyMode.None);
+  private static nint? _ForceAtMaxDistOffset;
 
   public ref Vector ForceAtMaxDist {
-    get => ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset.Value);
+    get {
+      if (_ForceAtMaxDistOffset == null) {
+        _ForceAtMaxDistOffset = Schema.GetOffset(0x41A5EAC24119AAF9);
+      }
+      return ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaneNormalOffset = new(() => Schema.GetOffset(0x41A5EAC221103682), LazyThreadSafetyMode.None);
+  private static nint? _PlaneNormalOffset;
 
   public ref Vector PlaneNormal {
-    get => ref _Handle.AsRef<Vector>(_PlaneNormalOffset.Value);
+    get {
+      if (_PlaneNormalOffset == null) {
+        _PlaneNormalOffset = Schema.GetOffset(0x41A5EAC221103682);
+      }
+      return ref _Handle.AsRef<Vector>(_PlaneNormalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x41A5EAC23F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x41A5EAC23F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExponentOffset = new(() => Schema.GetOffset(0x41A5EAC220A7BCBC), LazyThreadSafetyMode.None);
+  private static nint? _ExponentOffset;
 
   public ref float Exponent {
-    get => ref _Handle.AsRef<float>(_ExponentOffset.Value);
+    get {
+      if (_ExponentOffset == null) {
+        _ExponentOffset = Schema.GetOffset(0x41A5EAC220A7BCBC);
+      }
+      return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+    }
   }
 
 

@@ -17,24 +17,42 @@ internal partial class CPathSimpleImpl : CBaseEntityImpl, CPathSimple {
   public CPathSimpleImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPathQueryComponentOffset = new(() => Schema.GetOffset(0x10936CB34513F542), LazyThreadSafetyMode.None);
+  private static nint? _CPathQueryComponentOffset;
 
   public CPathQueryComponent CPathQueryComponent {
-    get => new CPathQueryComponentImpl(_Handle + _CPathQueryComponentOffset.Value);
+    get {
+      if (_CPathQueryComponentOffset == null) {
+        _CPathQueryComponentOffset = Schema.GetOffset(0x10936CB34513F542);
+      }
+      return new CPathQueryComponentImpl(_Handle + _CPathQueryComponentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathStringOffset = new(() => Schema.GetOffset(0x10936CB36EC51AA7), LazyThreadSafetyMode.None);
+  private static nint? _PathStringOffset;
 
   public string PathString {
     get {
-      var ptr = _Handle.Read<nint>(_PathStringOffset.Value);
+      if (_PathStringOffset == null) {
+        _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
+      }
+      var ptr = _Handle.Read<nint>(_PathStringOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _PathStringOffset.Value, value);
+    set {
+      if (_PathStringOffset == null) {
+        _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
+      }
+      Schema.SetString(_Handle, _PathStringOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ClosedLoopOffset = new(() => Schema.GetOffset(0x10936CB37C20D1AB), LazyThreadSafetyMode.None);
+  private static nint? _ClosedLoopOffset;
 
   public ref bool ClosedLoop {
-    get => ref _Handle.AsRef<bool>(_ClosedLoopOffset.Value);
+    get {
+      if (_ClosedLoopOffset == null) {
+        _ClosedLoopOffset = Schema.GetOffset(0x10936CB37C20D1AB);
+      }
+      return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+    }
   }
 
   public void CPathQueryComponentUpdated() {

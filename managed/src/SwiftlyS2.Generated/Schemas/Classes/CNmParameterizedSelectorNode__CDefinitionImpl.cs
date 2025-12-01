@@ -17,30 +17,55 @@ internal partial class CNmParameterizedSelectorNode__CDefinitionImpl : CNmPoseNo
   public CNmParameterizedSelectorNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OptionNodeIndicesOffset = new(() => Schema.GetOffset(0xE1B260B3DA97B15D), LazyThreadSafetyMode.None);
+  private static nint? _OptionNodeIndicesOffset;
 
   public SchemaUntypedField OptionNodeIndices {
-    get => new SchemaUntypedField(_Handle + _OptionNodeIndicesOffset.Value);
+    get {
+      if (_OptionNodeIndicesOffset == null) {
+        _OptionNodeIndicesOffset = Schema.GetOffset(0xE1B260B3DA97B15D);
+      }
+      return new SchemaUntypedField(_Handle + _OptionNodeIndicesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OptionWeightsOffset = new(() => Schema.GetOffset(0xE1B260B331D94DB5), LazyThreadSafetyMode.None);
+  private static nint? _OptionWeightsOffset;
 
   public SchemaUntypedField OptionWeights {
-    get => new SchemaUntypedField(_Handle + _OptionWeightsOffset.Value);
+    get {
+      if (_OptionWeightsOffset == null) {
+        _OptionWeightsOffset = Schema.GetOffset(0xE1B260B331D94DB5);
+      }
+      return new SchemaUntypedField(_Handle + _OptionWeightsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParameterNodeIdxOffset = new(() => Schema.GetOffset(0xE1B260B366C6F2AB), LazyThreadSafetyMode.None);
+  private static nint? _ParameterNodeIdxOffset;
 
   public ref short ParameterNodeIdx {
-    get => ref _Handle.AsRef<short>(_ParameterNodeIdxOffset.Value);
+    get {
+      if (_ParameterNodeIdxOffset == null) {
+        _ParameterNodeIdxOffset = Schema.GetOffset(0xE1B260B366C6F2AB);
+      }
+      return ref _Handle.AsRef<short>(_ParameterNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IgnoreInvalidOptionsOffset = new(() => Schema.GetOffset(0xE1B260B3507C679C), LazyThreadSafetyMode.None);
+  private static nint? _IgnoreInvalidOptionsOffset;
 
   public ref bool IgnoreInvalidOptions {
-    get => ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset.Value);
+    get {
+      if (_IgnoreInvalidOptionsOffset == null) {
+        _IgnoreInvalidOptionsOffset = Schema.GetOffset(0xE1B260B3507C679C);
+      }
+      return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasWeightsSetOffset = new(() => Schema.GetOffset(0xE1B260B3EA6127CC), LazyThreadSafetyMode.None);
+  private static nint? _HasWeightsSetOffset;
 
   public ref bool HasWeightsSet {
-    get => ref _Handle.AsRef<bool>(_HasWeightsSetOffset.Value);
+    get {
+      if (_HasWeightsSetOffset == null) {
+        _HasWeightsSetOffset = Schema.GetOffset(0xE1B260B3EA6127CC);
+      }
+      return ref _Handle.AsRef<bool>(_HasWeightsSetOffset!.Value);
+    }
   }
 
 

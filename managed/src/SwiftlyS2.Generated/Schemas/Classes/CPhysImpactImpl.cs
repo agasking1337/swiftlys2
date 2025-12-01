@@ -17,24 +17,42 @@ internal partial class CPhysImpactImpl : CPointEntityImpl, CPhysImpact {
   public CPhysImpactImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DamageOffset = new(() => Schema.GetOffset(0x2C5E7E549C988CE0), LazyThreadSafetyMode.None);
+  private static nint? _DamageOffset;
 
   public ref float Damage {
-    get => ref _Handle.AsRef<float>(_DamageOffset.Value);
+    get {
+      if (_DamageOffset == null) {
+        _DamageOffset = Schema.GetOffset(0x2C5E7E549C988CE0);
+      }
+      return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOffset = new(() => Schema.GetOffset(0x2C5E7E543CB20D02), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOffset;
 
   public ref float Distance {
-    get => ref _Handle.AsRef<float>(_DistanceOffset.Value);
+    get {
+      if (_DistanceOffset == null) {
+        _DistanceOffset = Schema.GetOffset(0x2C5E7E543CB20D02);
+      }
+      return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DirectionEntityNameOffset = new(() => Schema.GetOffset(0x2C5E7E54329C8132), LazyThreadSafetyMode.None);
+  private static nint? _DirectionEntityNameOffset;
 
   public string DirectionEntityName {
     get {
-      var ptr = _Handle.Read<nint>(_DirectionEntityNameOffset.Value);
+      if (_DirectionEntityNameOffset == null) {
+        _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
+      }
+      var ptr = _Handle.Read<nint>(_DirectionEntityNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _DirectionEntityNameOffset.Value, value);
+    set {
+      if (_DirectionEntityNameOffset == null) {
+        _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
+      }
+      Schema.SetString(_Handle, _DirectionEntityNameOffset!.Value, value);
+    }
   } 
 
 

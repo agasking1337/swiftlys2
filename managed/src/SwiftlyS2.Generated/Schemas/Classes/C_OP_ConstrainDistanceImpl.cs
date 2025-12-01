@@ -17,30 +17,55 @@ internal partial class C_OP_ConstrainDistanceImpl : CParticleFunctionConstraintI
   public C_OP_ConstrainDistanceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinDistanceOffset = new(() => Schema.GetOffset(0xDF3E3FA1F016B7AC), LazyThreadSafetyMode.None);
+  private static nint? _MinDistanceOffset;
 
   public CParticleCollectionFloatInput MinDistance {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset.Value);
+    get {
+      if (_MinDistanceOffset == null) {
+        _MinDistanceOffset = Schema.GetOffset(0xDF3E3FA1F016B7AC);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistanceOffset = new(() => Schema.GetOffset(0xDF3E3FA1844E396A), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceOffset;
 
   public CParticleCollectionFloatInput MaxDistance {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset.Value);
+    get {
+      if (_MaxDistanceOffset == null) {
+        _MaxDistanceOffset = Schema.GetOffset(0xDF3E3FA1844E396A);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0xDF3E3FA13F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0xDF3E3FA13F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CenterOffsetOffset = new(() => Schema.GetOffset(0xDF3E3FA108F7D41F), LazyThreadSafetyMode.None);
+  private static nint? _CenterOffsetOffset;
 
   public ref Vector CenterOffset {
-    get => ref _Handle.AsRef<Vector>(_CenterOffsetOffset.Value);
+    get {
+      if (_CenterOffsetOffset == null) {
+        _CenterOffsetOffset = Schema.GetOffset(0xDF3E3FA108F7D41F);
+      }
+      return ref _Handle.AsRef<Vector>(_CenterOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GlobalCenterOffset = new(() => Schema.GetOffset(0xDF3E3FA1196669C3), LazyThreadSafetyMode.None);
+  private static nint? _GlobalCenterOffset;
 
   public ref bool GlobalCenter {
-    get => ref _Handle.AsRef<bool>(_GlobalCenterOffset.Value);
+    get {
+      if (_GlobalCenterOffset == null) {
+        _GlobalCenterOffset = Schema.GetOffset(0xDF3E3FA1196669C3);
+      }
+      return ref _Handle.AsRef<bool>(_GlobalCenterOffset!.Value);
+    }
   }
 
 

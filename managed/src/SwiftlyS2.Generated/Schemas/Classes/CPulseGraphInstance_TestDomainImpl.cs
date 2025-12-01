@@ -17,50 +17,95 @@ internal partial class CPulseGraphInstance_TestDomainImpl : CBasePulseGraphInsta
   public CPulseGraphInstance_TestDomainImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IsRunningUnitTestsOffset = new(() => Schema.GetOffset(0x1731648B356A8543), LazyThreadSafetyMode.None);
+  private static nint? _IsRunningUnitTestsOffset;
 
   public ref bool IsRunningUnitTests {
-    get => ref _Handle.AsRef<bool>(_IsRunningUnitTestsOffset.Value);
+    get {
+      if (_IsRunningUnitTestsOffset == null) {
+        _IsRunningUnitTestsOffset = Schema.GetOffset(0x1731648B356A8543);
+      }
+      return ref _Handle.AsRef<bool>(_IsRunningUnitTestsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExplicitTimeSteppingOffset = new(() => Schema.GetOffset(0x1731648BBDBCBA9A), LazyThreadSafetyMode.None);
+  private static nint? _ExplicitTimeSteppingOffset;
 
   public ref bool ExplicitTimeStepping {
-    get => ref _Handle.AsRef<bool>(_ExplicitTimeSteppingOffset.Value);
+    get {
+      if (_ExplicitTimeSteppingOffset == null) {
+        _ExplicitTimeSteppingOffset = Schema.GetOffset(0x1731648BBDBCBA9A);
+      }
+      return ref _Handle.AsRef<bool>(_ExplicitTimeSteppingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExpectingToDestroyWithYieldedCursorsOffset = new(() => Schema.GetOffset(0x1731648B8134CF7A), LazyThreadSafetyMode.None);
+  private static nint? _ExpectingToDestroyWithYieldedCursorsOffset;
 
   public ref bool ExpectingToDestroyWithYieldedCursors {
-    get => ref _Handle.AsRef<bool>(_ExpectingToDestroyWithYieldedCursorsOffset.Value);
+    get {
+      if (_ExpectingToDestroyWithYieldedCursorsOffset == null) {
+        _ExpectingToDestroyWithYieldedCursorsOffset = Schema.GetOffset(0x1731648B8134CF7A);
+      }
+      return ref _Handle.AsRef<bool>(_ExpectingToDestroyWithYieldedCursorsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _QuietTracepointsOffset = new(() => Schema.GetOffset(0x1731648B8C15006B), LazyThreadSafetyMode.None);
+  private static nint? _QuietTracepointsOffset;
 
   public ref bool QuietTracepoints {
-    get => ref _Handle.AsRef<bool>(_QuietTracepointsOffset.Value);
+    get {
+      if (_QuietTracepointsOffset == null) {
+        _QuietTracepointsOffset = Schema.GetOffset(0x1731648B8C15006B);
+      }
+      return ref _Handle.AsRef<bool>(_QuietTracepointsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExpectingCursorTerminatedDueToMaxInstructionsOffset = new(() => Schema.GetOffset(0x1731648BF984A235), LazyThreadSafetyMode.None);
+  private static nint? _ExpectingCursorTerminatedDueToMaxInstructionsOffset;
 
   public ref bool ExpectingCursorTerminatedDueToMaxInstructions {
-    get => ref _Handle.AsRef<bool>(_ExpectingCursorTerminatedDueToMaxInstructionsOffset.Value);
+    get {
+      if (_ExpectingCursorTerminatedDueToMaxInstructionsOffset == null) {
+        _ExpectingCursorTerminatedDueToMaxInstructionsOffset = Schema.GetOffset(0x1731648BF984A235);
+      }
+      return ref _Handle.AsRef<bool>(_ExpectingCursorTerminatedDueToMaxInstructionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CursorsTerminatedDueToMaxInstructionsOffset = new(() => Schema.GetOffset(0x1731648B8061C3CB), LazyThreadSafetyMode.None);
+  private static nint? _CursorsTerminatedDueToMaxInstructionsOffset;
 
   public ref int CursorsTerminatedDueToMaxInstructions {
-    get => ref _Handle.AsRef<int>(_CursorsTerminatedDueToMaxInstructionsOffset.Value);
+    get {
+      if (_CursorsTerminatedDueToMaxInstructionsOffset == null) {
+        _CursorsTerminatedDueToMaxInstructionsOffset = Schema.GetOffset(0x1731648B8061C3CB);
+      }
+      return ref _Handle.AsRef<int>(_CursorsTerminatedDueToMaxInstructionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextValidateIndexOffset = new(() => Schema.GetOffset(0x1731648B5AE2F20E), LazyThreadSafetyMode.None);
+  private static nint? _NextValidateIndexOffset;
 
   public ref int NextValidateIndex {
-    get => ref _Handle.AsRef<int>(_NextValidateIndexOffset.Value);
+    get {
+      if (_NextValidateIndexOffset == null) {
+        _NextValidateIndexOffset = Schema.GetOffset(0x1731648B5AE2F20E);
+      }
+      return ref _Handle.AsRef<int>(_NextValidateIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TracepointsOffset = new(() => Schema.GetOffset(0x1731648B04FCE4C9), LazyThreadSafetyMode.None);
+  private static nint? _TracepointsOffset;
 
   public ref CUtlVector<CUtlString> Tracepoints {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_TracepointsOffset.Value);
+    get {
+      if (_TracepointsOffset == null) {
+        _TracepointsOffset = Schema.GetOffset(0x1731648B04FCE4C9);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_TracepointsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TestYesOrNoPathOffset = new(() => Schema.GetOffset(0x1731648B1322BA21), LazyThreadSafetyMode.None);
+  private static nint? _TestYesOrNoPathOffset;
 
   public ref bool TestYesOrNoPath {
-    get => ref _Handle.AsRef<bool>(_TestYesOrNoPathOffset.Value);
+    get {
+      if (_TestYesOrNoPathOffset == null) {
+        _TestYesOrNoPathOffset = Schema.GetOffset(0x1731648B1322BA21);
+      }
+      return ref _Handle.AsRef<bool>(_TestYesOrNoPathOffset!.Value);
+    }
   }
 
 

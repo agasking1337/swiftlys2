@@ -17,25 +17,45 @@ internal partial class CNmTransitionEventConditionNode__CDefinitionImpl : CNmBoo
   public CNmTransitionEventConditionNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RequireRuleIDOffset = new(() => Schema.GetOffset(0x874AC07F75BFD237), LazyThreadSafetyMode.None);
+  private static nint? _RequireRuleIDOffset;
 
   public ref CGlobalSymbol RequireRuleID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset.Value);
+    get {
+      if (_RequireRuleIDOffset == null) {
+        _RequireRuleIDOffset = Schema.GetOffset(0x874AC07F75BFD237);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventConditionRulesOffset = new(() => Schema.GetOffset(0x874AC07FA904315F), LazyThreadSafetyMode.None);
+  private static nint? _EventConditionRulesOffset;
 
   public CNmBitFlags EventConditionRules {
-    get => new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset.Value);
+    get {
+      if (_EventConditionRulesOffset == null) {
+        _EventConditionRulesOffset = Schema.GetOffset(0x874AC07FA904315F);
+      }
+      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SourceStateNodeIdxOffset = new(() => Schema.GetOffset(0x874AC07F63F0228C), LazyThreadSafetyMode.None);
+  private static nint? _SourceStateNodeIdxOffset;
 
   public ref short SourceStateNodeIdx {
-    get => ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset.Value);
+    get {
+      if (_SourceStateNodeIdxOffset == null) {
+        _SourceStateNodeIdxOffset = Schema.GetOffset(0x874AC07F63F0228C);
+      }
+      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RuleConditionOffset = new(() => Schema.GetOffset(0x874AC07FE5B98074), LazyThreadSafetyMode.None);
+  private static nint? _RuleConditionOffset;
 
   public ref NmTransitionRuleCondition_t RuleCondition {
-    get => ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset.Value);
+    get {
+      if (_RuleConditionOffset == null) {
+        _RuleConditionOffset = Schema.GetOffset(0x874AC07FE5B98074);
+      }
+      return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset!.Value);
+    }
   }
 
 

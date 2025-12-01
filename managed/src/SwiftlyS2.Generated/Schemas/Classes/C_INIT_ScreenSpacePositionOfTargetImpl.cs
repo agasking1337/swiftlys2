@@ -17,25 +17,45 @@ internal partial class C_INIT_ScreenSpacePositionOfTargetImpl : CParticleFunctio
   public C_INIT_ScreenSpacePositionOfTargetImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetPositionOffset = new(() => Schema.GetOffset(0xBA53E3F7554C563B), LazyThreadSafetyMode.None);
+  private static nint? _TargetPositionOffset;
 
   public CPerParticleVecInput TargetPosition {
-    get => new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset.Value);
+    get {
+      if (_TargetPositionOffset == null) {
+        _TargetPositionOffset = Schema.GetOffset(0xBA53E3F7554C563B);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OututBehindnessOffset = new(() => Schema.GetOffset(0xBA53E3F7DB123D49), LazyThreadSafetyMode.None);
+  private static nint? _OututBehindnessOffset;
 
   public ref bool OututBehindness {
-    get => ref _Handle.AsRef<bool>(_OututBehindnessOffset.Value);
+    get {
+      if (_OututBehindnessOffset == null) {
+        _OututBehindnessOffset = Schema.GetOffset(0xBA53E3F7DB123D49);
+      }
+      return ref _Handle.AsRef<bool>(_OututBehindnessOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BehindFieldOutputOffset = new(() => Schema.GetOffset(0xBA53E3F769F4F392), LazyThreadSafetyMode.None);
+  private static nint? _BehindFieldOutputOffset;
 
   public ParticleAttributeIndex_t BehindFieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _BehindFieldOutputOffset.Value);
+    get {
+      if (_BehindFieldOutputOffset == null) {
+        _BehindFieldOutputOffset = Schema.GetOffset(0xBA53E3F769F4F392);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _BehindFieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BehindOutputRemapOffset = new(() => Schema.GetOffset(0xBA53E3F74B35FBF3), LazyThreadSafetyMode.None);
+  private static nint? _BehindOutputRemapOffset;
 
   public CParticleRemapFloatInput BehindOutputRemap {
-    get => new CParticleRemapFloatInputImpl(_Handle + _BehindOutputRemapOffset.Value);
+    get {
+      if (_BehindOutputRemapOffset == null) {
+        _BehindOutputRemapOffset = Schema.GetOffset(0xBA53E3F74B35FBF3);
+      }
+      return new CParticleRemapFloatInputImpl(_Handle + _BehindOutputRemapOffset!.Value);
+    }
   }
 
 

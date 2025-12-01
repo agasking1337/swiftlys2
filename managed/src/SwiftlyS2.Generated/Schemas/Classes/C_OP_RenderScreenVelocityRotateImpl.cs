@@ -17,15 +17,25 @@ internal partial class C_OP_RenderScreenVelocityRotateImpl : CParticleFunctionRe
   public C_OP_RenderScreenVelocityRotateImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RotateRateDegreesOffset = new(() => Schema.GetOffset(0x6288600D11A21BC7), LazyThreadSafetyMode.None);
+  private static nint? _RotateRateDegreesOffset;
 
   public ref float RotateRateDegrees {
-    get => ref _Handle.AsRef<float>(_RotateRateDegreesOffset.Value);
+    get {
+      if (_RotateRateDegreesOffset == null) {
+        _RotateRateDegreesOffset = Schema.GetOffset(0x6288600D11A21BC7);
+      }
+      return ref _Handle.AsRef<float>(_RotateRateDegreesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForwardDegreesOffset = new(() => Schema.GetOffset(0x6288600D44D44C45), LazyThreadSafetyMode.None);
+  private static nint? _ForwardDegreesOffset;
 
   public ref float ForwardDegrees {
-    get => ref _Handle.AsRef<float>(_ForwardDegreesOffset.Value);
+    get {
+      if (_ForwardDegreesOffset == null) {
+        _ForwardDegreesOffset = Schema.GetOffset(0x6288600D44D44C45);
+      }
+      return ref _Handle.AsRef<float>(_ForwardDegreesOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class CPulseCell_WaitForObservableImpl : CPulseCell_BaseYieldin
   public CPulseCell_WaitForObservableImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConditionOffset = new(() => Schema.GetOffset(0xE6EB02CD5F2A883E), LazyThreadSafetyMode.None);
+  private static nint? _ConditionOffset;
 
   public PulseObservableBoolExpression_t Condition {
-    get => new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset.Value);
+    get {
+      if (_ConditionOffset == null) {
+        _ConditionOffset = Schema.GetOffset(0xE6EB02CD5F2A883E);
+      }
+      return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnTrueOffset = new(() => Schema.GetOffset(0xE6EB02CD6EAE5D88), LazyThreadSafetyMode.None);
+  private static nint? _OnTrueOffset;
 
   public CPulse_ResumePoint OnTrue {
-    get => new CPulse_ResumePointImpl(_Handle + _OnTrueOffset.Value);
+    get {
+      if (_OnTrueOffset == null) {
+        _OnTrueOffset = Schema.GetOffset(0xE6EB02CD6EAE5D88);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnTrueOffset!.Value);
+    }
   }
 
 

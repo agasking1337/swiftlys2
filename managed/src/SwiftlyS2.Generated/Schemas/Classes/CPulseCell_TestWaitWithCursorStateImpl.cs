@@ -17,20 +17,35 @@ internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseY
   public CPulseCell_TestWaitWithCursorStateImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WakeResumeOffset = new(() => Schema.GetOffset(0xB1305BB431F86DC2), LazyThreadSafetyMode.None);
+  private static nint? _WakeResumeOffset;
 
   public CPulse_ResumePoint WakeResume {
-    get => new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset.Value);
+    get {
+      if (_WakeResumeOffset == null) {
+        _WakeResumeOffset = Schema.GetOffset(0xB1305BB431F86DC2);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WakeCancelOffset = new(() => Schema.GetOffset(0xB1305BB47C373223), LazyThreadSafetyMode.None);
+  private static nint? _WakeCancelOffset;
 
   public CPulse_ResumePoint WakeCancel {
-    get => new CPulse_ResumePointImpl(_Handle + _WakeCancelOffset.Value);
+    get {
+      if (_WakeCancelOffset == null) {
+        _WakeCancelOffset = Schema.GetOffset(0xB1305BB47C373223);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _WakeCancelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WakeFailOffset = new(() => Schema.GetOffset(0xB1305BB4BE921FF5), LazyThreadSafetyMode.None);
+  private static nint? _WakeFailOffset;
 
   public CPulse_ResumePoint WakeFail {
-    get => new CPulse_ResumePointImpl(_Handle + _WakeFailOffset.Value);
+    get {
+      if (_WakeFailOffset == null) {
+        _WakeFailOffset = Schema.GetOffset(0xB1305BB4BE921FF5);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _WakeFailOffset!.Value);
+    }
   }
 
 

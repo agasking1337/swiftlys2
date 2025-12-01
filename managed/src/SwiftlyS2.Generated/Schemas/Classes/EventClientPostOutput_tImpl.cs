@@ -17,30 +17,55 @@ internal partial class EventClientPostOutput_tImpl : SchemaClass, EventClientPos
   public EventClientPostOutput_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LoopStateOffset = new(() => Schema.GetOffset(0x98578A18F928A2EC), LazyThreadSafetyMode.None);
+  private static nint? _LoopStateOffset;
 
   public EngineLoopState_t LoopState {
-    get => new EngineLoopState_tImpl(_Handle + _LoopStateOffset.Value);
+    get {
+      if (_LoopStateOffset == null) {
+        _LoopStateOffset = Schema.GetOffset(0x98578A18F928A2EC);
+      }
+      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderTimeOffset = new(() => Schema.GetOffset(0x98578A183C2AE65A), LazyThreadSafetyMode.None);
+  private static nint? _RenderTimeOffset;
 
   public ref double RenderTime {
-    get => ref _Handle.AsRef<double>(_RenderTimeOffset.Value);
+    get {
+      if (_RenderTimeOffset == null) {
+        _RenderTimeOffset = Schema.GetOffset(0x98578A183C2AE65A);
+      }
+      return ref _Handle.AsRef<double>(_RenderTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderFrameTimeOffset = new(() => Schema.GetOffset(0x98578A18F2FB2D81), LazyThreadSafetyMode.None);
+  private static nint? _RenderFrameTimeOffset;
 
   public ref float RenderFrameTime {
-    get => ref _Handle.AsRef<float>(_RenderFrameTimeOffset.Value);
+    get {
+      if (_RenderFrameTimeOffset == null) {
+        _RenderFrameTimeOffset = Schema.GetOffset(0x98578A18F2FB2D81);
+      }
+      return ref _Handle.AsRef<float>(_RenderFrameTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderFrameTimeUnboundedOffset = new(() => Schema.GetOffset(0x98578A18735692FF), LazyThreadSafetyMode.None);
+  private static nint? _RenderFrameTimeUnboundedOffset;
 
   public ref float RenderFrameTimeUnbounded {
-    get => ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset.Value);
+    get {
+      if (_RenderFrameTimeUnboundedOffset == null) {
+        _RenderFrameTimeUnboundedOffset = Schema.GetOffset(0x98578A18735692FF);
+      }
+      return ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderOnlyOffset = new(() => Schema.GetOffset(0x98578A18E274559F), LazyThreadSafetyMode.None);
+  private static nint? _RenderOnlyOffset;
 
   public ref bool RenderOnly {
-    get => ref _Handle.AsRef<bool>(_RenderOnlyOffset.Value);
+    get {
+      if (_RenderOnlyOffset == null) {
+        _RenderOnlyOffset = Schema.GetOffset(0x98578A18E274559F);
+      }
+      return ref _Handle.AsRef<bool>(_RenderOnlyOffset!.Value);
+    }
   }
 
 

@@ -17,34 +17,62 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell
   public CPulseCell_Outflow_ListenForEntityOutputImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnFiredOffset = new(() => Schema.GetOffset(0xCB35163784825730), LazyThreadSafetyMode.None);
+  private static nint? _OnFiredOffset;
 
   public SignatureOutflow_Resume OnFired {
-    get => new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset.Value);
+    get {
+      if (_OnFiredOffset == null) {
+        _OnFiredOffset = Schema.GetOffset(0xCB35163784825730);
+      }
+      return new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnCanceledOffset = new(() => Schema.GetOffset(0xCB351637F02162DB), LazyThreadSafetyMode.None);
+  private static nint? _OnCanceledOffset;
 
   public CPulse_ResumePoint OnCanceled {
-    get => new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset.Value);
+    get {
+      if (_OnCanceledOffset == null) {
+        _OnCanceledOffset = Schema.GetOffset(0xCB351637F02162DB);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrEntityOutputOffset = new(() => Schema.GetOffset(0xCB351637C8E70456), LazyThreadSafetyMode.None);
+  private static nint? _StrEntityOutputOffset;
 
   public ref CGlobalSymbol StrEntityOutput {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset.Value);
+    get {
+      if (_StrEntityOutputOffset == null) {
+        _StrEntityOutputOffset = Schema.GetOffset(0xCB351637C8E70456);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrEntityOutputParamOffset = new(() => Schema.GetOffset(0xCB351637BB356637), LazyThreadSafetyMode.None);
+  private static nint? _StrEntityOutputParamOffset;
 
   public string StrEntityOutputParam {
     get {
-      var ptr = _Handle.Read<nint>(_StrEntityOutputParamOffset.Value);
+      if (_StrEntityOutputParamOffset == null) {
+        _StrEntityOutputParamOffset = Schema.GetOffset(0xCB351637BB356637);
+      }
+      var ptr = _Handle.Read<nint>(_StrEntityOutputParamOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrEntityOutputParamOffset.Value, value);
+    set {
+      if (_StrEntityOutputParamOffset == null) {
+        _StrEntityOutputParamOffset = Schema.GetOffset(0xCB351637BB356637);
+      }
+      Schema.SetString(_Handle, _StrEntityOutputParamOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ListenUntilCanceledOffset = new(() => Schema.GetOffset(0xCB351637C798285D), LazyThreadSafetyMode.None);
+  private static nint? _ListenUntilCanceledOffset;
 
   public ref bool ListenUntilCanceled {
-    get => ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset.Value);
+    get {
+      if (_ListenUntilCanceledOffset == null) {
+        _ListenUntilCanceledOffset = Schema.GetOffset(0xCB351637C798285D);
+      }
+      return ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset!.Value);
+    }
   }
 
 

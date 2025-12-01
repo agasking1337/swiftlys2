@@ -17,100 +17,195 @@ internal partial class C_INIT_StatusEffectCitadelImpl : CParticleFunctionInitial
   public C_INIT_StatusEffectCitadelImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SFXColorWarpAmountOffset = new(() => Schema.GetOffset(0x6420071B7AE5DF43), LazyThreadSafetyMode.None);
+  private static nint? _SFXColorWarpAmountOffset;
 
   public ref float SFXColorWarpAmount {
-    get => ref _Handle.AsRef<float>(_SFXColorWarpAmountOffset.Value);
+    get {
+      if (_SFXColorWarpAmountOffset == null) {
+        _SFXColorWarpAmountOffset = Schema.GetOffset(0x6420071B7AE5DF43);
+      }
+      return ref _Handle.AsRef<float>(_SFXColorWarpAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXNormalAmountOffset = new(() => Schema.GetOffset(0x6420071BACB8EED5), LazyThreadSafetyMode.None);
+  private static nint? _SFXNormalAmountOffset;
 
   public ref float SFXNormalAmount {
-    get => ref _Handle.AsRef<float>(_SFXNormalAmountOffset.Value);
+    get {
+      if (_SFXNormalAmountOffset == null) {
+        _SFXNormalAmountOffset = Schema.GetOffset(0x6420071BACB8EED5);
+      }
+      return ref _Handle.AsRef<float>(_SFXNormalAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXMetalnessAmountOffset = new(() => Schema.GetOffset(0x6420071B02A1BB5A), LazyThreadSafetyMode.None);
+  private static nint? _SFXMetalnessAmountOffset;
 
   public ref float SFXMetalnessAmount {
-    get => ref _Handle.AsRef<float>(_SFXMetalnessAmountOffset.Value);
+    get {
+      if (_SFXMetalnessAmountOffset == null) {
+        _SFXMetalnessAmountOffset = Schema.GetOffset(0x6420071B02A1BB5A);
+      }
+      return ref _Handle.AsRef<float>(_SFXMetalnessAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXRoughnessAmountOffset = new(() => Schema.GetOffset(0x6420071BC6E86EA4), LazyThreadSafetyMode.None);
+  private static nint? _SFXRoughnessAmountOffset;
 
   public ref float SFXRoughnessAmount {
-    get => ref _Handle.AsRef<float>(_SFXRoughnessAmountOffset.Value);
+    get {
+      if (_SFXRoughnessAmountOffset == null) {
+        _SFXRoughnessAmountOffset = Schema.GetOffset(0x6420071BC6E86EA4);
+      }
+      return ref _Handle.AsRef<float>(_SFXRoughnessAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSelfIllumAmountOffset = new(() => Schema.GetOffset(0x6420071B7BD60AE5), LazyThreadSafetyMode.None);
+  private static nint? _SFXSelfIllumAmountOffset;
 
   public ref float SFXSelfIllumAmount {
-    get => ref _Handle.AsRef<float>(_SFXSelfIllumAmountOffset.Value);
+    get {
+      if (_SFXSelfIllumAmountOffset == null) {
+        _SFXSelfIllumAmountOffset = Schema.GetOffset(0x6420071B7BD60AE5);
+      }
+      return ref _Handle.AsRef<float>(_SFXSelfIllumAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSScaleOffset = new(() => Schema.GetOffset(0x6420071BCA52F1F3), LazyThreadSafetyMode.None);
+  private static nint? _SFXSScaleOffset;
 
   public ref float SFXSScale {
-    get => ref _Handle.AsRef<float>(_SFXSScaleOffset.Value);
+    get {
+      if (_SFXSScaleOffset == null) {
+        _SFXSScaleOffset = Schema.GetOffset(0x6420071BCA52F1F3);
+      }
+      return ref _Handle.AsRef<float>(_SFXSScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSScrollXOffset = new(() => Schema.GetOffset(0x6420071BF8557E0E), LazyThreadSafetyMode.None);
+  private static nint? _SFXSScrollXOffset;
 
   public ref float SFXSScrollX {
-    get => ref _Handle.AsRef<float>(_SFXSScrollXOffset.Value);
+    get {
+      if (_SFXSScrollXOffset == null) {
+        _SFXSScrollXOffset = Schema.GetOffset(0x6420071BF8557E0E);
+      }
+      return ref _Handle.AsRef<float>(_SFXSScrollXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSScrollYOffset = new(() => Schema.GetOffset(0x6420071BF9557FA1), LazyThreadSafetyMode.None);
+  private static nint? _SFXSScrollYOffset;
 
   public ref float SFXSScrollY {
-    get => ref _Handle.AsRef<float>(_SFXSScrollYOffset.Value);
+    get {
+      if (_SFXSScrollYOffset == null) {
+        _SFXSScrollYOffset = Schema.GetOffset(0x6420071BF9557FA1);
+      }
+      return ref _Handle.AsRef<float>(_SFXSScrollYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSScrollZOffset = new(() => Schema.GetOffset(0x6420071BF6557AE8), LazyThreadSafetyMode.None);
+  private static nint? _SFXSScrollZOffset;
 
   public ref float SFXSScrollZ {
-    get => ref _Handle.AsRef<float>(_SFXSScrollZOffset.Value);
+    get {
+      if (_SFXSScrollZOffset == null) {
+        _SFXSScrollZOffset = Schema.GetOffset(0x6420071BF6557AE8);
+      }
+      return ref _Handle.AsRef<float>(_SFXSScrollZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSOffsetXOffset = new(() => Schema.GetOffset(0x6420071BFA92D3C0), LazyThreadSafetyMode.None);
+  private static nint? _SFXSOffsetXOffset;
 
   public ref float SFXSOffsetX {
-    get => ref _Handle.AsRef<float>(_SFXSOffsetXOffset.Value);
+    get {
+      if (_SFXSOffsetXOffset == null) {
+        _SFXSOffsetXOffset = Schema.GetOffset(0x6420071BFA92D3C0);
+      }
+      return ref _Handle.AsRef<float>(_SFXSOffsetXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSOffsetYOffset = new(() => Schema.GetOffset(0x6420071BFB92D553), LazyThreadSafetyMode.None);
+  private static nint? _SFXSOffsetYOffset;
 
   public ref float SFXSOffsetY {
-    get => ref _Handle.AsRef<float>(_SFXSOffsetYOffset.Value);
+    get {
+      if (_SFXSOffsetYOffset == null) {
+        _SFXSOffsetYOffset = Schema.GetOffset(0x6420071BFB92D553);
+      }
+      return ref _Handle.AsRef<float>(_SFXSOffsetYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSOffsetZOffset = new(() => Schema.GetOffset(0x6420071BFC92D6E6), LazyThreadSafetyMode.None);
+  private static nint? _SFXSOffsetZOffset;
 
   public ref float SFXSOffsetZ {
-    get => ref _Handle.AsRef<float>(_SFXSOffsetZOffset.Value);
+    get {
+      if (_SFXSOffsetZOffset == null) {
+        _SFXSOffsetZOffset = Schema.GetOffset(0x6420071BFC92D6E6);
+      }
+      return ref _Handle.AsRef<float>(_SFXSOffsetZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DetailComboOffset = new(() => Schema.GetOffset(0x6420071B928C6606), LazyThreadSafetyMode.None);
+  private static nint? _DetailComboOffset;
 
   public ref DetailCombo_t DetailCombo {
-    get => ref _Handle.AsRef<DetailCombo_t>(_DetailComboOffset.Value);
+    get {
+      if (_DetailComboOffset == null) {
+        _DetailComboOffset = Schema.GetOffset(0x6420071B928C6606);
+      }
+      return ref _Handle.AsRef<DetailCombo_t>(_DetailComboOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSDetailAmountOffset = new(() => Schema.GetOffset(0x6420071B5B8C7946), LazyThreadSafetyMode.None);
+  private static nint? _SFXSDetailAmountOffset;
 
   public ref float SFXSDetailAmount {
-    get => ref _Handle.AsRef<float>(_SFXSDetailAmountOffset.Value);
+    get {
+      if (_SFXSDetailAmountOffset == null) {
+        _SFXSDetailAmountOffset = Schema.GetOffset(0x6420071B5B8C7946);
+      }
+      return ref _Handle.AsRef<float>(_SFXSDetailAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSDetailScaleOffset = new(() => Schema.GetOffset(0x6420071BCC4A4840), LazyThreadSafetyMode.None);
+  private static nint? _SFXSDetailScaleOffset;
 
   public ref float SFXSDetailScale {
-    get => ref _Handle.AsRef<float>(_SFXSDetailScaleOffset.Value);
+    get {
+      if (_SFXSDetailScaleOffset == null) {
+        _SFXSDetailScaleOffset = Schema.GetOffset(0x6420071BCC4A4840);
+      }
+      return ref _Handle.AsRef<float>(_SFXSDetailScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSDetailScrollXOffset = new(() => Schema.GetOffset(0x6420071BF45EED31), LazyThreadSafetyMode.None);
+  private static nint? _SFXSDetailScrollXOffset;
 
   public ref float SFXSDetailScrollX {
-    get => ref _Handle.AsRef<float>(_SFXSDetailScrollXOffset.Value);
+    get {
+      if (_SFXSDetailScrollXOffset == null) {
+        _SFXSDetailScrollXOffset = Schema.GetOffset(0x6420071BF45EED31);
+      }
+      return ref _Handle.AsRef<float>(_SFXSDetailScrollXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSDetailScrollYOffset = new(() => Schema.GetOffset(0x6420071BF35EEB9E), LazyThreadSafetyMode.None);
+  private static nint? _SFXSDetailScrollYOffset;
 
   public ref float SFXSDetailScrollY {
-    get => ref _Handle.AsRef<float>(_SFXSDetailScrollYOffset.Value);
+    get {
+      if (_SFXSDetailScrollYOffset == null) {
+        _SFXSDetailScrollYOffset = Schema.GetOffset(0x6420071BF35EEB9E);
+      }
+      return ref _Handle.AsRef<float>(_SFXSDetailScrollYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSDetailScrollZOffset = new(() => Schema.GetOffset(0x6420071BF25EEA0B), LazyThreadSafetyMode.None);
+  private static nint? _SFXSDetailScrollZOffset;
 
   public ref float SFXSDetailScrollZ {
-    get => ref _Handle.AsRef<float>(_SFXSDetailScrollZOffset.Value);
+    get {
+      if (_SFXSDetailScrollZOffset == null) {
+        _SFXSDetailScrollZOffset = Schema.GetOffset(0x6420071BF25EEA0B);
+      }
+      return ref _Handle.AsRef<float>(_SFXSDetailScrollZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SFXSUseModelUVsOffset = new(() => Schema.GetOffset(0x6420071B8F106179), LazyThreadSafetyMode.None);
+  private static nint? _SFXSUseModelUVsOffset;
 
   public ref float SFXSUseModelUVs {
-    get => ref _Handle.AsRef<float>(_SFXSUseModelUVsOffset.Value);
+    get {
+      if (_SFXSUseModelUVsOffset == null) {
+        _SFXSUseModelUVsOffset = Schema.GetOffset(0x6420071B8F106179);
+      }
+      return ref _Handle.AsRef<float>(_SFXSUseModelUVsOffset!.Value);
+    }
   }
 
 

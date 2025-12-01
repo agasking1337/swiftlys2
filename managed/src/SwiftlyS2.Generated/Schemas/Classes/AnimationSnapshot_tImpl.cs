@@ -17,19 +17,32 @@ internal partial class AnimationSnapshot_tImpl : AnimationSnapshotBase_tImpl, An
   public AnimationSnapshot_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EntIndexOffset = new(() => Schema.GetOffset(0xAC640D3E5558C54A), LazyThreadSafetyMode.None);
+  private static nint? _EntIndexOffset;
 
   public ref int EntIndex {
-    get => ref _Handle.AsRef<int>(_EntIndexOffset.Value);
+    get {
+      if (_EntIndexOffset == null) {
+        _EntIndexOffset = Schema.GetOffset(0xAC640D3E5558C54A);
+      }
+      return ref _Handle.AsRef<int>(_EntIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelNameOffset = new(() => Schema.GetOffset(0xAC640D3E5D35B6E1), LazyThreadSafetyMode.None);
+  private static nint? _ModelNameOffset;
 
   public string ModelName {
     get {
-      var ptr = _Handle.Read<nint>(_ModelNameOffset.Value);
+      if (_ModelNameOffset == null) {
+        _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
+      }
+      var ptr = _Handle.Read<nint>(_ModelNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ModelNameOffset.Value, value);
+    set {
+      if (_ModelNameOffset == null) {
+        _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
+      }
+      Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+    }
   } 
 
 

@@ -17,24 +17,42 @@ internal partial class CLogicAchievementImpl : CLogicalEntityImpl, CLogicAchieve
   public CLogicAchievementImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0xE8C4579F3A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0xE8C4579F3A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AchievementEventIDOffset = new(() => Schema.GetOffset(0xE8C4579F12AB7E15), LazyThreadSafetyMode.None);
+  private static nint? _AchievementEventIDOffset;
 
   public string AchievementEventID {
     get {
-      var ptr = _Handle.Read<nint>(_AchievementEventIDOffset.Value);
+      if (_AchievementEventIDOffset == null) {
+        _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
+      }
+      var ptr = _Handle.Read<nint>(_AchievementEventIDOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AchievementEventIDOffset.Value, value);
+    set {
+      if (_AchievementEventIDOffset == null) {
+        _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
+      }
+      Schema.SetString(_Handle, _AchievementEventIDOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OnFiredOffset = new(() => Schema.GetOffset(0xE8C4579F84825730), LazyThreadSafetyMode.None);
+  private static nint? _OnFiredOffset;
 
   public CEntityIOOutput OnFired {
-    get => new CEntityIOOutputImpl(_Handle + _OnFiredOffset.Value);
+    get {
+      if (_OnFiredOffset == null) {
+        _OnFiredOffset = Schema.GetOffset(0xE8C4579F84825730);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnFiredOffset!.Value);
+    }
   }
 
 

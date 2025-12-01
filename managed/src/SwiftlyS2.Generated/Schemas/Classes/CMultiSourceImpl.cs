@@ -23,24 +23,42 @@ internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource {
   public ISchemaFixedArray<int> RgTriggered {
     get => new SchemaFixedArray<int>(_Handle, 0x87DC5C664616C37F, 32, 4, 4);
   }
-  private static readonly Lazy<nint> _OnTriggerOffset = new(() => Schema.GetOffset(0x87DC5C6681E0BFEC), LazyThreadSafetyMode.None);
+  private static nint? _OnTriggerOffset;
 
   public CEntityIOOutput OnTrigger {
-    get => new CEntityIOOutputImpl(_Handle + _OnTriggerOffset.Value);
+    get {
+      if (_OnTriggerOffset == null) {
+        _OnTriggerOffset = Schema.GetOffset(0x87DC5C6681E0BFEC);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnTriggerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TotalOffset = new(() => Schema.GetOffset(0x87DC5C667223ED06), LazyThreadSafetyMode.None);
+  private static nint? _TotalOffset;
 
   public ref int Total {
-    get => ref _Handle.AsRef<int>(_TotalOffset.Value);
+    get {
+      if (_TotalOffset == null) {
+        _TotalOffset = Schema.GetOffset(0x87DC5C667223ED06);
+      }
+      return ref _Handle.AsRef<int>(_TotalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GlobalstateOffset = new(() => Schema.GetOffset(0x87DC5C6677A86653), LazyThreadSafetyMode.None);
+  private static nint? _GlobalstateOffset;
 
   public string Globalstate {
     get {
-      var ptr = _Handle.Read<nint>(_GlobalstateOffset.Value);
+      if (_GlobalstateOffset == null) {
+        _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
+      }
+      var ptr = _Handle.Read<nint>(_GlobalstateOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _GlobalstateOffset.Value, value);
+    set {
+      if (_GlobalstateOffset == null) {
+        _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
+      }
+      Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
+    }
   } 
 
 

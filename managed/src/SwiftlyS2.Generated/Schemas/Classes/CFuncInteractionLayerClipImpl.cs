@@ -17,28 +17,49 @@ internal partial class CFuncInteractionLayerClipImpl : CBaseModelEntityImpl, CFu
   public CFuncInteractionLayerClipImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x5A9288DF3A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x5A9288DF3A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InteractsAsOffset = new(() => Schema.GetOffset(0x5A9288DF488FC5DC), LazyThreadSafetyMode.None);
+  private static nint? _InteractsAsOffset;
 
   public string InteractsAs {
     get {
-      var ptr = _Handle.Read<nint>(_InteractsAsOffset.Value);
+      if (_InteractsAsOffset == null) {
+        _InteractsAsOffset = Schema.GetOffset(0x5A9288DF488FC5DC);
+      }
+      var ptr = _Handle.Read<nint>(_InteractsAsOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _InteractsAsOffset.Value, value);
+    set {
+      if (_InteractsAsOffset == null) {
+        _InteractsAsOffset = Schema.GetOffset(0x5A9288DF488FC5DC);
+      }
+      Schema.SetString(_Handle, _InteractsAsOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _InteractsWithOffset = new(() => Schema.GetOffset(0x5A9288DF84AB4214), LazyThreadSafetyMode.None);
+  private static nint? _InteractsWithOffset;
 
   public string InteractsWith {
     get {
-      var ptr = _Handle.Read<nint>(_InteractsWithOffset.Value);
+      if (_InteractsWithOffset == null) {
+        _InteractsWithOffset = Schema.GetOffset(0x5A9288DF84AB4214);
+      }
+      var ptr = _Handle.Read<nint>(_InteractsWithOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _InteractsWithOffset.Value, value);
+    set {
+      if (_InteractsWithOffset == null) {
+        _InteractsWithOffset = Schema.GetOffset(0x5A9288DF84AB4214);
+      }
+      Schema.SetString(_Handle, _InteractsWithOffset!.Value, value);
+    }
   } 
 
 

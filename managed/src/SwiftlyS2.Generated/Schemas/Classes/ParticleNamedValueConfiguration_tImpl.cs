@@ -17,51 +17,93 @@ internal partial class ParticleNamedValueConfiguration_tImpl : SchemaClass, Part
   public ParticleNamedValueConfiguration_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConfigNameOffset = new(() => Schema.GetOffset(0x4C42AD0EA7B74064), LazyThreadSafetyMode.None);
+  private static nint? _ConfigNameOffset;
 
   public string ConfigName {
     get {
-      var ptr = _Handle.Read<nint>(_ConfigNameOffset.Value);
+      if (_ConfigNameOffset == null) {
+        _ConfigNameOffset = Schema.GetOffset(0x4C42AD0EA7B74064);
+      }
+      var ptr = _Handle.Read<nint>(_ConfigNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ConfigNameOffset.Value, value);
+    set {
+      if (_ConfigNameOffset == null) {
+        _ConfigNameOffset = Schema.GetOffset(0x4C42AD0EA7B74064);
+      }
+      Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ConfigValueOffset = new(() => Schema.GetOffset(0x4C42AD0ECF981D3C), LazyThreadSafetyMode.None);
+  private static nint? _ConfigValueOffset;
 
   public SchemaUntypedField ConfigValue {
-    get => new SchemaUntypedField(_Handle + _ConfigValueOffset.Value);
+    get {
+      if (_ConfigValueOffset == null) {
+        _ConfigValueOffset = Schema.GetOffset(0x4C42AD0ECF981D3C);
+      }
+      return new SchemaUntypedField(_Handle + _ConfigValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoundValuePathOffset = new(() => Schema.GetOffset(0x4C42AD0ED4977C9F), LazyThreadSafetyMode.None);
+  private static nint? _BoundValuePathOffset;
 
   public string BoundValuePath {
     get {
-      var ptr = _Handle.Read<nint>(_BoundValuePathOffset.Value);
+      if (_BoundValuePathOffset == null) {
+        _BoundValuePathOffset = Schema.GetOffset(0x4C42AD0ED4977C9F);
+      }
+      var ptr = _Handle.Read<nint>(_BoundValuePathOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _BoundValuePathOffset.Value, value);
+    set {
+      if (_BoundValuePathOffset == null) {
+        _BoundValuePathOffset = Schema.GetOffset(0x4C42AD0ED4977C9F);
+      }
+      Schema.SetString(_Handle, _BoundValuePathOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AttachTypeOffset = new(() => Schema.GetOffset(0x4C42AD0E432E8381), LazyThreadSafetyMode.None);
+  private static nint? _AttachTypeOffset;
 
   public ref ParticleAttachment_t AttachType {
-    get => ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset.Value);
+    get {
+      if (_AttachTypeOffset == null) {
+        _AttachTypeOffset = Schema.GetOffset(0x4C42AD0E432E8381);
+      }
+      return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrEntityScopeOffset = new(() => Schema.GetOffset(0x4C42AD0ECCAF0621), LazyThreadSafetyMode.None);
+  private static nint? _StrEntityScopeOffset;
 
   public string StrEntityScope {
     get {
-      var ptr = _Handle.Read<nint>(_StrEntityScopeOffset.Value);
+      if (_StrEntityScopeOffset == null) {
+        _StrEntityScopeOffset = Schema.GetOffset(0x4C42AD0ECCAF0621);
+      }
+      var ptr = _Handle.Read<nint>(_StrEntityScopeOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrEntityScopeOffset.Value, value);
+    set {
+      if (_StrEntityScopeOffset == null) {
+        _StrEntityScopeOffset = Schema.GetOffset(0x4C42AD0ECCAF0621);
+      }
+      Schema.SetString(_Handle, _StrEntityScopeOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _StrAttachmentNameOffset = new(() => Schema.GetOffset(0x4C42AD0EEB143B4E), LazyThreadSafetyMode.None);
+  private static nint? _StrAttachmentNameOffset;
 
   public string StrAttachmentName {
     get {
-      var ptr = _Handle.Read<nint>(_StrAttachmentNameOffset.Value);
+      if (_StrAttachmentNameOffset == null) {
+        _StrAttachmentNameOffset = Schema.GetOffset(0x4C42AD0EEB143B4E);
+      }
+      var ptr = _Handle.Read<nint>(_StrAttachmentNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrAttachmentNameOffset.Value, value);
+    set {
+      if (_StrAttachmentNameOffset == null) {
+        _StrAttachmentNameOffset = Schema.GetOffset(0x4C42AD0EEB143B4E);
+      }
+      Schema.SetString(_Handle, _StrAttachmentNameOffset!.Value, value);
+    }
   } 
 
 

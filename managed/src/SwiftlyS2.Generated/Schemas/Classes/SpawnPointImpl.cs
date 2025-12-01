@@ -17,20 +17,35 @@ internal partial class SpawnPointImpl : CServerOnlyPointEntityImpl, SpawnPoint {
   public SpawnPointImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PriorityOffset = new(() => Schema.GetOffset(0x72527C0E6224A30C), LazyThreadSafetyMode.None);
+  private static nint? _PriorityOffset;
 
   public ref int Priority {
-    get => ref _Handle.AsRef<int>(_PriorityOffset.Value);
+    get {
+      if (_PriorityOffset == null) {
+        _PriorityOffset = Schema.GetOffset(0x72527C0E6224A30C);
+      }
+      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledOffset = new(() => Schema.GetOffset(0x72527C0E6154EB7E), LazyThreadSafetyMode.None);
+  private static nint? _EnabledOffset;
 
   public ref bool Enabled {
-    get => ref _Handle.AsRef<bool>(_EnabledOffset.Value);
+    get {
+      if (_EnabledOffset == null) {
+        _EnabledOffset = Schema.GetOffset(0x72527C0E6154EB7E);
+      }
+      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x72527C0E18853D59), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref int Type {
-    get => ref _Handle.AsRef<int>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x72527C0E18853D59);
+      }
+      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    }
   }
 
 

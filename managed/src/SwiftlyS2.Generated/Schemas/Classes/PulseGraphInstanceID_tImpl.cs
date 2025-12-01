@@ -17,10 +17,15 @@ internal partial class PulseGraphInstanceID_tImpl : SchemaClass, PulseGraphInsta
   public PulseGraphInstanceID_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ValueOffset = new(() => Schema.GetOffset(0x4291F7FFDCB0894A), LazyThreadSafetyMode.None);
+  private static nint? _ValueOffset;
 
   public ref uint Value {
-    get => ref _Handle.AsRef<uint>(_ValueOffset.Value);
+    get {
+      if (_ValueOffset == null) {
+        _ValueOffset = Schema.GetOffset(0x4291F7FFDCB0894A);
+      }
+      return ref _Handle.AsRef<uint>(_ValueOffset!.Value);
+    }
   }
 
 

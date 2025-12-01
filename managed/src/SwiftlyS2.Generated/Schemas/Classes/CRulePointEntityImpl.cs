@@ -17,10 +17,15 @@ internal partial class CRulePointEntityImpl : CRuleEntityImpl, CRulePointEntity 
   public CRulePointEntityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ScoreOffset = new(() => Schema.GetOffset(0x9E2258396C814615), LazyThreadSafetyMode.None);
+  private static nint? _ScoreOffset;
 
   public ref int Score {
-    get => ref _Handle.AsRef<int>(_ScoreOffset.Value);
+    get {
+      if (_ScoreOffset == null) {
+        _ScoreOffset = Schema.GetOffset(0x9E2258396C814615);
+      }
+      return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
+    }
   }
 
 

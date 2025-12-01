@@ -17,15 +17,25 @@ internal partial class CParticleVariableRefImpl : SchemaClass, CParticleVariable
   public CParticleVariableRefImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _VariableNameOffset = new(() => Schema.GetOffset(0x4FB747D9D3D609A6), LazyThreadSafetyMode.None);
+  private static nint? _VariableNameOffset;
 
   public SchemaUntypedField VariableName {
-    get => new SchemaUntypedField(_Handle + _VariableNameOffset.Value);
+    get {
+      if (_VariableNameOffset == null) {
+        _VariableNameOffset = Schema.GetOffset(0x4FB747D9D3D609A6);
+      }
+      return new SchemaUntypedField(_Handle + _VariableNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VariableTypeOffset = new(() => Schema.GetOffset(0x4FB747D9954B670D), LazyThreadSafetyMode.None);
+  private static nint? _VariableTypeOffset;
 
   public SchemaUntypedField VariableType {
-    get => new SchemaUntypedField(_Handle + _VariableTypeOffset.Value);
+    get {
+      if (_VariableTypeOffset == null) {
+        _VariableTypeOffset = Schema.GetOffset(0x4FB747D9954B670D);
+      }
+      return new SchemaUntypedField(_Handle + _VariableTypeOffset!.Value);
+    }
   }
 
 

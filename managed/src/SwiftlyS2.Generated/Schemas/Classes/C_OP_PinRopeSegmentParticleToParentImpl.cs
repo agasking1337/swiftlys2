@@ -17,20 +17,35 @@ internal partial class C_OP_PinRopeSegmentParticleToParentImpl : CParticleFuncti
   public C_OP_PinRopeSegmentParticleToParentImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ParticleSelectionOffset = new(() => Schema.GetOffset(0x5F59F78EA2307EA7), LazyThreadSafetyMode.None);
+  private static nint? _ParticleSelectionOffset;
 
   public ref ParticleSelection_t ParticleSelection {
-    get => ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset.Value);
+    get {
+      if (_ParticleSelectionOffset == null) {
+        _ParticleSelectionOffset = Schema.GetOffset(0x5F59F78EA2307EA7);
+      }
+      return ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParticleNumberOffset = new(() => Schema.GetOffset(0x5F59F78E12F26402), LazyThreadSafetyMode.None);
+  private static nint? _ParticleNumberOffset;
 
   public CParticleCollectionFloatInput ParticleNumber {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset.Value);
+    get {
+      if (_ParticleNumberOffset == null) {
+        _ParticleNumberOffset = Schema.GetOffset(0x5F59F78E12F26402);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0x5F59F78ECF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CPerParticleFloatInput Interpolation {
-    get => new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0x5F59F78ECF55B987);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
 
 

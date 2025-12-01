@@ -17,30 +17,55 @@ internal partial class CPulse_RegisterInfoImpl : SchemaClass, CPulse_RegisterInf
   public CPulse_RegisterInfoImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RegOffset = new(() => Schema.GetOffset(0x8D60BE3D464A7749), LazyThreadSafetyMode.None);
+  private static nint? _RegOffset;
 
   public PulseRuntimeRegisterIndex_t Reg {
-    get => new PulseRuntimeRegisterIndex_tImpl(_Handle + _RegOffset.Value);
+    get {
+      if (_RegOffset == null) {
+        _RegOffset = Schema.GetOffset(0x8D60BE3D464A7749);
+      }
+      return new PulseRuntimeRegisterIndex_tImpl(_Handle + _RegOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x8D60BE3D8ED6D5CD), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public SchemaUntypedField Type {
-    get => new SchemaUntypedField(_Handle + _TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x8D60BE3D8ED6D5CD);
+      }
+      return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OriginNameOffset = new(() => Schema.GetOffset(0x8D60BE3D745ADAEC), LazyThreadSafetyMode.None);
+  private static nint? _OriginNameOffset;
 
   public SchemaUntypedField OriginName {
-    get => new SchemaUntypedField(_Handle + _OriginNameOffset.Value);
+    get {
+      if (_OriginNameOffset == null) {
+        _OriginNameOffset = Schema.GetOffset(0x8D60BE3D745ADAEC);
+      }
+      return new SchemaUntypedField(_Handle + _OriginNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WrittenByInstructionOffset = new(() => Schema.GetOffset(0x8D60BE3D5311609B), LazyThreadSafetyMode.None);
+  private static nint? _WrittenByInstructionOffset;
 
   public ref int WrittenByInstruction {
-    get => ref _Handle.AsRef<int>(_WrittenByInstructionOffset.Value);
+    get {
+      if (_WrittenByInstructionOffset == null) {
+        _WrittenByInstructionOffset = Schema.GetOffset(0x8D60BE3D5311609B);
+      }
+      return ref _Handle.AsRef<int>(_WrittenByInstructionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastReadByInstructionOffset = new(() => Schema.GetOffset(0x8D60BE3D9D1961CC), LazyThreadSafetyMode.None);
+  private static nint? _LastReadByInstructionOffset;
 
   public ref int LastReadByInstruction {
-    get => ref _Handle.AsRef<int>(_LastReadByInstructionOffset.Value);
+    get {
+      if (_LastReadByInstructionOffset == null) {
+        _LastReadByInstructionOffset = Schema.GetOffset(0x8D60BE3D9D1961CC);
+      }
+      return ref _Handle.AsRef<int>(_LastReadByInstructionOffset!.Value);
+    }
   }
 
 

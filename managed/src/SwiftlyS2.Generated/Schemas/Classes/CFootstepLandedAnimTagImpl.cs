@@ -17,37 +17,66 @@ internal partial class CFootstepLandedAnimTagImpl : CAnimTagBaseImpl, CFootstepL
   public CFootstepLandedAnimTagImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FootstepTypeOffset = new(() => Schema.GetOffset(0xD5058C6793F974DB), LazyThreadSafetyMode.None);
+  private static nint? _FootstepTypeOffset;
 
   public ref FootstepLandedFootSoundType_t FootstepType {
-    get => ref _Handle.AsRef<FootstepLandedFootSoundType_t>(_FootstepTypeOffset.Value);
+    get {
+      if (_FootstepTypeOffset == null) {
+        _FootstepTypeOffset = Schema.GetOffset(0xD5058C6793F974DB);
+      }
+      return ref _Handle.AsRef<FootstepLandedFootSoundType_t>(_FootstepTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OverrideSoundNameOffset = new(() => Schema.GetOffset(0xD5058C67FEE552B7), LazyThreadSafetyMode.None);
+  private static nint? _OverrideSoundNameOffset;
 
   public string OverrideSoundName {
     get {
-      var ptr = _Handle.Read<nint>(_OverrideSoundNameOffset.Value);
+      if (_OverrideSoundNameOffset == null) {
+        _OverrideSoundNameOffset = Schema.GetOffset(0xD5058C67FEE552B7);
+      }
+      var ptr = _Handle.Read<nint>(_OverrideSoundNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OverrideSoundNameOffset.Value, value);
+    set {
+      if (_OverrideSoundNameOffset == null) {
+        _OverrideSoundNameOffset = Schema.GetOffset(0xD5058C67FEE552B7);
+      }
+      Schema.SetString(_Handle, _OverrideSoundNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _DebugAnimSourceStringOffset = new(() => Schema.GetOffset(0xD5058C676912A1B9), LazyThreadSafetyMode.None);
+  private static nint? _DebugAnimSourceStringOffset;
 
   public string DebugAnimSourceString {
     get {
-      var ptr = _Handle.Read<nint>(_DebugAnimSourceStringOffset.Value);
+      if (_DebugAnimSourceStringOffset == null) {
+        _DebugAnimSourceStringOffset = Schema.GetOffset(0xD5058C676912A1B9);
+      }
+      var ptr = _Handle.Read<nint>(_DebugAnimSourceStringOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _DebugAnimSourceStringOffset.Value, value);
+    set {
+      if (_DebugAnimSourceStringOffset == null) {
+        _DebugAnimSourceStringOffset = Schema.GetOffset(0xD5058C676912A1B9);
+      }
+      Schema.SetString(_Handle, _DebugAnimSourceStringOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _BoneNameOffset = new(() => Schema.GetOffset(0xD5058C6707D0902C), LazyThreadSafetyMode.None);
+  private static nint? _BoneNameOffset;
 
   public string BoneName {
     get {
-      var ptr = _Handle.Read<nint>(_BoneNameOffset.Value);
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0xD5058C6707D0902C);
+      }
+      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _BoneNameOffset.Value, value);
+    set {
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0xD5058C6707D0902C);
+      }
+      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+    }
   } 
 
 

@@ -17,70 +17,135 @@ internal partial class PostProcessingResource_tImpl : SchemaClass, PostProcessin
   public PostProcessingResource_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HasTonemapParamsOffset = new(() => Schema.GetOffset(0x81127543E6A6D70D), LazyThreadSafetyMode.None);
+  private static nint? _HasTonemapParamsOffset;
 
   public ref bool HasTonemapParams {
-    get => ref _Handle.AsRef<bool>(_HasTonemapParamsOffset.Value);
+    get {
+      if (_HasTonemapParamsOffset == null) {
+        _HasTonemapParamsOffset = Schema.GetOffset(0x81127543E6A6D70D);
+      }
+      return ref _Handle.AsRef<bool>(_HasTonemapParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ToneMapParamsOffset = new(() => Schema.GetOffset(0x811275437AD3669B), LazyThreadSafetyMode.None);
+  private static nint? _ToneMapParamsOffset;
 
   public PostProcessingTonemapParameters_t ToneMapParams {
-    get => new PostProcessingTonemapParameters_tImpl(_Handle + _ToneMapParamsOffset.Value);
+    get {
+      if (_ToneMapParamsOffset == null) {
+        _ToneMapParamsOffset = Schema.GetOffset(0x811275437AD3669B);
+      }
+      return new PostProcessingTonemapParameters_tImpl(_Handle + _ToneMapParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasBloomParamsOffset = new(() => Schema.GetOffset(0x81127543754C1410), LazyThreadSafetyMode.None);
+  private static nint? _HasBloomParamsOffset;
 
   public ref bool HasBloomParams {
-    get => ref _Handle.AsRef<bool>(_HasBloomParamsOffset.Value);
+    get {
+      if (_HasBloomParamsOffset == null) {
+        _HasBloomParamsOffset = Schema.GetOffset(0x81127543754C1410);
+      }
+      return ref _Handle.AsRef<bool>(_HasBloomParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BloomParamsOffset = new(() => Schema.GetOffset(0x81127543CEC3092A), LazyThreadSafetyMode.None);
+  private static nint? _BloomParamsOffset;
 
   public PostProcessingBloomParameters_t BloomParams {
-    get => new PostProcessingBloomParameters_tImpl(_Handle + _BloomParamsOffset.Value);
+    get {
+      if (_BloomParamsOffset == null) {
+        _BloomParamsOffset = Schema.GetOffset(0x81127543CEC3092A);
+      }
+      return new PostProcessingBloomParameters_tImpl(_Handle + _BloomParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasVignetteParamsOffset = new(() => Schema.GetOffset(0x81127543593E9813), LazyThreadSafetyMode.None);
+  private static nint? _HasVignetteParamsOffset;
 
   public ref bool HasVignetteParams {
-    get => ref _Handle.AsRef<bool>(_HasVignetteParamsOffset.Value);
+    get {
+      if (_HasVignetteParamsOffset == null) {
+        _HasVignetteParamsOffset = Schema.GetOffset(0x81127543593E9813);
+      }
+      return ref _Handle.AsRef<bool>(_HasVignetteParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VignetteParamsOffset = new(() => Schema.GetOffset(0x81127543FBBFC5B9), LazyThreadSafetyMode.None);
+  private static nint? _VignetteParamsOffset;
 
   public PostProcessingVignetteParameters_t VignetteParams {
-    get => new PostProcessingVignetteParameters_tImpl(_Handle + _VignetteParamsOffset.Value);
+    get {
+      if (_VignetteParamsOffset == null) {
+        _VignetteParamsOffset = Schema.GetOffset(0x81127543FBBFC5B9);
+      }
+      return new PostProcessingVignetteParameters_tImpl(_Handle + _VignetteParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasLocalContrastParamsOffset = new(() => Schema.GetOffset(0x81127543247F8B76), LazyThreadSafetyMode.None);
+  private static nint? _HasLocalContrastParamsOffset;
 
   public ref bool HasLocalContrastParams {
-    get => ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset.Value);
+    get {
+      if (_HasLocalContrastParamsOffset == null) {
+        _HasLocalContrastParamsOffset = Schema.GetOffset(0x81127543247F8B76);
+      }
+      return ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalConstrastParamsOffset = new(() => Schema.GetOffset(0x811275437AB7080F), LazyThreadSafetyMode.None);
+  private static nint? _LocalConstrastParamsOffset;
 
   public PostProcessingLocalContrastParameters_t LocalConstrastParams {
-    get => new PostProcessingLocalContrastParameters_tImpl(_Handle + _LocalConstrastParamsOffset.Value);
+    get {
+      if (_LocalConstrastParamsOffset == null) {
+        _LocalConstrastParamsOffset = Schema.GetOffset(0x811275437AB7080F);
+      }
+      return new PostProcessingLocalContrastParameters_tImpl(_Handle + _LocalConstrastParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorCorrectionVolumeDimOffset = new(() => Schema.GetOffset(0x81127543BF8A2F78), LazyThreadSafetyMode.None);
+  private static nint? _ColorCorrectionVolumeDimOffset;
 
   public ref int ColorCorrectionVolumeDim {
-    get => ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset.Value);
+    get {
+      if (_ColorCorrectionVolumeDimOffset == null) {
+        _ColorCorrectionVolumeDimOffset = Schema.GetOffset(0x81127543BF8A2F78);
+      }
+      return ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorCorrectionVolumeDataOffset = new(() => Schema.GetOffset(0x81127543211CF8FA), LazyThreadSafetyMode.None);
+  private static nint? _ColorCorrectionVolumeDataOffset;
 
   public ref CUtlBinaryBlock ColorCorrectionVolumeData {
-    get => ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset.Value);
+    get {
+      if (_ColorCorrectionVolumeDataOffset == null) {
+        _ColorCorrectionVolumeDataOffset = Schema.GetOffset(0x81127543211CF8FA);
+      }
+      return ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasColorCorrectionOffset = new(() => Schema.GetOffset(0x811275434EDD24C6), LazyThreadSafetyMode.None);
+  private static nint? _HasColorCorrectionOffset;
 
   public ref bool HasColorCorrection {
-    get => ref _Handle.AsRef<bool>(_HasColorCorrectionOffset.Value);
+    get {
+      if (_HasColorCorrectionOffset == null) {
+        _HasColorCorrectionOffset = Schema.GetOffset(0x811275434EDD24C6);
+      }
+      return ref _Handle.AsRef<bool>(_HasColorCorrectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasFogScatteringParamsOffset = new(() => Schema.GetOffset(0x81127543EBB4887D), LazyThreadSafetyMode.None);
+  private static nint? _HasFogScatteringParamsOffset;
 
   public ref bool HasFogScatteringParams {
-    get => ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset.Value);
+    get {
+      if (_HasFogScatteringParamsOffset == null) {
+        _HasFogScatteringParamsOffset = Schema.GetOffset(0x81127543EBB4887D);
+      }
+      return ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FogScatteringParamsOffset = new(() => Schema.GetOffset(0x8112754373861903), LazyThreadSafetyMode.None);
+  private static nint? _FogScatteringParamsOffset;
 
   public PostProcessingFogScatteringParameters_t FogScatteringParams {
-    get => new PostProcessingFogScatteringParameters_tImpl(_Handle + _FogScatteringParamsOffset.Value);
+    get {
+      if (_FogScatteringParamsOffset == null) {
+        _FogScatteringParamsOffset = Schema.GetOffset(0x8112754373861903);
+      }
+      return new PostProcessingFogScatteringParameters_tImpl(_Handle + _FogScatteringParamsOffset!.Value);
+    }
   }
 
 

@@ -17,35 +17,65 @@ internal partial class CAudioMorphDataImpl : SchemaClass, CAudioMorphData {
   public CAudioMorphDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TimesOffset = new(() => Schema.GetOffset(0xA13726EA86A55CD5), LazyThreadSafetyMode.None);
+  private static nint? _TimesOffset;
 
   public ref CUtlVector<float> Times {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset.Value);
+    get {
+      if (_TimesOffset == null) {
+        _TimesOffset = Schema.GetOffset(0xA13726EA86A55CD5);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameHashCodesOffset = new(() => Schema.GetOffset(0xA13726EAC13918BC), LazyThreadSafetyMode.None);
+  private static nint? _NameHashCodesOffset;
 
   public ref CUtlVector<uint> NameHashCodes {
-    get => ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset.Value);
+    get {
+      if (_NameHashCodesOffset == null) {
+        _NameHashCodesOffset = Schema.GetOffset(0xA13726EAC13918BC);
+      }
+      return ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameStringsOffset = new(() => Schema.GetOffset(0xA13726EA23776A0C), LazyThreadSafetyMode.None);
+  private static nint? _NameStringsOffset;
 
   public ref CUtlVector<CUtlString> NameStrings {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset.Value);
+    get {
+      if (_NameStringsOffset == null) {
+        _NameStringsOffset = Schema.GetOffset(0xA13726EA23776A0C);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SamplesOffset = new(() => Schema.GetOffset(0xA13726EA364CA9DC), LazyThreadSafetyMode.None);
+  private static nint? _SamplesOffset;
 
   public ref CUtlVector<CUtlVector<float>> Samples {
-    get => ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset.Value);
+    get {
+      if (_SamplesOffset == null) {
+        _SamplesOffset = Schema.GetOffset(0xA13726EA364CA9DC);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EaseInOffset = new(() => Schema.GetOffset(0xA13726EA4514C026), LazyThreadSafetyMode.None);
+  private static nint? _EaseInOffset;
 
   public ref float EaseIn {
-    get => ref _Handle.AsRef<float>(_EaseInOffset.Value);
+    get {
+      if (_EaseInOffset == null) {
+        _EaseInOffset = Schema.GetOffset(0xA13726EA4514C026);
+      }
+      return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EaseOutOffset = new(() => Schema.GetOffset(0xA13726EA46B49C07), LazyThreadSafetyMode.None);
+  private static nint? _EaseOutOffset;
 
   public ref float EaseOut {
-    get => ref _Handle.AsRef<float>(_EaseOutOffset.Value);
+    get {
+      if (_EaseOutOffset == null) {
+        _EaseOutOffset = Schema.GetOffset(0xA13726EA46B49C07);
+      }
+      return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
+    }
   }
 
 

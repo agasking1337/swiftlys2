@@ -17,10 +17,15 @@ internal partial class CPulseCell_CursorQueueImpl : CPulseCell_WaitForCursorsWit
   public CPulseCell_CursorQueueImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CursorsAllowedToRunParallelOffset = new(() => Schema.GetOffset(0xDAB7EC55AC04AAF9), LazyThreadSafetyMode.None);
+  private static nint? _CursorsAllowedToRunParallelOffset;
 
   public ref int CursorsAllowedToRunParallel {
-    get => ref _Handle.AsRef<int>(_CursorsAllowedToRunParallelOffset.Value);
+    get {
+      if (_CursorsAllowedToRunParallelOffset == null) {
+        _CursorsAllowedToRunParallelOffset = Schema.GetOffset(0xDAB7EC55AC04AAF9);
+      }
+      return ref _Handle.AsRef<int>(_CursorsAllowedToRunParallelOffset!.Value);
+    }
   }
 
 

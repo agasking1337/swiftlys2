@@ -17,30 +17,55 @@ internal partial class CNmFloatEaseNode__CDefinitionImpl : CNmFloatValueNode__CD
   public CNmFloatEaseNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EaseTimeOffset = new(() => Schema.GetOffset(0x9D7103D0A54FCC), LazyThreadSafetyMode.None);
+  private static nint? _EaseTimeOffset;
 
   public ref float EaseTime {
-    get => ref _Handle.AsRef<float>(_EaseTimeOffset.Value);
+    get {
+      if (_EaseTimeOffset == null) {
+        _EaseTimeOffset = Schema.GetOffset(0x9D7103D0A54FCC);
+      }
+      return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartValueOffset = new(() => Schema.GetOffset(0x9D710351C82C2A), LazyThreadSafetyMode.None);
+  private static nint? _StartValueOffset;
 
   public ref float StartValue {
-    get => ref _Handle.AsRef<float>(_StartValueOffset.Value);
+    get {
+      if (_StartValueOffset == null) {
+        _StartValueOffset = Schema.GetOffset(0x9D710351C82C2A);
+      }
+      return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputValueNodeIdxOffset = new(() => Schema.GetOffset(0x9D710395E89F27), LazyThreadSafetyMode.None);
+  private static nint? _InputValueNodeIdxOffset;
 
   public ref short InputValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_InputValueNodeIdxOffset.Value);
+    get {
+      if (_InputValueNodeIdxOffset == null) {
+        _InputValueNodeIdxOffset = Schema.GetOffset(0x9D710395E89F27);
+      }
+      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EasingOpOffset = new(() => Schema.GetOffset(0x9D7103CF457EAF), LazyThreadSafetyMode.None);
+  private static nint? _EasingOpOffset;
 
   public ref NmEasingOperation_t EasingOp {
-    get => ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset.Value);
+    get {
+      if (_EasingOpOffset == null) {
+        _EasingOpOffset = Schema.GetOffset(0x9D7103CF457EAF);
+      }
+      return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseStartValueOffset = new(() => Schema.GetOffset(0x9D710306DE6089), LazyThreadSafetyMode.None);
+  private static nint? _UseStartValueOffset;
 
   public ref bool UseStartValue {
-    get => ref _Handle.AsRef<bool>(_UseStartValueOffset.Value);
+    get {
+      if (_UseStartValueOffset == null) {
+        _UseStartValueOffset = Schema.GetOffset(0x9D710306DE6089);
+      }
+      return ref _Handle.AsRef<bool>(_UseStartValueOffset!.Value);
+    }
   }
 
 

@@ -17,47 +17,86 @@ internal partial class CPointPrefabImpl : CServerOnlyPointEntityImpl, CPointPref
   public CPointPrefabImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetMapNameOffset = new(() => Schema.GetOffset(0x2C6EB7C6129742FD), LazyThreadSafetyMode.None);
+  private static nint? _TargetMapNameOffset;
 
   public string TargetMapName {
     get {
-      var ptr = _Handle.Read<nint>(_TargetMapNameOffset.Value);
+      if (_TargetMapNameOffset == null) {
+        _TargetMapNameOffset = Schema.GetOffset(0x2C6EB7C6129742FD);
+      }
+      var ptr = _Handle.Read<nint>(_TargetMapNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TargetMapNameOffset.Value, value);
+    set {
+      if (_TargetMapNameOffset == null) {
+        _TargetMapNameOffset = Schema.GetOffset(0x2C6EB7C6129742FD);
+      }
+      Schema.SetString(_Handle, _TargetMapNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ForceWorldGroupIDOffset = new(() => Schema.GetOffset(0x2C6EB7C61F55F68E), LazyThreadSafetyMode.None);
+  private static nint? _ForceWorldGroupIDOffset;
 
   public string ForceWorldGroupID {
     get {
-      var ptr = _Handle.Read<nint>(_ForceWorldGroupIDOffset.Value);
+      if (_ForceWorldGroupIDOffset == null) {
+        _ForceWorldGroupIDOffset = Schema.GetOffset(0x2C6EB7C61F55F68E);
+      }
+      var ptr = _Handle.Read<nint>(_ForceWorldGroupIDOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ForceWorldGroupIDOffset.Value, value);
+    set {
+      if (_ForceWorldGroupIDOffset == null) {
+        _ForceWorldGroupIDOffset = Schema.GetOffset(0x2C6EB7C61F55F68E);
+      }
+      Schema.SetString(_Handle, _ForceWorldGroupIDOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AssociatedRelayTargetNameOffset = new(() => Schema.GetOffset(0x2C6EB7C6A6960E7A), LazyThreadSafetyMode.None);
+  private static nint? _AssociatedRelayTargetNameOffset;
 
   public string AssociatedRelayTargetName {
     get {
-      var ptr = _Handle.Read<nint>(_AssociatedRelayTargetNameOffset.Value);
+      if (_AssociatedRelayTargetNameOffset == null) {
+        _AssociatedRelayTargetNameOffset = Schema.GetOffset(0x2C6EB7C6A6960E7A);
+      }
+      var ptr = _Handle.Read<nint>(_AssociatedRelayTargetNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AssociatedRelayTargetNameOffset.Value, value);
+    set {
+      if (_AssociatedRelayTargetNameOffset == null) {
+        _AssociatedRelayTargetNameOffset = Schema.GetOffset(0x2C6EB7C6A6960E7A);
+      }
+      Schema.SetString(_Handle, _AssociatedRelayTargetNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _FixupNamesOffset = new(() => Schema.GetOffset(0x2C6EB7C6821D8FCF), LazyThreadSafetyMode.None);
+  private static nint? _FixupNamesOffset;
 
   public ref bool FixupNames {
-    get => ref _Handle.AsRef<bool>(_FixupNamesOffset.Value);
+    get {
+      if (_FixupNamesOffset == null) {
+        _FixupNamesOffset = Schema.GetOffset(0x2C6EB7C6821D8FCF);
+      }
+      return ref _Handle.AsRef<bool>(_FixupNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoadDynamicOffset = new(() => Schema.GetOffset(0x2C6EB7C6A3437F12), LazyThreadSafetyMode.None);
+  private static nint? _LoadDynamicOffset;
 
   public ref bool LoadDynamic {
-    get => ref _Handle.AsRef<bool>(_LoadDynamicOffset.Value);
+    get {
+      if (_LoadDynamicOffset == null) {
+        _LoadDynamicOffset = Schema.GetOffset(0x2C6EB7C6A3437F12);
+      }
+      return ref _Handle.AsRef<bool>(_LoadDynamicOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AssociatedRelayEntityOffset = new(() => Schema.GetOffset(0x2C6EB7C683435943), LazyThreadSafetyMode.None);
+  private static nint? _AssociatedRelayEntityOffset;
 
   public ref CHandle<CPointPrefab> AssociatedRelayEntity {
-    get => ref _Handle.AsRef<CHandle<CPointPrefab>>(_AssociatedRelayEntityOffset.Value);
+    get {
+      if (_AssociatedRelayEntityOffset == null) {
+        _AssociatedRelayEntityOffset = Schema.GetOffset(0x2C6EB7C683435943);
+      }
+      return ref _Handle.AsRef<CHandle<CPointPrefab>>(_AssociatedRelayEntityOffset!.Value);
+    }
   }
 
 

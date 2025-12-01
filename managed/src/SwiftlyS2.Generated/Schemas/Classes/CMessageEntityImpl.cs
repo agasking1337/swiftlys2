@@ -17,34 +17,62 @@ internal partial class CMessageEntityImpl : CPointEntityImpl, CMessageEntity {
   public CMessageEntityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0x893EADCEA921CA53), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref int Radius {
-    get => ref _Handle.AsRef<int>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0x893EADCEA921CA53);
+      }
+      return ref _Handle.AsRef<int>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MessageTextOffset = new(() => Schema.GetOffset(0x893EADCEBA6E5D73), LazyThreadSafetyMode.None);
+  private static nint? _MessageTextOffset;
 
   public string MessageText {
     get {
-      var ptr = _Handle.Read<nint>(_MessageTextOffset.Value);
+      if (_MessageTextOffset == null) {
+        _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
+      }
+      var ptr = _Handle.Read<nint>(_MessageTextOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _MessageTextOffset.Value, value);
+    set {
+      if (_MessageTextOffset == null) {
+        _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
+      }
+      Schema.SetString(_Handle, _MessageTextOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _DrawTextOffset = new(() => Schema.GetOffset(0x893EADCE598871D4), LazyThreadSafetyMode.None);
+  private static nint? _DrawTextOffset;
 
   public ref bool DrawText {
-    get => ref _Handle.AsRef<bool>(_DrawTextOffset.Value);
+    get {
+      if (_DrawTextOffset == null) {
+        _DrawTextOffset = Schema.GetOffset(0x893EADCE598871D4);
+      }
+      return ref _Handle.AsRef<bool>(_DrawTextOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DeveloperOnlyOffset = new(() => Schema.GetOffset(0x893EADCE981A6E5F), LazyThreadSafetyMode.None);
+  private static nint? _DeveloperOnlyOffset;
 
   public ref bool DeveloperOnly {
-    get => ref _Handle.AsRef<bool>(_DeveloperOnlyOffset.Value);
+    get {
+      if (_DeveloperOnlyOffset == null) {
+        _DeveloperOnlyOffset = Schema.GetOffset(0x893EADCE981A6E5F);
+      }
+      return ref _Handle.AsRef<bool>(_DeveloperOnlyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledOffset = new(() => Schema.GetOffset(0x893EADCE6154EB7E), LazyThreadSafetyMode.None);
+  private static nint? _EnabledOffset;
 
   public ref bool Enabled {
-    get => ref _Handle.AsRef<bool>(_EnabledOffset.Value);
+    get {
+      if (_EnabledOffset == null) {
+        _EnabledOffset = Schema.GetOffset(0x893EADCE6154EB7E);
+      }
+      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    }
   }
 
 

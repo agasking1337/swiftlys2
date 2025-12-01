@@ -17,25 +17,45 @@ internal partial class CBasePropImpl : CBaseAnimGraphImpl, CBaseProp {
   public CBasePropImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModelOverrodeBlockLOSOffset = new(() => Schema.GetOffset(0x14D39FA24CF7EDF1), LazyThreadSafetyMode.None);
+  private static nint? _ModelOverrodeBlockLOSOffset;
 
   public ref bool ModelOverrodeBlockLOS {
-    get => ref _Handle.AsRef<bool>(_ModelOverrodeBlockLOSOffset.Value);
+    get {
+      if (_ModelOverrodeBlockLOSOffset == null) {
+        _ModelOverrodeBlockLOSOffset = Schema.GetOffset(0x14D39FA24CF7EDF1);
+      }
+      return ref _Handle.AsRef<bool>(_ModelOverrodeBlockLOSOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShapeTypeOffset = new(() => Schema.GetOffset(0x14D39FA23BE42771), LazyThreadSafetyMode.None);
+  private static nint? _ShapeTypeOffset;
 
   public ref int ShapeType {
-    get => ref _Handle.AsRef<int>(_ShapeTypeOffset.Value);
+    get {
+      if (_ShapeTypeOffset == null) {
+        _ShapeTypeOffset = Schema.GetOffset(0x14D39FA23BE42771);
+      }
+      return ref _Handle.AsRef<int>(_ShapeTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConformToCollisionBoundsOffset = new(() => Schema.GetOffset(0x14D39FA2A98E60A1), LazyThreadSafetyMode.None);
+  private static nint? _ConformToCollisionBoundsOffset;
 
   public ref bool ConformToCollisionBounds {
-    get => ref _Handle.AsRef<bool>(_ConformToCollisionBoundsOffset.Value);
+    get {
+      if (_ConformToCollisionBoundsOffset == null) {
+        _ConformToCollisionBoundsOffset = Schema.GetOffset(0x14D39FA2A98E60A1);
+      }
+      return ref _Handle.AsRef<bool>(_ConformToCollisionBoundsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MPreferredCatchTransformOffset = new(() => Schema.GetOffset(0x14D39FA2CC626070), LazyThreadSafetyMode.None);
+  private static nint? _MPreferredCatchTransformOffset;
 
   public ref CTransform MPreferredCatchTransform {
-    get => ref _Handle.AsRef<CTransform>(_MPreferredCatchTransformOffset.Value);
+    get {
+      if (_MPreferredCatchTransformOffset == null) {
+        _MPreferredCatchTransformOffset = Schema.GetOffset(0x14D39FA2CC626070);
+      }
+      return ref _Handle.AsRef<CTransform>(_MPreferredCatchTransformOffset!.Value);
+    }
   }
 
 

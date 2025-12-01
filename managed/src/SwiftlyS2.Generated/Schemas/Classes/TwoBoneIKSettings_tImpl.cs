@@ -17,80 +17,155 @@ internal partial class TwoBoneIKSettings_tImpl : SchemaClass, TwoBoneIKSettings_
   public TwoBoneIKSettings_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EndEffectorTypeOffset = new(() => Schema.GetOffset(0xBE091551687CB4CE), LazyThreadSafetyMode.None);
+  private static nint? _EndEffectorTypeOffset;
 
   public ref IkEndEffectorType EndEffectorType {
-    get => ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset.Value);
+    get {
+      if (_EndEffectorTypeOffset == null) {
+        _EndEffectorTypeOffset = Schema.GetOffset(0xBE091551687CB4CE);
+      }
+      return ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndEffectorAttachmentOffset = new(() => Schema.GetOffset(0xBE0915516872873B), LazyThreadSafetyMode.None);
+  private static nint? _EndEffectorAttachmentOffset;
 
   public CAnimAttachment EndEffectorAttachment {
-    get => new CAnimAttachmentImpl(_Handle + _EndEffectorAttachmentOffset.Value);
+    get {
+      if (_EndEffectorAttachmentOffset == null) {
+        _EndEffectorAttachmentOffset = Schema.GetOffset(0xBE0915516872873B);
+      }
+      return new CAnimAttachmentImpl(_Handle + _EndEffectorAttachmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetTypeOffset = new(() => Schema.GetOffset(0xBE09155113C167A0), LazyThreadSafetyMode.None);
+  private static nint? _TargetTypeOffset;
 
   public ref IkTargetType TargetType {
-    get => ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset.Value);
+    get {
+      if (_TargetTypeOffset == null) {
+        _TargetTypeOffset = Schema.GetOffset(0xBE09155113C167A0);
+      }
+      return ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetAttachmentOffset = new(() => Schema.GetOffset(0xBE091551C90DDA55), LazyThreadSafetyMode.None);
+  private static nint? _TargetAttachmentOffset;
 
   public CAnimAttachment TargetAttachment {
-    get => new CAnimAttachmentImpl(_Handle + _TargetAttachmentOffset.Value);
+    get {
+      if (_TargetAttachmentOffset == null) {
+        _TargetAttachmentOffset = Schema.GetOffset(0xBE091551C90DDA55);
+      }
+      return new CAnimAttachmentImpl(_Handle + _TargetAttachmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetBoneIndexOffset = new(() => Schema.GetOffset(0xBE091551D1D2A3DA), LazyThreadSafetyMode.None);
+  private static nint? _TargetBoneIndexOffset;
 
   public ref int TargetBoneIndex {
-    get => ref _Handle.AsRef<int>(_TargetBoneIndexOffset.Value);
+    get {
+      if (_TargetBoneIndexOffset == null) {
+        _TargetBoneIndexOffset = Schema.GetOffset(0xBE091551D1D2A3DA);
+      }
+      return ref _Handle.AsRef<int>(_TargetBoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PositionParamOffset = new(() => Schema.GetOffset(0xBE091551FF710245), LazyThreadSafetyMode.None);
+  private static nint? _PositionParamOffset;
 
   public CAnimParamHandle PositionParam {
-    get => new CAnimParamHandleImpl(_Handle + _PositionParamOffset.Value);
+    get {
+      if (_PositionParamOffset == null) {
+        _PositionParamOffset = Schema.GetOffset(0xBE091551FF710245);
+      }
+      return new CAnimParamHandleImpl(_Handle + _PositionParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationParamOffset = new(() => Schema.GetOffset(0xBE09155193200F16), LazyThreadSafetyMode.None);
+  private static nint? _RotationParamOffset;
 
   public CAnimParamHandle RotationParam {
-    get => new CAnimParamHandleImpl(_Handle + _RotationParamOffset.Value);
+    get {
+      if (_RotationParamOffset == null) {
+        _RotationParamOffset = Schema.GetOffset(0xBE09155193200F16);
+      }
+      return new CAnimParamHandleImpl(_Handle + _RotationParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlwaysUseFallbackHingeOffset = new(() => Schema.GetOffset(0xBE09155158B8E174), LazyThreadSafetyMode.None);
+  private static nint? _AlwaysUseFallbackHingeOffset;
 
   public ref bool AlwaysUseFallbackHinge {
-    get => ref _Handle.AsRef<bool>(_AlwaysUseFallbackHingeOffset.Value);
+    get {
+      if (_AlwaysUseFallbackHingeOffset == null) {
+        _AlwaysUseFallbackHingeOffset = Schema.GetOffset(0xBE09155158B8E174);
+      }
+      return ref _Handle.AsRef<bool>(_AlwaysUseFallbackHingeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LsFallbackHingeAxisOffset = new(() => Schema.GetOffset(0xBE0915517DF22B04), LazyThreadSafetyMode.None);
+  private static nint? _LsFallbackHingeAxisOffset;
 
   public ref Vector LsFallbackHingeAxis {
-    get => ref _Handle.AsRef<Vector>(_LsFallbackHingeAxisOffset.Value);
+    get {
+      if (_LsFallbackHingeAxisOffset == null) {
+        _LsFallbackHingeAxisOffset = Schema.GetOffset(0xBE0915517DF22B04);
+      }
+      return ref _Handle.AsRef<Vector>(_LsFallbackHingeAxisOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FixedBoneIndexOffset = new(() => Schema.GetOffset(0xBE091551D1DD1DC5), LazyThreadSafetyMode.None);
+  private static nint? _FixedBoneIndexOffset;
 
   public ref int FixedBoneIndex {
-    get => ref _Handle.AsRef<int>(_FixedBoneIndexOffset.Value);
+    get {
+      if (_FixedBoneIndexOffset == null) {
+        _FixedBoneIndexOffset = Schema.GetOffset(0xBE091551D1DD1DC5);
+      }
+      return ref _Handle.AsRef<int>(_FixedBoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MiddleBoneIndexOffset = new(() => Schema.GetOffset(0xBE091551489C3976), LazyThreadSafetyMode.None);
+  private static nint? _MiddleBoneIndexOffset;
 
   public ref int MiddleBoneIndex {
-    get => ref _Handle.AsRef<int>(_MiddleBoneIndexOffset.Value);
+    get {
+      if (_MiddleBoneIndexOffset == null) {
+        _MiddleBoneIndexOffset = Schema.GetOffset(0xBE091551489C3976);
+      }
+      return ref _Handle.AsRef<int>(_MiddleBoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndBoneIndexOffset = new(() => Schema.GetOffset(0xBE09155146E23D1C), LazyThreadSafetyMode.None);
+  private static nint? _EndBoneIndexOffset;
 
   public ref int EndBoneIndex {
-    get => ref _Handle.AsRef<int>(_EndBoneIndexOffset.Value);
+    get {
+      if (_EndBoneIndexOffset == null) {
+        _EndBoneIndexOffset = Schema.GetOffset(0xBE09155146E23D1C);
+      }
+      return ref _Handle.AsRef<int>(_EndBoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MatchTargetOrientationOffset = new(() => Schema.GetOffset(0xBE09155142E0C3DB), LazyThreadSafetyMode.None);
+  private static nint? _MatchTargetOrientationOffset;
 
   public ref bool MatchTargetOrientation {
-    get => ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset.Value);
+    get {
+      if (_MatchTargetOrientationOffset == null) {
+        _MatchTargetOrientationOffset = Schema.GetOffset(0xBE09155142E0C3DB);
+      }
+      return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConstrainTwistOffset = new(() => Schema.GetOffset(0xBE091551DB3DB7ED), LazyThreadSafetyMode.None);
+  private static nint? _ConstrainTwistOffset;
 
   public ref bool ConstrainTwist {
-    get => ref _Handle.AsRef<bool>(_ConstrainTwistOffset.Value);
+    get {
+      if (_ConstrainTwistOffset == null) {
+        _ConstrainTwistOffset = Schema.GetOffset(0xBE091551DB3DB7ED);
+      }
+      return ref _Handle.AsRef<bool>(_ConstrainTwistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxTwistOffset = new(() => Schema.GetOffset(0xBE091551A898EE6E), LazyThreadSafetyMode.None);
+  private static nint? _MaxTwistOffset;
 
   public ref float MaxTwist {
-    get => ref _Handle.AsRef<float>(_MaxTwistOffset.Value);
+    get {
+      if (_MaxTwistOffset == null) {
+        _MaxTwistOffset = Schema.GetOffset(0xBE091551A898EE6E);
+      }
+      return ref _Handle.AsRef<float>(_MaxTwistOffset!.Value);
+    }
   }
 
 

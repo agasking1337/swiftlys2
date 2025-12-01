@@ -17,30 +17,55 @@ internal partial class C_OP_RepeatedTriggerChildGroupImpl : CParticleFunctionPre
   public C_OP_RepeatedTriggerChildGroupImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildGroupIDOffset = new(() => Schema.GetOffset(0x3D9A0D4E3F3C965), LazyThreadSafetyMode.None);
+  private static nint? _ChildGroupIDOffset;
 
   public ref int ChildGroupID {
-    get => ref _Handle.AsRef<int>(_ChildGroupIDOffset.Value);
+    get {
+      if (_ChildGroupIDOffset == null) {
+        _ChildGroupIDOffset = Schema.GetOffset(0x3D9A0D4E3F3C965);
+      }
+      return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClusterRefireTimeOffset = new(() => Schema.GetOffset(0x3D9A0D47E6BEEAB), LazyThreadSafetyMode.None);
+  private static nint? _ClusterRefireTimeOffset;
 
   public CParticleCollectionFloatInput ClusterRefireTime {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ClusterRefireTimeOffset.Value);
+    get {
+      if (_ClusterRefireTimeOffset == null) {
+        _ClusterRefireTimeOffset = Schema.GetOffset(0x3D9A0D47E6BEEAB);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ClusterRefireTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClusterSizeOffset = new(() => Schema.GetOffset(0x3D9A0D4A7549FF6), LazyThreadSafetyMode.None);
+  private static nint? _ClusterSizeOffset;
 
   public CParticleCollectionFloatInput ClusterSize {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ClusterSizeOffset.Value);
+    get {
+      if (_ClusterSizeOffset == null) {
+        _ClusterSizeOffset = Schema.GetOffset(0x3D9A0D4A7549FF6);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ClusterSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClusterCooldownOffset = new(() => Schema.GetOffset(0x3D9A0D4753687EA), LazyThreadSafetyMode.None);
+  private static nint? _ClusterCooldownOffset;
 
   public CParticleCollectionFloatInput ClusterCooldown {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ClusterCooldownOffset.Value);
+    get {
+      if (_ClusterCooldownOffset == null) {
+        _ClusterCooldownOffset = Schema.GetOffset(0x3D9A0D4753687EA);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ClusterCooldownOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LimitChildCountOffset = new(() => Schema.GetOffset(0x3D9A0D4EA978249), LazyThreadSafetyMode.None);
+  private static nint? _LimitChildCountOffset;
 
   public ref bool LimitChildCount {
-    get => ref _Handle.AsRef<bool>(_LimitChildCountOffset.Value);
+    get {
+      if (_LimitChildCountOffset == null) {
+        _LimitChildCountOffset = Schema.GetOffset(0x3D9A0D4EA978249);
+      }
+      return ref _Handle.AsRef<bool>(_LimitChildCountOffset!.Value);
+    }
   }
 
 

@@ -17,45 +17,85 @@ internal partial class C_OP_ConstrainDistanceToPathImpl : CParticleFunctionConst
   public C_OP_ConstrainDistanceToPathImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinDistanceOffset = new(() => Schema.GetOffset(0x8146F787F016B7AC), LazyThreadSafetyMode.None);
+  private static nint? _MinDistanceOffset;
 
   public ref float MinDistance {
-    get => ref _Handle.AsRef<float>(_MinDistanceOffset.Value);
+    get {
+      if (_MinDistanceOffset == null) {
+        _MinDistanceOffset = Schema.GetOffset(0x8146F787F016B7AC);
+      }
+      return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistance0Offset = new(() => Schema.GetOffset(0x8146F7876FFBC6F0), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistance0Offset;
 
   public ref float MaxDistance0 {
-    get => ref _Handle.AsRef<float>(_MaxDistance0Offset.Value);
+    get {
+      if (_MaxDistance0Offset == null) {
+        _MaxDistance0Offset = Schema.GetOffset(0x8146F7876FFBC6F0);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistance0Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistanceMidOffset = new(() => Schema.GetOffset(0x8146F7872D2B1E5A), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceMidOffset;
 
   public ref float MaxDistanceMid {
-    get => ref _Handle.AsRef<float>(_MaxDistanceMidOffset.Value);
+    get {
+      if (_MaxDistanceMidOffset == null) {
+        _MaxDistanceMidOffset = Schema.GetOffset(0x8146F7872D2B1E5A);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistanceMidOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistance1Offset = new(() => Schema.GetOffset(0x8146F78770FBC883), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistance1Offset;
 
   public ref float MaxDistance1 {
-    get => ref _Handle.AsRef<float>(_MaxDistance1Offset.Value);
+    get {
+      if (_MaxDistance1Offset == null) {
+        _MaxDistance1Offset = Schema.GetOffset(0x8146F78770FBC883);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistance1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathParametersOffset = new(() => Schema.GetOffset(0x8146F7878C111646), LazyThreadSafetyMode.None);
+  private static nint? _PathParametersOffset;
 
   public CPathParameters PathParameters {
-    get => new CPathParametersImpl(_Handle + _PathParametersOffset.Value);
+    get {
+      if (_PathParametersOffset == null) {
+        _PathParametersOffset = Schema.GetOffset(0x8146F7878C111646);
+      }
+      return new CPathParametersImpl(_Handle + _PathParametersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TravelTimeOffset = new(() => Schema.GetOffset(0x8146F7870228B67A), LazyThreadSafetyMode.None);
+  private static nint? _TravelTimeOffset;
 
   public ref float TravelTime {
-    get => ref _Handle.AsRef<float>(_TravelTimeOffset.Value);
+    get {
+      if (_TravelTimeOffset == null) {
+        _TravelTimeOffset = Schema.GetOffset(0x8146F7870228B67A);
+      }
+      return ref _Handle.AsRef<float>(_TravelTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldScaleOffset = new(() => Schema.GetOffset(0x8146F787BE94CE93), LazyThreadSafetyMode.None);
+  private static nint? _FieldScaleOffset;
 
   public ParticleAttributeIndex_t FieldScale {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldScaleOffset.Value);
+    get {
+      if (_FieldScaleOffset == null) {
+        _FieldScaleOffset = Schema.GetOffset(0x8146F787BE94CE93);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ManualTFieldOffset = new(() => Schema.GetOffset(0x8146F7871190C51B), LazyThreadSafetyMode.None);
+  private static nint? _ManualTFieldOffset;
 
   public ParticleAttributeIndex_t ManualTField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _ManualTFieldOffset.Value);
+    get {
+      if (_ManualTFieldOffset == null) {
+        _ManualTFieldOffset = Schema.GetOffset(0x8146F7871190C51B);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _ManualTFieldOffset!.Value);
+    }
   }
 
 

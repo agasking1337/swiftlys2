@@ -17,35 +17,65 @@ internal partial class C_OP_SetControlPointToCPVelocityImpl : CParticleFunctionP
   public C_OP_SetControlPointToCPVelocityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPInputOffset = new(() => Schema.GetOffset(0x8D70A057FB805736), LazyThreadSafetyMode.None);
+  private static nint? _CPInputOffset;
 
   public ref int CPInput {
-    get => ref _Handle.AsRef<int>(_CPInputOffset.Value);
+    get {
+      if (_CPInputOffset == null) {
+        _CPInputOffset = Schema.GetOffset(0x8D70A057FB805736);
+      }
+      return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOutputVelOffset = new(() => Schema.GetOffset(0x8D70A0576AC86D06), LazyThreadSafetyMode.None);
+  private static nint? _CPOutputVelOffset;
 
   public ref int CPOutputVel {
-    get => ref _Handle.AsRef<int>(_CPOutputVelOffset.Value);
+    get {
+      if (_CPOutputVelOffset == null) {
+        _CPOutputVelOffset = Schema.GetOffset(0x8D70A0576AC86D06);
+      }
+      return ref _Handle.AsRef<int>(_CPOutputVelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizeOffset = new(() => Schema.GetOffset(0x8D70A05748BC424C), LazyThreadSafetyMode.None);
+  private static nint? _NormalizeOffset;
 
   public ref bool Normalize {
-    get => ref _Handle.AsRef<bool>(_NormalizeOffset.Value);
+    get {
+      if (_NormalizeOffset == null) {
+        _NormalizeOffset = Schema.GetOffset(0x8D70A05748BC424C);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOutputMagOffset = new(() => Schema.GetOffset(0x8D70A05704FD82D2), LazyThreadSafetyMode.None);
+  private static nint? _CPOutputMagOffset;
 
   public ref int CPOutputMag {
-    get => ref _Handle.AsRef<int>(_CPOutputMagOffset.Value);
+    get {
+      if (_CPOutputMagOffset == null) {
+        _CPOutputMagOffset = Schema.GetOffset(0x8D70A05704FD82D2);
+      }
+      return ref _Handle.AsRef<int>(_CPOutputMagOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPFieldOffset = new(() => Schema.GetOffset(0x8D70A05750B79876), LazyThreadSafetyMode.None);
+  private static nint? _CPFieldOffset;
 
   public ref int CPField {
-    get => ref _Handle.AsRef<int>(_CPFieldOffset.Value);
+    get {
+      if (_CPFieldOffset == null) {
+        _CPFieldOffset = Schema.GetOffset(0x8D70A05750B79876);
+      }
+      return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ComparisonVelocityOffset = new(() => Schema.GetOffset(0x8D70A05723BF409F), LazyThreadSafetyMode.None);
+  private static nint? _ComparisonVelocityOffset;
 
   public CParticleCollectionVecInput ComparisonVelocity {
-    get => new CParticleCollectionVecInputImpl(_Handle + _ComparisonVelocityOffset.Value);
+    get {
+      if (_ComparisonVelocityOffset == null) {
+        _ComparisonVelocityOffset = Schema.GetOffset(0x8D70A05723BF409F);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _ComparisonVelocityOffset!.Value);
+    }
   }
 
 

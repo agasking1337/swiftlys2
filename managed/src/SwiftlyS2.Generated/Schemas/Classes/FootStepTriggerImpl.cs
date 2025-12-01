@@ -17,20 +17,35 @@ internal partial class FootStepTriggerImpl : SchemaClass, FootStepTrigger {
   public FootStepTriggerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TagsOffset = new(() => Schema.GetOffset(0xD1D326CDB46C8540), LazyThreadSafetyMode.None);
+  private static nint? _TagsOffset;
 
   public ref CUtlVector<int> Tags {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset.Value);
+    get {
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0xD1D326CDB46C8540);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootIndexOffset = new(() => Schema.GetOffset(0xD1D326CD67D56BAB), LazyThreadSafetyMode.None);
+  private static nint? _FootIndexOffset;
 
   public ref int FootIndex {
-    get => ref _Handle.AsRef<int>(_FootIndexOffset.Value);
+    get {
+      if (_FootIndexOffset == null) {
+        _FootIndexOffset = Schema.GetOffset(0xD1D326CD67D56BAB);
+      }
+      return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TriggerPhaseOffset = new(() => Schema.GetOffset(0xD1D326CD486B84EE), LazyThreadSafetyMode.None);
+  private static nint? _TriggerPhaseOffset;
 
   public ref StepPhase TriggerPhase {
-    get => ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset.Value);
+    get {
+      if (_TriggerPhaseOffset == null) {
+        _TriggerPhaseOffset = Schema.GetOffset(0xD1D326CD486B84EE);
+      }
+      return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset!.Value);
+    }
   }
 
 

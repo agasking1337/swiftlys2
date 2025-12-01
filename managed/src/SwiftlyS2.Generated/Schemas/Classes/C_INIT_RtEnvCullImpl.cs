@@ -17,49 +17,92 @@ internal partial class C_INIT_RtEnvCullImpl : CParticleFunctionInitializerImpl, 
   public C_INIT_RtEnvCullImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TestDirOffset = new(() => Schema.GetOffset(0xEA96DD4FC17166B4), LazyThreadSafetyMode.None);
+  private static nint? _TestDirOffset;
 
   public ref Vector TestDir {
-    get => ref _Handle.AsRef<Vector>(_TestDirOffset.Value);
+    get {
+      if (_TestDirOffset == null) {
+        _TestDirOffset = Schema.GetOffset(0xEA96DD4FC17166B4);
+      }
+      return ref _Handle.AsRef<Vector>(_TestDirOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TestNormalOffset = new(() => Schema.GetOffset(0xEA96DD4FD4AC77F2), LazyThreadSafetyMode.None);
+  private static nint? _TestNormalOffset;
 
   public ref Vector TestNormal {
-    get => ref _Handle.AsRef<Vector>(_TestNormalOffset.Value);
+    get {
+      if (_TestNormalOffset == null) {
+        _TestNormalOffset = Schema.GetOffset(0xEA96DD4FD4AC77F2);
+      }
+      return ref _Handle.AsRef<Vector>(_TestNormalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseVelocityOffset = new(() => Schema.GetOffset(0xEA96DD4F5E806BAF), LazyThreadSafetyMode.None);
+  private static nint? _UseVelocityOffset;
 
   public ref bool UseVelocity {
-    get => ref _Handle.AsRef<bool>(_UseVelocityOffset.Value);
+    get {
+      if (_UseVelocityOffset == null) {
+        _UseVelocityOffset = Schema.GetOffset(0xEA96DD4F5E806BAF);
+      }
+      return ref _Handle.AsRef<bool>(_UseVelocityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullOnMissOffset = new(() => Schema.GetOffset(0xEA96DD4F5E118398), LazyThreadSafetyMode.None);
+  private static nint? _CullOnMissOffset;
 
   public ref bool CullOnMiss {
-    get => ref _Handle.AsRef<bool>(_CullOnMissOffset.Value);
+    get {
+      if (_CullOnMissOffset == null) {
+        _CullOnMissOffset = Schema.GetOffset(0xEA96DD4F5E118398);
+      }
+      return ref _Handle.AsRef<bool>(_CullOnMissOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LifeAdjustOffset = new(() => Schema.GetOffset(0xEA96DD4FA38568F0), LazyThreadSafetyMode.None);
+  private static nint? _LifeAdjustOffset;
 
   public ref bool LifeAdjust {
-    get => ref _Handle.AsRef<bool>(_LifeAdjustOffset.Value);
+    get {
+      if (_LifeAdjustOffset == null) {
+        _LifeAdjustOffset = Schema.GetOffset(0xEA96DD4FA38568F0);
+      }
+      return ref _Handle.AsRef<bool>(_LifeAdjustOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RtEnvNameOffset = new(() => Schema.GetOffset(0xEA96DD4FC32A9775), LazyThreadSafetyMode.None);
+  private static nint? _RtEnvNameOffset;
 
   public string RtEnvName {
     get {
-      var ptr = _Handle + _RtEnvNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_RtEnvNameOffset == null) {
+            _RtEnvNameOffset = Schema.GetOffset(0xEA96DD4FC32A9775);
+        }
+        var ptr = _Handle + _RtEnvNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _RtEnvNameOffset.Value, value, 128);
+    set {
+        if (_RtEnvNameOffset == null) {
+            _RtEnvNameOffset = Schema.GetOffset(0xEA96DD4FC32A9775);
+        }
+        Schema.SetFixedString(_Handle, _RtEnvNameOffset!.Value, value, 128);
+    }
   } 
-  private static readonly Lazy<nint> _RTEnvCPOffset = new(() => Schema.GetOffset(0xEA96DD4F01881731), LazyThreadSafetyMode.None);
+  private static nint? _RTEnvCPOffset;
 
   public ref int RTEnvCP {
-    get => ref _Handle.AsRef<int>(_RTEnvCPOffset.Value);
+    get {
+      if (_RTEnvCPOffset == null) {
+        _RTEnvCPOffset = Schema.GetOffset(0xEA96DD4F01881731);
+      }
+      return ref _Handle.AsRef<int>(_RTEnvCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ComponentOffset = new(() => Schema.GetOffset(0xEA96DD4FBFD0952C), LazyThreadSafetyMode.None);
+  private static nint? _ComponentOffset;
 
   public ref int Component {
-    get => ref _Handle.AsRef<int>(_ComponentOffset.Value);
+    get {
+      if (_ComponentOffset == null) {
+        _ComponentOffset = Schema.GetOffset(0xEA96DD4FBFD0952C);
+      }
+      return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+    }
   }
 
 

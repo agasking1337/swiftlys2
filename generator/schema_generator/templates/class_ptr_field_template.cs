@@ -1,8 +1,11 @@
-  private static readonly Lazy<nint> _$NAME$Offset = new(() => Schema.GetOffset($HASH$), LazyThreadSafetyMode.None);
+  private static nint? _$NAME$Offset;
 
   public $INTERFACE_TYPE$? $NAME$ {
     get {
-      var ptr = _Handle.Read<nint>(_$NAME$Offset.Value);
+      if (_$NAME$Offset == null) {
+        _$NAME$Offset = Schema.GetOffset($HASH$);
+      }
+      var ptr = _Handle.Read<nint>(_$NAME$Offset!.Value);
       return ptr.IsValidPtr() ? new $IMPL_TYPE$(ptr) : null;
     }
   }

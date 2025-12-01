@@ -17,20 +17,35 @@ internal partial class CEnumAnimParameterImpl : CConcreteAnimParameterImpl, CEnu
   public CEnumAnimParameterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DefaultValueOffset = new(() => Schema.GetOffset(0xCCD4BF1DBBE0341F), LazyThreadSafetyMode.None);
+  private static nint? _DefaultValueOffset;
 
   public ref byte DefaultValue {
-    get => ref _Handle.AsRef<byte>(_DefaultValueOffset.Value);
+    get {
+      if (_DefaultValueOffset == null) {
+        _DefaultValueOffset = Schema.GetOffset(0xCCD4BF1DBBE0341F);
+      }
+      return ref _Handle.AsRef<byte>(_DefaultValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnumOptionsOffset = new(() => Schema.GetOffset(0xCCD4BF1D5A08D71E), LazyThreadSafetyMode.None);
+  private static nint? _EnumOptionsOffset;
 
   public ref CUtlVector<CUtlString> EnumOptions {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset.Value);
+    get {
+      if (_EnumOptionsOffset == null) {
+        _EnumOptionsOffset = Schema.GetOffset(0xCCD4BF1D5A08D71E);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnumReferencedOffset = new(() => Schema.GetOffset(0xCCD4BF1D5C66779B), LazyThreadSafetyMode.None);
+  private static nint? _EnumReferencedOffset;
 
   public ref CUtlVector<ulong> EnumReferenced {
-    get => ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset.Value);
+    get {
+      if (_EnumReferencedOffset == null) {
+        _EnumReferencedOffset = Schema.GetOffset(0xCCD4BF1D5C66779B);
+      }
+      return ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset!.Value);
+    }
   }
 
 

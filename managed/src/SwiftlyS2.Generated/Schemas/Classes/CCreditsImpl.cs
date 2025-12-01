@@ -17,20 +17,35 @@ internal partial class CCreditsImpl : CPointEntityImpl, CCredits {
   public CCreditsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnCreditsDoneOffset = new(() => Schema.GetOffset(0xF1224C0488A2DA7A), LazyThreadSafetyMode.None);
+  private static nint? _OnCreditsDoneOffset;
 
   public CEntityIOOutput OnCreditsDone {
-    get => new CEntityIOOutputImpl(_Handle + _OnCreditsDoneOffset.Value);
+    get {
+      if (_OnCreditsDoneOffset == null) {
+        _OnCreditsDoneOffset = Schema.GetOffset(0xF1224C0488A2DA7A);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnCreditsDoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RolledOutroCreditsOffset = new(() => Schema.GetOffset(0xF1224C048E1511D4), LazyThreadSafetyMode.None);
+  private static nint? _RolledOutroCreditsOffset;
 
   public ref bool RolledOutroCredits {
-    get => ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset.Value);
+    get {
+      if (_RolledOutroCreditsOffset == null) {
+        _RolledOutroCreditsOffset = Schema.GetOffset(0xF1224C048E1511D4);
+      }
+      return ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LogoLengthOffset = new(() => Schema.GetOffset(0xF1224C04D283492C), LazyThreadSafetyMode.None);
+  private static nint? _LogoLengthOffset;
 
   public ref float LogoLength {
-    get => ref _Handle.AsRef<float>(_LogoLengthOffset.Value);
+    get {
+      if (_LogoLengthOffset == null) {
+        _LogoLengthOffset = Schema.GetOffset(0xF1224C04D283492C);
+      }
+      return ref _Handle.AsRef<float>(_LogoLengthOffset!.Value);
+    }
   }
 
 

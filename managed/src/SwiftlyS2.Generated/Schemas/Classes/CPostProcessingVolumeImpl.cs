@@ -17,65 +17,125 @@ internal partial class CPostProcessingVolumeImpl : CBaseTriggerImpl, CPostProces
   public CPostProcessingVolumeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PostSettingsOffset = new(() => Schema.GetOffset(0x5DBC28C1D2EB75A4), LazyThreadSafetyMode.None);
+  private static nint? _PostSettingsOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostSettings {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostSettingsOffset.Value);
+    get {
+      if (_PostSettingsOffset == null) {
+        _PostSettingsOffset = Schema.GetOffset(0x5DBC28C1D2EB75A4);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FadeDurationOffset = new(() => Schema.GetOffset(0x5DBC28C1C4E6DEE1), LazyThreadSafetyMode.None);
+  private static nint? _FadeDurationOffset;
 
   public ref float FadeDuration {
-    get => ref _Handle.AsRef<float>(_FadeDurationOffset.Value);
+    get {
+      if (_FadeDurationOffset == null) {
+        _FadeDurationOffset = Schema.GetOffset(0x5DBC28C1C4E6DEE1);
+      }
+      return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinLogExposureOffset = new(() => Schema.GetOffset(0x5DBC28C17457F7D0), LazyThreadSafetyMode.None);
+  private static nint? _MinLogExposureOffset;
 
   public ref float MinLogExposure {
-    get => ref _Handle.AsRef<float>(_MinLogExposureOffset.Value);
+    get {
+      if (_MinLogExposureOffset == null) {
+        _MinLogExposureOffset = Schema.GetOffset(0x5DBC28C17457F7D0);
+      }
+      return ref _Handle.AsRef<float>(_MinLogExposureOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxLogExposureOffset = new(() => Schema.GetOffset(0x5DBC28C1DC5D3ED6), LazyThreadSafetyMode.None);
+  private static nint? _MaxLogExposureOffset;
 
   public ref float MaxLogExposure {
-    get => ref _Handle.AsRef<float>(_MaxLogExposureOffset.Value);
+    get {
+      if (_MaxLogExposureOffset == null) {
+        _MaxLogExposureOffset = Schema.GetOffset(0x5DBC28C1DC5D3ED6);
+      }
+      return ref _Handle.AsRef<float>(_MaxLogExposureOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinExposureOffset = new(() => Schema.GetOffset(0x5DBC28C122FAB634), LazyThreadSafetyMode.None);
+  private static nint? _MinExposureOffset;
 
   public ref float MinExposure {
-    get => ref _Handle.AsRef<float>(_MinExposureOffset.Value);
+    get {
+      if (_MinExposureOffset == null) {
+        _MinExposureOffset = Schema.GetOffset(0x5DBC28C122FAB634);
+      }
+      return ref _Handle.AsRef<float>(_MinExposureOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxExposureOffset = new(() => Schema.GetOffset(0x5DBC28C15D4951D6), LazyThreadSafetyMode.None);
+  private static nint? _MaxExposureOffset;
 
   public ref float MaxExposure {
-    get => ref _Handle.AsRef<float>(_MaxExposureOffset.Value);
+    get {
+      if (_MaxExposureOffset == null) {
+        _MaxExposureOffset = Schema.GetOffset(0x5DBC28C15D4951D6);
+      }
+      return ref _Handle.AsRef<float>(_MaxExposureOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExposureCompensationOffset = new(() => Schema.GetOffset(0x5DBC28C16EC15498), LazyThreadSafetyMode.None);
+  private static nint? _ExposureCompensationOffset;
 
   public ref float ExposureCompensation {
-    get => ref _Handle.AsRef<float>(_ExposureCompensationOffset.Value);
+    get {
+      if (_ExposureCompensationOffset == null) {
+        _ExposureCompensationOffset = Schema.GetOffset(0x5DBC28C16EC15498);
+      }
+      return ref _Handle.AsRef<float>(_ExposureCompensationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExposureFadeSpeedUpOffset = new(() => Schema.GetOffset(0x5DBC28C19789BBB6), LazyThreadSafetyMode.None);
+  private static nint? _ExposureFadeSpeedUpOffset;
 
   public ref float ExposureFadeSpeedUp {
-    get => ref _Handle.AsRef<float>(_ExposureFadeSpeedUpOffset.Value);
+    get {
+      if (_ExposureFadeSpeedUpOffset == null) {
+        _ExposureFadeSpeedUpOffset = Schema.GetOffset(0x5DBC28C19789BBB6);
+      }
+      return ref _Handle.AsRef<float>(_ExposureFadeSpeedUpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExposureFadeSpeedDownOffset = new(() => Schema.GetOffset(0x5DBC28C154685D1F), LazyThreadSafetyMode.None);
+  private static nint? _ExposureFadeSpeedDownOffset;
 
   public ref float ExposureFadeSpeedDown {
-    get => ref _Handle.AsRef<float>(_ExposureFadeSpeedDownOffset.Value);
+    get {
+      if (_ExposureFadeSpeedDownOffset == null) {
+        _ExposureFadeSpeedDownOffset = Schema.GetOffset(0x5DBC28C154685D1F);
+      }
+      return ref _Handle.AsRef<float>(_ExposureFadeSpeedDownOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TonemapEVSmoothingRangeOffset = new(() => Schema.GetOffset(0x5DBC28C19C2546CB), LazyThreadSafetyMode.None);
+  private static nint? _TonemapEVSmoothingRangeOffset;
 
   public ref float TonemapEVSmoothingRange {
-    get => ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset.Value);
+    get {
+      if (_TonemapEVSmoothingRangeOffset == null) {
+        _TonemapEVSmoothingRangeOffset = Schema.GetOffset(0x5DBC28C19C2546CB);
+      }
+      return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MasterOffset = new(() => Schema.GetOffset(0x5DBC28C15AFF9193), LazyThreadSafetyMode.None);
+  private static nint? _MasterOffset;
 
   public ref bool Master {
-    get => ref _Handle.AsRef<bool>(_MasterOffset.Value);
+    get {
+      if (_MasterOffset == null) {
+        _MasterOffset = Schema.GetOffset(0x5DBC28C15AFF9193);
+      }
+      return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExposureControlOffset = new(() => Schema.GetOffset(0x5DBC28C12C195925), LazyThreadSafetyMode.None);
+  private static nint? _ExposureControlOffset;
 
   public ref bool ExposureControl {
-    get => ref _Handle.AsRef<bool>(_ExposureControlOffset.Value);
+    get {
+      if (_ExposureControlOffset == null) {
+        _ExposureControlOffset = Schema.GetOffset(0x5DBC28C12C195925);
+      }
+      return ref _Handle.AsRef<bool>(_ExposureControlOffset!.Value);
+    }
   }
 
   public void PostSettingsUpdated() {

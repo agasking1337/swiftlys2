@@ -17,15 +17,25 @@ internal partial class C_INIT_InitVecCollectionImpl : CParticleFunctionInitializ
   public C_INIT_InitVecCollectionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueOffset = new(() => Schema.GetOffset(0x2F5AD47234445438), LazyThreadSafetyMode.None);
+  private static nint? _InputValueOffset;
 
   public CParticleCollectionVecInput InputValue {
-    get => new CParticleCollectionVecInputImpl(_Handle + _InputValueOffset.Value);
+    get {
+      if (_InputValueOffset == null) {
+        _InputValueOffset = Schema.GetOffset(0x2F5AD47234445438);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _InputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputFieldOffset = new(() => Schema.GetOffset(0x2F5AD472324F6F74), LazyThreadSafetyMode.None);
+  private static nint? _OutputFieldOffset;
 
   public ParticleAttributeIndex_t OutputField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset.Value);
+    get {
+      if (_OutputFieldOffset == null) {
+        _OutputFieldOffset = Schema.GetOffset(0x2F5AD472324F6F74);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+    }
   }
 
 

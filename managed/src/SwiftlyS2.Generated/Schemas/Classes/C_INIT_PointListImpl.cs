@@ -17,30 +17,55 @@ internal partial class C_INIT_PointListImpl : CParticleFunctionInitializerImpl, 
   public C_INIT_PointListImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x5E193E54E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x5E193E54E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PointListOffset = new(() => Schema.GetOffset(0x5E193E54976AB4FD), LazyThreadSafetyMode.None);
+  private static nint? _PointListOffset;
 
   public ref CUtlVector<PointDefinition_t> PointList {
-    get => ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset.Value);
+    get {
+      if (_PointListOffset == null) {
+        _PointListOffset = Schema.GetOffset(0x5E193E54976AB4FD);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaceAlongPathOffset = new(() => Schema.GetOffset(0x5E193E5481CF2E1A), LazyThreadSafetyMode.None);
+  private static nint? _PlaceAlongPathOffset;
 
   public ref bool PlaceAlongPath {
-    get => ref _Handle.AsRef<bool>(_PlaceAlongPathOffset.Value);
+    get {
+      if (_PlaceAlongPathOffset == null) {
+        _PlaceAlongPathOffset = Schema.GetOffset(0x5E193E5481CF2E1A);
+      }
+      return ref _Handle.AsRef<bool>(_PlaceAlongPathOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClosedLoopOffset = new(() => Schema.GetOffset(0x5E193E547C20D1AB), LazyThreadSafetyMode.None);
+  private static nint? _ClosedLoopOffset;
 
   public ref bool ClosedLoop {
-    get => ref _Handle.AsRef<bool>(_ClosedLoopOffset.Value);
+    get {
+      if (_ClosedLoopOffset == null) {
+        _ClosedLoopOffset = Schema.GetOffset(0x5E193E547C20D1AB);
+      }
+      return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumPointsAlongPathOffset = new(() => Schema.GetOffset(0x5E193E54ACB5FC8A), LazyThreadSafetyMode.None);
+  private static nint? _NumPointsAlongPathOffset;
 
   public ref int NumPointsAlongPath {
-    get => ref _Handle.AsRef<int>(_NumPointsAlongPathOffset.Value);
+    get {
+      if (_NumPointsAlongPathOffset == null) {
+        _NumPointsAlongPathOffset = Schema.GetOffset(0x5E193E54ACB5FC8A);
+      }
+      return ref _Handle.AsRef<int>(_NumPointsAlongPathOffset!.Value);
+    }
   }
 
 

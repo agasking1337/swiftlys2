@@ -17,20 +17,35 @@ internal partial class CMotionNodeSequenceImpl : CMotionNodeImpl, CMotionNodeSeq
   public CMotionNodeSequenceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TagsOffset = new(() => Schema.GetOffset(0xA932DE59B46C8540), LazyThreadSafetyMode.None);
+  private static nint? _TagsOffset;
 
   public ref CUtlVector<TagSpan_t> Tags {
-    get => ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset.Value);
+    get {
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0xA932DE59B46C8540);
+      }
+      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SequenceOffset = new(() => Schema.GetOffset(0xA932DE59E0A0598E), LazyThreadSafetyMode.None);
+  private static nint? _SequenceOffset;
 
   public HSequence Sequence {
-    get => new HSequenceImpl(_Handle + _SequenceOffset.Value);
+    get {
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0xA932DE59E0A0598E);
+      }
+      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaybackSpeedOffset = new(() => Schema.GetOffset(0xA932DE59FA2B402D), LazyThreadSafetyMode.None);
+  private static nint? _PlaybackSpeedOffset;
 
   public ref float PlaybackSpeed {
-    get => ref _Handle.AsRef<float>(_PlaybackSpeedOffset.Value);
+    get {
+      if (_PlaybackSpeedOffset == null) {
+        _PlaybackSpeedOffset = Schema.GetOffset(0xA932DE59FA2B402D);
+      }
+      return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+    }
   }
 
 

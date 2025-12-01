@@ -17,44 +17,82 @@ internal partial class BoneDemoCaptureSettings_tImpl : SchemaClass, BoneDemoCapt
   public BoneDemoCaptureSettings_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoneNameOffset = new(() => Schema.GetOffset(0x17A5730FDEE0E0C), LazyThreadSafetyMode.None);
+  private static nint? _BoneNameOffset;
 
   public string BoneName {
     get {
-      var ptr = _Handle.Read<nint>(_BoneNameOffset.Value);
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
+      }
+      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _BoneNameOffset.Value, value);
+    set {
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
+      }
+      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ErrorSplineRotationMaxOffset = new(() => Schema.GetOffset(0x17A5730AB5B6CD2), LazyThreadSafetyMode.None);
+  private static nint? _ErrorSplineRotationMaxOffset;
 
   public ref float ErrorSplineRotationMax {
-    get => ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset.Value);
+    get {
+      if (_ErrorSplineRotationMaxOffset == null) {
+        _ErrorSplineRotationMaxOffset = Schema.GetOffset(0x17A5730AB5B6CD2);
+      }
+      return ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ErrorSplineTranslationMaxOffset = new(() => Schema.GetOffset(0x17A57306248F645), LazyThreadSafetyMode.None);
+  private static nint? _ErrorSplineTranslationMaxOffset;
 
   public ref float ErrorSplineTranslationMax {
-    get => ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset.Value);
+    get {
+      if (_ErrorSplineTranslationMaxOffset == null) {
+        _ErrorSplineTranslationMaxOffset = Schema.GetOffset(0x17A57306248F645);
+      }
+      return ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ErrorSplineScaleMaxOffset = new(() => Schema.GetOffset(0x17A5730A30B95BA), LazyThreadSafetyMode.None);
+  private static nint? _ErrorSplineScaleMaxOffset;
 
   public ref float ErrorSplineScaleMax {
-    get => ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset.Value);
+    get {
+      if (_ErrorSplineScaleMaxOffset == null) {
+        _ErrorSplineScaleMaxOffset = Schema.GetOffset(0x17A5730A30B95BA);
+      }
+      return ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ErrorQuantizationRotationMaxOffset = new(() => Schema.GetOffset(0x17A57303509C8AA), LazyThreadSafetyMode.None);
+  private static nint? _ErrorQuantizationRotationMaxOffset;
 
   public ref float ErrorQuantizationRotationMax {
-    get => ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset.Value);
+    get {
+      if (_ErrorQuantizationRotationMaxOffset == null) {
+        _ErrorQuantizationRotationMaxOffset = Schema.GetOffset(0x17A57303509C8AA);
+      }
+      return ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ErrorQuantizationTranslationMaxOffset = new(() => Schema.GetOffset(0x17A5730F1E2893D), LazyThreadSafetyMode.None);
+  private static nint? _ErrorQuantizationTranslationMaxOffset;
 
   public ref float ErrorQuantizationTranslationMax {
-    get => ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset.Value);
+    get {
+      if (_ErrorQuantizationTranslationMaxOffset == null) {
+        _ErrorQuantizationTranslationMaxOffset = Schema.GetOffset(0x17A5730F1E2893D);
+      }
+      return ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ErrorQuantizationScaleMaxOffset = new(() => Schema.GetOffset(0x17A57302ACF0072), LazyThreadSafetyMode.None);
+  private static nint? _ErrorQuantizationScaleMaxOffset;
 
   public ref float ErrorQuantizationScaleMax {
-    get => ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset.Value);
+    get {
+      if (_ErrorQuantizationScaleMaxOffset == null) {
+        _ErrorQuantizationScaleMaxOffset = Schema.GetOffset(0x17A57302ACF0072);
+      }
+      return ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset!.Value);
+    }
   }
 
 

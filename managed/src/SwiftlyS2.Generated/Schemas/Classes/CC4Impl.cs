@@ -17,58 +17,108 @@ internal partial class CC4Impl : CCSWeaponBaseImpl, CC4 {
   public CC4Impl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LastValidPlayerHeldPositionOffset = new(() => Schema.GetOffset(0x1D49B0B580F67DBC), LazyThreadSafetyMode.None);
+  private static nint? _LastValidPlayerHeldPositionOffset;
 
   public ref Vector LastValidPlayerHeldPosition {
-    get => ref _Handle.AsRef<Vector>(_LastValidPlayerHeldPositionOffset.Value);
+    get {
+      if (_LastValidPlayerHeldPositionOffset == null) {
+        _LastValidPlayerHeldPositionOffset = Schema.GetOffset(0x1D49B0B580F67DBC);
+      }
+      return ref _Handle.AsRef<Vector>(_LastValidPlayerHeldPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastValidDroppedPositionOffset = new(() => Schema.GetOffset(0x1D49B0B552BFA49A), LazyThreadSafetyMode.None);
+  private static nint? _LastValidDroppedPositionOffset;
 
   public ref Vector LastValidDroppedPosition {
-    get => ref _Handle.AsRef<Vector>(_LastValidDroppedPositionOffset.Value);
+    get {
+      if (_LastValidDroppedPositionOffset == null) {
+        _LastValidDroppedPositionOffset = Schema.GetOffset(0x1D49B0B552BFA49A);
+      }
+      return ref _Handle.AsRef<Vector>(_LastValidDroppedPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DoValidDroppedPositionCheckOffset = new(() => Schema.GetOffset(0x1D49B0B586C3166D), LazyThreadSafetyMode.None);
+  private static nint? _DoValidDroppedPositionCheckOffset;
 
   public ref bool DoValidDroppedPositionCheck {
-    get => ref _Handle.AsRef<bool>(_DoValidDroppedPositionCheckOffset.Value);
+    get {
+      if (_DoValidDroppedPositionCheckOffset == null) {
+        _DoValidDroppedPositionCheckOffset = Schema.GetOffset(0x1D49B0B586C3166D);
+      }
+      return ref _Handle.AsRef<bool>(_DoValidDroppedPositionCheckOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartedArmingOffset = new(() => Schema.GetOffset(0x1D49B0B5BE331CA8), LazyThreadSafetyMode.None);
+  private static nint? _StartedArmingOffset;
 
   public ref bool StartedArming {
-    get => ref _Handle.AsRef<bool>(_StartedArmingOffset.Value);
+    get {
+      if (_StartedArmingOffset == null) {
+        _StartedArmingOffset = Schema.GetOffset(0x1D49B0B5BE331CA8);
+      }
+      return ref _Handle.AsRef<bool>(_StartedArmingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ArmedTimeOffset = new(() => Schema.GetOffset(0x1D49B0B54C4C86C9), LazyThreadSafetyMode.None);
+  private static nint? _ArmedTimeOffset;
 
   public GameTime_t ArmedTime {
-    get => new GameTime_tImpl(_Handle + _ArmedTimeOffset.Value);
+    get {
+      if (_ArmedTimeOffset == null) {
+        _ArmedTimeOffset = Schema.GetOffset(0x1D49B0B54C4C86C9);
+      }
+      return new GameTime_tImpl(_Handle + _ArmedTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BombPlacedAnimationOffset = new(() => Schema.GetOffset(0x1D49B0B52F5F9F2A), LazyThreadSafetyMode.None);
+  private static nint? _BombPlacedAnimationOffset;
 
   public ref bool BombPlacedAnimation {
-    get => ref _Handle.AsRef<bool>(_BombPlacedAnimationOffset.Value);
+    get {
+      if (_BombPlacedAnimationOffset == null) {
+        _BombPlacedAnimationOffset = Schema.GetOffset(0x1D49B0B52F5F9F2A);
+      }
+      return ref _Handle.AsRef<bool>(_BombPlacedAnimationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsPlantingViaUseOffset = new(() => Schema.GetOffset(0x1D49B0B566506CF1), LazyThreadSafetyMode.None);
+  private static nint? _IsPlantingViaUseOffset;
 
   public ref bool IsPlantingViaUse {
-    get => ref _Handle.AsRef<bool>(_IsPlantingViaUseOffset.Value);
+    get {
+      if (_IsPlantingViaUseOffset == null) {
+        _IsPlantingViaUseOffset = Schema.GetOffset(0x1D49B0B566506CF1);
+      }
+      return ref _Handle.AsRef<bool>(_IsPlantingViaUseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EntitySpottedStateOffset = new(() => Schema.GetOffset(0x1D49B0B5032B547C), LazyThreadSafetyMode.None);
+  private static nint? _EntitySpottedStateOffset;
 
   public EntitySpottedState_t EntitySpottedState {
-    get => new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset.Value);
+    get {
+      if (_EntitySpottedStateOffset == null) {
+        _EntitySpottedStateOffset = Schema.GetOffset(0x1D49B0B5032B547C);
+      }
+      return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpotRulesOffset = new(() => Schema.GetOffset(0x1D49B0B5776CCE44), LazyThreadSafetyMode.None);
+  private static nint? _SpotRulesOffset;
 
   public ref int SpotRules {
-    get => ref _Handle.AsRef<int>(_SpotRulesOffset.Value);
+    get {
+      if (_SpotRulesOffset == null) {
+        _SpotRulesOffset = Schema.GetOffset(0x1D49B0B5776CCE44);
+      }
+      return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
+    }
   }
   public ISchemaFixedArray<bool> PlayedArmingBeeps {
     get => new SchemaFixedArray<bool>(_Handle, 0x1D49B0B525D5D369, 7, 1, 1);
   }
-  private static readonly Lazy<nint> _BombPlantedOffset = new(() => Schema.GetOffset(0x1D49B0B53C00B55F), LazyThreadSafetyMode.None);
+  private static nint? _BombPlantedOffset;
 
   public ref bool BombPlanted {
-    get => ref _Handle.AsRef<bool>(_BombPlantedOffset.Value);
+    get {
+      if (_BombPlantedOffset == null) {
+        _BombPlantedOffset = Schema.GetOffset(0x1D49B0B53C00B55F);
+      }
+      return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
+    }
   }
 
   public void StartedArmingUpdated() {

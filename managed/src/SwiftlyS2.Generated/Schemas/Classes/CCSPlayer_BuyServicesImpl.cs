@@ -17,10 +17,15 @@ internal partial class CCSPlayer_BuyServicesImpl : CPlayerPawnComponentImpl, CCS
   public CCSPlayer_BuyServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SellbackPurchaseEntriesOffset = new(() => Schema.GetOffset(0xF0C2C12231D8CF7F), LazyThreadSafetyMode.None);
+  private static nint? _SellbackPurchaseEntriesOffset;
 
   public ref CUtlVector<SellbackPurchaseEntry_t> SellbackPurchaseEntries {
-    get => ref _Handle.AsRef<CUtlVector<SellbackPurchaseEntry_t>>(_SellbackPurchaseEntriesOffset.Value);
+    get {
+      if (_SellbackPurchaseEntriesOffset == null) {
+        _SellbackPurchaseEntriesOffset = Schema.GetOffset(0xF0C2C12231D8CF7F);
+      }
+      return ref _Handle.AsRef<CUtlVector<SellbackPurchaseEntry_t>>(_SellbackPurchaseEntriesOffset!.Value);
+    }
   }
 
   public void SellbackPurchaseEntriesUpdated() {

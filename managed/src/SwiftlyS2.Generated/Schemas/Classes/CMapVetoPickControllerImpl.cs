@@ -17,35 +17,65 @@ internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPic
   public CMapVetoPickControllerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PlayedIntroVcdOffset = new(() => Schema.GetOffset(0xD5DDD68DA8EE58C9), LazyThreadSafetyMode.None);
+  private static nint? _PlayedIntroVcdOffset;
 
   public ref bool PlayedIntroVcd {
-    get => ref _Handle.AsRef<bool>(_PlayedIntroVcdOffset.Value);
+    get {
+      if (_PlayedIntroVcdOffset == null) {
+        _PlayedIntroVcdOffset = Schema.GetOffset(0xD5DDD68DA8EE58C9);
+      }
+      return ref _Handle.AsRef<bool>(_PlayedIntroVcdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NeedToPlayFiveSecondsRemainingOffset = new(() => Schema.GetOffset(0xD5DDD68D94B61BAD), LazyThreadSafetyMode.None);
+  private static nint? _NeedToPlayFiveSecondsRemainingOffset;
 
   public ref bool NeedToPlayFiveSecondsRemaining {
-    get => ref _Handle.AsRef<bool>(_NeedToPlayFiveSecondsRemainingOffset.Value);
+    get {
+      if (_NeedToPlayFiveSecondsRemainingOffset == null) {
+        _NeedToPlayFiveSecondsRemainingOffset = Schema.GetOffset(0xD5DDD68D94B61BAD);
+      }
+      return ref _Handle.AsRef<bool>(_NeedToPlayFiveSecondsRemainingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DblPreMatchDraftSequenceTimeOffset = new(() => Schema.GetOffset(0xD5DDD68DB69AE022), LazyThreadSafetyMode.None);
+  private static nint? _DblPreMatchDraftSequenceTimeOffset;
 
   public ref double DblPreMatchDraftSequenceTime {
-    get => ref _Handle.AsRef<double>(_DblPreMatchDraftSequenceTimeOffset.Value);
+    get {
+      if (_DblPreMatchDraftSequenceTimeOffset == null) {
+        _DblPreMatchDraftSequenceTimeOffset = Schema.GetOffset(0xD5DDD68DB69AE022);
+      }
+      return ref _Handle.AsRef<double>(_DblPreMatchDraftSequenceTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PreMatchDraftStateChangedOffset = new(() => Schema.GetOffset(0xD5DDD68D114D7C7D), LazyThreadSafetyMode.None);
+  private static nint? _PreMatchDraftStateChangedOffset;
 
   public ref bool PreMatchDraftStateChanged {
-    get => ref _Handle.AsRef<bool>(_PreMatchDraftStateChangedOffset.Value);
+    get {
+      if (_PreMatchDraftStateChangedOffset == null) {
+        _PreMatchDraftStateChangedOffset = Schema.GetOffset(0xD5DDD68D114D7C7D);
+      }
+      return ref _Handle.AsRef<bool>(_PreMatchDraftStateChangedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DraftTypeOffset = new(() => Schema.GetOffset(0xD5DDD68D6BFCF590), LazyThreadSafetyMode.None);
+  private static nint? _DraftTypeOffset;
 
   public ref int DraftType {
-    get => ref _Handle.AsRef<int>(_DraftTypeOffset.Value);
+    get {
+      if (_DraftTypeOffset == null) {
+        _DraftTypeOffset = Schema.GetOffset(0xD5DDD68D6BFCF590);
+      }
+      return ref _Handle.AsRef<int>(_DraftTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TeamWinningCoinTossOffset = new(() => Schema.GetOffset(0xD5DDD68D45B5B5A2), LazyThreadSafetyMode.None);
+  private static nint? _TeamWinningCoinTossOffset;
 
   public ref int TeamWinningCoinToss {
-    get => ref _Handle.AsRef<int>(_TeamWinningCoinTossOffset.Value);
+    get {
+      if (_TeamWinningCoinTossOffset == null) {
+        _TeamWinningCoinTossOffset = Schema.GetOffset(0xD5DDD68D45B5B5A2);
+      }
+      return ref _Handle.AsRef<int>(_TeamWinningCoinTossOffset!.Value);
+    }
   }
   public ISchemaFixedArray<int> TeamWithFirstChoice {
     get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D8887D005, 64, 4, 4);
@@ -77,45 +107,85 @@ internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPic
   public ISchemaFixedArray<int> StartingSide0 {
     get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DDAE5D5BA, 64, 4, 4);
   }
-  private static readonly Lazy<nint> _CurrentPhaseOffset = new(() => Schema.GetOffset(0xD5DDD68DA6D9FE15), LazyThreadSafetyMode.None);
+  private static nint? _CurrentPhaseOffset;
 
   public ref int CurrentPhase {
-    get => ref _Handle.AsRef<int>(_CurrentPhaseOffset.Value);
+    get {
+      if (_CurrentPhaseOffset == null) {
+        _CurrentPhaseOffset = Schema.GetOffset(0xD5DDD68DA6D9FE15);
+      }
+      return ref _Handle.AsRef<int>(_CurrentPhaseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PhaseStartTickOffset = new(() => Schema.GetOffset(0xD5DDD68DD6F24225), LazyThreadSafetyMode.None);
+  private static nint? _PhaseStartTickOffset;
 
   public ref int PhaseStartTick {
-    get => ref _Handle.AsRef<int>(_PhaseStartTickOffset.Value);
+    get {
+      if (_PhaseStartTickOffset == null) {
+        _PhaseStartTickOffset = Schema.GetOffset(0xD5DDD68DD6F24225);
+      }
+      return ref _Handle.AsRef<int>(_PhaseStartTickOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PhaseDurationTicksOffset = new(() => Schema.GetOffset(0xD5DDD68D77B8F176), LazyThreadSafetyMode.None);
+  private static nint? _PhaseDurationTicksOffset;
 
   public ref int PhaseDurationTicks {
-    get => ref _Handle.AsRef<int>(_PhaseDurationTicksOffset.Value);
+    get {
+      if (_PhaseDurationTicksOffset == null) {
+        _PhaseDurationTicksOffset = Schema.GetOffset(0xD5DDD68D77B8F176);
+      }
+      return ref _Handle.AsRef<int>(_PhaseDurationTicksOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnMapVetoedOffset = new(() => Schema.GetOffset(0xD5DDD68D6C16E77B), LazyThreadSafetyMode.None);
+  private static nint? _OnMapVetoedOffset;
 
   public SchemaUntypedField OnMapVetoed {
-    get => new SchemaUntypedField(_Handle + _OnMapVetoedOffset.Value);
+    get {
+      if (_OnMapVetoedOffset == null) {
+        _OnMapVetoedOffset = Schema.GetOffset(0xD5DDD68D6C16E77B);
+      }
+      return new SchemaUntypedField(_Handle + _OnMapVetoedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnMapPickedOffset = new(() => Schema.GetOffset(0xD5DDD68DF50BA186), LazyThreadSafetyMode.None);
+  private static nint? _OnMapPickedOffset;
 
   public SchemaUntypedField OnMapPicked {
-    get => new SchemaUntypedField(_Handle + _OnMapPickedOffset.Value);
+    get {
+      if (_OnMapPickedOffset == null) {
+        _OnMapPickedOffset = Schema.GetOffset(0xD5DDD68DF50BA186);
+      }
+      return new SchemaUntypedField(_Handle + _OnMapPickedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnSidesPickedOffset = new(() => Schema.GetOffset(0xD5DDD68DC852D128), LazyThreadSafetyMode.None);
+  private static nint? _OnSidesPickedOffset;
 
   public SchemaUntypedField OnSidesPicked {
-    get => new SchemaUntypedField(_Handle + _OnSidesPickedOffset.Value);
+    get {
+      if (_OnSidesPickedOffset == null) {
+        _OnSidesPickedOffset = Schema.GetOffset(0xD5DDD68DC852D128);
+      }
+      return new SchemaUntypedField(_Handle + _OnSidesPickedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnNewPhaseStartedOffset = new(() => Schema.GetOffset(0xD5DDD68D40B650EE), LazyThreadSafetyMode.None);
+  private static nint? _OnNewPhaseStartedOffset;
 
   public SchemaUntypedField OnNewPhaseStarted {
-    get => new SchemaUntypedField(_Handle + _OnNewPhaseStartedOffset.Value);
+    get {
+      if (_OnNewPhaseStartedOffset == null) {
+        _OnNewPhaseStartedOffset = Schema.GetOffset(0xD5DDD68D40B650EE);
+      }
+      return new SchemaUntypedField(_Handle + _OnNewPhaseStartedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnLevelTransitionOffset = new(() => Schema.GetOffset(0xD5DDD68D2AEE71AD), LazyThreadSafetyMode.None);
+  private static nint? _OnLevelTransitionOffset;
 
   public SchemaUntypedField OnLevelTransition {
-    get => new SchemaUntypedField(_Handle + _OnLevelTransitionOffset.Value);
+    get {
+      if (_OnLevelTransitionOffset == null) {
+        _OnLevelTransitionOffset = Schema.GetOffset(0xD5DDD68D2AEE71AD);
+      }
+      return new SchemaUntypedField(_Handle + _OnLevelTransitionOffset!.Value);
+    }
   }
 
   public void DraftTypeUpdated() {

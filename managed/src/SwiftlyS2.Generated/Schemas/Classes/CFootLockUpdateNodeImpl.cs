@@ -17,105 +17,205 @@ internal partial class CFootLockUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootLock
   public CFootLockUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OpFixedSettingsOffset = new(() => Schema.GetOffset(0xA8F37E8E533AB09), LazyThreadSafetyMode.None);
+  private static nint? _OpFixedSettingsOffset;
 
   public FootLockPoseOpFixedSettings OpFixedSettings {
-    get => new FootLockPoseOpFixedSettingsImpl(_Handle + _OpFixedSettingsOffset.Value);
+    get {
+      if (_OpFixedSettingsOffset == null) {
+        _OpFixedSettingsOffset = Schema.GetOffset(0xA8F37E8E533AB09);
+      }
+      return new FootLockPoseOpFixedSettingsImpl(_Handle + _OpFixedSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootSettingsOffset = new(() => Schema.GetOffset(0xA8F37E8A7F2ADE4), LazyThreadSafetyMode.None);
+  private static nint? _FootSettingsOffset;
 
   public ref CUtlVector<FootFixedSettings> FootSettings {
-    get => ref _Handle.AsRef<CUtlVector<FootFixedSettings>>(_FootSettingsOffset.Value);
+    get {
+      if (_FootSettingsOffset == null) {
+        _FootSettingsOffset = Schema.GetOffset(0xA8F37E8A7F2ADE4);
+      }
+      return ref _Handle.AsRef<CUtlVector<FootFixedSettings>>(_FootSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipShiftDampingOffset = new(() => Schema.GetOffset(0xA8F37E80EA57628), LazyThreadSafetyMode.None);
+  private static nint? _HipShiftDampingOffset;
 
   public CAnimInputDamping HipShiftDamping {
-    get => new CAnimInputDampingImpl(_Handle + _HipShiftDampingOffset.Value);
+    get {
+      if (_HipShiftDampingOffset == null) {
+        _HipShiftDampingOffset = Schema.GetOffset(0xA8F37E80EA57628);
+      }
+      return new CAnimInputDampingImpl(_Handle + _HipShiftDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RootHeightDampingOffset = new(() => Schema.GetOffset(0xA8F37E84DE10164), LazyThreadSafetyMode.None);
+  private static nint? _RootHeightDampingOffset;
 
   public CAnimInputDamping RootHeightDamping {
-    get => new CAnimInputDampingImpl(_Handle + _RootHeightDampingOffset.Value);
+    get {
+      if (_RootHeightDampingOffset == null) {
+        _RootHeightDampingOffset = Schema.GetOffset(0xA8F37E84DE10164);
+      }
+      return new CAnimInputDampingImpl(_Handle + _RootHeightDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrideCurveScaleOffset = new(() => Schema.GetOffset(0xA8F37E824E250E9), LazyThreadSafetyMode.None);
+  private static nint? _StrideCurveScaleOffset;
 
   public ref float StrideCurveScale {
-    get => ref _Handle.AsRef<float>(_StrideCurveScaleOffset.Value);
+    get {
+      if (_StrideCurveScaleOffset == null) {
+        _StrideCurveScaleOffset = Schema.GetOffset(0xA8F37E824E250E9);
+      }
+      return ref _Handle.AsRef<float>(_StrideCurveScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrideCurveLimitScaleOffset = new(() => Schema.GetOffset(0xA8F37E8BE5E55F6), LazyThreadSafetyMode.None);
+  private static nint? _StrideCurveLimitScaleOffset;
 
   public ref float StrideCurveLimitScale {
-    get => ref _Handle.AsRef<float>(_StrideCurveLimitScaleOffset.Value);
+    get {
+      if (_StrideCurveLimitScaleOffset == null) {
+        _StrideCurveLimitScaleOffset = Schema.GetOffset(0xA8F37E8BE5E55F6);
+      }
+      return ref _Handle.AsRef<float>(_StrideCurveLimitScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StepHeightIncreaseScaleOffset = new(() => Schema.GetOffset(0xA8F37E8AEFDE950), LazyThreadSafetyMode.None);
+  private static nint? _StepHeightIncreaseScaleOffset;
 
   public ref float StepHeightIncreaseScale {
-    get => ref _Handle.AsRef<float>(_StepHeightIncreaseScaleOffset.Value);
+    get {
+      if (_StepHeightIncreaseScaleOffset == null) {
+        _StepHeightIncreaseScaleOffset = Schema.GetOffset(0xA8F37E8AEFDE950);
+      }
+      return ref _Handle.AsRef<float>(_StepHeightIncreaseScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StepHeightDecreaseScaleOffset = new(() => Schema.GetOffset(0xA8F37E882893258), LazyThreadSafetyMode.None);
+  private static nint? _StepHeightDecreaseScaleOffset;
 
   public ref float StepHeightDecreaseScale {
-    get => ref _Handle.AsRef<float>(_StepHeightDecreaseScaleOffset.Value);
+    get {
+      if (_StepHeightDecreaseScaleOffset == null) {
+        _StepHeightDecreaseScaleOffset = Schema.GetOffset(0xA8F37E882893258);
+      }
+      return ref _Handle.AsRef<float>(_StepHeightDecreaseScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipShiftScaleOffset = new(() => Schema.GetOffset(0xA8F37E847C1BE5A), LazyThreadSafetyMode.None);
+  private static nint? _HipShiftScaleOffset;
 
   public ref float HipShiftScale {
-    get => ref _Handle.AsRef<float>(_HipShiftScaleOffset.Value);
+    get {
+      if (_HipShiftScaleOffset == null) {
+        _HipShiftScaleOffset = Schema.GetOffset(0xA8F37E847C1BE5A);
+      }
+      return ref _Handle.AsRef<float>(_HipShiftScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendTimeOffset = new(() => Schema.GetOffset(0xA8F37E8A6206E9F), LazyThreadSafetyMode.None);
+  private static nint? _BlendTimeOffset;
 
   public ref float BlendTime {
-    get => ref _Handle.AsRef<float>(_BlendTimeOffset.Value);
+    get {
+      if (_BlendTimeOffset == null) {
+        _BlendTimeOffset = Schema.GetOffset(0xA8F37E8A6206E9F);
+      }
+      return ref _Handle.AsRef<float>(_BlendTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxRootHeightOffsetOffset = new(() => Schema.GetOffset(0xA8F37E8C33AC7DF), LazyThreadSafetyMode.None);
+  private static nint? _MaxRootHeightOffsetOffset;
 
   public ref float MaxRootHeightOffset {
-    get => ref _Handle.AsRef<float>(_MaxRootHeightOffsetOffset.Value);
+    get {
+      if (_MaxRootHeightOffsetOffset == null) {
+        _MaxRootHeightOffsetOffset = Schema.GetOffset(0xA8F37E8C33AC7DF);
+      }
+      return ref _Handle.AsRef<float>(_MaxRootHeightOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinRootHeightOffsetOffset = new(() => Schema.GetOffset(0xA8F37E8D9B970B1), LazyThreadSafetyMode.None);
+  private static nint? _MinRootHeightOffsetOffset;
 
   public ref float MinRootHeightOffset {
-    get => ref _Handle.AsRef<float>(_MinRootHeightOffsetOffset.Value);
+    get {
+      if (_MinRootHeightOffsetOffset == null) {
+        _MinRootHeightOffsetOffset = Schema.GetOffset(0xA8F37E8D9B970B1);
+      }
+      return ref _Handle.AsRef<float>(_MinRootHeightOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TiltPlanePitchSpringStrengthOffset = new(() => Schema.GetOffset(0xA8F37E864893350), LazyThreadSafetyMode.None);
+  private static nint? _TiltPlanePitchSpringStrengthOffset;
 
   public ref float TiltPlanePitchSpringStrength {
-    get => ref _Handle.AsRef<float>(_TiltPlanePitchSpringStrengthOffset.Value);
+    get {
+      if (_TiltPlanePitchSpringStrengthOffset == null) {
+        _TiltPlanePitchSpringStrengthOffset = Schema.GetOffset(0xA8F37E864893350);
+      }
+      return ref _Handle.AsRef<float>(_TiltPlanePitchSpringStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TiltPlaneRollSpringStrengthOffset = new(() => Schema.GetOffset(0xA8F37E8AD412E55), LazyThreadSafetyMode.None);
+  private static nint? _TiltPlaneRollSpringStrengthOffset;
 
   public ref float TiltPlaneRollSpringStrength {
-    get => ref _Handle.AsRef<float>(_TiltPlaneRollSpringStrengthOffset.Value);
+    get {
+      if (_TiltPlaneRollSpringStrengthOffset == null) {
+        _TiltPlaneRollSpringStrengthOffset = Schema.GetOffset(0xA8F37E8AD412E55);
+      }
+      return ref _Handle.AsRef<float>(_TiltPlaneRollSpringStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyFootRotationLimitsOffset = new(() => Schema.GetOffset(0xA8F37E87C3F5AED), LazyThreadSafetyMode.None);
+  private static nint? _ApplyFootRotationLimitsOffset;
 
   public ref bool ApplyFootRotationLimits {
-    get => ref _Handle.AsRef<bool>(_ApplyFootRotationLimitsOffset.Value);
+    get {
+      if (_ApplyFootRotationLimitsOffset == null) {
+        _ApplyFootRotationLimitsOffset = Schema.GetOffset(0xA8F37E87C3F5AED);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyFootRotationLimitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyHipShiftOffset = new(() => Schema.GetOffset(0xA8F37E8DE90F994), LazyThreadSafetyMode.None);
+  private static nint? _ApplyHipShiftOffset;
 
   public ref bool ApplyHipShift {
-    get => ref _Handle.AsRef<bool>(_ApplyHipShiftOffset.Value);
+    get {
+      if (_ApplyHipShiftOffset == null) {
+        _ApplyHipShiftOffset = Schema.GetOffset(0xA8F37E8DE90F994);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyHipShiftOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModulateStepHeightOffset = new(() => Schema.GetOffset(0xA8F37E82412FFBF), LazyThreadSafetyMode.None);
+  private static nint? _ModulateStepHeightOffset;
 
   public ref bool ModulateStepHeight {
-    get => ref _Handle.AsRef<bool>(_ModulateStepHeightOffset.Value);
+    get {
+      if (_ModulateStepHeightOffset == null) {
+        _ModulateStepHeightOffset = Schema.GetOffset(0xA8F37E82412FFBF);
+      }
+      return ref _Handle.AsRef<bool>(_ModulateStepHeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetChildOffset = new(() => Schema.GetOffset(0xA8F37E865CC88B6), LazyThreadSafetyMode.None);
+  private static nint? _ResetChildOffset;
 
   public ref bool ResetChild {
-    get => ref _Handle.AsRef<bool>(_ResetChildOffset.Value);
+    get {
+      if (_ResetChildOffset == null) {
+        _ResetChildOffset = Schema.GetOffset(0xA8F37E865CC88B6);
+      }
+      return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableVerticalCurvedPathsOffset = new(() => Schema.GetOffset(0xA8F37E80A18A0EB), LazyThreadSafetyMode.None);
+  private static nint? _EnableVerticalCurvedPathsOffset;
 
   public ref bool EnableVerticalCurvedPaths {
-    get => ref _Handle.AsRef<bool>(_EnableVerticalCurvedPathsOffset.Value);
+    get {
+      if (_EnableVerticalCurvedPathsOffset == null) {
+        _EnableVerticalCurvedPathsOffset = Schema.GetOffset(0xA8F37E80A18A0EB);
+      }
+      return ref _Handle.AsRef<bool>(_EnableVerticalCurvedPathsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableRootHeightDampingOffset = new(() => Schema.GetOffset(0xA8F37E802F42911), LazyThreadSafetyMode.None);
+  private static nint? _EnableRootHeightDampingOffset;
 
   public ref bool EnableRootHeightDamping {
-    get => ref _Handle.AsRef<bool>(_EnableRootHeightDampingOffset.Value);
+    get {
+      if (_EnableRootHeightDampingOffset == null) {
+        _EnableRootHeightDampingOffset = Schema.GetOffset(0xA8F37E802F42911);
+      }
+      return ref _Handle.AsRef<bool>(_EnableRootHeightDampingOffset!.Value);
+    }
   }
 
 

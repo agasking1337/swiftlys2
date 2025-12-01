@@ -17,15 +17,25 @@ internal partial class CVoiceContainerAnalysisBaseImpl : SchemaClass, CVoiceCont
   public CVoiceContainerAnalysisBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RegenerateCurveOnCompileOffset = new(() => Schema.GetOffset(0xC0BE2FE061AFA19C), LazyThreadSafetyMode.None);
+  private static nint? _RegenerateCurveOnCompileOffset;
 
   public ref bool RegenerateCurveOnCompile {
-    get => ref _Handle.AsRef<bool>(_RegenerateCurveOnCompileOffset.Value);
+    get {
+      if (_RegenerateCurveOnCompileOffset == null) {
+        _RegenerateCurveOnCompileOffset = Schema.GetOffset(0xC0BE2FE061AFA19C);
+      }
+      return ref _Handle.AsRef<bool>(_RegenerateCurveOnCompileOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurveOffset = new(() => Schema.GetOffset(0xC0BE2FE0BFFA0B34), LazyThreadSafetyMode.None);
+  private static nint? _CurveOffset;
 
   public SchemaUntypedField Curve {
-    get => new SchemaUntypedField(_Handle + _CurveOffset.Value);
+    get {
+      if (_CurveOffset == null) {
+        _CurveOffset = Schema.GetOffset(0xC0BE2FE0BFFA0B34);
+      }
+      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    }
   }
 
 

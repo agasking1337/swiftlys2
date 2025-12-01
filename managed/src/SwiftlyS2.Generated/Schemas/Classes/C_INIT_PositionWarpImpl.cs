@@ -17,55 +17,105 @@ internal partial class C_INIT_PositionWarpImpl : CParticleFunctionInitializerImp
   public C_INIT_PositionWarpImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WarpMinOffset = new(() => Schema.GetOffset(0x15BDD34F1B8A7F09), LazyThreadSafetyMode.None);
+  private static nint? _WarpMinOffset;
 
   public CParticleCollectionVecInput WarpMin {
-    get => new CParticleCollectionVecInputImpl(_Handle + _WarpMinOffset.Value);
+    get {
+      if (_WarpMinOffset == null) {
+        _WarpMinOffset = Schema.GetOffset(0x15BDD34F1B8A7F09);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _WarpMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WarpMaxOffset = new(() => Schema.GetOffset(0x15BDD34F0D76E147), LazyThreadSafetyMode.None);
+  private static nint? _WarpMaxOffset;
 
   public CParticleCollectionVecInput WarpMax {
-    get => new CParticleCollectionVecInputImpl(_Handle + _WarpMaxOffset.Value);
+    get {
+      if (_WarpMaxOffset == null) {
+        _WarpMaxOffset = Schema.GetOffset(0x15BDD34F0D76E147);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _WarpMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleControlPointNumberOffset = new(() => Schema.GetOffset(0x15BDD34F9A649261), LazyThreadSafetyMode.None);
+  private static nint? _ScaleControlPointNumberOffset;
 
   public ref int ScaleControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset.Value);
+    get {
+      if (_ScaleControlPointNumberOffset == null) {
+        _ScaleControlPointNumberOffset = Schema.GetOffset(0x15BDD34F9A649261);
+      }
+      return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x15BDD34F3F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x15BDD34F3F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusComponentOffset = new(() => Schema.GetOffset(0x15BDD34FFBFE904A), LazyThreadSafetyMode.None);
+  private static nint? _RadiusComponentOffset;
 
   public ref int RadiusComponent {
-    get => ref _Handle.AsRef<int>(_RadiusComponentOffset.Value);
+    get {
+      if (_RadiusComponentOffset == null) {
+        _RadiusComponentOffset = Schema.GetOffset(0x15BDD34FFBFE904A);
+      }
+      return ref _Handle.AsRef<int>(_RadiusComponentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WarpTimeOffset = new(() => Schema.GetOffset(0x15BDD34F34CDAE88), LazyThreadSafetyMode.None);
+  private static nint? _WarpTimeOffset;
 
   public ref float WarpTime {
-    get => ref _Handle.AsRef<float>(_WarpTimeOffset.Value);
+    get {
+      if (_WarpTimeOffset == null) {
+        _WarpTimeOffset = Schema.GetOffset(0x15BDD34F34CDAE88);
+      }
+      return ref _Handle.AsRef<float>(_WarpTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WarpStartTimeOffset = new(() => Schema.GetOffset(0x15BDD34F4326267A), LazyThreadSafetyMode.None);
+  private static nint? _WarpStartTimeOffset;
 
   public ref float WarpStartTime {
-    get => ref _Handle.AsRef<float>(_WarpStartTimeOffset.Value);
+    get {
+      if (_WarpStartTimeOffset == null) {
+        _WarpStartTimeOffset = Schema.GetOffset(0x15BDD34F4326267A);
+      }
+      return ref _Handle.AsRef<float>(_WarpStartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PrevPosScaleOffset = new(() => Schema.GetOffset(0x15BDD34F46CED122), LazyThreadSafetyMode.None);
+  private static nint? _PrevPosScaleOffset;
 
   public ref float PrevPosScale {
-    get => ref _Handle.AsRef<float>(_PrevPosScaleOffset.Value);
+    get {
+      if (_PrevPosScaleOffset == null) {
+        _PrevPosScaleOffset = Schema.GetOffset(0x15BDD34F46CED122);
+      }
+      return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InvertWarpOffset = new(() => Schema.GetOffset(0x15BDD34F67E23133), LazyThreadSafetyMode.None);
+  private static nint? _InvertWarpOffset;
 
   public ref bool InvertWarp {
-    get => ref _Handle.AsRef<bool>(_InvertWarpOffset.Value);
+    get {
+      if (_InvertWarpOffset == null) {
+        _InvertWarpOffset = Schema.GetOffset(0x15BDD34F67E23133);
+      }
+      return ref _Handle.AsRef<bool>(_InvertWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseCountOffset = new(() => Schema.GetOffset(0x15BDD34F8836B9AB), LazyThreadSafetyMode.None);
+  private static nint? _UseCountOffset;
 
   public ref bool UseCount {
-    get => ref _Handle.AsRef<bool>(_UseCountOffset.Value);
+    get {
+      if (_UseCountOffset == null) {
+        _UseCountOffset = Schema.GetOffset(0x15BDD34F8836B9AB);
+      }
+      return ref _Handle.AsRef<bool>(_UseCountOffset!.Value);
+    }
   }
 
 

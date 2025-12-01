@@ -17,55 +17,105 @@ internal partial class VMixDynamics3BandDesc_tImpl : SchemaClass, VMixDynamics3B
   public VMixDynamics3BandDesc_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FldbGainOutputOffset = new(() => Schema.GetOffset(0xA4A1000DFC3C16D3), LazyThreadSafetyMode.None);
+  private static nint? _FldbGainOutputOffset;
 
   public ref float FldbGainOutput {
-    get => ref _Handle.AsRef<float>(_FldbGainOutputOffset.Value);
+    get {
+      if (_FldbGainOutputOffset == null) {
+        _FldbGainOutputOffset = Schema.GetOffset(0xA4A1000DFC3C16D3);
+      }
+      return ref _Handle.AsRef<float>(_FldbGainOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RMSTimeMSOffset = new(() => Schema.GetOffset(0xA4A1000DFB749526), LazyThreadSafetyMode.None);
+  private static nint? _RMSTimeMSOffset;
 
   public ref float RMSTimeMS {
-    get => ref _Handle.AsRef<float>(_RMSTimeMSOffset.Value);
+    get {
+      if (_RMSTimeMSOffset == null) {
+        _RMSTimeMSOffset = Schema.GetOffset(0xA4A1000DFB749526);
+      }
+      return ref _Handle.AsRef<float>(_RMSTimeMSOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FldbKneeWidthOffset = new(() => Schema.GetOffset(0xA4A1000D35532FF2), LazyThreadSafetyMode.None);
+  private static nint? _FldbKneeWidthOffset;
 
   public ref float FldbKneeWidth {
-    get => ref _Handle.AsRef<float>(_FldbKneeWidthOffset.Value);
+    get {
+      if (_FldbKneeWidthOffset == null) {
+        _FldbKneeWidthOffset = Schema.GetOffset(0xA4A1000D35532FF2);
+      }
+      return ref _Handle.AsRef<float>(_FldbKneeWidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DepthOffset = new(() => Schema.GetOffset(0xA4A1000DD3AD54E8), LazyThreadSafetyMode.None);
+  private static nint? _DepthOffset;
 
   public ref float Depth {
-    get => ref _Handle.AsRef<float>(_DepthOffset.Value);
+    get {
+      if (_DepthOffset == null) {
+        _DepthOffset = Schema.GetOffset(0xA4A1000DD3AD54E8);
+      }
+      return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WetMixOffset = new(() => Schema.GetOffset(0xA4A1000DD5453C15), LazyThreadSafetyMode.None);
+  private static nint? _WetMixOffset;
 
   public ref float WetMix {
-    get => ref _Handle.AsRef<float>(_WetMixOffset.Value);
+    get {
+      if (_WetMixOffset == null) {
+        _WetMixOffset = Schema.GetOffset(0xA4A1000DD5453C15);
+      }
+      return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeScaleOffset = new(() => Schema.GetOffset(0xA4A1000DB49D735C), LazyThreadSafetyMode.None);
+  private static nint? _TimeScaleOffset;
 
   public ref float TimeScale {
-    get => ref _Handle.AsRef<float>(_TimeScaleOffset.Value);
+    get {
+      if (_TimeScaleOffset == null) {
+        _TimeScaleOffset = Schema.GetOffset(0xA4A1000DB49D735C);
+      }
+      return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LowCutoffFreqOffset = new(() => Schema.GetOffset(0xA4A1000D1E9A1CCC), LazyThreadSafetyMode.None);
+  private static nint? _LowCutoffFreqOffset;
 
   public ref float LowCutoffFreq {
-    get => ref _Handle.AsRef<float>(_LowCutoffFreqOffset.Value);
+    get {
+      if (_LowCutoffFreqOffset == null) {
+        _LowCutoffFreqOffset = Schema.GetOffset(0xA4A1000D1E9A1CCC);
+      }
+      return ref _Handle.AsRef<float>(_LowCutoffFreqOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HighCutoffFreqOffset = new(() => Schema.GetOffset(0xA4A1000D3FE556C8), LazyThreadSafetyMode.None);
+  private static nint? _HighCutoffFreqOffset;
 
   public ref float HighCutoffFreq {
-    get => ref _Handle.AsRef<float>(_HighCutoffFreqOffset.Value);
+    get {
+      if (_HighCutoffFreqOffset == null) {
+        _HighCutoffFreqOffset = Schema.GetOffset(0xA4A1000D3FE556C8);
+      }
+      return ref _Handle.AsRef<float>(_HighCutoffFreqOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PeakModeOffset = new(() => Schema.GetOffset(0xA4A1000D87DF35F9), LazyThreadSafetyMode.None);
+  private static nint? _PeakModeOffset;
 
   public ref bool PeakMode {
-    get => ref _Handle.AsRef<bool>(_PeakModeOffset.Value);
+    get {
+      if (_PeakModeOffset == null) {
+        _PeakModeOffset = Schema.GetOffset(0xA4A1000D87DF35F9);
+      }
+      return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BandDescOffset = new(() => Schema.GetOffset(0xA4A1000D04203F47), LazyThreadSafetyMode.None);
+  private static nint? _BandDescOffset;
 
   public SchemaUntypedField BandDesc {
-    get => new SchemaUntypedField(_Handle + _BandDescOffset.Value);
+    get {
+      if (_BandDescOffset == null) {
+        _BandDescOffset = Schema.GetOffset(0xA4A1000D04203F47);
+      }
+      return new SchemaUntypedField(_Handle + _BandDescOffset!.Value);
+    }
   }
 
 

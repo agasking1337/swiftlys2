@@ -17,30 +17,55 @@ internal partial class C_OP_ConstrainDistanceToUserSpecifiedPathImpl : CParticle
   public C_OP_ConstrainDistanceToUserSpecifiedPathImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinDistanceOffset = new(() => Schema.GetOffset(0x42F2CE28F016B7AC), LazyThreadSafetyMode.None);
+  private static nint? _MinDistanceOffset;
 
   public ref float MinDistance {
-    get => ref _Handle.AsRef<float>(_MinDistanceOffset.Value);
+    get {
+      if (_MinDistanceOffset == null) {
+        _MinDistanceOffset = Schema.GetOffset(0x42F2CE28F016B7AC);
+      }
+      return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxDistanceOffset = new(() => Schema.GetOffset(0x42F2CE2898893360), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceOffset;
 
   public ref float MaxDistance {
-    get => ref _Handle.AsRef<float>(_MaxDistanceOffset.Value);
+    get {
+      if (_MaxDistanceOffset == null) {
+        _MaxDistanceOffset = Schema.GetOffset(0x42F2CE2898893360);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeScaleOffset = new(() => Schema.GetOffset(0x42F2CE28B49D735C), LazyThreadSafetyMode.None);
+  private static nint? _TimeScaleOffset;
 
   public ref float TimeScale {
-    get => ref _Handle.AsRef<float>(_TimeScaleOffset.Value);
+    get {
+      if (_TimeScaleOffset == null) {
+        _TimeScaleOffset = Schema.GetOffset(0x42F2CE28B49D735C);
+      }
+      return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopedPathOffset = new(() => Schema.GetOffset(0x42F2CE284D64C459), LazyThreadSafetyMode.None);
+  private static nint? _LoopedPathOffset;
 
   public ref bool LoopedPath {
-    get => ref _Handle.AsRef<bool>(_LoopedPathOffset.Value);
+    get {
+      if (_LoopedPathOffset == null) {
+        _LoopedPathOffset = Schema.GetOffset(0x42F2CE284D64C459);
+      }
+      return ref _Handle.AsRef<bool>(_LoopedPathOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PointListOffset = new(() => Schema.GetOffset(0x42F2CE28976AB4FD), LazyThreadSafetyMode.None);
+  private static nint? _PointListOffset;
 
   public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList {
-    get => ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset.Value);
+    get {
+      if (_PointListOffset == null) {
+        _PointListOffset = Schema.GetOffset(0x42F2CE28976AB4FD);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset!.Value);
+    }
   }
 
 

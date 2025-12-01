@@ -17,62 +17,116 @@ internal partial class C_OP_DriveCPFromGlobalSoundFloatImpl : CParticleFunctionP
   public C_OP_DriveCPFromGlobalSoundFloatImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OutputControlPointOffset = new(() => Schema.GetOffset(0x1E3FE630266B0FD9), LazyThreadSafetyMode.None);
+  private static nint? _OutputControlPointOffset;
 
   public ref int OutputControlPoint {
-    get => ref _Handle.AsRef<int>(_OutputControlPointOffset.Value);
+    get {
+      if (_OutputControlPointOffset == null) {
+        _OutputControlPointOffset = Schema.GetOffset(0x1E3FE630266B0FD9);
+      }
+      return ref _Handle.AsRef<int>(_OutputControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputFieldOffset = new(() => Schema.GetOffset(0x1E3FE630324F6F74), LazyThreadSafetyMode.None);
+  private static nint? _OutputFieldOffset;
 
   public ref int OutputField {
-    get => ref _Handle.AsRef<int>(_OutputFieldOffset.Value);
+    get {
+      if (_OutputFieldOffset == null) {
+        _OutputFieldOffset = Schema.GetOffset(0x1E3FE630324F6F74);
+      }
+      return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0x1E3FE630E88A0D0F), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref float InputMin {
-    get => ref _Handle.AsRef<float>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0x1E3FE630E88A0D0F);
+      }
+      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0x1E3FE630D6766901), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref float InputMax {
-    get => ref _Handle.AsRef<float>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0x1E3FE630D6766901);
+      }
+      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0x1E3FE6305F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0x1E3FE6305F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0x1E3FE63051A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0x1E3FE63051A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StackNameOffset = new(() => Schema.GetOffset(0x1E3FE6308C81C05C), LazyThreadSafetyMode.None);
+  private static nint? _StackNameOffset;
 
   public string StackName {
     get {
-      var ptr = _Handle.Read<nint>(_StackNameOffset.Value);
+      if (_StackNameOffset == null) {
+        _StackNameOffset = Schema.GetOffset(0x1E3FE6308C81C05C);
+      }
+      var ptr = _Handle.Read<nint>(_StackNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StackNameOffset.Value, value);
+    set {
+      if (_StackNameOffset == null) {
+        _StackNameOffset = Schema.GetOffset(0x1E3FE6308C81C05C);
+      }
+      Schema.SetString(_Handle, _StackNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OperatorNameOffset = new(() => Schema.GetOffset(0x1E3FE63091CAF75E), LazyThreadSafetyMode.None);
+  private static nint? _OperatorNameOffset;
 
   public string OperatorName {
     get {
-      var ptr = _Handle.Read<nint>(_OperatorNameOffset.Value);
+      if (_OperatorNameOffset == null) {
+        _OperatorNameOffset = Schema.GetOffset(0x1E3FE63091CAF75E);
+      }
+      var ptr = _Handle.Read<nint>(_OperatorNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OperatorNameOffset.Value, value);
+    set {
+      if (_OperatorNameOffset == null) {
+        _OperatorNameOffset = Schema.GetOffset(0x1E3FE63091CAF75E);
+      }
+      Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _FieldNameOffset = new(() => Schema.GetOffset(0x1E3FE6300A25F4C4), LazyThreadSafetyMode.None);
+  private static nint? _FieldNameOffset;
 
   public string FieldName {
     get {
-      var ptr = _Handle.Read<nint>(_FieldNameOffset.Value);
+      if (_FieldNameOffset == null) {
+        _FieldNameOffset = Schema.GetOffset(0x1E3FE6300A25F4C4);
+      }
+      var ptr = _Handle.Read<nint>(_FieldNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _FieldNameOffset.Value, value);
+    set {
+      if (_FieldNameOffset == null) {
+        _FieldNameOffset = Schema.GetOffset(0x1E3FE6300A25F4C4);
+      }
+      Schema.SetString(_Handle, _FieldNameOffset!.Value, value);
+    }
   } 
 
 

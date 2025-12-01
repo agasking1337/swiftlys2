@@ -17,30 +17,55 @@ internal partial class C_INIT_CreateParticleImpulseImpl : CParticleFunctionIniti
   public C_INIT_CreateParticleImpulseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputRadiusOffset = new(() => Schema.GetOffset(0x1617EF931F5CA2F9), LazyThreadSafetyMode.None);
+  private static nint? _InputRadiusOffset;
 
   public CPerParticleFloatInput InputRadius {
-    get => new CPerParticleFloatInputImpl(_Handle + _InputRadiusOffset.Value);
+    get {
+      if (_InputRadiusOffset == null) {
+        _InputRadiusOffset = Schema.GetOffset(0x1617EF931F5CA2F9);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InputRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMagnitudeOffset = new(() => Schema.GetOffset(0x1617EF938E8975B7), LazyThreadSafetyMode.None);
+  private static nint? _InputMagnitudeOffset;
 
   public CPerParticleFloatInput InputMagnitude {
-    get => new CPerParticleFloatInputImpl(_Handle + _InputMagnitudeOffset.Value);
+    get {
+      if (_InputMagnitudeOffset == null) {
+        _InputMagnitudeOffset = Schema.GetOffset(0x1617EF938E8975B7);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InputMagnitudeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FalloffFunctionOffset = new(() => Schema.GetOffset(0x1617EF93A7D5FD7D), LazyThreadSafetyMode.None);
+  private static nint? _FalloffFunctionOffset;
 
   public ref ParticleFalloffFunction_t FalloffFunction {
-    get => ref _Handle.AsRef<ParticleFalloffFunction_t>(_FalloffFunctionOffset.Value);
+    get {
+      if (_FalloffFunctionOffset == null) {
+        _FalloffFunctionOffset = Schema.GetOffset(0x1617EF93A7D5FD7D);
+      }
+      return ref _Handle.AsRef<ParticleFalloffFunction_t>(_FalloffFunctionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputFalloffExpOffset = new(() => Schema.GetOffset(0x1617EF9356063396), LazyThreadSafetyMode.None);
+  private static nint? _InputFalloffExpOffset;
 
   public CPerParticleFloatInput InputFalloffExp {
-    get => new CPerParticleFloatInputImpl(_Handle + _InputFalloffExpOffset.Value);
+    get {
+      if (_InputFalloffExpOffset == null) {
+        _InputFalloffExpOffset = Schema.GetOffset(0x1617EF9356063396);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InputFalloffExpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ImpulseTypeOffset = new(() => Schema.GetOffset(0x1617EF9309B21020), LazyThreadSafetyMode.None);
+  private static nint? _ImpulseTypeOffset;
 
   public ref ParticleImpulseType_t ImpulseType {
-    get => ref _Handle.AsRef<ParticleImpulseType_t>(_ImpulseTypeOffset.Value);
+    get {
+      if (_ImpulseTypeOffset == null) {
+        _ImpulseTypeOffset = Schema.GetOffset(0x1617EF9309B21020);
+      }
+      return ref _Handle.AsRef<ParticleImpulseType_t>(_ImpulseTypeOffset!.Value);
+    }
   }
 
 

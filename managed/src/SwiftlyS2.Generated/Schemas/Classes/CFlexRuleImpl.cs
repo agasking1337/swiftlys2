@@ -17,15 +17,25 @@ internal partial class CFlexRuleImpl : SchemaClass, CFlexRule {
   public CFlexRuleImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FlexOffset = new(() => Schema.GetOffset(0xA92320A3D3DC2E86), LazyThreadSafetyMode.None);
+  private static nint? _FlexOffset;
 
   public ref int Flex {
-    get => ref _Handle.AsRef<int>(_FlexOffset.Value);
+    get {
+      if (_FlexOffset == null) {
+        _FlexOffset = Schema.GetOffset(0xA92320A3D3DC2E86);
+      }
+      return ref _Handle.AsRef<int>(_FlexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlexOpsOffset = new(() => Schema.GetOffset(0xA92320A3F3F4D8D2), LazyThreadSafetyMode.None);
+  private static nint? _FlexOpsOffset;
 
   public ref CUtlVector<CFlexOp> FlexOps {
-    get => ref _Handle.AsRef<CUtlVector<CFlexOp>>(_FlexOpsOffset.Value);
+    get {
+      if (_FlexOpsOffset == null) {
+        _FlexOpsOffset = Schema.GetOffset(0xA92320A3F3F4D8D2);
+      }
+      return ref _Handle.AsRef<CUtlVector<CFlexOp>>(_FlexOpsOffset!.Value);
+    }
   }
 
 

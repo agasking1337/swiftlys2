@@ -17,30 +17,55 @@ internal partial class CStateNodeTransitionDataImpl : SchemaClass, CStateNodeTra
   public CStateNodeTransitionDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CurveOffset = new(() => Schema.GetOffset(0xFC9FD460BFFA0B34), LazyThreadSafetyMode.None);
+  private static nint? _CurveOffset;
 
   public CBlendCurve Curve {
-    get => new CBlendCurveImpl(_Handle + _CurveOffset.Value);
+    get {
+      if (_CurveOffset == null) {
+        _CurveOffset = Schema.GetOffset(0xFC9FD460BFFA0B34);
+      }
+      return new CBlendCurveImpl(_Handle + _CurveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendDurationOffset = new(() => Schema.GetOffset(0xFC9FD460BC9B1228), LazyThreadSafetyMode.None);
+  private static nint? _BlendDurationOffset;
 
   public SchemaUntypedField BlendDuration {
-    get => new SchemaUntypedField(_Handle + _BlendDurationOffset.Value);
+    get {
+      if (_BlendDurationOffset == null) {
+        _BlendDurationOffset = Schema.GetOffset(0xFC9FD460BC9B1228);
+      }
+      return new SchemaUntypedField(_Handle + _BlendDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetCycleValueOffset = new(() => Schema.GetOffset(0xFC9FD4609897AC3F), LazyThreadSafetyMode.None);
+  private static nint? _ResetCycleValueOffset;
 
   public SchemaUntypedField ResetCycleValue {
-    get => new SchemaUntypedField(_Handle + _ResetCycleValueOffset.Value);
+    get {
+      if (_ResetCycleValueOffset == null) {
+        _ResetCycleValueOffset = Schema.GetOffset(0xFC9FD4609897AC3F);
+      }
+      return new SchemaUntypedField(_Handle + _ResetCycleValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetOffset = new(() => Schema.GetOffset(0xFC9FD460F99F9AA0), LazyThreadSafetyMode.None);
+  private static nint? _ResetOffset;
 
   public SchemaUntypedField Reset {
-    get => new SchemaUntypedField(_Handle + _ResetOffset.Value);
+    get {
+      if (_ResetOffset == null) {
+        _ResetOffset = Schema.GetOffset(0xFC9FD460F99F9AA0);
+      }
+      return new SchemaUntypedField(_Handle + _ResetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetCycleOptionOffset = new(() => Schema.GetOffset(0xFC9FD460A597A1E3), LazyThreadSafetyMode.None);
+  private static nint? _ResetCycleOptionOffset;
 
   public SchemaUntypedField ResetCycleOption {
-    get => new SchemaUntypedField(_Handle + _ResetCycleOptionOffset.Value);
+    get {
+      if (_ResetCycleOptionOffset == null) {
+        _ResetCycleOptionOffset = Schema.GetOffset(0xFC9FD460A597A1E3);
+      }
+      return new SchemaUntypedField(_Handle + _ResetCycleOptionOffset!.Value);
+    }
   }
 
 

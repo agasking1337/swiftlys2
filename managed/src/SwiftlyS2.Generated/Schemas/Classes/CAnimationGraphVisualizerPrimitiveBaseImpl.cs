@@ -17,20 +17,35 @@ internal partial class CAnimationGraphVisualizerPrimitiveBaseImpl : SchemaClass,
   public CAnimationGraphVisualizerPrimitiveBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x5204B0848ED6D5CD), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref CAnimationGraphVisualizerPrimitiveType Type {
-    get => ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x5204B0848ED6D5CD);
+      }
+      return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OwningAnimNodePathsOffset = new(() => Schema.GetOffset(0x5204B08461A2E55C), LazyThreadSafetyMode.None);
+  private static nint? _OwningAnimNodePathsOffset;
 
   public SchemaUntypedField OwningAnimNodePaths {
-    get => new SchemaUntypedField(_Handle + _OwningAnimNodePathsOffset.Value);
+    get {
+      if (_OwningAnimNodePathsOffset == null) {
+        _OwningAnimNodePathsOffset = Schema.GetOffset(0x5204B08461A2E55C);
+      }
+      return new SchemaUntypedField(_Handle + _OwningAnimNodePathsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OwningAnimNodePathCountOffset = new(() => Schema.GetOffset(0x5204B0844241A972), LazyThreadSafetyMode.None);
+  private static nint? _OwningAnimNodePathCountOffset;
 
   public ref int OwningAnimNodePathCount {
-    get => ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset.Value);
+    get {
+      if (_OwningAnimNodePathCountOffset == null) {
+        _OwningAnimNodePathCountOffset = Schema.GetOffset(0x5204B0844241A972);
+      }
+      return ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class C_OP_Orient2DRelToCPImpl : CParticleFunctionOperatorImpl,
   public C_OP_Orient2DRelToCPImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RotOffsetOffset = new(() => Schema.GetOffset(0xD330A83D1EA9CDF), LazyThreadSafetyMode.None);
+  private static nint? _RotOffsetOffset;
 
   public ref float RotOffset {
-    get => ref _Handle.AsRef<float>(_RotOffsetOffset.Value);
+    get {
+      if (_RotOffsetOffset == null) {
+        _RotOffsetOffset = Schema.GetOffset(0xD330A83D1EA9CDF);
+      }
+      return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinStrengthOffset = new(() => Schema.GetOffset(0xD330A8312520F26), LazyThreadSafetyMode.None);
+  private static nint? _SpinStrengthOffset;
 
   public ref float SpinStrength {
-    get => ref _Handle.AsRef<float>(_SpinStrengthOffset.Value);
+    get {
+      if (_SpinStrengthOffset == null) {
+        _SpinStrengthOffset = Schema.GetOffset(0xD330A8312520F26);
+      }
+      return ref _Handle.AsRef<float>(_SpinStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOffset = new(() => Schema.GetOffset(0xD330A83EB661472), LazyThreadSafetyMode.None);
+  private static nint? _CPOffset;
 
   public ref int CP {
-    get => ref _Handle.AsRef<int>(_CPOffset.Value);
+    get {
+      if (_CPOffset == null) {
+        _CPOffset = Schema.GetOffset(0xD330A83EB661472);
+      }
+      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xD330A83E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xD330A83E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
 
 

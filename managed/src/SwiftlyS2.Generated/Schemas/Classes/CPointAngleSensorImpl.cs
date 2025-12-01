@@ -17,69 +17,132 @@ internal partial class CPointAngleSensorImpl : CPointEntityImpl, CPointAngleSens
   public CPointAngleSensorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x1E4356013A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x1E4356013A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LookAtNameOffset = new(() => Schema.GetOffset(0x1E435601A28C338C), LazyThreadSafetyMode.None);
+  private static nint? _LookAtNameOffset;
 
   public string LookAtName {
     get {
-      var ptr = _Handle.Read<nint>(_LookAtNameOffset.Value);
+      if (_LookAtNameOffset == null) {
+        _LookAtNameOffset = Schema.GetOffset(0x1E435601A28C338C);
+      }
+      var ptr = _Handle.Read<nint>(_LookAtNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LookAtNameOffset.Value, value);
+    set {
+      if (_LookAtNameOffset == null) {
+        _LookAtNameOffset = Schema.GetOffset(0x1E435601A28C338C);
+      }
+      Schema.SetString(_Handle, _LookAtNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetEntityOffset = new(() => Schema.GetOffset(0x1E43560125D042A9), LazyThreadSafetyMode.None);
+  private static nint? _TargetEntityOffset;
 
   public ref CHandle<CBaseEntity> TargetEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset.Value);
+    get {
+      if (_TargetEntityOffset == null) {
+        _TargetEntityOffset = Schema.GetOffset(0x1E43560125D042A9);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LookAtEntityOffset = new(() => Schema.GetOffset(0x1E435601073CB5DE), LazyThreadSafetyMode.None);
+  private static nint? _LookAtEntityOffset;
 
   public ref CHandle<CBaseEntity> LookAtEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookAtEntityOffset.Value);
+    get {
+      if (_LookAtEntityOffset == null) {
+        _LookAtEntityOffset = Schema.GetOffset(0x1E435601073CB5DE);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookAtEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0x1E435601BC5E3BAB), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0x1E435601BC5E3BAB);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DotToleranceOffset = new(() => Schema.GetOffset(0x1E4356011A15A535), LazyThreadSafetyMode.None);
+  private static nint? _DotToleranceOffset;
 
   public ref float DotTolerance {
-    get => ref _Handle.AsRef<float>(_DotToleranceOffset.Value);
+    get {
+      if (_DotToleranceOffset == null) {
+        _DotToleranceOffset = Schema.GetOffset(0x1E4356011A15A535);
+      }
+      return ref _Handle.AsRef<float>(_DotToleranceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FacingTimeOffset = new(() => Schema.GetOffset(0x1E43560177B926C8), LazyThreadSafetyMode.None);
+  private static nint? _FacingTimeOffset;
 
   public GameTime_t FacingTime {
-    get => new GameTime_tImpl(_Handle + _FacingTimeOffset.Value);
+    get {
+      if (_FacingTimeOffset == null) {
+        _FacingTimeOffset = Schema.GetOffset(0x1E43560177B926C8);
+      }
+      return new GameTime_tImpl(_Handle + _FacingTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FiredOffset = new(() => Schema.GetOffset(0x1E435601E8E73267), LazyThreadSafetyMode.None);
+  private static nint? _FiredOffset;
 
   public ref bool Fired {
-    get => ref _Handle.AsRef<bool>(_FiredOffset.Value);
+    get {
+      if (_FiredOffset == null) {
+        _FiredOffset = Schema.GetOffset(0x1E435601E8E73267);
+      }
+      return ref _Handle.AsRef<bool>(_FiredOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnFacingLookatOffset = new(() => Schema.GetOffset(0x1E4356011F71721C), LazyThreadSafetyMode.None);
+  private static nint? _OnFacingLookatOffset;
 
   public CEntityIOOutput OnFacingLookat {
-    get => new CEntityIOOutputImpl(_Handle + _OnFacingLookatOffset.Value);
+    get {
+      if (_OnFacingLookatOffset == null) {
+        _OnFacingLookatOffset = Schema.GetOffset(0x1E4356011F71721C);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnFacingLookatOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnNotFacingLookatOffset = new(() => Schema.GetOffset(0x1E435601A7B496D5), LazyThreadSafetyMode.None);
+  private static nint? _OnNotFacingLookatOffset;
 
   public CEntityIOOutput OnNotFacingLookat {
-    get => new CEntityIOOutputImpl(_Handle + _OnNotFacingLookatOffset.Value);
+    get {
+      if (_OnNotFacingLookatOffset == null) {
+        _OnNotFacingLookatOffset = Schema.GetOffset(0x1E435601A7B496D5);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnNotFacingLookatOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetDirOffset = new(() => Schema.GetOffset(0x1E435601946F7FDF), LazyThreadSafetyMode.None);
+  private static nint? _TargetDirOffset;
 
   public SchemaUntypedField TargetDir {
-    get => new SchemaUntypedField(_Handle + _TargetDirOffset.Value);
+    get {
+      if (_TargetDirOffset == null) {
+        _TargetDirOffset = Schema.GetOffset(0x1E435601946F7FDF);
+      }
+      return new SchemaUntypedField(_Handle + _TargetDirOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FacingPercentageOffset = new(() => Schema.GetOffset(0x1E4356018B451097), LazyThreadSafetyMode.None);
+  private static nint? _FacingPercentageOffset;
 
   public SchemaUntypedField FacingPercentage {
-    get => new SchemaUntypedField(_Handle + _FacingPercentageOffset.Value);
+    get {
+      if (_FacingPercentageOffset == null) {
+        _FacingPercentageOffset = Schema.GetOffset(0x1E4356018B451097);
+      }
+      return new SchemaUntypedField(_Handle + _FacingPercentageOffset!.Value);
+    }
   }
 
 

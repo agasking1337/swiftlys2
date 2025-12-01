@@ -17,15 +17,25 @@ internal partial class CDestructiblePartsSystemDataImpl : SchemaClass, CDestruct
   public CDestructiblePartsSystemDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PartsDataByHitGroupOffset = new(() => Schema.GetOffset(0xABDCB98361E96220), LazyThreadSafetyMode.None);
+  private static nint? _PartsDataByHitGroupOffset;
 
   public SchemaUntypedField PartsDataByHitGroup {
-    get => new SchemaUntypedField(_Handle + _PartsDataByHitGroupOffset.Value);
+    get {
+      if (_PartsDataByHitGroupOffset == null) {
+        _PartsDataByHitGroupOffset = Schema.GetOffset(0xABDCB98361E96220);
+      }
+      return new SchemaUntypedField(_Handle + _PartsDataByHitGroupOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = new(() => Schema.GetOffset(0xABDCB9834CA810D8), LazyThreadSafetyMode.None);
+  private static nint? _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset;
 
   public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing {
-    get => new CRangeIntImpl(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset.Value);
+    get {
+      if (_MinMaxNumberHitGroupsToDestroyWhenGibbingOffset == null) {
+        _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = Schema.GetOffset(0xABDCB9834CA810D8);
+      }
+      return new CRangeIntImpl(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset!.Value);
+    }
   }
 
 

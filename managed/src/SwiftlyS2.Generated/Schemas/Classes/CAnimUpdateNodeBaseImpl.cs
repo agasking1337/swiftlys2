@@ -17,24 +17,42 @@ internal partial class CAnimUpdateNodeBaseImpl : SchemaClass, CAnimUpdateNodeBas
   public CAnimUpdateNodeBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NodePathOffset = new(() => Schema.GetOffset(0xA16B836B69EE5E4E), LazyThreadSafetyMode.None);
+  private static nint? _NodePathOffset;
 
   public CAnimNodePath NodePath {
-    get => new CAnimNodePathImpl(_Handle + _NodePathOffset.Value);
+    get {
+      if (_NodePathOffset == null) {
+        _NodePathOffset = Schema.GetOffset(0xA16B836B69EE5E4E);
+      }
+      return new CAnimNodePathImpl(_Handle + _NodePathOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NetworkModeOffset = new(() => Schema.GetOffset(0xA16B836BE3307112), LazyThreadSafetyMode.None);
+  private static nint? _NetworkModeOffset;
 
   public ref AnimNodeNetworkMode NetworkMode {
-    get => ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset.Value);
+    get {
+      if (_NetworkModeOffset == null) {
+        _NetworkModeOffset = Schema.GetOffset(0xA16B836BE3307112);
+      }
+      return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xA16B836B4D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
 
 

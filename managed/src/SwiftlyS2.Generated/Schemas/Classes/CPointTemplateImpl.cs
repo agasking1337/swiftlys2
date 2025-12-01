@@ -17,72 +17,136 @@ internal partial class CPointTemplateImpl : CLogicalEntityImpl, CPointTemplate {
   public CPointTemplateImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WorldNameOffset = new(() => Schema.GetOffset(0x7085DB4EB1FC5B40), LazyThreadSafetyMode.None);
+  private static nint? _WorldNameOffset;
 
   public string WorldName {
     get {
-      var ptr = _Handle.Read<nint>(_WorldNameOffset.Value);
+      if (_WorldNameOffset == null) {
+        _WorldNameOffset = Schema.GetOffset(0x7085DB4EB1FC5B40);
+      }
+      var ptr = _Handle.Read<nint>(_WorldNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _WorldNameOffset.Value, value);
+    set {
+      if (_WorldNameOffset == null) {
+        _WorldNameOffset = Schema.GetOffset(0x7085DB4EB1FC5B40);
+      }
+      Schema.SetString(_Handle, _WorldNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _Source2EntityLumpNameOffset = new(() => Schema.GetOffset(0x7085DB4EC0B648BC), LazyThreadSafetyMode.None);
+  private static nint? _Source2EntityLumpNameOffset;
 
   public string Source2EntityLumpName {
     get {
-      var ptr = _Handle.Read<nint>(_Source2EntityLumpNameOffset.Value);
+      if (_Source2EntityLumpNameOffset == null) {
+        _Source2EntityLumpNameOffset = Schema.GetOffset(0x7085DB4EC0B648BC);
+      }
+      var ptr = _Handle.Read<nint>(_Source2EntityLumpNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _Source2EntityLumpNameOffset.Value, value);
+    set {
+      if (_Source2EntityLumpNameOffset == null) {
+        _Source2EntityLumpNameOffset = Schema.GetOffset(0x7085DB4EC0B648BC);
+      }
+      Schema.SetString(_Handle, _Source2EntityLumpNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _EntityFilterNameOffset = new(() => Schema.GetOffset(0x7085DB4E3BCB3E97), LazyThreadSafetyMode.None);
+  private static nint? _EntityFilterNameOffset;
 
   public string EntityFilterName {
     get {
-      var ptr = _Handle.Read<nint>(_EntityFilterNameOffset.Value);
+      if (_EntityFilterNameOffset == null) {
+        _EntityFilterNameOffset = Schema.GetOffset(0x7085DB4E3BCB3E97);
+      }
+      var ptr = _Handle.Read<nint>(_EntityFilterNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _EntityFilterNameOffset.Value, value);
+    set {
+      if (_EntityFilterNameOffset == null) {
+        _EntityFilterNameOffset = Schema.GetOffset(0x7085DB4E3BCB3E97);
+      }
+      Schema.SetString(_Handle, _EntityFilterNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TimeoutIntervalOffset = new(() => Schema.GetOffset(0x7085DB4E354D6687), LazyThreadSafetyMode.None);
+  private static nint? _TimeoutIntervalOffset;
 
   public ref float TimeoutInterval {
-    get => ref _Handle.AsRef<float>(_TimeoutIntervalOffset.Value);
+    get {
+      if (_TimeoutIntervalOffset == null) {
+        _TimeoutIntervalOffset = Schema.GetOffset(0x7085DB4E354D6687);
+      }
+      return ref _Handle.AsRef<float>(_TimeoutIntervalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AsynchronouslySpawnEntitiesOffset = new(() => Schema.GetOffset(0x7085DB4E5371B8CE), LazyThreadSafetyMode.None);
+  private static nint? _AsynchronouslySpawnEntitiesOffset;
 
   public ref bool AsynchronouslySpawnEntities {
-    get => ref _Handle.AsRef<bool>(_AsynchronouslySpawnEntitiesOffset.Value);
+    get {
+      if (_AsynchronouslySpawnEntitiesOffset == null) {
+        _AsynchronouslySpawnEntitiesOffset = Schema.GetOffset(0x7085DB4E5371B8CE);
+      }
+      return ref _Handle.AsRef<bool>(_AsynchronouslySpawnEntitiesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClientOnlyEntityBehaviorOffset = new(() => Schema.GetOffset(0x7085DB4EF26096D5), LazyThreadSafetyMode.None);
+  private static nint? _ClientOnlyEntityBehaviorOffset;
 
   public ref PointTemplateClientOnlyEntityBehavior_t ClientOnlyEntityBehavior {
-    get => ref _Handle.AsRef<PointTemplateClientOnlyEntityBehavior_t>(_ClientOnlyEntityBehaviorOffset.Value);
+    get {
+      if (_ClientOnlyEntityBehaviorOffset == null) {
+        _ClientOnlyEntityBehaviorOffset = Schema.GetOffset(0x7085DB4EF26096D5);
+      }
+      return ref _Handle.AsRef<PointTemplateClientOnlyEntityBehavior_t>(_ClientOnlyEntityBehaviorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OwnerSpawnGroupTypeOffset = new(() => Schema.GetOffset(0x7085DB4EFAC3C132), LazyThreadSafetyMode.None);
+  private static nint? _OwnerSpawnGroupTypeOffset;
 
   public ref PointTemplateOwnerSpawnGroupType_t OwnerSpawnGroupType {
-    get => ref _Handle.AsRef<PointTemplateOwnerSpawnGroupType_t>(_OwnerSpawnGroupTypeOffset.Value);
+    get {
+      if (_OwnerSpawnGroupTypeOffset == null) {
+        _OwnerSpawnGroupTypeOffset = Schema.GetOffset(0x7085DB4EFAC3C132);
+      }
+      return ref _Handle.AsRef<PointTemplateOwnerSpawnGroupType_t>(_OwnerSpawnGroupTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CreatedSpawnGroupHandlesOffset = new(() => Schema.GetOffset(0x7085DB4EF66F13E4), LazyThreadSafetyMode.None);
+  private static nint? _CreatedSpawnGroupHandlesOffset;
 
   public ref CUtlVector<uint> CreatedSpawnGroupHandles {
-    get => ref _Handle.AsRef<CUtlVector<uint>>(_CreatedSpawnGroupHandlesOffset.Value);
+    get {
+      if (_CreatedSpawnGroupHandlesOffset == null) {
+        _CreatedSpawnGroupHandlesOffset = Schema.GetOffset(0x7085DB4EF66F13E4);
+      }
+      return ref _Handle.AsRef<CUtlVector<uint>>(_CreatedSpawnGroupHandlesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpawnedEntityHandlesOffset = new(() => Schema.GetOffset(0x7085DB4EAFF1C191), LazyThreadSafetyMode.None);
+  private static nint? _SpawnedEntityHandlesOffset;
 
   public ref CUtlVector<CHandle<CEntityInstance>> SpawnedEntityHandles {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CEntityInstance>>>(_SpawnedEntityHandlesOffset.Value);
+    get {
+      if (_SpawnedEntityHandlesOffset == null) {
+        _SpawnedEntityHandlesOffset = Schema.GetOffset(0x7085DB4EAFF1C191);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CEntityInstance>>>(_SpawnedEntityHandlesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptSpawnCallbackOffset = new(() => Schema.GetOffset(0x7085DB4EAD74D892), LazyThreadSafetyMode.None);
+  private static nint? _ScriptSpawnCallbackOffset;
 
   public SchemaUntypedField ScriptSpawnCallback {
-    get => new SchemaUntypedField(_Handle + _ScriptSpawnCallbackOffset.Value);
+    get {
+      if (_ScriptSpawnCallbackOffset == null) {
+        _ScriptSpawnCallbackOffset = Schema.GetOffset(0x7085DB4EAD74D892);
+      }
+      return new SchemaUntypedField(_Handle + _ScriptSpawnCallbackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptCallbackScopeOffset = new(() => Schema.GetOffset(0x7085DB4E3B18B033), LazyThreadSafetyMode.None);
+  private static nint? _ScriptCallbackScopeOffset;
 
   public SchemaUntypedField ScriptCallbackScope {
-    get => new SchemaUntypedField(_Handle + _ScriptCallbackScopeOffset.Value);
+    get {
+      if (_ScriptCallbackScopeOffset == null) {
+        _ScriptCallbackScopeOffset = Schema.GetOffset(0x7085DB4E3B18B033);
+      }
+      return new SchemaUntypedField(_Handle + _ScriptCallbackScopeOffset!.Value);
+    }
   }
 
 

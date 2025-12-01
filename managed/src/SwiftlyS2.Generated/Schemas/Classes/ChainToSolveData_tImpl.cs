@@ -17,35 +17,65 @@ internal partial class ChainToSolveData_tImpl : SchemaClass, ChainToSolveData_t 
   public ChainToSolveData_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChainIndexOffset = new(() => Schema.GetOffset(0x87A241BDA34589B6), LazyThreadSafetyMode.None);
+  private static nint? _ChainIndexOffset;
 
   public ref int ChainIndex {
-    get => ref _Handle.AsRef<int>(_ChainIndexOffset.Value);
+    get {
+      if (_ChainIndexOffset == null) {
+        _ChainIndexOffset = Schema.GetOffset(0x87A241BDA34589B6);
+      }
+      return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SolverSettingsOffset = new(() => Schema.GetOffset(0x87A241BDE19D8233), LazyThreadSafetyMode.None);
+  private static nint? _SolverSettingsOffset;
 
   public IKSolverSettings_t SolverSettings {
-    get => new IKSolverSettings_tImpl(_Handle + _SolverSettingsOffset.Value);
+    get {
+      if (_SolverSettingsOffset == null) {
+        _SolverSettingsOffset = Schema.GetOffset(0x87A241BDE19D8233);
+      }
+      return new IKSolverSettings_tImpl(_Handle + _SolverSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetSettingsOffset = new(() => Schema.GetOffset(0x87A241BDD6828E35), LazyThreadSafetyMode.None);
+  private static nint? _TargetSettingsOffset;
 
   public IKTargetSettings_t TargetSettings {
-    get => new IKTargetSettings_tImpl(_Handle + _TargetSettingsOffset.Value);
+    get {
+      if (_TargetSettingsOffset == null) {
+        _TargetSettingsOffset = Schema.GetOffset(0x87A241BDD6828E35);
+      }
+      return new IKTargetSettings_tImpl(_Handle + _TargetSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DebugSettingOffset = new(() => Schema.GetOffset(0x87A241BD624CC0B4), LazyThreadSafetyMode.None);
+  private static nint? _DebugSettingOffset;
 
   public ref SolveIKChainAnimNodeDebugSetting DebugSetting {
-    get => ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset.Value);
+    get {
+      if (_DebugSettingOffset == null) {
+        _DebugSettingOffset = Schema.GetOffset(0x87A241BD624CC0B4);
+      }
+      return ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DebugNormalizedValueOffset = new(() => Schema.GetOffset(0x87A241BD0F331460), LazyThreadSafetyMode.None);
+  private static nint? _DebugNormalizedValueOffset;
 
   public ref float DebugNormalizedValue {
-    get => ref _Handle.AsRef<float>(_DebugNormalizedValueOffset.Value);
+    get {
+      if (_DebugNormalizedValueOffset == null) {
+        _DebugNormalizedValueOffset = Schema.GetOffset(0x87A241BD0F331460);
+      }
+      return ref _Handle.AsRef<float>(_DebugNormalizedValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DebugOffsetOffset = new(() => Schema.GetOffset(0x87A241BD2FF28BBF), LazyThreadSafetyMode.None);
+  private static nint? _DebugOffsetOffset;
 
   public ref Vector DebugOffset {
-    get => ref _Handle.AsRef<Vector>(_DebugOffsetOffset.Value);
+    get {
+      if (_DebugOffsetOffset == null) {
+        _DebugOffsetOffset = Schema.GetOffset(0x87A241BD2FF28BBF);
+      }
+      return ref _Handle.AsRef<Vector>(_DebugOffsetOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class CNmStateMachineNode__TransitionDefinition_tImpl : SchemaC
   public CNmStateMachineNode__TransitionDefinition_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetStateIdxOffset = new(() => Schema.GetOffset(0x9404D2C4E5C0218C), LazyThreadSafetyMode.None);
+  private static nint? _TargetStateIdxOffset;
 
   public ref short TargetStateIdx {
-    get => ref _Handle.AsRef<short>(_TargetStateIdxOffset.Value);
+    get {
+      if (_TargetStateIdxOffset == null) {
+        _TargetStateIdxOffset = Schema.GetOffset(0x9404D2C4E5C0218C);
+      }
+      return ref _Handle.AsRef<short>(_TargetStateIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConditionNodeIdxOffset = new(() => Schema.GetOffset(0x9404D2C4773FE641), LazyThreadSafetyMode.None);
+  private static nint? _ConditionNodeIdxOffset;
 
   public ref short ConditionNodeIdx {
-    get => ref _Handle.AsRef<short>(_ConditionNodeIdxOffset.Value);
+    get {
+      if (_ConditionNodeIdxOffset == null) {
+        _ConditionNodeIdxOffset = Schema.GetOffset(0x9404D2C4773FE641);
+      }
+      return ref _Handle.AsRef<short>(_ConditionNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionNodeIdxOffset = new(() => Schema.GetOffset(0x9404D2C40D5CDE45), LazyThreadSafetyMode.None);
+  private static nint? _TransitionNodeIdxOffset;
 
   public ref short TransitionNodeIdx {
-    get => ref _Handle.AsRef<short>(_TransitionNodeIdxOffset.Value);
+    get {
+      if (_TransitionNodeIdxOffset == null) {
+        _TransitionNodeIdxOffset = Schema.GetOffset(0x9404D2C40D5CDE45);
+      }
+      return ref _Handle.AsRef<short>(_TransitionNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CanBeForcedOffset = new(() => Schema.GetOffset(0x9404D2C4B6EB0555), LazyThreadSafetyMode.None);
+  private static nint? _CanBeForcedOffset;
 
   public ref bool CanBeForced {
-    get => ref _Handle.AsRef<bool>(_CanBeForcedOffset.Value);
+    get {
+      if (_CanBeForcedOffset == null) {
+        _CanBeForcedOffset = Schema.GetOffset(0x9404D2C4B6EB0555);
+      }
+      return ref _Handle.AsRef<bool>(_CanBeForcedOffset!.Value);
+    }
   }
 
 

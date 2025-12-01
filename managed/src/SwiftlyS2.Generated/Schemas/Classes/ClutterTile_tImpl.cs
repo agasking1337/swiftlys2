@@ -17,20 +17,35 @@ internal partial class ClutterTile_tImpl : SchemaClass, ClutterTile_t {
   public ClutterTile_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FirstInstanceOffset = new(() => Schema.GetOffset(0xAC4066F19AF07072), LazyThreadSafetyMode.None);
+  private static nint? _FirstInstanceOffset;
 
   public ref uint FirstInstance {
-    get => ref _Handle.AsRef<uint>(_FirstInstanceOffset.Value);
+    get {
+      if (_FirstInstanceOffset == null) {
+        _FirstInstanceOffset = Schema.GetOffset(0xAC4066F19AF07072);
+      }
+      return ref _Handle.AsRef<uint>(_FirstInstanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastInstanceOffset = new(() => Schema.GetOffset(0xAC4066F10D99AC92), LazyThreadSafetyMode.None);
+  private static nint? _LastInstanceOffset;
 
   public ref uint LastInstance {
-    get => ref _Handle.AsRef<uint>(_LastInstanceOffset.Value);
+    get {
+      if (_LastInstanceOffset == null) {
+        _LastInstanceOffset = Schema.GetOffset(0xAC4066F10D99AC92);
+      }
+      return ref _Handle.AsRef<uint>(_LastInstanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoundsWsOffset = new(() => Schema.GetOffset(0xAC4066F1BE54855A), LazyThreadSafetyMode.None);
+  private static nint? _BoundsWsOffset;
 
   public AABB_t BoundsWs {
-    get => new AABB_tImpl(_Handle + _BoundsWsOffset.Value);
+    get {
+      if (_BoundsWsOffset == null) {
+        _BoundsWsOffset = Schema.GetOffset(0xAC4066F1BE54855A);
+      }
+      return new AABB_tImpl(_Handle + _BoundsWsOffset!.Value);
+    }
   }
 
 

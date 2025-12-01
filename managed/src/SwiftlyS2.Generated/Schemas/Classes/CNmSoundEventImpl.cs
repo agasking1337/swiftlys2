@@ -17,52 +17,96 @@ internal partial class CNmSoundEventImpl : CNmEventImpl, CNmSoundEvent {
   public CNmSoundEventImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RelevanceOffset = new(() => Schema.GetOffset(0xDC15E5261E3F4008), LazyThreadSafetyMode.None);
+  private static nint? _RelevanceOffset;
 
   public ref CNmEventRelevance_t Relevance {
-    get => ref _Handle.AsRef<CNmEventRelevance_t>(_RelevanceOffset.Value);
+    get {
+      if (_RelevanceOffset == null) {
+        _RelevanceOffset = Schema.GetOffset(0xDC15E5261E3F4008);
+      }
+      return ref _Handle.AsRef<CNmEventRelevance_t>(_RelevanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xDC15E5264D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xDC15E5264D8F5786);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xDC15E5264D8F5786);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PositionOffset = new(() => Schema.GetOffset(0xDC15E5264B57E0AA), LazyThreadSafetyMode.None);
+  private static nint? _PositionOffset;
 
   public ref CNmSoundEvent__Position_t Position {
-    get => ref _Handle.AsRef<CNmSoundEvent__Position_t>(_PositionOffset.Value);
+    get {
+      if (_PositionOffset == null) {
+        _PositionOffset = Schema.GetOffset(0xDC15E5264B57E0AA);
+      }
+      return ref _Handle.AsRef<CNmSoundEvent__Position_t>(_PositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachmentNameOffset = new(() => Schema.GetOffset(0xDC15E526295DA9CB), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentNameOffset;
 
   public string AttachmentName {
     get {
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset.Value);
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0xDC15E526295DA9CB);
+      }
+      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AttachmentNameOffset.Value, value);
+    set {
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0xDC15E526295DA9CB);
+      }
+      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TagsOffset = new(() => Schema.GetOffset(0xDC15E526B46C8540), LazyThreadSafetyMode.None);
+  private static nint? _TagsOffset;
 
   public string Tags {
     get {
-      var ptr = _Handle.Read<nint>(_TagsOffset.Value);
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0xDC15E526B46C8540);
+      }
+      var ptr = _Handle.Read<nint>(_TagsOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TagsOffset.Value, value);
+    set {
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0xDC15E526B46C8540);
+      }
+      Schema.SetString(_Handle, _TagsOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ContinuePlayingSoundAtDurationEndOffset = new(() => Schema.GetOffset(0xDC15E5262CB53E61), LazyThreadSafetyMode.None);
+  private static nint? _ContinuePlayingSoundAtDurationEndOffset;
 
   public ref bool ContinuePlayingSoundAtDurationEnd {
-    get => ref _Handle.AsRef<bool>(_ContinuePlayingSoundAtDurationEndOffset.Value);
+    get {
+      if (_ContinuePlayingSoundAtDurationEndOffset == null) {
+        _ContinuePlayingSoundAtDurationEndOffset = Schema.GetOffset(0xDC15E5262CB53E61);
+      }
+      return ref _Handle.AsRef<bool>(_ContinuePlayingSoundAtDurationEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationInterruptionThresholdOffset = new(() => Schema.GetOffset(0xDC15E5269F1AA35B), LazyThreadSafetyMode.None);
+  private static nint? _DurationInterruptionThresholdOffset;
 
   public ref float DurationInterruptionThreshold {
-    get => ref _Handle.AsRef<float>(_DurationInterruptionThresholdOffset.Value);
+    get {
+      if (_DurationInterruptionThresholdOffset == null) {
+        _DurationInterruptionThresholdOffset = Schema.GetOffset(0xDC15E5269F1AA35B);
+      }
+      return ref _Handle.AsRef<float>(_DurationInterruptionThresholdOffset!.Value);
+    }
   }
 
 

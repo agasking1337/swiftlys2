@@ -17,30 +17,55 @@ internal partial class C_INIT_NormalOffsetImpl : CParticleFunctionInitializerImp
   public C_INIT_NormalOffsetImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OffsetMinOffset = new(() => Schema.GetOffset(0x79E80AD67E1ECBDE), LazyThreadSafetyMode.None);
+  private static nint? _OffsetMinOffset;
 
   public ref Vector OffsetMin {
-    get => ref _Handle.AsRef<Vector>(_OffsetMinOffset.Value);
+    get {
+      if (_OffsetMinOffset == null) {
+        _OffsetMinOffset = Schema.GetOffset(0x79E80AD67E1ECBDE);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetMaxOffset = new(() => Schema.GetOffset(0x79E80AD69009CD7C), LazyThreadSafetyMode.None);
+  private static nint? _OffsetMaxOffset;
 
   public ref Vector OffsetMax {
-    get => ref _Handle.AsRef<Vector>(_OffsetMaxOffset.Value);
+    get {
+      if (_OffsetMaxOffset == null) {
+        _OffsetMaxOffset = Schema.GetOffset(0x79E80AD69009CD7C);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x79E80AD63F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x79E80AD63F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordsOffset = new(() => Schema.GetOffset(0x79E80AD630E716DE), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordsOffset;
 
   public ref bool LocalCoords {
-    get => ref _Handle.AsRef<bool>(_LocalCoordsOffset.Value);
+    get {
+      if (_LocalCoordsOffset == null) {
+        _LocalCoordsOffset = Schema.GetOffset(0x79E80AD630E716DE);
+      }
+      return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizeOffset = new(() => Schema.GetOffset(0x79E80AD648BC424C), LazyThreadSafetyMode.None);
+  private static nint? _NormalizeOffset;
 
   public ref bool Normalize {
-    get => ref _Handle.AsRef<bool>(_NormalizeOffset.Value);
+    get {
+      if (_NormalizeOffset == null) {
+        _NormalizeOffset = Schema.GetOffset(0x79E80AD648BC424C);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    }
   }
 
 

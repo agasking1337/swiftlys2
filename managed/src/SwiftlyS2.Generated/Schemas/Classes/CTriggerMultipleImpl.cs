@@ -17,10 +17,15 @@ internal partial class CTriggerMultipleImpl : CBaseTriggerImpl, CTriggerMultiple
   public CTriggerMultipleImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnTriggerOffset = new(() => Schema.GetOffset(0x327F607E81E0BFEC), LazyThreadSafetyMode.None);
+  private static nint? _OnTriggerOffset;
 
   public CEntityIOOutput OnTrigger {
-    get => new CEntityIOOutputImpl(_Handle + _OnTriggerOffset.Value);
+    get {
+      if (_OnTriggerOffset == null) {
+        _OnTriggerOffset = Schema.GetOffset(0x327F607E81E0BFEC);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnTriggerOffset!.Value);
+    }
   }
 
 

@@ -17,48 +17,89 @@ internal partial class CAudioAnimTagImpl : CAnimTagBaseImpl, CAudioAnimTag {
   public CAudioAnimTagImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ClipNameOffset = new(() => Schema.GetOffset(0x785914777D84420), LazyThreadSafetyMode.None);
+  private static nint? _ClipNameOffset;
 
   public string ClipName {
     get {
-      var ptr = _Handle.Read<nint>(_ClipNameOffset.Value);
+      if (_ClipNameOffset == null) {
+        _ClipNameOffset = Schema.GetOffset(0x785914777D84420);
+      }
+      var ptr = _Handle.Read<nint>(_ClipNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ClipNameOffset.Value, value);
+    set {
+      if (_ClipNameOffset == null) {
+        _ClipNameOffset = Schema.GetOffset(0x785914777D84420);
+      }
+      Schema.SetString(_Handle, _ClipNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AttachmentNameOffset = new(() => Schema.GetOffset(0x7859147295DA9CB), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentNameOffset;
 
   public string AttachmentName {
     get {
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset.Value);
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0x7859147295DA9CB);
+      }
+      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AttachmentNameOffset.Value, value);
+    set {
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0x7859147295DA9CB);
+      }
+      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _VolumeOffset = new(() => Schema.GetOffset(0x78591477647E0C9), LazyThreadSafetyMode.None);
+  private static nint? _VolumeOffset;
 
   public ref float Volume {
-    get => ref _Handle.AsRef<float>(_VolumeOffset.Value);
+    get {
+      if (_VolumeOffset == null) {
+        _VolumeOffset = Schema.GetOffset(0x78591477647E0C9);
+      }
+      return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StopWhenTagEndsOffset = new(() => Schema.GetOffset(0x7859147878BB46D), LazyThreadSafetyMode.None);
+  private static nint? _StopWhenTagEndsOffset;
 
   public ref bool StopWhenTagEnds {
-    get => ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset.Value);
+    get {
+      if (_StopWhenTagEndsOffset == null) {
+        _StopWhenTagEndsOffset = Schema.GetOffset(0x7859147878BB46D);
+      }
+      return ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StopWhenGraphEndsOffset = new(() => Schema.GetOffset(0x785914705444061), LazyThreadSafetyMode.None);
+  private static nint? _StopWhenGraphEndsOffset;
 
   public ref bool StopWhenGraphEnds {
-    get => ref _Handle.AsRef<bool>(_StopWhenGraphEndsOffset.Value);
+    get {
+      if (_StopWhenGraphEndsOffset == null) {
+        _StopWhenGraphEndsOffset = Schema.GetOffset(0x785914705444061);
+      }
+      return ref _Handle.AsRef<bool>(_StopWhenGraphEndsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayOnServerOffset = new(() => Schema.GetOffset(0x7859147BAA179F9), LazyThreadSafetyMode.None);
+  private static nint? _PlayOnServerOffset;
 
   public ref bool PlayOnServer {
-    get => ref _Handle.AsRef<bool>(_PlayOnServerOffset.Value);
+    get {
+      if (_PlayOnServerOffset == null) {
+        _PlayOnServerOffset = Schema.GetOffset(0x7859147BAA179F9);
+      }
+      return ref _Handle.AsRef<bool>(_PlayOnServerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayOnClientOffset = new(() => Schema.GetOffset(0x78591471136791D), LazyThreadSafetyMode.None);
+  private static nint? _PlayOnClientOffset;
 
   public ref bool PlayOnClient {
-    get => ref _Handle.AsRef<bool>(_PlayOnClientOffset.Value);
+    get {
+      if (_PlayOnClientOffset == null) {
+        _PlayOnClientOffset = Schema.GetOffset(0x78591471136791D);
+      }
+      return ref _Handle.AsRef<bool>(_PlayOnClientOffset!.Value);
+    }
   }
 
 

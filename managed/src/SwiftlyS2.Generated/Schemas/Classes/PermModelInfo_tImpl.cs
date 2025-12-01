@@ -17,63 +17,119 @@ internal partial class PermModelInfo_tImpl : SchemaClass, PermModelInfo_t {
   public PermModelInfo_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x1B48585FCE6E9C28), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x1B48585FCE6E9C28);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HullMinOffset = new(() => Schema.GetOffset(0x1B48585FAC1193D6), LazyThreadSafetyMode.None);
+  private static nint? _HullMinOffset;
 
   public ref Vector HullMin {
-    get => ref _Handle.AsRef<Vector>(_HullMinOffset.Value);
+    get {
+      if (_HullMinOffset == null) {
+        _HullMinOffset = Schema.GetOffset(0x1B48585FAC1193D6);
+      }
+      return ref _Handle.AsRef<Vector>(_HullMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HullMaxOffset = new(() => Schema.GetOffset(0x1B48585F9E269884), LazyThreadSafetyMode.None);
+  private static nint? _HullMaxOffset;
 
   public ref Vector HullMax {
-    get => ref _Handle.AsRef<Vector>(_HullMaxOffset.Value);
+    get {
+      if (_HullMaxOffset == null) {
+        _HullMaxOffset = Schema.GetOffset(0x1B48585F9E269884);
+      }
+      return ref _Handle.AsRef<Vector>(_HullMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ViewMinOffset = new(() => Schema.GetOffset(0x1B48585F22A936E8), LazyThreadSafetyMode.None);
+  private static nint? _ViewMinOffset;
 
   public ref Vector ViewMin {
-    get => ref _Handle.AsRef<Vector>(_ViewMinOffset.Value);
+    get {
+      if (_ViewMinOffset == null) {
+        _ViewMinOffset = Schema.GetOffset(0x1B48585F22A936E8);
+      }
+      return ref _Handle.AsRef<Vector>(_ViewMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ViewMaxOffset = new(() => Schema.GetOffset(0x1B48585F18BCAEE2), LazyThreadSafetyMode.None);
+  private static nint? _ViewMaxOffset;
 
   public ref Vector ViewMax {
-    get => ref _Handle.AsRef<Vector>(_ViewMaxOffset.Value);
+    get {
+      if (_ViewMaxOffset == null) {
+        _ViewMaxOffset = Schema.GetOffset(0x1B48585F18BCAEE2);
+      }
+      return ref _Handle.AsRef<Vector>(_ViewMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MassOffset = new(() => Schema.GetOffset(0x1B48585FCD83D263), LazyThreadSafetyMode.None);
+  private static nint? _MassOffset;
 
   public ref float Mass {
-    get => ref _Handle.AsRef<float>(_MassOffset.Value);
+    get {
+      if (_MassOffset == null) {
+        _MassOffset = Schema.GetOffset(0x1B48585FCD83D263);
+      }
+      return ref _Handle.AsRef<float>(_MassOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EyePositionOffset = new(() => Schema.GetOffset(0x1B48585FA0F51EB1), LazyThreadSafetyMode.None);
+  private static nint? _EyePositionOffset;
 
   public ref Vector EyePosition {
-    get => ref _Handle.AsRef<Vector>(_EyePositionOffset.Value);
+    get {
+      if (_EyePositionOffset == null) {
+        _EyePositionOffset = Schema.GetOffset(0x1B48585FA0F51EB1);
+      }
+      return ref _Handle.AsRef<Vector>(_EyePositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxEyeDeflectionOffset = new(() => Schema.GetOffset(0x1B48585F1C6CE157), LazyThreadSafetyMode.None);
+  private static nint? _MaxEyeDeflectionOffset;
 
   public ref float MaxEyeDeflection {
-    get => ref _Handle.AsRef<float>(_MaxEyeDeflectionOffset.Value);
+    get {
+      if (_MaxEyeDeflectionOffset == null) {
+        _MaxEyeDeflectionOffset = Schema.GetOffset(0x1B48585F1C6CE157);
+      }
+      return ref _Handle.AsRef<float>(_MaxEyeDeflectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SurfacePropertyOffset = new(() => Schema.GetOffset(0x1B48585F1A25534C), LazyThreadSafetyMode.None);
+  private static nint? _SurfacePropertyOffset;
 
   public string SurfaceProperty {
     get {
-      var ptr = _Handle.Read<nint>(_SurfacePropertyOffset.Value);
+      if (_SurfacePropertyOffset == null) {
+        _SurfacePropertyOffset = Schema.GetOffset(0x1B48585F1A25534C);
+      }
+      var ptr = _Handle.Read<nint>(_SurfacePropertyOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SurfacePropertyOffset.Value, value);
+    set {
+      if (_SurfacePropertyOffset == null) {
+        _SurfacePropertyOffset = Schema.GetOffset(0x1B48585F1A25534C);
+      }
+      Schema.SetString(_Handle, _SurfacePropertyOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _KeyValueTextOffset = new(() => Schema.GetOffset(0x1B48585F2156929E), LazyThreadSafetyMode.None);
+  private static nint? _KeyValueTextOffset;
 
   public string KeyValueText {
     get {
-      var ptr = _Handle.Read<nint>(_KeyValueTextOffset.Value);
+      if (_KeyValueTextOffset == null) {
+        _KeyValueTextOffset = Schema.GetOffset(0x1B48585F2156929E);
+      }
+      var ptr = _Handle.Read<nint>(_KeyValueTextOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _KeyValueTextOffset.Value, value);
+    set {
+      if (_KeyValueTextOffset == null) {
+        _KeyValueTextOffset = Schema.GetOffset(0x1B48585F2156929E);
+      }
+      Schema.SetString(_Handle, _KeyValueTextOffset!.Value, value);
+    }
   } 
 
 

@@ -17,20 +17,35 @@ internal partial class CCycleControlUpdateNodeImpl : CUnaryUpdateNodeImpl, CCycl
   public CCycleControlUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ValueSourceOffset = new(() => Schema.GetOffset(0xB811C15CD4D5B6B7), LazyThreadSafetyMode.None);
+  private static nint? _ValueSourceOffset;
 
   public ref AnimValueSource ValueSource {
-    get => ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset.Value);
+    get {
+      if (_ValueSourceOffset == null) {
+        _ValueSourceOffset = Schema.GetOffset(0xB811C15CD4D5B6B7);
+      }
+      return ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamIndexOffset = new(() => Schema.GetOffset(0xB811C15C61990A86), LazyThreadSafetyMode.None);
+  private static nint? _ParamIndexOffset;
 
   public CAnimParamHandle ParamIndex {
-    get => new CAnimParamHandleImpl(_Handle + _ParamIndexOffset.Value);
+    get {
+      if (_ParamIndexOffset == null) {
+        _ParamIndexOffset = Schema.GetOffset(0xB811C15C61990A86);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LockWhenWaningOffset = new(() => Schema.GetOffset(0xB811C15CEED48004), LazyThreadSafetyMode.None);
+  private static nint? _LockWhenWaningOffset;
 
   public ref bool LockWhenWaning {
-    get => ref _Handle.AsRef<bool>(_LockWhenWaningOffset.Value);
+    get {
+      if (_LockWhenWaningOffset == null) {
+        _LockWhenWaningOffset = Schema.GetOffset(0xB811C15CEED48004);
+      }
+      return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+    }
   }
 
 

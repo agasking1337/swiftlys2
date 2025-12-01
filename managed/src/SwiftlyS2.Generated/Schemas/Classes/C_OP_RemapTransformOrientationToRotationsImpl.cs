@@ -17,25 +17,45 @@ internal partial class C_OP_RemapTransformOrientationToRotationsImpl : CParticle
   public C_OP_RemapTransformOrientationToRotationsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0x73EBC1F8B3FDC289), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0x73EBC1F8B3FDC289);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationOffset = new(() => Schema.GetOffset(0x73EBC1F81992E6BF), LazyThreadSafetyMode.None);
+  private static nint? _RotationOffset;
 
   public ref Vector Rotation {
-    get => ref _Handle.AsRef<Vector>(_RotationOffset.Value);
+    get {
+      if (_RotationOffset == null) {
+        _RotationOffset = Schema.GetOffset(0x73EBC1F81992E6BF);
+      }
+      return ref _Handle.AsRef<Vector>(_RotationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseQuatOffset = new(() => Schema.GetOffset(0x73EBC1F843F0D4DB), LazyThreadSafetyMode.None);
+  private static nint? _UseQuatOffset;
 
   public ref bool UseQuat {
-    get => ref _Handle.AsRef<bool>(_UseQuatOffset.Value);
+    get {
+      if (_UseQuatOffset == null) {
+        _UseQuatOffset = Schema.GetOffset(0x73EBC1F843F0D4DB);
+      }
+      return ref _Handle.AsRef<bool>(_UseQuatOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WriteNormalOffset = new(() => Schema.GetOffset(0x73EBC1F8C2EF44FF), LazyThreadSafetyMode.None);
+  private static nint? _WriteNormalOffset;
 
   public ref bool WriteNormal {
-    get => ref _Handle.AsRef<bool>(_WriteNormalOffset.Value);
+    get {
+      if (_WriteNormalOffset == null) {
+        _WriteNormalOffset = Schema.GetOffset(0x73EBC1F8C2EF44FF);
+      }
+      return ref _Handle.AsRef<bool>(_WriteNormalOffset!.Value);
+    }
   }
 
 

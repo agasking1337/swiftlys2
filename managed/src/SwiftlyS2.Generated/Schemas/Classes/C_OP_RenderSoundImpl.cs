@@ -17,69 +17,132 @@ internal partial class C_OP_RenderSoundImpl : CParticleFunctionRendererImpl, C_O
   public C_OP_RenderSoundImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DurationScaleOffset = new(() => Schema.GetOffset(0xBDBBFDFC776D4203), LazyThreadSafetyMode.None);
+  private static nint? _DurationScaleOffset;
 
   public ref float DurationScale {
-    get => ref _Handle.AsRef<float>(_DurationScaleOffset.Value);
+    get {
+      if (_DurationScaleOffset == null) {
+        _DurationScaleOffset = Schema.GetOffset(0xBDBBFDFC776D4203);
+      }
+      return ref _Handle.AsRef<float>(_DurationScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SndLvlScaleOffset = new(() => Schema.GetOffset(0xBDBBFDFC19AAA97E), LazyThreadSafetyMode.None);
+  private static nint? _SndLvlScaleOffset;
 
   public ref float SndLvlScale {
-    get => ref _Handle.AsRef<float>(_SndLvlScaleOffset.Value);
+    get {
+      if (_SndLvlScaleOffset == null) {
+        _SndLvlScaleOffset = Schema.GetOffset(0xBDBBFDFC19AAA97E);
+      }
+      return ref _Handle.AsRef<float>(_SndLvlScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PitchScaleOffset = new(() => Schema.GetOffset(0xBDBBFDFCBBEE57F3), LazyThreadSafetyMode.None);
+  private static nint? _PitchScaleOffset;
 
   public ref float PitchScale {
-    get => ref _Handle.AsRef<float>(_PitchScaleOffset.Value);
+    get {
+      if (_PitchScaleOffset == null) {
+        _PitchScaleOffset = Schema.GetOffset(0xBDBBFDFCBBEE57F3);
+      }
+      return ref _Handle.AsRef<float>(_PitchScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VolumeScaleOffset = new(() => Schema.GetOffset(0xBDBBFDFCDFBFD5FD), LazyThreadSafetyMode.None);
+  private static nint? _VolumeScaleOffset;
 
   public ref float VolumeScale {
-    get => ref _Handle.AsRef<float>(_VolumeScaleOffset.Value);
+    get {
+      if (_VolumeScaleOffset == null) {
+        _VolumeScaleOffset = Schema.GetOffset(0xBDBBFDFCDFBFD5FD);
+      }
+      return ref _Handle.AsRef<float>(_VolumeScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SndLvlFieldOffset = new(() => Schema.GetOffset(0xBDBBFDFC17E2BD46), LazyThreadSafetyMode.None);
+  private static nint? _SndLvlFieldOffset;
 
   public ParticleAttributeIndex_t SndLvlField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _SndLvlFieldOffset.Value);
+    get {
+      if (_SndLvlFieldOffset == null) {
+        _SndLvlFieldOffset = Schema.GetOffset(0xBDBBFDFC17E2BD46);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _SndLvlFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationFieldOffset = new(() => Schema.GetOffset(0xBDBBFDFCB21EDAAB), LazyThreadSafetyMode.None);
+  private static nint? _DurationFieldOffset;
 
   public ParticleAttributeIndex_t DurationField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _DurationFieldOffset.Value);
+    get {
+      if (_DurationFieldOffset == null) {
+        _DurationFieldOffset = Schema.GetOffset(0xBDBBFDFCB21EDAAB);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _DurationFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PitchFieldOffset = new(() => Schema.GetOffset(0xBDBBFDFC6E37791F), LazyThreadSafetyMode.None);
+  private static nint? _PitchFieldOffset;
 
   public ParticleAttributeIndex_t PitchField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _PitchFieldOffset.Value);
+    get {
+      if (_PitchFieldOffset == null) {
+        _PitchFieldOffset = Schema.GetOffset(0xBDBBFDFC6E37791F);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _PitchFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VolumeFieldOffset = new(() => Schema.GetOffset(0xBDBBFDFC3F07D465), LazyThreadSafetyMode.None);
+  private static nint? _VolumeFieldOffset;
 
   public ParticleAttributeIndex_t VolumeField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _VolumeFieldOffset.Value);
+    get {
+      if (_VolumeFieldOffset == null) {
+        _VolumeFieldOffset = Schema.GetOffset(0xBDBBFDFC3F07D465);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _VolumeFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChannelOffset = new(() => Schema.GetOffset(0xBDBBFDFCC4CD80F8), LazyThreadSafetyMode.None);
+  private static nint? _ChannelOffset;
 
   public ref int Channel {
-    get => ref _Handle.AsRef<int>(_ChannelOffset.Value);
+    get {
+      if (_ChannelOffset == null) {
+        _ChannelOffset = Schema.GetOffset(0xBDBBFDFCC4CD80F8);
+      }
+      return ref _Handle.AsRef<int>(_ChannelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPReferenceOffset = new(() => Schema.GetOffset(0xBDBBFDFC1349FFE7), LazyThreadSafetyMode.None);
+  private static nint? _CPReferenceOffset;
 
   public ref int CPReference {
-    get => ref _Handle.AsRef<int>(_CPReferenceOffset.Value);
+    get {
+      if (_CPReferenceOffset == null) {
+        _CPReferenceOffset = Schema.GetOffset(0xBDBBFDFC1349FFE7);
+      }
+      return ref _Handle.AsRef<int>(_CPReferenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundNameOffset = new(() => Schema.GetOffset(0xBDBBFDFC26D82A1A), LazyThreadSafetyMode.None);
+  private static nint? _SoundNameOffset;
 
   public string SoundName {
     get {
-      var ptr = _Handle + _SoundNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_SoundNameOffset == null) {
+            _SoundNameOffset = Schema.GetOffset(0xBDBBFDFC26D82A1A);
+        }
+        var ptr = _Handle + _SoundNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _SoundNameOffset.Value, value, 256);
+    set {
+        if (_SoundNameOffset == null) {
+            _SoundNameOffset = Schema.GetOffset(0xBDBBFDFC26D82A1A);
+        }
+        Schema.SetFixedString(_Handle, _SoundNameOffset!.Value, value, 256);
+    }
   } 
-  private static readonly Lazy<nint> _SuppressStopSoundEventOffset = new(() => Schema.GetOffset(0xBDBBFDFC76AD7797), LazyThreadSafetyMode.None);
+  private static nint? _SuppressStopSoundEventOffset;
 
   public ref bool SuppressStopSoundEvent {
-    get => ref _Handle.AsRef<bool>(_SuppressStopSoundEventOffset.Value);
+    get {
+      if (_SuppressStopSoundEventOffset == null) {
+        _SuppressStopSoundEventOffset = Schema.GetOffset(0xBDBBFDFC76AD7797);
+      }
+      return ref _Handle.AsRef<bool>(_SuppressStopSoundEventOffset!.Value);
+    }
   }
 
 

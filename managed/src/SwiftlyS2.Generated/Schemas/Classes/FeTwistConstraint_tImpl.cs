@@ -17,25 +17,45 @@ internal partial class FeTwistConstraint_tImpl : SchemaClass, FeTwistConstraint_
   public FeTwistConstraint_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NodeOrientOffset = new(() => Schema.GetOffset(0x4BD7707B59026ED8), LazyThreadSafetyMode.None);
+  private static nint? _NodeOrientOffset;
 
   public ref ushort NodeOrient {
-    get => ref _Handle.AsRef<ushort>(_NodeOrientOffset.Value);
+    get {
+      if (_NodeOrientOffset == null) {
+        _NodeOrientOffset = Schema.GetOffset(0x4BD7707B59026ED8);
+      }
+      return ref _Handle.AsRef<ushort>(_NodeOrientOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NodeEndOffset = new(() => Schema.GetOffset(0x4BD7707B8A00317E), LazyThreadSafetyMode.None);
+  private static nint? _NodeEndOffset;
 
   public ref ushort NodeEnd {
-    get => ref _Handle.AsRef<ushort>(_NodeEndOffset.Value);
+    get {
+      if (_NodeEndOffset == null) {
+        _NodeEndOffset = Schema.GetOffset(0x4BD7707B8A00317E);
+      }
+      return ref _Handle.AsRef<ushort>(_NodeEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TwistRelaxOffset = new(() => Schema.GetOffset(0x4BD7707B9E4510FC), LazyThreadSafetyMode.None);
+  private static nint? _TwistRelaxOffset;
 
   public ref float TwistRelax {
-    get => ref _Handle.AsRef<float>(_TwistRelaxOffset.Value);
+    get {
+      if (_TwistRelaxOffset == null) {
+        _TwistRelaxOffset = Schema.GetOffset(0x4BD7707B9E4510FC);
+      }
+      return ref _Handle.AsRef<float>(_TwistRelaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SwingRelaxOffset = new(() => Schema.GetOffset(0x4BD7707BE4722697), LazyThreadSafetyMode.None);
+  private static nint? _SwingRelaxOffset;
 
   public ref float SwingRelax {
-    get => ref _Handle.AsRef<float>(_SwingRelaxOffset.Value);
+    get {
+      if (_SwingRelaxOffset == null) {
+        _SwingRelaxOffset = Schema.GetOffset(0x4BD7707BE4722697);
+      }
+      return ref _Handle.AsRef<float>(_SwingRelaxOffset!.Value);
+    }
   }
 
 

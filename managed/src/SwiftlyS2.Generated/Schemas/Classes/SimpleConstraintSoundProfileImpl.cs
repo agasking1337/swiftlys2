@@ -17,10 +17,15 @@ internal partial class SimpleConstraintSoundProfileImpl : SchemaClass, SimpleCon
   public SimpleConstraintSoundProfileImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _KeypointsOffset = new(() => Schema.GetOffset(0xB768AA94AE55150C), LazyThreadSafetyMode.None);
+  private static nint? _KeypointsOffset;
 
   public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints {
-    get => ref _Handle.AsRef<SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t>(_KeypointsOffset.Value);
+    get {
+      if (_KeypointsOffset == null) {
+        _KeypointsOffset = Schema.GetOffset(0xB768AA94AE55150C);
+      }
+      return ref _Handle.AsRef<SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t>(_KeypointsOffset!.Value);
+    }
   }
   public ISchemaFixedArray<float> KeyPoints {
     get => new SchemaFixedArray<float>(_Handle, 0xB768AA9449DA0463, 2, 4, 4);

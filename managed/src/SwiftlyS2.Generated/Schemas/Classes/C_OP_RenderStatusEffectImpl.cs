@@ -17,40 +17,75 @@ internal partial class C_OP_RenderStatusEffectImpl : CParticleFunctionRendererIm
   public C_OP_RenderStatusEffectImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TextureColorWarpOffset = new(() => Schema.GetOffset(0x2D120E02C99DEE43), LazyThreadSafetyMode.None);
+  private static nint? _TextureColorWarpOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureColorWarpOffset.Value);
+    get {
+      if (_TextureColorWarpOffset == null) {
+        _TextureColorWarpOffset = Schema.GetOffset(0x2D120E02C99DEE43);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureColorWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureDetail2Offset = new(() => Schema.GetOffset(0x2D120E021AC8A787), LazyThreadSafetyMode.None);
+  private static nint? _TextureDetail2Offset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail2 {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDetail2Offset.Value);
+    get {
+      if (_TextureDetail2Offset == null) {
+        _TextureDetail2Offset = Schema.GetOffset(0x2D120E021AC8A787);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDetail2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureDiffuseWarpOffset = new(() => Schema.GetOffset(0x2D120E02F91AF7A2), LazyThreadSafetyMode.None);
+  private static nint? _TextureDiffuseWarpOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDiffuseWarp {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDiffuseWarpOffset.Value);
+    get {
+      if (_TextureDiffuseWarpOffset == null) {
+        _TextureDiffuseWarpOffset = Schema.GetOffset(0x2D120E02F91AF7A2);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDiffuseWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureFresnelColorWarpOffset = new(() => Schema.GetOffset(0x2D120E02C8B05C0A), LazyThreadSafetyMode.None);
+  private static nint? _TextureFresnelColorWarpOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelColorWarp {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelColorWarpOffset.Value);
+    get {
+      if (_TextureFresnelColorWarpOffset == null) {
+        _TextureFresnelColorWarpOffset = Schema.GetOffset(0x2D120E02C8B05C0A);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelColorWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureFresnelWarpOffset = new(() => Schema.GetOffset(0x2D120E020BCD7353), LazyThreadSafetyMode.None);
+  private static nint? _TextureFresnelWarpOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelWarp {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelWarpOffset.Value);
+    get {
+      if (_TextureFresnelWarpOffset == null) {
+        _TextureFresnelWarpOffset = Schema.GetOffset(0x2D120E020BCD7353);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureSpecularWarpOffset = new(() => Schema.GetOffset(0x2D120E02B904CD45), LazyThreadSafetyMode.None);
+  private static nint? _TextureSpecularWarpOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSpecularWarp {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureSpecularWarpOffset.Value);
+    get {
+      if (_TextureSpecularWarpOffset == null) {
+        _TextureSpecularWarpOffset = Schema.GetOffset(0x2D120E02B904CD45);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureSpecularWarpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureEnvMapOffset = new(() => Schema.GetOffset(0x2D120E0280FDA7DD), LazyThreadSafetyMode.None);
+  private static nint? _TextureEnvMapOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureEnvMap {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureEnvMapOffset.Value);
+    get {
+      if (_TextureEnvMapOffset == null) {
+        _TextureEnvMapOffset = Schema.GetOffset(0x2D120E0280FDA7DD);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureEnvMapOffset!.Value);
+    }
   }
 
 

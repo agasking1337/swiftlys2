@@ -17,70 +17,135 @@ internal partial class C_OP_RemapCPtoVectorImpl : CParticleFunctionOperatorImpl,
   public C_OP_RemapCPtoVectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPInputOffset = new(() => Schema.GetOffset(0xA5B6B7CBFB805736), LazyThreadSafetyMode.None);
+  private static nint? _CPInputOffset;
 
   public ref int CPInput {
-    get => ref _Handle.AsRef<int>(_CPInputOffset.Value);
+    get {
+      if (_CPInputOffset == null) {
+        _CPInputOffset = Schema.GetOffset(0xA5B6B7CBFB805736);
+      }
+      return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xA5B6B7CBE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xA5B6B7CBE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSpaceCPOffset = new(() => Schema.GetOffset(0xA5B6B7CBC8E9CB31), LazyThreadSafetyMode.None);
+  private static nint? _LocalSpaceCPOffset;
 
   public ref int LocalSpaceCP {
-    get => ref _Handle.AsRef<int>(_LocalSpaceCPOffset.Value);
+    get {
+      if (_LocalSpaceCPOffset == null) {
+        _LocalSpaceCPOffset = Schema.GetOffset(0xA5B6B7CBC8E9CB31);
+      }
+      return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0xA5B6B7CB367FBCC9), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref Vector InputMin {
-    get => ref _Handle.AsRef<Vector>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0xA5B6B7CB367FBCC9);
+      }
+      return ref _Handle.AsRef<Vector>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0xA5B6B7CB286C1F07), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref Vector InputMax {
-    get => ref _Handle.AsRef<Vector>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0xA5B6B7CB286C1F07);
+      }
+      return ref _Handle.AsRef<Vector>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0xA5B6B7CBA04D6C7C), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref Vector OutputMin {
-    get => ref _Handle.AsRef<Vector>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0xA5B6B7CBA04D6C7C);
+      }
+      return ref _Handle.AsRef<Vector>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0xA5B6B7CB8E39C86E), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref Vector OutputMax {
-    get => ref _Handle.AsRef<Vector>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0xA5B6B7CB8E39C86E);
+      }
+      return ref _Handle.AsRef<Vector>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0xA5B6B7CB67FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public ref float StartTime {
-    get => ref _Handle.AsRef<float>(_StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0xA5B6B7CB67FE9DC4);
+      }
+      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndTimeOffset = new(() => Schema.GetOffset(0xA5B6B7CB2041DF9D), LazyThreadSafetyMode.None);
+  private static nint? _EndTimeOffset;
 
   public ref float EndTime {
-    get => ref _Handle.AsRef<float>(_EndTimeOffset.Value);
+    get {
+      if (_EndTimeOffset == null) {
+        _EndTimeOffset = Schema.GetOffset(0xA5B6B7CB2041DF9D);
+      }
+      return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpRateOffset = new(() => Schema.GetOffset(0xA5B6B7CBD3B705A7), LazyThreadSafetyMode.None);
+  private static nint? _InterpRateOffset;
 
   public ref float InterpRate {
-    get => ref _Handle.AsRef<float>(_InterpRateOffset.Value);
+    get {
+      if (_InterpRateOffset == null) {
+        _InterpRateOffset = Schema.GetOffset(0xA5B6B7CBD3B705A7);
+      }
+      return ref _Handle.AsRef<float>(_InterpRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetMethodOffset = new(() => Schema.GetOffset(0xA5B6B7CBFB53C31E), LazyThreadSafetyMode.None);
+  private static nint? _SetMethodOffset;
 
   public ref ParticleSetMethod_t SetMethod {
-    get => ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset.Value);
+    get {
+      if (_SetMethodOffset == null) {
+        _SetMethodOffset = Schema.GetOffset(0xA5B6B7CBFB53C31E);
+      }
+      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0xA5B6B7CB17412B2A), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref bool Offset {
-    get => ref _Handle.AsRef<bool>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0xA5B6B7CB17412B2A);
+      }
+      return ref _Handle.AsRef<bool>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AccelerateOffset = new(() => Schema.GetOffset(0xA5B6B7CBA9BEFF50), LazyThreadSafetyMode.None);
+  private static nint? _AccelerateOffset;
 
   public ref bool Accelerate {
-    get => ref _Handle.AsRef<bool>(_AccelerateOffset.Value);
+    get {
+      if (_AccelerateOffset == null) {
+        _AccelerateOffset = Schema.GetOffset(0xA5B6B7CBA9BEFF50);
+      }
+      return ref _Handle.AsRef<bool>(_AccelerateOffset!.Value);
+    }
   }
 
 

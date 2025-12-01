@@ -17,15 +17,25 @@ internal partial class CRenderBufferBindingImpl : SchemaClass, CRenderBufferBind
   public CRenderBufferBindingImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BufferOffset = new(() => Schema.GetOffset(0xFC8416C144D3898D), LazyThreadSafetyMode.None);
+  private static nint? _BufferOffset;
 
   public ref ulong Buffer {
-    get => ref _Handle.AsRef<ulong>(_BufferOffset.Value);
+    get {
+      if (_BufferOffset == null) {
+        _BufferOffset = Schema.GetOffset(0xFC8416C144D3898D);
+      }
+      return ref _Handle.AsRef<ulong>(_BufferOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BindOffsetBytesOffset = new(() => Schema.GetOffset(0xFC8416C1AD9A201C), LazyThreadSafetyMode.None);
+  private static nint? _BindOffsetBytesOffset;
 
   public ref uint BindOffsetBytes {
-    get => ref _Handle.AsRef<uint>(_BindOffsetBytesOffset.Value);
+    get {
+      if (_BindOffsetBytesOffset == null) {
+        _BindOffsetBytesOffset = Schema.GetOffset(0xFC8416C1AD9A201C);
+      }
+      return ref _Handle.AsRef<uint>(_BindOffsetBytesOffset!.Value);
+    }
   }
 
 

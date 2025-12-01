@@ -17,39 +17,72 @@ internal partial class CFuncTrainImpl : CBasePlatTrainImpl, CFuncTrain {
   public CFuncTrainImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CurrentTargetOffset = new(() => Schema.GetOffset(0xAAD8EE8EBD175911), LazyThreadSafetyMode.None);
+  private static nint? _CurrentTargetOffset;
 
   public ref CHandle<CBaseEntity> CurrentTarget {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_CurrentTargetOffset.Value);
+    get {
+      if (_CurrentTargetOffset == null) {
+        _CurrentTargetOffset = Schema.GetOffset(0xAAD8EE8EBD175911);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CurrentTargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActivatedOffset = new(() => Schema.GetOffset(0xAAD8EE8E4337A09C), LazyThreadSafetyMode.None);
+  private static nint? _ActivatedOffset;
 
   public ref bool Activated {
-    get => ref _Handle.AsRef<bool>(_ActivatedOffset.Value);
+    get {
+      if (_ActivatedOffset == null) {
+        _ActivatedOffset = Schema.GetOffset(0xAAD8EE8E4337A09C);
+      }
+      return ref _Handle.AsRef<bool>(_ActivatedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnemyOffset = new(() => Schema.GetOffset(0xAAD8EE8E430EC2D5), LazyThreadSafetyMode.None);
+  private static nint? _EnemyOffset;
 
   public ref CHandle<CBaseEntity> Enemy {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_EnemyOffset.Value);
+    get {
+      if (_EnemyOffset == null) {
+        _EnemyOffset = Schema.GetOffset(0xAAD8EE8E430EC2D5);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EnemyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlockDamageOffset = new(() => Schema.GetOffset(0xAAD8EE8EA5348091), LazyThreadSafetyMode.None);
+  private static nint? _BlockDamageOffset;
 
   public ref float BlockDamage {
-    get => ref _Handle.AsRef<float>(_BlockDamageOffset.Value);
+    get {
+      if (_BlockDamageOffset == null) {
+        _BlockDamageOffset = Schema.GetOffset(0xAAD8EE8EA5348091);
+      }
+      return ref _Handle.AsRef<float>(_BlockDamageOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextBlockTimeOffset = new(() => Schema.GetOffset(0xAAD8EE8E82BC1902), LazyThreadSafetyMode.None);
+  private static nint? _NextBlockTimeOffset;
 
   public GameTime_t NextBlockTime {
-    get => new GameTime_tImpl(_Handle + _NextBlockTimeOffset.Value);
+    get {
+      if (_NextBlockTimeOffset == null) {
+        _NextBlockTimeOffset = Schema.GetOffset(0xAAD8EE8E82BC1902);
+      }
+      return new GameTime_tImpl(_Handle + _NextBlockTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastTargetOffset = new(() => Schema.GetOffset(0xAAD8EE8ECF22FD34), LazyThreadSafetyMode.None);
+  private static nint? _LastTargetOffset;
 
   public string LastTarget {
     get {
-      var ptr = _Handle.Read<nint>(_LastTargetOffset.Value);
+      if (_LastTargetOffset == null) {
+        _LastTargetOffset = Schema.GetOffset(0xAAD8EE8ECF22FD34);
+      }
+      var ptr = _Handle.Read<nint>(_LastTargetOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LastTargetOffset.Value, value);
+    set {
+      if (_LastTargetOffset == null) {
+        _LastTargetOffset = Schema.GetOffset(0xAAD8EE8ECF22FD34);
+      }
+      Schema.SetString(_Handle, _LastTargetOffset!.Value, value);
+    }
   } 
 
 

@@ -17,29 +17,52 @@ internal partial class CInfoFanImpl : CPointEntityImpl, CInfoFan {
   public CInfoFanImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FanForceMaxRadiusOffset = new(() => Schema.GetOffset(0x1372EEA33EA45A67), LazyThreadSafetyMode.None);
+  private static nint? _FanForceMaxRadiusOffset;
 
   public ref float FanForceMaxRadius {
-    get => ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset.Value);
+    get {
+      if (_FanForceMaxRadiusOffset == null) {
+        _FanForceMaxRadiusOffset = Schema.GetOffset(0x1372EEA33EA45A67);
+      }
+      return ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FanForceMinRadiusOffset = new(() => Schema.GetOffset(0x1372EEA352CA71C5), LazyThreadSafetyMode.None);
+  private static nint? _FanForceMinRadiusOffset;
 
   public ref float FanForceMinRadius {
-    get => ref _Handle.AsRef<float>(_FanForceMinRadiusOffset.Value);
+    get {
+      if (_FanForceMinRadiusOffset == null) {
+        _FanForceMinRadiusOffset = Schema.GetOffset(0x1372EEA352CA71C5);
+      }
+      return ref _Handle.AsRef<float>(_FanForceMinRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurveDistRangeOffset = new(() => Schema.GetOffset(0x1372EEA3EE91456F), LazyThreadSafetyMode.None);
+  private static nint? _CurveDistRangeOffset;
 
   public ref float CurveDistRange {
-    get => ref _Handle.AsRef<float>(_CurveDistRangeOffset.Value);
+    get {
+      if (_CurveDistRangeOffset == null) {
+        _CurveDistRangeOffset = Schema.GetOffset(0x1372EEA3EE91456F);
+      }
+      return ref _Handle.AsRef<float>(_CurveDistRangeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FanForceCurveStringOffset = new(() => Schema.GetOffset(0x1372EEA3CC493A61), LazyThreadSafetyMode.None);
+  private static nint? _FanForceCurveStringOffset;
 
   public string FanForceCurveString {
     get {
-      var ptr = _Handle.Read<nint>(_FanForceCurveStringOffset.Value);
+      if (_FanForceCurveStringOffset == null) {
+        _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
+      }
+      var ptr = _Handle.Read<nint>(_FanForceCurveStringOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _FanForceCurveStringOffset.Value, value);
+    set {
+      if (_FanForceCurveStringOffset == null) {
+        _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
+      }
+      Schema.SetString(_Handle, _FanForceCurveStringOffset!.Value, value);
+    }
   } 
 
   public void FanForceMaxRadiusUpdated() {

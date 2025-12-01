@@ -17,34 +17,62 @@ internal partial class CPlayerPingImpl : CBaseEntityImpl, CPlayerPing {
   public CPlayerPingImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PlayerOffset = new(() => Schema.GetOffset(0x5943E25F68856C16), LazyThreadSafetyMode.None);
+  private static nint? _PlayerOffset;
 
   public ref CHandle<CCSPlayerPawn> Player {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerOffset.Value);
+    get {
+      if (_PlayerOffset == null) {
+        _PlayerOffset = Schema.GetOffset(0x5943E25F68856C16);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PingedEntityOffset = new(() => Schema.GetOffset(0x5943E25F35D9D429), LazyThreadSafetyMode.None);
+  private static nint? _PingedEntityOffset;
 
   public ref CHandle<CBaseEntity> PingedEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_PingedEntityOffset.Value);
+    get {
+      if (_PingedEntityOffset == null) {
+        _PingedEntityOffset = Schema.GetOffset(0x5943E25F35D9D429);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PingedEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x5943E25FC932D7CC), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref int Type {
-    get => ref _Handle.AsRef<int>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x5943E25FC932D7CC);
+      }
+      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UrgentOffset = new(() => Schema.GetOffset(0x5943E25F4F5EE9D0), LazyThreadSafetyMode.None);
+  private static nint? _UrgentOffset;
 
   public ref bool Urgent {
-    get => ref _Handle.AsRef<bool>(_UrgentOffset.Value);
+    get {
+      if (_UrgentOffset == null) {
+        _UrgentOffset = Schema.GetOffset(0x5943E25F4F5EE9D0);
+      }
+      return ref _Handle.AsRef<bool>(_UrgentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaceNameOffset = new(() => Schema.GetOffset(0x5943E25F6039F660), LazyThreadSafetyMode.None);
+  private static nint? _PlaceNameOffset;
 
   public string PlaceName {
     get {
-      var ptr = _Handle + _PlaceNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_PlaceNameOffset == null) {
+            _PlaceNameOffset = Schema.GetOffset(0x5943E25F6039F660);
+        }
+        var ptr = _Handle + _PlaceNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _PlaceNameOffset.Value, value, 18);
+    set {
+        if (_PlaceNameOffset == null) {
+            _PlaceNameOffset = Schema.GetOffset(0x5943E25F6039F660);
+        }
+        Schema.SetFixedString(_Handle, _PlaceNameOffset!.Value, value, 18);
+    }
   } 
 
   public void PlayerUpdated() {

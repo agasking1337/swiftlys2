@@ -17,10 +17,15 @@ internal partial class WeaponPurchaseTracker_tImpl : SchemaClass, WeaponPurchase
   public WeaponPurchaseTracker_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WeaponPurchasesOffset = new(() => Schema.GetOffset(0xD558F475988247C7), LazyThreadSafetyMode.None);
+  private static nint? _WeaponPurchasesOffset;
 
   public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases {
-    get => ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset.Value);
+    get {
+      if (_WeaponPurchasesOffset == null) {
+        _WeaponPurchasesOffset = Schema.GetOffset(0xD558F475988247C7);
+      }
+      return ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset!.Value);
+    }
   }
 
   public void WeaponPurchasesUpdated() {

@@ -17,88 +17,169 @@ internal partial class CDamageRecordImpl : SchemaClass, CDamageRecord {
   public CDamageRecordImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PlayerDamagerOffset = new(() => Schema.GetOffset(0x149283162F5812D9), LazyThreadSafetyMode.None);
+  private static nint? _PlayerDamagerOffset;
 
   public ref CHandle<CCSPlayerPawn> PlayerDamager {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerDamagerOffset.Value);
+    get {
+      if (_PlayerDamagerOffset == null) {
+        _PlayerDamagerOffset = Schema.GetOffset(0x149283162F5812D9);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerDamagerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerRecipientOffset = new(() => Schema.GetOffset(0x14928316EB48351F), LazyThreadSafetyMode.None);
+  private static nint? _PlayerRecipientOffset;
 
   public ref CHandle<CCSPlayerPawn> PlayerRecipient {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerRecipientOffset.Value);
+    get {
+      if (_PlayerRecipientOffset == null) {
+        _PlayerRecipientOffset = Schema.GetOffset(0x14928316EB48351F);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerRecipientOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerControllerDamagerOffset = new(() => Schema.GetOffset(0x14928316285F9023), LazyThreadSafetyMode.None);
+  private static nint? _PlayerControllerDamagerOffset;
 
   public ref CHandle<CCSPlayerController> PlayerControllerDamager {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerController>>(_PlayerControllerDamagerOffset.Value);
+    get {
+      if (_PlayerControllerDamagerOffset == null) {
+        _PlayerControllerDamagerOffset = Schema.GetOffset(0x14928316285F9023);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_PlayerControllerDamagerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerControllerRecipientOffset = new(() => Schema.GetOffset(0x14928316033B0B25), LazyThreadSafetyMode.None);
+  private static nint? _PlayerControllerRecipientOffset;
 
   public ref CHandle<CCSPlayerController> PlayerControllerRecipient {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerController>>(_PlayerControllerRecipientOffset.Value);
+    get {
+      if (_PlayerControllerRecipientOffset == null) {
+        _PlayerControllerRecipientOffset = Schema.GetOffset(0x14928316033B0B25);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_PlayerControllerRecipientOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerDamagerNameOffset = new(() => Schema.GetOffset(0x149283165AB278AD), LazyThreadSafetyMode.None);
+  private static nint? _PlayerDamagerNameOffset;
 
   public string PlayerDamagerName {
     get {
-      var ptr = _Handle.Read<nint>(_PlayerDamagerNameOffset.Value);
+      if (_PlayerDamagerNameOffset == null) {
+        _PlayerDamagerNameOffset = Schema.GetOffset(0x149283165AB278AD);
+      }
+      var ptr = _Handle.Read<nint>(_PlayerDamagerNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _PlayerDamagerNameOffset.Value, value);
+    set {
+      if (_PlayerDamagerNameOffset == null) {
+        _PlayerDamagerNameOffset = Schema.GetOffset(0x149283165AB278AD);
+      }
+      Schema.SetString(_Handle, _PlayerDamagerNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PlayerRecipientNameOffset = new(() => Schema.GetOffset(0x14928316E6015313), LazyThreadSafetyMode.None);
+  private static nint? _PlayerRecipientNameOffset;
 
   public string PlayerRecipientName {
     get {
-      var ptr = _Handle.Read<nint>(_PlayerRecipientNameOffset.Value);
+      if (_PlayerRecipientNameOffset == null) {
+        _PlayerRecipientNameOffset = Schema.GetOffset(0x14928316E6015313);
+      }
+      var ptr = _Handle.Read<nint>(_PlayerRecipientNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _PlayerRecipientNameOffset.Value, value);
+    set {
+      if (_PlayerRecipientNameOffset == null) {
+        _PlayerRecipientNameOffset = Schema.GetOffset(0x14928316E6015313);
+      }
+      Schema.SetString(_Handle, _PlayerRecipientNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _DamagerXuidOffset = new(() => Schema.GetOffset(0x14928316DAD4D818), LazyThreadSafetyMode.None);
+  private static nint? _DamagerXuidOffset;
 
   public ref ulong DamagerXuid {
-    get => ref _Handle.AsRef<ulong>(_DamagerXuidOffset.Value);
+    get {
+      if (_DamagerXuidOffset == null) {
+        _DamagerXuidOffset = Schema.GetOffset(0x14928316DAD4D818);
+      }
+      return ref _Handle.AsRef<ulong>(_DamagerXuidOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RecipientXuidOffset = new(() => Schema.GetOffset(0x1492831684A232C2), LazyThreadSafetyMode.None);
+  private static nint? _RecipientXuidOffset;
 
   public ref ulong RecipientXuid {
-    get => ref _Handle.AsRef<ulong>(_RecipientXuidOffset.Value);
+    get {
+      if (_RecipientXuidOffset == null) {
+        _RecipientXuidOffset = Schema.GetOffset(0x1492831684A232C2);
+      }
+      return ref _Handle.AsRef<ulong>(_RecipientXuidOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BulletsDamageOffset = new(() => Schema.GetOffset(0x149283163641E11D), LazyThreadSafetyMode.None);
+  private static nint? _BulletsDamageOffset;
 
   public ref float BulletsDamage {
-    get => ref _Handle.AsRef<float>(_BulletsDamageOffset.Value);
+    get {
+      if (_BulletsDamageOffset == null) {
+        _BulletsDamageOffset = Schema.GetOffset(0x149283163641E11D);
+      }
+      return ref _Handle.AsRef<float>(_BulletsDamageOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DamageOffset = new(() => Schema.GetOffset(0x14928316DC60E53E), LazyThreadSafetyMode.None);
+  private static nint? _DamageOffset;
 
   public ref float Damage {
-    get => ref _Handle.AsRef<float>(_DamageOffset.Value);
+    get {
+      if (_DamageOffset == null) {
+        _DamageOffset = Schema.GetOffset(0x14928316DC60E53E);
+      }
+      return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActualHealthRemovedOffset = new(() => Schema.GetOffset(0x14928316F8DC2935), LazyThreadSafetyMode.None);
+  private static nint? _ActualHealthRemovedOffset;
 
   public ref float ActualHealthRemoved {
-    get => ref _Handle.AsRef<float>(_ActualHealthRemovedOffset.Value);
+    get {
+      if (_ActualHealthRemovedOffset == null) {
+        _ActualHealthRemovedOffset = Schema.GetOffset(0x14928316F8DC2935);
+      }
+      return ref _Handle.AsRef<float>(_ActualHealthRemovedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumHitsOffset = new(() => Schema.GetOffset(0x149283162EC9980E), LazyThreadSafetyMode.None);
+  private static nint? _NumHitsOffset;
 
   public ref int NumHits {
-    get => ref _Handle.AsRef<int>(_NumHitsOffset.Value);
+    get {
+      if (_NumHitsOffset == null) {
+        _NumHitsOffset = Schema.GetOffset(0x149283162EC9980E);
+      }
+      return ref _Handle.AsRef<int>(_NumHitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastBulletUpdateOffset = new(() => Schema.GetOffset(0x14928316D5ABC11D), LazyThreadSafetyMode.None);
+  private static nint? _LastBulletUpdateOffset;
 
   public ref int LastBulletUpdate {
-    get => ref _Handle.AsRef<int>(_LastBulletUpdateOffset.Value);
+    get {
+      if (_LastBulletUpdateOffset == null) {
+        _LastBulletUpdateOffset = Schema.GetOffset(0x14928316D5ABC11D);
+      }
+      return ref _Handle.AsRef<int>(_LastBulletUpdateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsOtherEnemyOffset = new(() => Schema.GetOffset(0x149283164F1F40EB), LazyThreadSafetyMode.None);
+  private static nint? _IsOtherEnemyOffset;
 
   public ref bool IsOtherEnemy {
-    get => ref _Handle.AsRef<bool>(_IsOtherEnemyOffset.Value);
+    get {
+      if (_IsOtherEnemyOffset == null) {
+        _IsOtherEnemyOffset = Schema.GetOffset(0x149283164F1F40EB);
+      }
+      return ref _Handle.AsRef<bool>(_IsOtherEnemyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _KillTypeOffset = new(() => Schema.GetOffset(0x14928316C2ADBB11), LazyThreadSafetyMode.None);
+  private static nint? _KillTypeOffset;
 
   public ref EKillTypes_t KillType {
-    get => ref _Handle.AsRef<EKillTypes_t>(_KillTypeOffset.Value);
+    get {
+      if (_KillTypeOffset == null) {
+        _KillTypeOffset = Schema.GetOffset(0x14928316C2ADBB11);
+      }
+      return ref _Handle.AsRef<EKillTypes_t>(_KillTypeOffset!.Value);
+    }
   }
 
   public void PlayerDamagerUpdated() {

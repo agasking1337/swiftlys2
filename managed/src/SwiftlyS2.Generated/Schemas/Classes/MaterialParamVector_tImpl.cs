@@ -17,10 +17,15 @@ internal partial class MaterialParamVector_tImpl : MaterialParam_tImpl, Material
   public MaterialParamVector_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ValueOffset = new(() => Schema.GetOffset(0xC82210956B99AEEA), LazyThreadSafetyMode.None);
+  private static nint? _ValueOffset;
 
   public ref Vector4D Value {
-    get => ref _Handle.AsRef<Vector4D>(_ValueOffset.Value);
+    get {
+      if (_ValueOffset == null) {
+        _ValueOffset = Schema.GetOffset(0xC82210956B99AEEA);
+      }
+      return ref _Handle.AsRef<Vector4D>(_ValueOffset!.Value);
+    }
   }
 
 

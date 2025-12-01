@@ -17,25 +17,45 @@ internal partial class CPhysicsEntitySolverImpl : CLogicalEntityImpl, CPhysicsEn
   public CPhysicsEntitySolverImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MovingEntityOffset = new(() => Schema.GetOffset(0x2948C36FC1DA080E), LazyThreadSafetyMode.None);
+  private static nint? _MovingEntityOffset;
 
   public ref CHandle<CBaseEntity> MovingEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_MovingEntityOffset.Value);
+    get {
+      if (_MovingEntityOffset == null) {
+        _MovingEntityOffset = Schema.GetOffset(0x2948C36FC1DA080E);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MovingEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PhysicsBlockerOffset = new(() => Schema.GetOffset(0x2948C36F3DD8AB5E), LazyThreadSafetyMode.None);
+  private static nint? _PhysicsBlockerOffset;
 
   public ref CHandle<CBaseEntity> PhysicsBlocker {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_PhysicsBlockerOffset.Value);
+    get {
+      if (_PhysicsBlockerOffset == null) {
+        _PhysicsBlockerOffset = Schema.GetOffset(0x2948C36F3DD8AB5E);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PhysicsBlockerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SeparationDurationOffset = new(() => Schema.GetOffset(0x2948C36F202FE0BD), LazyThreadSafetyMode.None);
+  private static nint? _SeparationDurationOffset;
 
   public ref float SeparationDuration {
-    get => ref _Handle.AsRef<float>(_SeparationDurationOffset.Value);
+    get {
+      if (_SeparationDurationOffset == null) {
+        _SeparationDurationOffset = Schema.GetOffset(0x2948C36F202FE0BD);
+      }
+      return ref _Handle.AsRef<float>(_SeparationDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CancelTimeOffset = new(() => Schema.GetOffset(0x2948C36F12944512), LazyThreadSafetyMode.None);
+  private static nint? _CancelTimeOffset;
 
   public GameTime_t CancelTime {
-    get => new GameTime_tImpl(_Handle + _CancelTimeOffset.Value);
+    get {
+      if (_CancelTimeOffset == null) {
+        _CancelTimeOffset = Schema.GetOffset(0x2948C36F12944512);
+      }
+      return new GameTime_tImpl(_Handle + _CancelTimeOffset!.Value);
+    }
   }
 
 

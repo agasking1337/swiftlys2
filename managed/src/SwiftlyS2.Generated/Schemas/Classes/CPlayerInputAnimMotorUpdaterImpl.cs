@@ -17,35 +17,65 @@ internal partial class CPlayerInputAnimMotorUpdaterImpl : CAnimMotorUpdaterBaseI
   public CPlayerInputAnimMotorUpdaterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SampleTimesOffset = new(() => Schema.GetOffset(0xA117CC02471975DF), LazyThreadSafetyMode.None);
+  private static nint? _SampleTimesOffset;
 
   public ref CUtlVector<float> SampleTimes {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset.Value);
+    get {
+      if (_SampleTimesOffset == null) {
+        _SampleTimesOffset = Schema.GetOffset(0xA117CC02471975DF);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpringConstantOffset = new(() => Schema.GetOffset(0xA117CC02CE2260BE), LazyThreadSafetyMode.None);
+  private static nint? _SpringConstantOffset;
 
   public ref float SpringConstant {
-    get => ref _Handle.AsRef<float>(_SpringConstantOffset.Value);
+    get {
+      if (_SpringConstantOffset == null) {
+        _SpringConstantOffset = Schema.GetOffset(0xA117CC02CE2260BE);
+      }
+      return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnticipationDistanceOffset = new(() => Schema.GetOffset(0xA117CC0264273401), LazyThreadSafetyMode.None);
+  private static nint? _AnticipationDistanceOffset;
 
   public ref float AnticipationDistance {
-    get => ref _Handle.AsRef<float>(_AnticipationDistanceOffset.Value);
+    get {
+      if (_AnticipationDistanceOffset == null) {
+        _AnticipationDistanceOffset = Schema.GetOffset(0xA117CC0264273401);
+      }
+      return ref _Handle.AsRef<float>(_AnticipationDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnticipationPosParamOffset = new(() => Schema.GetOffset(0xA117CC0286389829), LazyThreadSafetyMode.None);
+  private static nint? _AnticipationPosParamOffset;
 
   public CAnimParamHandle AnticipationPosParam {
-    get => new CAnimParamHandleImpl(_Handle + _AnticipationPosParamOffset.Value);
+    get {
+      if (_AnticipationPosParamOffset == null) {
+        _AnticipationPosParamOffset = Schema.GetOffset(0xA117CC0286389829);
+      }
+      return new CAnimParamHandleImpl(_Handle + _AnticipationPosParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnticipationHeadingParamOffset = new(() => Schema.GetOffset(0xA117CC02095DAB6D), LazyThreadSafetyMode.None);
+  private static nint? _AnticipationHeadingParamOffset;
 
   public CAnimParamHandle AnticipationHeadingParam {
-    get => new CAnimParamHandleImpl(_Handle + _AnticipationHeadingParamOffset.Value);
+    get {
+      if (_AnticipationHeadingParamOffset == null) {
+        _AnticipationHeadingParamOffset = Schema.GetOffset(0xA117CC02095DAB6D);
+      }
+      return new CAnimParamHandleImpl(_Handle + _AnticipationHeadingParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseAccelerationOffset = new(() => Schema.GetOffset(0xA117CC02254F8B08), LazyThreadSafetyMode.None);
+  private static nint? _UseAccelerationOffset;
 
   public ref bool UseAcceleration {
-    get => ref _Handle.AsRef<bool>(_UseAccelerationOffset.Value);
+    get {
+      if (_UseAccelerationOffset == null) {
+        _UseAccelerationOffset = Schema.GetOffset(0xA117CC02254F8B08);
+      }
+      return ref _Handle.AsRef<bool>(_UseAccelerationOffset!.Value);
+    }
   }
 
 

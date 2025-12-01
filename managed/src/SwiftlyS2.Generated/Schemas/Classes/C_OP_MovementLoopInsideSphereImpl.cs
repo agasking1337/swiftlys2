@@ -17,25 +17,45 @@ internal partial class C_OP_MovementLoopInsideSphereImpl : CParticleFunctionOper
   public C_OP_MovementLoopInsideSphereImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPOffset = new(() => Schema.GetOffset(0x7C19959FEB661472), LazyThreadSafetyMode.None);
+  private static nint? _CPOffset;
 
   public ref int CP {
-    get => ref _Handle.AsRef<int>(_CPOffset.Value);
+    get {
+      if (_CPOffset == null) {
+        _CPOffset = Schema.GetOffset(0x7C19959FEB661472);
+      }
+      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOffset = new(() => Schema.GetOffset(0x7C19959F00DC4A68), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOffset;
 
   public CParticleCollectionFloatInput Distance {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset.Value);
+    get {
+      if (_DistanceOffset == null) {
+        _DistanceOffset = Schema.GetOffset(0x7C19959F00DC4A68);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x7C19959F5F596B51), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public CParticleCollectionVecInput Scale {
-    get => new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x7C19959F5F596B51);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistSqrAttrOffset = new(() => Schema.GetOffset(0x7C19959F767818FE), LazyThreadSafetyMode.None);
+  private static nint? _DistSqrAttrOffset;
 
   public ParticleAttributeIndex_t DistSqrAttr {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _DistSqrAttrOffset.Value);
+    get {
+      if (_DistSqrAttrOffset == null) {
+        _DistSqrAttrOffset = Schema.GetOffset(0x7C19959F767818FE);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _DistSqrAttrOffset!.Value);
+    }
   }
 
 

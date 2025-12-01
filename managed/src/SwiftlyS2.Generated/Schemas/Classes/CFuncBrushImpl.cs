@@ -17,39 +17,72 @@ internal partial class CFuncBrushImpl : CBaseModelEntityImpl, CFuncBrush {
   public CFuncBrushImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SolidityOffset = new(() => Schema.GetOffset(0x26435484B869EE4D), LazyThreadSafetyMode.None);
+  private static nint? _SolidityOffset;
 
   public ref BrushSolidities_e Solidity {
-    get => ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset.Value);
+    get {
+      if (_SolidityOffset == null) {
+        _SolidityOffset = Schema.GetOffset(0x26435484B869EE4D);
+      }
+      return ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x2643548451B3CEAC), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref int Disabled {
-    get => ref _Handle.AsRef<int>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x2643548451B3CEAC);
+      }
+      return ref _Handle.AsRef<int>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SolidBspOffset = new(() => Schema.GetOffset(0x26435484A50CEC89), LazyThreadSafetyMode.None);
+  private static nint? _SolidBspOffset;
 
   public ref bool SolidBsp {
-    get => ref _Handle.AsRef<bool>(_SolidBspOffset.Value);
+    get {
+      if (_SolidBspOffset == null) {
+        _SolidBspOffset = Schema.GetOffset(0x26435484A50CEC89);
+      }
+      return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExcludedClassOffset = new(() => Schema.GetOffset(0x2643548495B3D111), LazyThreadSafetyMode.None);
+  private static nint? _ExcludedClassOffset;
 
   public string ExcludedClass {
     get {
-      var ptr = _Handle.Read<nint>(_ExcludedClassOffset.Value);
+      if (_ExcludedClassOffset == null) {
+        _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
+      }
+      var ptr = _Handle.Read<nint>(_ExcludedClassOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ExcludedClassOffset.Value, value);
+    set {
+      if (_ExcludedClassOffset == null) {
+        _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
+      }
+      Schema.SetString(_Handle, _ExcludedClassOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _InvertExclusionOffset = new(() => Schema.GetOffset(0x264354845DE14F07), LazyThreadSafetyMode.None);
+  private static nint? _InvertExclusionOffset;
 
   public ref bool InvertExclusion {
-    get => ref _Handle.AsRef<bool>(_InvertExclusionOffset.Value);
+    get {
+      if (_InvertExclusionOffset == null) {
+        _InvertExclusionOffset = Schema.GetOffset(0x264354845DE14F07);
+      }
+      return ref _Handle.AsRef<bool>(_InvertExclusionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptedMovementOffset = new(() => Schema.GetOffset(0x26435484C2863DD2), LazyThreadSafetyMode.None);
+  private static nint? _ScriptedMovementOffset;
 
   public ref bool ScriptedMovement {
-    get => ref _Handle.AsRef<bool>(_ScriptedMovementOffset.Value);
+    get {
+      if (_ScriptedMovementOffset == null) {
+        _ScriptedMovementOffset = Schema.GetOffset(0x26435484C2863DD2);
+      }
+      return ref _Handle.AsRef<bool>(_ScriptedMovementOffset!.Value);
+    }
   }
 
 

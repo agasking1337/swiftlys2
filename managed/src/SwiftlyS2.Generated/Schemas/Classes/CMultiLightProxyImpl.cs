@@ -17,53 +17,99 @@ internal partial class CMultiLightProxyImpl : CLogicalEntityImpl, CMultiLightPro
   public CMultiLightProxyImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LightNameFilterOffset = new(() => Schema.GetOffset(0xF2B647B3071F3A26), LazyThreadSafetyMode.None);
+  private static nint? _LightNameFilterOffset;
 
   public string LightNameFilter {
     get {
-      var ptr = _Handle.Read<nint>(_LightNameFilterOffset.Value);
+      if (_LightNameFilterOffset == null) {
+        _LightNameFilterOffset = Schema.GetOffset(0xF2B647B3071F3A26);
+      }
+      var ptr = _Handle.Read<nint>(_LightNameFilterOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LightNameFilterOffset.Value, value);
+    set {
+      if (_LightNameFilterOffset == null) {
+        _LightNameFilterOffset = Schema.GetOffset(0xF2B647B3071F3A26);
+      }
+      Schema.SetString(_Handle, _LightNameFilterOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _LightClassFilterOffset = new(() => Schema.GetOffset(0xF2B647B32B566D5B), LazyThreadSafetyMode.None);
+  private static nint? _LightClassFilterOffset;
 
   public string LightClassFilter {
     get {
-      var ptr = _Handle.Read<nint>(_LightClassFilterOffset.Value);
+      if (_LightClassFilterOffset == null) {
+        _LightClassFilterOffset = Schema.GetOffset(0xF2B647B32B566D5B);
+      }
+      var ptr = _Handle.Read<nint>(_LightClassFilterOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LightClassFilterOffset.Value, value);
+    set {
+      if (_LightClassFilterOffset == null) {
+        _LightClassFilterOffset = Schema.GetOffset(0xF2B647B32B566D5B);
+      }
+      Schema.SetString(_Handle, _LightClassFilterOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _LightRadiusFilterOffset = new(() => Schema.GetOffset(0xF2B647B3DBC59891), LazyThreadSafetyMode.None);
+  private static nint? _LightRadiusFilterOffset;
 
   public ref float LightRadiusFilter {
-    get => ref _Handle.AsRef<float>(_LightRadiusFilterOffset.Value);
+    get {
+      if (_LightRadiusFilterOffset == null) {
+        _LightRadiusFilterOffset = Schema.GetOffset(0xF2B647B3DBC59891);
+      }
+      return ref _Handle.AsRef<float>(_LightRadiusFilterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessDeltaOffset = new(() => Schema.GetOffset(0xF2B647B3E60D5182), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessDeltaOffset;
 
   public ref float BrightnessDelta {
-    get => ref _Handle.AsRef<float>(_BrightnessDeltaOffset.Value);
+    get {
+      if (_BrightnessDeltaOffset == null) {
+        _BrightnessDeltaOffset = Schema.GetOffset(0xF2B647B3E60D5182);
+      }
+      return ref _Handle.AsRef<float>(_BrightnessDeltaOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PerformScreenFadeOffset = new(() => Schema.GetOffset(0xF2B647B3F3DAE928), LazyThreadSafetyMode.None);
+  private static nint? _PerformScreenFadeOffset;
 
   public ref bool PerformScreenFade {
-    get => ref _Handle.AsRef<bool>(_PerformScreenFadeOffset.Value);
+    get {
+      if (_PerformScreenFadeOffset == null) {
+        _PerformScreenFadeOffset = Schema.GetOffset(0xF2B647B3F3DAE928);
+      }
+      return ref _Handle.AsRef<bool>(_PerformScreenFadeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetBrightnessMultiplierOffset = new(() => Schema.GetOffset(0xF2B647B3B84CF4BA), LazyThreadSafetyMode.None);
+  private static nint? _TargetBrightnessMultiplierOffset;
 
   public ref float TargetBrightnessMultiplier {
-    get => ref _Handle.AsRef<float>(_TargetBrightnessMultiplierOffset.Value);
+    get {
+      if (_TargetBrightnessMultiplierOffset == null) {
+        _TargetBrightnessMultiplierOffset = Schema.GetOffset(0xF2B647B3B84CF4BA);
+      }
+      return ref _Handle.AsRef<float>(_TargetBrightnessMultiplierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurrentBrightnessMultiplierOffset = new(() => Schema.GetOffset(0xF2B647B3C03C5EEC), LazyThreadSafetyMode.None);
+  private static nint? _CurrentBrightnessMultiplierOffset;
 
   public ref float CurrentBrightnessMultiplier {
-    get => ref _Handle.AsRef<float>(_CurrentBrightnessMultiplierOffset.Value);
+    get {
+      if (_CurrentBrightnessMultiplierOffset == null) {
+        _CurrentBrightnessMultiplierOffset = Schema.GetOffset(0xF2B647B3C03C5EEC);
+      }
+      return ref _Handle.AsRef<float>(_CurrentBrightnessMultiplierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LightsOffset = new(() => Schema.GetOffset(0xF2B647B3A5ECA534), LazyThreadSafetyMode.None);
+  private static nint? _LightsOffset;
 
   public ref CUtlVector<CHandle<CLightEntity>> Lights {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CLightEntity>>>(_LightsOffset.Value);
+    get {
+      if (_LightsOffset == null) {
+        _LightsOffset = Schema.GetOffset(0xF2B647B3A5ECA534);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CLightEntity>>>(_LightsOffset!.Value);
+    }
   }
 
 

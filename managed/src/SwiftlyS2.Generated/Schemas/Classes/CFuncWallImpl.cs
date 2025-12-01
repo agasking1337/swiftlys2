@@ -17,10 +17,15 @@ internal partial class CFuncWallImpl : CBaseModelEntityImpl, CFuncWall {
   public CFuncWallImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StateOffset = new(() => Schema.GetOffset(0x8F4C70C07C824322), LazyThreadSafetyMode.None);
+  private static nint? _StateOffset;
 
   public ref int State {
-    get => ref _Handle.AsRef<int>(_StateOffset.Value);
+    get {
+      if (_StateOffset == null) {
+        _StateOffset = Schema.GetOffset(0x8F4C70C07C824322);
+      }
+      return ref _Handle.AsRef<int>(_StateOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class CSoundEnvelopeImpl : SchemaClass, CSoundEnvelope {
   public CSoundEnvelopeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CurrentOffset = new(() => Schema.GetOffset(0xDF974C315AD334FA), LazyThreadSafetyMode.None);
+  private static nint? _CurrentOffset;
 
   public ref float Current {
-    get => ref _Handle.AsRef<float>(_CurrentOffset.Value);
+    get {
+      if (_CurrentOffset == null) {
+        _CurrentOffset = Schema.GetOffset(0xDF974C315AD334FA);
+      }
+      return ref _Handle.AsRef<float>(_CurrentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetOffset = new(() => Schema.GetOffset(0xDF974C31FA08A9E8), LazyThreadSafetyMode.None);
+  private static nint? _TargetOffset;
 
   public ref float Target {
-    get => ref _Handle.AsRef<float>(_TargetOffset.Value);
+    get {
+      if (_TargetOffset == null) {
+        _TargetOffset = Schema.GetOffset(0xDF974C31FA08A9E8);
+      }
+      return ref _Handle.AsRef<float>(_TargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RateOffset = new(() => Schema.GetOffset(0xDF974C316C5ECD07), LazyThreadSafetyMode.None);
+  private static nint? _RateOffset;
 
   public ref float Rate {
-    get => ref _Handle.AsRef<float>(_RateOffset.Value);
+    get {
+      if (_RateOffset == null) {
+        _RateOffset = Schema.GetOffset(0xDF974C316C5ECD07);
+      }
+      return ref _Handle.AsRef<float>(_RateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceupdateOffset = new(() => Schema.GetOffset(0xDF974C3131B01C25), LazyThreadSafetyMode.None);
+  private static nint? _ForceupdateOffset;
 
   public ref bool Forceupdate {
-    get => ref _Handle.AsRef<bool>(_ForceupdateOffset.Value);
+    get {
+      if (_ForceupdateOffset == null) {
+        _ForceupdateOffset = Schema.GetOffset(0xDF974C3131B01C25);
+      }
+      return ref _Handle.AsRef<bool>(_ForceupdateOffset!.Value);
+    }
   }
 
 

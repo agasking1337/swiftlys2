@@ -17,25 +17,45 @@ internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZo
   public CGamePlayerZoneImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnPlayerInZoneOffset = new(() => Schema.GetOffset(0x35811C97FBD22730), LazyThreadSafetyMode.None);
+  private static nint? _OnPlayerInZoneOffset;
 
   public CEntityIOOutput OnPlayerInZone {
-    get => new CEntityIOOutputImpl(_Handle + _OnPlayerInZoneOffset.Value);
+    get {
+      if (_OnPlayerInZoneOffset == null) {
+        _OnPlayerInZoneOffset = Schema.GetOffset(0x35811C97FBD22730);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnPlayerInZoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnPlayerOutZoneOffset = new(() => Schema.GetOffset(0x35811C97E3DE880D), LazyThreadSafetyMode.None);
+  private static nint? _OnPlayerOutZoneOffset;
 
   public CEntityIOOutput OnPlayerOutZone {
-    get => new CEntityIOOutputImpl(_Handle + _OnPlayerOutZoneOffset.Value);
+    get {
+      if (_OnPlayerOutZoneOffset == null) {
+        _OnPlayerOutZoneOffset = Schema.GetOffset(0x35811C97E3DE880D);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnPlayerOutZoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayersInCountOffset = new(() => Schema.GetOffset(0x35811C9706A59501), LazyThreadSafetyMode.None);
+  private static nint? _PlayersInCountOffset;
 
   public SchemaUntypedField PlayersInCount {
-    get => new SchemaUntypedField(_Handle + _PlayersInCountOffset.Value);
+    get {
+      if (_PlayersInCountOffset == null) {
+        _PlayersInCountOffset = Schema.GetOffset(0x35811C9706A59501);
+      }
+      return new SchemaUntypedField(_Handle + _PlayersInCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayersOutCountOffset = new(() => Schema.GetOffset(0x35811C976894D862), LazyThreadSafetyMode.None);
+  private static nint? _PlayersOutCountOffset;
 
   public SchemaUntypedField PlayersOutCount {
-    get => new SchemaUntypedField(_Handle + _PlayersOutCountOffset.Value);
+    get {
+      if (_PlayersOutCountOffset == null) {
+        _PlayersOutCountOffset = Schema.GetOffset(0x35811C976894D862);
+      }
+      return new SchemaUntypedField(_Handle + _PlayersOutCountOffset!.Value);
+    }
   }
 
 

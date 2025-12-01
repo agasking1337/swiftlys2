@@ -17,45 +17,85 @@ internal partial class C_OP_WaterImpulseRendererImpl : CParticleFunctionRenderer
   public C_OP_WaterImpulseRendererImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PosOffset = new(() => Schema.GetOffset(0x7CC87C0C3B18EB69), LazyThreadSafetyMode.None);
+  private static nint? _PosOffset;
 
   public CPerParticleVecInput Pos {
-    get => new CPerParticleVecInputImpl(_Handle + _PosOffset.Value);
+    get {
+      if (_PosOffset == null) {
+        _PosOffset = Schema.GetOffset(0x7CC87C0C3B18EB69);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0x7CC87C0C5ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public CPerParticleFloatInput Radius {
-    get => new CPerParticleFloatInputImpl(_Handle + _RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0x7CC87C0C5ACFC08D);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MagnitudeOffset = new(() => Schema.GetOffset(0x7CC87C0CED0A1D8B), LazyThreadSafetyMode.None);
+  private static nint? _MagnitudeOffset;
 
   public CPerParticleFloatInput Magnitude {
-    get => new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset.Value);
+    get {
+      if (_MagnitudeOffset == null) {
+        _MagnitudeOffset = Schema.GetOffset(0x7CC87C0CED0A1D8B);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShapeOffset = new(() => Schema.GetOffset(0x7CC87C0C5DCE07D8), LazyThreadSafetyMode.None);
+  private static nint? _ShapeOffset;
 
   public CPerParticleFloatInput Shape {
-    get => new CPerParticleFloatInputImpl(_Handle + _ShapeOffset.Value);
+    get {
+      if (_ShapeOffset == null) {
+        _ShapeOffset = Schema.GetOffset(0x7CC87C0C5DCE07D8);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _ShapeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WindSpeedOffset = new(() => Schema.GetOffset(0x7CC87C0CADDA5C24), LazyThreadSafetyMode.None);
+  private static nint? _WindSpeedOffset;
 
   public CPerParticleFloatInput WindSpeed {
-    get => new CPerParticleFloatInputImpl(_Handle + _WindSpeedOffset.Value);
+    get {
+      if (_WindSpeedOffset == null) {
+        _WindSpeedOffset = Schema.GetOffset(0x7CC87C0CADDA5C24);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _WindSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WobbleOffset = new(() => Schema.GetOffset(0x7CC87C0CF8575B0A), LazyThreadSafetyMode.None);
+  private static nint? _WobbleOffset;
 
   public CPerParticleFloatInput Wobble {
-    get => new CPerParticleFloatInputImpl(_Handle + _WobbleOffset.Value);
+    get {
+      if (_WobbleOffset == null) {
+        _WobbleOffset = Schema.GetOffset(0x7CC87C0CF8575B0A);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _WobbleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsRadialWindOffset = new(() => Schema.GetOffset(0x7CC87C0C64147034), LazyThreadSafetyMode.None);
+  private static nint? _IsRadialWindOffset;
 
   public ref bool IsRadialWind {
-    get => ref _Handle.AsRef<bool>(_IsRadialWindOffset.Value);
+    get {
+      if (_IsRadialWindOffset == null) {
+        _IsRadialWindOffset = Schema.GetOffset(0x7CC87C0C64147034);
+      }
+      return ref _Handle.AsRef<bool>(_IsRadialWindOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventTypeOffset = new(() => Schema.GetOffset(0x7CC87C0CE1F9AA93), LazyThreadSafetyMode.None);
+  private static nint? _EventTypeOffset;
 
   public ref EventTypeSelection_t EventType {
-    get => ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset.Value);
+    get {
+      if (_EventTypeOffset == null) {
+        _EventTypeOffset = Schema.GetOffset(0x7CC87C0CE1F9AA93);
+      }
+      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    }
   }
 
 

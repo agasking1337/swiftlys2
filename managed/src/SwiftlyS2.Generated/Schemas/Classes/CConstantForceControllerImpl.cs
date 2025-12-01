@@ -17,25 +17,45 @@ internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForc
   public CConstantForceControllerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LinearOffset = new(() => Schema.GetOffset(0x37030A8D6B6D1260), LazyThreadSafetyMode.None);
+  private static nint? _LinearOffset;
 
   public ref Vector Linear {
-    get => ref _Handle.AsRef<Vector>(_LinearOffset.Value);
+    get {
+      if (_LinearOffset == null) {
+        _LinearOffset = Schema.GetOffset(0x37030A8D6B6D1260);
+      }
+      return ref _Handle.AsRef<Vector>(_LinearOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularOffset = new(() => Schema.GetOffset(0x37030A8D74E0EB09), LazyThreadSafetyMode.None);
+  private static nint? _AngularOffset;
 
   public SchemaUntypedField Angular {
-    get => new SchemaUntypedField(_Handle + _AngularOffset.Value);
+    get {
+      if (_AngularOffset == null) {
+        _AngularOffset = Schema.GetOffset(0x37030A8D74E0EB09);
+      }
+      return new SchemaUntypedField(_Handle + _AngularOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearSaveOffset = new(() => Schema.GetOffset(0x37030A8D96B9953D), LazyThreadSafetyMode.None);
+  private static nint? _LinearSaveOffset;
 
   public ref Vector LinearSave {
-    get => ref _Handle.AsRef<Vector>(_LinearSaveOffset.Value);
+    get {
+      if (_LinearSaveOffset == null) {
+        _LinearSaveOffset = Schema.GetOffset(0x37030A8D96B9953D);
+      }
+      return ref _Handle.AsRef<Vector>(_LinearSaveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularSaveOffset = new(() => Schema.GetOffset(0x37030A8D8294323C), LazyThreadSafetyMode.None);
+  private static nint? _AngularSaveOffset;
 
   public SchemaUntypedField AngularSave {
-    get => new SchemaUntypedField(_Handle + _AngularSaveOffset.Value);
+    get {
+      if (_AngularSaveOffset == null) {
+        _AngularSaveOffset = Schema.GetOffset(0x37030A8D8294323C);
+      }
+      return new SchemaUntypedField(_Handle + _AngularSaveOffset!.Value);
+    }
   }
 
 

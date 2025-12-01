@@ -17,10 +17,15 @@ internal partial class CFilterMassGreaterImpl : CBaseFilterImpl, CFilterMassGrea
   public CFilterMassGreaterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FilterMassOffset = new(() => Schema.GetOffset(0xBF74FA22FF3F08E7), LazyThreadSafetyMode.None);
+  private static nint? _FilterMassOffset;
 
   public ref float FilterMass {
-    get => ref _Handle.AsRef<float>(_FilterMassOffset.Value);
+    get {
+      if (_FilterMassOffset == null) {
+        _FilterMassOffset = Schema.GetOffset(0xBF74FA22FF3F08E7);
+      }
+      return ref _Handle.AsRef<float>(_FilterMassOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class CIronSightControllerImpl : SchemaClass, CIronSightControl
   public CIronSightControllerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IronSightAvailableOffset = new(() => Schema.GetOffset(0x9E147D3131BCE9D3), LazyThreadSafetyMode.None);
+  private static nint? _IronSightAvailableOffset;
 
   public ref bool IronSightAvailable {
-    get => ref _Handle.AsRef<bool>(_IronSightAvailableOffset.Value);
+    get {
+      if (_IronSightAvailableOffset == null) {
+        _IronSightAvailableOffset = Schema.GetOffset(0x9E147D3131BCE9D3);
+      }
+      return ref _Handle.AsRef<bool>(_IronSightAvailableOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IronSightAmountOffset = new(() => Schema.GetOffset(0x9E147D31D64422F6), LazyThreadSafetyMode.None);
+  private static nint? _IronSightAmountOffset;
 
   public ref float IronSightAmount {
-    get => ref _Handle.AsRef<float>(_IronSightAmountOffset.Value);
+    get {
+      if (_IronSightAmountOffset == null) {
+        _IronSightAmountOffset = Schema.GetOffset(0x9E147D31D64422F6);
+      }
+      return ref _Handle.AsRef<float>(_IronSightAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IronSightAmountGainedOffset = new(() => Schema.GetOffset(0x9E147D316631E9A0), LazyThreadSafetyMode.None);
+  private static nint? _IronSightAmountGainedOffset;
 
   public ref float IronSightAmountGained {
-    get => ref _Handle.AsRef<float>(_IronSightAmountGainedOffset.Value);
+    get {
+      if (_IronSightAmountGainedOffset == null) {
+        _IronSightAmountGainedOffset = Schema.GetOffset(0x9E147D316631E9A0);
+      }
+      return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IronSightAmountBiasedOffset = new(() => Schema.GetOffset(0x9E147D31526716FA), LazyThreadSafetyMode.None);
+  private static nint? _IronSightAmountBiasedOffset;
 
   public ref float IronSightAmountBiased {
-    get => ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset.Value);
+    get {
+      if (_IronSightAmountBiasedOffset == null) {
+        _IronSightAmountBiasedOffset = Schema.GetOffset(0x9E147D31526716FA);
+      }
+      return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset!.Value);
+    }
   }
 
 

@@ -17,60 +17,115 @@ internal partial class C_INIT_CreateWithinCapsuleTransformImpl : CParticleFuncti
   public C_INIT_CreateWithinCapsuleTransformImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RadiusMinOffset = new(() => Schema.GetOffset(0xC088DBA85AD00941), LazyThreadSafetyMode.None);
+  private static nint? _RadiusMinOffset;
 
   public CPerParticleFloatInput RadiusMin {
-    get => new CPerParticleFloatInputImpl(_Handle + _RadiusMinOffset.Value);
+    get {
+      if (_RadiusMinOffset == null) {
+        _RadiusMinOffset = Schema.GetOffset(0xC088DBA85AD00941);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _RadiusMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusMaxOffset = new(() => Schema.GetOffset(0xC088DBA84CE37AEF), LazyThreadSafetyMode.None);
+  private static nint? _RadiusMaxOffset;
 
   public CPerParticleFloatInput RadiusMax {
-    get => new CPerParticleFloatInputImpl(_Handle + _RadiusMaxOffset.Value);
+    get {
+      if (_RadiusMaxOffset == null) {
+        _RadiusMaxOffset = Schema.GetOffset(0xC088DBA84CE37AEF);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _RadiusMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeightOffset = new(() => Schema.GetOffset(0xC088DBA86631D40E), LazyThreadSafetyMode.None);
+  private static nint? _HeightOffset;
 
   public CPerParticleFloatInput Height {
-    get => new CPerParticleFloatInputImpl(_Handle + _HeightOffset.Value);
+    get {
+      if (_HeightOffset == null) {
+        _HeightOffset = Schema.GetOffset(0xC088DBA86631D40E);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _HeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0xC088DBA8B3FDC289), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0xC088DBA8B3FDC289);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMinOffset = new(() => Schema.GetOffset(0xC088DBA8B989E1F8), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMinOffset;
 
   public CPerParticleFloatInput SpeedMin {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset.Value);
+    get {
+      if (_SpeedMinOffset == null) {
+        _SpeedMinOffset = Schema.GetOffset(0xC088DBA8B989E1F8);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMaxOffset = new(() => Schema.GetOffset(0xC088DBA8CF9D8C52), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMaxOffset;
 
   public CPerParticleFloatInput SpeedMax {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset.Value);
+    get {
+      if (_SpeedMaxOffset == null) {
+        _SpeedMaxOffset = Schema.GetOffset(0xC088DBA8CF9D8C52);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedRandExpOffset = new(() => Schema.GetOffset(0xC088DBA83303A1AA), LazyThreadSafetyMode.None);
+  private static nint? _SpeedRandExpOffset;
 
   public ref float SpeedRandExp {
-    get => ref _Handle.AsRef<float>(_SpeedRandExpOffset.Value);
+    get {
+      if (_SpeedRandExpOffset == null) {
+        _SpeedRandExpOffset = Schema.GetOffset(0xC088DBA83303A1AA);
+      }
+      return ref _Handle.AsRef<float>(_SpeedRandExpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordinateSystemSpeedMinOffset = new(() => Schema.GetOffset(0xC088DBA8A4A0F1AE), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordinateSystemSpeedMinOffset;
 
   public CPerParticleVecInput LocalCoordinateSystemSpeedMin {
-    get => new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMinOffset.Value);
+    get {
+      if (_LocalCoordinateSystemSpeedMinOffset == null) {
+        _LocalCoordinateSystemSpeedMinOffset = Schema.GetOffset(0xC088DBA8A4A0F1AE);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordinateSystemSpeedMaxOffset = new(() => Schema.GetOffset(0xC088DBA8968D53EC), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordinateSystemSpeedMaxOffset;
 
   public CPerParticleVecInput LocalCoordinateSystemSpeedMax {
-    get => new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMaxOffset.Value);
+    get {
+      if (_LocalCoordinateSystemSpeedMaxOffset == null) {
+        _LocalCoordinateSystemSpeedMaxOffset = Schema.GetOffset(0xC088DBA8968D53EC);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xC088DBA8E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xC088DBA8E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldVelocityOffset = new(() => Schema.GetOffset(0xC088DBA8852EBFAC), LazyThreadSafetyMode.None);
+  private static nint? _FieldVelocityOffset;
 
   public ParticleAttributeIndex_t FieldVelocity {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldVelocityOffset.Value);
+    get {
+      if (_FieldVelocityOffset == null) {
+        _FieldVelocityOffset = Schema.GetOffset(0xC088DBA8852EBFAC);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldVelocityOffset!.Value);
+    }
   }
 
 

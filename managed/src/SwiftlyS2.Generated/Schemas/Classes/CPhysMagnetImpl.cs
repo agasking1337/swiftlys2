@@ -17,65 +17,125 @@ internal partial class CPhysMagnetImpl : CBaseAnimGraphImpl, CPhysMagnet {
   public CPhysMagnetImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnMagnetAttachOffset = new(() => Schema.GetOffset(0x5772891055B6907B), LazyThreadSafetyMode.None);
+  private static nint? _OnMagnetAttachOffset;
 
   public CEntityIOOutput OnMagnetAttach {
-    get => new CEntityIOOutputImpl(_Handle + _OnMagnetAttachOffset.Value);
+    get {
+      if (_OnMagnetAttachOffset == null) {
+        _OnMagnetAttachOffset = Schema.GetOffset(0x5772891055B6907B);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnMagnetAttachOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnMagnetDetachOffset = new(() => Schema.GetOffset(0x57728910FA716045), LazyThreadSafetyMode.None);
+  private static nint? _OnMagnetDetachOffset;
 
   public CEntityIOOutput OnMagnetDetach {
-    get => new CEntityIOOutputImpl(_Handle + _OnMagnetDetachOffset.Value);
+    get {
+      if (_OnMagnetDetachOffset == null) {
+        _OnMagnetDetachOffset = Schema.GetOffset(0x57728910FA716045);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnMagnetDetachOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MassScaleOffset = new(() => Schema.GetOffset(0x5772891001B9E905), LazyThreadSafetyMode.None);
+  private static nint? _MassScaleOffset;
 
   public ref float MassScale {
-    get => ref _Handle.AsRef<float>(_MassScaleOffset.Value);
+    get {
+      if (_MassScaleOffset == null) {
+        _MassScaleOffset = Schema.GetOffset(0x5772891001B9E905);
+      }
+      return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceLimitOffset = new(() => Schema.GetOffset(0x57728910BA45B8F7), LazyThreadSafetyMode.None);
+  private static nint? _ForceLimitOffset;
 
   public ref float ForceLimit {
-    get => ref _Handle.AsRef<float>(_ForceLimitOffset.Value);
+    get {
+      if (_ForceLimitOffset == null) {
+        _ForceLimitOffset = Schema.GetOffset(0x57728910BA45B8F7);
+      }
+      return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TorqueLimitOffset = new(() => Schema.GetOffset(0x577289106D51FE3E), LazyThreadSafetyMode.None);
+  private static nint? _TorqueLimitOffset;
 
   public ref float TorqueLimit {
-    get => ref _Handle.AsRef<float>(_TorqueLimitOffset.Value);
+    get {
+      if (_TorqueLimitOffset == null) {
+        _TorqueLimitOffset = Schema.GetOffset(0x577289106D51FE3E);
+      }
+      return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MagnettedEntitiesOffset = new(() => Schema.GetOffset(0x57728910E39284F3), LazyThreadSafetyMode.None);
+  private static nint? _MagnettedEntitiesOffset;
 
   public ref CUtlVector<magnetted_objects_t> MagnettedEntities {
-    get => ref _Handle.AsRef<CUtlVector<magnetted_objects_t>>(_MagnettedEntitiesOffset.Value);
+    get {
+      if (_MagnettedEntitiesOffset == null) {
+        _MagnettedEntitiesOffset = Schema.GetOffset(0x57728910E39284F3);
+      }
+      return ref _Handle.AsRef<CUtlVector<magnetted_objects_t>>(_MagnettedEntitiesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActiveOffset = new(() => Schema.GetOffset(0x577289108334208F), LazyThreadSafetyMode.None);
+  private static nint? _ActiveOffset;
 
   public ref bool Active {
-    get => ref _Handle.AsRef<bool>(_ActiveOffset.Value);
+    get {
+      if (_ActiveOffset == null) {
+        _ActiveOffset = Schema.GetOffset(0x577289108334208F);
+      }
+      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasHitSomethingOffset = new(() => Schema.GetOffset(0x577289109E7903E0), LazyThreadSafetyMode.None);
+  private static nint? _HasHitSomethingOffset;
 
   public ref bool HasHitSomething {
-    get => ref _Handle.AsRef<bool>(_HasHitSomethingOffset.Value);
+    get {
+      if (_HasHitSomethingOffset == null) {
+        _HasHitSomethingOffset = Schema.GetOffset(0x577289109E7903E0);
+      }
+      return ref _Handle.AsRef<bool>(_HasHitSomethingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TotalMassOffset = new(() => Schema.GetOffset(0x57728910A3F382DB), LazyThreadSafetyMode.None);
+  private static nint? _TotalMassOffset;
 
   public ref float TotalMass {
-    get => ref _Handle.AsRef<float>(_TotalMassOffset.Value);
+    get {
+      if (_TotalMassOffset == null) {
+        _TotalMassOffset = Schema.GetOffset(0x57728910A3F382DB);
+      }
+      return ref _Handle.AsRef<float>(_TotalMassOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0x577289105ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0x577289105ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextSuckTimeOffset = new(() => Schema.GetOffset(0x577289102E3592CD), LazyThreadSafetyMode.None);
+  private static nint? _NextSuckTimeOffset;
 
   public GameTime_t NextSuckTime {
-    get => new GameTime_tImpl(_Handle + _NextSuckTimeOffset.Value);
+    get {
+      if (_NextSuckTimeOffset == null) {
+        _NextSuckTimeOffset = Schema.GetOffset(0x577289102E3592CD);
+      }
+      return new GameTime_tImpl(_Handle + _NextSuckTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxObjectsAttachedOffset = new(() => Schema.GetOffset(0x57728910326F6EB6), LazyThreadSafetyMode.None);
+  private static nint? _MaxObjectsAttachedOffset;
 
   public ref int MaxObjectsAttached {
-    get => ref _Handle.AsRef<int>(_MaxObjectsAttachedOffset.Value);
+    get {
+      if (_MaxObjectsAttachedOffset == null) {
+        _MaxObjectsAttachedOffset = Schema.GetOffset(0x57728910326F6EB6);
+      }
+      return ref _Handle.AsRef<int>(_MaxObjectsAttachedOffset!.Value);
+    }
   }
 
 

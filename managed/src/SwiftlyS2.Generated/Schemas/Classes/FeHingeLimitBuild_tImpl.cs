@@ -20,20 +20,35 @@ internal partial class FeHingeLimitBuild_tImpl : SchemaClass, FeHingeLimitBuild_
   public ISchemaFixedArray<ushort> Node {
     get => new SchemaFixedArray<ushort>(_Handle, 0x50E120ADCD6694B9, 6, 2, 2);
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x50E120ADB8D52E48), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x50E120ADB8D52E48);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LimitCWOffset = new(() => Schema.GetOffset(0x50E120ADC3D20C44), LazyThreadSafetyMode.None);
+  private static nint? _LimitCWOffset;
 
   public ref float LimitCW {
-    get => ref _Handle.AsRef<float>(_LimitCWOffset.Value);
+    get {
+      if (_LimitCWOffset == null) {
+        _LimitCWOffset = Schema.GetOffset(0x50E120ADC3D20C44);
+      }
+      return ref _Handle.AsRef<float>(_LimitCWOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LimitCCWOffset = new(() => Schema.GetOffset(0x50E120ADA6C794ED), LazyThreadSafetyMode.None);
+  private static nint? _LimitCCWOffset;
 
   public ref float LimitCCW {
-    get => ref _Handle.AsRef<float>(_LimitCCWOffset.Value);
+    get {
+      if (_LimitCCWOffset == null) {
+        _LimitCCWOffset = Schema.GetOffset(0x50E120ADA6C794ED);
+      }
+      return ref _Handle.AsRef<float>(_LimitCCWOffset!.Value);
+    }
   }
 
 

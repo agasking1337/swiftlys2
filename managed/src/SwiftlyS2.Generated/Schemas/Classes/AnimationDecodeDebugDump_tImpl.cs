@@ -17,15 +17,25 @@ internal partial class AnimationDecodeDebugDump_tImpl : SchemaClass, AnimationDe
   public AnimationDecodeDebugDump_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ProcessingTypeOffset = new(() => Schema.GetOffset(0xA584797F5F059FB6), LazyThreadSafetyMode.None);
+  private static nint? _ProcessingTypeOffset;
 
   public ref AnimationProcessingType_t ProcessingType {
-    get => ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset.Value);
+    get {
+      if (_ProcessingTypeOffset == null) {
+        _ProcessingTypeOffset = Schema.GetOffset(0xA584797F5F059FB6);
+      }
+      return ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ElemsOffset = new(() => Schema.GetOffset(0xA584797F3F2FC92B), LazyThreadSafetyMode.None);
+  private static nint? _ElemsOffset;
 
   public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems {
-    get => ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset.Value);
+    get {
+      if (_ElemsOffset == null) {
+        _ElemsOffset = Schema.GetOffset(0xA584797F3F2FC92B);
+      }
+      return ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class ModelReference_tImpl : SchemaClass, ModelReference_t {
   public ModelReference_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModelOffset = new(() => Schema.GetOffset(0x72F202EC1CD79E7A), LazyThreadSafetyMode.None);
+  private static nint? _ModelOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset.Value);
+    get {
+      if (_ModelOffset == null) {
+        _ModelOffset = Schema.GetOffset(0x72F202EC1CD79E7A);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RelativeProbabilityOfSpawnOffset = new(() => Schema.GetOffset(0x72F202ECDBFCAD1E), LazyThreadSafetyMode.None);
+  private static nint? _RelativeProbabilityOfSpawnOffset;
 
   public ref float RelativeProbabilityOfSpawn {
-    get => ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset.Value);
+    get {
+      if (_RelativeProbabilityOfSpawnOffset == null) {
+        _RelativeProbabilityOfSpawnOffset = Schema.GetOffset(0x72F202ECDBFCAD1E);
+      }
+      return ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset!.Value);
+    }
   }
 
 

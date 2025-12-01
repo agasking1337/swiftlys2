@@ -17,32 +17,56 @@ internal partial class CBoneConstraintDotToMorphImpl : CBoneConstraintBaseImpl, 
   public CBoneConstraintDotToMorphImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoneNameOffset = new(() => Schema.GetOffset(0x75939F077559AC1F), LazyThreadSafetyMode.None);
+  private static nint? _BoneNameOffset;
 
   public string BoneName {
     get {
-      var ptr = _Handle.Read<nint>(_BoneNameOffset.Value);
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0x75939F077559AC1F);
+      }
+      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _BoneNameOffset.Value, value);
+    set {
+      if (_BoneNameOffset == null) {
+        _BoneNameOffset = Schema.GetOffset(0x75939F077559AC1F);
+      }
+      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetBoneNameOffset = new(() => Schema.GetOffset(0x75939F07CBA1BE4A), LazyThreadSafetyMode.None);
+  private static nint? _TargetBoneNameOffset;
 
   public string TargetBoneName {
     get {
-      var ptr = _Handle.Read<nint>(_TargetBoneNameOffset.Value);
+      if (_TargetBoneNameOffset == null) {
+        _TargetBoneNameOffset = Schema.GetOffset(0x75939F07CBA1BE4A);
+      }
+      var ptr = _Handle.Read<nint>(_TargetBoneNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TargetBoneNameOffset.Value, value);
+    set {
+      if (_TargetBoneNameOffset == null) {
+        _TargetBoneNameOffset = Schema.GetOffset(0x75939F07CBA1BE4A);
+      }
+      Schema.SetString(_Handle, _TargetBoneNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _MorphChannelNameOffset = new(() => Schema.GetOffset(0x75939F0777272AE4), LazyThreadSafetyMode.None);
+  private static nint? _MorphChannelNameOffset;
 
   public string MorphChannelName {
     get {
-      var ptr = _Handle.Read<nint>(_MorphChannelNameOffset.Value);
+      if (_MorphChannelNameOffset == null) {
+        _MorphChannelNameOffset = Schema.GetOffset(0x75939F0777272AE4);
+      }
+      var ptr = _Handle.Read<nint>(_MorphChannelNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _MorphChannelNameOffset.Value, value);
+    set {
+      if (_MorphChannelNameOffset == null) {
+        _MorphChannelNameOffset = Schema.GetOffset(0x75939F0777272AE4);
+      }
+      Schema.SetString(_Handle, _MorphChannelNameOffset!.Value, value);
+    }
   } 
   public ISchemaFixedArray<float> Remap {
     get => new SchemaFixedArray<float>(_Handle, 0x75939F07BE3DB1A0, 4, 4, 4);

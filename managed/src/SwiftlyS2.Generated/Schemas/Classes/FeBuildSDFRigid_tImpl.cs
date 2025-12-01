@@ -17,20 +17,35 @@ internal partial class FeBuildSDFRigid_tImpl : FeSDFRigid_tImpl, FeBuildSDFRigid
   public FeBuildSDFRigid_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PriorityOffset = new(() => Schema.GetOffset(0x8C389301E7EFB335), LazyThreadSafetyMode.None);
+  private static nint? _PriorityOffset;
 
   public ref int Priority {
-    get => ref _Handle.AsRef<int>(_PriorityOffset.Value);
+    get {
+      if (_PriorityOffset == null) {
+        _PriorityOffset = Schema.GetOffset(0x8C389301E7EFB335);
+      }
+      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VertexMapHashOffset = new(() => Schema.GetOffset(0x8C38930106BCA0A3), LazyThreadSafetyMode.None);
+  private static nint? _VertexMapHashOffset;
 
   public ref uint VertexMapHash {
-    get => ref _Handle.AsRef<uint>(_VertexMapHashOffset.Value);
+    get {
+      if (_VertexMapHashOffset == null) {
+        _VertexMapHashOffset = Schema.GetOffset(0x8C38930106BCA0A3);
+      }
+      return ref _Handle.AsRef<uint>(_VertexMapHashOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AntitunnelGroupBitsOffset = new(() => Schema.GetOffset(0x8C389301A5C6E91A), LazyThreadSafetyMode.None);
+  private static nint? _AntitunnelGroupBitsOffset;
 
   public ref uint AntitunnelGroupBits {
-    get => ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset.Value);
+    get {
+      if (_AntitunnelGroupBitsOffset == null) {
+        _AntitunnelGroupBitsOffset = Schema.GetOffset(0x8C389301A5C6E91A);
+      }
+      return ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset!.Value);
+    }
   }
 
 

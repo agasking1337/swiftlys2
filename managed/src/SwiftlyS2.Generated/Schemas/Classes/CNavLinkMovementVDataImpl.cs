@@ -17,25 +17,45 @@ internal partial class CNavLinkMovementVDataImpl : SchemaClass, CNavLinkMovement
   public CNavLinkMovementVDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ToolsOnlyOwnerModelNameOffset = new(() => Schema.GetOffset(0xACA2D2486DD9DD04), LazyThreadSafetyMode.None);
+  private static nint? _ToolsOnlyOwnerModelNameOffset;
 
   public SchemaUntypedField ToolsOnlyOwnerModelName {
-    get => new SchemaUntypedField(_Handle + _ToolsOnlyOwnerModelNameOffset.Value);
+    get {
+      if (_ToolsOnlyOwnerModelNameOffset == null) {
+        _ToolsOnlyOwnerModelNameOffset = Schema.GetOffset(0xACA2D2486DD9DD04);
+      }
+      return new SchemaUntypedField(_Handle + _ToolsOnlyOwnerModelNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsInterpolatedOffset = new(() => Schema.GetOffset(0xACA2D248EC811A8C), LazyThreadSafetyMode.None);
+  private static nint? _IsInterpolatedOffset;
 
   public ref bool IsInterpolated {
-    get => ref _Handle.AsRef<bool>(_IsInterpolatedOffset.Value);
+    get {
+      if (_IsInterpolatedOffset == null) {
+        _IsInterpolatedOffset = Schema.GetOffset(0xACA2D248EC811A8C);
+      }
+      return ref _Handle.AsRef<bool>(_IsInterpolatedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RecommendedDistanceOffset = new(() => Schema.GetOffset(0xACA2D248BA1A388E), LazyThreadSafetyMode.None);
+  private static nint? _RecommendedDistanceOffset;
 
   public ref uint RecommendedDistance {
-    get => ref _Handle.AsRef<uint>(_RecommendedDistanceOffset.Value);
+    get {
+      if (_RecommendedDistanceOffset == null) {
+        _RecommendedDistanceOffset = Schema.GetOffset(0xACA2D248BA1A388E);
+      }
+      return ref _Handle.AsRef<uint>(_RecommendedDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnimgraphVarsOffset = new(() => Schema.GetOffset(0xACA2D2480FD1BA32), LazyThreadSafetyMode.None);
+  private static nint? _AnimgraphVarsOffset;
 
   public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars {
-    get => ref _Handle.AsRef<CUtlVector<CNavLinkAnimgraphVar>>(_AnimgraphVarsOffset.Value);
+    get {
+      if (_AnimgraphVarsOffset == null) {
+        _AnimgraphVarsOffset = Schema.GetOffset(0xACA2D2480FD1BA32);
+      }
+      return ref _Handle.AsRef<CUtlVector<CNavLinkAnimgraphVar>>(_AnimgraphVarsOffset!.Value);
+    }
   }
 
 

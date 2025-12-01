@@ -17,60 +17,115 @@ internal partial class RsBlendStateDesc_tImpl : SchemaClass, RsBlendStateDesc_t 
   public RsBlendStateDesc_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SrcBlendBitsOffset = new(() => Schema.GetOffset(0x5A78EC788B3147C4), LazyThreadSafetyMode.None);
+  private static nint? _SrcBlendBitsOffset;
 
   public ref uint SrcBlendBits {
-    get => ref _Handle.AsRef<uint>(_SrcBlendBitsOffset.Value);
+    get {
+      if (_SrcBlendBitsOffset == null) {
+        _SrcBlendBitsOffset = Schema.GetOffset(0x5A78EC788B3147C4);
+      }
+      return ref _Handle.AsRef<uint>(_SrcBlendBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestBlendBitsOffset = new(() => Schema.GetOffset(0x5A78EC78E23CD0E0), LazyThreadSafetyMode.None);
+  private static nint? _DestBlendBitsOffset;
 
   public ref uint DestBlendBits {
-    get => ref _Handle.AsRef<uint>(_DestBlendBitsOffset.Value);
+    get {
+      if (_DestBlendBitsOffset == null) {
+        _DestBlendBitsOffset = Schema.GetOffset(0x5A78EC78E23CD0E0);
+      }
+      return ref _Handle.AsRef<uint>(_DestBlendBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SrcBlendAlphaBitsOffset = new(() => Schema.GetOffset(0x5A78EC78E2820E60), LazyThreadSafetyMode.None);
+  private static nint? _SrcBlendAlphaBitsOffset;
 
   public ref uint SrcBlendAlphaBits {
-    get => ref _Handle.AsRef<uint>(_SrcBlendAlphaBitsOffset.Value);
+    get {
+      if (_SrcBlendAlphaBitsOffset == null) {
+        _SrcBlendAlphaBitsOffset = Schema.GetOffset(0x5A78EC78E2820E60);
+      }
+      return ref _Handle.AsRef<uint>(_SrcBlendAlphaBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestBlendAlphaBitsOffset = new(() => Schema.GetOffset(0x5A78EC784217BA4C), LazyThreadSafetyMode.None);
+  private static nint? _DestBlendAlphaBitsOffset;
 
   public ref uint DestBlendAlphaBits {
-    get => ref _Handle.AsRef<uint>(_DestBlendAlphaBitsOffset.Value);
+    get {
+      if (_DestBlendAlphaBitsOffset == null) {
+        _DestBlendAlphaBitsOffset = Schema.GetOffset(0x5A78EC784217BA4C);
+      }
+      return ref _Handle.AsRef<uint>(_DestBlendAlphaBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderTargetWriteMaskBitsOffset = new(() => Schema.GetOffset(0x5A78EC78CB45C38F), LazyThreadSafetyMode.None);
+  private static nint? _RenderTargetWriteMaskBitsOffset;
 
   public ref uint RenderTargetWriteMaskBits {
-    get => ref _Handle.AsRef<uint>(_RenderTargetWriteMaskBitsOffset.Value);
+    get {
+      if (_RenderTargetWriteMaskBitsOffset == null) {
+        _RenderTargetWriteMaskBitsOffset = Schema.GetOffset(0x5A78EC78CB45C38F);
+      }
+      return ref _Handle.AsRef<uint>(_RenderTargetWriteMaskBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendOpBitsOffset = new(() => Schema.GetOffset(0x5A78EC7824A9742B), LazyThreadSafetyMode.None);
+  private static nint? _BlendOpBitsOffset;
 
   public SchemaUntypedField BlendOpBits {
-    get => new SchemaUntypedField(_Handle + _BlendOpBitsOffset.Value);
+    get {
+      if (_BlendOpBitsOffset == null) {
+        _BlendOpBitsOffset = Schema.GetOffset(0x5A78EC7824A9742B);
+      }
+      return new SchemaUntypedField(_Handle + _BlendOpBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaToCoverageEnableOffset = new(() => Schema.GetOffset(0x5A78EC7860C58F3B), LazyThreadSafetyMode.None);
+  private static nint? _AlphaToCoverageEnableOffset;
 
   public SchemaUntypedField AlphaToCoverageEnable {
-    get => new SchemaUntypedField(_Handle + _AlphaToCoverageEnableOffset.Value);
+    get {
+      if (_AlphaToCoverageEnableOffset == null) {
+        _AlphaToCoverageEnableOffset = Schema.GetOffset(0x5A78EC7860C58F3B);
+      }
+      return new SchemaUntypedField(_Handle + _AlphaToCoverageEnableOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IndependentBlendEnableOffset = new(() => Schema.GetOffset(0x5A78EC78E42575C7), LazyThreadSafetyMode.None);
+  private static nint? _IndependentBlendEnableOffset;
 
   public SchemaUntypedField IndependentBlendEnable {
-    get => new SchemaUntypedField(_Handle + _IndependentBlendEnableOffset.Value);
+    get {
+      if (_IndependentBlendEnableOffset == null) {
+        _IndependentBlendEnableOffset = Schema.GetOffset(0x5A78EC78E42575C7);
+      }
+      return new SchemaUntypedField(_Handle + _IndependentBlendEnableOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendOpAlphaBitsOffset = new(() => Schema.GetOffset(0x5A78EC788F0DF1ED), LazyThreadSafetyMode.None);
+  private static nint? _BlendOpAlphaBitsOffset;
 
   public ref uint BlendOpAlphaBits {
-    get => ref _Handle.AsRef<uint>(_BlendOpAlphaBitsOffset.Value);
+    get {
+      if (_BlendOpAlphaBitsOffset == null) {
+        _BlendOpAlphaBitsOffset = Schema.GetOffset(0x5A78EC788F0DF1ED);
+      }
+      return ref _Handle.AsRef<uint>(_BlendOpAlphaBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendEnableBitsOffset = new(() => Schema.GetOffset(0x5A78EC780FE207F3), LazyThreadSafetyMode.None);
+  private static nint? _BlendEnableBitsOffset;
 
   public ref byte BlendEnableBits {
-    get => ref _Handle.AsRef<byte>(_BlendEnableBitsOffset.Value);
+    get {
+      if (_BlendEnableBitsOffset == null) {
+        _BlendEnableBitsOffset = Schema.GetOffset(0x5A78EC780FE207F3);
+      }
+      return ref _Handle.AsRef<byte>(_BlendEnableBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SrgbWriteEnableBitsOffset = new(() => Schema.GetOffset(0x5A78EC783E54A99F), LazyThreadSafetyMode.None);
+  private static nint? _SrgbWriteEnableBitsOffset;
 
   public ref byte SrgbWriteEnableBits {
-    get => ref _Handle.AsRef<byte>(_SrgbWriteEnableBitsOffset.Value);
+    get {
+      if (_SrgbWriteEnableBitsOffset == null) {
+        _SrgbWriteEnableBitsOffset = Schema.GetOffset(0x5A78EC783E54A99F);
+      }
+      return ref _Handle.AsRef<byte>(_SrgbWriteEnableBitsOffset!.Value);
+    }
   }
 
 

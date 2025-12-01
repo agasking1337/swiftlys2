@@ -17,15 +17,25 @@ internal partial class CNmCachedFloatNode__CDefinitionImpl : CNmFloatValueNode__
   public CNmCachedFloatNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueNodeIdxOffset = new(() => Schema.GetOffset(0x3390BC2F95E89F27), LazyThreadSafetyMode.None);
+  private static nint? _InputValueNodeIdxOffset;
 
   public ref short InputValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_InputValueNodeIdxOffset.Value);
+    get {
+      if (_InputValueNodeIdxOffset == null) {
+        _InputValueNodeIdxOffset = Schema.GetOffset(0x3390BC2F95E89F27);
+      }
+      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModeOffset = new(() => Schema.GetOffset(0x3390BC2F90FD5BB2), LazyThreadSafetyMode.None);
+  private static nint? _ModeOffset;
 
   public ref NmCachedValueMode_t Mode {
-    get => ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset.Value);
+    get {
+      if (_ModeOffset == null) {
+        _ModeOffset = Schema.GetOffset(0x3390BC2F90FD5BB2);
+      }
+      return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset!.Value);
+    }
   }
 
 

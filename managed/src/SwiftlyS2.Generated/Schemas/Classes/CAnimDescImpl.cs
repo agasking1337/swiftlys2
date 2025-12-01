@@ -17,80 +17,155 @@ internal partial class CAnimDescImpl : SchemaClass, CAnimDesc {
   public CAnimDescImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xF48A66664D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public ref CBufferString Name {
-    get => ref _Handle.AsRef<CBufferString>(_NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xF48A66664D8F5786);
+      }
+      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0xF48A6666DC74A14C), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public CAnimDesc_Flag Flags {
-    get => new CAnimDesc_FlagImpl(_Handle + _FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0xF48A6666DC74A14C);
+      }
+      return new CAnimDesc_FlagImpl(_Handle + _FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FpsOffset = new(() => Schema.GetOffset(0xF48A6666BDD34AA8), LazyThreadSafetyMode.None);
+  private static nint? _FpsOffset;
 
   public ref float Fps {
-    get => ref _Handle.AsRef<float>(_FpsOffset.Value);
+    get {
+      if (_FpsOffset == null) {
+        _FpsOffset = Schema.GetOffset(0xF48A6666BDD34AA8);
+      }
+      return ref _Handle.AsRef<float>(_FpsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DataOffset = new(() => Schema.GetOffset(0xF48A66661621C725), LazyThreadSafetyMode.None);
+  private static nint? _DataOffset;
 
   public CAnimEncodedFrames Data {
-    get => new CAnimEncodedFramesImpl(_Handle + _DataOffset.Value);
+    get {
+      if (_DataOffset == null) {
+        _DataOffset = Schema.GetOffset(0xF48A66661621C725);
+      }
+      return new CAnimEncodedFramesImpl(_Handle + _DataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MovementArrayOffset = new(() => Schema.GetOffset(0xF48A6666A7A8E615), LazyThreadSafetyMode.None);
+  private static nint? _MovementArrayOffset;
 
   public ref CUtlVector<CAnimMovement> MovementArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimMovement>>(_MovementArrayOffset.Value);
+    get {
+      if (_MovementArrayOffset == null) {
+        _MovementArrayOffset = Schema.GetOffset(0xF48A6666A7A8E615);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimMovement>>(_MovementArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XInitialOffsetOffset = new(() => Schema.GetOffset(0xF48A6666BAB8D6AA), LazyThreadSafetyMode.None);
+  private static nint? _XInitialOffsetOffset;
 
   public ref CTransform XInitialOffset {
-    get => ref _Handle.AsRef<CTransform>(_XInitialOffsetOffset.Value);
+    get {
+      if (_XInitialOffsetOffset == null) {
+        _XInitialOffsetOffset = Schema.GetOffset(0xF48A6666BAB8D6AA);
+      }
+      return ref _Handle.AsRef<CTransform>(_XInitialOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventArrayOffset = new(() => Schema.GetOffset(0xF48A6666B9FB599C), LazyThreadSafetyMode.None);
+  private static nint? _EventArrayOffset;
 
   public ref CUtlVector<CAnimEventDefinition> EventArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimEventDefinition>>(_EventArrayOffset.Value);
+    get {
+      if (_EventArrayOffset == null) {
+        _EventArrayOffset = Schema.GetOffset(0xF48A6666B9FB599C);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimEventDefinition>>(_EventArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActivityArrayOffset = new(() => Schema.GetOffset(0xF48A666638F0ACE1), LazyThreadSafetyMode.None);
+  private static nint? _ActivityArrayOffset;
 
   public ref CUtlVector<CAnimActivity> ActivityArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset.Value);
+    get {
+      if (_ActivityArrayOffset == null) {
+        _ActivityArrayOffset = Schema.GetOffset(0xF48A666638F0ACE1);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HierarchyArrayOffset = new(() => Schema.GetOffset(0xF48A6666A806B925), LazyThreadSafetyMode.None);
+  private static nint? _HierarchyArrayOffset;
 
   public ref CUtlVector<CAnimLocalHierarchy> HierarchyArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimLocalHierarchy>>(_HierarchyArrayOffset.Value);
+    get {
+      if (_HierarchyArrayOffset == null) {
+        _HierarchyArrayOffset = Schema.GetOffset(0xF48A6666A806B925);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimLocalHierarchy>>(_HierarchyArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FramestalltimeOffset = new(() => Schema.GetOffset(0xF48A666641995711), LazyThreadSafetyMode.None);
+  private static nint? _FramestalltimeOffset;
 
   public ref float Framestalltime {
-    get => ref _Handle.AsRef<float>(_FramestalltimeOffset.Value);
+    get {
+      if (_FramestalltimeOffset == null) {
+        _FramestalltimeOffset = Schema.GetOffset(0xF48A666641995711);
+      }
+      return ref _Handle.AsRef<float>(_FramestalltimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RootMinOffset = new(() => Schema.GetOffset(0xF48A66666EC1D517), LazyThreadSafetyMode.None);
+  private static nint? _RootMinOffset;
 
   public ref Vector RootMin {
-    get => ref _Handle.AsRef<Vector>(_RootMinOffset.Value);
+    get {
+      if (_RootMinOffset == null) {
+        _RootMinOffset = Schema.GetOffset(0xF48A66666EC1D517);
+      }
+      return ref _Handle.AsRef<Vector>(_RootMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RootMaxOffset = new(() => Schema.GetOffset(0xF48A66667CD572D9), LazyThreadSafetyMode.None);
+  private static nint? _RootMaxOffset;
 
   public ref Vector RootMax {
-    get => ref _Handle.AsRef<Vector>(_RootMaxOffset.Value);
+    get {
+      if (_RootMaxOffset == null) {
+        _RootMaxOffset = Schema.GetOffset(0xF48A66667CD572D9);
+      }
+      return ref _Handle.AsRef<Vector>(_RootMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneWorldMinOffset = new(() => Schema.GetOffset(0xF48A66663E4E9D3F), LazyThreadSafetyMode.None);
+  private static nint? _BoneWorldMinOffset;
 
   public ref CUtlVector<Vector> BoneWorldMin {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMinOffset.Value);
+    get {
+      if (_BoneWorldMinOffset == null) {
+        _BoneWorldMinOffset = Schema.GetOffset(0xF48A66663E4E9D3F);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneWorldMaxOffset = new(() => Schema.GetOffset(0xF48A66664C3B2B91), LazyThreadSafetyMode.None);
+  private static nint? _BoneWorldMaxOffset;
 
   public ref CUtlVector<Vector> BoneWorldMax {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMaxOffset.Value);
+    get {
+      if (_BoneWorldMaxOffset == null) {
+        _BoneWorldMaxOffset = Schema.GetOffset(0xF48A66664C3B2B91);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SequenceParamsOffset = new(() => Schema.GetOffset(0xF48A666645F20F3E), LazyThreadSafetyMode.None);
+  private static nint? _SequenceParamsOffset;
 
   public CAnimSequenceParams SequenceParams {
-    get => new CAnimSequenceParamsImpl(_Handle + _SequenceParamsOffset.Value);
+    get {
+      if (_SequenceParamsOffset == null) {
+        _SequenceParamsOffset = Schema.GetOffset(0xF48A666645F20F3E);
+      }
+      return new CAnimSequenceParamsImpl(_Handle + _SequenceParamsOffset!.Value);
+    }
   }
 
 

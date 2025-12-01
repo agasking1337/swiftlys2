@@ -17,145 +17,285 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken {
   public CChickenImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AttributeManagerOffset = new(() => Schema.GetOffset(0x66D7920D537B0586), LazyThreadSafetyMode.None);
+  private static nint? _AttributeManagerOffset;
 
   public CAttributeContainer AttributeManager {
-    get => new CAttributeContainerImpl(_Handle + _AttributeManagerOffset.Value);
+    get {
+      if (_AttributeManagerOffset == null) {
+        _AttributeManagerOffset = Schema.GetOffset(0x66D7920D537B0586);
+      }
+      return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UpdateTimerOffset = new(() => Schema.GetOffset(0x66D7920DE92599E5), LazyThreadSafetyMode.None);
+  private static nint? _UpdateTimerOffset;
 
   public CountdownTimer UpdateTimer {
-    get => new CountdownTimerImpl(_Handle + _UpdateTimerOffset.Value);
+    get {
+      if (_UpdateTimerOffset == null) {
+        _UpdateTimerOffset = Schema.GetOffset(0x66D7920DE92599E5);
+      }
+      return new CountdownTimerImpl(_Handle + _UpdateTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StuckAnchorOffset = new(() => Schema.GetOffset(0x66D7920D7FBA1852), LazyThreadSafetyMode.None);
+  private static nint? _StuckAnchorOffset;
 
   public ref Vector StuckAnchor {
-    get => ref _Handle.AsRef<Vector>(_StuckAnchorOffset.Value);
+    get {
+      if (_StuckAnchorOffset == null) {
+        _StuckAnchorOffset = Schema.GetOffset(0x66D7920D7FBA1852);
+      }
+      return ref _Handle.AsRef<Vector>(_StuckAnchorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StuckTimerOffset = new(() => Schema.GetOffset(0x66D7920D22E8E3F0), LazyThreadSafetyMode.None);
+  private static nint? _StuckTimerOffset;
 
   public CountdownTimer StuckTimer {
-    get => new CountdownTimerImpl(_Handle + _StuckTimerOffset.Value);
+    get {
+      if (_StuckTimerOffset == null) {
+        _StuckTimerOffset = Schema.GetOffset(0x66D7920D22E8E3F0);
+      }
+      return new CountdownTimerImpl(_Handle + _StuckTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CollisionStuckTimerOffset = new(() => Schema.GetOffset(0x66D7920DDA840C2A), LazyThreadSafetyMode.None);
+  private static nint? _CollisionStuckTimerOffset;
 
   public CountdownTimer CollisionStuckTimer {
-    get => new CountdownTimerImpl(_Handle + _CollisionStuckTimerOffset.Value);
+    get {
+      if (_CollisionStuckTimerOffset == null) {
+        _CollisionStuckTimerOffset = Schema.GetOffset(0x66D7920DDA840C2A);
+      }
+      return new CountdownTimerImpl(_Handle + _CollisionStuckTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsOnGroundOffset = new(() => Schema.GetOffset(0x66D7920D66E85E9B), LazyThreadSafetyMode.None);
+  private static nint? _IsOnGroundOffset;
 
   public ref bool IsOnGround {
-    get => ref _Handle.AsRef<bool>(_IsOnGroundOffset.Value);
+    get {
+      if (_IsOnGroundOffset == null) {
+        _IsOnGroundOffset = Schema.GetOffset(0x66D7920D66E85E9B);
+      }
+      return ref _Handle.AsRef<bool>(_IsOnGroundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FallVelocityOffset = new(() => Schema.GetOffset(0x66D7920DE845FA27), LazyThreadSafetyMode.None);
+  private static nint? _FallVelocityOffset;
 
   public ref Vector FallVelocity {
-    get => ref _Handle.AsRef<Vector>(_FallVelocityOffset.Value);
+    get {
+      if (_FallVelocityOffset == null) {
+        _FallVelocityOffset = Schema.GetOffset(0x66D7920DE845FA27);
+      }
+      return ref _Handle.AsRef<Vector>(_FallVelocityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DesiredActivityOffset = new(() => Schema.GetOffset(0x66D7920D0BDF74DC), LazyThreadSafetyMode.None);
+  private static nint? _DesiredActivityOffset;
 
   public ref ChickenActivity DesiredActivity {
-    get => ref _Handle.AsRef<ChickenActivity>(_DesiredActivityOffset.Value);
+    get {
+      if (_DesiredActivityOffset == null) {
+        _DesiredActivityOffset = Schema.GetOffset(0x66D7920D0BDF74DC);
+      }
+      return ref _Handle.AsRef<ChickenActivity>(_DesiredActivityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurrentActivityOffset = new(() => Schema.GetOffset(0x66D7920DBF339767), LazyThreadSafetyMode.None);
+  private static nint? _CurrentActivityOffset;
 
   public ref ChickenActivity CurrentActivity {
-    get => ref _Handle.AsRef<ChickenActivity>(_CurrentActivityOffset.Value);
+    get {
+      if (_CurrentActivityOffset == null) {
+        _CurrentActivityOffset = Schema.GetOffset(0x66D7920DBF339767);
+      }
+      return ref _Handle.AsRef<ChickenActivity>(_CurrentActivityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActivityTimerOffset = new(() => Schema.GetOffset(0x66D7920D80BFBDAD), LazyThreadSafetyMode.None);
+  private static nint? _ActivityTimerOffset;
 
   public CountdownTimer ActivityTimer {
-    get => new CountdownTimerImpl(_Handle + _ActivityTimerOffset.Value);
+    get {
+      if (_ActivityTimerOffset == null) {
+        _ActivityTimerOffset = Schema.GetOffset(0x66D7920D80BFBDAD);
+      }
+      return new CountdownTimerImpl(_Handle + _ActivityTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnRateOffset = new(() => Schema.GetOffset(0x66D7920D76FF88A8), LazyThreadSafetyMode.None);
+  private static nint? _TurnRateOffset;
 
   public ref float TurnRate {
-    get => ref _Handle.AsRef<float>(_TurnRateOffset.Value);
+    get {
+      if (_TurnRateOffset == null) {
+        _TurnRateOffset = Schema.GetOffset(0x66D7920D76FF88A8);
+      }
+      return ref _Handle.AsRef<float>(_TurnRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FleeFromOffset = new(() => Schema.GetOffset(0x66D7920D24941539), LazyThreadSafetyMode.None);
+  private static nint? _FleeFromOffset;
 
   public ref CHandle<CBaseEntity> FleeFrom {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_FleeFromOffset.Value);
+    get {
+      if (_FleeFromOffset == null) {
+        _FleeFromOffset = Schema.GetOffset(0x66D7920D24941539);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_FleeFromOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveRateThrottleTimerOffset = new(() => Schema.GetOffset(0x66D7920D7F3A963B), LazyThreadSafetyMode.None);
+  private static nint? _MoveRateThrottleTimerOffset;
 
   public CountdownTimer MoveRateThrottleTimer {
-    get => new CountdownTimerImpl(_Handle + _MoveRateThrottleTimerOffset.Value);
+    get {
+      if (_MoveRateThrottleTimerOffset == null) {
+        _MoveRateThrottleTimerOffset = Schema.GetOffset(0x66D7920D7F3A963B);
+      }
+      return new CountdownTimerImpl(_Handle + _MoveRateThrottleTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartleTimerOffset = new(() => Schema.GetOffset(0x66D7920D5F30C195), LazyThreadSafetyMode.None);
+  private static nint? _StartleTimerOffset;
 
   public CountdownTimer StartleTimer {
-    get => new CountdownTimerImpl(_Handle + _StartleTimerOffset.Value);
+    get {
+      if (_StartleTimerOffset == null) {
+        _StartleTimerOffset = Schema.GetOffset(0x66D7920D5F30C195);
+      }
+      return new CountdownTimerImpl(_Handle + _StartleTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VocalizeTimerOffset = new(() => Schema.GetOffset(0x66D7920D8A04CBE9), LazyThreadSafetyMode.None);
+  private static nint? _VocalizeTimerOffset;
 
   public CountdownTimer VocalizeTimer {
-    get => new CountdownTimerImpl(_Handle + _VocalizeTimerOffset.Value);
+    get {
+      if (_VocalizeTimerOffset == null) {
+        _VocalizeTimerOffset = Schema.GetOffset(0x66D7920D8A04CBE9);
+      }
+      return new CountdownTimerImpl(_Handle + _VocalizeTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WhenZombifiedOffset = new(() => Schema.GetOffset(0x66D7920DEC63D622), LazyThreadSafetyMode.None);
+  private static nint? _WhenZombifiedOffset;
 
   public GameTime_t WhenZombified {
-    get => new GameTime_tImpl(_Handle + _WhenZombifiedOffset.Value);
+    get {
+      if (_WhenZombifiedOffset == null) {
+        _WhenZombifiedOffset = Schema.GetOffset(0x66D7920DEC63D622);
+      }
+      return new GameTime_tImpl(_Handle + _WhenZombifiedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _JumpedThisFrameOffset = new(() => Schema.GetOffset(0x66D7920D6BF897BD), LazyThreadSafetyMode.None);
+  private static nint? _JumpedThisFrameOffset;
 
   public ref bool JumpedThisFrame {
-    get => ref _Handle.AsRef<bool>(_JumpedThisFrameOffset.Value);
+    get {
+      if (_JumpedThisFrameOffset == null) {
+        _JumpedThisFrameOffset = Schema.GetOffset(0x66D7920D6BF897BD);
+      }
+      return ref _Handle.AsRef<bool>(_JumpedThisFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LeaderOffset = new(() => Schema.GetOffset(0x66D7920D658B4E84), LazyThreadSafetyMode.None);
+  private static nint? _LeaderOffset;
 
   public ref CHandle<CCSPlayerPawn> Leader {
-    get => ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_LeaderOffset.Value);
+    get {
+      if (_LeaderOffset == null) {
+        _LeaderOffset = Schema.GetOffset(0x66D7920D658B4E84);
+      }
+      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_LeaderOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReuseTimerOffset = new(() => Schema.GetOffset(0x66D7920D6D7BFBA8), LazyThreadSafetyMode.None);
+  private static nint? _ReuseTimerOffset;
 
   public CountdownTimer ReuseTimer {
-    get => new CountdownTimerImpl(_Handle + _ReuseTimerOffset.Value);
+    get {
+      if (_ReuseTimerOffset == null) {
+        _ReuseTimerOffset = Schema.GetOffset(0x66D7920D6D7BFBA8);
+      }
+      return new CountdownTimerImpl(_Handle + _ReuseTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasBeenUsedOffset = new(() => Schema.GetOffset(0x66D7920D4B85A934), LazyThreadSafetyMode.None);
+  private static nint? _HasBeenUsedOffset;
 
   public ref bool HasBeenUsed {
-    get => ref _Handle.AsRef<bool>(_HasBeenUsedOffset.Value);
+    get {
+      if (_HasBeenUsedOffset == null) {
+        _HasBeenUsedOffset = Schema.GetOffset(0x66D7920D4B85A934);
+      }
+      return ref _Handle.AsRef<bool>(_HasBeenUsedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _JumpTimerOffset = new(() => Schema.GetOffset(0x66D7920D6CBF3C9A), LazyThreadSafetyMode.None);
+  private static nint? _JumpTimerOffset;
 
   public CountdownTimer JumpTimer {
-    get => new CountdownTimerImpl(_Handle + _JumpTimerOffset.Value);
+    get {
+      if (_JumpTimerOffset == null) {
+        _JumpTimerOffset = Schema.GetOffset(0x66D7920D6CBF3C9A);
+      }
+      return new CountdownTimerImpl(_Handle + _JumpTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastJumpTimeOffset = new(() => Schema.GetOffset(0x66D7920DAB061352), LazyThreadSafetyMode.None);
+  private static nint? _LastJumpTimeOffset;
 
   public ref float LastJumpTime {
-    get => ref _Handle.AsRef<float>(_LastJumpTimeOffset.Value);
+    get {
+      if (_LastJumpTimeOffset == null) {
+        _LastJumpTimeOffset = Schema.GetOffset(0x66D7920DAB061352);
+      }
+      return ref _Handle.AsRef<float>(_LastJumpTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InJumpOffset = new(() => Schema.GetOffset(0x66D7920DD74EE446), LazyThreadSafetyMode.None);
+  private static nint? _InJumpOffset;
 
   public ref bool InJump {
-    get => ref _Handle.AsRef<bool>(_InJumpOffset.Value);
+    get {
+      if (_InJumpOffset == null) {
+        _InJumpOffset = Schema.GetOffset(0x66D7920DD74EE446);
+      }
+      return ref _Handle.AsRef<bool>(_InJumpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RepathTimerOffset = new(() => Schema.GetOffset(0x66D7920D4AEA977C), LazyThreadSafetyMode.None);
+  private static nint? _RepathTimerOffset;
 
   public CountdownTimer RepathTimer {
-    get => new CountdownTimerImpl(_Handle + _RepathTimerOffset.Value);
+    get {
+      if (_RepathTimerOffset == null) {
+        _RepathTimerOffset = Schema.GetOffset(0x66D7920D4AEA977C);
+      }
+      return new CountdownTimerImpl(_Handle + _RepathTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathGoalOffset = new(() => Schema.GetOffset(0x66D7920DEF360269), LazyThreadSafetyMode.None);
+  private static nint? _PathGoalOffset;
 
   public ref Vector PathGoal {
-    get => ref _Handle.AsRef<Vector>(_PathGoalOffset.Value);
+    get {
+      if (_PathGoalOffset == null) {
+        _PathGoalOffset = Schema.GetOffset(0x66D7920DEF360269);
+      }
+      return ref _Handle.AsRef<Vector>(_PathGoalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActiveFollowStartTimeOffset = new(() => Schema.GetOffset(0x66D7920D204FDDA9), LazyThreadSafetyMode.None);
+  private static nint? _ActiveFollowStartTimeOffset;
 
   public GameTime_t ActiveFollowStartTime {
-    get => new GameTime_tImpl(_Handle + _ActiveFollowStartTimeOffset.Value);
+    get {
+      if (_ActiveFollowStartTimeOffset == null) {
+        _ActiveFollowStartTimeOffset = Schema.GetOffset(0x66D7920D204FDDA9);
+      }
+      return new GameTime_tImpl(_Handle + _ActiveFollowStartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FollowMinuteTimerOffset = new(() => Schema.GetOffset(0x66D7920DCDBFCCA9), LazyThreadSafetyMode.None);
+  private static nint? _FollowMinuteTimerOffset;
 
   public CountdownTimer FollowMinuteTimer {
-    get => new CountdownTimerImpl(_Handle + _FollowMinuteTimerOffset.Value);
+    get {
+      if (_FollowMinuteTimerOffset == null) {
+        _FollowMinuteTimerOffset = Schema.GetOffset(0x66D7920DCDBFCCA9);
+      }
+      return new CountdownTimerImpl(_Handle + _FollowMinuteTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlockDirectionTimerOffset = new(() => Schema.GetOffset(0x66D7920D579BB6BC), LazyThreadSafetyMode.None);
+  private static nint? _BlockDirectionTimerOffset;
 
   public CountdownTimer BlockDirectionTimer {
-    get => new CountdownTimerImpl(_Handle + _BlockDirectionTimerOffset.Value);
+    get {
+      if (_BlockDirectionTimerOffset == null) {
+        _BlockDirectionTimerOffset = Schema.GetOffset(0x66D7920D579BB6BC);
+      }
+      return new CountdownTimerImpl(_Handle + _BlockDirectionTimerOffset!.Value);
+    }
   }
 
   public void AttributeManagerUpdated() {

@@ -17,40 +17,75 @@ internal partial class CAnimEncodeDifferenceImpl : SchemaClass, CAnimEncodeDiffe
   public CAnimEncodeDifferenceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoneArrayOffset = new(() => Schema.GetOffset(0x65474B2E80273F0C), LazyThreadSafetyMode.None);
+  private static nint? _BoneArrayOffset;
 
   public ref CUtlVector<CAnimBoneDifference> BoneArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset.Value);
+    get {
+      if (_BoneArrayOffset == null) {
+        _BoneArrayOffset = Schema.GetOffset(0x65474B2E80273F0C);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MorphArrayOffset = new(() => Schema.GetOffset(0x65474B2E8C6827E6), LazyThreadSafetyMode.None);
+  private static nint? _MorphArrayOffset;
 
   public ref CUtlVector<CAnimMorphDifference> MorphArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset.Value);
+    get {
+      if (_MorphArrayOffset == null) {
+        _MorphArrayOffset = Schema.GetOffset(0x65474B2E8C6827E6);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UserArrayOffset = new(() => Schema.GetOffset(0x65474B2EFBDB0C13), LazyThreadSafetyMode.None);
+  private static nint? _UserArrayOffset;
 
   public ref CUtlVector<CAnimUserDifference> UserArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset.Value);
+    get {
+      if (_UserArrayOffset == null) {
+        _UserArrayOffset = Schema.GetOffset(0x65474B2EFBDB0C13);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasRotationBitArrayOffset = new(() => Schema.GetOffset(0x65474B2E6AD7DEA5), LazyThreadSafetyMode.None);
+  private static nint? _HasRotationBitArrayOffset;
 
   public ref CUtlVector<byte> HasRotationBitArray {
-    get => ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset.Value);
+    get {
+      if (_HasRotationBitArrayOffset == null) {
+        _HasRotationBitArrayOffset = Schema.GetOffset(0x65474B2E6AD7DEA5);
+      }
+      return ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasMovementBitArrayOffset = new(() => Schema.GetOffset(0x65474B2EAD247FA6), LazyThreadSafetyMode.None);
+  private static nint? _HasMovementBitArrayOffset;
 
   public ref CUtlVector<byte> HasMovementBitArray {
-    get => ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset.Value);
+    get {
+      if (_HasMovementBitArrayOffset == null) {
+        _HasMovementBitArrayOffset = Schema.GetOffset(0x65474B2EAD247FA6);
+      }
+      return ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasMorphBitArrayOffset = new(() => Schema.GetOffset(0x65474B2E5F84C5D3), LazyThreadSafetyMode.None);
+  private static nint? _HasMorphBitArrayOffset;
 
   public ref CUtlVector<byte> HasMorphBitArray {
-    get => ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset.Value);
+    get {
+      if (_HasMorphBitArrayOffset == null) {
+        _HasMorphBitArrayOffset = Schema.GetOffset(0x65474B2E5F84C5D3);
+      }
+      return ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasUserBitArrayOffset = new(() => Schema.GetOffset(0x65474B2EB41ED7E0), LazyThreadSafetyMode.None);
+  private static nint? _HasUserBitArrayOffset;
 
   public ref CUtlVector<byte> HasUserBitArray {
-    get => ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset.Value);
+    get {
+      if (_HasUserBitArrayOffset == null) {
+        _HasUserBitArrayOffset = Schema.GetOffset(0x65474B2EB41ED7E0);
+      }
+      return ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset!.Value);
+    }
   }
 
 

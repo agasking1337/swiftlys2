@@ -17,15 +17,25 @@ internal partial class CNavLinkAnimgraphVarImpl : SchemaClass, CNavLinkAnimgraph
   public CNavLinkAnimgraphVarImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AnimGraphNavlinkTypeOffset = new(() => Schema.GetOffset(0xD079ABDB24A7FCF6), LazyThreadSafetyMode.None);
+  private static nint? _AnimGraphNavlinkTypeOffset;
 
   public ref CGlobalSymbol AnimGraphNavlinkType {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_AnimGraphNavlinkTypeOffset.Value);
+    get {
+      if (_AnimGraphNavlinkTypeOffset == null) {
+        _AnimGraphNavlinkTypeOffset = Schema.GetOffset(0xD079ABDB24A7FCF6);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraphNavlinkTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlignmentDegreesOffset = new(() => Schema.GetOffset(0xD079ABDB371747C0), LazyThreadSafetyMode.None);
+  private static nint? _AlignmentDegreesOffset;
 
   public ref uint AlignmentDegrees {
-    get => ref _Handle.AsRef<uint>(_AlignmentDegreesOffset.Value);
+    get {
+      if (_AlignmentDegreesOffset == null) {
+        _AlignmentDegreesOffset = Schema.GetOffset(0xD079ABDB371747C0);
+      }
+      return ref _Handle.AsRef<uint>(_AlignmentDegreesOffset!.Value);
+    }
   }
 
 

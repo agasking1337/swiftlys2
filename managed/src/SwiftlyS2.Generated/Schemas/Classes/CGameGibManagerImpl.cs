@@ -17,25 +17,45 @@ internal partial class CGameGibManagerImpl : CBaseEntityImpl, CGameGibManager {
   public CGameGibManagerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AllowNewGibsOffset = new(() => Schema.GetOffset(0x1068CB09FD80F507), LazyThreadSafetyMode.None);
+  private static nint? _AllowNewGibsOffset;
 
   public ref bool AllowNewGibs {
-    get => ref _Handle.AsRef<bool>(_AllowNewGibsOffset.Value);
+    get {
+      if (_AllowNewGibsOffset == null) {
+        _AllowNewGibsOffset = Schema.GetOffset(0x1068CB09FD80F507);
+      }
+      return ref _Handle.AsRef<bool>(_AllowNewGibsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurrentMaxPiecesOffset = new(() => Schema.GetOffset(0x1068CB0999B0D602), LazyThreadSafetyMode.None);
+  private static nint? _CurrentMaxPiecesOffset;
 
   public ref int CurrentMaxPieces {
-    get => ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset.Value);
+    get {
+      if (_CurrentMaxPiecesOffset == null) {
+        _CurrentMaxPiecesOffset = Schema.GetOffset(0x1068CB0999B0D602);
+      }
+      return ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxPiecesOffset = new(() => Schema.GetOffset(0x1068CB092DDFB63D), LazyThreadSafetyMode.None);
+  private static nint? _MaxPiecesOffset;
 
   public ref int MaxPieces {
-    get => ref _Handle.AsRef<int>(_MaxPiecesOffset.Value);
+    get {
+      if (_MaxPiecesOffset == null) {
+        _MaxPiecesOffset = Schema.GetOffset(0x1068CB092DDFB63D);
+      }
+      return ref _Handle.AsRef<int>(_MaxPiecesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastFrameOffset = new(() => Schema.GetOffset(0x1068CB09F0B58C21), LazyThreadSafetyMode.None);
+  private static nint? _LastFrameOffset;
 
   public ref int LastFrame {
-    get => ref _Handle.AsRef<int>(_LastFrameOffset.Value);
+    get {
+      if (_LastFrameOffset == null) {
+        _LastFrameOffset = Schema.GetOffset(0x1068CB09F0B58C21);
+      }
+      return ref _Handle.AsRef<int>(_LastFrameOffset!.Value);
+    }
   }
 
 

@@ -17,59 +17,112 @@ internal partial class CStateUpdateDataImpl : SchemaClass, CStateUpdateData {
   public CStateUpdateDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xD984C8C64D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xD984C8C64D8F5786);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xD984C8C64D8F5786);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ScriptOffset = new(() => Schema.GetOffset(0xD984C8C629D70FB0), LazyThreadSafetyMode.None);
+  private static nint? _ScriptOffset;
 
   public AnimScriptHandle Script {
-    get => new AnimScriptHandleImpl(_Handle + _ScriptOffset.Value);
+    get {
+      if (_ScriptOffset == null) {
+        _ScriptOffset = Schema.GetOffset(0xD984C8C629D70FB0);
+      }
+      return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionIndicesOffset = new(() => Schema.GetOffset(0xD984C8C689E40507), LazyThreadSafetyMode.None);
+  private static nint? _TransitionIndicesOffset;
 
   public ref CUtlVector<int> TransitionIndices {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_TransitionIndicesOffset.Value);
+    get {
+      if (_TransitionIndicesOffset == null) {
+        _TransitionIndicesOffset = Schema.GetOffset(0xD984C8C689E40507);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_TransitionIndicesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActionsOffset = new(() => Schema.GetOffset(0xD984C8C68D622684), LazyThreadSafetyMode.None);
+  private static nint? _ActionsOffset;
 
   public ref CUtlVector<CStateActionUpdater> Actions {
-    get => ref _Handle.AsRef<CUtlVector<CStateActionUpdater>>(_ActionsOffset.Value);
+    get {
+      if (_ActionsOffset == null) {
+        _ActionsOffset = Schema.GetOffset(0xD984C8C68D622684);
+      }
+      return ref _Handle.AsRef<CUtlVector<CStateActionUpdater>>(_ActionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StateIDOffset = new(() => Schema.GetOffset(0xD984C8C65362B56B), LazyThreadSafetyMode.None);
+  private static nint? _StateIDOffset;
 
   public AnimStateID StateID {
-    get => new AnimStateIDImpl(_Handle + _StateIDOffset.Value);
+    get {
+      if (_StateIDOffset == null) {
+        _StateIDOffset = Schema.GetOffset(0xD984C8C65362B56B);
+      }
+      return new AnimStateIDImpl(_Handle + _StateIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsStartStateOffset = new(() => Schema.GetOffset(0xD984C8C6B4CEE040), LazyThreadSafetyMode.None);
+  private static nint? _IsStartStateOffset;
 
   public SchemaUntypedField IsStartState {
-    get => new SchemaUntypedField(_Handle + _IsStartStateOffset.Value);
+    get {
+      if (_IsStartStateOffset == null) {
+        _IsStartStateOffset = Schema.GetOffset(0xD984C8C6B4CEE040);
+      }
+      return new SchemaUntypedField(_Handle + _IsStartStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsEndStateOffset = new(() => Schema.GetOffset(0xD984C8C65C2338AF), LazyThreadSafetyMode.None);
+  private static nint? _IsEndStateOffset;
 
   public SchemaUntypedField IsEndState {
-    get => new SchemaUntypedField(_Handle + _IsEndStateOffset.Value);
+    get {
+      if (_IsEndStateOffset == null) {
+        _IsEndStateOffset = Schema.GetOffset(0xD984C8C65C2338AF);
+      }
+      return new SchemaUntypedField(_Handle + _IsEndStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsPassthroughOffset = new(() => Schema.GetOffset(0xD984C8C6F0AD9431), LazyThreadSafetyMode.None);
+  private static nint? _IsPassthroughOffset;
 
   public SchemaUntypedField IsPassthrough {
-    get => new SchemaUntypedField(_Handle + _IsPassthroughOffset.Value);
+    get {
+      if (_IsPassthroughOffset == null) {
+        _IsPassthroughOffset = Schema.GetOffset(0xD984C8C6F0AD9431);
+      }
+      return new SchemaUntypedField(_Handle + _IsPassthroughOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsPassthroughRootMotionOffset = new(() => Schema.GetOffset(0xD984C8C64B319C83), LazyThreadSafetyMode.None);
+  private static nint? _IsPassthroughRootMotionOffset;
 
   public SchemaUntypedField IsPassthroughRootMotion {
-    get => new SchemaUntypedField(_Handle + _IsPassthroughRootMotionOffset.Value);
+    get {
+      if (_IsPassthroughRootMotionOffset == null) {
+        _IsPassthroughRootMotionOffset = Schema.GetOffset(0xD984C8C64B319C83);
+      }
+      return new SchemaUntypedField(_Handle + _IsPassthroughRootMotionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PreEvaluatePassthroughTransitionPathOffset = new(() => Schema.GetOffset(0xD984C8C60DFCB92D), LazyThreadSafetyMode.None);
+  private static nint? _PreEvaluatePassthroughTransitionPathOffset;
 
   public SchemaUntypedField PreEvaluatePassthroughTransitionPath {
-    get => new SchemaUntypedField(_Handle + _PreEvaluatePassthroughTransitionPathOffset.Value);
+    get {
+      if (_PreEvaluatePassthroughTransitionPathOffset == null) {
+        _PreEvaluatePassthroughTransitionPathOffset = Schema.GetOffset(0xD984C8C60DFCB92D);
+      }
+      return new SchemaUntypedField(_Handle + _PreEvaluatePassthroughTransitionPathOffset!.Value);
+    }
   }
 
 

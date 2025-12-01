@@ -17,20 +17,35 @@ internal partial class FeNodeReverseOffset_tImpl : SchemaClass, FeNodeReverseOff
   public FeNodeReverseOffset_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0xA3D68D6AB2913856), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref Vector Offset {
-    get => ref _Handle.AsRef<Vector>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0xA3D68D6AB2913856);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneCtrlOffset = new(() => Schema.GetOffset(0xA3D68D6AE9730872), LazyThreadSafetyMode.None);
+  private static nint? _BoneCtrlOffset;
 
   public ref ushort BoneCtrl {
-    get => ref _Handle.AsRef<ushort>(_BoneCtrlOffset.Value);
+    get {
+      if (_BoneCtrlOffset == null) {
+        _BoneCtrlOffset = Schema.GetOffset(0xA3D68D6AE9730872);
+      }
+      return ref _Handle.AsRef<ushort>(_BoneCtrlOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetNodeOffset = new(() => Schema.GetOffset(0xA3D68D6A817BD540), LazyThreadSafetyMode.None);
+  private static nint? _TargetNodeOffset;
 
   public ref ushort TargetNode {
-    get => ref _Handle.AsRef<ushort>(_TargetNodeOffset.Value);
+    get {
+      if (_TargetNodeOffset == null) {
+        _TargetNodeOffset = Schema.GetOffset(0xA3D68D6A817BD540);
+      }
+      return ref _Handle.AsRef<ushort>(_TargetNodeOffset!.Value);
+    }
   }
 
 

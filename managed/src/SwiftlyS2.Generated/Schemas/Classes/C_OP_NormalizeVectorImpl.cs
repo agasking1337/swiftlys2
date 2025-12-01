@@ -17,15 +17,25 @@ internal partial class C_OP_NormalizeVectorImpl : CParticleFunctionOperatorImpl,
   public C_OP_NormalizeVectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x53107B8BE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x53107B8BE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x53107B8BB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x53107B8BB731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
 
 

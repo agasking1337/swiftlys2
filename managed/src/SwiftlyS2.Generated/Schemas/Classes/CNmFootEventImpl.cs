@@ -17,10 +17,15 @@ internal partial class CNmFootEventImpl : CNmEventImpl, CNmFootEvent {
   public CNmFootEventImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PhaseOffset = new(() => Schema.GetOffset(0x1F9E5CE14846D318), LazyThreadSafetyMode.None);
+  private static nint? _PhaseOffset;
 
   public ref NmFootPhase_t Phase {
-    get => ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset.Value);
+    get {
+      if (_PhaseOffset == null) {
+        _PhaseOffset = Schema.GetOffset(0x1F9E5CE14846D318);
+      }
+      return ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset!.Value);
+    }
   }
 
 

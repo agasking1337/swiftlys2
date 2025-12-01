@@ -17,19 +17,32 @@ internal partial class VecInputMaterialVariable_tImpl : SchemaClass, VecInputMat
   public VecInputMaterialVariable_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StrVariableOffset = new(() => Schema.GetOffset(0x3A84C75DA52C3390), LazyThreadSafetyMode.None);
+  private static nint? _StrVariableOffset;
 
   public string StrVariable {
     get {
-      var ptr = _Handle.Read<nint>(_StrVariableOffset.Value);
+      if (_StrVariableOffset == null) {
+        _StrVariableOffset = Schema.GetOffset(0x3A84C75DA52C3390);
+      }
+      var ptr = _Handle.Read<nint>(_StrVariableOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrVariableOffset.Value, value);
+    set {
+      if (_StrVariableOffset == null) {
+        _StrVariableOffset = Schema.GetOffset(0x3A84C75DA52C3390);
+      }
+      Schema.SetString(_Handle, _StrVariableOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _InputOffset = new(() => Schema.GetOffset(0x3A84C75D1EA0ED5B), LazyThreadSafetyMode.None);
+  private static nint? _InputOffset;
 
   public CParticleCollectionVecInput Input {
-    get => new CParticleCollectionVecInputImpl(_Handle + _InputOffset.Value);
+    get {
+      if (_InputOffset == null) {
+        _InputOffset = Schema.GetOffset(0x3A84C75D1EA0ED5B);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _InputOffset!.Value);
+    }
   }
 
 

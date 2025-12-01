@@ -17,30 +17,55 @@ internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttac
   public FollowAttachmentSettings_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AttachmentOffset = new(() => Schema.GetOffset(0x94FFC64B2C5CA308), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentOffset;
 
   public CAnimAttachment Attachment {
-    get => new CAnimAttachmentImpl(_Handle + _AttachmentOffset.Value);
+    get {
+      if (_AttachmentOffset == null) {
+        _AttachmentOffset = Schema.GetOffset(0x94FFC64B2C5CA308);
+      }
+      return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneIndexOffset = new(() => Schema.GetOffset(0x94FFC64B6AFA4155), LazyThreadSafetyMode.None);
+  private static nint? _BoneIndexOffset;
 
   public ref int BoneIndex {
-    get => ref _Handle.AsRef<int>(_BoneIndexOffset.Value);
+    get {
+      if (_BoneIndexOffset == null) {
+        _BoneIndexOffset = Schema.GetOffset(0x94FFC64B6AFA4155);
+      }
+      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachmentHandleOffset = new(() => Schema.GetOffset(0x94FFC64BA203035E), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentHandleOffset;
 
   public AttachmentHandle_t AttachmentHandle {
-    get => new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset.Value);
+    get {
+      if (_AttachmentHandleOffset == null) {
+        _AttachmentHandleOffset = Schema.GetOffset(0x94FFC64BA203035E);
+      }
+      return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MatchTranslationOffset = new(() => Schema.GetOffset(0x94FFC64B96FCC779), LazyThreadSafetyMode.None);
+  private static nint? _MatchTranslationOffset;
 
   public ref bool MatchTranslation {
-    get => ref _Handle.AsRef<bool>(_MatchTranslationOffset.Value);
+    get {
+      if (_MatchTranslationOffset == null) {
+        _MatchTranslationOffset = Schema.GetOffset(0x94FFC64B96FCC779);
+      }
+      return ref _Handle.AsRef<bool>(_MatchTranslationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MatchRotationOffset = new(() => Schema.GetOffset(0x94FFC64BA4FB561C), LazyThreadSafetyMode.None);
+  private static nint? _MatchRotationOffset;
 
   public ref bool MatchRotation {
-    get => ref _Handle.AsRef<bool>(_MatchRotationOffset.Value);
+    get {
+      if (_MatchRotationOffset == null) {
+        _MatchRotationOffset = Schema.GetOffset(0x94FFC64BA4FB561C);
+      }
+      return ref _Handle.AsRef<bool>(_MatchRotationOffset!.Value);
+    }
   }
 
 

@@ -17,30 +17,55 @@ internal partial class RagdollCreationParams_tImpl : SchemaClass, RagdollCreatio
   public RagdollCreationParams_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ForceOffset = new(() => Schema.GetOffset(0xAF0FCC44E530B0A8), LazyThreadSafetyMode.None);
+  private static nint? _ForceOffset;
 
   public ref Vector Force {
-    get => ref _Handle.AsRef<Vector>(_ForceOffset.Value);
+    get {
+      if (_ForceOffset == null) {
+        _ForceOffset = Schema.GetOffset(0xAF0FCC44E530B0A8);
+      }
+      return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceBoneOffset = new(() => Schema.GetOffset(0xAF0FCC44DDAC019E), LazyThreadSafetyMode.None);
+  private static nint? _ForceBoneOffset;
 
   public ref int ForceBone {
-    get => ref _Handle.AsRef<int>(_ForceBoneOffset.Value);
+    get {
+      if (_ForceBoneOffset == null) {
+        _ForceBoneOffset = Schema.GetOffset(0xAF0FCC44DDAC019E);
+      }
+      return ref _Handle.AsRef<int>(_ForceBoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceCurrentWorldTransformOffset = new(() => Schema.GetOffset(0xAF0FCC443FC20379), LazyThreadSafetyMode.None);
+  private static nint? _ForceCurrentWorldTransformOffset;
 
   public ref bool ForceCurrentWorldTransform {
-    get => ref _Handle.AsRef<bool>(_ForceCurrentWorldTransformOffset.Value);
+    get {
+      if (_ForceCurrentWorldTransformOffset == null) {
+        _ForceCurrentWorldTransformOffset = Schema.GetOffset(0xAF0FCC443FC20379);
+      }
+      return ref _Handle.AsRef<bool>(_ForceCurrentWorldTransformOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseLRURetirementOffset = new(() => Schema.GetOffset(0xAF0FCC444DCF62FA), LazyThreadSafetyMode.None);
+  private static nint? _UseLRURetirementOffset;
 
   public ref bool UseLRURetirement {
-    get => ref _Handle.AsRef<bool>(_UseLRURetirementOffset.Value);
+    get {
+      if (_UseLRURetirementOffset == null) {
+        _UseLRURetirementOffset = Schema.GetOffset(0xAF0FCC444DCF62FA);
+      }
+      return ref _Handle.AsRef<bool>(_UseLRURetirementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HealthToGrantOffset = new(() => Schema.GetOffset(0xAF0FCC4414E28C5C), LazyThreadSafetyMode.None);
+  private static nint? _HealthToGrantOffset;
 
   public ref int HealthToGrant {
-    get => ref _Handle.AsRef<int>(_HealthToGrantOffset.Value);
+    get {
+      if (_HealthToGrantOffset == null) {
+        _HealthToGrantOffset = Schema.GetOffset(0xAF0FCC4414E28C5C);
+      }
+      return ref _Handle.AsRef<int>(_HealthToGrantOffset!.Value);
+    }
   }
 
 

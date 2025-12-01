@@ -17,30 +17,55 @@ internal partial class C_OP_RemapBoundingVolumetoCPImpl : CParticleFunctionPreEm
   public C_OP_RemapBoundingVolumetoCPImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OutControlPointNumberOffset = new(() => Schema.GetOffset(0xBFFF451ED021D73F), LazyThreadSafetyMode.None);
+  private static nint? _OutControlPointNumberOffset;
 
   public ref int OutControlPointNumber {
-    get => ref _Handle.AsRef<int>(_OutControlPointNumberOffset.Value);
+    get {
+      if (_OutControlPointNumberOffset == null) {
+        _OutControlPointNumberOffset = Schema.GetOffset(0xBFFF451ED021D73F);
+      }
+      return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0xBFFF451EE88A0D0F), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref float InputMin {
-    get => ref _Handle.AsRef<float>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0xBFFF451EE88A0D0F);
+      }
+      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0xBFFF451ED6766901), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref float InputMax {
-    get => ref _Handle.AsRef<float>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0xBFFF451ED6766901);
+      }
+      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0xBFFF451E5F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0xBFFF451E5F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0xBFFF451E51A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0xBFFF451E51A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
 
 

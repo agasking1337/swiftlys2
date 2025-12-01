@@ -17,45 +17,85 @@ internal partial class C_OP_RenderAsModelsImpl : CParticleFunctionRendererImpl, 
   public C_OP_RenderAsModelsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModelListOffset = new(() => Schema.GetOffset(0x634E6CCB05FC11B6), LazyThreadSafetyMode.None);
+  private static nint? _ModelListOffset;
 
   public ref CUtlVector<ModelReference_t> ModelList {
-    get => ref _Handle.AsRef<CUtlVector<ModelReference_t>>(_ModelListOffset.Value);
+    get {
+      if (_ModelListOffset == null) {
+        _ModelListOffset = Schema.GetOffset(0x634E6CCB05FC11B6);
+      }
+      return ref _Handle.AsRef<CUtlVector<ModelReference_t>>(_ModelListOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelScaleOffset = new(() => Schema.GetOffset(0x634E6CCBD28B2146), LazyThreadSafetyMode.None);
+  private static nint? _ModelScaleOffset;
 
   public ref float ModelScale {
-    get => ref _Handle.AsRef<float>(_ModelScaleOffset.Value);
+    get {
+      if (_ModelScaleOffset == null) {
+        _ModelScaleOffset = Schema.GetOffset(0x634E6CCBD28B2146);
+      }
+      return ref _Handle.AsRef<float>(_ModelScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FitToModelSizeOffset = new(() => Schema.GetOffset(0x634E6CCBF444BB23), LazyThreadSafetyMode.None);
+  private static nint? _FitToModelSizeOffset;
 
   public ref bool FitToModelSize {
-    get => ref _Handle.AsRef<bool>(_FitToModelSizeOffset.Value);
+    get {
+      if (_FitToModelSizeOffset == null) {
+        _FitToModelSizeOffset = Schema.GetOffset(0x634E6CCBF444BB23);
+      }
+      return ref _Handle.AsRef<bool>(_FitToModelSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NonUniformScalingOffset = new(() => Schema.GetOffset(0x634E6CCBC2ADF0D9), LazyThreadSafetyMode.None);
+  private static nint? _NonUniformScalingOffset;
 
   public ref bool NonUniformScaling {
-    get => ref _Handle.AsRef<bool>(_NonUniformScalingOffset.Value);
+    get {
+      if (_NonUniformScalingOffset == null) {
+        _NonUniformScalingOffset = Schema.GetOffset(0x634E6CCBC2ADF0D9);
+      }
+      return ref _Handle.AsRef<bool>(_NonUniformScalingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XAxisScalingAttributeOffset = new(() => Schema.GetOffset(0x634E6CCB0E363ADD), LazyThreadSafetyMode.None);
+  private static nint? _XAxisScalingAttributeOffset;
 
   public ParticleAttributeIndex_t XAxisScalingAttribute {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _XAxisScalingAttributeOffset.Value);
+    get {
+      if (_XAxisScalingAttributeOffset == null) {
+        _XAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCB0E363ADD);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _XAxisScalingAttributeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YAxisScalingAttributeOffset = new(() => Schema.GetOffset(0x634E6CCBC293ED92), LazyThreadSafetyMode.None);
+  private static nint? _YAxisScalingAttributeOffset;
 
   public ParticleAttributeIndex_t YAxisScalingAttribute {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _YAxisScalingAttributeOffset.Value);
+    get {
+      if (_YAxisScalingAttributeOffset == null) {
+        _YAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCBC293ED92);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _YAxisScalingAttributeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ZAxisScalingAttributeOffset = new(() => Schema.GetOffset(0x634E6CCBC34C4EDF), LazyThreadSafetyMode.None);
+  private static nint? _ZAxisScalingAttributeOffset;
 
   public ParticleAttributeIndex_t ZAxisScalingAttribute {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _ZAxisScalingAttributeOffset.Value);
+    get {
+      if (_ZAxisScalingAttributeOffset == null) {
+        _ZAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCBC34C4EDF);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _ZAxisScalingAttributeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SizeCullBloatOffset = new(() => Schema.GetOffset(0x634E6CCB5EB61122), LazyThreadSafetyMode.None);
+  private static nint? _SizeCullBloatOffset;
 
   public ref int SizeCullBloat {
-    get => ref _Handle.AsRef<int>(_SizeCullBloatOffset.Value);
+    get {
+      if (_SizeCullBloatOffset == null) {
+        _SizeCullBloatOffset = Schema.GetOffset(0x634E6CCB5EB61122);
+      }
+      return ref _Handle.AsRef<int>(_SizeCullBloatOffset!.Value);
+    }
   }
 
 

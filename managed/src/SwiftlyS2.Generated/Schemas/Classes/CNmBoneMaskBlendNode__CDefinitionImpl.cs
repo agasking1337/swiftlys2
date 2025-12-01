@@ -17,20 +17,35 @@ internal partial class CNmBoneMaskBlendNode__CDefinitionImpl : CNmBoneMaskValueN
   public CNmBoneMaskBlendNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SourceMaskNodeIdxOffset = new(() => Schema.GetOffset(0x551EA0BCFF243A47), LazyThreadSafetyMode.None);
+  private static nint? _SourceMaskNodeIdxOffset;
 
   public ref short SourceMaskNodeIdx {
-    get => ref _Handle.AsRef<short>(_SourceMaskNodeIdxOffset.Value);
+    get {
+      if (_SourceMaskNodeIdxOffset == null) {
+        _SourceMaskNodeIdxOffset = Schema.GetOffset(0x551EA0BCFF243A47);
+      }
+      return ref _Handle.AsRef<short>(_SourceMaskNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetMaskNodeIdxOffset = new(() => Schema.GetOffset(0x551EA0BC74E90A6F), LazyThreadSafetyMode.None);
+  private static nint? _TargetMaskNodeIdxOffset;
 
   public ref short TargetMaskNodeIdx {
-    get => ref _Handle.AsRef<short>(_TargetMaskNodeIdxOffset.Value);
+    get {
+      if (_TargetMaskNodeIdxOffset == null) {
+        _TargetMaskNodeIdxOffset = Schema.GetOffset(0x551EA0BC74E90A6F);
+      }
+      return ref _Handle.AsRef<short>(_TargetMaskNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendWeightValueNodeIdxOffset = new(() => Schema.GetOffset(0x551EA0BC2735A990), LazyThreadSafetyMode.None);
+  private static nint? _BlendWeightValueNodeIdxOffset;
 
   public ref short BlendWeightValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_BlendWeightValueNodeIdxOffset.Value);
+    get {
+      if (_BlendWeightValueNodeIdxOffset == null) {
+        _BlendWeightValueNodeIdxOffset = Schema.GetOffset(0x551EA0BC2735A990);
+      }
+      return ref _Handle.AsRef<short>(_BlendWeightValueNodeIdxOffset!.Value);
+    }
   }
 
 

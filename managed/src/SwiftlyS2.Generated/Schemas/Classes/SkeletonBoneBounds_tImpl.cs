@@ -17,15 +17,25 @@ internal partial class SkeletonBoneBounds_tImpl : SchemaClass, SkeletonBoneBound
   public SkeletonBoneBounds_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CenterOffset = new(() => Schema.GetOffset(0xFF0CF520FA3A6E4), LazyThreadSafetyMode.None);
+  private static nint? _CenterOffset;
 
   public ref Vector Center {
-    get => ref _Handle.AsRef<Vector>(_CenterOffset.Value);
+    get {
+      if (_CenterOffset == null) {
+        _CenterOffset = Schema.GetOffset(0xFF0CF520FA3A6E4);
+      }
+      return ref _Handle.AsRef<Vector>(_CenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SizeOffset = new(() => Schema.GetOffset(0xFF0CF52DABBAEBC), LazyThreadSafetyMode.None);
+  private static nint? _SizeOffset;
 
   public ref Vector Size {
-    get => ref _Handle.AsRef<Vector>(_SizeOffset.Value);
+    get {
+      if (_SizeOffset == null) {
+        _SizeOffset = Schema.GetOffset(0xFF0CF52DABBAEBC);
+      }
+      return ref _Handle.AsRef<Vector>(_SizeOffset!.Value);
+    }
   }
 
 

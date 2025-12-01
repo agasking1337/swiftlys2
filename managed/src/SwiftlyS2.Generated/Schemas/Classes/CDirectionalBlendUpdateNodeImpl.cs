@@ -17,45 +17,85 @@ internal partial class CDirectionalBlendUpdateNodeImpl : CLeafUpdateNodeImpl, CD
   public CDirectionalBlendUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SequencesOffset = new(() => Schema.GetOffset(0xD7E03CEC996DA947), LazyThreadSafetyMode.None);
+  private static nint? _SequencesOffset;
 
   public SchemaUntypedField Sequences {
-    get => new SchemaUntypedField(_Handle + _SequencesOffset.Value);
+    get {
+      if (_SequencesOffset == null) {
+        _SequencesOffset = Schema.GetOffset(0xD7E03CEC996DA947);
+      }
+      return new SchemaUntypedField(_Handle + _SequencesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DampingOffset = new(() => Schema.GetOffset(0xD7E03CEC15440FB5), LazyThreadSafetyMode.None);
+  private static nint? _DampingOffset;
 
   public CAnimInputDamping Damping {
-    get => new CAnimInputDampingImpl(_Handle + _DampingOffset.Value);
+    get {
+      if (_DampingOffset == null) {
+        _DampingOffset = Schema.GetOffset(0xD7E03CEC15440FB5);
+      }
+      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendValueSourceOffset = new(() => Schema.GetOffset(0xD7E03CEC7AB7C374), LazyThreadSafetyMode.None);
+  private static nint? _BlendValueSourceOffset;
 
   public ref AnimValueSource BlendValueSource {
-    get => ref _Handle.AsRef<AnimValueSource>(_BlendValueSourceOffset.Value);
+    get {
+      if (_BlendValueSourceOffset == null) {
+        _BlendValueSourceOffset = Schema.GetOffset(0xD7E03CEC7AB7C374);
+      }
+      return ref _Handle.AsRef<AnimValueSource>(_BlendValueSourceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamIndexOffset = new(() => Schema.GetOffset(0xD7E03CEC61990A86), LazyThreadSafetyMode.None);
+  private static nint? _ParamIndexOffset;
 
   public CAnimParamHandle ParamIndex {
-    get => new CAnimParamHandleImpl(_Handle + _ParamIndexOffset.Value);
+    get {
+      if (_ParamIndexOffset == null) {
+        _ParamIndexOffset = Schema.GetOffset(0xD7E03CEC61990A86);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaybackSpeedOffset = new(() => Schema.GetOffset(0xD7E03CEC1AFA7387), LazyThreadSafetyMode.None);
+  private static nint? _PlaybackSpeedOffset;
 
   public ref float PlaybackSpeed {
-    get => ref _Handle.AsRef<float>(_PlaybackSpeedOffset.Value);
+    get {
+      if (_PlaybackSpeedOffset == null) {
+        _PlaybackSpeedOffset = Schema.GetOffset(0xD7E03CEC1AFA7387);
+      }
+      return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0xD7E03CEC3D9FF5AD), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0xD7E03CEC3D9FF5AD);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopOffset = new(() => Schema.GetOffset(0xD7E03CECC668A4CB), LazyThreadSafetyMode.None);
+  private static nint? _LoopOffset;
 
   public ref bool Loop {
-    get => ref _Handle.AsRef<bool>(_LoopOffset.Value);
+    get {
+      if (_LoopOffset == null) {
+        _LoopOffset = Schema.GetOffset(0xD7E03CECC668A4CB);
+      }
+      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LockBlendOnResetOffset = new(() => Schema.GetOffset(0xD7E03CEC76334223), LazyThreadSafetyMode.None);
+  private static nint? _LockBlendOnResetOffset;
 
   public ref bool LockBlendOnReset {
-    get => ref _Handle.AsRef<bool>(_LockBlendOnResetOffset.Value);
+    get {
+      if (_LockBlendOnResetOffset == null) {
+        _LockBlendOnResetOffset = Schema.GetOffset(0xD7E03CEC76334223);
+      }
+      return ref _Handle.AsRef<bool>(_LockBlendOnResetOffset!.Value);
+    }
   }
 
 

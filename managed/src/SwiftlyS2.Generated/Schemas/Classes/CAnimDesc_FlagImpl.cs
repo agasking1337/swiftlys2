@@ -17,45 +17,85 @@ internal partial class CAnimDesc_FlagImpl : SchemaClass, CAnimDesc_Flag {
   public CAnimDesc_FlagImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LoopingOffset = new(() => Schema.GetOffset(0xF86D993525449B0D), LazyThreadSafetyMode.None);
+  private static nint? _LoopingOffset;
 
   public ref bool Looping {
-    get => ref _Handle.AsRef<bool>(_LoopingOffset.Value);
+    get {
+      if (_LoopingOffset == null) {
+        _LoopingOffset = Schema.GetOffset(0xF86D993525449B0D);
+      }
+      return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AllZerosOffset = new(() => Schema.GetOffset(0xF86D99350524016F), LazyThreadSafetyMode.None);
+  private static nint? _AllZerosOffset;
 
   public ref bool AllZeros {
-    get => ref _Handle.AsRef<bool>(_AllZerosOffset.Value);
+    get {
+      if (_AllZerosOffset == null) {
+        _AllZerosOffset = Schema.GetOffset(0xF86D99350524016F);
+      }
+      return ref _Handle.AsRef<bool>(_AllZerosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HiddenOffset = new(() => Schema.GetOffset(0xF86D993557D2DC99), LazyThreadSafetyMode.None);
+  private static nint? _HiddenOffset;
 
   public ref bool Hidden {
-    get => ref _Handle.AsRef<bool>(_HiddenOffset.Value);
+    get {
+      if (_HiddenOffset == null) {
+        _HiddenOffset = Schema.GetOffset(0xF86D993557D2DC99);
+      }
+      return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DeltaOffset = new(() => Schema.GetOffset(0xF86D99352E4BCA01), LazyThreadSafetyMode.None);
+  private static nint? _DeltaOffset;
 
   public ref bool Delta {
-    get => ref _Handle.AsRef<bool>(_DeltaOffset.Value);
+    get {
+      if (_DeltaOffset == null) {
+        _DeltaOffset = Schema.GetOffset(0xF86D99352E4BCA01);
+      }
+      return ref _Handle.AsRef<bool>(_DeltaOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LegacyWorldspaceOffset = new(() => Schema.GetOffset(0xF86D9935E598BF5C), LazyThreadSafetyMode.None);
+  private static nint? _LegacyWorldspaceOffset;
 
   public ref bool LegacyWorldspace {
-    get => ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset.Value);
+    get {
+      if (_LegacyWorldspaceOffset == null) {
+        _LegacyWorldspaceOffset = Schema.GetOffset(0xF86D9935E598BF5C);
+      }
+      return ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelDocOffset = new(() => Schema.GetOffset(0xF86D9935815FEAE4), LazyThreadSafetyMode.None);
+  private static nint? _ModelDocOffset;
 
   public ref bool ModelDoc {
-    get => ref _Handle.AsRef<bool>(_ModelDocOffset.Value);
+    get {
+      if (_ModelDocOffset == null) {
+        _ModelDocOffset = Schema.GetOffset(0xF86D9935815FEAE4);
+      }
+      return ref _Handle.AsRef<bool>(_ModelDocOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ImplicitSeqIgnoreDeltaOffset = new(() => Schema.GetOffset(0xF86D9935C902252B), LazyThreadSafetyMode.None);
+  private static nint? _ImplicitSeqIgnoreDeltaOffset;
 
   public ref bool ImplicitSeqIgnoreDelta {
-    get => ref _Handle.AsRef<bool>(_ImplicitSeqIgnoreDeltaOffset.Value);
+    get {
+      if (_ImplicitSeqIgnoreDeltaOffset == null) {
+        _ImplicitSeqIgnoreDeltaOffset = Schema.GetOffset(0xF86D9935C902252B);
+      }
+      return ref _Handle.AsRef<bool>(_ImplicitSeqIgnoreDeltaOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnimGraphAdditiveOffset = new(() => Schema.GetOffset(0xF86D9935704DBB70), LazyThreadSafetyMode.None);
+  private static nint? _AnimGraphAdditiveOffset;
 
   public ref bool AnimGraphAdditive {
-    get => ref _Handle.AsRef<bool>(_AnimGraphAdditiveOffset.Value);
+    get {
+      if (_AnimGraphAdditiveOffset == null) {
+        _AnimGraphAdditiveOffset = Schema.GetOffset(0xF86D9935704DBB70);
+      }
+      return ref _Handle.AsRef<bool>(_AnimGraphAdditiveOffset!.Value);
+    }
   }
 
 

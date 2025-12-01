@@ -17,60 +17,115 @@ internal partial class C_OP_ExternalWindForceImpl : CParticleFunctionForceImpl, 
   public C_OP_ExternalWindForceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SamplePositionOffset = new(() => Schema.GetOffset(0xFE6646FBC3F6C534), LazyThreadSafetyMode.None);
+  private static nint? _SamplePositionOffset;
 
   public CPerParticleVecInput SamplePosition {
-    get => new CPerParticleVecInputImpl(_Handle + _SamplePositionOffset.Value);
+    get {
+      if (_SamplePositionOffset == null) {
+        _SamplePositionOffset = Schema.GetOffset(0xFE6646FBC3F6C534);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _SamplePositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0xFE6646FB5F596B51), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public CPerParticleVecInput Scale {
-    get => new CPerParticleVecInputImpl(_Handle + _ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0xFE6646FB5F596B51);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SampleWindOffset = new(() => Schema.GetOffset(0xFE6646FB3C2A72D1), LazyThreadSafetyMode.None);
+  private static nint? _SampleWindOffset;
 
   public ref bool SampleWind {
-    get => ref _Handle.AsRef<bool>(_SampleWindOffset.Value);
+    get {
+      if (_SampleWindOffset == null) {
+        _SampleWindOffset = Schema.GetOffset(0xFE6646FB3C2A72D1);
+      }
+      return ref _Handle.AsRef<bool>(_SampleWindOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SampleWaterOffset = new(() => Schema.GetOffset(0xFE6646FB97B80806), LazyThreadSafetyMode.None);
+  private static nint? _SampleWaterOffset;
 
   public ref bool SampleWater {
-    get => ref _Handle.AsRef<bool>(_SampleWaterOffset.Value);
+    get {
+      if (_SampleWaterOffset == null) {
+        _SampleWaterOffset = Schema.GetOffset(0xFE6646FB97B80806);
+      }
+      return ref _Handle.AsRef<bool>(_SampleWaterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DampenNearWaterPlaneOffset = new(() => Schema.GetOffset(0xFE6646FB974DA031), LazyThreadSafetyMode.None);
+  private static nint? _DampenNearWaterPlaneOffset;
 
   public ref bool DampenNearWaterPlane {
-    get => ref _Handle.AsRef<bool>(_DampenNearWaterPlaneOffset.Value);
+    get {
+      if (_DampenNearWaterPlaneOffset == null) {
+        _DampenNearWaterPlaneOffset = Schema.GetOffset(0xFE6646FB974DA031);
+      }
+      return ref _Handle.AsRef<bool>(_DampenNearWaterPlaneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SampleGravityOffset = new(() => Schema.GetOffset(0xFE6646FB805373EF), LazyThreadSafetyMode.None);
+  private static nint? _SampleGravityOffset;
 
   public ref bool SampleGravity {
-    get => ref _Handle.AsRef<bool>(_SampleGravityOffset.Value);
+    get {
+      if (_SampleGravityOffset == null) {
+        _SampleGravityOffset = Schema.GetOffset(0xFE6646FB805373EF);
+      }
+      return ref _Handle.AsRef<bool>(_SampleGravityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GravityForceOffset = new(() => Schema.GetOffset(0xFE6646FB2E2EF2C4), LazyThreadSafetyMode.None);
+  private static nint? _GravityForceOffset;
 
   public CPerParticleVecInput GravityForce {
-    get => new CPerParticleVecInputImpl(_Handle + _GravityForceOffset.Value);
+    get {
+      if (_GravityForceOffset == null) {
+        _GravityForceOffset = Schema.GetOffset(0xFE6646FB2E2EF2C4);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _GravityForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseBasicMovementGravityOffset = new(() => Schema.GetOffset(0xFE6646FBC84E3D7B), LazyThreadSafetyMode.None);
+  private static nint? _UseBasicMovementGravityOffset;
 
   public ref bool UseBasicMovementGravity {
-    get => ref _Handle.AsRef<bool>(_UseBasicMovementGravityOffset.Value);
+    get {
+      if (_UseBasicMovementGravityOffset == null) {
+        _UseBasicMovementGravityOffset = Schema.GetOffset(0xFE6646FBC84E3D7B);
+      }
+      return ref _Handle.AsRef<bool>(_UseBasicMovementGravityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalGravityScaleOffset = new(() => Schema.GetOffset(0xFE6646FBD7EB148E), LazyThreadSafetyMode.None);
+  private static nint? _LocalGravityScaleOffset;
 
   public CPerParticleFloatInput LocalGravityScale {
-    get => new CPerParticleFloatInputImpl(_Handle + _LocalGravityScaleOffset.Value);
+    get {
+      if (_LocalGravityScaleOffset == null) {
+        _LocalGravityScaleOffset = Schema.GetOffset(0xFE6646FBD7EB148E);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _LocalGravityScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalBuoyancyScaleOffset = new(() => Schema.GetOffset(0xFE6646FBC6A6171E), LazyThreadSafetyMode.None);
+  private static nint? _LocalBuoyancyScaleOffset;
 
   public CPerParticleFloatInput LocalBuoyancyScale {
-    get => new CPerParticleFloatInputImpl(_Handle + _LocalBuoyancyScaleOffset.Value);
+    get {
+      if (_LocalBuoyancyScaleOffset == null) {
+        _LocalBuoyancyScaleOffset = Schema.GetOffset(0xFE6646FBC6A6171E);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _LocalBuoyancyScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BuoyancyForceOffset = new(() => Schema.GetOffset(0xFE6646FBCA7F361E), LazyThreadSafetyMode.None);
+  private static nint? _BuoyancyForceOffset;
 
   public CPerParticleVecInput BuoyancyForce {
-    get => new CPerParticleVecInputImpl(_Handle + _BuoyancyForceOffset.Value);
+    get {
+      if (_BuoyancyForceOffset == null) {
+        _BuoyancyForceOffset = Schema.GetOffset(0xFE6646FBCA7F361E);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _BuoyancyForceOffset!.Value);
+    }
   }
 
 

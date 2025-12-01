@@ -17,25 +17,45 @@ internal partial class CAnimationGraphVisualizerPieImpl : CAnimationGraphVisuali
   public CAnimationGraphVisualizerPieImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WsCenterOffset = new(() => Schema.GetOffset(0x152844C290A3905E), LazyThreadSafetyMode.None);
+  private static nint? _WsCenterOffset;
 
   public ref Vector WsCenter {
-    get => ref _Handle.AsRef<Vector>(_WsCenterOffset.Value);
+    get {
+      if (_WsCenterOffset == null) {
+        _WsCenterOffset = Schema.GetOffset(0x152844C290A3905E);
+      }
+      return ref _Handle.AsRef<Vector>(_WsCenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WsStartOffset = new(() => Schema.GetOffset(0x152844C2EFF42149), LazyThreadSafetyMode.None);
+  private static nint? _WsStartOffset;
 
   public ref Vector WsStart {
-    get => ref _Handle.AsRef<Vector>(_WsStartOffset.Value);
+    get {
+      if (_WsStartOffset == null) {
+        _WsStartOffset = Schema.GetOffset(0x152844C2EFF42149);
+      }
+      return ref _Handle.AsRef<Vector>(_WsStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WsEndOffset = new(() => Schema.GetOffset(0x152844C280C1EC98), LazyThreadSafetyMode.None);
+  private static nint? _WsEndOffset;
 
   public ref Vector WsEnd {
-    get => ref _Handle.AsRef<Vector>(_WsEndOffset.Value);
+    get {
+      if (_WsEndOffset == null) {
+        _WsEndOffset = Schema.GetOffset(0x152844C280C1EC98);
+      }
+      return ref _Handle.AsRef<Vector>(_WsEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorOffset = new(() => Schema.GetOffset(0x152844C2D7D017D8), LazyThreadSafetyMode.None);
+  private static nint? _ColorOffset;
 
   public ref Color Color {
-    get => ref _Handle.AsRef<Color>(_ColorOffset.Value);
+    get {
+      if (_ColorOffset == null) {
+        _ColorOffset = Schema.GetOffset(0x152844C2D7D017D8);
+      }
+      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    }
   }
 
 

@@ -17,95 +17,185 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge {
   public CPhysHingeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SoundInfoOffset = new(() => Schema.GetOffset(0xFCB149B185F704E8), LazyThreadSafetyMode.None);
+  private static nint? _SoundInfoOffset;
 
   public ConstraintSoundInfo SoundInfo {
-    get => new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset.Value);
+    get {
+      if (_SoundInfoOffset == null) {
+        _SoundInfoOffset = Schema.GetOffset(0xFCB149B185F704E8);
+      }
+      return new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyMinLimitReachedOffset = new(() => Schema.GetOffset(0xFCB149B1CD28EA23), LazyThreadSafetyMode.None);
+  private static nint? _NotifyMinLimitReachedOffset;
 
   public CEntityIOOutput NotifyMinLimitReached {
-    get => new CEntityIOOutputImpl(_Handle + _NotifyMinLimitReachedOffset.Value);
+    get {
+      if (_NotifyMinLimitReachedOffset == null) {
+        _NotifyMinLimitReachedOffset = Schema.GetOffset(0xFCB149B1CD28EA23);
+      }
+      return new CEntityIOOutputImpl(_Handle + _NotifyMinLimitReachedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyMaxLimitReachedOffset = new(() => Schema.GetOffset(0xFCB149B15B33E6AD), LazyThreadSafetyMode.None);
+  private static nint? _NotifyMaxLimitReachedOffset;
 
   public CEntityIOOutput NotifyMaxLimitReached {
-    get => new CEntityIOOutputImpl(_Handle + _NotifyMaxLimitReachedOffset.Value);
+    get {
+      if (_NotifyMaxLimitReachedOffset == null) {
+        _NotifyMaxLimitReachedOffset = Schema.GetOffset(0xFCB149B15B33E6AD);
+      }
+      return new CEntityIOOutputImpl(_Handle + _NotifyMaxLimitReachedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AtMinLimitOffset = new(() => Schema.GetOffset(0xFCB149B119CAC3B7), LazyThreadSafetyMode.None);
+  private static nint? _AtMinLimitOffset;
 
   public ref bool AtMinLimit {
-    get => ref _Handle.AsRef<bool>(_AtMinLimitOffset.Value);
+    get {
+      if (_AtMinLimitOffset == null) {
+        _AtMinLimitOffset = Schema.GetOffset(0xFCB149B119CAC3B7);
+      }
+      return ref _Handle.AsRef<bool>(_AtMinLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AtMaxLimitOffset = new(() => Schema.GetOffset(0xFCB149B153E2D225), LazyThreadSafetyMode.None);
+  private static nint? _AtMaxLimitOffset;
 
   public ref bool AtMaxLimit {
-    get => ref _Handle.AsRef<bool>(_AtMaxLimitOffset.Value);
+    get {
+      if (_AtMaxLimitOffset == null) {
+        _AtMaxLimitOffset = Schema.GetOffset(0xFCB149B153E2D225);
+      }
+      return ref _Handle.AsRef<bool>(_AtMaxLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HingeOffset = new(() => Schema.GetOffset(0xFCB149B13923C0AC), LazyThreadSafetyMode.None);
+  private static nint? _HingeOffset;
 
   public constraint_hingeparams_t Hinge {
-    get => new constraint_hingeparams_tImpl(_Handle + _HingeOffset.Value);
+    get {
+      if (_HingeOffset == null) {
+        _HingeOffset = Schema.GetOffset(0xFCB149B13923C0AC);
+      }
+      return new constraint_hingeparams_tImpl(_Handle + _HingeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HingeFrictionOffset = new(() => Schema.GetOffset(0xFCB149B11390591E), LazyThreadSafetyMode.None);
+  private static nint? _HingeFrictionOffset;
 
   public ref float HingeFriction {
-    get => ref _Handle.AsRef<float>(_HingeFrictionOffset.Value);
+    get {
+      if (_HingeFrictionOffset == null) {
+        _HingeFrictionOffset = Schema.GetOffset(0xFCB149B11390591E);
+      }
+      return ref _Handle.AsRef<float>(_HingeFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SystemLoadScaleOffset = new(() => Schema.GetOffset(0xFCB149B19C24DB62), LazyThreadSafetyMode.None);
+  private static nint? _SystemLoadScaleOffset;
 
   public ref float SystemLoadScale {
-    get => ref _Handle.AsRef<float>(_SystemLoadScaleOffset.Value);
+    get {
+      if (_SystemLoadScaleOffset == null) {
+        _SystemLoadScaleOffset = Schema.GetOffset(0xFCB149B19C24DB62);
+      }
+      return ref _Handle.AsRef<float>(_SystemLoadScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsAxisLocalOffset = new(() => Schema.GetOffset(0xFCB149B15A72A0AF), LazyThreadSafetyMode.None);
+  private static nint? _IsAxisLocalOffset;
 
   public ref bool IsAxisLocal {
-    get => ref _Handle.AsRef<bool>(_IsAxisLocalOffset.Value);
+    get {
+      if (_IsAxisLocalOffset == null) {
+        _IsAxisLocalOffset = Schema.GetOffset(0xFCB149B15A72A0AF);
+      }
+      return ref _Handle.AsRef<bool>(_IsAxisLocalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinRotationOffset = new(() => Schema.GetOffset(0xFCB149B124801DAB), LazyThreadSafetyMode.None);
+  private static nint? _MinRotationOffset;
 
   public ref float MinRotation {
-    get => ref _Handle.AsRef<float>(_MinRotationOffset.Value);
+    get {
+      if (_MinRotationOffset == null) {
+        _MinRotationOffset = Schema.GetOffset(0xFCB149B124801DAB);
+      }
+      return ref _Handle.AsRef<float>(_MinRotationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxRotationOffset = new(() => Schema.GetOffset(0xFCB149B1770EB7E9), LazyThreadSafetyMode.None);
+  private static nint? _MaxRotationOffset;
 
   public ref float MaxRotation {
-    get => ref _Handle.AsRef<float>(_MaxRotationOffset.Value);
+    get {
+      if (_MaxRotationOffset == null) {
+        _MaxRotationOffset = Schema.GetOffset(0xFCB149B1770EB7E9);
+      }
+      return ref _Handle.AsRef<float>(_MaxRotationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InitialRotationOffset = new(() => Schema.GetOffset(0xFCB149B1C9493687), LazyThreadSafetyMode.None);
+  private static nint? _InitialRotationOffset;
 
   public ref float InitialRotation {
-    get => ref _Handle.AsRef<float>(_InitialRotationOffset.Value);
+    get {
+      if (_InitialRotationOffset == null) {
+        _InitialRotationOffset = Schema.GetOffset(0xFCB149B1C9493687);
+      }
+      return ref _Handle.AsRef<float>(_InitialRotationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorFrequencyOffset = new(() => Schema.GetOffset(0xFCB149B156F7120A), LazyThreadSafetyMode.None);
+  private static nint? _MotorFrequencyOffset;
 
   public ref float MotorFrequency {
-    get => ref _Handle.AsRef<float>(_MotorFrequencyOffset.Value);
+    get {
+      if (_MotorFrequencyOffset == null) {
+        _MotorFrequencyOffset = Schema.GetOffset(0xFCB149B156F7120A);
+      }
+      return ref _Handle.AsRef<float>(_MotorFrequencyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorDampingRatioOffset = new(() => Schema.GetOffset(0xFCB149B1D8669699), LazyThreadSafetyMode.None);
+  private static nint? _MotorDampingRatioOffset;
 
   public ref float MotorDampingRatio {
-    get => ref _Handle.AsRef<float>(_MotorDampingRatioOffset.Value);
+    get {
+      if (_MotorDampingRatioOffset == null) {
+        _MotorDampingRatioOffset = Schema.GetOffset(0xFCB149B1D8669699);
+      }
+      return ref _Handle.AsRef<float>(_MotorDampingRatioOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngleSpeedOffset = new(() => Schema.GetOffset(0xFCB149B18CA05599), LazyThreadSafetyMode.None);
+  private static nint? _AngleSpeedOffset;
 
   public ref float AngleSpeed {
-    get => ref _Handle.AsRef<float>(_AngleSpeedOffset.Value);
+    get {
+      if (_AngleSpeedOffset == null) {
+        _AngleSpeedOffset = Schema.GetOffset(0xFCB149B18CA05599);
+      }
+      return ref _Handle.AsRef<float>(_AngleSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngleSpeedThresholdOffset = new(() => Schema.GetOffset(0xFCB149B141F77A9C), LazyThreadSafetyMode.None);
+  private static nint? _AngleSpeedThresholdOffset;
 
   public ref float AngleSpeedThreshold {
-    get => ref _Handle.AsRef<float>(_AngleSpeedThresholdOffset.Value);
+    get {
+      if (_AngleSpeedThresholdOffset == null) {
+        _AngleSpeedThresholdOffset = Schema.GetOffset(0xFCB149B141F77A9C);
+      }
+      return ref _Handle.AsRef<float>(_AngleSpeedThresholdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnStartMovingOffset = new(() => Schema.GetOffset(0xFCB149B1F38945EA), LazyThreadSafetyMode.None);
+  private static nint? _OnStartMovingOffset;
 
   public CEntityIOOutput OnStartMoving {
-    get => new CEntityIOOutputImpl(_Handle + _OnStartMovingOffset.Value);
+    get {
+      if (_OnStartMovingOffset == null) {
+        _OnStartMovingOffset = Schema.GetOffset(0xFCB149B1F38945EA);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnStartMovingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnStopMovingOffset = new(() => Schema.GetOffset(0xFCB149B1D3A538AE), LazyThreadSafetyMode.None);
+  private static nint? _OnStopMovingOffset;
 
   public CEntityIOOutput OnStopMoving {
-    get => new CEntityIOOutputImpl(_Handle + _OnStopMovingOffset.Value);
+    get {
+      if (_OnStopMovingOffset == null) {
+        _OnStopMovingOffset = Schema.GetOffset(0xFCB149B1D3A538AE);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnStopMovingOffset!.Value);
+    }
   }
 
 

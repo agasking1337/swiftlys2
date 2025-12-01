@@ -17,10 +17,15 @@ internal partial class C_OP_RemapTransformToVelocityImpl : CParticleFunctionOper
   public C_OP_RemapTransformToVelocityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0xC1A2CC64B3FDC289), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0xC1A2CC64B3FDC289);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
 
 

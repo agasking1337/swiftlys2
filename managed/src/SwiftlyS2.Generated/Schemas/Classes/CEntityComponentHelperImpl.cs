@@ -17,29 +17,45 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
   public CEntityComponentHelperImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x714DB384DC74A14C), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x714DB384DC74A14C);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InfoOffset = new(() => Schema.GetOffset(0x714DB3840F0BFD1B), LazyThreadSafetyMode.None);
+  private static nint? _InfoOffset;
 
   public EntComponentInfo_t? Info {
     get {
-      var ptr = _Handle.Read<nint>(_InfoOffset.Value);
+      if (_InfoOffset == null) {
+        _InfoOffset = Schema.GetOffset(0x714DB3840F0BFD1B);
+      }
+      var ptr = _Handle.Read<nint>(_InfoOffset!.Value);
       return ptr.IsValidPtr() ? new EntComponentInfo_tImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _PriorityOffset = new(() => Schema.GetOffset(0x714DB384E7EFB335), LazyThreadSafetyMode.None);
+  private static nint? _PriorityOffset;
 
   public ref int Priority {
-    get => ref _Handle.AsRef<int>(_PriorityOffset.Value);
+    get {
+      if (_PriorityOffset == null) {
+        _PriorityOffset = Schema.GetOffset(0x714DB384E7EFB335);
+      }
+      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextOffset = new(() => Schema.GetOffset(0x714DB38432B11E0E), LazyThreadSafetyMode.None);
+  private static nint? _NextOffset;
 
   public CEntityComponentHelper? Next {
     get {
-      var ptr = _Handle.Read<nint>(_NextOffset.Value);
+      if (_NextOffset == null) {
+        _NextOffset = Schema.GetOffset(0x714DB38432B11E0E);
+      }
+      var ptr = _Handle.Read<nint>(_NextOffset!.Value);
       return ptr.IsValidPtr() ? new CEntityComponentHelperImpl(ptr) : null;
     }
   }

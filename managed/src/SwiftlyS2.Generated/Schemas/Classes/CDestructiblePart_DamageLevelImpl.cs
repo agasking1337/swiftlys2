@@ -17,59 +17,112 @@ internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestruc
   public CDestructiblePart_DamageLevelImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xF69D69CB63D22D49), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _BreakablePieceNameOffset = new(() => Schema.GetOffset(0xF69D69CB88329BEA), LazyThreadSafetyMode.None);
+  private static nint? _BreakablePieceNameOffset;
 
   public ref CGlobalSymbol BreakablePieceName {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset.Value);
+    get {
+      if (_BreakablePieceNameOffset == null) {
+        _BreakablePieceNameOffset = Schema.GetOffset(0xF69D69CB88329BEA);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BodyGroupValueOffset = new(() => Schema.GetOffset(0xF69D69CB90FF4BE9), LazyThreadSafetyMode.None);
+  private static nint? _BodyGroupValueOffset;
 
   public ref int BodyGroupValue {
-    get => ref _Handle.AsRef<int>(_BodyGroupValueOffset.Value);
+    get {
+      if (_BodyGroupValueOffset == null) {
+        _BodyGroupValueOffset = Schema.GetOffset(0xF69D69CB90FF4BE9);
+      }
+      return ref _Handle.AsRef<int>(_BodyGroupValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HealthOffset = new(() => Schema.GetOffset(0xF69D69CB6E9C4CC3), LazyThreadSafetyMode.None);
+  private static nint? _HealthOffset;
 
   public CSkillInt Health {
-    get => new CSkillIntImpl(_Handle + _HealthOffset.Value);
+    get {
+      if (_HealthOffset == null) {
+        _HealthOffset = Schema.GetOffset(0xF69D69CB6E9C4CC3);
+      }
+      return new CSkillIntImpl(_Handle + _HealthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CriticalDamagePercentOffset = new(() => Schema.GetOffset(0xF69D69CB4488F688), LazyThreadSafetyMode.None);
+  private static nint? _CriticalDamagePercentOffset;
 
   public ref float CriticalDamagePercent {
-    get => ref _Handle.AsRef<float>(_CriticalDamagePercentOffset.Value);
+    get {
+      if (_CriticalDamagePercentOffset == null) {
+        _CriticalDamagePercentOffset = Schema.GetOffset(0xF69D69CB4488F688);
+      }
+      return ref _Handle.AsRef<float>(_CriticalDamagePercentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DamagePassthroughTypeOffset = new(() => Schema.GetOffset(0xF69D69CB3D01100A), LazyThreadSafetyMode.None);
+  private static nint? _DamagePassthroughTypeOffset;
 
   public ref EDestructiblePartDamagePassThroughType DamagePassthroughType {
-    get => ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset.Value);
+    get {
+      if (_DamagePassthroughTypeOffset == null) {
+        _DamagePassthroughTypeOffset = Schema.GetOffset(0xF69D69CB3D01100A);
+      }
+      return ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestructionDeathBehaviorOffset = new(() => Schema.GetOffset(0xF69D69CB41778385), LazyThreadSafetyMode.None);
+  private static nint? _DestructionDeathBehaviorOffset;
 
   public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior {
-    get => ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset.Value);
+    get {
+      if (_DestructionDeathBehaviorOffset == null) {
+        _DestructionDeathBehaviorOffset = Schema.GetOffset(0xF69D69CB41778385);
+      }
+      return ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CustomDeathHandshakeOffset = new(() => Schema.GetOffset(0xF69D69CBF17A0D42), LazyThreadSafetyMode.None);
+  private static nint? _CustomDeathHandshakeOffset;
 
   public ref CGlobalSymbol CustomDeathHandshake {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset.Value);
+    get {
+      if (_CustomDeathHandshakeOffset == null) {
+        _CustomDeathHandshakeOffset = Schema.GetOffset(0xF69D69CBF17A0D42);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShouldDestroyOnDeathOffset = new(() => Schema.GetOffset(0xF69D69CBC63DDDD5), LazyThreadSafetyMode.None);
+  private static nint? _ShouldDestroyOnDeathOffset;
 
   public ref bool ShouldDestroyOnDeath {
-    get => ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset.Value);
+    get {
+      if (_ShouldDestroyOnDeathOffset == null) {
+        _ShouldDestroyOnDeathOffset = Schema.GetOffset(0xF69D69CBC63DDDD5);
+      }
+      return ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DeathDestroyTimeOffset = new(() => Schema.GetOffset(0xF69D69CB29D83EA2), LazyThreadSafetyMode.None);
+  private static nint? _DeathDestroyTimeOffset;
 
   public CRangeFloat DeathDestroyTime {
-    get => new CRangeFloatImpl(_Handle + _DeathDestroyTimeOffset.Value);
+    get {
+      if (_DeathDestroyTimeOffset == null) {
+        _DeathDestroyTimeOffset = Schema.GetOffset(0xF69D69CB29D83EA2);
+      }
+      return new CRangeFloatImpl(_Handle + _DeathDestroyTimeOffset!.Value);
+    }
   }
 
 

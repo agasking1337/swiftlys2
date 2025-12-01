@@ -17,23 +17,39 @@ internal partial class CWorldCompositionChunkReferenceElement_tImpl : SchemaClas
   public CWorldCompositionChunkReferenceElement_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StrMapToLoadOffset = new(() => Schema.GetOffset(0x9B80004DE87F0C1B), LazyThreadSafetyMode.None);
+  private static nint? _StrMapToLoadOffset;
 
   public string StrMapToLoad {
     get {
-      var ptr = _Handle.Read<nint>(_StrMapToLoadOffset.Value);
+      if (_StrMapToLoadOffset == null) {
+        _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
+      }
+      var ptr = _Handle.Read<nint>(_StrMapToLoadOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrMapToLoadOffset.Value, value);
+    set {
+      if (_StrMapToLoadOffset == null) {
+        _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
+      }
+      Schema.SetString(_Handle, _StrMapToLoadOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _StrLandmarkNameOffset = new(() => Schema.GetOffset(0x9B80004DE0BB30D3), LazyThreadSafetyMode.None);
+  private static nint? _StrLandmarkNameOffset;
 
   public string StrLandmarkName {
     get {
-      var ptr = _Handle.Read<nint>(_StrLandmarkNameOffset.Value);
+      if (_StrLandmarkNameOffset == null) {
+        _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
+      }
+      var ptr = _Handle.Read<nint>(_StrLandmarkNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrLandmarkNameOffset.Value, value);
+    set {
+      if (_StrLandmarkNameOffset == null) {
+        _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
+      }
+      Schema.SetString(_Handle, _StrLandmarkNameOffset!.Value, value);
+    }
   } 
 
 

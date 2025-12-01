@@ -17,60 +17,115 @@ internal partial class CSeqS1SeqDescImpl : SchemaClass, CSeqS1SeqDesc {
   public CSeqS1SeqDescImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x6EF8193563D22D49), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public ref CBufferString Name {
-    get => ref _Handle.AsRef<CBufferString>(_NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x6EF8193563D22D49);
+      }
+      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x6EF81935DC74A14C), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public CSeqSeqDescFlag Flags {
-    get => new CSeqSeqDescFlagImpl(_Handle + _FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x6EF81935DC74A14C);
+      }
+      return new CSeqSeqDescFlagImpl(_Handle + _FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FetchOffset = new(() => Schema.GetOffset(0x6EF81935ED8BE703), LazyThreadSafetyMode.None);
+  private static nint? _FetchOffset;
 
   public CSeqMultiFetch Fetch {
-    get => new CSeqMultiFetchImpl(_Handle + _FetchOffset.Value);
+    get {
+      if (_FetchOffset == null) {
+        _FetchOffset = Schema.GetOffset(0x6EF81935ED8BE703);
+      }
+      return new CSeqMultiFetchImpl(_Handle + _FetchOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalWeightlistOffset = new(() => Schema.GetOffset(0x6EF819356F64F49C), LazyThreadSafetyMode.None);
+  private static nint? _LocalWeightlistOffset;
 
   public ref int LocalWeightlist {
-    get => ref _Handle.AsRef<int>(_LocalWeightlistOffset.Value);
+    get {
+      if (_LocalWeightlistOffset == null) {
+        _LocalWeightlistOffset = Schema.GetOffset(0x6EF819356F64F49C);
+      }
+      return ref _Handle.AsRef<int>(_LocalWeightlistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AutoLayerArrayOffset = new(() => Schema.GetOffset(0x6EF81935834EB170), LazyThreadSafetyMode.None);
+  private static nint? _AutoLayerArrayOffset;
 
   public ref CUtlVector<CSeqAutoLayer> AutoLayerArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqAutoLayer>>(_AutoLayerArrayOffset.Value);
+    get {
+      if (_AutoLayerArrayOffset == null) {
+        _AutoLayerArrayOffset = Schema.GetOffset(0x6EF81935834EB170);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqAutoLayer>>(_AutoLayerArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IKLockArrayOffset = new(() => Schema.GetOffset(0x6EF81935BF1FEC6B), LazyThreadSafetyMode.None);
+  private static nint? _IKLockArrayOffset;
 
   public ref CUtlVector<CSeqIKLock> IKLockArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_IKLockArrayOffset.Value);
+    get {
+      if (_IKLockArrayOffset == null) {
+        _IKLockArrayOffset = Schema.GetOffset(0x6EF81935BF1FEC6B);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_IKLockArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionOffset = new(() => Schema.GetOffset(0x6EF8193582B0A282), LazyThreadSafetyMode.None);
+  private static nint? _TransitionOffset;
 
   public CSeqTransition Transition {
-    get => new CSeqTransitionImpl(_Handle + _TransitionOffset.Value);
+    get {
+      if (_TransitionOffset == null) {
+        _TransitionOffset = Schema.GetOffset(0x6EF8193582B0A282);
+      }
+      return new CSeqTransitionImpl(_Handle + _TransitionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SequenceKeysOffset = new(() => Schema.GetOffset(0x6EF81935C7ACD18C), LazyThreadSafetyMode.None);
+  private static nint? _SequenceKeysOffset;
 
   public SchemaUntypedField SequenceKeys {
-    get => new SchemaUntypedField(_Handle + _SequenceKeysOffset.Value);
+    get {
+      if (_SequenceKeysOffset == null) {
+        _SequenceKeysOffset = Schema.GetOffset(0x6EF81935C7ACD18C);
+      }
+      return new SchemaUntypedField(_Handle + _SequenceKeysOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LegacyKeyValueTextOffset = new(() => Schema.GetOffset(0x6EF81935D12D4AC1), LazyThreadSafetyMode.None);
+  private static nint? _LegacyKeyValueTextOffset;
 
   public ref CBufferString LegacyKeyValueText {
-    get => ref _Handle.AsRef<CBufferString>(_LegacyKeyValueTextOffset.Value);
+    get {
+      if (_LegacyKeyValueTextOffset == null) {
+        _LegacyKeyValueTextOffset = Schema.GetOffset(0x6EF81935D12D4AC1);
+      }
+      return ref _Handle.AsRef<CBufferString>(_LegacyKeyValueTextOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActivityArrayOffset = new(() => Schema.GetOffset(0x6EF8193538F0ACE1), LazyThreadSafetyMode.None);
+  private static nint? _ActivityArrayOffset;
 
   public ref CUtlVector<CAnimActivity> ActivityArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset.Value);
+    get {
+      if (_ActivityArrayOffset == null) {
+        _ActivityArrayOffset = Schema.GetOffset(0x6EF8193538F0ACE1);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootMotionOffset = new(() => Schema.GetOffset(0x6EF8193543CF70A3), LazyThreadSafetyMode.None);
+  private static nint? _FootMotionOffset;
 
   public ref CUtlVector<CFootMotion> FootMotion {
-    get => ref _Handle.AsRef<CUtlVector<CFootMotion>>(_FootMotionOffset.Value);
+    get {
+      if (_FootMotionOffset == null) {
+        _FootMotionOffset = Schema.GetOffset(0x6EF8193543CF70A3);
+      }
+      return ref _Handle.AsRef<CUtlVector<CFootMotion>>(_FootMotionOffset!.Value);
+    }
   }
 
 

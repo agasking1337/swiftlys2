@@ -17,45 +17,85 @@ internal partial class CAnimSkeletonImpl : SchemaClass, CAnimSkeleton {
   public CAnimSkeletonImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LocalSpaceTransformsOffset = new(() => Schema.GetOffset(0x33309AA433B34B4F), LazyThreadSafetyMode.None);
+  private static nint? _LocalSpaceTransformsOffset;
 
   public ref CUtlVector<CTransform> LocalSpaceTransforms {
-    get => ref _Handle.AsRef<CUtlVector<CTransform>>(_LocalSpaceTransformsOffset.Value);
+    get {
+      if (_LocalSpaceTransformsOffset == null) {
+        _LocalSpaceTransformsOffset = Schema.GetOffset(0x33309AA433B34B4F);
+      }
+      return ref _Handle.AsRef<CUtlVector<CTransform>>(_LocalSpaceTransformsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelSpaceTransformsOffset = new(() => Schema.GetOffset(0x33309AA4F9870969), LazyThreadSafetyMode.None);
+  private static nint? _ModelSpaceTransformsOffset;
 
   public ref CUtlVector<CTransform> ModelSpaceTransforms {
-    get => ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceTransformsOffset.Value);
+    get {
+      if (_ModelSpaceTransformsOffset == null) {
+        _ModelSpaceTransformsOffset = Schema.GetOffset(0x33309AA4F9870969);
+      }
+      return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceTransformsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneNamesOffset = new(() => Schema.GetOffset(0x33309AA43CC0D1ED), LazyThreadSafetyMode.None);
+  private static nint? _BoneNamesOffset;
 
   public ref CUtlVector<CUtlString> BoneNames {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset.Value);
+    get {
+      if (_BoneNamesOffset == null) {
+        _BoneNamesOffset = Schema.GetOffset(0x33309AA43CC0D1ED);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChildrenOffset = new(() => Schema.GetOffset(0x33309AA47415FA72), LazyThreadSafetyMode.None);
+  private static nint? _ChildrenOffset;
 
   public ref CUtlVector<CUtlVector<int>> Children {
-    get => ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_ChildrenOffset.Value);
+    get {
+      if (_ChildrenOffset == null) {
+        _ChildrenOffset = Schema.GetOffset(0x33309AA47415FA72);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_ChildrenOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentsOffset = new(() => Schema.GetOffset(0x33309AA470DBC8AA), LazyThreadSafetyMode.None);
+  private static nint? _ParentsOffset;
 
   public ref CUtlVector<int> Parents {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_ParentsOffset.Value);
+    get {
+      if (_ParentsOffset == null) {
+        _ParentsOffset = Schema.GetOffset(0x33309AA470DBC8AA);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_ParentsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FeetOffset = new(() => Schema.GetOffset(0x33309AA47910AFF5), LazyThreadSafetyMode.None);
+  private static nint? _FeetOffset;
 
   public ref CUtlVector<CAnimFoot> Feet {
-    get => ref _Handle.AsRef<CUtlVector<CAnimFoot>>(_FeetOffset.Value);
+    get {
+      if (_FeetOffset == null) {
+        _FeetOffset = Schema.GetOffset(0x33309AA47910AFF5);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimFoot>>(_FeetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MorphNamesOffset = new(() => Schema.GetOffset(0x33309AA4E8F4EC4F), LazyThreadSafetyMode.None);
+  private static nint? _MorphNamesOffset;
 
   public ref CUtlVector<CUtlString> MorphNames {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_MorphNamesOffset.Value);
+    get {
+      if (_MorphNamesOffset == null) {
+        _MorphNamesOffset = Schema.GetOffset(0x33309AA4E8F4EC4F);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_MorphNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LodBoneCountsOffset = new(() => Schema.GetOffset(0x33309AA4403723B2), LazyThreadSafetyMode.None);
+  private static nint? _LodBoneCountsOffset;
 
   public ref CUtlVector<int> LodBoneCounts {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_LodBoneCountsOffset.Value);
+    get {
+      if (_LodBoneCountsOffset == null) {
+        _LodBoneCountsOffset = Schema.GetOffset(0x33309AA4403723B2);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_LodBoneCountsOffset!.Value);
+    }
   }
 
 

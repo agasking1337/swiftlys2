@@ -17,58 +17,109 @@ internal partial class CFuncMonitorImpl : CFuncBrushImpl, CFuncMonitor {
   public CFuncMonitorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetCameraOffset = new(() => Schema.GetOffset(0x17F9564ADE5A6027), LazyThreadSafetyMode.None);
+  private static nint? _TargetCameraOffset;
 
   public string TargetCamera {
     get {
-      var ptr = _Handle.Read<nint>(_TargetCameraOffset.Value);
+      if (_TargetCameraOffset == null) {
+        _TargetCameraOffset = Schema.GetOffset(0x17F9564ADE5A6027);
+      }
+      var ptr = _Handle.Read<nint>(_TargetCameraOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TargetCameraOffset.Value, value);
+    set {
+      if (_TargetCameraOffset == null) {
+        _TargetCameraOffset = Schema.GetOffset(0x17F9564ADE5A6027);
+      }
+      Schema.SetString(_Handle, _TargetCameraOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ResolutionEnumOffset = new(() => Schema.GetOffset(0x17F9564A7A397BAA), LazyThreadSafetyMode.None);
+  private static nint? _ResolutionEnumOffset;
 
   public ref int ResolutionEnum {
-    get => ref _Handle.AsRef<int>(_ResolutionEnumOffset.Value);
+    get {
+      if (_ResolutionEnumOffset == null) {
+        _ResolutionEnumOffset = Schema.GetOffset(0x17F9564A7A397BAA);
+      }
+      return ref _Handle.AsRef<int>(_ResolutionEnumOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderShadowsOffset = new(() => Schema.GetOffset(0x17F9564AB664410E), LazyThreadSafetyMode.None);
+  private static nint? _RenderShadowsOffset;
 
   public ref bool RenderShadows {
-    get => ref _Handle.AsRef<bool>(_RenderShadowsOffset.Value);
+    get {
+      if (_RenderShadowsOffset == null) {
+        _RenderShadowsOffset = Schema.GetOffset(0x17F9564AB664410E);
+      }
+      return ref _Handle.AsRef<bool>(_RenderShadowsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseUniqueColorTargetOffset = new(() => Schema.GetOffset(0x17F9564A53B28E5B), LazyThreadSafetyMode.None);
+  private static nint? _UseUniqueColorTargetOffset;
 
   public ref bool UseUniqueColorTarget {
-    get => ref _Handle.AsRef<bool>(_UseUniqueColorTargetOffset.Value);
+    get {
+      if (_UseUniqueColorTargetOffset == null) {
+        _UseUniqueColorTargetOffset = Schema.GetOffset(0x17F9564A53B28E5B);
+      }
+      return ref _Handle.AsRef<bool>(_UseUniqueColorTargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrushModelNameOffset = new(() => Schema.GetOffset(0x17F9564A85323213), LazyThreadSafetyMode.None);
+  private static nint? _BrushModelNameOffset;
 
   public string BrushModelName {
     get {
-      var ptr = _Handle.Read<nint>(_BrushModelNameOffset.Value);
+      if (_BrushModelNameOffset == null) {
+        _BrushModelNameOffset = Schema.GetOffset(0x17F9564A85323213);
+      }
+      var ptr = _Handle.Read<nint>(_BrushModelNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _BrushModelNameOffset.Value, value);
+    set {
+      if (_BrushModelNameOffset == null) {
+        _BrushModelNameOffset = Schema.GetOffset(0x17F9564A85323213);
+      }
+      Schema.SetString(_Handle, _BrushModelNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetCamera1Offset = new(() => Schema.GetOffset(0x17F9564ACC7D5969), LazyThreadSafetyMode.None);
+  private static nint? _TargetCamera1Offset;
 
   public ref CHandle<CBaseEntity> TargetCamera1 {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetCamera1Offset.Value);
+    get {
+      if (_TargetCamera1Offset == null) {
+        _TargetCamera1Offset = Schema.GetOffset(0x17F9564ACC7D5969);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetCamera1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledOffset = new(() => Schema.GetOffset(0x17F9564A6154EB7E), LazyThreadSafetyMode.None);
+  private static nint? _EnabledOffset;
 
   public ref bool Enabled {
-    get => ref _Handle.AsRef<bool>(_EnabledOffset.Value);
+    get {
+      if (_EnabledOffset == null) {
+        _EnabledOffset = Schema.GetOffset(0x17F9564A6154EB7E);
+      }
+      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Draw3DSkyboxOffset = new(() => Schema.GetOffset(0x17F9564AA37E21FE), LazyThreadSafetyMode.None);
+  private static nint? _Draw3DSkyboxOffset;
 
   public ref bool Draw3DSkybox {
-    get => ref _Handle.AsRef<bool>(_Draw3DSkyboxOffset.Value);
+    get {
+      if (_Draw3DSkyboxOffset == null) {
+        _Draw3DSkyboxOffset = Schema.GetOffset(0x17F9564AA37E21FE);
+      }
+      return ref _Handle.AsRef<bool>(_Draw3DSkyboxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartEnabledOffset = new(() => Schema.GetOffset(0x17F9564A500D5C24), LazyThreadSafetyMode.None);
+  private static nint? _StartEnabledOffset;
 
   public ref bool StartEnabled {
-    get => ref _Handle.AsRef<bool>(_StartEnabledOffset.Value);
+    get {
+      if (_StartEnabledOffset == null) {
+        _StartEnabledOffset = Schema.GetOffset(0x17F9564A500D5C24);
+      }
+      return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
+    }
   }
 
   public void TargetCameraUpdated() {

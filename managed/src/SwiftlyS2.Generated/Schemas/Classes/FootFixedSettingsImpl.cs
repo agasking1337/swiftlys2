@@ -17,55 +17,105 @@ internal partial class FootFixedSettingsImpl : SchemaClass, FootFixedSettings {
   public FootFixedSettingsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TraceSettingsOffset = new(() => Schema.GetOffset(0x3401F9D0115F2D3B), LazyThreadSafetyMode.None);
+  private static nint? _TraceSettingsOffset;
 
   public TraceSettings_t TraceSettings {
-    get => new TraceSettings_tImpl(_Handle + _TraceSettingsOffset.Value);
+    get {
+      if (_TraceSettingsOffset == null) {
+        _TraceSettingsOffset = Schema.GetOffset(0x3401F9D0115F2D3B);
+      }
+      return new TraceSettings_tImpl(_Handle + _TraceSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootBaseBindPosePositionMSOffset = new(() => Schema.GetOffset(0x3401F9D0C391A025), LazyThreadSafetyMode.None);
+  private static nint? _FootBaseBindPosePositionMSOffset;
 
   public ref Vector FootBaseBindPosePositionMS {
-    get => ref _Handle.AsRef<Vector>(_FootBaseBindPosePositionMSOffset.Value);
+    get {
+      if (_FootBaseBindPosePositionMSOffset == null) {
+        _FootBaseBindPosePositionMSOffset = Schema.GetOffset(0x3401F9D0C391A025);
+      }
+      return ref _Handle.AsRef<Vector>(_FootBaseBindPosePositionMSOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootBaseLengthOffset = new(() => Schema.GetOffset(0x3401F9D08593ED7E), LazyThreadSafetyMode.None);
+  private static nint? _FootBaseLengthOffset;
 
   public ref float FootBaseLength {
-    get => ref _Handle.AsRef<float>(_FootBaseLengthOffset.Value);
+    get {
+      if (_FootBaseLengthOffset == null) {
+        _FootBaseLengthOffset = Schema.GetOffset(0x3401F9D08593ED7E);
+      }
+      return ref _Handle.AsRef<float>(_FootBaseLengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxRotationLeftOffset = new(() => Schema.GetOffset(0x3401F9D0FA1CDF44), LazyThreadSafetyMode.None);
+  private static nint? _MaxRotationLeftOffset;
 
   public ref float MaxRotationLeft {
-    get => ref _Handle.AsRef<float>(_MaxRotationLeftOffset.Value);
+    get {
+      if (_MaxRotationLeftOffset == null) {
+        _MaxRotationLeftOffset = Schema.GetOffset(0x3401F9D0FA1CDF44);
+      }
+      return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxRotationRightOffset = new(() => Schema.GetOffset(0x3401F9D08C95FA31), LazyThreadSafetyMode.None);
+  private static nint? _MaxRotationRightOffset;
 
   public ref float MaxRotationRight {
-    get => ref _Handle.AsRef<float>(_MaxRotationRightOffset.Value);
+    get {
+      if (_MaxRotationRightOffset == null) {
+        _MaxRotationRightOffset = Schema.GetOffset(0x3401F9D08C95FA31);
+      }
+      return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootstepLandedTagIndexOffset = new(() => Schema.GetOffset(0x3401F9D04954321B), LazyThreadSafetyMode.None);
+  private static nint? _FootstepLandedTagIndexOffset;
 
   public ref int FootstepLandedTagIndex {
-    get => ref _Handle.AsRef<int>(_FootstepLandedTagIndexOffset.Value);
+    get {
+      if (_FootstepLandedTagIndexOffset == null) {
+        _FootstepLandedTagIndexOffset = Schema.GetOffset(0x3401F9D04954321B);
+      }
+      return ref _Handle.AsRef<int>(_FootstepLandedTagIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableTracingOffset = new(() => Schema.GetOffset(0x3401F9D03C16FC54), LazyThreadSafetyMode.None);
+  private static nint? _EnableTracingOffset;
 
   public ref bool EnableTracing {
-    get => ref _Handle.AsRef<bool>(_EnableTracingOffset.Value);
+    get {
+      if (_EnableTracingOffset == null) {
+        _EnableTracingOffset = Schema.GetOffset(0x3401F9D03C16FC54);
+      }
+      return ref _Handle.AsRef<bool>(_EnableTracingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TraceAngleBlendOffset = new(() => Schema.GetOffset(0x3401F9D0029B769E), LazyThreadSafetyMode.None);
+  private static nint? _TraceAngleBlendOffset;
 
   public ref float TraceAngleBlend {
-    get => ref _Handle.AsRef<float>(_TraceAngleBlendOffset.Value);
+    get {
+      if (_TraceAngleBlendOffset == null) {
+        _TraceAngleBlendOffset = Schema.GetOffset(0x3401F9D0029B769E);
+      }
+      return ref _Handle.AsRef<float>(_TraceAngleBlendOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DisableTagIndexOffset = new(() => Schema.GetOffset(0x3401F9D0C56AE9EB), LazyThreadSafetyMode.None);
+  private static nint? _DisableTagIndexOffset;
 
   public ref int DisableTagIndex {
-    get => ref _Handle.AsRef<int>(_DisableTagIndexOffset.Value);
+    get {
+      if (_DisableTagIndexOffset == null) {
+        _DisableTagIndexOffset = Schema.GetOffset(0x3401F9D0C56AE9EB);
+      }
+      return ref _Handle.AsRef<int>(_DisableTagIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FootIndexOffset = new(() => Schema.GetOffset(0x3401F9D067D56BAB), LazyThreadSafetyMode.None);
+  private static nint? _FootIndexOffset;
 
   public ref int FootIndex {
-    get => ref _Handle.AsRef<int>(_FootIndexOffset.Value);
+    get {
+      if (_FootIndexOffset == null) {
+        _FootIndexOffset = Schema.GetOffset(0x3401F9D067D56BAB);
+      }
+      return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+    }
   }
 
 

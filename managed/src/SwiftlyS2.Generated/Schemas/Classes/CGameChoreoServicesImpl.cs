@@ -17,30 +17,55 @@ internal partial class CGameChoreoServicesImpl : IChoreoServicesImpl, CGameChore
   public CGameChoreoServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OwnerOffset = new(() => Schema.GetOffset(0xF5FFE2B2F6D89572), LazyThreadSafetyMode.None);
+  private static nint? _OwnerOffset;
 
   public ref CHandle<CBaseAnimGraph> Owner {
-    get => ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_OwnerOffset.Value);
+    get {
+      if (_OwnerOffset == null) {
+        _OwnerOffset = Schema.GetOffset(0xF5FFE2B2F6D89572);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_OwnerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptedSequenceOffset = new(() => Schema.GetOffset(0xF5FFE2B2E43BF85C), LazyThreadSafetyMode.None);
+  private static nint? _ScriptedSequenceOffset;
 
   public ref CHandle<CScriptedSequence> ScriptedSequence {
-    get => ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset.Value);
+    get {
+      if (_ScriptedSequenceOffset == null) {
+        _ScriptedSequenceOffset = Schema.GetOffset(0xF5FFE2B2E43BF85C);
+      }
+      return ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScriptStateOffset = new(() => Schema.GetOffset(0xF5FFE2B2E4CD331F), LazyThreadSafetyMode.None);
+  private static nint? _ScriptStateOffset;
 
   public ref IChoreoServices__ScriptState_t ScriptState {
-    get => ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset.Value);
+    get {
+      if (_ScriptStateOffset == null) {
+        _ScriptStateOffset = Schema.GetOffset(0xF5FFE2B2E4CD331F);
+      }
+      return ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChoreoStateOffset = new(() => Schema.GetOffset(0xF5FFE2B251730DD8), LazyThreadSafetyMode.None);
+  private static nint? _ChoreoStateOffset;
 
   public ref IChoreoServices__ChoreoState_t ChoreoState {
-    get => ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset.Value);
+    get {
+      if (_ChoreoStateOffset == null) {
+        _ChoreoStateOffset = Schema.GetOffset(0xF5FFE2B251730DD8);
+      }
+      return ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeStartedStateOffset = new(() => Schema.GetOffset(0xF5FFE2B20BD38900), LazyThreadSafetyMode.None);
+  private static nint? _TimeStartedStateOffset;
 
   public GameTime_t TimeStartedState {
-    get => new GameTime_tImpl(_Handle + _TimeStartedStateOffset.Value);
+    get {
+      if (_TimeStartedStateOffset == null) {
+        _TimeStartedStateOffset = Schema.GetOffset(0xF5FFE2B20BD38900);
+      }
+      return new GameTime_tImpl(_Handle + _TimeStartedStateOffset!.Value);
+    }
   }
 
 

@@ -1,5 +1,10 @@
-  private static readonly Lazy<nint> _$NAME$Offset = new(() => Schema.GetOffset($HASH$), LazyThreadSafetyMode.None);
+  private static nint? _$NAME$Offset;
 
   public ref $IMPL_TYPE$ $NAME$ {
-    get => ref _Handle.$REF_METHOD$<$IMPL_TYPE$>(_$NAME$Offset.Value);
+    get {
+      if (_$NAME$Offset == null) {
+        _$NAME$Offset = Schema.GetOffset($HASH$);
+      }
+      return ref _Handle.$REF_METHOD$<$IMPL_TYPE$>(_$NAME$Offset!.Value);
+    }
   }

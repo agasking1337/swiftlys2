@@ -17,33 +17,59 @@ internal partial class CAI_ChangeHintGroupImpl : CBaseEntityImpl, CAI_ChangeHint
   public CAI_ChangeHintGroupImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SearchTypeOffset = new(() => Schema.GetOffset(0xE2F9617B09088830), LazyThreadSafetyMode.None);
+  private static nint? _SearchTypeOffset;
 
   public ref int SearchType {
-    get => ref _Handle.AsRef<int>(_SearchTypeOffset.Value);
+    get {
+      if (_SearchTypeOffset == null) {
+        _SearchTypeOffset = Schema.GetOffset(0xE2F9617B09088830);
+      }
+      return ref _Handle.AsRef<int>(_SearchTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrSearchNameOffset = new(() => Schema.GetOffset(0xE2F9617B8A77B967), LazyThreadSafetyMode.None);
+  private static nint? _StrSearchNameOffset;
 
   public string StrSearchName {
     get {
-      var ptr = _Handle.Read<nint>(_StrSearchNameOffset.Value);
+      if (_StrSearchNameOffset == null) {
+        _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
+      }
+      var ptr = _Handle.Read<nint>(_StrSearchNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrSearchNameOffset.Value, value);
+    set {
+      if (_StrSearchNameOffset == null) {
+        _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
+      }
+      Schema.SetString(_Handle, _StrSearchNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _StrNewHintGroupOffset = new(() => Schema.GetOffset(0xE2F9617BD4585F62), LazyThreadSafetyMode.None);
+  private static nint? _StrNewHintGroupOffset;
 
   public string StrNewHintGroup {
     get {
-      var ptr = _Handle.Read<nint>(_StrNewHintGroupOffset.Value);
+      if (_StrNewHintGroupOffset == null) {
+        _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
+      }
+      var ptr = _Handle.Read<nint>(_StrNewHintGroupOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrNewHintGroupOffset.Value, value);
+    set {
+      if (_StrNewHintGroupOffset == null) {
+        _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
+      }
+      Schema.SetString(_Handle, _StrNewHintGroupOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0xE2F9617B5ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0xE2F9617B5ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
 
 

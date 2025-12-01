@@ -17,21 +17,34 @@ internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue {
   public CHintMessageQueueImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TmMessageEndOffset = new(() => Schema.GetOffset(0xBE13489745AC0F6), LazyThreadSafetyMode.None);
+  private static nint? _TmMessageEndOffset;
 
   public ref float TmMessageEnd {
-    get => ref _Handle.AsRef<float>(_TmMessageEndOffset.Value);
+    get {
+      if (_TmMessageEndOffset == null) {
+        _TmMessageEndOffset = Schema.GetOffset(0xBE13489745AC0F6);
+      }
+      return ref _Handle.AsRef<float>(_TmMessageEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MessagesOffset = new(() => Schema.GetOffset(0xBE134896139CC55), LazyThreadSafetyMode.None);
+  private static nint? _MessagesOffset;
 
   public ref CUtlVector<PointerTo<CHintMessage>> Messages {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset.Value);
+    get {
+      if (_MessagesOffset == null) {
+        _MessagesOffset = Schema.GetOffset(0xBE134896139CC55);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerControllerOffset = new(() => Schema.GetOffset(0xBE13489DCE6762E), LazyThreadSafetyMode.None);
+  private static nint? _PlayerControllerOffset;
 
   public CBasePlayerController? PlayerController {
     get {
-      var ptr = _Handle.Read<nint>(_PlayerControllerOffset.Value);
+      if (_PlayerControllerOffset == null) {
+        _PlayerControllerOffset = Schema.GetOffset(0xBE13489DCE6762E);
+      }
+      var ptr = _Handle.Read<nint>(_PlayerControllerOffset!.Value);
       return ptr.IsValidPtr() ? new CBasePlayerControllerImpl(ptr) : null;
     }
   }

@@ -17,10 +17,15 @@ internal partial class FuseFunctionIndex_tImpl : SchemaClass, FuseFunctionIndex_
   public FuseFunctionIndex_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ValueOffset = new(() => Schema.GetOffset(0x48B825DFDCB0894A), LazyThreadSafetyMode.None);
+  private static nint? _ValueOffset;
 
   public ref ushort Value {
-    get => ref _Handle.AsRef<ushort>(_ValueOffset.Value);
+    get {
+      if (_ValueOffset == null) {
+        _ValueOffset = Schema.GetOffset(0x48B825DFDCB0894A);
+      }
+      return ref _Handle.AsRef<ushort>(_ValueOffset!.Value);
+    }
   }
 
 

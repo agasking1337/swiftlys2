@@ -17,15 +17,25 @@ internal partial class CVoiceContainerSetElementImpl : SchemaClass, CVoiceContai
   public CVoiceContainerSetElementImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SoundOffset = new(() => Schema.GetOffset(0x1280027B4E1C4FB4), LazyThreadSafetyMode.None);
+  private static nint? _SoundOffset;
 
   public CSoundContainerReference Sound {
-    get => new CSoundContainerReferenceImpl(_Handle + _SoundOffset.Value);
+    get {
+      if (_SoundOffset == null) {
+        _SoundOffset = Schema.GetOffset(0x1280027B4E1C4FB4);
+      }
+      return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VolumeDBOffset = new(() => Schema.GetOffset(0x1280027B3197E3EF), LazyThreadSafetyMode.None);
+  private static nint? _VolumeDBOffset;
 
   public ref float VolumeDB {
-    get => ref _Handle.AsRef<float>(_VolumeDBOffset.Value);
+    get {
+      if (_VolumeDBOffset == null) {
+        _VolumeDBOffset = Schema.GetOffset(0x1280027B3197E3EF);
+      }
+      return ref _Handle.AsRef<float>(_VolumeDBOffset!.Value);
+    }
   }
 
 

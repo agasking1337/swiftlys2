@@ -17,24 +17,42 @@ internal partial class PermEntityLumpData_tImpl : SchemaClass, PermEntityLumpDat
   public PermEntityLumpData_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x47DA25F14D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x47DA25F14D8F5786);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x47DA25F14D8F5786);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ChildLumpsOffset = new(() => Schema.GetOffset(0x47DA25F1AFDAF56C), LazyThreadSafetyMode.None);
+  private static nint? _ChildLumpsOffset;
 
   public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps {
-    get => ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_ChildLumpsOffset.Value);
+    get {
+      if (_ChildLumpsOffset == null) {
+        _ChildLumpsOffset = Schema.GetOffset(0x47DA25F1AFDAF56C);
+      }
+      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_ChildLumpsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EntityKeyValuesOffset = new(() => Schema.GetOffset(0x47DA25F1DBD62937), LazyThreadSafetyMode.None);
+  private static nint? _EntityKeyValuesOffset;
 
   public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues {
-    get => ref _Handle.AsRef<CUtlLeanVector<EntityKeyValueData_t, int>>(_EntityKeyValuesOffset.Value);
+    get {
+      if (_EntityKeyValuesOffset == null) {
+        _EntityKeyValuesOffset = Schema.GetOffset(0x47DA25F1DBD62937);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<EntityKeyValueData_t, int>>(_EntityKeyValuesOffset!.Value);
+    }
   }
 
 

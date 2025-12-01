@@ -17,120 +17,235 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite {
   public CSpriteImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SpriteMaterialOffset = new(() => Schema.GetOffset(0xAAF88CE378793443), LazyThreadSafetyMode.None);
+  private static nint? _SpriteMaterialOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteMaterial {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SpriteMaterialOffset.Value);
+    get {
+      if (_SpriteMaterialOffset == null) {
+        _SpriteMaterialOffset = Schema.GetOffset(0xAAF88CE378793443);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SpriteMaterialOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachedToEntityOffset = new(() => Schema.GetOffset(0xAAF88CE3FDEAA64D), LazyThreadSafetyMode.None);
+  private static nint? _AttachedToEntityOffset;
 
   public ref CHandle<CBaseEntity> AttachedToEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedToEntityOffset.Value);
+    get {
+      if (_AttachedToEntityOffset == null) {
+        _AttachedToEntityOffset = Schema.GetOffset(0xAAF88CE3FDEAA64D);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedToEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachmentOffset = new(() => Schema.GetOffset(0xAAF88CE3E3BF4024), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentOffset;
 
   public AttachmentHandle_t Attachment {
-    get => new AttachmentHandle_tImpl(_Handle + _AttachmentOffset.Value);
+    get {
+      if (_AttachmentOffset == null) {
+        _AttachmentOffset = Schema.GetOffset(0xAAF88CE3E3BF4024);
+      }
+      return new AttachmentHandle_tImpl(_Handle + _AttachmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpriteFramerateOffset = new(() => Schema.GetOffset(0xAAF88CE3E156249D), LazyThreadSafetyMode.None);
+  private static nint? _SpriteFramerateOffset;
 
   public ref float SpriteFramerate {
-    get => ref _Handle.AsRef<float>(_SpriteFramerateOffset.Value);
+    get {
+      if (_SpriteFramerateOffset == null) {
+        _SpriteFramerateOffset = Schema.GetOffset(0xAAF88CE3E156249D);
+      }
+      return ref _Handle.AsRef<float>(_SpriteFramerateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FrameOffset = new(() => Schema.GetOffset(0xAAF88CE3F836C9F4), LazyThreadSafetyMode.None);
+  private static nint? _FrameOffset;
 
   public ref float Frame {
-    get => ref _Handle.AsRef<float>(_FrameOffset.Value);
+    get {
+      if (_FrameOffset == null) {
+        _FrameOffset = Schema.GetOffset(0xAAF88CE3F836C9F4);
+      }
+      return ref _Handle.AsRef<float>(_FrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DieTimeOffset = new(() => Schema.GetOffset(0xAAF88CE361B33206), LazyThreadSafetyMode.None);
+  private static nint? _DieTimeOffset;
 
   public GameTime_t DieTime {
-    get => new GameTime_tImpl(_Handle + _DieTimeOffset.Value);
+    get {
+      if (_DieTimeOffset == null) {
+        _DieTimeOffset = Schema.GetOffset(0xAAF88CE361B33206);
+      }
+      return new GameTime_tImpl(_Handle + _DieTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessOffset = new(() => Schema.GetOffset(0xAAF88CE3A4C26AE6), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessOffset;
 
   public ref uint Brightness {
-    get => ref _Handle.AsRef<uint>(_BrightnessOffset.Value);
+    get {
+      if (_BrightnessOffset == null) {
+        _BrightnessOffset = Schema.GetOffset(0xAAF88CE3A4C26AE6);
+      }
+      return ref _Handle.AsRef<uint>(_BrightnessOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessDurationOffset = new(() => Schema.GetOffset(0xAAF88CE36700BD7C), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessDurationOffset;
 
   public ref float BrightnessDuration {
-    get => ref _Handle.AsRef<float>(_BrightnessDurationOffset.Value);
+    get {
+      if (_BrightnessDurationOffset == null) {
+        _BrightnessDurationOffset = Schema.GetOffset(0xAAF88CE36700BD7C);
+      }
+      return ref _Handle.AsRef<float>(_BrightnessDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpriteScaleOffset = new(() => Schema.GetOffset(0xAAF88CE3E39D2B84), LazyThreadSafetyMode.None);
+  private static nint? _SpriteScaleOffset;
 
   public ref float SpriteScale {
-    get => ref _Handle.AsRef<float>(_SpriteScaleOffset.Value);
+    get {
+      if (_SpriteScaleOffset == null) {
+        _SpriteScaleOffset = Schema.GetOffset(0xAAF88CE3E39D2B84);
+      }
+      return ref _Handle.AsRef<float>(_SpriteScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleDurationOffset = new(() => Schema.GetOffset(0xAAF88CE35F21994B), LazyThreadSafetyMode.None);
+  private static nint? _ScaleDurationOffset;
 
   public ref float ScaleDuration {
-    get => ref _Handle.AsRef<float>(_ScaleDurationOffset.Value);
+    get {
+      if (_ScaleDurationOffset == null) {
+        _ScaleDurationOffset = Schema.GetOffset(0xAAF88CE35F21994B);
+      }
+      return ref _Handle.AsRef<float>(_ScaleDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldSpaceScaleOffset = new(() => Schema.GetOffset(0xAAF88CE37E045A3F), LazyThreadSafetyMode.None);
+  private static nint? _WorldSpaceScaleOffset;
 
   public ref bool WorldSpaceScale {
-    get => ref _Handle.AsRef<bool>(_WorldSpaceScaleOffset.Value);
+    get {
+      if (_WorldSpaceScaleOffset == null) {
+        _WorldSpaceScaleOffset = Schema.GetOffset(0xAAF88CE37E045A3F);
+      }
+      return ref _Handle.AsRef<bool>(_WorldSpaceScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GlowProxySizeOffset = new(() => Schema.GetOffset(0xAAF88CE3C4210897), LazyThreadSafetyMode.None);
+  private static nint? _GlowProxySizeOffset;
 
   public ref float GlowProxySize {
-    get => ref _Handle.AsRef<float>(_GlowProxySizeOffset.Value);
+    get {
+      if (_GlowProxySizeOffset == null) {
+        _GlowProxySizeOffset = Schema.GetOffset(0xAAF88CE3C4210897);
+      }
+      return ref _Handle.AsRef<float>(_GlowProxySizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HDRColorScaleOffset = new(() => Schema.GetOffset(0xAAF88CE3C930B3E8), LazyThreadSafetyMode.None);
+  private static nint? _HDRColorScaleOffset;
 
   public ref float HDRColorScale {
-    get => ref _Handle.AsRef<float>(_HDRColorScaleOffset.Value);
+    get {
+      if (_HDRColorScaleOffset == null) {
+        _HDRColorScaleOffset = Schema.GetOffset(0xAAF88CE3C930B3E8);
+      }
+      return ref _Handle.AsRef<float>(_HDRColorScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastTimeOffset = new(() => Schema.GetOffset(0xAAF88CE32E79549E), LazyThreadSafetyMode.None);
+  private static nint? _LastTimeOffset;
 
   public GameTime_t LastTime {
-    get => new GameTime_tImpl(_Handle + _LastTimeOffset.Value);
+    get {
+      if (_LastTimeOffset == null) {
+        _LastTimeOffset = Schema.GetOffset(0xAAF88CE32E79549E);
+      }
+      return new GameTime_tImpl(_Handle + _LastTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxFrameOffset = new(() => Schema.GetOffset(0xAAF88CE397F185CC), LazyThreadSafetyMode.None);
+  private static nint? _MaxFrameOffset;
 
   public ref float MaxFrame {
-    get => ref _Handle.AsRef<float>(_MaxFrameOffset.Value);
+    get {
+      if (_MaxFrameOffset == null) {
+        _MaxFrameOffset = Schema.GetOffset(0xAAF88CE397F185CC);
+      }
+      return ref _Handle.AsRef<float>(_MaxFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartScaleOffset = new(() => Schema.GetOffset(0xAAF88CE3634567D1), LazyThreadSafetyMode.None);
+  private static nint? _StartScaleOffset;
 
   public ref float StartScale {
-    get => ref _Handle.AsRef<float>(_StartScaleOffset.Value);
+    get {
+      if (_StartScaleOffset == null) {
+        _StartScaleOffset = Schema.GetOffset(0xAAF88CE3634567D1);
+      }
+      return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestScaleOffset = new(() => Schema.GetOffset(0xAAF88CE341A20F83), LazyThreadSafetyMode.None);
+  private static nint? _DestScaleOffset;
 
   public ref float DestScale {
-    get => ref _Handle.AsRef<float>(_DestScaleOffset.Value);
+    get {
+      if (_DestScaleOffset == null) {
+        _DestScaleOffset = Schema.GetOffset(0xAAF88CE341A20F83);
+      }
+      return ref _Handle.AsRef<float>(_DestScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleTimeStartOffset = new(() => Schema.GetOffset(0xAAF88CE303EA4A2E), LazyThreadSafetyMode.None);
+  private static nint? _ScaleTimeStartOffset;
 
   public GameTime_t ScaleTimeStart {
-    get => new GameTime_tImpl(_Handle + _ScaleTimeStartOffset.Value);
+    get {
+      if (_ScaleTimeStartOffset == null) {
+        _ScaleTimeStartOffset = Schema.GetOffset(0xAAF88CE303EA4A2E);
+      }
+      return new GameTime_tImpl(_Handle + _ScaleTimeStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartBrightnessOffset = new(() => Schema.GetOffset(0xAAF88CE3A9C01268), LazyThreadSafetyMode.None);
+  private static nint? _StartBrightnessOffset;
 
   public ref int StartBrightness {
-    get => ref _Handle.AsRef<int>(_StartBrightnessOffset.Value);
+    get {
+      if (_StartBrightnessOffset == null) {
+        _StartBrightnessOffset = Schema.GetOffset(0xAAF88CE3A9C01268);
+      }
+      return ref _Handle.AsRef<int>(_StartBrightnessOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestBrightnessOffset = new(() => Schema.GetOffset(0xAAF88CE38627AE5E), LazyThreadSafetyMode.None);
+  private static nint? _DestBrightnessOffset;
 
   public ref int DestBrightness {
-    get => ref _Handle.AsRef<int>(_DestBrightnessOffset.Value);
+    get {
+      if (_DestBrightnessOffset == null) {
+        _DestBrightnessOffset = Schema.GetOffset(0xAAF88CE38627AE5E);
+      }
+      return ref _Handle.AsRef<int>(_DestBrightnessOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessTimeStartOffset = new(() => Schema.GetOffset(0xAAF88CE3478AFDAF), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessTimeStartOffset;
 
   public GameTime_t BrightnessTimeStart {
-    get => new GameTime_tImpl(_Handle + _BrightnessTimeStartOffset.Value);
+    get {
+      if (_BrightnessTimeStartOffset == null) {
+        _BrightnessTimeStartOffset = Schema.GetOffset(0xAAF88CE3478AFDAF);
+      }
+      return new GameTime_tImpl(_Handle + _BrightnessTimeStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpriteWidthOffset = new(() => Schema.GetOffset(0xAAF88CE3F10EC104), LazyThreadSafetyMode.None);
+  private static nint? _SpriteWidthOffset;
 
   public ref int SpriteWidth {
-    get => ref _Handle.AsRef<int>(_SpriteWidthOffset.Value);
+    get {
+      if (_SpriteWidthOffset == null) {
+        _SpriteWidthOffset = Schema.GetOffset(0xAAF88CE3F10EC104);
+      }
+      return ref _Handle.AsRef<int>(_SpriteWidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpriteHeightOffset = new(() => Schema.GetOffset(0xAAF88CE36BAED033), LazyThreadSafetyMode.None);
+  private static nint? _SpriteHeightOffset;
 
   public ref int SpriteHeight {
-    get => ref _Handle.AsRef<int>(_SpriteHeightOffset.Value);
+    get {
+      if (_SpriteHeightOffset == null) {
+        _SpriteHeightOffset = Schema.GetOffset(0xAAF88CE36BAED033);
+      }
+      return ref _Handle.AsRef<int>(_SpriteHeightOffset!.Value);
+    }
   }
 
   public void SpriteMaterialUpdated() {

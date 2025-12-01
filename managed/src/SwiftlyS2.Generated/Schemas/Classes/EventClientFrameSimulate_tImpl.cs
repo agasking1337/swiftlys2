@@ -17,25 +17,45 @@ internal partial class EventClientFrameSimulate_tImpl : SchemaClass, EventClient
   public EventClientFrameSimulate_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LoopStateOffset = new(() => Schema.GetOffset(0x18229C4F928A2EC), LazyThreadSafetyMode.None);
+  private static nint? _LoopStateOffset;
 
   public EngineLoopState_t LoopState {
-    get => new EngineLoopState_tImpl(_Handle + _LoopStateOffset.Value);
+    get {
+      if (_LoopStateOffset == null) {
+        _LoopStateOffset = Schema.GetOffset(0x18229C4F928A2EC);
+      }
+      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RealTimeOffset = new(() => Schema.GetOffset(0x18229C41168EC02), LazyThreadSafetyMode.None);
+  private static nint? _RealTimeOffset;
 
   public ref float RealTime {
-    get => ref _Handle.AsRef<float>(_RealTimeOffset.Value);
+    get {
+      if (_RealTimeOffset == null) {
+        _RealTimeOffset = Schema.GetOffset(0x18229C41168EC02);
+      }
+      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FrameTimeOffset = new(() => Schema.GetOffset(0x18229C4659DF875), LazyThreadSafetyMode.None);
+  private static nint? _FrameTimeOffset;
 
   public ref float FrameTime {
-    get => ref _Handle.AsRef<float>(_FrameTimeOffset.Value);
+    get {
+      if (_FrameTimeOffset == null) {
+        _FrameTimeOffset = Schema.GetOffset(0x18229C4659DF875);
+      }
+      return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScheduleSendTickPacketOffset = new(() => Schema.GetOffset(0x18229C400A650C3), LazyThreadSafetyMode.None);
+  private static nint? _ScheduleSendTickPacketOffset;
 
   public ref bool ScheduleSendTickPacket {
-    get => ref _Handle.AsRef<bool>(_ScheduleSendTickPacketOffset.Value);
+    get {
+      if (_ScheduleSendTickPacketOffset == null) {
+        _ScheduleSendTickPacketOffset = Schema.GetOffset(0x18229C400A650C3);
+      }
+      return ref _Handle.AsRef<bool>(_ScheduleSendTickPacketOffset!.Value);
+    }
   }
 
 

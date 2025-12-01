@@ -17,25 +17,45 @@ internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CS
   public CSequenceUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SequenceOffset = new(() => Schema.GetOffset(0xB5F91396E0A0598E), LazyThreadSafetyMode.None);
+  private static nint? _SequenceOffset;
 
   public HSequence Sequence {
-    get => new HSequenceImpl(_Handle + _SequenceOffset.Value);
+    get {
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0xB5F91396E0A0598E);
+      }
+      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0xB5F913963D9FF5AD), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0xB5F913963D9FF5AD);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamSpansOffset = new(() => Schema.GetOffset(0xB5F91396DAC91553), LazyThreadSafetyMode.None);
+  private static nint? _ParamSpansOffset;
 
   public CParamSpanUpdater ParamSpans {
-    get => new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset.Value);
+    get {
+      if (_ParamSpansOffset == null) {
+        _ParamSpansOffset = Schema.GetOffset(0xB5F91396DAC91553);
+      }
+      return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TagsOffset = new(() => Schema.GetOffset(0xB5F91396B46C8540), LazyThreadSafetyMode.None);
+  private static nint? _TagsOffset;
 
   public ref CUtlVector<TagSpan_t> Tags {
-    get => ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset.Value);
+    get {
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0xB5F91396B46C8540);
+      }
+      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    }
   }
 
 

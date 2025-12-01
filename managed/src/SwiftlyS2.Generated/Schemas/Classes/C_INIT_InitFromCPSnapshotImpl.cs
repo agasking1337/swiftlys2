@@ -17,64 +17,122 @@ internal partial class C_INIT_InitFromCPSnapshotImpl : CParticleFunctionInitiali
   public C_INIT_InitFromCPSnapshotImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x772EF71B3F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x772EF71B3F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrSnapshotSubsetOffset = new(() => Schema.GetOffset(0x772EF71BBD8A8E5E), LazyThreadSafetyMode.None);
+  private static nint? _StrSnapshotSubsetOffset;
 
   public string StrSnapshotSubset {
     get {
-      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset.Value);
+      if (_StrSnapshotSubsetOffset == null) {
+        _StrSnapshotSubsetOffset = Schema.GetOffset(0x772EF71BBD8A8E5E);
+      }
+      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrSnapshotSubsetOffset.Value, value);
+    set {
+      if (_StrSnapshotSubsetOffset == null) {
+        _StrSnapshotSubsetOffset = Schema.GetOffset(0x772EF71BBD8A8E5E);
+      }
+      Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AttributeToReadOffset = new(() => Schema.GetOffset(0x772EF71BE0F61F9E), LazyThreadSafetyMode.None);
+  private static nint? _AttributeToReadOffset;
 
   public ParticleAttributeIndex_t AttributeToRead {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset.Value);
+    get {
+      if (_AttributeToReadOffset == null) {
+        _AttributeToReadOffset = Schema.GetOffset(0x772EF71BE0F61F9E);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttributeToWriteOffset = new(() => Schema.GetOffset(0x772EF71B389A3CC1), LazyThreadSafetyMode.None);
+  private static nint? _AttributeToWriteOffset;
 
   public ParticleAttributeIndex_t AttributeToWrite {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset.Value);
+    get {
+      if (_AttributeToWriteOffset == null) {
+        _AttributeToWriteOffset = Schema.GetOffset(0x772EF71B389A3CC1);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSpaceCPOffset = new(() => Schema.GetOffset(0x772EF71BC8E9CB31), LazyThreadSafetyMode.None);
+  private static nint? _LocalSpaceCPOffset;
 
   public ref int LocalSpaceCP {
-    get => ref _Handle.AsRef<int>(_LocalSpaceCPOffset.Value);
+    get {
+      if (_LocalSpaceCPOffset == null) {
+        _LocalSpaceCPOffset = Schema.GetOffset(0x772EF71BC8E9CB31);
+      }
+      return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomOffset = new(() => Schema.GetOffset(0x772EF71BD13B9DC2), LazyThreadSafetyMode.None);
+  private static nint? _RandomOffset;
 
   public ref bool Random {
-    get => ref _Handle.AsRef<bool>(_RandomOffset.Value);
+    get {
+      if (_RandomOffset == null) {
+        _RandomOffset = Schema.GetOffset(0x772EF71BD13B9DC2);
+      }
+      return ref _Handle.AsRef<bool>(_RandomOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReverseOffset = new(() => Schema.GetOffset(0x772EF71BEA4E22E5), LazyThreadSafetyMode.None);
+  private static nint? _ReverseOffset;
 
   public ref bool Reverse {
-    get => ref _Handle.AsRef<bool>(_ReverseOffset.Value);
+    get {
+      if (_ReverseOffset == null) {
+        _ReverseOffset = Schema.GetOffset(0x772EF71BEA4E22E5);
+      }
+      return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SnapShotIncrementOffset = new(() => Schema.GetOffset(0x772EF71BC1AED602), LazyThreadSafetyMode.None);
+  private static nint? _SnapShotIncrementOffset;
 
   public CParticleCollectionFloatInput SnapShotIncrement {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _SnapShotIncrementOffset.Value);
+    get {
+      if (_SnapShotIncrementOffset == null) {
+        _SnapShotIncrementOffset = Schema.GetOffset(0x772EF71BC1AED602);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _SnapShotIncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ManualSnapshotIndexOffset = new(() => Schema.GetOffset(0x772EF71BA02E904D), LazyThreadSafetyMode.None);
+  private static nint? _ManualSnapshotIndexOffset;
 
   public CPerParticleFloatInput ManualSnapshotIndex {
-    get => new CPerParticleFloatInputImpl(_Handle + _ManualSnapshotIndexOffset.Value);
+    get {
+      if (_ManualSnapshotIndexOffset == null) {
+        _ManualSnapshotIndexOffset = Schema.GetOffset(0x772EF71BA02E904D);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _ManualSnapshotIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomSeedOffset = new(() => Schema.GetOffset(0x772EF71B6388F067), LazyThreadSafetyMode.None);
+  private static nint? _RandomSeedOffset;
 
   public ref int RandomSeed {
-    get => ref _Handle.AsRef<int>(_RandomSeedOffset.Value);
+    get {
+      if (_RandomSeedOffset == null) {
+        _RandomSeedOffset = Schema.GetOffset(0x772EF71B6388F067);
+      }
+      return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSpaceAnglesOffset = new(() => Schema.GetOffset(0x772EF71BF571F352), LazyThreadSafetyMode.None);
+  private static nint? _LocalSpaceAnglesOffset;
 
   public ref bool LocalSpaceAngles {
-    get => ref _Handle.AsRef<bool>(_LocalSpaceAnglesOffset.Value);
+    get {
+      if (_LocalSpaceAnglesOffset == null) {
+        _LocalSpaceAnglesOffset = Schema.GetOffset(0x772EF71BF571F352);
+      }
+      return ref _Handle.AsRef<bool>(_LocalSpaceAnglesOffset!.Value);
+    }
   }
 
 

@@ -17,15 +17,25 @@ internal partial class PackedAABB_tImpl : SchemaClass, PackedAABB_t {
   public PackedAABB_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PackedMinOffset = new(() => Schema.GetOffset(0x868E43307AC1AEAF), LazyThreadSafetyMode.None);
+  private static nint? _PackedMinOffset;
 
   public ref uint PackedMin {
-    get => ref _Handle.AsRef<uint>(_PackedMinOffset.Value);
+    get {
+      if (_PackedMinOffset == null) {
+        _PackedMinOffset = Schema.GetOffset(0x868E43307AC1AEAF);
+      }
+      return ref _Handle.AsRef<uint>(_PackedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PackedMaxOffset = new(() => Schema.GetOffset(0x868E433068AE0AA1), LazyThreadSafetyMode.None);
+  private static nint? _PackedMaxOffset;
 
   public ref uint PackedMax {
-    get => ref _Handle.AsRef<uint>(_PackedMaxOffset.Value);
+    get {
+      if (_PackedMaxOffset == null) {
+        _PackedMaxOffset = Schema.GetOffset(0x868E433068AE0AA1);
+      }
+      return ref _Handle.AsRef<uint>(_PackedMaxOffset!.Value);
+    }
   }
 
 

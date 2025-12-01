@@ -17,44 +17,78 @@ internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue {
   public CBaseIssueImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TypeStringOffset = new(() => Schema.GetOffset(0xE0727D1E2E3EE7A9), LazyThreadSafetyMode.None);
+  private static nint? _TypeStringOffset;
 
   public string TypeString {
     get {
-      var ptr = _Handle + _TypeStringOffset.Value;
-      return Schema.GetString(ptr);
+        if (_TypeStringOffset == null) {
+            _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
+        }
+        var ptr = _Handle + _TypeStringOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _TypeStringOffset.Value, value, 64);
+    set {
+        if (_TypeStringOffset == null) {
+            _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
+        }
+        Schema.SetFixedString(_Handle, _TypeStringOffset!.Value, value, 64);
+    }
   } 
-  private static readonly Lazy<nint> _DetailsStringOffset = new(() => Schema.GetOffset(0xE0727D1ECCE4C9BF), LazyThreadSafetyMode.None);
+  private static nint? _DetailsStringOffset;
 
   public string DetailsString {
     get {
-      var ptr = _Handle + _DetailsStringOffset.Value;
-      return Schema.GetString(ptr);
+        if (_DetailsStringOffset == null) {
+            _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
+        }
+        var ptr = _Handle + _DetailsStringOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _DetailsStringOffset.Value, value, 4096);
+    set {
+        if (_DetailsStringOffset == null) {
+            _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
+        }
+        Schema.SetFixedString(_Handle, _DetailsStringOffset!.Value, value, 260);
+    }
   } 
-  private static readonly Lazy<nint> _NumYesVotesOffset = new(() => Schema.GetOffset(0xE0727D1E7ED4202C), LazyThreadSafetyMode.None);
+  private static nint? _NumYesVotesOffset;
 
   public ref int NumYesVotes {
-    get => ref _Handle.AsRef<int>(_NumYesVotesOffset.Value);
+    get {
+      if (_NumYesVotesOffset == null) {
+        _NumYesVotesOffset = Schema.GetOffset(0xE0727D1E7ED4202C);
+      }
+      return ref _Handle.AsRef<int>(_NumYesVotesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumNoVotesOffset = new(() => Schema.GetOffset(0xE0727D1E54F18188), LazyThreadSafetyMode.None);
+  private static nint? _NumNoVotesOffset;
 
   public ref int NumNoVotes {
-    get => ref _Handle.AsRef<int>(_NumNoVotesOffset.Value);
+    get {
+      if (_NumNoVotesOffset == null) {
+        _NumNoVotesOffset = Schema.GetOffset(0xE0727D1E54F18188);
+      }
+      return ref _Handle.AsRef<int>(_NumNoVotesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumPotentialVotesOffset = new(() => Schema.GetOffset(0xE0727D1E61EC9307), LazyThreadSafetyMode.None);
+  private static nint? _NumPotentialVotesOffset;
 
   public ref int NumPotentialVotes {
-    get => ref _Handle.AsRef<int>(_NumPotentialVotesOffset.Value);
+    get {
+      if (_NumPotentialVotesOffset == null) {
+        _NumPotentialVotesOffset = Schema.GetOffset(0xE0727D1E61EC9307);
+      }
+      return ref _Handle.AsRef<int>(_NumPotentialVotesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VoteControllerOffset = new(() => Schema.GetOffset(0xE0727D1ECB818C7B), LazyThreadSafetyMode.None);
+  private static nint? _VoteControllerOffset;
 
   public CVoteController? VoteController {
     get {
-      var ptr = _Handle.Read<nint>(_VoteControllerOffset.Value);
+      if (_VoteControllerOffset == null) {
+        _VoteControllerOffset = Schema.GetOffset(0xE0727D1ECB818C7B);
+      }
+      var ptr = _Handle.Read<nint>(_VoteControllerOffset!.Value);
       return ptr.IsValidPtr() ? new CVoteControllerImpl(ptr) : null;
     }
   }

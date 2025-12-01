@@ -17,90 +17,175 @@ internal partial class HitReactFixedSettings_tImpl : SchemaClass, HitReactFixedS
   public HitReactFixedSettings_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WeightListIndexOffset = new(() => Schema.GetOffset(0x49C67E6F30288377), LazyThreadSafetyMode.None);
+  private static nint? _WeightListIndexOffset;
 
   public ref int WeightListIndex {
-    get => ref _Handle.AsRef<int>(_WeightListIndexOffset.Value);
+    get {
+      if (_WeightListIndexOffset == null) {
+        _WeightListIndexOffset = Schema.GetOffset(0x49C67E6F30288377);
+      }
+      return ref _Handle.AsRef<int>(_WeightListIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectedBoneCountOffset = new(() => Schema.GetOffset(0x49C67E6F5D78F32A), LazyThreadSafetyMode.None);
+  private static nint? _EffectedBoneCountOffset;
 
   public ref int EffectedBoneCount {
-    get => ref _Handle.AsRef<int>(_EffectedBoneCountOffset.Value);
+    get {
+      if (_EffectedBoneCountOffset == null) {
+        _EffectedBoneCountOffset = Schema.GetOffset(0x49C67E6F5D78F32A);
+      }
+      return ref _Handle.AsRef<int>(_EffectedBoneCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxImpactForceOffset = new(() => Schema.GetOffset(0x49C67E6F30F6F9AC), LazyThreadSafetyMode.None);
+  private static nint? _MaxImpactForceOffset;
 
   public ref float MaxImpactForce {
-    get => ref _Handle.AsRef<float>(_MaxImpactForceOffset.Value);
+    get {
+      if (_MaxImpactForceOffset == null) {
+        _MaxImpactForceOffset = Schema.GetOffset(0x49C67E6F30F6F9AC);
+      }
+      return ref _Handle.AsRef<float>(_MaxImpactForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinImpactForceOffset = new(() => Schema.GetOffset(0x49C67E6F0A67F596), LazyThreadSafetyMode.None);
+  private static nint? _MinImpactForceOffset;
 
   public ref float MinImpactForce {
-    get => ref _Handle.AsRef<float>(_MinImpactForceOffset.Value);
+    get {
+      if (_MinImpactForceOffset == null) {
+        _MinImpactForceOffset = Schema.GetOffset(0x49C67E6F0A67F596);
+      }
+      return ref _Handle.AsRef<float>(_MinImpactForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WhipImpactScaleOffset = new(() => Schema.GetOffset(0x49C67E6FBE9EBA7B), LazyThreadSafetyMode.None);
+  private static nint? _WhipImpactScaleOffset;
 
   public ref float WhipImpactScale {
-    get => ref _Handle.AsRef<float>(_WhipImpactScaleOffset.Value);
+    get {
+      if (_WhipImpactScaleOffset == null) {
+        _WhipImpactScaleOffset = Schema.GetOffset(0x49C67E6FBE9EBA7B);
+      }
+      return ref _Handle.AsRef<float>(_WhipImpactScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CounterRotationScaleOffset = new(() => Schema.GetOffset(0x49C67E6F8F00801B), LazyThreadSafetyMode.None);
+  private static nint? _CounterRotationScaleOffset;
 
   public ref float CounterRotationScale {
-    get => ref _Handle.AsRef<float>(_CounterRotationScaleOffset.Value);
+    get {
+      if (_CounterRotationScaleOffset == null) {
+        _CounterRotationScaleOffset = Schema.GetOffset(0x49C67E6F8F00801B);
+      }
+      return ref _Handle.AsRef<float>(_CounterRotationScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceFadeScaleOffset = new(() => Schema.GetOffset(0x49C67E6FCE3774BC), LazyThreadSafetyMode.None);
+  private static nint? _DistanceFadeScaleOffset;
 
   public ref float DistanceFadeScale {
-    get => ref _Handle.AsRef<float>(_DistanceFadeScaleOffset.Value);
+    get {
+      if (_DistanceFadeScaleOffset == null) {
+        _DistanceFadeScaleOffset = Schema.GetOffset(0x49C67E6FCE3774BC);
+      }
+      return ref _Handle.AsRef<float>(_DistanceFadeScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PropagationScaleOffset = new(() => Schema.GetOffset(0x49C67E6F5C590343), LazyThreadSafetyMode.None);
+  private static nint? _PropagationScaleOffset;
 
   public ref float PropagationScale {
-    get => ref _Handle.AsRef<float>(_PropagationScaleOffset.Value);
+    get {
+      if (_PropagationScaleOffset == null) {
+        _PropagationScaleOffset = Schema.GetOffset(0x49C67E6F5C590343);
+      }
+      return ref _Handle.AsRef<float>(_PropagationScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WhipDelayOffset = new(() => Schema.GetOffset(0x49C67E6F7E59F654), LazyThreadSafetyMode.None);
+  private static nint? _WhipDelayOffset;
 
   public ref float WhipDelay {
-    get => ref _Handle.AsRef<float>(_WhipDelayOffset.Value);
+    get {
+      if (_WhipDelayOffset == null) {
+        _WhipDelayOffset = Schema.GetOffset(0x49C67E6F7E59F654);
+      }
+      return ref _Handle.AsRef<float>(_WhipDelayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpringStrengthOffset = new(() => Schema.GetOffset(0x49C67E6F595D254F), LazyThreadSafetyMode.None);
+  private static nint? _SpringStrengthOffset;
 
   public ref float SpringStrength {
-    get => ref _Handle.AsRef<float>(_SpringStrengthOffset.Value);
+    get {
+      if (_SpringStrengthOffset == null) {
+        _SpringStrengthOffset = Schema.GetOffset(0x49C67E6F595D254F);
+      }
+      return ref _Handle.AsRef<float>(_SpringStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WhipSpringStrengthOffset = new(() => Schema.GetOffset(0x49C67E6F149D5369), LazyThreadSafetyMode.None);
+  private static nint? _WhipSpringStrengthOffset;
 
   public ref float WhipSpringStrength {
-    get => ref _Handle.AsRef<float>(_WhipSpringStrengthOffset.Value);
+    get {
+      if (_WhipSpringStrengthOffset == null) {
+        _WhipSpringStrengthOffset = Schema.GetOffset(0x49C67E6F149D5369);
+      }
+      return ref _Handle.AsRef<float>(_WhipSpringStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxAngleRadiansOffset = new(() => Schema.GetOffset(0x49C67E6F6654A2A4), LazyThreadSafetyMode.None);
+  private static nint? _MaxAngleRadiansOffset;
 
   public ref float MaxAngleRadians {
-    get => ref _Handle.AsRef<float>(_MaxAngleRadiansOffset.Value);
+    get {
+      if (_MaxAngleRadiansOffset == null) {
+        _MaxAngleRadiansOffset = Schema.GetOffset(0x49C67E6F6654A2A4);
+      }
+      return ref _Handle.AsRef<float>(_MaxAngleRadiansOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipBoneIndexOffset = new(() => Schema.GetOffset(0x49C67E6F12FFBC70), LazyThreadSafetyMode.None);
+  private static nint? _HipBoneIndexOffset;
 
   public ref int HipBoneIndex {
-    get => ref _Handle.AsRef<int>(_HipBoneIndexOffset.Value);
+    get {
+      if (_HipBoneIndexOffset == null) {
+        _HipBoneIndexOffset = Schema.GetOffset(0x49C67E6F12FFBC70);
+      }
+      return ref _Handle.AsRef<int>(_HipBoneIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipBoneTranslationScaleOffset = new(() => Schema.GetOffset(0x49C67E6F604F4D39), LazyThreadSafetyMode.None);
+  private static nint? _HipBoneTranslationScaleOffset;
 
   public ref float HipBoneTranslationScale {
-    get => ref _Handle.AsRef<float>(_HipBoneTranslationScaleOffset.Value);
+    get {
+      if (_HipBoneTranslationScaleOffset == null) {
+        _HipBoneTranslationScaleOffset = Schema.GetOffset(0x49C67E6F604F4D39);
+      }
+      return ref _Handle.AsRef<float>(_HipBoneTranslationScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipDipSpringStrengthOffset = new(() => Schema.GetOffset(0x49C67E6F1C148301), LazyThreadSafetyMode.None);
+  private static nint? _HipDipSpringStrengthOffset;
 
   public ref float HipDipSpringStrength {
-    get => ref _Handle.AsRef<float>(_HipDipSpringStrengthOffset.Value);
+    get {
+      if (_HipDipSpringStrengthOffset == null) {
+        _HipDipSpringStrengthOffset = Schema.GetOffset(0x49C67E6F1C148301);
+      }
+      return ref _Handle.AsRef<float>(_HipDipSpringStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipDipImpactScaleOffset = new(() => Schema.GetOffset(0x49C67E6F9856E173), LazyThreadSafetyMode.None);
+  private static nint? _HipDipImpactScaleOffset;
 
   public ref float HipDipImpactScale {
-    get => ref _Handle.AsRef<float>(_HipDipImpactScaleOffset.Value);
+    get {
+      if (_HipDipImpactScaleOffset == null) {
+        _HipDipImpactScaleOffset = Schema.GetOffset(0x49C67E6F9856E173);
+      }
+      return ref _Handle.AsRef<float>(_HipDipImpactScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HipDipDelayOffset = new(() => Schema.GetOffset(0x49C67E6F8A45177C), LazyThreadSafetyMode.None);
+  private static nint? _HipDipDelayOffset;
 
   public ref float HipDipDelay {
-    get => ref _Handle.AsRef<float>(_HipDipDelayOffset.Value);
+    get {
+      if (_HipDipDelayOffset == null) {
+        _HipDipDelayOffset = Schema.GetOffset(0x49C67E6F8A45177C);
+      }
+      return ref _Handle.AsRef<float>(_HipDipDelayOffset!.Value);
+    }
   }
 
 

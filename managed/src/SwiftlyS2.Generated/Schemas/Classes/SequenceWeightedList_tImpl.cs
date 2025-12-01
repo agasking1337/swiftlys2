@@ -17,15 +17,25 @@ internal partial class SequenceWeightedList_tImpl : SchemaClass, SequenceWeighte
   public SequenceWeightedList_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SequenceOffset = new(() => Schema.GetOffset(0x9BB15AFE3775D33C), LazyThreadSafetyMode.None);
+  private static nint? _SequenceOffset;
 
   public ref int Sequence {
-    get => ref _Handle.AsRef<int>(_SequenceOffset.Value);
+    get {
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0x9BB15AFE3775D33C);
+      }
+      return ref _Handle.AsRef<int>(_SequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RelativeWeightOffset = new(() => Schema.GetOffset(0x9BB15AFE1BC599BB), LazyThreadSafetyMode.None);
+  private static nint? _RelativeWeightOffset;
 
   public ref float RelativeWeight {
-    get => ref _Handle.AsRef<float>(_RelativeWeightOffset.Value);
+    get {
+      if (_RelativeWeightOffset == null) {
+        _RelativeWeightOffset = Schema.GetOffset(0x9BB15AFE1BC599BB);
+      }
+      return ref _Handle.AsRef<float>(_RelativeWeightOffset!.Value);
+    }
   }
 
 

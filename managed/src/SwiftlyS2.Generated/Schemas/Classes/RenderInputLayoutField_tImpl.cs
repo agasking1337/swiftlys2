@@ -17,43 +17,79 @@ internal partial class RenderInputLayoutField_tImpl : SchemaClass, RenderInputLa
   public RenderInputLayoutField_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SemanticNameOffset = new(() => Schema.GetOffset(0x752C88F08F25E44C), LazyThreadSafetyMode.None);
+  private static nint? _SemanticNameOffset;
 
   public string SemanticName {
     get {
-      var ptr = _Handle + _SemanticNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_SemanticNameOffset == null) {
+            _SemanticNameOffset = Schema.GetOffset(0x752C88F08F25E44C);
+        }
+        var ptr = _Handle + _SemanticNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _SemanticNameOffset.Value, value, 32);
+    set {
+        if (_SemanticNameOffset == null) {
+            _SemanticNameOffset = Schema.GetOffset(0x752C88F08F25E44C);
+        }
+        Schema.SetFixedString(_Handle, _SemanticNameOffset!.Value, value, 32);
+    }
   } 
-  private static readonly Lazy<nint> _SemanticIndexOffset = new(() => Schema.GetOffset(0x752C88F0AAC99783), LazyThreadSafetyMode.None);
+  private static nint? _SemanticIndexOffset;
 
   public ref byte SemanticIndex {
-    get => ref _Handle.AsRef<byte>(_SemanticIndexOffset.Value);
+    get {
+      if (_SemanticIndexOffset == null) {
+        _SemanticIndexOffset = Schema.GetOffset(0x752C88F0AAC99783);
+      }
+      return ref _Handle.AsRef<byte>(_SemanticIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0x752C88F027734C8E), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref short Offset {
-    get => ref _Handle.AsRef<short>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0x752C88F027734C8E);
+      }
+      return ref _Handle.AsRef<short>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SlotOffset = new(() => Schema.GetOffset(0x752C88F08A37D215), LazyThreadSafetyMode.None);
+  private static nint? _SlotOffset;
 
   public ref byte Slot {
-    get => ref _Handle.AsRef<byte>(_SlotOffset.Value);
+    get {
+      if (_SlotOffset == null) {
+        _SlotOffset = Schema.GetOffset(0x752C88F08A37D215);
+      }
+      return ref _Handle.AsRef<byte>(_SlotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SlotTypeOffset = new(() => Schema.GetOffset(0x752C88F05072B95D), LazyThreadSafetyMode.None);
+  private static nint? _SlotTypeOffset;
 
   public ref RenderSlotType_t SlotType {
-    get => ref _Handle.AsRef<RenderSlotType_t>(_SlotTypeOffset.Value);
+    get {
+      if (_SlotTypeOffset == null) {
+        _SlotTypeOffset = Schema.GetOffset(0x752C88F05072B95D);
+      }
+      return ref _Handle.AsRef<RenderSlotType_t>(_SlotTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShaderSemanticOffset = new(() => Schema.GetOffset(0x752C88F0897CAA95), LazyThreadSafetyMode.None);
+  private static nint? _ShaderSemanticOffset;
 
   public string ShaderSemantic {
     get {
-      var ptr = _Handle + _ShaderSemanticOffset.Value;
-      return Schema.GetString(ptr);
+        if (_ShaderSemanticOffset == null) {
+            _ShaderSemanticOffset = Schema.GetOffset(0x752C88F0897CAA95);
+        }
+        var ptr = _Handle + _ShaderSemanticOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _ShaderSemanticOffset.Value, value, 32);
+    set {
+        if (_ShaderSemanticOffset == null) {
+            _ShaderSemanticOffset = Schema.GetOffset(0x752C88F0897CAA95);
+        }
+        Schema.SetFixedString(_Handle, _ShaderSemanticOffset!.Value, value, 32);
+    }
   } 
 
 

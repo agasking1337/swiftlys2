@@ -17,30 +17,55 @@ internal partial class CAddUpdateNodeImpl : CBinaryUpdateNodeImpl, CAddUpdateNod
   public CAddUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FootMotionTimingOffset = new(() => Schema.GetOffset(0x607346F4BB17F13D), LazyThreadSafetyMode.None);
+  private static nint? _FootMotionTimingOffset;
 
   public ref BinaryNodeChildOption FootMotionTiming {
-    get => ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset.Value);
+    get {
+      if (_FootMotionTimingOffset == null) {
+        _FootMotionTimingOffset = Schema.GetOffset(0x607346F4BB17F13D);
+      }
+      return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyToFootMotionOffset = new(() => Schema.GetOffset(0x607346F43D831E94), LazyThreadSafetyMode.None);
+  private static nint? _ApplyToFootMotionOffset;
 
   public ref bool ApplyToFootMotion {
-    get => ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset.Value);
+    get {
+      if (_ApplyToFootMotionOffset == null) {
+        _ApplyToFootMotionOffset = Schema.GetOffset(0x607346F43D831E94);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyChannelsSeparatelyOffset = new(() => Schema.GetOffset(0x607346F4FF2DBB45), LazyThreadSafetyMode.None);
+  private static nint? _ApplyChannelsSeparatelyOffset;
 
   public ref bool ApplyChannelsSeparately {
-    get => ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset.Value);
+    get {
+      if (_ApplyChannelsSeparatelyOffset == null) {
+        _ApplyChannelsSeparatelyOffset = Schema.GetOffset(0x607346F4FF2DBB45);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseModelSpaceOffset = new(() => Schema.GetOffset(0x607346F448863521), LazyThreadSafetyMode.None);
+  private static nint? _UseModelSpaceOffset;
 
   public ref bool UseModelSpace {
-    get => ref _Handle.AsRef<bool>(_UseModelSpaceOffset.Value);
+    get {
+      if (_UseModelSpaceOffset == null) {
+        _UseModelSpaceOffset = Schema.GetOffset(0x607346F448863521);
+      }
+      return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyScaleOffset = new(() => Schema.GetOffset(0x607346F469D11233), LazyThreadSafetyMode.None);
+  private static nint? _ApplyScaleOffset;
 
   public ref bool ApplyScale {
-    get => ref _Handle.AsRef<bool>(_ApplyScaleOffset.Value);
+    get {
+      if (_ApplyScaleOffset == null) {
+        _ApplyScaleOffset = Schema.GetOffset(0x607346F469D11233);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyScaleOffset!.Value);
+    }
   }
 
 

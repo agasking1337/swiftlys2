@@ -17,65 +17,125 @@ internal partial class CMoverUpdateNodeImpl : CUnaryUpdateNodeImpl, CMoverUpdate
   public CMoverUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DampingOffset = new(() => Schema.GetOffset(0x42BA18A215440FB5), LazyThreadSafetyMode.None);
+  private static nint? _DampingOffset;
 
   public CAnimInputDamping Damping {
-    get => new CAnimInputDampingImpl(_Handle + _DampingOffset.Value);
+    get {
+      if (_DampingOffset == null) {
+        _DampingOffset = Schema.GetOffset(0x42BA18A215440FB5);
+      }
+      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FacingTargetOffset = new(() => Schema.GetOffset(0x42BA18A2ED73C452), LazyThreadSafetyMode.None);
+  private static nint? _FacingTargetOffset;
 
   public ref AnimValueSource FacingTarget {
-    get => ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset.Value);
+    get {
+      if (_FacingTargetOffset == null) {
+        _FacingTargetOffset = Schema.GetOffset(0x42BA18A2ED73C452);
+      }
+      return ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveVecParamOffset = new(() => Schema.GetOffset(0x42BA18A22C2934BD), LazyThreadSafetyMode.None);
+  private static nint? _MoveVecParamOffset;
 
   public CAnimParamHandle MoveVecParam {
-    get => new CAnimParamHandleImpl(_Handle + _MoveVecParamOffset.Value);
+    get {
+      if (_MoveVecParamOffset == null) {
+        _MoveVecParamOffset = Schema.GetOffset(0x42BA18A22C2934BD);
+      }
+      return new CAnimParamHandleImpl(_Handle + _MoveVecParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveHeadingParamOffset = new(() => Schema.GetOffset(0x42BA18A283A456D1), LazyThreadSafetyMode.None);
+  private static nint? _MoveHeadingParamOffset;
 
   public CAnimParamHandle MoveHeadingParam {
-    get => new CAnimParamHandleImpl(_Handle + _MoveHeadingParamOffset.Value);
+    get {
+      if (_MoveHeadingParamOffset == null) {
+        _MoveHeadingParamOffset = Schema.GetOffset(0x42BA18A283A456D1);
+      }
+      return new CAnimParamHandleImpl(_Handle + _MoveHeadingParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnToFaceParamOffset = new(() => Schema.GetOffset(0x42BA18A275778205), LazyThreadSafetyMode.None);
+  private static nint? _TurnToFaceParamOffset;
 
   public CAnimParamHandle TurnToFaceParam {
-    get => new CAnimParamHandleImpl(_Handle + _TurnToFaceParamOffset.Value);
+    get {
+      if (_TurnToFaceParamOffset == null) {
+        _TurnToFaceParamOffset = Schema.GetOffset(0x42BA18A275778205);
+      }
+      return new CAnimParamHandleImpl(_Handle + _TurnToFaceParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnToFaceOffsetOffset = new(() => Schema.GetOffset(0x42BA18A2359F1A87), LazyThreadSafetyMode.None);
+  private static nint? _TurnToFaceOffsetOffset;
 
   public ref float TurnToFaceOffset {
-    get => ref _Handle.AsRef<float>(_TurnToFaceOffsetOffset.Value);
+    get {
+      if (_TurnToFaceOffsetOffset == null) {
+        _TurnToFaceOffsetOffset = Schema.GetOffset(0x42BA18A2359F1A87);
+      }
+      return ref _Handle.AsRef<float>(_TurnToFaceOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TurnToFaceLimitOffset = new(() => Schema.GetOffset(0x42BA18A22A27B7DF), LazyThreadSafetyMode.None);
+  private static nint? _TurnToFaceLimitOffset;
 
   public ref float TurnToFaceLimit {
-    get => ref _Handle.AsRef<float>(_TurnToFaceLimitOffset.Value);
+    get {
+      if (_TurnToFaceLimitOffset == null) {
+        _TurnToFaceLimitOffset = Schema.GetOffset(0x42BA18A22A27B7DF);
+      }
+      return ref _Handle.AsRef<float>(_TurnToFaceLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AdditiveOffset = new(() => Schema.GetOffset(0x42BA18A20FA86105), LazyThreadSafetyMode.None);
+  private static nint? _AdditiveOffset;
 
   public ref bool Additive {
-    get => ref _Handle.AsRef<bool>(_AdditiveOffset.Value);
+    get {
+      if (_AdditiveOffset == null) {
+        _AdditiveOffset = Schema.GetOffset(0x42BA18A20FA86105);
+      }
+      return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyMovementOffset = new(() => Schema.GetOffset(0x42BA18A240CF2252), LazyThreadSafetyMode.None);
+  private static nint? _ApplyMovementOffset;
 
   public ref bool ApplyMovement {
-    get => ref _Handle.AsRef<bool>(_ApplyMovementOffset.Value);
+    get {
+      if (_ApplyMovementOffset == null) {
+        _ApplyMovementOffset = Schema.GetOffset(0x42BA18A240CF2252);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyMovementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OrientMovementOffset = new(() => Schema.GetOffset(0x42BA18A2E957E789), LazyThreadSafetyMode.None);
+  private static nint? _OrientMovementOffset;
 
   public ref bool OrientMovement {
-    get => ref _Handle.AsRef<bool>(_OrientMovementOffset.Value);
+    get {
+      if (_OrientMovementOffset == null) {
+        _OrientMovementOffset = Schema.GetOffset(0x42BA18A2E957E789);
+      }
+      return ref _Handle.AsRef<bool>(_OrientMovementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ApplyRotationOffset = new(() => Schema.GetOffset(0x42BA18A25B6A1835), LazyThreadSafetyMode.None);
+  private static nint? _ApplyRotationOffset;
 
   public ref bool ApplyRotation {
-    get => ref _Handle.AsRef<bool>(_ApplyRotationOffset.Value);
+    get {
+      if (_ApplyRotationOffset == null) {
+        _ApplyRotationOffset = Schema.GetOffset(0x42BA18A25B6A1835);
+      }
+      return ref _Handle.AsRef<bool>(_ApplyRotationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LimitOnlyOffset = new(() => Schema.GetOffset(0x42BA18A2D127934E), LazyThreadSafetyMode.None);
+  private static nint? _LimitOnlyOffset;
 
   public ref bool LimitOnly {
-    get => ref _Handle.AsRef<bool>(_LimitOnlyOffset.Value);
+    get {
+      if (_LimitOnlyOffset == null) {
+        _LimitOnlyOffset = Schema.GetOffset(0x42BA18A2D127934E);
+      }
+      return ref _Handle.AsRef<bool>(_LimitOnlyOffset!.Value);
+    }
   }
 
 

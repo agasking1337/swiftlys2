@@ -17,57 +17,106 @@ internal partial class CCitadelSoundOpvarSetOBBImpl : CBaseEntityImpl, CCitadelS
   public CCitadelSoundOpvarSetOBBImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StackNameOffset = new(() => Schema.GetOffset(0xD3F8645E3B3E9CD4), LazyThreadSafetyMode.None);
+  private static nint? _StackNameOffset;
 
   public string StackName {
     get {
-      var ptr = _Handle.Read<nint>(_StackNameOffset.Value);
+      if (_StackNameOffset == null) {
+        _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
+      }
+      var ptr = _Handle.Read<nint>(_StackNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StackNameOffset.Value, value);
+    set {
+      if (_StackNameOffset == null) {
+        _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
+      }
+      Schema.SetString(_Handle, _StackNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OperatorNameOffset = new(() => Schema.GetOffset(0xD3F8645EF6140996), LazyThreadSafetyMode.None);
+  private static nint? _OperatorNameOffset;
 
   public string OperatorName {
     get {
-      var ptr = _Handle.Read<nint>(_OperatorNameOffset.Value);
+      if (_OperatorNameOffset == null) {
+        _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
+      }
+      var ptr = _Handle.Read<nint>(_OperatorNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OperatorNameOffset.Value, value);
+    set {
+      if (_OperatorNameOffset == null) {
+        _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
+      }
+      Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OpvarNameOffset = new(() => Schema.GetOffset(0xD3F8645E2CAEFF3C), LazyThreadSafetyMode.None);
+  private static nint? _OpvarNameOffset;
 
   public string OpvarName {
     get {
-      var ptr = _Handle.Read<nint>(_OpvarNameOffset.Value);
+      if (_OpvarNameOffset == null) {
+        _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
+      }
+      var ptr = _Handle.Read<nint>(_OpvarNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OpvarNameOffset.Value, value);
+    set {
+      if (_OpvarNameOffset == null) {
+        _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
+      }
+      Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _DistanceInnerMinsOffset = new(() => Schema.GetOffset(0xD3F8645EC7540883), LazyThreadSafetyMode.None);
+  private static nint? _DistanceInnerMinsOffset;
 
   public ref Vector DistanceInnerMins {
-    get => ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset.Value);
+    get {
+      if (_DistanceInnerMinsOffset == null) {
+        _DistanceInnerMinsOffset = Schema.GetOffset(0xD3F8645EC7540883);
+      }
+      return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceInnerMaxsOffset = new(() => Schema.GetOffset(0xD3F8645E705E7E61), LazyThreadSafetyMode.None);
+  private static nint? _DistanceInnerMaxsOffset;
 
   public ref Vector DistanceInnerMaxs {
-    get => ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset.Value);
+    get {
+      if (_DistanceInnerMaxsOffset == null) {
+        _DistanceInnerMaxsOffset = Schema.GetOffset(0xD3F8645E705E7E61);
+      }
+      return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOuterMinsOffset = new(() => Schema.GetOffset(0xD3F8645E185EC6F4), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOuterMinsOffset;
 
   public ref Vector DistanceOuterMins {
-    get => ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset.Value);
+    get {
+      if (_DistanceOuterMinsOffset == null) {
+        _DistanceOuterMinsOffset = Schema.GetOffset(0xD3F8645E185EC6F4);
+      }
+      return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOuterMaxsOffset = new(() => Schema.GetOffset(0xD3F8645E99738B36), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOuterMaxsOffset;
 
   public ref Vector DistanceOuterMaxs {
-    get => ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset.Value);
+    get {
+      if (_DistanceOuterMaxsOffset == null) {
+        _DistanceOuterMaxsOffset = Schema.GetOffset(0xD3F8645E99738B36);
+      }
+      return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AABBDirectionOffset = new(() => Schema.GetOffset(0xD3F8645EE8CF552C), LazyThreadSafetyMode.None);
+  private static nint? _AABBDirectionOffset;
 
   public ref int AABBDirection {
-    get => ref _Handle.AsRef<int>(_AABBDirectionOffset.Value);
+    get {
+      if (_AABBDirectionOffset == null) {
+        _AABBDirectionOffset = Schema.GetOffset(0xD3F8645EE8CF552C);
+      }
+      return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
+    }
   }
 
   public void StackNameUpdated() {

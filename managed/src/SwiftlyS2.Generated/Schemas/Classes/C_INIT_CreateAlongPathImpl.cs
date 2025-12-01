@@ -17,30 +17,55 @@ internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializer
   public C_INIT_CreateAlongPathImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MaxDistanceOffset = new(() => Schema.GetOffset(0x655F7B0C844E396A), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceOffset;
 
   public ref float MaxDistance {
-    get => ref _Handle.AsRef<float>(_MaxDistanceOffset.Value);
+    get {
+      if (_MaxDistanceOffset == null) {
+        _MaxDistanceOffset = Schema.GetOffset(0x655F7B0C844E396A);
+      }
+      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathParamsOffset = new(() => Schema.GetOffset(0x655F7B0C3C10092C), LazyThreadSafetyMode.None);
+  private static nint? _PathParamsOffset;
 
   public CPathParameters PathParams {
-    get => new CPathParametersImpl(_Handle + _PathParamsOffset.Value);
+    get {
+      if (_PathParamsOffset == null) {
+        _PathParamsOffset = Schema.GetOffset(0x655F7B0C3C10092C);
+      }
+      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseRandomCPsOffset = new(() => Schema.GetOffset(0x655F7B0CA15D9A41), LazyThreadSafetyMode.None);
+  private static nint? _UseRandomCPsOffset;
 
   public ref bool UseRandomCPs {
-    get => ref _Handle.AsRef<bool>(_UseRandomCPsOffset.Value);
+    get {
+      if (_UseRandomCPsOffset == null) {
+        _UseRandomCPsOffset = Schema.GetOffset(0x655F7B0CA15D9A41);
+      }
+      return ref _Handle.AsRef<bool>(_UseRandomCPsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndOffsetOffset = new(() => Schema.GetOffset(0x655F7B0C5BBD1959), LazyThreadSafetyMode.None);
+  private static nint? _EndOffsetOffset;
 
   public ref Vector EndOffset {
-    get => ref _Handle.AsRef<Vector>(_EndOffsetOffset.Value);
+    get {
+      if (_EndOffsetOffset == null) {
+        _EndOffsetOffset = Schema.GetOffset(0x655F7B0C5BBD1959);
+      }
+      return ref _Handle.AsRef<Vector>(_EndOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SaveOffsetOffset = new(() => Schema.GetOffset(0x655F7B0C43F64E5B), LazyThreadSafetyMode.None);
+  private static nint? _SaveOffsetOffset;
 
   public ref bool SaveOffset {
-    get => ref _Handle.AsRef<bool>(_SaveOffsetOffset.Value);
+    get {
+      if (_SaveOffsetOffset == null) {
+        _SaveOffsetOffset = Schema.GetOffset(0x655F7B0C43F64E5B);
+      }
+      return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+    }
   }
 
 

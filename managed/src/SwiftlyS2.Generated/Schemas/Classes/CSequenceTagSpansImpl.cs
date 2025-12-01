@@ -17,15 +17,25 @@ internal partial class CSequenceTagSpansImpl : SchemaClass, CSequenceTagSpans {
   public CSequenceTagSpansImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SequenceNameOffset = new(() => Schema.GetOffset(0x132BFE6A7462AF30), LazyThreadSafetyMode.None);
+  private static nint? _SequenceNameOffset;
 
   public ref CGlobalSymbol SequenceName {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset.Value);
+    get {
+      if (_SequenceNameOffset == null) {
+        _SequenceNameOffset = Schema.GetOffset(0x132BFE6A7462AF30);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TagsOffset = new(() => Schema.GetOffset(0x132BFE6AB46C8540), LazyThreadSafetyMode.None);
+  private static nint? _TagsOffset;
 
   public ref CUtlVector<TagSpan_t> Tags {
-    get => ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset.Value);
+    get {
+      if (_TagsOffset == null) {
+        _TagsOffset = Schema.GetOffset(0x132BFE6AB46C8540);
+      }
+      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    }
   }
 
 

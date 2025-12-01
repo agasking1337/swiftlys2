@@ -17,25 +17,45 @@ internal partial class C_OP_RenderVRHapticEventImpl : CParticleFunctionRendererI
   public C_OP_RenderVRHapticEventImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HandOffset = new(() => Schema.GetOffset(0xB83C5242D49ECB4C), LazyThreadSafetyMode.None);
+  private static nint? _HandOffset;
 
   public ref ParticleVRHandChoiceList_t Hand {
-    get => ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset.Value);
+    get {
+      if (_HandOffset == null) {
+        _HandOffset = Schema.GetOffset(0xB83C5242D49ECB4C);
+      }
+      return ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputHandCPOffset = new(() => Schema.GetOffset(0xB83C52428D35D26A), LazyThreadSafetyMode.None);
+  private static nint? _OutputHandCPOffset;
 
   public ref int OutputHandCP {
-    get => ref _Handle.AsRef<int>(_OutputHandCPOffset.Value);
+    get {
+      if (_OutputHandCPOffset == null) {
+        _OutputHandCPOffset = Schema.GetOffset(0xB83C52428D35D26A);
+      }
+      return ref _Handle.AsRef<int>(_OutputHandCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputFieldOffset = new(() => Schema.GetOffset(0xB83C5242324F6F74), LazyThreadSafetyMode.None);
+  private static nint? _OutputFieldOffset;
 
   public ref int OutputField {
-    get => ref _Handle.AsRef<int>(_OutputFieldOffset.Value);
+    get {
+      if (_OutputFieldOffset == null) {
+        _OutputFieldOffset = Schema.GetOffset(0xB83C5242324F6F74);
+      }
+      return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AmplitudeOffset = new(() => Schema.GetOffset(0xB83C5242B44B0E18), LazyThreadSafetyMode.None);
+  private static nint? _AmplitudeOffset;
 
   public CPerParticleFloatInput Amplitude {
-    get => new CPerParticleFloatInputImpl(_Handle + _AmplitudeOffset.Value);
+    get {
+      if (_AmplitudeOffset == null) {
+        _AmplitudeOffset = Schema.GetOffset(0xB83C5242B44B0E18);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _AmplitudeOffset!.Value);
+    }
   }
 
 

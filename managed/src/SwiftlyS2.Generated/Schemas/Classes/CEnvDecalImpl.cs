@@ -17,50 +17,95 @@ internal partial class CEnvDecalImpl : CBaseModelEntityImpl, CEnvDecal {
   public CEnvDecalImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DecalMaterialOffset = new(() => Schema.GetOffset(0xF52AFA9ED892BA39), LazyThreadSafetyMode.None);
+  private static nint? _DecalMaterialOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset.Value);
+    get {
+      if (_DecalMaterialOffset == null) {
+        _DecalMaterialOffset = Schema.GetOffset(0xF52AFA9ED892BA39);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WidthOffset = new(() => Schema.GetOffset(0xF52AFA9EB91935E1), LazyThreadSafetyMode.None);
+  private static nint? _WidthOffset;
 
   public ref float Width {
-    get => ref _Handle.AsRef<float>(_WidthOffset.Value);
+    get {
+      if (_WidthOffset == null) {
+        _WidthOffset = Schema.GetOffset(0xF52AFA9EB91935E1);
+      }
+      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeightOffset = new(() => Schema.GetOffset(0xF52AFA9EEADD7FB0), LazyThreadSafetyMode.None);
+  private static nint? _HeightOffset;
 
   public ref float Height {
-    get => ref _Handle.AsRef<float>(_HeightOffset.Value);
+    get {
+      if (_HeightOffset == null) {
+        _HeightOffset = Schema.GetOffset(0xF52AFA9EEADD7FB0);
+      }
+      return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DepthOffset = new(() => Schema.GetOffset(0xF52AFA9ED3AD54E8), LazyThreadSafetyMode.None);
+  private static nint? _DepthOffset;
 
   public ref float Depth {
-    get => ref _Handle.AsRef<float>(_DepthOffset.Value);
+    get {
+      if (_DepthOffset == null) {
+        _DepthOffset = Schema.GetOffset(0xF52AFA9ED3AD54E8);
+      }
+      return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RenderOrderOffset = new(() => Schema.GetOffset(0xF52AFA9E554E763B), LazyThreadSafetyMode.None);
+  private static nint? _RenderOrderOffset;
 
   public ref uint RenderOrder {
-    get => ref _Handle.AsRef<uint>(_RenderOrderOffset.Value);
+    get {
+      if (_RenderOrderOffset == null) {
+        _RenderOrderOffset = Schema.GetOffset(0xF52AFA9E554E763B);
+      }
+      return ref _Handle.AsRef<uint>(_RenderOrderOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProjectOnWorldOffset = new(() => Schema.GetOffset(0xF52AFA9E213B0285), LazyThreadSafetyMode.None);
+  private static nint? _ProjectOnWorldOffset;
 
   public ref bool ProjectOnWorld {
-    get => ref _Handle.AsRef<bool>(_ProjectOnWorldOffset.Value);
+    get {
+      if (_ProjectOnWorldOffset == null) {
+        _ProjectOnWorldOffset = Schema.GetOffset(0xF52AFA9E213B0285);
+      }
+      return ref _Handle.AsRef<bool>(_ProjectOnWorldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProjectOnCharactersOffset = new(() => Schema.GetOffset(0xF52AFA9EE0371FB7), LazyThreadSafetyMode.None);
+  private static nint? _ProjectOnCharactersOffset;
 
   public ref bool ProjectOnCharacters {
-    get => ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset.Value);
+    get {
+      if (_ProjectOnCharactersOffset == null) {
+        _ProjectOnCharactersOffset = Schema.GetOffset(0xF52AFA9EE0371FB7);
+      }
+      return ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProjectOnWaterOffset = new(() => Schema.GetOffset(0xF52AFA9ED4AF2E96), LazyThreadSafetyMode.None);
+  private static nint? _ProjectOnWaterOffset;
 
   public ref bool ProjectOnWater {
-    get => ref _Handle.AsRef<bool>(_ProjectOnWaterOffset.Value);
+    get {
+      if (_ProjectOnWaterOffset == null) {
+        _ProjectOnWaterOffset = Schema.GetOffset(0xF52AFA9ED4AF2E96);
+      }
+      return ref _Handle.AsRef<bool>(_ProjectOnWaterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DepthSortBiasOffset = new(() => Schema.GetOffset(0xF52AFA9ED8EE79D9), LazyThreadSafetyMode.None);
+  private static nint? _DepthSortBiasOffset;
 
   public ref float DepthSortBias {
-    get => ref _Handle.AsRef<float>(_DepthSortBiasOffset.Value);
+    get {
+      if (_DepthSortBiasOffset == null) {
+        _DepthSortBiasOffset = Schema.GetOffset(0xF52AFA9ED8EE79D9);
+      }
+      return ref _Handle.AsRef<float>(_DepthSortBiasOffset!.Value);
+    }
   }
 
   public void DecalMaterialUpdated() {

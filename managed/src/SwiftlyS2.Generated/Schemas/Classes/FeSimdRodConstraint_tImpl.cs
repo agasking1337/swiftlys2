@@ -17,30 +17,55 @@ internal partial class FeSimdRodConstraint_tImpl : SchemaClass, FeSimdRodConstra
   public FeSimdRodConstraint_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NodeOffset = new(() => Schema.GetOffset(0x596F7846CD6694B9), LazyThreadSafetyMode.None);
+  private static nint? _NodeOffset;
 
   public SchemaUntypedField Node {
-    get => new SchemaUntypedField(_Handle + _NodeOffset.Value);
+    get {
+      if (_NodeOffset == null) {
+        _NodeOffset = Schema.GetOffset(0x596F7846CD6694B9);
+      }
+      return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _F4MaxDistOffset = new(() => Schema.GetOffset(0x596F7846287D425F), LazyThreadSafetyMode.None);
+  private static nint? _F4MaxDistOffset;
 
   public ref fltx4 F4MaxDist {
-    get => ref _Handle.AsRef<fltx4>(_F4MaxDistOffset.Value);
+    get {
+      if (_F4MaxDistOffset == null) {
+        _F4MaxDistOffset = Schema.GetOffset(0x596F7846287D425F);
+      }
+      return ref _Handle.AsRef<fltx4>(_F4MaxDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _F4MinDistOffset = new(() => Schema.GetOffset(0x596F7846C67A2525), LazyThreadSafetyMode.None);
+  private static nint? _F4MinDistOffset;
 
   public ref fltx4 F4MinDist {
-    get => ref _Handle.AsRef<fltx4>(_F4MinDistOffset.Value);
+    get {
+      if (_F4MinDistOffset == null) {
+        _F4MinDistOffset = Schema.GetOffset(0x596F7846C67A2525);
+      }
+      return ref _Handle.AsRef<fltx4>(_F4MinDistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _F4Weight0Offset = new(() => Schema.GetOffset(0x596F78461FFC3579), LazyThreadSafetyMode.None);
+  private static nint? _F4Weight0Offset;
 
   public ref fltx4 F4Weight0 {
-    get => ref _Handle.AsRef<fltx4>(_F4Weight0Offset.Value);
+    get {
+      if (_F4Weight0Offset == null) {
+        _F4Weight0Offset = Schema.GetOffset(0x596F78461FFC3579);
+      }
+      return ref _Handle.AsRef<fltx4>(_F4Weight0Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _F4RelaxationFactorOffset = new(() => Schema.GetOffset(0x596F7846DF311F87), LazyThreadSafetyMode.None);
+  private static nint? _F4RelaxationFactorOffset;
 
   public ref fltx4 F4RelaxationFactor {
-    get => ref _Handle.AsRef<fltx4>(_F4RelaxationFactorOffset.Value);
+    get {
+      if (_F4RelaxationFactorOffset == null) {
+        _F4RelaxationFactorOffset = Schema.GetOffset(0x596F7846DF311F87);
+      }
+      return ref _Handle.AsRef<fltx4>(_F4RelaxationFactorOffset!.Value);
+    }
   }
 
 

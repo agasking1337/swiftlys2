@@ -17,40 +17,75 @@ internal partial class CAnimBoneImpl : SchemaClass, CAnimBone {
   public CAnimBoneImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x891F6AB94D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public ref CBufferString Name {
-    get => ref _Handle.AsRef<CBufferString>(_NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x891F6AB94D8F5786);
+      }
+      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentOffset = new(() => Schema.GetOffset(0x891F6AB92FF7A69D), LazyThreadSafetyMode.None);
+  private static nint? _ParentOffset;
 
   public ref int Parent {
-    get => ref _Handle.AsRef<int>(_ParentOffset.Value);
+    get {
+      if (_ParentOffset == null) {
+        _ParentOffset = Schema.GetOffset(0x891F6AB92FF7A69D);
+      }
+      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PosOffset = new(() => Schema.GetOffset(0x891F6AB944CEBEA9), LazyThreadSafetyMode.None);
+  private static nint? _PosOffset;
 
   public ref Vector Pos {
-    get => ref _Handle.AsRef<Vector>(_PosOffset.Value);
+    get {
+      if (_PosOffset == null) {
+        _PosOffset = Schema.GetOffset(0x891F6AB944CEBEA9);
+      }
+      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _QuatOffset = new(() => Schema.GetOffset(0x891F6AB9157658BE), LazyThreadSafetyMode.None);
+  private static nint? _QuatOffset;
 
   public SchemaUntypedField Quat {
-    get => new SchemaUntypedField(_Handle + _QuatOffset.Value);
+    get {
+      if (_QuatOffset == null) {
+        _QuatOffset = Schema.GetOffset(0x891F6AB9157658BE);
+      }
+      return new SchemaUntypedField(_Handle + _QuatOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x891F6AB9C2A44391), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x891F6AB9C2A44391);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlignmentOffset = new(() => Schema.GetOffset(0x891F6AB9CA0E45D1), LazyThreadSafetyMode.None);
+  private static nint? _AlignmentOffset;
 
   public SchemaUntypedField Alignment {
-    get => new SchemaUntypedField(_Handle + _AlignmentOffset.Value);
+    get {
+      if (_AlignmentOffset == null) {
+        _AlignmentOffset = Schema.GetOffset(0x891F6AB9CA0E45D1);
+      }
+      return new SchemaUntypedField(_Handle + _AlignmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x891F6AB9DC74A14C), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref int Flags {
-    get => ref _Handle.AsRef<int>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x891F6AB9DC74A14C);
+      }
+      return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+    }
   }
 
 

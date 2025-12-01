@@ -17,30 +17,55 @@ internal partial class CStopAtGoalUpdateNodeImpl : CUnaryUpdateNodeImpl, CStopAt
   public CStopAtGoalUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OuterRadiusOffset = new(() => Schema.GetOffset(0x4889F8297B66A818), LazyThreadSafetyMode.None);
+  private static nint? _OuterRadiusOffset;
 
   public ref float OuterRadius {
-    get => ref _Handle.AsRef<float>(_OuterRadiusOffset.Value);
+    get {
+      if (_OuterRadiusOffset == null) {
+        _OuterRadiusOffset = Schema.GetOffset(0x4889F8297B66A818);
+      }
+      return ref _Handle.AsRef<float>(_OuterRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InnerRadiusOffset = new(() => Schema.GetOffset(0x4889F82932121407), LazyThreadSafetyMode.None);
+  private static nint? _InnerRadiusOffset;
 
   public ref float InnerRadius {
-    get => ref _Handle.AsRef<float>(_InnerRadiusOffset.Value);
+    get {
+      if (_InnerRadiusOffset == null) {
+        _InnerRadiusOffset = Schema.GetOffset(0x4889F82932121407);
+      }
+      return ref _Handle.AsRef<float>(_InnerRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxScaleOffset = new(() => Schema.GetOffset(0x4889F829FF4EC8E7), LazyThreadSafetyMode.None);
+  private static nint? _MaxScaleOffset;
 
   public ref float MaxScale {
-    get => ref _Handle.AsRef<float>(_MaxScaleOffset.Value);
+    get {
+      if (_MaxScaleOffset == null) {
+        _MaxScaleOffset = Schema.GetOffset(0x4889F829FF4EC8E7);
+      }
+      return ref _Handle.AsRef<float>(_MaxScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinScaleOffset = new(() => Schema.GetOffset(0x4889F829D125D67D), LazyThreadSafetyMode.None);
+  private static nint? _MinScaleOffset;
 
   public ref float MinScale {
-    get => ref _Handle.AsRef<float>(_MinScaleOffset.Value);
+    get {
+      if (_MinScaleOffset == null) {
+        _MinScaleOffset = Schema.GetOffset(0x4889F829D125D67D);
+      }
+      return ref _Handle.AsRef<float>(_MinScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DampingOffset = new(() => Schema.GetOffset(0x4889F82915440FB5), LazyThreadSafetyMode.None);
+  private static nint? _DampingOffset;
 
   public CAnimInputDamping Damping {
-    get => new CAnimInputDampingImpl(_Handle + _DampingOffset.Value);
+    get {
+      if (_DampingOffset == null) {
+        _DampingOffset = Schema.GetOffset(0x4889F82915440FB5);
+      }
+      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    }
   }
 
 

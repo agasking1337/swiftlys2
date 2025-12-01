@@ -17,45 +17,85 @@ internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl
   public CMovementComponentUpdaterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MotorsOffset = new(() => Schema.GetOffset(0xCAAB73FD817BF33), LazyThreadSafetyMode.None);
+  private static nint? _MotorsOffset;
 
   public ref CUtlVector<SchemaUntypedField> Motors {
-    get => ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset.Value);
+    get {
+      if (_MotorsOffset == null) {
+        _MotorsOffset = Schema.GetOffset(0xCAAB73FD817BF33);
+      }
+      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FacingDampingOffset = new(() => Schema.GetOffset(0xCAAB73F9A430F4B), LazyThreadSafetyMode.None);
+  private static nint? _FacingDampingOffset;
 
   public CAnimInputDamping FacingDamping {
-    get => new CAnimInputDampingImpl(_Handle + _FacingDampingOffset.Value);
+    get {
+      if (_FacingDampingOffset == null) {
+        _FacingDampingOffset = Schema.GetOffset(0xCAAB73F9A430F4B);
+      }
+      return new CAnimInputDampingImpl(_Handle + _FacingDampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultMotorIndexOffset = new(() => Schema.GetOffset(0xCAAB73F5A788411), LazyThreadSafetyMode.None);
+  private static nint? _DefaultMotorIndexOffset;
 
   public ref int DefaultMotorIndex {
-    get => ref _Handle.AsRef<int>(_DefaultMotorIndexOffset.Value);
+    get {
+      if (_DefaultMotorIndexOffset == null) {
+        _DefaultMotorIndexOffset = Schema.GetOffset(0xCAAB73F5A788411);
+      }
+      return ref _Handle.AsRef<int>(_DefaultMotorIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultRunSpeedOffset = new(() => Schema.GetOffset(0xCAAB73F47B9DED8), LazyThreadSafetyMode.None);
+  private static nint? _DefaultRunSpeedOffset;
 
   public ref float DefaultRunSpeed {
-    get => ref _Handle.AsRef<float>(_DefaultRunSpeedOffset.Value);
+    get {
+      if (_DefaultRunSpeedOffset == null) {
+        _DefaultRunSpeedOffset = Schema.GetOffset(0xCAAB73F47B9DED8);
+      }
+      return ref _Handle.AsRef<float>(_DefaultRunSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveVarsDisabledOffset = new(() => Schema.GetOffset(0xCAAB73FB55A4C6A), LazyThreadSafetyMode.None);
+  private static nint? _MoveVarsDisabledOffset;
 
   public ref bool MoveVarsDisabled {
-    get => ref _Handle.AsRef<bool>(_MoveVarsDisabledOffset.Value);
+    get {
+      if (_MoveVarsDisabledOffset == null) {
+        _MoveVarsDisabledOffset = Schema.GetOffset(0xCAAB73FB55A4C6A);
+      }
+      return ref _Handle.AsRef<bool>(_MoveVarsDisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NetworkPathOffset = new(() => Schema.GetOffset(0xCAAB73F86C36FF6), LazyThreadSafetyMode.None);
+  private static nint? _NetworkPathOffset;
 
   public ref bool NetworkPath {
-    get => ref _Handle.AsRef<bool>(_NetworkPathOffset.Value);
+    get {
+      if (_NetworkPathOffset == null) {
+        _NetworkPathOffset = Schema.GetOffset(0xCAAB73F86C36FF6);
+      }
+      return ref _Handle.AsRef<bool>(_NetworkPathOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NetworkFacingOffset = new(() => Schema.GetOffset(0xCAAB73FE3436E8F), LazyThreadSafetyMode.None);
+  private static nint? _NetworkFacingOffset;
 
   public ref bool NetworkFacing {
-    get => ref _Handle.AsRef<bool>(_NetworkFacingOffset.Value);
+    get {
+      if (_NetworkFacingOffset == null) {
+        _NetworkFacingOffset = Schema.GetOffset(0xCAAB73FE3436E8F);
+      }
+      return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamHandlesOffset = new(() => Schema.GetOffset(0xCAAB73FF6A771ED), LazyThreadSafetyMode.None);
+  private static nint? _ParamHandlesOffset;
 
   public SchemaUntypedField ParamHandles {
-    get => new SchemaUntypedField(_Handle + _ParamHandlesOffset.Value);
+    get {
+      if (_ParamHandlesOffset == null) {
+        _ParamHandlesOffset = Schema.GetOffset(0xCAAB73FF6A771ED);
+      }
+      return new SchemaUntypedField(_Handle + _ParamHandlesOffset!.Value);
+    }
   }
 
 

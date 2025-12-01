@@ -17,25 +17,45 @@ internal partial class ragdollelement_tImpl : SchemaClass, ragdollelement_t {
   public ragdollelement_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OriginParentSpaceOffset = new(() => Schema.GetOffset(0x6DFDA0AB476AA8AB), LazyThreadSafetyMode.None);
+  private static nint? _OriginParentSpaceOffset;
 
   public ref Vector OriginParentSpace {
-    get => ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset.Value);
+    get {
+      if (_OriginParentSpaceOffset == null) {
+        _OriginParentSpaceOffset = Schema.GetOffset(0x6DFDA0AB476AA8AB);
+      }
+      return ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentIndexOffset = new(() => Schema.GetOffset(0x6DFDA0ABFE49C863), LazyThreadSafetyMode.None);
+  private static nint? _ParentIndexOffset;
 
   public ref int ParentIndex {
-    get => ref _Handle.AsRef<int>(_ParentIndexOffset.Value);
+    get {
+      if (_ParentIndexOffset == null) {
+        _ParentIndexOffset = Schema.GetOffset(0x6DFDA0ABFE49C863);
+      }
+      return ref _Handle.AsRef<int>(_ParentIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0x6DFDA0AB5ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0x6DFDA0AB5ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeightOffset = new(() => Schema.GetOffset(0x6DFDA0ABCAB61C56), LazyThreadSafetyMode.None);
+  private static nint? _HeightOffset;
 
   public ref int Height {
-    get => ref _Handle.AsRef<int>(_HeightOffset.Value);
+    get {
+      if (_HeightOffset == null) {
+        _HeightOffset = Schema.GetOffset(0x6DFDA0ABCAB61C56);
+      }
+      return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+    }
   }
 
 

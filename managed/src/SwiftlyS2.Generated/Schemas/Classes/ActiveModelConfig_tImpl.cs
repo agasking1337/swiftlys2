@@ -17,29 +17,52 @@ internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_
   public ActiveModelConfig_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HandleOffset = new(() => Schema.GetOffset(0x554D81919D208453), LazyThreadSafetyMode.None);
+  private static nint? _HandleOffset;
 
   public ModelConfigHandle_t Handle {
-    get => new ModelConfigHandle_tImpl(_Handle + _HandleOffset.Value);
+    get {
+      if (_HandleOffset == null) {
+        _HandleOffset = Schema.GetOffset(0x554D81919D208453);
+      }
+      return new ModelConfigHandle_tImpl(_Handle + _HandleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x554D8191CAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AssociatedEntitiesOffset = new(() => Schema.GetOffset(0x554D8191D6EB4F18), LazyThreadSafetyMode.None);
+  private static nint? _AssociatedEntitiesOffset;
 
   public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset.Value);
+    get {
+      if (_AssociatedEntitiesOffset == null) {
+        _AssociatedEntitiesOffset = Schema.GetOffset(0x554D8191D6EB4F18);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AssociatedEntityNamesOffset = new(() => Schema.GetOffset(0x554D8191EB3B241C), LazyThreadSafetyMode.None);
+  private static nint? _AssociatedEntityNamesOffset;
 
   public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames {
-    get => ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset.Value);
+    get {
+      if (_AssociatedEntityNamesOffset == null) {
+        _AssociatedEntityNamesOffset = Schema.GetOffset(0x554D8191EB3B241C);
+      }
+      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset!.Value);
+    }
   }
 
   public void HandleUpdated() {

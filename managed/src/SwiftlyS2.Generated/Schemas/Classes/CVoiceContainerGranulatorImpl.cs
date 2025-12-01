@@ -17,35 +17,65 @@ internal partial class CVoiceContainerGranulatorImpl : CVoiceContainerBaseImpl, 
   public CVoiceContainerGranulatorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _GrainLengthOffset = new(() => Schema.GetOffset(0x30F273589D2BE672), LazyThreadSafetyMode.None);
+  private static nint? _GrainLengthOffset;
 
   public ref float GrainLength {
-    get => ref _Handle.AsRef<float>(_GrainLengthOffset.Value);
+    get {
+      if (_GrainLengthOffset == null) {
+        _GrainLengthOffset = Schema.GetOffset(0x30F273589D2BE672);
+      }
+      return ref _Handle.AsRef<float>(_GrainLengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GrainCrossfadeAmountOffset = new(() => Schema.GetOffset(0x30F27358AE31A7DC), LazyThreadSafetyMode.None);
+  private static nint? _GrainCrossfadeAmountOffset;
 
   public ref float GrainCrossfadeAmount {
-    get => ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset.Value);
+    get {
+      if (_GrainCrossfadeAmountOffset == null) {
+        _GrainCrossfadeAmountOffset = Schema.GetOffset(0x30F27358AE31A7DC);
+      }
+      return ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartJitterOffset = new(() => Schema.GetOffset(0x30F27358FBAD6833), LazyThreadSafetyMode.None);
+  private static nint? _StartJitterOffset;
 
   public ref float StartJitter {
-    get => ref _Handle.AsRef<float>(_StartJitterOffset.Value);
+    get {
+      if (_StartJitterOffset == null) {
+        _StartJitterOffset = Schema.GetOffset(0x30F27358FBAD6833);
+      }
+      return ref _Handle.AsRef<float>(_StartJitterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaybackJitterOffset = new(() => Schema.GetOffset(0x30F273583904EEB8), LazyThreadSafetyMode.None);
+  private static nint? _PlaybackJitterOffset;
 
   public ref float PlaybackJitter {
-    get => ref _Handle.AsRef<float>(_PlaybackJitterOffset.Value);
+    get {
+      if (_PlaybackJitterOffset == null) {
+        _PlaybackJitterOffset = Schema.GetOffset(0x30F273583904EEB8);
+      }
+      return ref _Handle.AsRef<float>(_PlaybackJitterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShouldWraparoundOffset = new(() => Schema.GetOffset(0x30F273585F9E45A3), LazyThreadSafetyMode.None);
+  private static nint? _ShouldWraparoundOffset;
 
   public ref bool ShouldWraparound {
-    get => ref _Handle.AsRef<bool>(_ShouldWraparoundOffset.Value);
+    get {
+      if (_ShouldWraparoundOffset == null) {
+        _ShouldWraparoundOffset = Schema.GetOffset(0x30F273585F9E45A3);
+      }
+      return ref _Handle.AsRef<bool>(_ShouldWraparoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SourceAudioOffset = new(() => Schema.GetOffset(0x30F27358E5E00DE2), LazyThreadSafetyMode.None);
+  private static nint? _SourceAudioOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset.Value);
+    get {
+      if (_SourceAudioOffset == null) {
+        _SourceAudioOffset = Schema.GetOffset(0x30F27358E5E00DE2);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset!.Value);
+    }
   }
 
 

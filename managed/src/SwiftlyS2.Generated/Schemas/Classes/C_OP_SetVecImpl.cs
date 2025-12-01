@@ -17,30 +17,55 @@ internal partial class C_OP_SetVecImpl : CParticleFunctionOperatorImpl, C_OP_Set
   public C_OP_SetVecImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueOffset = new(() => Schema.GetOffset(0x24E155B734445438), LazyThreadSafetyMode.None);
+  private static nint? _InputValueOffset;
 
   public CPerParticleVecInput InputValue {
-    get => new CPerParticleVecInputImpl(_Handle + _InputValueOffset.Value);
+    get {
+      if (_InputValueOffset == null) {
+        _InputValueOffset = Schema.GetOffset(0x24E155B734445438);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _InputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputFieldOffset = new(() => Schema.GetOffset(0x24E155B7324F6F74), LazyThreadSafetyMode.None);
+  private static nint? _OutputFieldOffset;
 
   public ParticleAttributeIndex_t OutputField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset.Value);
+    get {
+      if (_OutputFieldOffset == null) {
+        _OutputFieldOffset = Schema.GetOffset(0x24E155B7324F6F74);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetMethodOffset = new(() => Schema.GetOffset(0x24E155B7FB53C31E), LazyThreadSafetyMode.None);
+  private static nint? _SetMethodOffset;
 
   public ref ParticleSetMethod_t SetMethod {
-    get => ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset.Value);
+    get {
+      if (_SetMethodOffset == null) {
+        _SetMethodOffset = Schema.GetOffset(0x24E155B7FB53C31E);
+      }
+      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LerpOffset = new(() => Schema.GetOffset(0x24E155B75C17F8E8), LazyThreadSafetyMode.None);
+  private static nint? _LerpOffset;
 
   public CPerParticleFloatInput Lerp {
-    get => new CPerParticleFloatInputImpl(_Handle + _LerpOffset.Value);
+    get {
+      if (_LerpOffset == null) {
+        _LerpOffset = Schema.GetOffset(0x24E155B75C17F8E8);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizedOutputOffset = new(() => Schema.GetOffset(0x24E155B70AA98C55), LazyThreadSafetyMode.None);
+  private static nint? _NormalizedOutputOffset;
 
   public ref bool NormalizedOutput {
-    get => ref _Handle.AsRef<bool>(_NormalizedOutputOffset.Value);
+    get {
+      if (_NormalizedOutputOffset == null) {
+        _NormalizedOutputOffset = Schema.GetOffset(0x24E155B70AA98C55);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+    }
   }
 
 

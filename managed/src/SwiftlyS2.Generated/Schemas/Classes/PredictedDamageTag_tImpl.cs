@@ -17,25 +17,45 @@ internal partial class PredictedDamageTag_tImpl : SchemaClass, PredictedDamageTa
   public PredictedDamageTag_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TagTickOffset = new(() => Schema.GetOffset(0x43420069BBCAAE16), LazyThreadSafetyMode.None);
+  private static nint? _TagTickOffset;
 
   public GameTick_t TagTick {
-    get => new GameTick_tImpl(_Handle + _TagTickOffset.Value);
+    get {
+      if (_TagTickOffset == null) {
+        _TagTickOffset = Schema.GetOffset(0x43420069BBCAAE16);
+      }
+      return new GameTick_tImpl(_Handle + _TagTickOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlinchModSmallOffset = new(() => Schema.GetOffset(0x4342006970E7E18A), LazyThreadSafetyMode.None);
+  private static nint? _FlinchModSmallOffset;
 
   public ref float FlinchModSmall {
-    get => ref _Handle.AsRef<float>(_FlinchModSmallOffset.Value);
+    get {
+      if (_FlinchModSmallOffset == null) {
+        _FlinchModSmallOffset = Schema.GetOffset(0x4342006970E7E18A);
+      }
+      return ref _Handle.AsRef<float>(_FlinchModSmallOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlinchModLargeOffset = new(() => Schema.GetOffset(0x43420069E052DA66), LazyThreadSafetyMode.None);
+  private static nint? _FlinchModLargeOffset;
 
   public ref float FlinchModLarge {
-    get => ref _Handle.AsRef<float>(_FlinchModLargeOffset.Value);
+    get {
+      if (_FlinchModLargeOffset == null) {
+        _FlinchModLargeOffset = Schema.GetOffset(0x43420069E052DA66);
+      }
+      return ref _Handle.AsRef<float>(_FlinchModLargeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FriendlyFireDamageReductionRatioOffset = new(() => Schema.GetOffset(0x43420069BA6A7F4D), LazyThreadSafetyMode.None);
+  private static nint? _FriendlyFireDamageReductionRatioOffset;
 
   public ref float FriendlyFireDamageReductionRatio {
-    get => ref _Handle.AsRef<float>(_FriendlyFireDamageReductionRatioOffset.Value);
+    get {
+      if (_FriendlyFireDamageReductionRatioOffset == null) {
+        _FriendlyFireDamageReductionRatioOffset = Schema.GetOffset(0x43420069BA6A7F4D);
+      }
+      return ref _Handle.AsRef<float>(_FriendlyFireDamageReductionRatioOffset!.Value);
+    }
   }
 
   public void TagTickUpdated() {

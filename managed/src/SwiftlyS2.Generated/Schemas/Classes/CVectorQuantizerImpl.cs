@@ -17,20 +17,35 @@ internal partial class CVectorQuantizerImpl : SchemaClass, CVectorQuantizer {
   public CVectorQuantizerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CentroidVectorsOffset = new(() => Schema.GetOffset(0x9E79F13089538103), LazyThreadSafetyMode.None);
+  private static nint? _CentroidVectorsOffset;
 
   public ref CUtlVector<float> CentroidVectors {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_CentroidVectorsOffset.Value);
+    get {
+      if (_CentroidVectorsOffset == null) {
+        _CentroidVectorsOffset = Schema.GetOffset(0x9E79F13089538103);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_CentroidVectorsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CentroidsOffset = new(() => Schema.GetOffset(0x9E79F13064667B2E), LazyThreadSafetyMode.None);
+  private static nint? _CentroidsOffset;
 
   public ref int Centroids {
-    get => ref _Handle.AsRef<int>(_CentroidsOffset.Value);
+    get {
+      if (_CentroidsOffset == null) {
+        _CentroidsOffset = Schema.GetOffset(0x9E79F13064667B2E);
+      }
+      return ref _Handle.AsRef<int>(_CentroidsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DimensionsOffset = new(() => Schema.GetOffset(0x9E79F1302D8795AC), LazyThreadSafetyMode.None);
+  private static nint? _DimensionsOffset;
 
   public ref int Dimensions {
-    get => ref _Handle.AsRef<int>(_DimensionsOffset.Value);
+    get {
+      if (_DimensionsOffset == null) {
+        _DimensionsOffset = Schema.GetOffset(0x9E79F1302D8795AC);
+      }
+      return ref _Handle.AsRef<int>(_DimensionsOffset!.Value);
+    }
   }
 
 

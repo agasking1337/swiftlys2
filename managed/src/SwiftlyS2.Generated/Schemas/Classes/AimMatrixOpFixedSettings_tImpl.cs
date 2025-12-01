@@ -17,70 +17,135 @@ internal partial class AimMatrixOpFixedSettings_tImpl : SchemaClass, AimMatrixOp
   public AimMatrixOpFixedSettings_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AttachmentOffset = new(() => Schema.GetOffset(0xE059B1E02C5CA308), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentOffset;
 
   public CAnimAttachment Attachment {
-    get => new CAnimAttachmentImpl(_Handle + _AttachmentOffset.Value);
+    get {
+      if (_AttachmentOffset == null) {
+        _AttachmentOffset = Schema.GetOffset(0xE059B1E02C5CA308);
+      }
+      return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DampingOffset = new(() => Schema.GetOffset(0xE059B1E015440FB5), LazyThreadSafetyMode.None);
+  private static nint? _DampingOffset;
 
   public CAnimInputDamping Damping {
-    get => new CAnimInputDampingImpl(_Handle + _DampingOffset.Value);
+    get {
+      if (_DampingOffset == null) {
+        _DampingOffset = Schema.GetOffset(0xE059B1E015440FB5);
+      }
+      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PoseCacheHandlesOffset = new(() => Schema.GetOffset(0xE059B1E0E7BA8E61), LazyThreadSafetyMode.None);
+  private static nint? _PoseCacheHandlesOffset;
 
   public SchemaUntypedField PoseCacheHandles {
-    get => new SchemaUntypedField(_Handle + _PoseCacheHandlesOffset.Value);
+    get {
+      if (_PoseCacheHandlesOffset == null) {
+        _PoseCacheHandlesOffset = Schema.GetOffset(0xE059B1E0E7BA8E61);
+      }
+      return new SchemaUntypedField(_Handle + _PoseCacheHandlesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendModeOffset = new(() => Schema.GetOffset(0xE059B1E0DBED6224), LazyThreadSafetyMode.None);
+  private static nint? _BlendModeOffset;
 
   public ref AimMatrixBlendMode BlendMode {
-    get => ref _Handle.AsRef<AimMatrixBlendMode>(_BlendModeOffset.Value);
+    get {
+      if (_BlendModeOffset == null) {
+        _BlendModeOffset = Schema.GetOffset(0xE059B1E0DBED6224);
+      }
+      return ref _Handle.AsRef<AimMatrixBlendMode>(_BlendModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxYawAngleOffset = new(() => Schema.GetOffset(0xE059B1E049BAD4B1), LazyThreadSafetyMode.None);
+  private static nint? _MaxYawAngleOffset;
 
   public ref float MaxYawAngle {
-    get => ref _Handle.AsRef<float>(_MaxYawAngleOffset.Value);
+    get {
+      if (_MaxYawAngleOffset == null) {
+        _MaxYawAngleOffset = Schema.GetOffset(0xE059B1E049BAD4B1);
+      }
+      return ref _Handle.AsRef<float>(_MaxYawAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxPitchAngleOffset = new(() => Schema.GetOffset(0xE059B1E0AE96A782), LazyThreadSafetyMode.None);
+  private static nint? _MaxPitchAngleOffset;
 
   public ref float MaxPitchAngle {
-    get => ref _Handle.AsRef<float>(_MaxPitchAngleOffset.Value);
+    get {
+      if (_MaxPitchAngleOffset == null) {
+        _MaxPitchAngleOffset = Schema.GetOffset(0xE059B1E0AE96A782);
+      }
+      return ref _Handle.AsRef<float>(_MaxPitchAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SequenceMaxFrameOffset = new(() => Schema.GetOffset(0xE059B1E05FD0AE0B), LazyThreadSafetyMode.None);
+  private static nint? _SequenceMaxFrameOffset;
 
   public ref int SequenceMaxFrame {
-    get => ref _Handle.AsRef<int>(_SequenceMaxFrameOffset.Value);
+    get {
+      if (_SequenceMaxFrameOffset == null) {
+        _SequenceMaxFrameOffset = Schema.GetOffset(0xE059B1E05FD0AE0B);
+      }
+      return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneMaskIndexOffset = new(() => Schema.GetOffset(0xE059B1E04871547D), LazyThreadSafetyMode.None);
+  private static nint? _BoneMaskIndexOffset;
 
   public ref int BoneMaskIndex {
-    get => ref _Handle.AsRef<int>(_BoneMaskIndexOffset.Value);
+    get {
+      if (_BoneMaskIndexOffset == null) {
+        _BoneMaskIndexOffset = Schema.GetOffset(0xE059B1E04871547D);
+      }
+      return ref _Handle.AsRef<int>(_BoneMaskIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetIsPositionOffset = new(() => Schema.GetOffset(0xE059B1E014C34163), LazyThreadSafetyMode.None);
+  private static nint? _TargetIsPositionOffset;
 
   public ref bool TargetIsPosition {
-    get => ref _Handle.AsRef<bool>(_TargetIsPositionOffset.Value);
+    get {
+      if (_TargetIsPositionOffset == null) {
+        _TargetIsPositionOffset = Schema.GetOffset(0xE059B1E014C34163);
+      }
+      return ref _Handle.AsRef<bool>(_TargetIsPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseBiasAndClampOffset = new(() => Schema.GetOffset(0xE059B1E0F71F7341), LazyThreadSafetyMode.None);
+  private static nint? _UseBiasAndClampOffset;
 
   public ref bool UseBiasAndClamp {
-    get => ref _Handle.AsRef<bool>(_UseBiasAndClampOffset.Value);
+    get {
+      if (_UseBiasAndClampOffset == null) {
+        _UseBiasAndClampOffset = Schema.GetOffset(0xE059B1E0F71F7341);
+      }
+      return ref _Handle.AsRef<bool>(_UseBiasAndClampOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BiasAndClampYawOffsetOffset = new(() => Schema.GetOffset(0xE059B1E07D3789F6), LazyThreadSafetyMode.None);
+  private static nint? _BiasAndClampYawOffsetOffset;
 
   public ref float BiasAndClampYawOffset {
-    get => ref _Handle.AsRef<float>(_BiasAndClampYawOffsetOffset.Value);
+    get {
+      if (_BiasAndClampYawOffsetOffset == null) {
+        _BiasAndClampYawOffsetOffset = Schema.GetOffset(0xE059B1E07D3789F6);
+      }
+      return ref _Handle.AsRef<float>(_BiasAndClampYawOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BiasAndClampPitchOffsetOffset = new(() => Schema.GetOffset(0xE059B1E08421472F), LazyThreadSafetyMode.None);
+  private static nint? _BiasAndClampPitchOffsetOffset;
 
   public ref float BiasAndClampPitchOffset {
-    get => ref _Handle.AsRef<float>(_BiasAndClampPitchOffsetOffset.Value);
+    get {
+      if (_BiasAndClampPitchOffsetOffset == null) {
+        _BiasAndClampPitchOffsetOffset = Schema.GetOffset(0xE059B1E08421472F);
+      }
+      return ref _Handle.AsRef<float>(_BiasAndClampPitchOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BiasAndClampBlendCurveOffset = new(() => Schema.GetOffset(0xE059B1E0D81016FE), LazyThreadSafetyMode.None);
+  private static nint? _BiasAndClampBlendCurveOffset;
 
   public CBlendCurve BiasAndClampBlendCurve {
-    get => new CBlendCurveImpl(_Handle + _BiasAndClampBlendCurveOffset.Value);
+    get {
+      if (_BiasAndClampBlendCurveOffset == null) {
+        _BiasAndClampBlendCurveOffset = Schema.GetOffset(0xE059B1E0D81016FE);
+      }
+      return new CBlendCurveImpl(_Handle + _BiasAndClampBlendCurveOffset!.Value);
+    }
   }
 
 

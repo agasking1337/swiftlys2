@@ -17,25 +17,45 @@ internal partial class C_OP_RemapCrossProductOfTwoVectorsToVectorImpl : CParticl
   public C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputVec1Offset = new(() => Schema.GetOffset(0x4B4531D84584355A), LazyThreadSafetyMode.None);
+  private static nint? _InputVec1Offset;
 
   public CPerParticleVecInput InputVec1 {
-    get => new CPerParticleVecInputImpl(_Handle + _InputVec1Offset.Value);
+    get {
+      if (_InputVec1Offset == null) {
+        _InputVec1Offset = Schema.GetOffset(0x4B4531D84584355A);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _InputVec1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputVec2Offset = new(() => Schema.GetOffset(0x4B4531D8448433C7), LazyThreadSafetyMode.None);
+  private static nint? _InputVec2Offset;
 
   public CPerParticleVecInput InputVec2 {
-    get => new CPerParticleVecInputImpl(_Handle + _InputVec2Offset.Value);
+    get {
+      if (_InputVec2Offset == null) {
+        _InputVec2Offset = Schema.GetOffset(0x4B4531D8448433C7);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _InputVec2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x4B4531D8E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x4B4531D8E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizeOffset = new(() => Schema.GetOffset(0x4B4531D848BC424C), LazyThreadSafetyMode.None);
+  private static nint? _NormalizeOffset;
 
   public ref bool Normalize {
-    get => ref _Handle.AsRef<bool>(_NormalizeOffset.Value);
+    get {
+      if (_NormalizeOffset == null) {
+        _NormalizeOffset = Schema.GetOffset(0x4B4531D848BC424C);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    }
   }
 
 

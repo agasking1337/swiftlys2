@@ -17,10 +17,15 @@ internal partial class CModelConfigElement_UserPickImpl : CModelConfigElementImp
   public CModelConfigElement_UserPickImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChoicesOffset = new(() => Schema.GetOffset(0x9AB617A69E9959BF), LazyThreadSafetyMode.None);
+  private static nint? _ChoicesOffset;
 
   public ref CUtlVector<CUtlString> Choices {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset.Value);
+    get {
+      if (_ChoicesOffset == null) {
+        _ChoicesOffset = Schema.GetOffset(0x9AB617A69E9959BF);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset!.Value);
+    }
   }
 
 

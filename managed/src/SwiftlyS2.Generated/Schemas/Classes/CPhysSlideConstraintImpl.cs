@@ -17,55 +17,105 @@ internal partial class CPhysSlideConstraintImpl : CPhysConstraintImpl, CPhysSlid
   public CPhysSlideConstraintImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AxisEndOffset = new(() => Schema.GetOffset(0xA91FF5D04F9CAA89), LazyThreadSafetyMode.None);
+  private static nint? _AxisEndOffset;
 
   public ref Vector AxisEnd {
-    get => ref _Handle.AsRef<Vector>(_AxisEndOffset.Value);
+    get {
+      if (_AxisEndOffset == null) {
+        _AxisEndOffset = Schema.GetOffset(0xA91FF5D04F9CAA89);
+      }
+      return ref _Handle.AsRef<Vector>(_AxisEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SlideFrictionOffset = new(() => Schema.GetOffset(0xA91FF5D0A21A9E94), LazyThreadSafetyMode.None);
+  private static nint? _SlideFrictionOffset;
 
   public ref float SlideFriction {
-    get => ref _Handle.AsRef<float>(_SlideFrictionOffset.Value);
+    get {
+      if (_SlideFrictionOffset == null) {
+        _SlideFrictionOffset = Schema.GetOffset(0xA91FF5D0A21A9E94);
+      }
+      return ref _Handle.AsRef<float>(_SlideFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SystemLoadScaleOffset = new(() => Schema.GetOffset(0xA91FF5D09C24DB62), LazyThreadSafetyMode.None);
+  private static nint? _SystemLoadScaleOffset;
 
   public ref float SystemLoadScale {
-    get => ref _Handle.AsRef<float>(_SystemLoadScaleOffset.Value);
+    get {
+      if (_SystemLoadScaleOffset == null) {
+        _SystemLoadScaleOffset = Schema.GetOffset(0xA91FF5D09C24DB62);
+      }
+      return ref _Handle.AsRef<float>(_SystemLoadScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InitialOffsetOffset = new(() => Schema.GetOffset(0xA91FF5D0A52C9850), LazyThreadSafetyMode.None);
+  private static nint? _InitialOffsetOffset;
 
   public ref float InitialOffset {
-    get => ref _Handle.AsRef<float>(_InitialOffsetOffset.Value);
+    get {
+      if (_InitialOffsetOffset == null) {
+        _InitialOffsetOffset = Schema.GetOffset(0xA91FF5D0A52C9850);
+      }
+      return ref _Handle.AsRef<float>(_InitialOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableLinearConstraintOffset = new(() => Schema.GetOffset(0xA91FF5D068F4518C), LazyThreadSafetyMode.None);
+  private static nint? _EnableLinearConstraintOffset;
 
   public ref bool EnableLinearConstraint {
-    get => ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset.Value);
+    get {
+      if (_EnableLinearConstraintOffset == null) {
+        _EnableLinearConstraintOffset = Schema.GetOffset(0xA91FF5D068F4518C);
+      }
+      return ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableAngularConstraintOffset = new(() => Schema.GetOffset(0xA91FF5D0F98A5C8B), LazyThreadSafetyMode.None);
+  private static nint? _EnableAngularConstraintOffset;
 
   public ref bool EnableAngularConstraint {
-    get => ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset.Value);
+    get {
+      if (_EnableAngularConstraintOffset == null) {
+        _EnableAngularConstraintOffset = Schema.GetOffset(0xA91FF5D0F98A5C8B);
+      }
+      return ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorFrequencyOffset = new(() => Schema.GetOffset(0xA91FF5D056F7120A), LazyThreadSafetyMode.None);
+  private static nint? _MotorFrequencyOffset;
 
   public ref float MotorFrequency {
-    get => ref _Handle.AsRef<float>(_MotorFrequencyOffset.Value);
+    get {
+      if (_MotorFrequencyOffset == null) {
+        _MotorFrequencyOffset = Schema.GetOffset(0xA91FF5D056F7120A);
+      }
+      return ref _Handle.AsRef<float>(_MotorFrequencyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MotorDampingRatioOffset = new(() => Schema.GetOffset(0xA91FF5D0D8669699), LazyThreadSafetyMode.None);
+  private static nint? _MotorDampingRatioOffset;
 
   public ref float MotorDampingRatio {
-    get => ref _Handle.AsRef<float>(_MotorDampingRatioOffset.Value);
+    get {
+      if (_MotorDampingRatioOffset == null) {
+        _MotorDampingRatioOffset = Schema.GetOffset(0xA91FF5D0D8669699);
+      }
+      return ref _Handle.AsRef<float>(_MotorDampingRatioOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseEntityPivotOffset = new(() => Schema.GetOffset(0xA91FF5D0240C4065), LazyThreadSafetyMode.None);
+  private static nint? _UseEntityPivotOffset;
 
   public ref bool UseEntityPivot {
-    get => ref _Handle.AsRef<bool>(_UseEntityPivotOffset.Value);
+    get {
+      if (_UseEntityPivotOffset == null) {
+        _UseEntityPivotOffset = Schema.GetOffset(0xA91FF5D0240C4065);
+      }
+      return ref _Handle.AsRef<bool>(_UseEntityPivotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundInfoOffset = new(() => Schema.GetOffset(0xA91FF5D085F704E8), LazyThreadSafetyMode.None);
+  private static nint? _SoundInfoOffset;
 
   public ConstraintSoundInfo SoundInfo {
-    get => new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset.Value);
+    get {
+      if (_SoundInfoOffset == null) {
+        _SoundInfoOffset = Schema.GetOffset(0xA91FF5D085F704E8);
+      }
+      return new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset!.Value);
+    }
   }
 
 

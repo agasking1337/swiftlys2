@@ -17,15 +17,25 @@ internal partial class C_OP_PointVectorAtNextParticleImpl : CParticleFunctionOpe
   public C_OP_PointVectorAtNextParticleImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xC209094CE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xC209094CE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0xC209094CCF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CPerParticleFloatInput Interpolation {
-    get => new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0xC209094CCF55B987);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
 
 

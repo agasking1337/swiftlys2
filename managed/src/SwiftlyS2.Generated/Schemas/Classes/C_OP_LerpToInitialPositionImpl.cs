@@ -17,30 +17,55 @@ internal partial class C_OP_LerpToInitialPositionImpl : CParticleFunctionOperato
   public C_OP_LerpToInitialPositionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x56175BC3F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x56175BC3F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0x56175BCCF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CPerParticleFloatInput Interpolation {
-    get => new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0x56175BCCF55B987);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CacheFieldOffset = new(() => Schema.GetOffset(0x56175BCB3696EEB), LazyThreadSafetyMode.None);
+  private static nint? _CacheFieldOffset;
 
   public ParticleAttributeIndex_t CacheField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _CacheFieldOffset.Value);
+    get {
+      if (_CacheFieldOffset == null) {
+        _CacheFieldOffset = Schema.GetOffset(0x56175BCB3696EEB);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _CacheFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x56175BCB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public CParticleCollectionFloatInput Scale {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x56175BCB731A42F);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Scale1Offset = new(() => Schema.GetOffset(0x56175BC5F596B51), LazyThreadSafetyMode.None);
+  private static nint? _Scale1Offset;
 
   public CParticleCollectionVecInput Scale1 {
-    get => new CParticleCollectionVecInputImpl(_Handle + _Scale1Offset.Value);
+    get {
+      if (_Scale1Offset == null) {
+        _Scale1Offset = Schema.GetOffset(0x56175BC5F596B51);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _Scale1Offset!.Value);
+    }
   }
 
 

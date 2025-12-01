@@ -17,20 +17,35 @@ internal partial class C_OP_StopAfterCPDurationImpl : CParticleFunctionPreEmissi
   public C_OP_StopAfterCPDurationImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0xFC2AFAC6BC5E3BAB), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public CParticleCollectionFloatInput Duration {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0xFC2AFAC6BC5E3BAB);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestroyImmediatelyOffset = new(() => Schema.GetOffset(0xFC2AFAC675F43101), LazyThreadSafetyMode.None);
+  private static nint? _DestroyImmediatelyOffset;
 
   public ref bool DestroyImmediately {
-    get => ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset.Value);
+    get {
+      if (_DestroyImmediatelyOffset == null) {
+        _DestroyImmediatelyOffset = Schema.GetOffset(0xFC2AFAC675F43101);
+      }
+      return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayEndCapOffset = new(() => Schema.GetOffset(0xFC2AFAC6A7AB4A38), LazyThreadSafetyMode.None);
+  private static nint? _PlayEndCapOffset;
 
   public ref bool PlayEndCap {
-    get => ref _Handle.AsRef<bool>(_PlayEndCapOffset.Value);
+    get {
+      if (_PlayEndCapOffset == null) {
+        _PlayEndCapOffset = Schema.GetOffset(0xFC2AFAC6A7AB4A38);
+      }
+      return ref _Handle.AsRef<bool>(_PlayEndCapOffset!.Value);
+    }
   }
 
 

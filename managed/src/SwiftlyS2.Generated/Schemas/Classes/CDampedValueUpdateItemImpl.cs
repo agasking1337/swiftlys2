@@ -17,20 +17,35 @@ internal partial class CDampedValueUpdateItemImpl : SchemaClass, CDampedValueUpd
   public CDampedValueUpdateItemImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DampingOffset = new(() => Schema.GetOffset(0x4B11725415440FB5), LazyThreadSafetyMode.None);
+  private static nint? _DampingOffset;
 
   public CAnimInputDamping Damping {
-    get => new CAnimInputDampingImpl(_Handle + _DampingOffset.Value);
+    get {
+      if (_DampingOffset == null) {
+        _DampingOffset = Schema.GetOffset(0x4B11725415440FB5);
+      }
+      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamInOffset = new(() => Schema.GetOffset(0x4B117254ED40E37B), LazyThreadSafetyMode.None);
+  private static nint? _ParamInOffset;
 
   public CAnimParamHandle ParamIn {
-    get => new CAnimParamHandleImpl(_Handle + _ParamInOffset.Value);
+    get {
+      if (_ParamInOffset == null) {
+        _ParamInOffset = Schema.GetOffset(0x4B117254ED40E37B);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamOutOffset = new(() => Schema.GetOffset(0x4B117254AA5799A8), LazyThreadSafetyMode.None);
+  private static nint? _ParamOutOffset;
 
   public CAnimParamHandle ParamOut {
-    get => new CAnimParamHandleImpl(_Handle + _ParamOutOffset.Value);
+    get {
+      if (_ParamOutOffset == null) {
+        _ParamOutOffset = Schema.GetOffset(0x4B117254AA5799A8);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+    }
   }
 
 

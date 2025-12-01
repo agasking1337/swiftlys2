@@ -17,35 +17,65 @@ internal partial class CAnimLocalHierarchyImpl : SchemaClass, CAnimLocalHierarch
   public CAnimLocalHierarchyImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoneOffset = new(() => Schema.GetOffset(0x3D14C1ED515646C4), LazyThreadSafetyMode.None);
+  private static nint? _BoneOffset;
 
   public ref CBufferString Bone {
-    get => ref _Handle.AsRef<CBufferString>(_BoneOffset.Value);
+    get {
+      if (_BoneOffset == null) {
+        _BoneOffset = Schema.GetOffset(0x3D14C1ED515646C4);
+      }
+      return ref _Handle.AsRef<CBufferString>(_BoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NewParentOffset = new(() => Schema.GetOffset(0x3D14C1ED40620004), LazyThreadSafetyMode.None);
+  private static nint? _NewParentOffset;
 
   public ref CBufferString NewParent {
-    get => ref _Handle.AsRef<CBufferString>(_NewParentOffset.Value);
+    get {
+      if (_NewParentOffset == null) {
+        _NewParentOffset = Schema.GetOffset(0x3D14C1ED40620004);
+      }
+      return ref _Handle.AsRef<CBufferString>(_NewParentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartFrameOffset = new(() => Schema.GetOffset(0x3D14C1ED9134F088), LazyThreadSafetyMode.None);
+  private static nint? _StartFrameOffset;
 
   public ref int StartFrame {
-    get => ref _Handle.AsRef<int>(_StartFrameOffset.Value);
+    get {
+      if (_StartFrameOffset == null) {
+        _StartFrameOffset = Schema.GetOffset(0x3D14C1ED9134F088);
+      }
+      return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PeakFrameOffset = new(() => Schema.GetOffset(0x3D14C1ED3BAFAFC7), LazyThreadSafetyMode.None);
+  private static nint? _PeakFrameOffset;
 
   public ref int PeakFrame {
-    get => ref _Handle.AsRef<int>(_PeakFrameOffset.Value);
+    get {
+      if (_PeakFrameOffset == null) {
+        _PeakFrameOffset = Schema.GetOffset(0x3D14C1ED3BAFAFC7);
+      }
+      return ref _Handle.AsRef<int>(_PeakFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TailFrameOffset = new(() => Schema.GetOffset(0x3D14C1ED3F824524), LazyThreadSafetyMode.None);
+  private static nint? _TailFrameOffset;
 
   public ref int TailFrame {
-    get => ref _Handle.AsRef<int>(_TailFrameOffset.Value);
+    get {
+      if (_TailFrameOffset == null) {
+        _TailFrameOffset = Schema.GetOffset(0x3D14C1ED3F824524);
+      }
+      return ref _Handle.AsRef<int>(_TailFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndFrameOffset = new(() => Schema.GetOffset(0x3D14C1EDEA91BD07), LazyThreadSafetyMode.None);
+  private static nint? _EndFrameOffset;
 
   public ref int EndFrame {
-    get => ref _Handle.AsRef<int>(_EndFrameOffset.Value);
+    get {
+      if (_EndFrameOffset == null) {
+        _EndFrameOffset = Schema.GetOffset(0x3D14C1EDEA91BD07);
+      }
+      return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+    }
   }
 
 

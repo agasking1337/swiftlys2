@@ -17,20 +17,35 @@ internal partial class CNmSyncTrack__Event_tImpl : SchemaClass, CNmSyncTrack__Ev
   public CNmSyncTrack__Event_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IDOffset = new(() => Schema.GetOffset(0x8B8C5B0A95066900), LazyThreadSafetyMode.None);
+  private static nint? _IDOffset;
 
   public ref CGlobalSymbol ID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_IDOffset.Value);
+    get {
+      if (_IDOffset == null) {
+        _IDOffset = Schema.GetOffset(0x8B8C5B0A95066900);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x8B8C5B0A6330E7EE), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public NmPercent_t StartTime {
-    get => new NmPercent_tImpl(_Handle + _StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x8B8C5B0A6330E7EE);
+      }
+      return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0x8B8C5B0A3D9FF5AD), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public NmPercent_t Duration {
-    get => new NmPercent_tImpl(_Handle + _DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0x8B8C5B0A3D9FF5AD);
+      }
+      return new NmPercent_tImpl(_Handle + _DurationOffset!.Value);
+    }
   }
 
 

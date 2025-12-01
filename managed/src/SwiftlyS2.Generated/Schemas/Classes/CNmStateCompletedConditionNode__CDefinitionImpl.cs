@@ -17,20 +17,35 @@ internal partial class CNmStateCompletedConditionNode__CDefinitionImpl : CNmBool
   public CNmStateCompletedConditionNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SourceStateNodeIdxOffset = new(() => Schema.GetOffset(0x4C5A15CA63F0228C), LazyThreadSafetyMode.None);
+  private static nint? _SourceStateNodeIdxOffset;
 
   public ref short SourceStateNodeIdx {
-    get => ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset.Value);
+    get {
+      if (_SourceStateNodeIdxOffset == null) {
+        _SourceStateNodeIdxOffset = Schema.GetOffset(0x4C5A15CA63F0228C);
+      }
+      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionDurationOverrideNodeIdxOffset = new(() => Schema.GetOffset(0x4C5A15CACD97BBA1), LazyThreadSafetyMode.None);
+  private static nint? _TransitionDurationOverrideNodeIdxOffset;
 
   public ref short TransitionDurationOverrideNodeIdx {
-    get => ref _Handle.AsRef<short>(_TransitionDurationOverrideNodeIdxOffset.Value);
+    get {
+      if (_TransitionDurationOverrideNodeIdxOffset == null) {
+        _TransitionDurationOverrideNodeIdxOffset = Schema.GetOffset(0x4C5A15CACD97BBA1);
+      }
+      return ref _Handle.AsRef<short>(_TransitionDurationOverrideNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionDurationSecondsOffset = new(() => Schema.GetOffset(0x4C5A15CAD5E92B1D), LazyThreadSafetyMode.None);
+  private static nint? _TransitionDurationSecondsOffset;
 
   public ref float TransitionDurationSeconds {
-    get => ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset.Value);
+    get {
+      if (_TransitionDurationSecondsOffset == null) {
+        _TransitionDurationSecondsOffset = Schema.GetOffset(0x4C5A15CAD5E92B1D);
+      }
+      return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset!.Value);
+    }
   }
 
 

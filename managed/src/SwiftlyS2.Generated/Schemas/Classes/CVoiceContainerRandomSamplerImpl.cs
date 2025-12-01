@@ -17,35 +17,65 @@ internal partial class CVoiceContainerRandomSamplerImpl : CVoiceContainerBaseImp
   public CVoiceContainerRandomSamplerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AmplitudeOffset = new(() => Schema.GetOffset(0xDCA93E5CB44B0E18), LazyThreadSafetyMode.None);
+  private static nint? _AmplitudeOffset;
 
   public ref float Amplitude {
-    get => ref _Handle.AsRef<float>(_AmplitudeOffset.Value);
+    get {
+      if (_AmplitudeOffset == null) {
+        _AmplitudeOffset = Schema.GetOffset(0xDCA93E5CB44B0E18);
+      }
+      return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AmplitudeJitterOffset = new(() => Schema.GetOffset(0xDCA93E5C108296CE), LazyThreadSafetyMode.None);
+  private static nint? _AmplitudeJitterOffset;
 
   public ref float AmplitudeJitter {
-    get => ref _Handle.AsRef<float>(_AmplitudeJitterOffset.Value);
+    get {
+      if (_AmplitudeJitterOffset == null) {
+        _AmplitudeJitterOffset = Schema.GetOffset(0xDCA93E5C108296CE);
+      }
+      return ref _Handle.AsRef<float>(_AmplitudeJitterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeJitterOffset = new(() => Schema.GetOffset(0xDCA93E5C70047B44), LazyThreadSafetyMode.None);
+  private static nint? _TimeJitterOffset;
 
   public ref float TimeJitter {
-    get => ref _Handle.AsRef<float>(_TimeJitterOffset.Value);
+    get {
+      if (_TimeJitterOffset == null) {
+        _TimeJitterOffset = Schema.GetOffset(0xDCA93E5C70047B44);
+      }
+      return ref _Handle.AsRef<float>(_TimeJitterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxLengthOffset = new(() => Schema.GetOffset(0xDCA93E5C87A8B4C7), LazyThreadSafetyMode.None);
+  private static nint? _MaxLengthOffset;
 
   public ref float MaxLength {
-    get => ref _Handle.AsRef<float>(_MaxLengthOffset.Value);
+    get {
+      if (_MaxLengthOffset == null) {
+        _MaxLengthOffset = Schema.GetOffset(0xDCA93E5C87A8B4C7);
+      }
+      return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumDelayVariationsOffset = new(() => Schema.GetOffset(0xDCA93E5C9356280C), LazyThreadSafetyMode.None);
+  private static nint? _NumDelayVariationsOffset;
 
   public ref int NumDelayVariations {
-    get => ref _Handle.AsRef<int>(_NumDelayVariationsOffset.Value);
+    get {
+      if (_NumDelayVariationsOffset == null) {
+        _NumDelayVariationsOffset = Schema.GetOffset(0xDCA93E5C9356280C);
+      }
+      return ref _Handle.AsRef<int>(_NumDelayVariationsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GrainResourcesOffset = new(() => Schema.GetOffset(0xDCA93E5C95692BB9), LazyThreadSafetyMode.None);
+  private static nint? _GrainResourcesOffset;
 
   public ref CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>> GrainResources {
-    get => ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>>(_GrainResourcesOffset.Value);
+    get {
+      if (_GrainResourcesOffset == null) {
+        _GrainResourcesOffset = Schema.GetOffset(0xDCA93E5C95692BB9);
+      }
+      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>>(_GrainResourcesOffset!.Value);
+    }
   }
 
 

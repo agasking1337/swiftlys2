@@ -17,25 +17,45 @@ internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissi
   public C_OP_QuantizeCPComponentImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueOffset = new(() => Schema.GetOffset(0xDE980890EEDF8362), LazyThreadSafetyMode.None);
+  private static nint? _InputValueOffset;
 
   public CParticleCollectionFloatInput InputValue {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset.Value);
+    get {
+      if (_InputValueOffset == null) {
+        _InputValueOffset = Schema.GetOffset(0xDE980890EEDF8362);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOutputOffset = new(() => Schema.GetOffset(0xDE9808902077C953), LazyThreadSafetyMode.None);
+  private static nint? _CPOutputOffset;
 
   public ref int CPOutput {
-    get => ref _Handle.AsRef<int>(_CPOutputOffset.Value);
+    get {
+      if (_CPOutputOffset == null) {
+        _CPOutputOffset = Schema.GetOffset(0xDE9808902077C953);
+      }
+      return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutVectorFieldOffset = new(() => Schema.GetOffset(0xDE980890F9041E74), LazyThreadSafetyMode.None);
+  private static nint? _OutVectorFieldOffset;
 
   public ref int OutVectorField {
-    get => ref _Handle.AsRef<int>(_OutVectorFieldOffset.Value);
+    get {
+      if (_OutVectorFieldOffset == null) {
+        _OutVectorFieldOffset = Schema.GetOffset(0xDE980890F9041E74);
+      }
+      return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _QuantizeValueOffset = new(() => Schema.GetOffset(0xDE98089065E1A349), LazyThreadSafetyMode.None);
+  private static nint? _QuantizeValueOffset;
 
   public CParticleCollectionFloatInput QuantizeValue {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _QuantizeValueOffset.Value);
+    get {
+      if (_QuantizeValueOffset == null) {
+        _QuantizeValueOffset = Schema.GetOffset(0xDE98089065E1A349);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _QuantizeValueOffset!.Value);
+    }
   }
 
 

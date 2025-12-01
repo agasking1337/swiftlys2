@@ -17,69 +17,132 @@ internal partial class CFuncLadderImpl : CBaseModelEntityImpl, CFuncLadder {
   public CFuncLadderImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LadderDirOffset = new(() => Schema.GetOffset(0xD85E0238BEE3D218), LazyThreadSafetyMode.None);
+  private static nint? _LadderDirOffset;
 
   public ref Vector LadderDir {
-    get => ref _Handle.AsRef<Vector>(_LadderDirOffset.Value);
+    get {
+      if (_LadderDirOffset == null) {
+        _LadderDirOffset = Schema.GetOffset(0xD85E0238BEE3D218);
+      }
+      return ref _Handle.AsRef<Vector>(_LadderDirOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DismountsOffset = new(() => Schema.GetOffset(0xD85E0238E1BF2F19), LazyThreadSafetyMode.None);
+  private static nint? _DismountsOffset;
 
   public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CInfoLadderDismount>>>(_DismountsOffset.Value);
+    get {
+      if (_DismountsOffset == null) {
+        _DismountsOffset = Schema.GetOffset(0xD85E0238E1BF2F19);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CInfoLadderDismount>>>(_DismountsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalTopOffset = new(() => Schema.GetOffset(0xD85E0238A709E4E3), LazyThreadSafetyMode.None);
+  private static nint? _LocalTopOffset;
 
   public ref Vector LocalTop {
-    get => ref _Handle.AsRef<Vector>(_LocalTopOffset.Value);
+    get {
+      if (_LocalTopOffset == null) {
+        _LocalTopOffset = Schema.GetOffset(0xD85E0238A709E4E3);
+      }
+      return ref _Handle.AsRef<Vector>(_LocalTopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerMountPositionTopOffset = new(() => Schema.GetOffset(0xD85E02383DC07685), LazyThreadSafetyMode.None);
+  private static nint? _PlayerMountPositionTopOffset;
 
   public ref Vector PlayerMountPositionTop {
-    get => ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset.Value);
+    get {
+      if (_PlayerMountPositionTopOffset == null) {
+        _PlayerMountPositionTopOffset = Schema.GetOffset(0xD85E02383DC07685);
+      }
+      return ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayerMountPositionBottomOffset = new(() => Schema.GetOffset(0xD85E02387AC961B1), LazyThreadSafetyMode.None);
+  private static nint? _PlayerMountPositionBottomOffset;
 
   public ref Vector PlayerMountPositionBottom {
-    get => ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset.Value);
+    get {
+      if (_PlayerMountPositionBottomOffset == null) {
+        _PlayerMountPositionBottomOffset = Schema.GetOffset(0xD85E02387AC961B1);
+      }
+      return ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AutoRideSpeedOffset = new(() => Schema.GetOffset(0xD85E0238B5C8CE19), LazyThreadSafetyMode.None);
+  private static nint? _AutoRideSpeedOffset;
 
   public ref float AutoRideSpeed {
-    get => ref _Handle.AsRef<float>(_AutoRideSpeedOffset.Value);
+    get {
+      if (_AutoRideSpeedOffset == null) {
+        _AutoRideSpeedOffset = Schema.GetOffset(0xD85E0238B5C8CE19);
+      }
+      return ref _Handle.AsRef<float>(_AutoRideSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0xD85E02383A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0xD85E02383A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FakeLadderOffset = new(() => Schema.GetOffset(0xD85E023887708598), LazyThreadSafetyMode.None);
+  private static nint? _FakeLadderOffset;
 
   public ref bool FakeLadder {
-    get => ref _Handle.AsRef<bool>(_FakeLadderOffset.Value);
+    get {
+      if (_FakeLadderOffset == null) {
+        _FakeLadderOffset = Schema.GetOffset(0xD85E023887708598);
+      }
+      return ref _Handle.AsRef<bool>(_FakeLadderOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasSlackOffset = new(() => Schema.GetOffset(0xD85E02381745DB1D), LazyThreadSafetyMode.None);
+  private static nint? _HasSlackOffset;
 
   public ref bool HasSlack {
-    get => ref _Handle.AsRef<bool>(_HasSlackOffset.Value);
+    get {
+      if (_HasSlackOffset == null) {
+        _HasSlackOffset = Schema.GetOffset(0xD85E02381745DB1D);
+      }
+      return ref _Handle.AsRef<bool>(_HasSlackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SurfacePropNameOffset = new(() => Schema.GetOffset(0xD85E0238749EACC6), LazyThreadSafetyMode.None);
+  private static nint? _SurfacePropNameOffset;
 
   public string SurfacePropName {
     get {
-      var ptr = _Handle.Read<nint>(_SurfacePropNameOffset.Value);
+      if (_SurfacePropNameOffset == null) {
+        _SurfacePropNameOffset = Schema.GetOffset(0xD85E0238749EACC6);
+      }
+      var ptr = _Handle.Read<nint>(_SurfacePropNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SurfacePropNameOffset.Value, value);
+    set {
+      if (_SurfacePropNameOffset == null) {
+        _SurfacePropNameOffset = Schema.GetOffset(0xD85E0238749EACC6);
+      }
+      Schema.SetString(_Handle, _SurfacePropNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OnPlayerGotOnLadderOffset = new(() => Schema.GetOffset(0xD85E02381B2BA3FC), LazyThreadSafetyMode.None);
+  private static nint? _OnPlayerGotOnLadderOffset;
 
   public CEntityIOOutput OnPlayerGotOnLadder {
-    get => new CEntityIOOutputImpl(_Handle + _OnPlayerGotOnLadderOffset.Value);
+    get {
+      if (_OnPlayerGotOnLadderOffset == null) {
+        _OnPlayerGotOnLadderOffset = Schema.GetOffset(0xD85E02381B2BA3FC);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOnLadderOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnPlayerGotOffLadderOffset = new(() => Schema.GetOffset(0xD85E02388AD8997A), LazyThreadSafetyMode.None);
+  private static nint? _OnPlayerGotOffLadderOffset;
 
   public CEntityIOOutput OnPlayerGotOffLadder {
-    get => new CEntityIOOutputImpl(_Handle + _OnPlayerGotOffLadderOffset.Value);
+    get {
+      if (_OnPlayerGotOffLadderOffset == null) {
+        _OnPlayerGotOffLadderOffset = Schema.GetOffset(0xD85E02388AD8997A);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOffLadderOffset!.Value);
+    }
   }
 
   public void LadderDirUpdated() {

@@ -17,19 +17,32 @@ internal partial class CNmLegacyEventImpl : CNmEventImpl, CNmLegacyEvent {
   public CNmLegacyEventImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AnimEventClassNameOffset = new(() => Schema.GetOffset(0x78C36574C276DA33), LazyThreadSafetyMode.None);
+  private static nint? _AnimEventClassNameOffset;
 
   public string AnimEventClassName {
     get {
-      var ptr = _Handle.Read<nint>(_AnimEventClassNameOffset.Value);
+      if (_AnimEventClassNameOffset == null) {
+        _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
+      }
+      var ptr = _Handle.Read<nint>(_AnimEventClassNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AnimEventClassNameOffset.Value, value);
+    set {
+      if (_AnimEventClassNameOffset == null) {
+        _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
+      }
+      Schema.SetString(_Handle, _AnimEventClassNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _KVOffset = new(() => Schema.GetOffset(0x78C36574F70B8074), LazyThreadSafetyMode.None);
+  private static nint? _KVOffset;
 
   public SchemaUntypedField KV {
-    get => new SchemaUntypedField(_Handle + _KVOffset.Value);
+    get {
+      if (_KVOffset == null) {
+        _KVOffset = Schema.GetOffset(0x78C36574F70B8074);
+      }
+      return new SchemaUntypedField(_Handle + _KVOffset!.Value);
+    }
   }
 
 

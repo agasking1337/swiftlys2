@@ -17,42 +17,76 @@ internal partial class sndopvarlatchdata_tImpl : SchemaClass, sndopvarlatchdata_
   public sndopvarlatchdata_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StackOffset = new(() => Schema.GetOffset(0x8347C0D511ACB037), LazyThreadSafetyMode.None);
+  private static nint? _StackOffset;
 
   public string Stack {
     get {
-      var ptr = _Handle.Read<nint>(_StackOffset.Value);
+      if (_StackOffset == null) {
+        _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
+      }
+      var ptr = _Handle.Read<nint>(_StackOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StackOffset.Value, value);
+    set {
+      if (_StackOffset == null) {
+        _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
+      }
+      Schema.SetString(_Handle, _StackOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OperatorOffset = new(() => Schema.GetOffset(0x8347C0D55D107B55), LazyThreadSafetyMode.None);
+  private static nint? _OperatorOffset;
 
   public string Operator {
     get {
-      var ptr = _Handle.Read<nint>(_OperatorOffset.Value);
+      if (_OperatorOffset == null) {
+        _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
+      }
+      var ptr = _Handle.Read<nint>(_OperatorOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OperatorOffset.Value, value);
+    set {
+      if (_OperatorOffset == null) {
+        _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
+      }
+      Schema.SetString(_Handle, _OperatorOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OpvarOffset = new(() => Schema.GetOffset(0x8347C0D508A9F41F), LazyThreadSafetyMode.None);
+  private static nint? _OpvarOffset;
 
   public string Opvar {
     get {
-      var ptr = _Handle.Read<nint>(_OpvarOffset.Value);
+      if (_OpvarOffset == null) {
+        _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
+      }
+      var ptr = _Handle.Read<nint>(_OpvarOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _OpvarOffset.Value, value);
+    set {
+      if (_OpvarOffset == null) {
+        _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
+      }
+      Schema.SetString(_Handle, _OpvarOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ValOffset = new(() => Schema.GetOffset(0x8347C0D5E31D0C86), LazyThreadSafetyMode.None);
+  private static nint? _ValOffset;
 
   public ref float Val {
-    get => ref _Handle.AsRef<float>(_ValOffset.Value);
+    get {
+      if (_ValOffset == null) {
+        _ValOffset = Schema.GetOffset(0x8347C0D5E31D0C86);
+      }
+      return ref _Handle.AsRef<float>(_ValOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PosOffset = new(() => Schema.GetOffset(0x8347C0D5DE9CFC5D), LazyThreadSafetyMode.None);
+  private static nint? _PosOffset;
 
   public ref Vector Pos {
-    get => ref _Handle.AsRef<Vector>(_PosOffset.Value);
+    get {
+      if (_PosOffset == null) {
+        _PosOffset = Schema.GetOffset(0x8347C0D5DE9CFC5D);
+      }
+      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    }
   }
 
 

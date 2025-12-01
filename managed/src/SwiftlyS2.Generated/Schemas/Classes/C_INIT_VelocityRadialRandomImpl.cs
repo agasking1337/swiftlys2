@@ -17,45 +17,85 @@ internal partial class C_INIT_VelocityRadialRandomImpl : CParticleFunctionInitia
   public C_INIT_VelocityRadialRandomImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PerParticleCenterOffset = new(() => Schema.GetOffset(0x61A3C8D50314399B), LazyThreadSafetyMode.None);
+  private static nint? _PerParticleCenterOffset;
 
   public ref bool PerParticleCenter {
-    get => ref _Handle.AsRef<bool>(_PerParticleCenterOffset.Value);
+    get {
+      if (_PerParticleCenterOffset == null) {
+        _PerParticleCenterOffset = Schema.GetOffset(0x61A3C8D50314399B);
+      }
+      return ref _Handle.AsRef<bool>(_PerParticleCenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x61A3C8D53F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x61A3C8D53F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PositionOffset = new(() => Schema.GetOffset(0x61A3C8D5E092EE6A), LazyThreadSafetyMode.None);
+  private static nint? _PositionOffset;
 
   public CPerParticleVecInput Position {
-    get => new CPerParticleVecInputImpl(_Handle + _PositionOffset.Value);
+    get {
+      if (_PositionOffset == null) {
+        _PositionOffset = Schema.GetOffset(0x61A3C8D5E092EE6A);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _PositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FwdOffset = new(() => Schema.GetOffset(0x61A3C8D5974CB62A), LazyThreadSafetyMode.None);
+  private static nint? _FwdOffset;
 
   public CPerParticleVecInput Fwd {
-    get => new CPerParticleVecInputImpl(_Handle + _FwdOffset.Value);
+    get {
+      if (_FwdOffset == null) {
+        _FwdOffset = Schema.GetOffset(0x61A3C8D5974CB62A);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _FwdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMinOffset = new(() => Schema.GetOffset(0x61A3C8D5B989E1F8), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMinOffset;
 
   public CPerParticleFloatInput SpeedMin {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset.Value);
+    get {
+      if (_SpeedMinOffset == null) {
+        _SpeedMinOffset = Schema.GetOffset(0x61A3C8D5B989E1F8);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpeedMaxOffset = new(() => Schema.GetOffset(0x61A3C8D5CF9D8C52), LazyThreadSafetyMode.None);
+  private static nint? _SpeedMaxOffset;
 
   public CPerParticleFloatInput SpeedMax {
-    get => new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset.Value);
+    get {
+      if (_SpeedMaxOffset == null) {
+        _SpeedMaxOffset = Schema.GetOffset(0x61A3C8D5CF9D8C52);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordinateSystemSpeedScaleOffset = new(() => Schema.GetOffset(0x61A3C8D5CEF062F0), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordinateSystemSpeedScaleOffset;
 
   public ref Vector LocalCoordinateSystemSpeedScale {
-    get => ref _Handle.AsRef<Vector>(_LocalCoordinateSystemSpeedScaleOffset.Value);
+    get {
+      if (_LocalCoordinateSystemSpeedScaleOffset == null) {
+        _LocalCoordinateSystemSpeedScaleOffset = Schema.GetOffset(0x61A3C8D5CEF062F0);
+      }
+      return ref _Handle.AsRef<Vector>(_LocalCoordinateSystemSpeedScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IgnoreDeltaOffset = new(() => Schema.GetOffset(0x61A3C8D5A944B263), LazyThreadSafetyMode.None);
+  private static nint? _IgnoreDeltaOffset;
 
   public ref bool IgnoreDelta {
-    get => ref _Handle.AsRef<bool>(_IgnoreDeltaOffset.Value);
+    get {
+      if (_IgnoreDeltaOffset == null) {
+        _IgnoreDeltaOffset = Schema.GetOffset(0x61A3C8D5A944B263);
+      }
+      return ref _Handle.AsRef<bool>(_IgnoreDeltaOffset!.Value);
+    }
   }
 
 

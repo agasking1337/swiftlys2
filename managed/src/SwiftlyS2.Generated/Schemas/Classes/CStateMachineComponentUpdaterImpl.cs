@@ -17,10 +17,15 @@ internal partial class CStateMachineComponentUpdaterImpl : CAnimComponentUpdater
   public CStateMachineComponentUpdaterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StateMachineOffset = new(() => Schema.GetOffset(0x25255200BB7EEF2F), LazyThreadSafetyMode.None);
+  private static nint? _StateMachineOffset;
 
   public CAnimStateMachineUpdater StateMachine {
-    get => new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset.Value);
+    get {
+      if (_StateMachineOffset == null) {
+        _StateMachineOffset = Schema.GetOffset(0x25255200BB7EEF2F);
+      }
+      return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+    }
   }
 
 

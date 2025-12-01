@@ -17,60 +17,115 @@ internal partial class CNmGraphDefinitionImpl : SchemaClass, CNmGraphDefinition 
   public CNmGraphDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _VariationIDOffset = new(() => Schema.GetOffset(0xE028E08C8B90A5E3), LazyThreadSafetyMode.None);
+  private static nint? _VariationIDOffset;
 
   public ref CGlobalSymbol VariationID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_VariationIDOffset.Value);
+    get {
+      if (_VariationIDOffset == null) {
+        _VariationIDOffset = Schema.GetOffset(0xE028E08C8B90A5E3);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_VariationIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SkeletonOffset = new(() => Schema.GetOffset(0xE028E08CE77F030E), LazyThreadSafetyMode.None);
+  private static nint? _SkeletonOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset.Value);
+    get {
+      if (_SkeletonOffset == null) {
+        _SkeletonOffset = Schema.GetOffset(0xE028E08CE77F030E);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PersistentNodeIndicesOffset = new(() => Schema.GetOffset(0xE028E08C90896209), LazyThreadSafetyMode.None);
+  private static nint? _PersistentNodeIndicesOffset;
 
   public ref CUtlVector<short> PersistentNodeIndices {
-    get => ref _Handle.AsRef<CUtlVector<short>>(_PersistentNodeIndicesOffset.Value);
+    get {
+      if (_PersistentNodeIndicesOffset == null) {
+        _PersistentNodeIndicesOffset = Schema.GetOffset(0xE028E08C90896209);
+      }
+      return ref _Handle.AsRef<CUtlVector<short>>(_PersistentNodeIndicesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RootNodeIdxOffset = new(() => Schema.GetOffset(0xE028E08C25EE94C4), LazyThreadSafetyMode.None);
+  private static nint? _RootNodeIdxOffset;
 
   public ref short RootNodeIdx {
-    get => ref _Handle.AsRef<short>(_RootNodeIdxOffset.Value);
+    get {
+      if (_RootNodeIdxOffset == null) {
+        _RootNodeIdxOffset = Schema.GetOffset(0xE028E08C25EE94C4);
+      }
+      return ref _Handle.AsRef<short>(_RootNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlParameterIDsOffset = new(() => Schema.GetOffset(0xE028E08C500E5F9D), LazyThreadSafetyMode.None);
+  private static nint? _ControlParameterIDsOffset;
 
   public ref CUtlVector<CGlobalSymbol> ControlParameterIDs {
-    get => ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ControlParameterIDsOffset.Value);
+    get {
+      if (_ControlParameterIDsOffset == null) {
+        _ControlParameterIDsOffset = Schema.GetOffset(0xE028E08C500E5F9D);
+      }
+      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ControlParameterIDsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VirtualParameterIDsOffset = new(() => Schema.GetOffset(0xE028E08CB54BB9E7), LazyThreadSafetyMode.None);
+  private static nint? _VirtualParameterIDsOffset;
 
   public ref CUtlVector<CGlobalSymbol> VirtualParameterIDs {
-    get => ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_VirtualParameterIDsOffset.Value);
+    get {
+      if (_VirtualParameterIDsOffset == null) {
+        _VirtualParameterIDsOffset = Schema.GetOffset(0xE028E08CB54BB9E7);
+      }
+      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_VirtualParameterIDsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VirtualParameterNodeIndicesOffset = new(() => Schema.GetOffset(0xE028E08C1A18B610), LazyThreadSafetyMode.None);
+  private static nint? _VirtualParameterNodeIndicesOffset;
 
   public ref CUtlVector<short> VirtualParameterNodeIndices {
-    get => ref _Handle.AsRef<CUtlVector<short>>(_VirtualParameterNodeIndicesOffset.Value);
+    get {
+      if (_VirtualParameterNodeIndicesOffset == null) {
+        _VirtualParameterNodeIndicesOffset = Schema.GetOffset(0xE028E08C1A18B610);
+      }
+      return ref _Handle.AsRef<CUtlVector<short>>(_VirtualParameterNodeIndicesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReferencedGraphSlotsOffset = new(() => Schema.GetOffset(0xE028E08C6244F6FF), LazyThreadSafetyMode.None);
+  private static nint? _ReferencedGraphSlotsOffset;
 
   public ref CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t> ReferencedGraphSlots {
-    get => ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t>>(_ReferencedGraphSlotsOffset.Value);
+    get {
+      if (_ReferencedGraphSlotsOffset == null) {
+        _ReferencedGraphSlotsOffset = Schema.GetOffset(0xE028E08C6244F6FF);
+      }
+      return ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t>>(_ReferencedGraphSlotsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExternalGraphSlotsOffset = new(() => Schema.GetOffset(0xE028E08CECBCD94F), LazyThreadSafetyMode.None);
+  private static nint? _ExternalGraphSlotsOffset;
 
   public ref CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t> ExternalGraphSlots {
-    get => ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t>>(_ExternalGraphSlotsOffset.Value);
+    get {
+      if (_ExternalGraphSlotsOffset == null) {
+        _ExternalGraphSlotsOffset = Schema.GetOffset(0xE028E08CECBCD94F);
+      }
+      return ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t>>(_ExternalGraphSlotsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NodePathsOffset = new(() => Schema.GetOffset(0xE028E08CFF3E5A07), LazyThreadSafetyMode.None);
+  private static nint? _NodePathsOffset;
 
   public ref CUtlVector<CUtlString> NodePaths {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_NodePathsOffset.Value);
+    get {
+      if (_NodePathsOffset == null) {
+        _NodePathsOffset = Schema.GetOffset(0xE028E08CFF3E5A07);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NodePathsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResourcesOffset = new(() => Schema.GetOffset(0xE028E08C227C3612), LazyThreadSafetyMode.None);
+  private static nint? _ResourcesOffset;
 
   public ref CUtlVector<SchemaUntypedField> Resources {
-    get => ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ResourcesOffset.Value);
+    get {
+      if (_ResourcesOffset == null) {
+        _ResourcesOffset = Schema.GetOffset(0xE028E08C227C3612);
+      }
+      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ResourcesOffset!.Value);
+    }
   }
 
 

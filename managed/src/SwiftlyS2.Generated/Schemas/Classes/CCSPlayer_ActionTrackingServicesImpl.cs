@@ -17,25 +17,45 @@ internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnCompone
   public CCSPlayer_ActionTrackingServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LastWeaponBeforeC4AutoSwitchOffset = new(() => Schema.GetOffset(0xC890019D6687BAC0), LazyThreadSafetyMode.None);
+  private static nint? _LastWeaponBeforeC4AutoSwitchOffset;
 
   public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch {
-    get => ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset.Value);
+    get {
+      if (_LastWeaponBeforeC4AutoSwitchOffset == null) {
+        _LastWeaponBeforeC4AutoSwitchOffset = Schema.GetOffset(0xC890019D6687BAC0);
+      }
+      return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsRescuingOffset = new(() => Schema.GetOffset(0xC890019D225BDB2F), LazyThreadSafetyMode.None);
+  private static nint? _IsRescuingOffset;
 
   public ref bool IsRescuing {
-    get => ref _Handle.AsRef<bool>(_IsRescuingOffset.Value);
+    get {
+      if (_IsRescuingOffset == null) {
+        _IsRescuingOffset = Schema.GetOffset(0xC890019D225BDB2F);
+      }
+      return ref _Handle.AsRef<bool>(_IsRescuingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WeaponPurchasesThisMatchOffset = new(() => Schema.GetOffset(0xC890019D43F68EE0), LazyThreadSafetyMode.None);
+  private static nint? _WeaponPurchasesThisMatchOffset;
 
   public WeaponPurchaseTracker_t WeaponPurchasesThisMatch {
-    get => new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisMatchOffset.Value);
+    get {
+      if (_WeaponPurchasesThisMatchOffset == null) {
+        _WeaponPurchasesThisMatchOffset = Schema.GetOffset(0xC890019D43F68EE0);
+      }
+      return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WeaponPurchasesThisRoundOffset = new(() => Schema.GetOffset(0xC890019D7C64F835), LazyThreadSafetyMode.None);
+  private static nint? _WeaponPurchasesThisRoundOffset;
 
   public WeaponPurchaseTracker_t WeaponPurchasesThisRound {
-    get => new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisRoundOffset.Value);
+    get {
+      if (_WeaponPurchasesThisRoundOffset == null) {
+        _WeaponPurchasesThisRoundOffset = Schema.GetOffset(0xC890019D7C64F835);
+      }
+      return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+    }
   }
 
   public void IsRescuingUpdated() {

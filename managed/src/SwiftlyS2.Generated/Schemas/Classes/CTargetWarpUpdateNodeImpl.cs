@@ -17,75 +17,145 @@ internal partial class CTargetWarpUpdateNodeImpl : CUnaryUpdateNodeImpl, CTarget
   public CTargetWarpUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AngleModeOffset = new(() => Schema.GetOffset(0xF411CC8D21DC8BC), LazyThreadSafetyMode.None);
+  private static nint? _AngleModeOffset;
 
   public ref TargetWarpAngleMode_t AngleMode {
-    get => ref _Handle.AsRef<TargetWarpAngleMode_t>(_AngleModeOffset.Value);
+    get {
+      if (_AngleModeOffset == null) {
+        _AngleModeOffset = Schema.GetOffset(0xF411CC8D21DC8BC);
+      }
+      return ref _Handle.AsRef<TargetWarpAngleMode_t>(_AngleModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetPositionParameterOffset = new(() => Schema.GetOffset(0xF411CC8A44B9050), LazyThreadSafetyMode.None);
+  private static nint? _TargetPositionParameterOffset;
 
   public CAnimParamHandle TargetPositionParameter {
-    get => new CAnimParamHandleImpl(_Handle + _TargetPositionParameterOffset.Value);
+    get {
+      if (_TargetPositionParameterOffset == null) {
+        _TargetPositionParameterOffset = Schema.GetOffset(0xF411CC8A44B9050);
+      }
+      return new CAnimParamHandleImpl(_Handle + _TargetPositionParameterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetUpVectorParameterOffset = new(() => Schema.GetOffset(0xF411CC85C2D7DCB), LazyThreadSafetyMode.None);
+  private static nint? _TargetUpVectorParameterOffset;
 
   public CAnimParamHandle TargetUpVectorParameter {
-    get => new CAnimParamHandleImpl(_Handle + _TargetUpVectorParameterOffset.Value);
+    get {
+      if (_TargetUpVectorParameterOffset == null) {
+        _TargetUpVectorParameterOffset = Schema.GetOffset(0xF411CC85C2D7DCB);
+      }
+      return new CAnimParamHandleImpl(_Handle + _TargetUpVectorParameterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetFacePositionParameterOffset = new(() => Schema.GetOffset(0xF411CC81102D56F), LazyThreadSafetyMode.None);
+  private static nint? _TargetFacePositionParameterOffset;
 
   public CAnimParamHandle TargetFacePositionParameter {
-    get => new CAnimParamHandleImpl(_Handle + _TargetFacePositionParameterOffset.Value);
+    get {
+      if (_TargetFacePositionParameterOffset == null) {
+        _TargetFacePositionParameterOffset = Schema.GetOffset(0xF411CC81102D56F);
+      }
+      return new CAnimParamHandleImpl(_Handle + _TargetFacePositionParameterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveHeadingParameterOffset = new(() => Schema.GetOffset(0xF411CC83A7267CF), LazyThreadSafetyMode.None);
+  private static nint? _MoveHeadingParameterOffset;
 
   public CAnimParamHandle MoveHeadingParameter {
-    get => new CAnimParamHandleImpl(_Handle + _MoveHeadingParameterOffset.Value);
+    get {
+      if (_MoveHeadingParameterOffset == null) {
+        _MoveHeadingParameterOffset = Schema.GetOffset(0xF411CC83A7267CF);
+      }
+      return new CAnimParamHandleImpl(_Handle + _MoveHeadingParameterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DesiredMoveHeadingParameterOffset = new(() => Schema.GetOffset(0xF411CC8C6298DFB), LazyThreadSafetyMode.None);
+  private static nint? _DesiredMoveHeadingParameterOffset;
 
   public CAnimParamHandle DesiredMoveHeadingParameter {
-    get => new CAnimParamHandleImpl(_Handle + _DesiredMoveHeadingParameterOffset.Value);
+    get {
+      if (_DesiredMoveHeadingParameterOffset == null) {
+        _DesiredMoveHeadingParameterOffset = Schema.GetOffset(0xF411CC8C6298DFB);
+      }
+      return new CAnimParamHandleImpl(_Handle + _DesiredMoveHeadingParameterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CorrectionMethodOffset = new(() => Schema.GetOffset(0xF411CC81E19BA51), LazyThreadSafetyMode.None);
+  private static nint? _CorrectionMethodOffset;
 
   public ref TargetWarpCorrectionMethod CorrectionMethod {
-    get => ref _Handle.AsRef<TargetWarpCorrectionMethod>(_CorrectionMethodOffset.Value);
+    get {
+      if (_CorrectionMethodOffset == null) {
+        _CorrectionMethodOffset = Schema.GetOffset(0xF411CC81E19BA51);
+      }
+      return ref _Handle.AsRef<TargetWarpCorrectionMethod>(_CorrectionMethodOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetWarpTimingMethodOffset = new(() => Schema.GetOffset(0xF411CC8EC684360), LazyThreadSafetyMode.None);
+  private static nint? _TargetWarpTimingMethodOffset;
 
   public ref TargetWarpTimingMethod TargetWarpTimingMethod {
-    get => ref _Handle.AsRef<TargetWarpTimingMethod>(_TargetWarpTimingMethodOffset.Value);
+    get {
+      if (_TargetWarpTimingMethodOffset == null) {
+        _TargetWarpTimingMethodOffset = Schema.GetOffset(0xF411CC8EC684360);
+      }
+      return ref _Handle.AsRef<TargetWarpTimingMethod>(_TargetWarpTimingMethodOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetFacePositionIsWorldSpaceOffset = new(() => Schema.GetOffset(0xF411CC8504B4258), LazyThreadSafetyMode.None);
+  private static nint? _TargetFacePositionIsWorldSpaceOffset;
 
   public ref bool TargetFacePositionIsWorldSpace {
-    get => ref _Handle.AsRef<bool>(_TargetFacePositionIsWorldSpaceOffset.Value);
+    get {
+      if (_TargetFacePositionIsWorldSpaceOffset == null) {
+        _TargetFacePositionIsWorldSpaceOffset = Schema.GetOffset(0xF411CC8504B4258);
+      }
+      return ref _Handle.AsRef<bool>(_TargetFacePositionIsWorldSpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetPositionIsWorldSpaceOffset = new(() => Schema.GetOffset(0xF411CC8ABCF9ECD), LazyThreadSafetyMode.None);
+  private static nint? _TargetPositionIsWorldSpaceOffset;
 
   public ref bool TargetPositionIsWorldSpace {
-    get => ref _Handle.AsRef<bool>(_TargetPositionIsWorldSpaceOffset.Value);
+    get {
+      if (_TargetPositionIsWorldSpaceOffset == null) {
+        _TargetPositionIsWorldSpaceOffset = Schema.GetOffset(0xF411CC8ABCF9ECD);
+      }
+      return ref _Handle.AsRef<bool>(_TargetPositionIsWorldSpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnlyWarpWhenTagIsFoundOffset = new(() => Schema.GetOffset(0xF411CC84B577309), LazyThreadSafetyMode.None);
+  private static nint? _OnlyWarpWhenTagIsFoundOffset;
 
   public ref bool OnlyWarpWhenTagIsFound {
-    get => ref _Handle.AsRef<bool>(_OnlyWarpWhenTagIsFoundOffset.Value);
+    get {
+      if (_OnlyWarpWhenTagIsFoundOffset == null) {
+        _OnlyWarpWhenTagIsFoundOffset = Schema.GetOffset(0xF411CC84B577309);
+      }
+      return ref _Handle.AsRef<bool>(_OnlyWarpWhenTagIsFoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WarpOrientationDuringTranslationOffset = new(() => Schema.GetOffset(0xF411CC85672A125), LazyThreadSafetyMode.None);
+  private static nint? _WarpOrientationDuringTranslationOffset;
 
   public ref bool WarpOrientationDuringTranslation {
-    get => ref _Handle.AsRef<bool>(_WarpOrientationDuringTranslationOffset.Value);
+    get {
+      if (_WarpOrientationDuringTranslationOffset == null) {
+        _WarpOrientationDuringTranslationOffset = Schema.GetOffset(0xF411CC85672A125);
+      }
+      return ref _Handle.AsRef<bool>(_WarpOrientationDuringTranslationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WarpAroundCenterOffset = new(() => Schema.GetOffset(0xF411CC8B19C474F), LazyThreadSafetyMode.None);
+  private static nint? _WarpAroundCenterOffset;
 
   public ref bool WarpAroundCenter {
-    get => ref _Handle.AsRef<bool>(_WarpAroundCenterOffset.Value);
+    get {
+      if (_WarpAroundCenterOffset == null) {
+        _WarpAroundCenterOffset = Schema.GetOffset(0xF411CC8B19C474F);
+      }
+      return ref _Handle.AsRef<bool>(_WarpAroundCenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxAngleOffset = new(() => Schema.GetOffset(0xF411CC8A4B3D8AE), LazyThreadSafetyMode.None);
+  private static nint? _MaxAngleOffset;
 
   public ref float MaxAngle {
-    get => ref _Handle.AsRef<float>(_MaxAngleOffset.Value);
+    get {
+      if (_MaxAngleOffset == null) {
+        _MaxAngleOffset = Schema.GetOffset(0xF411CC8A4B3D8AE);
+      }
+      return ref _Handle.AsRef<float>(_MaxAngleOffset!.Value);
+    }
   }
 
 

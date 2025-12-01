@@ -17,25 +17,45 @@ internal partial class C_OP_HSVShiftToCPImpl : CParticleFunctionPreEmissionImpl,
   public C_OP_HSVShiftToCPImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ColorCPOffset = new(() => Schema.GetOffset(0xA6FD1F901D3D233F), LazyThreadSafetyMode.None);
+  private static nint? _ColorCPOffset;
 
   public ref int ColorCP {
-    get => ref _Handle.AsRef<int>(_ColorCPOffset.Value);
+    get {
+      if (_ColorCPOffset == null) {
+        _ColorCPOffset = Schema.GetOffset(0xA6FD1F901D3D233F);
+      }
+      return ref _Handle.AsRef<int>(_ColorCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorGemEnableCPOffset = new(() => Schema.GetOffset(0xA6FD1F907B5C2B7F), LazyThreadSafetyMode.None);
+  private static nint? _ColorGemEnableCPOffset;
 
   public ref int ColorGemEnableCP {
-    get => ref _Handle.AsRef<int>(_ColorGemEnableCPOffset.Value);
+    get {
+      if (_ColorGemEnableCPOffset == null) {
+        _ColorGemEnableCPOffset = Schema.GetOffset(0xA6FD1F907B5C2B7F);
+      }
+      return ref _Handle.AsRef<int>(_ColorGemEnableCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputCPOffset = new(() => Schema.GetOffset(0xA6FD1F9050DF5703), LazyThreadSafetyMode.None);
+  private static nint? _OutputCPOffset;
 
   public ref int OutputCP {
-    get => ref _Handle.AsRef<int>(_OutputCPOffset.Value);
+    get {
+      if (_OutputCPOffset == null) {
+        _OutputCPOffset = Schema.GetOffset(0xA6FD1F9050DF5703);
+      }
+      return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultHSVColorOffset = new(() => Schema.GetOffset(0xA6FD1F90A7EFB0DE), LazyThreadSafetyMode.None);
+  private static nint? _DefaultHSVColorOffset;
 
   public ref Color DefaultHSVColor {
-    get => ref _Handle.AsRef<Color>(_DefaultHSVColorOffset.Value);
+    get {
+      if (_DefaultHSVColorOffset == null) {
+        _DefaultHSVColorOffset = Schema.GetOffset(0xA6FD1F90A7EFB0DE);
+      }
+      return ref _Handle.AsRef<Color>(_DefaultHSVColorOffset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class C_INIT_RandomAlphaWindowThresholdImpl : CParticleFunction
   public C_INIT_RandomAlphaWindowThresholdImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinOffset = new(() => Schema.GetOffset(0x68DB6A2E3B1A5649), LazyThreadSafetyMode.None);
+  private static nint? _MinOffset;
 
   public ref float Min {
-    get => ref _Handle.AsRef<float>(_MinOffset.Value);
+    get {
+      if (_MinOffset == null) {
+        _MinOffset = Schema.GetOffset(0x68DB6A2E3B1A5649);
+      }
+      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxOffset = new(() => Schema.GetOffset(0x68DB6A2E2D06B887), LazyThreadSafetyMode.None);
+  private static nint? _MaxOffset;
 
   public ref float Max {
-    get => ref _Handle.AsRef<float>(_MaxOffset.Value);
+    get {
+      if (_MaxOffset == null) {
+        _MaxOffset = Schema.GetOffset(0x68DB6A2E2D06B887);
+      }
+      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExponentOffset = new(() => Schema.GetOffset(0x68DB6A2E20A7BCBC), LazyThreadSafetyMode.None);
+  private static nint? _ExponentOffset;
 
   public ref float Exponent {
-    get => ref _Handle.AsRef<float>(_ExponentOffset.Value);
+    get {
+      if (_ExponentOffset == null) {
+        _ExponentOffset = Schema.GetOffset(0x68DB6A2E20A7BCBC);
+      }
+      return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+    }
   }
 
 

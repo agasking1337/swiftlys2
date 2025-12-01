@@ -17,20 +17,35 @@ internal partial class PulseObservableBoolExpression_tImpl : SchemaClass, PulseO
   public PulseObservableBoolExpression_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EvaluateConnectionOffset = new(() => Schema.GetOffset(0x420AB396176904EE), LazyThreadSafetyMode.None);
+  private static nint? _EvaluateConnectionOffset;
 
   public CPulse_OutflowConnection EvaluateConnection {
-    get => new CPulse_OutflowConnectionImpl(_Handle + _EvaluateConnectionOffset.Value);
+    get {
+      if (_EvaluateConnectionOffset == null) {
+        _EvaluateConnectionOffset = Schema.GetOffset(0x420AB396176904EE);
+      }
+      return new CPulse_OutflowConnectionImpl(_Handle + _EvaluateConnectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DependentObservableVarsOffset = new(() => Schema.GetOffset(0x420AB396C3F55B8B), LazyThreadSafetyMode.None);
+  private static nint? _DependentObservableVarsOffset;
 
   public ref CUtlVector<PulseRuntimeVarIndex_t> DependentObservableVars {
-    get => ref _Handle.AsRef<CUtlVector<PulseRuntimeVarIndex_t>>(_DependentObservableVarsOffset.Value);
+    get {
+      if (_DependentObservableVarsOffset == null) {
+        _DependentObservableVarsOffset = Schema.GetOffset(0x420AB396C3F55B8B);
+      }
+      return ref _Handle.AsRef<CUtlVector<PulseRuntimeVarIndex_t>>(_DependentObservableVarsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DependentObservableBlackboardReferencesOffset = new(() => Schema.GetOffset(0x420AB3961EE1483A), LazyThreadSafetyMode.None);
+  private static nint? _DependentObservableBlackboardReferencesOffset;
 
   public ref CUtlVector<PulseRuntimeBlackboardReferenceIndex_t> DependentObservableBlackboardReferences {
-    get => ref _Handle.AsRef<CUtlVector<PulseRuntimeBlackboardReferenceIndex_t>>(_DependentObservableBlackboardReferencesOffset.Value);
+    get {
+      if (_DependentObservableBlackboardReferencesOffset == null) {
+        _DependentObservableBlackboardReferencesOffset = Schema.GetOffset(0x420AB3961EE1483A);
+      }
+      return ref _Handle.AsRef<CUtlVector<PulseRuntimeBlackboardReferenceIndex_t>>(_DependentObservableBlackboardReferencesOffset!.Value);
+    }
   }
 
 

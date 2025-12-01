@@ -17,35 +17,65 @@ internal partial class CLookAtUpdateNodeImpl : CUnaryUpdateNodeImpl, CLookAtUpda
   public CLookAtUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OpFixedSettingsOffset = new(() => Schema.GetOffset(0xC17476D5E533AB09), LazyThreadSafetyMode.None);
+  private static nint? _OpFixedSettingsOffset;
 
   public LookAtOpFixedSettings_t OpFixedSettings {
-    get => new LookAtOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset.Value);
+    get {
+      if (_OpFixedSettingsOffset == null) {
+        _OpFixedSettingsOffset = Schema.GetOffset(0xC17476D5E533AB09);
+      }
+      return new LookAtOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetOffset = new(() => Schema.GetOffset(0xC17476D5FA08A9E8), LazyThreadSafetyMode.None);
+  private static nint? _TargetOffset;
 
   public ref AnimVectorSource Target {
-    get => ref _Handle.AsRef<AnimVectorSource>(_TargetOffset.Value);
+    get {
+      if (_TargetOffset == null) {
+        _TargetOffset = Schema.GetOffset(0xC17476D5FA08A9E8);
+      }
+      return ref _Handle.AsRef<AnimVectorSource>(_TargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamIndexOffset = new(() => Schema.GetOffset(0xC17476D561990A86), LazyThreadSafetyMode.None);
+  private static nint? _ParamIndexOffset;
 
   public CAnimParamHandle ParamIndex {
-    get => new CAnimParamHandleImpl(_Handle + _ParamIndexOffset.Value);
+    get {
+      if (_ParamIndexOffset == null) {
+        _ParamIndexOffset = Schema.GetOffset(0xC17476D561990A86);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WeightParamIndexOffset = new(() => Schema.GetOffset(0xC17476D50F2AED7A), LazyThreadSafetyMode.None);
+  private static nint? _WeightParamIndexOffset;
 
   public CAnimParamHandle WeightParamIndex {
-    get => new CAnimParamHandleImpl(_Handle + _WeightParamIndexOffset.Value);
+    get {
+      if (_WeightParamIndexOffset == null) {
+        _WeightParamIndexOffset = Schema.GetOffset(0xC17476D50F2AED7A);
+      }
+      return new CAnimParamHandleImpl(_Handle + _WeightParamIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResetChildOffset = new(() => Schema.GetOffset(0xC17476D565CC88B6), LazyThreadSafetyMode.None);
+  private static nint? _ResetChildOffset;
 
   public ref bool ResetChild {
-    get => ref _Handle.AsRef<bool>(_ResetChildOffset.Value);
+    get {
+      if (_ResetChildOffset == null) {
+        _ResetChildOffset = Schema.GetOffset(0xC17476D565CC88B6);
+      }
+      return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LockWhenWaningOffset = new(() => Schema.GetOffset(0xC17476D5EED48004), LazyThreadSafetyMode.None);
+  private static nint? _LockWhenWaningOffset;
 
   public ref bool LockWhenWaning {
-    get => ref _Handle.AsRef<bool>(_LockWhenWaningOffset.Value);
+    get {
+      if (_LockWhenWaningOffset == null) {
+        _LockWhenWaningOffset = Schema.GetOffset(0xC17476D5EED48004);
+      }
+      return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+    }
   }
 
 

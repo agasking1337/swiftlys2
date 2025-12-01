@@ -17,20 +17,35 @@ internal partial class CFootTrajectoryImpl : SchemaClass, CFootTrajectory {
   public CFootTrajectoryImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0x193297AFFE159136), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref Vector Offset {
-    get => ref _Handle.AsRef<Vector>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0x193297AFFE159136);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationOffsetOffset = new(() => Schema.GetOffset(0x193297AFF811C66E), LazyThreadSafetyMode.None);
+  private static nint? _RotationOffsetOffset;
 
   public ref float RotationOffset {
-    get => ref _Handle.AsRef<float>(_RotationOffsetOffset.Value);
+    get {
+      if (_RotationOffsetOffset == null) {
+        _RotationOffsetOffset = Schema.GetOffset(0x193297AFF811C66E);
+      }
+      return ref _Handle.AsRef<float>(_RotationOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProgressionOffset = new(() => Schema.GetOffset(0x193297AF4C9E1656), LazyThreadSafetyMode.None);
+  private static nint? _ProgressionOffset;
 
   public ref float Progression {
-    get => ref _Handle.AsRef<float>(_ProgressionOffset.Value);
+    get {
+      if (_ProgressionOffset == null) {
+        _ProgressionOffset = Schema.GetOffset(0x193297AF4C9E1656);
+      }
+      return ref _Handle.AsRef<float>(_ProgressionOffset!.Value);
+    }
   }
 
 

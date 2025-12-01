@@ -17,90 +17,175 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
   public CMaterialDrawDescriptorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _UvDensityOffset = new(() => Schema.GetOffset(0xE7C21000A7661B68), LazyThreadSafetyMode.None);
+  private static nint? _UvDensityOffset;
 
   public ref float UvDensity {
-    get => ref _Handle.AsRef<float>(_UvDensityOffset.Value);
+    get {
+      if (_UvDensityOffset == null) {
+        _UvDensityOffset = Schema.GetOffset(0xE7C21000A7661B68);
+      }
+      return ref _Handle.AsRef<float>(_UvDensityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintColorOffset = new(() => Schema.GetOffset(0xE7C2100050AFF21F), LazyThreadSafetyMode.None);
+  private static nint? _TintColorOffset;
 
   public ref Vector TintColor {
-    get => ref _Handle.AsRef<Vector>(_TintColorOffset.Value);
+    get {
+      if (_TintColorOffset == null) {
+        _TintColorOffset = Schema.GetOffset(0xE7C2100050AFF21F);
+      }
+      return ref _Handle.AsRef<Vector>(_TintColorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaOffset = new(() => Schema.GetOffset(0xE7C21000A0DB7DD1), LazyThreadSafetyMode.None);
+  private static nint? _AlphaOffset;
 
   public ref float Alpha {
-    get => ref _Handle.AsRef<float>(_AlphaOffset.Value);
+    get {
+      if (_AlphaOffset == null) {
+        _AlphaOffset = Schema.GetOffset(0xE7C21000A0DB7DD1);
+      }
+      return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumMeshletsOffset = new(() => Schema.GetOffset(0xE7C21000A56D0338), LazyThreadSafetyMode.None);
+  private static nint? _NumMeshletsOffset;
 
   public ref ushort NumMeshlets {
-    get => ref _Handle.AsRef<ushort>(_NumMeshletsOffset.Value);
+    get {
+      if (_NumMeshletsOffset == null) {
+        _NumMeshletsOffset = Schema.GetOffset(0xE7C21000A56D0338);
+      }
+      return ref _Handle.AsRef<ushort>(_NumMeshletsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FirstMeshletOffset = new(() => Schema.GetOffset(0xE7C210006DA99901), LazyThreadSafetyMode.None);
+  private static nint? _FirstMeshletOffset;
 
   public ref uint FirstMeshlet {
-    get => ref _Handle.AsRef<uint>(_FirstMeshletOffset.Value);
+    get {
+      if (_FirstMeshletOffset == null) {
+        _FirstMeshletOffset = Schema.GetOffset(0xE7C210006DA99901);
+      }
+      return ref _Handle.AsRef<uint>(_FirstMeshletOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AppliedIndexOffsetOffset = new(() => Schema.GetOffset(0xE7C21000A24FA35D), LazyThreadSafetyMode.None);
+  private static nint? _AppliedIndexOffsetOffset;
 
   public ref uint AppliedIndexOffset {
-    get => ref _Handle.AsRef<uint>(_AppliedIndexOffsetOffset.Value);
+    get {
+      if (_AppliedIndexOffsetOffset == null) {
+        _AppliedIndexOffsetOffset = Schema.GetOffset(0xE7C21000A24FA35D);
+      }
+      return ref _Handle.AsRef<uint>(_AppliedIndexOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DepthVertexBufferIndexOffset = new(() => Schema.GetOffset(0xE7C2100049292FE2), LazyThreadSafetyMode.None);
+  private static nint? _DepthVertexBufferIndexOffset;
 
   public ref byte DepthVertexBufferIndex {
-    get => ref _Handle.AsRef<byte>(_DepthVertexBufferIndexOffset.Value);
+    get {
+      if (_DepthVertexBufferIndexOffset == null) {
+        _DepthVertexBufferIndexOffset = Schema.GetOffset(0xE7C2100049292FE2);
+      }
+      return ref _Handle.AsRef<byte>(_DepthVertexBufferIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MeshletPackedIVBIndexOffset = new(() => Schema.GetOffset(0xE7C21000A98C8BAC), LazyThreadSafetyMode.None);
+  private static nint? _MeshletPackedIVBIndexOffset;
 
   public ref byte MeshletPackedIVBIndex {
-    get => ref _Handle.AsRef<byte>(_MeshletPackedIVBIndexOffset.Value);
+    get {
+      if (_MeshletPackedIVBIndexOffset == null) {
+        _MeshletPackedIVBIndexOffset = Schema.GetOffset(0xE7C21000A98C8BAC);
+      }
+      return ref _Handle.AsRef<byte>(_MeshletPackedIVBIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RigidMeshPartsOffset = new(() => Schema.GetOffset(0xE7C2100062848C01), LazyThreadSafetyMode.None);
+  private static nint? _RigidMeshPartsOffset;
 
   public ref CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int> RigidMeshParts {
-    get => ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int>>(_RigidMeshPartsOffset.Value);
+    get {
+      if (_RigidMeshPartsOffset == null) {
+        _RigidMeshPartsOffset = Schema.GetOffset(0xE7C2100062848C01);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int>>(_RigidMeshPartsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PrimitiveTypeOffset = new(() => Schema.GetOffset(0xE7C2100041517C4A), LazyThreadSafetyMode.None);
+  private static nint? _PrimitiveTypeOffset;
 
   public ref RenderPrimitiveType_t PrimitiveType {
-    get => ref _Handle.AsRef<RenderPrimitiveType_t>(_PrimitiveTypeOffset.Value);
+    get {
+      if (_PrimitiveTypeOffset == null) {
+        _PrimitiveTypeOffset = Schema.GetOffset(0xE7C2100041517C4A);
+      }
+      return ref _Handle.AsRef<RenderPrimitiveType_t>(_PrimitiveTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BaseVertexOffset = new(() => Schema.GetOffset(0xE7C2100048F55CFA), LazyThreadSafetyMode.None);
+  private static nint? _BaseVertexOffset;
 
   public ref int BaseVertex {
-    get => ref _Handle.AsRef<int>(_BaseVertexOffset.Value);
+    get {
+      if (_BaseVertexOffset == null) {
+        _BaseVertexOffset = Schema.GetOffset(0xE7C2100048F55CFA);
+      }
+      return ref _Handle.AsRef<int>(_BaseVertexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VertexCountOffset = new(() => Schema.GetOffset(0xE7C2100012923E12), LazyThreadSafetyMode.None);
+  private static nint? _VertexCountOffset;
 
   public ref int VertexCount {
-    get => ref _Handle.AsRef<int>(_VertexCountOffset.Value);
+    get {
+      if (_VertexCountOffset == null) {
+        _VertexCountOffset = Schema.GetOffset(0xE7C2100012923E12);
+      }
+      return ref _Handle.AsRef<int>(_VertexCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartIndexOffset = new(() => Schema.GetOffset(0xE7C210008A0ACD99), LazyThreadSafetyMode.None);
+  private static nint? _StartIndexOffset;
 
   public ref int StartIndex {
-    get => ref _Handle.AsRef<int>(_StartIndexOffset.Value);
+    get {
+      if (_StartIndexOffset == null) {
+        _StartIndexOffset = Schema.GetOffset(0xE7C210008A0ACD99);
+      }
+      return ref _Handle.AsRef<int>(_StartIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IndexCountOffset = new(() => Schema.GetOffset(0xE7C21000B0202EFE), LazyThreadSafetyMode.None);
+  private static nint? _IndexCountOffset;
 
   public ref int IndexCount {
-    get => ref _Handle.AsRef<int>(_IndexCountOffset.Value);
+    get {
+      if (_IndexCountOffset == null) {
+        _IndexCountOffset = Schema.GetOffset(0xE7C21000B0202EFE);
+      }
+      return ref _Handle.AsRef<int>(_IndexCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IndexBufferOffset = new(() => Schema.GetOffset(0xE7C210003C0C2701), LazyThreadSafetyMode.None);
+  private static nint? _IndexBufferOffset;
 
   public CRenderBufferBinding IndexBuffer {
-    get => new CRenderBufferBindingImpl(_Handle + _IndexBufferOffset.Value);
+    get {
+      if (_IndexBufferOffset == null) {
+        _IndexBufferOffset = Schema.GetOffset(0xE7C210003C0C2701);
+      }
+      return new CRenderBufferBindingImpl(_Handle + _IndexBufferOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MeshletPackedIVBOffset = new(() => Schema.GetOffset(0xE7C21000015D34E4), LazyThreadSafetyMode.None);
+  private static nint? _MeshletPackedIVBOffset;
 
   public CRenderBufferBinding MeshletPackedIVB {
-    get => new CRenderBufferBindingImpl(_Handle + _MeshletPackedIVBOffset.Value);
+    get {
+      if (_MeshletPackedIVBOffset == null) {
+        _MeshletPackedIVBOffset = Schema.GetOffset(0xE7C21000015D34E4);
+      }
+      return new CRenderBufferBindingImpl(_Handle + _MeshletPackedIVBOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaterialOffset = new(() => Schema.GetOffset(0xE7C2100034ADFC00), LazyThreadSafetyMode.None);
+  private static nint? _MaterialOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset.Value);
+    get {
+      if (_MaterialOffset == null) {
+        _MaterialOffset = Schema.GetOffset(0xE7C2100034ADFC00);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    }
   }
 
 

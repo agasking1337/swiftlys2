@@ -17,24 +17,42 @@ internal partial class CSoundAreaEntityBaseImpl : CBaseEntityImpl, CSoundAreaEnt
   public CSoundAreaEntityBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x15C90E163A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x15C90E163A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundAreaTypeOffset = new(() => Schema.GetOffset(0x15C90E16227612E5), LazyThreadSafetyMode.None);
+  private static nint? _SoundAreaTypeOffset;
 
   public string SoundAreaType {
     get {
-      var ptr = _Handle.Read<nint>(_SoundAreaTypeOffset.Value);
+      if (_SoundAreaTypeOffset == null) {
+        _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
+      }
+      var ptr = _Handle.Read<nint>(_SoundAreaTypeOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SoundAreaTypeOffset.Value, value);
+    set {
+      if (_SoundAreaTypeOffset == null) {
+        _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
+      }
+      Schema.SetString(_Handle, _SoundAreaTypeOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PosOffset = new(() => Schema.GetOffset(0x15C90E16DE9CFC5D), LazyThreadSafetyMode.None);
+  private static nint? _PosOffset;
 
   public ref Vector Pos {
-    get => ref _Handle.AsRef<Vector>(_PosOffset.Value);
+    get {
+      if (_PosOffset == null) {
+        _PosOffset = Schema.GetOffset(0x15C90E16DE9CFC5D);
+      }
+      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    }
   }
 
   public void DisabledUpdated() {

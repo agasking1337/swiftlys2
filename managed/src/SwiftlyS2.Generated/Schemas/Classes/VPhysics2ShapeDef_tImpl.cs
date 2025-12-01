@@ -17,30 +17,55 @@ internal partial class VPhysics2ShapeDef_tImpl : SchemaClass, VPhysics2ShapeDef_
   public VPhysics2ShapeDef_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SpheresOffset = new(() => Schema.GetOffset(0xB5A68CEBBFDA8091), LazyThreadSafetyMode.None);
+  private static nint? _SpheresOffset;
 
   public ref CUtlVector<RnSphereDesc_t> Spheres {
-    get => ref _Handle.AsRef<CUtlVector<RnSphereDesc_t>>(_SpheresOffset.Value);
+    get {
+      if (_SpheresOffset == null) {
+        _SpheresOffset = Schema.GetOffset(0xB5A68CEBBFDA8091);
+      }
+      return ref _Handle.AsRef<CUtlVector<RnSphereDesc_t>>(_SpheresOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CapsulesOffset = new(() => Schema.GetOffset(0xB5A68CEBF8737C4D), LazyThreadSafetyMode.None);
+  private static nint? _CapsulesOffset;
 
   public ref CUtlVector<RnCapsuleDesc_t> Capsules {
-    get => ref _Handle.AsRef<CUtlVector<RnCapsuleDesc_t>>(_CapsulesOffset.Value);
+    get {
+      if (_CapsulesOffset == null) {
+        _CapsulesOffset = Schema.GetOffset(0xB5A68CEBF8737C4D);
+      }
+      return ref _Handle.AsRef<CUtlVector<RnCapsuleDesc_t>>(_CapsulesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HullsOffset = new(() => Schema.GetOffset(0xB5A68CEB31F7453F), LazyThreadSafetyMode.None);
+  private static nint? _HullsOffset;
 
   public ref CUtlVector<RnHullDesc_t> Hulls {
-    get => ref _Handle.AsRef<CUtlVector<RnHullDesc_t>>(_HullsOffset.Value);
+    get {
+      if (_HullsOffset == null) {
+        _HullsOffset = Schema.GetOffset(0xB5A68CEB31F7453F);
+      }
+      return ref _Handle.AsRef<CUtlVector<RnHullDesc_t>>(_HullsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MeshesOffset = new(() => Schema.GetOffset(0xB5A68CEBC0F01FD8), LazyThreadSafetyMode.None);
+  private static nint? _MeshesOffset;
 
   public ref CUtlVector<RnMeshDesc_t> Meshes {
-    get => ref _Handle.AsRef<CUtlVector<RnMeshDesc_t>>(_MeshesOffset.Value);
+    get {
+      if (_MeshesOffset == null) {
+        _MeshesOffset = Schema.GetOffset(0xB5A68CEBC0F01FD8);
+      }
+      return ref _Handle.AsRef<CUtlVector<RnMeshDesc_t>>(_MeshesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CollisionAttributeIndicesOffset = new(() => Schema.GetOffset(0xB5A68CEB86453EB2), LazyThreadSafetyMode.None);
+  private static nint? _CollisionAttributeIndicesOffset;
 
   public ref CUtlVector<ushort> CollisionAttributeIndices {
-    get => ref _Handle.AsRef<CUtlVector<ushort>>(_CollisionAttributeIndicesOffset.Value);
+    get {
+      if (_CollisionAttributeIndicesOffset == null) {
+        _CollisionAttributeIndicesOffset = Schema.GetOffset(0xB5A68CEB86453EB2);
+      }
+      return ref _Handle.AsRef<CUtlVector<ushort>>(_CollisionAttributeIndicesOffset!.Value);
+    }
   }
 
 

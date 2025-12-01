@@ -17,25 +17,45 @@ internal partial class C_OP_RemapCPVelocityToVectorImpl : CParticleFunctionOpera
   public C_OP_RemapCPVelocityToVectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointOffset = new(() => Schema.GetOffset(0xAD6CE1DC0D0DDF8C), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointOffset;
 
   public ref int ControlPoint {
-    get => ref _Handle.AsRef<int>(_ControlPointOffset.Value);
+    get {
+      if (_ControlPointOffset == null) {
+        _ControlPointOffset = Schema.GetOffset(0xAD6CE1DC0D0DDF8C);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xAD6CE1DCE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xAD6CE1DCE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0xAD6CE1DCB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0xAD6CE1DCB731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizeOffset = new(() => Schema.GetOffset(0xAD6CE1DC48BC424C), LazyThreadSafetyMode.None);
+  private static nint? _NormalizeOffset;
 
   public ref bool Normalize {
-    get => ref _Handle.AsRef<bool>(_NormalizeOffset.Value);
+    get {
+      if (_NormalizeOffset == null) {
+        _NormalizeOffset = Schema.GetOffset(0xAD6CE1DC48BC424C);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    }
   }
 
 

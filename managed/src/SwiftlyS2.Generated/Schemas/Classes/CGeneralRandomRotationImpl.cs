@@ -17,35 +17,65 @@ internal partial class CGeneralRandomRotationImpl : CParticleFunctionInitializer
   public CGeneralRandomRotationImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xB15F344FE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xB15F344FE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DegreesOffset = new(() => Schema.GetOffset(0xB15F344FB2A877A0), LazyThreadSafetyMode.None);
+  private static nint? _DegreesOffset;
 
   public ref float Degrees {
-    get => ref _Handle.AsRef<float>(_DegreesOffset.Value);
+    get {
+      if (_DegreesOffset == null) {
+        _DegreesOffset = Schema.GetOffset(0xB15F344FB2A877A0);
+      }
+      return ref _Handle.AsRef<float>(_DegreesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DegreesMinOffset = new(() => Schema.GetOffset(0xB15F344F6D22DDDC), LazyThreadSafetyMode.None);
+  private static nint? _DegreesMinOffset;
 
   public ref float DegreesMin {
-    get => ref _Handle.AsRef<float>(_DegreesMinOffset.Value);
+    get {
+      if (_DegreesMinOffset == null) {
+        _DegreesMinOffset = Schema.GetOffset(0xB15F344F6D22DDDC);
+      }
+      return ref _Handle.AsRef<float>(_DegreesMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DegreesMaxOffset = new(() => Schema.GetOffset(0xB15F344F5B0F39CE), LazyThreadSafetyMode.None);
+  private static nint? _DegreesMaxOffset;
 
   public ref float DegreesMax {
-    get => ref _Handle.AsRef<float>(_DegreesMaxOffset.Value);
+    get {
+      if (_DegreesMaxOffset == null) {
+        _DegreesMaxOffset = Schema.GetOffset(0xB15F344F5B0F39CE);
+      }
+      return ref _Handle.AsRef<float>(_DegreesMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationRandExponentOffset = new(() => Schema.GetOffset(0xB15F344F348610D5), LazyThreadSafetyMode.None);
+  private static nint? _RotationRandExponentOffset;
 
   public ref float RotationRandExponent {
-    get => ref _Handle.AsRef<float>(_RotationRandExponentOffset.Value);
+    get {
+      if (_RotationRandExponentOffset == null) {
+        _RotationRandExponentOffset = Schema.GetOffset(0xB15F344F348610D5);
+      }
+      return ref _Handle.AsRef<float>(_RotationRandExponentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomlyFlipDirectionOffset = new(() => Schema.GetOffset(0xB15F344F26D0F2EF), LazyThreadSafetyMode.None);
+  private static nint? _RandomlyFlipDirectionOffset;
 
   public ref bool RandomlyFlipDirection {
-    get => ref _Handle.AsRef<bool>(_RandomlyFlipDirectionOffset.Value);
+    get {
+      if (_RandomlyFlipDirectionOffset == null) {
+        _RandomlyFlipDirectionOffset = Schema.GetOffset(0xB15F344F26D0F2EF);
+      }
+      return ref _Handle.AsRef<bool>(_RandomlyFlipDirectionOffset!.Value);
+    }
   }
 
 

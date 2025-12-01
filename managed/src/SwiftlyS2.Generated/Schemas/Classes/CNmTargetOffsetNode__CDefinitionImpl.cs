@@ -17,25 +17,45 @@ internal partial class CNmTargetOffsetNode__CDefinitionImpl : CNmTargetValueNode
   public CNmTargetOffsetNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueNodeIdxOffset = new(() => Schema.GetOffset(0x33F484EF95E89F27), LazyThreadSafetyMode.None);
+  private static nint? _InputValueNodeIdxOffset;
 
   public ref short InputValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_InputValueNodeIdxOffset.Value);
+    get {
+      if (_InputValueNodeIdxOffset == null) {
+        _InputValueNodeIdxOffset = Schema.GetOffset(0x33F484EF95E89F27);
+      }
+      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsBoneSpaceOffsetOffset = new(() => Schema.GetOffset(0x33F484EF7B33F588), LazyThreadSafetyMode.None);
+  private static nint? _IsBoneSpaceOffsetOffset;
 
   public ref bool IsBoneSpaceOffset {
-    get => ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset.Value);
+    get {
+      if (_IsBoneSpaceOffsetOffset == null) {
+        _IsBoneSpaceOffsetOffset = Schema.GetOffset(0x33F484EF7B33F588);
+      }
+      return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationOffsetOffset = new(() => Schema.GetOffset(0x33F484EFD70314A4), LazyThreadSafetyMode.None);
+  private static nint? _RotationOffsetOffset;
 
   public ref Quaternion RotationOffset {
-    get => ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset.Value);
+    get {
+      if (_RotationOffsetOffset == null) {
+        _RotationOffsetOffset = Schema.GetOffset(0x33F484EFD70314A4);
+      }
+      return ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TranslationOffsetOffset = new(() => Schema.GetOffset(0x33F484EF1ABA9777), LazyThreadSafetyMode.None);
+  private static nint? _TranslationOffsetOffset;
 
   public ref Vector TranslationOffset {
-    get => ref _Handle.AsRef<Vector>(_TranslationOffsetOffset.Value);
+    get {
+      if (_TranslationOffsetOffset == null) {
+        _TranslationOffsetOffset = Schema.GetOffset(0x33F484EF1ABA9777);
+      }
+      return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset!.Value);
+    }
   }
 
 

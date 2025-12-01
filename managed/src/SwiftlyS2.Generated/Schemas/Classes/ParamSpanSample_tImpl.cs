@@ -17,15 +17,25 @@ internal partial class ParamSpanSample_tImpl : SchemaClass, ParamSpanSample_t {
   public ParamSpanSample_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ValueOffset = new(() => Schema.GetOffset(0x37E203136B99AEEA), LazyThreadSafetyMode.None);
+  private static nint? _ValueOffset;
 
   public SchemaUntypedField Value {
-    get => new SchemaUntypedField(_Handle + _ValueOffset.Value);
+    get {
+      if (_ValueOffset == null) {
+        _ValueOffset = Schema.GetOffset(0x37E203136B99AEEA);
+      }
+      return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CycleOffset = new(() => Schema.GetOffset(0x37E203130C77829F), LazyThreadSafetyMode.None);
+  private static nint? _CycleOffset;
 
   public ref float Cycle {
-    get => ref _Handle.AsRef<float>(_CycleOffset.Value);
+    get {
+      if (_CycleOffset == null) {
+        _CycleOffset = Schema.GetOffset(0x37E203130C77829F);
+      }
+      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    }
   }
 
 

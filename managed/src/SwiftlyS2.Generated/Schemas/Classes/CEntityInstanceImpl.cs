@@ -17,28 +17,42 @@ internal partial class CEntityInstanceImpl : SchemaClass, CEntityInstance {
   public CEntityInstanceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PrivateVScriptsOffset = new(() => Schema.GetOffset(0xB6DD442EB087F3B2), LazyThreadSafetyMode.None);
+  private static nint? _PrivateVScriptsOffset;
 
   public string PrivateVScripts {
     get {
-      var ptr = _Handle.Read<nint>(_PrivateVScriptsOffset.Value);
+      if (_PrivateVScriptsOffset == null) {
+        _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
+      }
+      var ptr = _Handle.Read<nint>(_PrivateVScriptsOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _PrivateVScriptsOffset.Value, value);
+    set {
+      if (_PrivateVScriptsOffset == null) {
+        _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
+      }
+      Schema.SetString(_Handle, _PrivateVScriptsOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _EntityOffset = new(() => Schema.GetOffset(0xB6DD442EA8A45978), LazyThreadSafetyMode.None);
+  private static nint? _EntityOffset;
 
   public CEntityIdentity? Entity {
     get {
-      var ptr = _Handle.Read<nint>(_EntityOffset.Value);
+      if (_EntityOffset == null) {
+        _EntityOffset = Schema.GetOffset(0xB6DD442EA8A45978);
+      }
+      var ptr = _Handle.Read<nint>(_EntityOffset!.Value);
       return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _CScriptComponentOffset = new(() => Schema.GetOffset(0xB6DD442E3F4202B4), LazyThreadSafetyMode.None);
+  private static nint? _CScriptComponentOffset;
 
   public CScriptComponent? CScriptComponent {
     get {
-      var ptr = _Handle.Read<nint>(_CScriptComponentOffset.Value);
+      if (_CScriptComponentOffset == null) {
+        _CScriptComponentOffset = Schema.GetOffset(0xB6DD442E3F4202B4);
+      }
+      var ptr = _Handle.Read<nint>(_CScriptComponentOffset!.Value);
       return ptr.IsValidPtr() ? new CScriptComponentImpl(ptr) : null;
     }
   }

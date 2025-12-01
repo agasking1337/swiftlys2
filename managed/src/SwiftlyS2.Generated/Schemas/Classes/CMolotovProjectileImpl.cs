@@ -17,25 +17,45 @@ internal partial class CMolotovProjectileImpl : CBaseCSGrenadeProjectileImpl, CM
   public CMolotovProjectileImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IsIncGrenadeOffset = new(() => Schema.GetOffset(0xA239EA8F9D1C12B7), LazyThreadSafetyMode.None);
+  private static nint? _IsIncGrenadeOffset;
 
   public ref bool IsIncGrenade {
-    get => ref _Handle.AsRef<bool>(_IsIncGrenadeOffset.Value);
+    get {
+      if (_IsIncGrenadeOffset == null) {
+        _IsIncGrenadeOffset = Schema.GetOffset(0xA239EA8F9D1C12B7);
+      }
+      return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DetonatedOffset = new(() => Schema.GetOffset(0xA239EA8F97D602AF), LazyThreadSafetyMode.None);
+  private static nint? _DetonatedOffset;
 
   public ref bool Detonated {
-    get => ref _Handle.AsRef<bool>(_DetonatedOffset.Value);
+    get {
+      if (_DetonatedOffset == null) {
+        _DetonatedOffset = Schema.GetOffset(0xA239EA8F97D602AF);
+      }
+      return ref _Handle.AsRef<bool>(_DetonatedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StillTimerOffset = new(() => Schema.GetOffset(0xA239EA8F2772246E), LazyThreadSafetyMode.None);
+  private static nint? _StillTimerOffset;
 
   public IntervalTimer StillTimer {
-    get => new IntervalTimerImpl(_Handle + _StillTimerOffset.Value);
+    get {
+      if (_StillTimerOffset == null) {
+        _StillTimerOffset = Schema.GetOffset(0xA239EA8F2772246E);
+      }
+      return new IntervalTimerImpl(_Handle + _StillTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HasBouncedOffPlayerOffset = new(() => Schema.GetOffset(0xA239EA8F2A625F7B), LazyThreadSafetyMode.None);
+  private static nint? _HasBouncedOffPlayerOffset;
 
   public ref bool HasBouncedOffPlayer {
-    get => ref _Handle.AsRef<bool>(_HasBouncedOffPlayerOffset.Value);
+    get {
+      if (_HasBouncedOffPlayerOffset == null) {
+        _HasBouncedOffPlayerOffset = Schema.GetOffset(0xA239EA8F2A625F7B);
+      }
+      return ref _Handle.AsRef<bool>(_HasBouncedOffPlayerOffset!.Value);
+    }
   }
 
   public void IsIncGrenadeUpdated() {

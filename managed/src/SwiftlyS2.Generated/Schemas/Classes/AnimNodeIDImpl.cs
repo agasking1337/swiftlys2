@@ -17,10 +17,15 @@ internal partial class AnimNodeIDImpl : SchemaClass, AnimNodeID {
   public AnimNodeIDImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IdOffset = new(() => Schema.GetOffset(0x9E71ACD1B4B6E980), LazyThreadSafetyMode.None);
+  private static nint? _IdOffset;
 
   public ref uint Id {
-    get => ref _Handle.AsRef<uint>(_IdOffset.Value);
+    get {
+      if (_IdOffset == null) {
+        _IdOffset = Schema.GetOffset(0x9E71ACD1B4B6E980);
+      }
+      return ref _Handle.AsRef<uint>(_IdOffset!.Value);
+    }
   }
 
 

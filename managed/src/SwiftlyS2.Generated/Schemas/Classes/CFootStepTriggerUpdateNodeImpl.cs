@@ -17,15 +17,25 @@ internal partial class CFootStepTriggerUpdateNodeImpl : CUnaryUpdateNodeImpl, CF
   public CFootStepTriggerUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TriggersOffset = new(() => Schema.GetOffset(0x799A3B55684C6AF0), LazyThreadSafetyMode.None);
+  private static nint? _TriggersOffset;
 
   public ref CUtlVector<FootStepTrigger> Triggers {
-    get => ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset.Value);
+    get {
+      if (_TriggersOffset == null) {
+        _TriggersOffset = Schema.GetOffset(0x799A3B55684C6AF0);
+      }
+      return ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ToleranceOffset = new(() => Schema.GetOffset(0x799A3B558C29728E), LazyThreadSafetyMode.None);
+  private static nint? _ToleranceOffset;
 
   public ref float Tolerance {
-    get => ref _Handle.AsRef<float>(_ToleranceOffset.Value);
+    get {
+      if (_ToleranceOffset == null) {
+        _ToleranceOffset = Schema.GetOffset(0x799A3B558C29728E);
+      }
+      return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+    }
   }
 
 

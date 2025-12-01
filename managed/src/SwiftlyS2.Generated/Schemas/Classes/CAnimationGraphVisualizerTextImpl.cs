@@ -17,24 +17,42 @@ internal partial class CAnimationGraphVisualizerTextImpl : CAnimationGraphVisual
   public CAnimationGraphVisualizerTextImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WsPositionOffset = new(() => Schema.GetOffset(0x123E08CFCA77AB88), LazyThreadSafetyMode.None);
+  private static nint? _WsPositionOffset;
 
   public ref Vector WsPosition {
-    get => ref _Handle.AsRef<Vector>(_WsPositionOffset.Value);
+    get {
+      if (_WsPositionOffset == null) {
+        _WsPositionOffset = Schema.GetOffset(0x123E08CFCA77AB88);
+      }
+      return ref _Handle.AsRef<Vector>(_WsPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorOffset = new(() => Schema.GetOffset(0x123E08CFD7D017D8), LazyThreadSafetyMode.None);
+  private static nint? _ColorOffset;
 
   public ref Color Color {
-    get => ref _Handle.AsRef<Color>(_ColorOffset.Value);
+    get {
+      if (_ColorOffset == null) {
+        _ColorOffset = Schema.GetOffset(0x123E08CFD7D017D8);
+      }
+      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextOffset = new(() => Schema.GetOffset(0x123E08CFFB9532BE), LazyThreadSafetyMode.None);
+  private static nint? _TextOffset;
 
   public string Text {
     get {
-      var ptr = _Handle.Read<nint>(_TextOffset.Value);
+      if (_TextOffset == null) {
+        _TextOffset = Schema.GetOffset(0x123E08CFFB9532BE);
+      }
+      var ptr = _Handle.Read<nint>(_TextOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TextOffset.Value, value);
+    set {
+      if (_TextOffset == null) {
+        _TextOffset = Schema.GetOffset(0x123E08CFFB9532BE);
+      }
+      Schema.SetString(_Handle, _TextOffset!.Value, value);
+    }
   } 
 
 

@@ -17,76 +17,137 @@ internal partial class CBotImpl : SchemaClass, CBot {
   public CBotImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControllerOffset = new(() => Schema.GetOffset(0x804AC5DB8F2DD553), LazyThreadSafetyMode.None);
+  private static nint? _ControllerOffset;
 
   public CCSPlayerController? Controller {
     get {
-      var ptr = _Handle.Read<nint>(_ControllerOffset.Value);
+      if (_ControllerOffset == null) {
+        _ControllerOffset = Schema.GetOffset(0x804AC5DB8F2DD553);
+      }
+      var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
       return ptr.IsValidPtr() ? new CCSPlayerControllerImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _PlayerOffset = new(() => Schema.GetOffset(0x804AC5DB2EC01D0E), LazyThreadSafetyMode.None);
+  private static nint? _PlayerOffset;
 
   public CCSPlayerPawn? Player {
     get {
-      var ptr = _Handle.Read<nint>(_PlayerOffset.Value);
+      if (_PlayerOffset == null) {
+        _PlayerOffset = Schema.GetOffset(0x804AC5DB2EC01D0E);
+      }
+      var ptr = _Handle.Read<nint>(_PlayerOffset!.Value);
       return ptr.IsValidPtr() ? new CCSPlayerPawnImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _HasSpawnedOffset = new(() => Schema.GetOffset(0x804AC5DBC2790687), LazyThreadSafetyMode.None);
+  private static nint? _HasSpawnedOffset;
 
   public ref bool HasSpawned {
-    get => ref _Handle.AsRef<bool>(_HasSpawnedOffset.Value);
+    get {
+      if (_HasSpawnedOffset == null) {
+        _HasSpawnedOffset = Schema.GetOffset(0x804AC5DBC2790687);
+      }
+      return ref _Handle.AsRef<bool>(_HasSpawnedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IdOffset = new(() => Schema.GetOffset(0x804AC5DBB4B6E980), LazyThreadSafetyMode.None);
+  private static nint? _IdOffset;
 
   public ref uint Id {
-    get => ref _Handle.AsRef<uint>(_IdOffset.Value);
+    get {
+      if (_IdOffset == null) {
+        _IdOffset = Schema.GetOffset(0x804AC5DBB4B6E980);
+      }
+      return ref _Handle.AsRef<uint>(_IdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsRunningOffset = new(() => Schema.GetOffset(0x804AC5DBE59BA57C), LazyThreadSafetyMode.None);
+  private static nint? _IsRunningOffset;
 
   public ref bool IsRunning {
-    get => ref _Handle.AsRef<bool>(_IsRunningOffset.Value);
+    get {
+      if (_IsRunningOffset == null) {
+        _IsRunningOffset = Schema.GetOffset(0x804AC5DBE59BA57C);
+      }
+      return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsCrouchingOffset = new(() => Schema.GetOffset(0x804AC5DB7C7E997D), LazyThreadSafetyMode.None);
+  private static nint? _IsCrouchingOffset;
 
   public ref bool IsCrouching {
-    get => ref _Handle.AsRef<bool>(_IsCrouchingOffset.Value);
+    get {
+      if (_IsCrouchingOffset == null) {
+        _IsCrouchingOffset = Schema.GetOffset(0x804AC5DB7C7E997D);
+      }
+      return ref _Handle.AsRef<bool>(_IsCrouchingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForwardSpeedOffset = new(() => Schema.GetOffset(0x804AC5DBD8FEDBBD), LazyThreadSafetyMode.None);
+  private static nint? _ForwardSpeedOffset;
 
   public ref float ForwardSpeed {
-    get => ref _Handle.AsRef<float>(_ForwardSpeedOffset.Value);
+    get {
+      if (_ForwardSpeedOffset == null) {
+        _ForwardSpeedOffset = Schema.GetOffset(0x804AC5DBD8FEDBBD);
+      }
+      return ref _Handle.AsRef<float>(_ForwardSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LeftSpeedOffset = new(() => Schema.GetOffset(0x804AC5DBA7C6445B), LazyThreadSafetyMode.None);
+  private static nint? _LeftSpeedOffset;
 
   public ref float LeftSpeed {
-    get => ref _Handle.AsRef<float>(_LeftSpeedOffset.Value);
+    get {
+      if (_LeftSpeedOffset == null) {
+        _LeftSpeedOffset = Schema.GetOffset(0x804AC5DBA7C6445B);
+      }
+      return ref _Handle.AsRef<float>(_LeftSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VerticalSpeedOffset = new(() => Schema.GetOffset(0x804AC5DB379CEA66), LazyThreadSafetyMode.None);
+  private static nint? _VerticalSpeedOffset;
 
   public ref float VerticalSpeed {
-    get => ref _Handle.AsRef<float>(_VerticalSpeedOffset.Value);
+    get {
+      if (_VerticalSpeedOffset == null) {
+        _VerticalSpeedOffset = Schema.GetOffset(0x804AC5DB379CEA66);
+      }
+      return ref _Handle.AsRef<float>(_VerticalSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ButtonFlagsOffset = new(() => Schema.GetOffset(0x804AC5DB82784FE8), LazyThreadSafetyMode.None);
+  private static nint? _ButtonFlagsOffset;
 
   public ref ulong ButtonFlags {
-    get => ref _Handle.AsRef<ulong>(_ButtonFlagsOffset.Value);
+    get {
+      if (_ButtonFlagsOffset == null) {
+        _ButtonFlagsOffset = Schema.GetOffset(0x804AC5DB82784FE8);
+      }
+      return ref _Handle.AsRef<ulong>(_ButtonFlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _JumpTimestampOffset = new(() => Schema.GetOffset(0x804AC5DBA7C5ED0B), LazyThreadSafetyMode.None);
+  private static nint? _JumpTimestampOffset;
 
   public ref float JumpTimestamp {
-    get => ref _Handle.AsRef<float>(_JumpTimestampOffset.Value);
+    get {
+      if (_JumpTimestampOffset == null) {
+        _JumpTimestampOffset = Schema.GetOffset(0x804AC5DBA7C5ED0B);
+      }
+      return ref _Handle.AsRef<float>(_JumpTimestampOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ViewForwardOffset = new(() => Schema.GetOffset(0x804AC5DBA852BF65), LazyThreadSafetyMode.None);
+  private static nint? _ViewForwardOffset;
 
   public ref Vector ViewForward {
-    get => ref _Handle.AsRef<Vector>(_ViewForwardOffset.Value);
+    get {
+      if (_ViewForwardOffset == null) {
+        _ViewForwardOffset = Schema.GetOffset(0x804AC5DBA852BF65);
+      }
+      return ref _Handle.AsRef<Vector>(_ViewForwardOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PostureStackIndexOffset = new(() => Schema.GetOffset(0x804AC5DBCB65E443), LazyThreadSafetyMode.None);
+  private static nint? _PostureStackIndexOffset;
 
   public ref int PostureStackIndex {
-    get => ref _Handle.AsRef<int>(_PostureStackIndexOffset.Value);
+    get {
+      if (_PostureStackIndexOffset == null) {
+        _PostureStackIndexOffset = Schema.GetOffset(0x804AC5DBCB65E443);
+      }
+      return ref _Handle.AsRef<int>(_PostureStackIndexOffset!.Value);
+    }
   }
 
 

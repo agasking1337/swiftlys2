@@ -20,50 +20,95 @@ internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t {
   public ISchemaFixedArray<float> K {
     get => new SchemaFixedArray<float>(_Handle, 0xBAF074C17C12054C, 3, 4, 4);
   }
-  private static readonly Lazy<nint> _InvAOffset = new(() => Schema.GetOffset(0xBAF074C1518D5F7B), LazyThreadSafetyMode.None);
+  private static nint? _InvAOffset;
 
   public ref float InvA {
-    get => ref _Handle.AsRef<float>(_InvAOffset.Value);
+    get {
+      if (_InvAOffset == null) {
+        _InvAOffset = Schema.GetOffset(0xBAF074C1518D5F7B);
+      }
+      return ref _Handle.AsRef<float>(_InvAOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TOffset = new(() => Schema.GetOffset(0xBAF074C1F10C3DA3), LazyThreadSafetyMode.None);
+  private static nint? _TOffset;
 
   public ref float T {
-    get => ref _Handle.AsRef<float>(_TOffset.Value);
+    get {
+      if (_TOffset == null) {
+        _TOffset = Schema.GetOffset(0xBAF074C1F10C3DA3);
+      }
+      return ref _Handle.AsRef<float>(_TOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ThetaRelaxedOffset = new(() => Schema.GetOffset(0xBAF074C14C35B770), LazyThreadSafetyMode.None);
+  private static nint? _ThetaRelaxedOffset;
 
   public ref float ThetaRelaxed {
-    get => ref _Handle.AsRef<float>(_ThetaRelaxedOffset.Value);
+    get {
+      if (_ThetaRelaxedOffset == null) {
+        _ThetaRelaxedOffset = Schema.GetOffset(0xBAF074C14C35B770);
+      }
+      return ref _Handle.AsRef<float>(_ThetaRelaxedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ThetaFactorOffset = new(() => Schema.GetOffset(0xBAF074C165B8FFDA), LazyThreadSafetyMode.None);
+  private static nint? _ThetaFactorOffset;
 
   public ref float ThetaFactor {
-    get => ref _Handle.AsRef<float>(_ThetaFactorOffset.Value);
+    get {
+      if (_ThetaFactorOffset == null) {
+        _ThetaFactorOffset = Schema.GetOffset(0xBAF074C165B8FFDA);
+      }
+      return ref _Handle.AsRef<float>(_ThetaFactorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _C01Offset = new(() => Schema.GetOffset(0xBAF074C13DE93555), LazyThreadSafetyMode.None);
+  private static nint? _C01Offset;
 
   public ref float C01 {
-    get => ref _Handle.AsRef<float>(_C01Offset.Value);
+    get {
+      if (_C01Offset == null) {
+        _C01Offset = Schema.GetOffset(0xBAF074C13DE93555);
+      }
+      return ref _Handle.AsRef<float>(_C01Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _C02Offset = new(() => Schema.GetOffset(0xBAF074C13AE9309C), LazyThreadSafetyMode.None);
+  private static nint? _C02Offset;
 
   public ref float C02 {
-    get => ref _Handle.AsRef<float>(_C02Offset.Value);
+    get {
+      if (_C02Offset == null) {
+        _C02Offset = Schema.GetOffset(0xBAF074C13AE9309C);
+      }
+      return ref _Handle.AsRef<float>(_C02Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _C03Offset = new(() => Schema.GetOffset(0xBAF074C13BE9322F), LazyThreadSafetyMode.None);
+  private static nint? _C03Offset;
 
   public ref float C03 {
-    get => ref _Handle.AsRef<float>(_C03Offset.Value);
+    get {
+      if (_C03Offset == null) {
+        _C03Offset = Schema.GetOffset(0xBAF074C13BE9322F);
+      }
+      return ref _Handle.AsRef<float>(_C03Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _C04Offset = new(() => Schema.GetOffset(0xBAF074C138E92D76), LazyThreadSafetyMode.None);
+  private static nint? _C04Offset;
 
   public ref float C04 {
-    get => ref _Handle.AsRef<float>(_C04Offset.Value);
+    get {
+      if (_C04Offset == null) {
+        _C04Offset = Schema.GetOffset(0xBAF074C138E92D76);
+      }
+      return ref _Handle.AsRef<float>(_C04Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AxialModelDistOffset = new(() => Schema.GetOffset(0xBAF074C1E53980E9), LazyThreadSafetyMode.None);
+  private static nint? _AxialModelDistOffset;
 
   public ref float AxialModelDist {
-    get => ref _Handle.AsRef<float>(_AxialModelDistOffset.Value);
+    get {
+      if (_AxialModelDistOffset == null) {
+        _AxialModelDistOffset = Schema.GetOffset(0xBAF074C1E53980E9);
+      }
+      return ref _Handle.AsRef<float>(_AxialModelDistOffset!.Value);
+    }
   }
   public ISchemaFixedArray<float> AxialModelWeights {
     get => new SchemaFixedArray<float>(_Handle, 0xBAF074C1D9CDB73E, 4, 4, 4);

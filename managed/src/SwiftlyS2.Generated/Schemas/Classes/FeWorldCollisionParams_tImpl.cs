@@ -17,25 +17,45 @@ internal partial class FeWorldCollisionParams_tImpl : SchemaClass, FeWorldCollis
   public FeWorldCollisionParams_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WorldFrictionOffset = new(() => Schema.GetOffset(0x85D16E65E1266C23), LazyThreadSafetyMode.None);
+  private static nint? _WorldFrictionOffset;
 
   public ref float WorldFriction {
-    get => ref _Handle.AsRef<float>(_WorldFrictionOffset.Value);
+    get {
+      if (_WorldFrictionOffset == null) {
+        _WorldFrictionOffset = Schema.GetOffset(0x85D16E65E1266C23);
+      }
+      return ref _Handle.AsRef<float>(_WorldFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GroundFrictionOffset = new(() => Schema.GetOffset(0x85D16E652D394B72), LazyThreadSafetyMode.None);
+  private static nint? _GroundFrictionOffset;
 
   public ref float GroundFriction {
-    get => ref _Handle.AsRef<float>(_GroundFrictionOffset.Value);
+    get {
+      if (_GroundFrictionOffset == null) {
+        _GroundFrictionOffset = Schema.GetOffset(0x85D16E652D394B72);
+      }
+      return ref _Handle.AsRef<float>(_GroundFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ListBeginOffset = new(() => Schema.GetOffset(0x85D16E650BA98846), LazyThreadSafetyMode.None);
+  private static nint? _ListBeginOffset;
 
   public ref ushort ListBegin {
-    get => ref _Handle.AsRef<ushort>(_ListBeginOffset.Value);
+    get {
+      if (_ListBeginOffset == null) {
+        _ListBeginOffset = Schema.GetOffset(0x85D16E650BA98846);
+      }
+      return ref _Handle.AsRef<ushort>(_ListBeginOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ListEndOffset = new(() => Schema.GetOffset(0x85D16E658683DD62), LazyThreadSafetyMode.None);
+  private static nint? _ListEndOffset;
 
   public ref ushort ListEnd {
-    get => ref _Handle.AsRef<ushort>(_ListEndOffset.Value);
+    get {
+      if (_ListEndOffset == null) {
+        _ListEndOffset = Schema.GetOffset(0x85D16E658683DD62);
+      }
+      return ref _Handle.AsRef<ushort>(_ListEndOffset!.Value);
+    }
   }
 
 

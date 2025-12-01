@@ -17,59 +17,112 @@ internal partial class CSSDSMsg_ViewTargetImpl : SchemaClass, CSSDSMsg_ViewTarge
   public CSSDSMsg_ViewTargetImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x4F31099BCAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x4F31099BCAE8A266);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x4F31099BCAE8A266);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TextureIdOffset = new(() => Schema.GetOffset(0x4F31099B67AB25D9), LazyThreadSafetyMode.None);
+  private static nint? _TextureIdOffset;
 
   public ref ulong TextureId {
-    get => ref _Handle.AsRef<ulong>(_TextureIdOffset.Value);
+    get {
+      if (_TextureIdOffset == null) {
+        _TextureIdOffset = Schema.GetOffset(0x4F31099B67AB25D9);
+      }
+      return ref _Handle.AsRef<ulong>(_TextureIdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WidthOffset = new(() => Schema.GetOffset(0x4F31099B119108BB), LazyThreadSafetyMode.None);
+  private static nint? _WidthOffset;
 
   public ref int Width {
-    get => ref _Handle.AsRef<int>(_WidthOffset.Value);
+    get {
+      if (_WidthOffset == null) {
+        _WidthOffset = Schema.GetOffset(0x4F31099B119108BB);
+      }
+      return ref _Handle.AsRef<int>(_WidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeightOffset = new(() => Schema.GetOffset(0x4F31099BCAB61C56), LazyThreadSafetyMode.None);
+  private static nint? _HeightOffset;
 
   public ref int Height {
-    get => ref _Handle.AsRef<int>(_HeightOffset.Value);
+    get {
+      if (_HeightOffset == null) {
+        _HeightOffset = Schema.GetOffset(0x4F31099BCAB61C56);
+      }
+      return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RequestedWidthOffset = new(() => Schema.GetOffset(0x4F31099BCCA175E9), LazyThreadSafetyMode.None);
+  private static nint? _RequestedWidthOffset;
 
   public ref int RequestedWidth {
-    get => ref _Handle.AsRef<int>(_RequestedWidthOffset.Value);
+    get {
+      if (_RequestedWidthOffset == null) {
+        _RequestedWidthOffset = Schema.GetOffset(0x4F31099BCCA175E9);
+      }
+      return ref _Handle.AsRef<int>(_RequestedWidthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RequestedHeightOffset = new(() => Schema.GetOffset(0x4F31099B145278D8), LazyThreadSafetyMode.None);
+  private static nint? _RequestedHeightOffset;
 
   public ref int RequestedHeight {
-    get => ref _Handle.AsRef<int>(_RequestedHeightOffset.Value);
+    get {
+      if (_RequestedHeightOffset == null) {
+        _RequestedHeightOffset = Schema.GetOffset(0x4F31099B145278D8);
+      }
+      return ref _Handle.AsRef<int>(_RequestedHeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumMipLevelsOffset = new(() => Schema.GetOffset(0x4F31099BD64413AC), LazyThreadSafetyMode.None);
+  private static nint? _NumMipLevelsOffset;
 
   public ref int NumMipLevels {
-    get => ref _Handle.AsRef<int>(_NumMipLevelsOffset.Value);
+    get {
+      if (_NumMipLevelsOffset == null) {
+        _NumMipLevelsOffset = Schema.GetOffset(0x4F31099BD64413AC);
+      }
+      return ref _Handle.AsRef<int>(_NumMipLevelsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DepthOffset = new(() => Schema.GetOffset(0x4F31099BB725DB96), LazyThreadSafetyMode.None);
+  private static nint? _DepthOffset;
 
   public ref int Depth {
-    get => ref _Handle.AsRef<int>(_DepthOffset.Value);
+    get {
+      if (_DepthOffset == null) {
+        _DepthOffset = Schema.GetOffset(0x4F31099BB725DB96);
+      }
+      return ref _Handle.AsRef<int>(_DepthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MultisampleNumSamplesOffset = new(() => Schema.GetOffset(0x4F31099B1B468317), LazyThreadSafetyMode.None);
+  private static nint? _MultisampleNumSamplesOffset;
 
   public ref int MultisampleNumSamples {
-    get => ref _Handle.AsRef<int>(_MultisampleNumSamplesOffset.Value);
+    get {
+      if (_MultisampleNumSamplesOffset == null) {
+        _MultisampleNumSamplesOffset = Schema.GetOffset(0x4F31099B1B468317);
+      }
+      return ref _Handle.AsRef<int>(_MultisampleNumSamplesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FormatOffset = new(() => Schema.GetOffset(0x4F31099BA87491AE), LazyThreadSafetyMode.None);
+  private static nint? _FormatOffset;
 
   public ref int Format {
-    get => ref _Handle.AsRef<int>(_FormatOffset.Value);
+    get {
+      if (_FormatOffset == null) {
+        _FormatOffset = Schema.GetOffset(0x4F31099BA87491AE);
+      }
+      return ref _Handle.AsRef<int>(_FormatOffset!.Value);
+    }
   }
 
 

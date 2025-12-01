@@ -17,10 +17,15 @@ internal partial class EventProfileStorageAvailable_tImpl : SchemaClass, EventPr
   public EventProfileStorageAvailable_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SplitScreenSlotOffset = new(() => Schema.GetOffset(0x871602F7DB96ED47), LazyThreadSafetyMode.None);
+  private static nint? _SplitScreenSlotOffset;
 
   public ref uint SplitScreenSlot {
-    get => ref _Handle.AsRef<uint>(_SplitScreenSlotOffset.Value);
+    get {
+      if (_SplitScreenSlotOffset == null) {
+        _SplitScreenSlotOffset = Schema.GetOffset(0x871602F7DB96ED47);
+      }
+      return ref _Handle.AsRef<uint>(_SplitScreenSlotOffset!.Value);
+    }
   }
 
 

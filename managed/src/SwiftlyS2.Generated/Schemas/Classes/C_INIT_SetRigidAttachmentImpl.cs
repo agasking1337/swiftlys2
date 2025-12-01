@@ -17,25 +17,45 @@ internal partial class C_INIT_SetRigidAttachmentImpl : CParticleFunctionInitiali
   public C_INIT_SetRigidAttachmentImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0xF6F728143F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0xF6F728143F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldInputOffset = new(() => Schema.GetOffset(0xF6F72814AE775669), LazyThreadSafetyMode.None);
+  private static nint? _FieldInputOffset;
 
   public ParticleAttributeIndex_t FieldInput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset.Value);
+    get {
+      if (_FieldInputOffset == null) {
+        _FieldInputOffset = Schema.GetOffset(0xF6F72814AE775669);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xF6F72814E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xF6F72814E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSpaceOffset = new(() => Schema.GetOffset(0xF6F7281462418E6E), LazyThreadSafetyMode.None);
+  private static nint? _LocalSpaceOffset;
 
   public ref bool LocalSpace {
-    get => ref _Handle.AsRef<bool>(_LocalSpaceOffset.Value);
+    get {
+      if (_LocalSpaceOffset == null) {
+        _LocalSpaceOffset = Schema.GetOffset(0xF6F7281462418E6E);
+      }
+      return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+    }
   }
 
 

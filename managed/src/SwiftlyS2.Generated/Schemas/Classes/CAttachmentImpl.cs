@@ -17,23 +17,39 @@ internal partial class CAttachmentImpl : SchemaClass, CAttachment {
   public CAttachmentImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x5F09808F4D8F5786), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _InfluenceNamesOffset = new(() => Schema.GetOffset(0x5F09808FFD9B3CB8), LazyThreadSafetyMode.None);
+  private static nint? _InfluenceNamesOffset;
 
   public string InfluenceNames {
     get {
-      var ptr = _Handle.Read<nint>(_InfluenceNamesOffset.Value);
+      if (_InfluenceNamesOffset == null) {
+        _InfluenceNamesOffset = Schema.GetOffset(0x5F09808FFD9B3CB8);
+      }
+      var ptr = _Handle.Read<nint>(_InfluenceNamesOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _InfluenceNamesOffset.Value, value);
+    set {
+      if (_InfluenceNamesOffset == null) {
+        _InfluenceNamesOffset = Schema.GetOffset(0x5F09808FFD9B3CB8);
+      }
+      Schema.SetString(_Handle, _InfluenceNamesOffset!.Value, value);
+    }
   } 
   public ISchemaFixedArray<Quaternion> InfluenceRotations {
     get => new SchemaFixedArray<Quaternion>(_Handle, 0x5F09808FD277168B, 3, 16, 16);
@@ -47,15 +63,25 @@ internal partial class CAttachmentImpl : SchemaClass, CAttachment {
   public ISchemaFixedArray<bool> InfluenceRootTransform {
     get => new SchemaFixedArray<bool>(_Handle, 0x5F09808F5763011C, 3, 1, 1);
   }
-  private static readonly Lazy<nint> _InfluencesOffset = new(() => Schema.GetOffset(0x5F09808F8E94AB85), LazyThreadSafetyMode.None);
+  private static nint? _InfluencesOffset;
 
   public ref byte Influences {
-    get => ref _Handle.AsRef<byte>(_InfluencesOffset.Value);
+    get {
+      if (_InfluencesOffset == null) {
+        _InfluencesOffset = Schema.GetOffset(0x5F09808F8E94AB85);
+      }
+      return ref _Handle.AsRef<byte>(_InfluencesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IgnoreRotationOffset = new(() => Schema.GetOffset(0x5F09808FC7A0F33D), LazyThreadSafetyMode.None);
+  private static nint? _IgnoreRotationOffset;
 
   public ref bool IgnoreRotation {
-    get => ref _Handle.AsRef<bool>(_IgnoreRotationOffset.Value);
+    get {
+      if (_IgnoreRotationOffset == null) {
+        _IgnoreRotationOffset = Schema.GetOffset(0x5F09808FC7A0F33D);
+      }
+      return ref _Handle.AsRef<bool>(_IgnoreRotationOffset!.Value);
+    }
   }
 
 

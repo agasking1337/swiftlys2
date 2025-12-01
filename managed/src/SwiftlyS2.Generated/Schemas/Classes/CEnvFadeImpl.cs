@@ -17,25 +17,45 @@ internal partial class CEnvFadeImpl : CLogicalEntityImpl, CEnvFade {
   public CEnvFadeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FadeColorOffset = new(() => Schema.GetOffset(0xEFBFC063C1517BF2), LazyThreadSafetyMode.None);
+  private static nint? _FadeColorOffset;
 
   public ref Color FadeColor {
-    get => ref _Handle.AsRef<Color>(_FadeColorOffset.Value);
+    get {
+      if (_FadeColorOffset == null) {
+        _FadeColorOffset = Schema.GetOffset(0xEFBFC063C1517BF2);
+      }
+      return ref _Handle.AsRef<Color>(_FadeColorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0xEFBFC0639879A98D), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0xEFBFC0639879A98D);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HoldDurationOffset = new(() => Schema.GetOffset(0xEFBFC0631D577A68), LazyThreadSafetyMode.None);
+  private static nint? _HoldDurationOffset;
 
   public ref float HoldDuration {
-    get => ref _Handle.AsRef<float>(_HoldDurationOffset.Value);
+    get {
+      if (_HoldDurationOffset == null) {
+        _HoldDurationOffset = Schema.GetOffset(0xEFBFC0631D577A68);
+      }
+      return ref _Handle.AsRef<float>(_HoldDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnBeginFadeOffset = new(() => Schema.GetOffset(0xEFBFC0633308BA63), LazyThreadSafetyMode.None);
+  private static nint? _OnBeginFadeOffset;
 
   public CEntityIOOutput OnBeginFade {
-    get => new CEntityIOOutputImpl(_Handle + _OnBeginFadeOffset.Value);
+    get {
+      if (_OnBeginFadeOffset == null) {
+        _OnBeginFadeOffset = Schema.GetOffset(0xEFBFC0633308BA63);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnBeginFadeOffset!.Value);
+    }
   }
 
   public void FadeColorUpdated() {

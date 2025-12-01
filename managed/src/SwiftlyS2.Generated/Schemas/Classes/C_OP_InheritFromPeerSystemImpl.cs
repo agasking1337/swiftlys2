@@ -17,25 +17,45 @@ internal partial class C_OP_InheritFromPeerSystemImpl : CParticleFunctionOperato
   public C_OP_InheritFromPeerSystemImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x8105C85DE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x8105C85DE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldInputOffset = new(() => Schema.GetOffset(0x8105C85DAE775669), LazyThreadSafetyMode.None);
+  private static nint? _FieldInputOffset;
 
   public ParticleAttributeIndex_t FieldInput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset.Value);
+    get {
+      if (_FieldInputOffset == null) {
+        _FieldInputOffset = Schema.GetOffset(0x8105C85DAE775669);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IncrementOffset = new(() => Schema.GetOffset(0x8105C85D2359F182), LazyThreadSafetyMode.None);
+  private static nint? _IncrementOffset;
 
   public ref int Increment {
-    get => ref _Handle.AsRef<int>(_IncrementOffset.Value);
+    get {
+      if (_IncrementOffset == null) {
+        _IncrementOffset = Schema.GetOffset(0x8105C85D2359F182);
+      }
+      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GroupIDOffset = new(() => Schema.GetOffset(0x8105C85D3BB05135), LazyThreadSafetyMode.None);
+  private static nint? _GroupIDOffset;
 
   public ref int GroupID {
-    get => ref _Handle.AsRef<int>(_GroupIDOffset.Value);
+    get {
+      if (_GroupIDOffset == null) {
+        _GroupIDOffset = Schema.GetOffset(0x8105C85D3BB05135);
+      }
+      return ref _Handle.AsRef<int>(_GroupIDOffset!.Value);
+    }
   }
 
 

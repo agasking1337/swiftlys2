@@ -41,6 +41,8 @@ using SwiftlyS2.Shared.Helpers;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.FileSystem;
 using SwiftlyS2.Shared.FileSystem;
+using SwiftlyS2.Core.Plugins;
+using SwiftlyS2.Shared.Plugins;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -79,6 +81,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public string ContextBasePath { get; init; }
     public string PluginDataDirectory { get; init; }
     public GameFileSystem GameFileSystem { get; init; }
+    // public PluginManager PluginManager { get; set; }
     public SwiftlyCore( string contextId, string contextBaseDirectory, PluginMetadata? pluginManifest, Type contextType, IServiceProvider coreProvider, string pluginDataDirectory )
     {
 
@@ -91,12 +94,14 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(this)
             .AddSingleton<ISwiftlyCore>(this)
             .AddSingleton(coreProvider.GetRequiredService<ProfileService>())
+            // .AddSingleton(coreProvider.GetRequiredService<PluginManager>())
             .AddSingleton(coreProvider.GetRequiredService<ConfigurationService>())
             .AddSingleton(coreProvider.GetRequiredService<HookManager>())
             .AddSingleton(coreProvider.GetRequiredService<PlayerManagerService>())
             .AddSingleton(coreProvider.GetRequiredService<TraceManager>())
             .AddSingleton(coreProvider.GetRequiredService<PermissionManager>())
             .AddSingleton(coreProvider.GetRequiredService<CommandTrackerManager>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuManagerAPI>())
 
             .AddSingleton<EventSubscriber>()
             .AddSingleton<EngineService>()
@@ -118,12 +123,10 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<Localizer>(provider => provider.GetRequiredService<TranslationService>().GetLocalizer())
             .AddSingleton<RegistratorService>()
             // .AddSingleton<MenuManager>()
-            .AddSingleton<MenuManagerAPI>()
             .AddSingleton<CommandLineService>()
             .AddSingleton<HelpersService>()
             .AddSingleton<GameService>()
             .AddSingleton<IPermissionManager>(provider => provider.GetRequiredService<PermissionManager>())
-
             .AddSingleton<IEventSubscriber>(provider => provider.GetRequiredService<EventSubscriber>())
             .AddSingleton<IGameEventService>(provider => provider.GetRequiredService<GameEventService>())
             .AddSingleton<INetMessageService>(provider => provider.GetRequiredService<NetMessageService>())
@@ -138,6 +141,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<IContextedProfilerService>(provider => provider.GetRequiredService<ContextedProfilerService>())
             .AddSingleton<ISchedulerService>(provider => provider.GetRequiredService<SchedulerService>())
             .AddSingleton<IEngineService>(provider => provider.GetRequiredService<EngineService>())
+            // .AddSingleton<IPluginManager>(provider => provider.GetRequiredService<PluginManager>())
             .AddSingleton<ITraceManager>(provider => provider.GetRequiredService<TraceManager>())
             .AddSingleton<IDatabaseService>(provider => provider.GetRequiredService<DatabaseService>())
             .AddSingleton<ITranslationService>(provider => provider.GetRequiredService<TranslationService>())
@@ -151,7 +155,6 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<IGameFileSystem>(provider => provider.GetRequiredService<GameFileSystem>())
 
             .AddLogging(builder => builder.AddProvider(new SwiftlyLoggerProvider(id.Name)))
-
             .BuildServiceProvider();
 
         EventSubscriber = serviceProvider.GetRequiredService<EventSubscriber>();
@@ -182,6 +185,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         GameService = serviceProvider.GetRequiredService<GameService>();
         Logger = LoggerFactory.CreateLogger(contextType);
         GameFileSystem = serviceProvider.GetRequiredService<GameFileSystem>();
+        // PluginManager = serviceProvider.GetRequiredService<PluginManager>();
     }
 
     public void InitializeType( Type type )
@@ -228,6 +232,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IHelpers ISwiftlyCore.Helpers => Helpers;
     IGameService ISwiftlyCore.Game => GameService;
     IGameFileSystem ISwiftlyCore.GameFileSystem => GameFileSystem;
+    // IPluginManager ISwiftlyCore.PluginManager => PluginManager;
     string ISwiftlyCore.PluginPath => ContextBasePath;
     string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
     string ISwiftlyCore.CSGODirectory => NativeEngineHelpers.GetCSGODirectoryPath();

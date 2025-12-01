@@ -17,20 +17,35 @@ internal partial class CFollowTargetUpdateNodeImpl : CUnaryUpdateNodeImpl, CFoll
   public CFollowTargetUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OpFixedDataOffset = new(() => Schema.GetOffset(0x2A45E9CB6960AF8C), LazyThreadSafetyMode.None);
+  private static nint? _OpFixedDataOffset;
 
   public FollowTargetOpFixedSettings_t OpFixedData {
-    get => new FollowTargetOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset.Value);
+    get {
+      if (_OpFixedDataOffset == null) {
+        _OpFixedDataOffset = Schema.GetOffset(0x2A45E9CB6960AF8C);
+      }
+      return new FollowTargetOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParameterPositionOffset = new(() => Schema.GetOffset(0x2A45E9CBDA71CD41), LazyThreadSafetyMode.None);
+  private static nint? _ParameterPositionOffset;
 
   public CAnimParamHandle ParameterPosition {
-    get => new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset.Value);
+    get {
+      if (_ParameterPositionOffset == null) {
+        _ParameterPositionOffset = Schema.GetOffset(0x2A45E9CBDA71CD41);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParameterOrientationOffset = new(() => Schema.GetOffset(0x2A45E9CB1320E9C8), LazyThreadSafetyMode.None);
+  private static nint? _ParameterOrientationOffset;
 
   public CAnimParamHandle ParameterOrientation {
-    get => new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset.Value);
+    get {
+      if (_ParameterOrientationOffset == null) {
+        _ParameterOrientationOffset = Schema.GetOffset(0x2A45E9CB1320E9C8);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+    }
   }
 
 

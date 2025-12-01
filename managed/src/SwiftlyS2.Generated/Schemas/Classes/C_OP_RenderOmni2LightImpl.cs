@@ -17,85 +17,165 @@ internal partial class C_OP_RenderOmni2LightImpl : CParticleFunctionRendererImpl
   public C_OP_RenderOmni2LightImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LightTypeOffset = new(() => Schema.GetOffset(0xDE9AF4EE18C7B4A3), LazyThreadSafetyMode.None);
+  private static nint? _LightTypeOffset;
 
   public ref ParticleOmni2LightTypeChoiceList_t LightType {
-    get => ref _Handle.AsRef<ParticleOmni2LightTypeChoiceList_t>(_LightTypeOffset.Value);
+    get {
+      if (_LightTypeOffset == null) {
+        _LightTypeOffset = Schema.GetOffset(0xDE9AF4EE18C7B4A3);
+      }
+      return ref _Handle.AsRef<ParticleOmni2LightTypeChoiceList_t>(_LightTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorBlendOffset = new(() => Schema.GetOffset(0xDE9AF4EE740E9A5F), LazyThreadSafetyMode.None);
+  private static nint? _ColorBlendOffset;
 
   public CParticleCollectionVecInput ColorBlend {
-    get => new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset.Value);
+    get {
+      if (_ColorBlendOffset == null) {
+        _ColorBlendOffset = Schema.GetOffset(0xDE9AF4EE740E9A5F);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorBlendTypeOffset = new(() => Schema.GetOffset(0xDE9AF4EEDBC6EFCF), LazyThreadSafetyMode.None);
+  private static nint? _ColorBlendTypeOffset;
 
   public ref ParticleColorBlendType_t ColorBlendType {
-    get => ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset.Value);
+    get {
+      if (_ColorBlendTypeOffset == null) {
+        _ColorBlendTypeOffset = Schema.GetOffset(0xDE9AF4EEDBC6EFCF);
+      }
+      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessUnitOffset = new(() => Schema.GetOffset(0xDE9AF4EE2A6E4030), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessUnitOffset;
 
   public ref ParticleLightUnitChoiceList_t BrightnessUnit {
-    get => ref _Handle.AsRef<ParticleLightUnitChoiceList_t>(_BrightnessUnitOffset.Value);
+    get {
+      if (_BrightnessUnitOffset == null) {
+        _BrightnessUnitOffset = Schema.GetOffset(0xDE9AF4EE2A6E4030);
+      }
+      return ref _Handle.AsRef<ParticleLightUnitChoiceList_t>(_BrightnessUnitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessLumensOffset = new(() => Schema.GetOffset(0xDE9AF4EEC542F6EA), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessLumensOffset;
 
   public CPerParticleFloatInput BrightnessLumens {
-    get => new CPerParticleFloatInputImpl(_Handle + _BrightnessLumensOffset.Value);
+    get {
+      if (_BrightnessLumensOffset == null) {
+        _BrightnessLumensOffset = Schema.GetOffset(0xDE9AF4EEC542F6EA);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _BrightnessLumensOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BrightnessCandelasOffset = new(() => Schema.GetOffset(0xDE9AF4EEE3A4688B), LazyThreadSafetyMode.None);
+  private static nint? _BrightnessCandelasOffset;
 
   public CPerParticleFloatInput BrightnessCandelas {
-    get => new CPerParticleFloatInputImpl(_Handle + _BrightnessCandelasOffset.Value);
+    get {
+      if (_BrightnessCandelasOffset == null) {
+        _BrightnessCandelasOffset = Schema.GetOffset(0xDE9AF4EEE3A4688B);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _BrightnessCandelasOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CastShadowsOffset = new(() => Schema.GetOffset(0xDE9AF4EE36113167), LazyThreadSafetyMode.None);
+  private static nint? _CastShadowsOffset;
 
   public ref bool CastShadows {
-    get => ref _Handle.AsRef<bool>(_CastShadowsOffset.Value);
+    get {
+      if (_CastShadowsOffset == null) {
+        _CastShadowsOffset = Schema.GetOffset(0xDE9AF4EE36113167);
+      }
+      return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FogOffset = new(() => Schema.GetOffset(0xDE9AF4EECA77E01F), LazyThreadSafetyMode.None);
+  private static nint? _FogOffset;
 
   public ref bool Fog {
-    get => ref _Handle.AsRef<bool>(_FogOffset.Value);
+    get {
+      if (_FogOffset == null) {
+        _FogOffset = Schema.GetOffset(0xDE9AF4EECA77E01F);
+      }
+      return ref _Handle.AsRef<bool>(_FogOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FogScaleOffset = new(() => Schema.GetOffset(0xDE9AF4EECF999E05), LazyThreadSafetyMode.None);
+  private static nint? _FogScaleOffset;
 
   public CPerParticleFloatInput FogScale {
-    get => new CPerParticleFloatInputImpl(_Handle + _FogScaleOffset.Value);
+    get {
+      if (_FogScaleOffset == null) {
+        _FogScaleOffset = Schema.GetOffset(0xDE9AF4EECF999E05);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _FogScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LuminaireRadiusOffset = new(() => Schema.GetOffset(0xDE9AF4EECB5A5B89), LazyThreadSafetyMode.None);
+  private static nint? _LuminaireRadiusOffset;
 
   public CPerParticleFloatInput LuminaireRadius {
-    get => new CPerParticleFloatInputImpl(_Handle + _LuminaireRadiusOffset.Value);
+    get {
+      if (_LuminaireRadiusOffset == null) {
+        _LuminaireRadiusOffset = Schema.GetOffset(0xDE9AF4EECB5A5B89);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _LuminaireRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SkirtOffset = new(() => Schema.GetOffset(0xDE9AF4EEEAFB6D2A), LazyThreadSafetyMode.None);
+  private static nint? _SkirtOffset;
 
   public CPerParticleFloatInput Skirt {
-    get => new CPerParticleFloatInputImpl(_Handle + _SkirtOffset.Value);
+    get {
+      if (_SkirtOffset == null) {
+        _SkirtOffset = Schema.GetOffset(0xDE9AF4EEEAFB6D2A);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _SkirtOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RangeOffset = new(() => Schema.GetOffset(0xDE9AF4EE3FC92844), LazyThreadSafetyMode.None);
+  private static nint? _RangeOffset;
 
   public CPerParticleFloatInput Range {
-    get => new CPerParticleFloatInputImpl(_Handle + _RangeOffset.Value);
+    get {
+      if (_RangeOffset == null) {
+        _RangeOffset = Schema.GetOffset(0xDE9AF4EE3FC92844);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _RangeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InnerConeAngleOffset = new(() => Schema.GetOffset(0xDE9AF4EE16875B1D), LazyThreadSafetyMode.None);
+  private static nint? _InnerConeAngleOffset;
 
   public CPerParticleFloatInput InnerConeAngle {
-    get => new CPerParticleFloatInputImpl(_Handle + _InnerConeAngleOffset.Value);
+    get {
+      if (_InnerConeAngleOffset == null) {
+        _InnerConeAngleOffset = Schema.GetOffset(0xDE9AF4EE16875B1D);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InnerConeAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OuterConeAngleOffset = new(() => Schema.GetOffset(0xDE9AF4EE90EF9464), LazyThreadSafetyMode.None);
+  private static nint? _OuterConeAngleOffset;
 
   public CPerParticleFloatInput OuterConeAngle {
-    get => new CPerParticleFloatInputImpl(_Handle + _OuterConeAngleOffset.Value);
+    get {
+      if (_OuterConeAngleOffset == null) {
+        _OuterConeAngleOffset = Schema.GetOffset(0xDE9AF4EE90EF9464);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _OuterConeAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LightCookieOffset = new(() => Schema.GetOffset(0xDE9AF4EE0609D103), LazyThreadSafetyMode.None);
+  private static nint? _LightCookieOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset.Value);
+    get {
+      if (_LightCookieOffset == null) {
+        _LightCookieOffset = Schema.GetOffset(0xDE9AF4EE0609D103);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SphericalCookieOffset = new(() => Schema.GetOffset(0xDE9AF4EE6C822B6E), LazyThreadSafetyMode.None);
+  private static nint? _SphericalCookieOffset;
 
   public ref bool SphericalCookie {
-    get => ref _Handle.AsRef<bool>(_SphericalCookieOffset.Value);
+    get {
+      if (_SphericalCookieOffset == null) {
+        _SphericalCookieOffset = Schema.GetOffset(0xDE9AF4EE6C822B6E);
+      }
+      return ref _Handle.AsRef<bool>(_SphericalCookieOffset!.Value);
+    }
   }
 
 

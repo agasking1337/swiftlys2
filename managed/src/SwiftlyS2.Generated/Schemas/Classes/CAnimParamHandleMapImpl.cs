@@ -17,10 +17,15 @@ internal partial class CAnimParamHandleMapImpl : SchemaClass, CAnimParamHandleMa
   public CAnimParamHandleMapImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ListOffset = new(() => Schema.GetOffset(0x82522A78CAD81C21), LazyThreadSafetyMode.None);
+  private static nint? _ListOffset;
 
   public SchemaUntypedField List {
-    get => new SchemaUntypedField(_Handle + _ListOffset.Value);
+    get {
+      if (_ListOffset == null) {
+        _ListOffset = Schema.GetOffset(0x82522A78CAD81C21);
+      }
+      return new SchemaUntypedField(_Handle + _ListOffset!.Value);
+    }
   }
 
 

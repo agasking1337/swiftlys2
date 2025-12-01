@@ -17,30 +17,55 @@ internal partial class SoundeventPathCornerPairNetworked_tImpl : SchemaClass, So
   public SoundeventPathCornerPairNetworked_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _P1Offset = new(() => Schema.GetOffset(0x138FC2E2CD01805E), LazyThreadSafetyMode.None);
+  private static nint? _P1Offset;
 
   public ref Vector P1 {
-    get => ref _Handle.AsRef<Vector>(_P1Offset.Value);
+    get {
+      if (_P1Offset == null) {
+        _P1Offset = Schema.GetOffset(0x138FC2E2CD01805E);
+      }
+      return ref _Handle.AsRef<Vector>(_P1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _P2Offset = new(() => Schema.GetOffset(0x138FC2E2CC017ECB), LazyThreadSafetyMode.None);
+  private static nint? _P2Offset;
 
   public ref Vector P2 {
-    get => ref _Handle.AsRef<Vector>(_P2Offset.Value);
+    get {
+      if (_P2Offset == null) {
+        _P2Offset = Schema.GetOffset(0x138FC2E2CC017ECB);
+      }
+      return ref _Handle.AsRef<Vector>(_P2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathLengthSqrOffset = new(() => Schema.GetOffset(0x138FC2E284D826AA), LazyThreadSafetyMode.None);
+  private static nint? _PathLengthSqrOffset;
 
   public ref float PathLengthSqr {
-    get => ref _Handle.AsRef<float>(_PathLengthSqrOffset.Value);
+    get {
+      if (_PathLengthSqrOffset == null) {
+        _PathLengthSqrOffset = Schema.GetOffset(0x138FC2E284D826AA);
+      }
+      return ref _Handle.AsRef<float>(_PathLengthSqrOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _P1PctOffset = new(() => Schema.GetOffset(0x138FC2E258AEE12B), LazyThreadSafetyMode.None);
+  private static nint? _P1PctOffset;
 
   public ref float P1Pct {
-    get => ref _Handle.AsRef<float>(_P1PctOffset.Value);
+    get {
+      if (_P1PctOffset == null) {
+        _P1PctOffset = Schema.GetOffset(0x138FC2E258AEE12B);
+      }
+      return ref _Handle.AsRef<float>(_P1PctOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _P2PctOffset = new(() => Schema.GetOffset(0x138FC2E294B6CBA8), LazyThreadSafetyMode.None);
+  private static nint? _P2PctOffset;
 
   public ref float P2Pct {
-    get => ref _Handle.AsRef<float>(_P2PctOffset.Value);
+    get {
+      if (_P2PctOffset == null) {
+        _P2PctOffset = Schema.GetOffset(0x138FC2E294B6CBA8);
+      }
+      return ref _Handle.AsRef<float>(_P2PctOffset!.Value);
+    }
   }
 
   public void P1Updated() {

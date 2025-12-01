@@ -17,20 +17,35 @@ internal partial class PhysShapeMarkup_tImpl : SchemaClass, PhysShapeMarkup_t {
   public PhysShapeMarkup_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BodyInAggregateOffset = new(() => Schema.GetOffset(0x87CE340954AFE651), LazyThreadSafetyMode.None);
+  private static nint? _BodyInAggregateOffset;
 
   public ref int BodyInAggregate {
-    get => ref _Handle.AsRef<int>(_BodyInAggregateOffset.Value);
+    get {
+      if (_BodyInAggregateOffset == null) {
+        _BodyInAggregateOffset = Schema.GetOffset(0x87CE340954AFE651);
+      }
+      return ref _Handle.AsRef<int>(_BodyInAggregateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShapeInBodyOffset = new(() => Schema.GetOffset(0x87CE3409C45F6FDD), LazyThreadSafetyMode.None);
+  private static nint? _ShapeInBodyOffset;
 
   public ref int ShapeInBody {
-    get => ref _Handle.AsRef<int>(_ShapeInBodyOffset.Value);
+    get {
+      if (_ShapeInBodyOffset == null) {
+        _ShapeInBodyOffset = Schema.GetOffset(0x87CE3409C45F6FDD);
+      }
+      return ref _Handle.AsRef<int>(_ShapeInBodyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HitGroupOffset = new(() => Schema.GetOffset(0x87CE3409A13CBDEA), LazyThreadSafetyMode.None);
+  private static nint? _HitGroupOffset;
 
   public ref CGlobalSymbol HitGroup {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_HitGroupOffset.Value);
+    get {
+      if (_HitGroupOffset == null) {
+        _HitGroupOffset = Schema.GetOffset(0x87CE3409A13CBDEA);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_HitGroupOffset!.Value);
+    }
   }
 
 

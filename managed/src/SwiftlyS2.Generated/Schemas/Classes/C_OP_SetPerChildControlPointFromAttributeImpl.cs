@@ -17,45 +17,85 @@ internal partial class C_OP_SetPerChildControlPointFromAttributeImpl : CParticle
   public C_OP_SetPerChildControlPointFromAttributeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildGroupIDOffset = new(() => Schema.GetOffset(0x4217F56BE3F3C965), LazyThreadSafetyMode.None);
+  private static nint? _ChildGroupIDOffset;
 
   public ref int ChildGroupID {
-    get => ref _Handle.AsRef<int>(_ChildGroupIDOffset.Value);
+    get {
+      if (_ChildGroupIDOffset == null) {
+        _ChildGroupIDOffset = Schema.GetOffset(0x4217F56BE3F3C965);
+      }
+      return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FirstControlPointOffset = new(() => Schema.GetOffset(0x4217F56B72117650), LazyThreadSafetyMode.None);
+  private static nint? _FirstControlPointOffset;
 
   public ref int FirstControlPoint {
-    get => ref _Handle.AsRef<int>(_FirstControlPointOffset.Value);
+    get {
+      if (_FirstControlPointOffset == null) {
+        _FirstControlPointOffset = Schema.GetOffset(0x4217F56B72117650);
+      }
+      return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumControlPointsOffset = new(() => Schema.GetOffset(0x4217F56B551EBC4F), LazyThreadSafetyMode.None);
+  private static nint? _NumControlPointsOffset;
 
   public ref int NumControlPoints {
-    get => ref _Handle.AsRef<int>(_NumControlPointsOffset.Value);
+    get {
+      if (_NumControlPointsOffset == null) {
+        _NumControlPointsOffset = Schema.GetOffset(0x4217F56B551EBC4F);
+      }
+      return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParticleIncrementOffset = new(() => Schema.GetOffset(0x4217F56B73AF63D0), LazyThreadSafetyMode.None);
+  private static nint? _ParticleIncrementOffset;
 
   public ref int ParticleIncrement {
-    get => ref _Handle.AsRef<int>(_ParticleIncrementOffset.Value);
+    get {
+      if (_ParticleIncrementOffset == null) {
+        _ParticleIncrementOffset = Schema.GetOffset(0x4217F56B73AF63D0);
+      }
+      return ref _Handle.AsRef<int>(_ParticleIncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FirstSourcePointOffset = new(() => Schema.GetOffset(0x4217F56B9D7DC18E), LazyThreadSafetyMode.None);
+  private static nint? _FirstSourcePointOffset;
 
   public ref int FirstSourcePoint {
-    get => ref _Handle.AsRef<int>(_FirstSourcePointOffset.Value);
+    get {
+      if (_FirstSourcePointOffset == null) {
+        _FirstSourcePointOffset = Schema.GetOffset(0x4217F56B9D7DC18E);
+      }
+      return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumBasedOnParticleCountOffset = new(() => Schema.GetOffset(0x4217F56B401CC5D0), LazyThreadSafetyMode.None);
+  private static nint? _NumBasedOnParticleCountOffset;
 
   public ref bool NumBasedOnParticleCount {
-    get => ref _Handle.AsRef<bool>(_NumBasedOnParticleCountOffset.Value);
+    get {
+      if (_NumBasedOnParticleCountOffset == null) {
+        _NumBasedOnParticleCountOffset = Schema.GetOffset(0x4217F56B401CC5D0);
+      }
+      return ref _Handle.AsRef<bool>(_NumBasedOnParticleCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttributeToReadOffset = new(() => Schema.GetOffset(0x4217F56BE0F61F9E), LazyThreadSafetyMode.None);
+  private static nint? _AttributeToReadOffset;
 
   public ParticleAttributeIndex_t AttributeToRead {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset.Value);
+    get {
+      if (_AttributeToReadOffset == null) {
+        _AttributeToReadOffset = Schema.GetOffset(0x4217F56BE0F61F9E);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPFieldOffset = new(() => Schema.GetOffset(0x4217F56B50B79876), LazyThreadSafetyMode.None);
+  private static nint? _CPFieldOffset;
 
   public ref int CPField {
-    get => ref _Handle.AsRef<int>(_CPFieldOffset.Value);
+    get {
+      if (_CPFieldOffset == null) {
+        _CPFieldOffset = Schema.GetOffset(0x4217F56B50B79876);
+      }
+      return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
+    }
   }
 
 

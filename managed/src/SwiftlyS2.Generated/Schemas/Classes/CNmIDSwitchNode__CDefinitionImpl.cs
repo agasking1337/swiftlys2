@@ -17,30 +17,55 @@ internal partial class CNmIDSwitchNode__CDefinitionImpl : CNmIDValueNode__CDefin
   public CNmIDSwitchNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SwitchValueNodeIdxOffset = new(() => Schema.GetOffset(0x24752DA7FBD7561), LazyThreadSafetyMode.None);
+  private static nint? _SwitchValueNodeIdxOffset;
 
   public ref short SwitchValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset.Value);
+    get {
+      if (_SwitchValueNodeIdxOffset == null) {
+        _SwitchValueNodeIdxOffset = Schema.GetOffset(0x24752DA7FBD7561);
+      }
+      return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TrueValueNodeIdxOffset = new(() => Schema.GetOffset(0x24752DAFDE74365), LazyThreadSafetyMode.None);
+  private static nint? _TrueValueNodeIdxOffset;
 
   public ref short TrueValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset.Value);
+    get {
+      if (_TrueValueNodeIdxOffset == null) {
+        _TrueValueNodeIdxOffset = Schema.GetOffset(0x24752DAFDE74365);
+      }
+      return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FalseValueNodeIdxOffset = new(() => Schema.GetOffset(0x24752DA8DBA2C78), LazyThreadSafetyMode.None);
+  private static nint? _FalseValueNodeIdxOffset;
 
   public ref short FalseValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset.Value);
+    get {
+      if (_FalseValueNodeIdxOffset == null) {
+        _FalseValueNodeIdxOffset = Schema.GetOffset(0x24752DA8DBA2C78);
+      }
+      return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FalseValueOffset = new(() => Schema.GetOffset(0x24752DAD3506AE9), LazyThreadSafetyMode.None);
+  private static nint? _FalseValueOffset;
 
   public ref CGlobalSymbol FalseValue {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_FalseValueOffset.Value);
+    get {
+      if (_FalseValueOffset == null) {
+        _FalseValueOffset = Schema.GetOffset(0x24752DAD3506AE9);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_FalseValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TrueValueOffset = new(() => Schema.GetOffset(0x24752DAF134112A), LazyThreadSafetyMode.None);
+  private static nint? _TrueValueOffset;
 
   public ref CGlobalSymbol TrueValue {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_TrueValueOffset.Value);
+    get {
+      if (_TrueValueOffset == null) {
+        _TrueValueOffset = Schema.GetOffset(0x24752DAF134112A);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_TrueValueOffset!.Value);
+    }
   }
 
 

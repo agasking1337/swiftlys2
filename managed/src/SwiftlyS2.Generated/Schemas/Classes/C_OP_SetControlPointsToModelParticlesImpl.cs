@@ -17,48 +17,89 @@ internal partial class C_OP_SetControlPointsToModelParticlesImpl : CParticleFunc
   public C_OP_SetControlPointsToModelParticlesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HitboxSetNameOffset = new(() => Schema.GetOffset(0x8850EF6A6A21BB0E), LazyThreadSafetyMode.None);
+  private static nint? _HitboxSetNameOffset;
 
   public string HitboxSetName {
     get {
-      var ptr = _Handle + _HitboxSetNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_HitboxSetNameOffset == null) {
+            _HitboxSetNameOffset = Schema.GetOffset(0x8850EF6A6A21BB0E);
+        }
+        var ptr = _Handle + _HitboxSetNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _HitboxSetNameOffset.Value, value, 128);
+    set {
+        if (_HitboxSetNameOffset == null) {
+            _HitboxSetNameOffset = Schema.GetOffset(0x8850EF6A6A21BB0E);
+        }
+        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+    }
   } 
-  private static readonly Lazy<nint> _AttachmentNameOffset = new(() => Schema.GetOffset(0x8850EF6A9CFCA76B), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentNameOffset;
 
   public string AttachmentName {
     get {
-      var ptr = _Handle + _AttachmentNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_AttachmentNameOffset == null) {
+            _AttachmentNameOffset = Schema.GetOffset(0x8850EF6A9CFCA76B);
+        }
+        var ptr = _Handle + _AttachmentNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _AttachmentNameOffset.Value, value, 128);
+    set {
+        if (_AttachmentNameOffset == null) {
+            _AttachmentNameOffset = Schema.GetOffset(0x8850EF6A9CFCA76B);
+        }
+        Schema.SetFixedString(_Handle, _AttachmentNameOffset!.Value, value, 128);
+    }
   } 
-  private static readonly Lazy<nint> _FirstControlPointOffset = new(() => Schema.GetOffset(0x8850EF6A72117650), LazyThreadSafetyMode.None);
+  private static nint? _FirstControlPointOffset;
 
   public ref int FirstControlPoint {
-    get => ref _Handle.AsRef<int>(_FirstControlPointOffset.Value);
+    get {
+      if (_FirstControlPointOffset == null) {
+        _FirstControlPointOffset = Schema.GetOffset(0x8850EF6A72117650);
+      }
+      return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumControlPointsOffset = new(() => Schema.GetOffset(0x8850EF6A551EBC4F), LazyThreadSafetyMode.None);
+  private static nint? _NumControlPointsOffset;
 
   public ref int NumControlPoints {
-    get => ref _Handle.AsRef<int>(_NumControlPointsOffset.Value);
+    get {
+      if (_NumControlPointsOffset == null) {
+        _NumControlPointsOffset = Schema.GetOffset(0x8850EF6A551EBC4F);
+      }
+      return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FirstSourcePointOffset = new(() => Schema.GetOffset(0x8850EF6A9D7DC18E), LazyThreadSafetyMode.None);
+  private static nint? _FirstSourcePointOffset;
 
   public ref int FirstSourcePoint {
-    get => ref _Handle.AsRef<int>(_FirstSourcePointOffset.Value);
+    get {
+      if (_FirstSourcePointOffset == null) {
+        _FirstSourcePointOffset = Schema.GetOffset(0x8850EF6A9D7DC18E);
+      }
+      return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SkinOffset = new(() => Schema.GetOffset(0x8850EF6A1BE32F18), LazyThreadSafetyMode.None);
+  private static nint? _SkinOffset;
 
   public ref bool Skin {
-    get => ref _Handle.AsRef<bool>(_SkinOffset.Value);
+    get {
+      if (_SkinOffset == null) {
+        _SkinOffset = Schema.GetOffset(0x8850EF6A1BE32F18);
+      }
+      return ref _Handle.AsRef<bool>(_SkinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachmentOffset = new(() => Schema.GetOffset(0x8850EF6A4D2F6EC8), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentOffset;
 
   public ref bool Attachment {
-    get => ref _Handle.AsRef<bool>(_AttachmentOffset.Value);
+    get {
+      if (_AttachmentOffset == null) {
+        _AttachmentOffset = Schema.GetOffset(0x8850EF6A4D2F6EC8);
+      }
+      return ref _Handle.AsRef<bool>(_AttachmentOffset!.Value);
+    }
   }
 
 

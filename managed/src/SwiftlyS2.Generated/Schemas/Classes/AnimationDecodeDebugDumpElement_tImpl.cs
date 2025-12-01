@@ -17,39 +17,72 @@ internal partial class AnimationDecodeDebugDumpElement_tImpl : SchemaClass, Anim
   public AnimationDecodeDebugDumpElement_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EntityIndexOffset = new(() => Schema.GetOffset(0x4CAFE8F7BDB9BC5A), LazyThreadSafetyMode.None);
+  private static nint? _EntityIndexOffset;
 
   public ref int EntityIndex {
-    get => ref _Handle.AsRef<int>(_EntityIndexOffset.Value);
+    get {
+      if (_EntityIndexOffset == null) {
+        _EntityIndexOffset = Schema.GetOffset(0x4CAFE8F7BDB9BC5A);
+      }
+      return ref _Handle.AsRef<int>(_EntityIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelNameOffset = new(() => Schema.GetOffset(0x4CAFE8F75D35B6E1), LazyThreadSafetyMode.None);
+  private static nint? _ModelNameOffset;
 
   public string ModelName {
     get {
-      var ptr = _Handle.Read<nint>(_ModelNameOffset.Value);
+      if (_ModelNameOffset == null) {
+        _ModelNameOffset = Schema.GetOffset(0x4CAFE8F75D35B6E1);
+      }
+      var ptr = _Handle.Read<nint>(_ModelNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ModelNameOffset.Value, value);
+    set {
+      if (_ModelNameOffset == null) {
+        _ModelNameOffset = Schema.GetOffset(0x4CAFE8F75D35B6E1);
+      }
+      Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PoseParamsOffset = new(() => Schema.GetOffset(0x4CAFE8F7B4A27762), LazyThreadSafetyMode.None);
+  private static nint? _PoseParamsOffset;
 
   public ref CUtlVector<CUtlString> PoseParams {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_PoseParamsOffset.Value);
+    get {
+      if (_PoseParamsOffset == null) {
+        _PoseParamsOffset = Schema.GetOffset(0x4CAFE8F7B4A27762);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PoseParamsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DecodeOpsOffset = new(() => Schema.GetOffset(0x4CAFE8F7D39502F9), LazyThreadSafetyMode.None);
+  private static nint? _DecodeOpsOffset;
 
   public ref CUtlVector<CUtlString> DecodeOps {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodeOpsOffset.Value);
+    get {
+      if (_DecodeOpsOffset == null) {
+        _DecodeOpsOffset = Schema.GetOffset(0x4CAFE8F7D39502F9);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodeOpsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InternalOpsOffset = new(() => Schema.GetOffset(0x4CAFE8F775823E0C), LazyThreadSafetyMode.None);
+  private static nint? _InternalOpsOffset;
 
   public ref CUtlVector<CUtlString> InternalOps {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_InternalOpsOffset.Value);
+    get {
+      if (_InternalOpsOffset == null) {
+        _InternalOpsOffset = Schema.GetOffset(0x4CAFE8F775823E0C);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InternalOpsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DecodedAnimsOffset = new(() => Schema.GetOffset(0x4CAFE8F7B20FFAAD), LazyThreadSafetyMode.None);
+  private static nint? _DecodedAnimsOffset;
 
   public ref CUtlVector<CUtlString> DecodedAnims {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodedAnimsOffset.Value);
+    get {
+      if (_DecodedAnimsOffset == null) {
+        _DecodedAnimsOffset = Schema.GetOffset(0x4CAFE8F7B20FFAAD);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodedAnimsOffset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class CPointProximitySensorImpl : CPointEntityImpl, CPointProxi
   public CPointProximitySensorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x769A8B133A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x769A8B133A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetEntityOffset = new(() => Schema.GetOffset(0x769A8B1325D042A9), LazyThreadSafetyMode.None);
+  private static nint? _TargetEntityOffset;
 
   public ref CHandle<CBaseEntity> TargetEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset.Value);
+    get {
+      if (_TargetEntityOffset == null) {
+        _TargetEntityOffset = Schema.GetOffset(0x769A8B1325D042A9);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOffset = new(() => Schema.GetOffset(0x769A8B13978BC0E2), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOffset;
 
   public SchemaUntypedField Distance {
-    get => new SchemaUntypedField(_Handle + _DistanceOffset.Value);
+    get {
+      if (_DistanceOffset == null) {
+        _DistanceOffset = Schema.GetOffset(0x769A8B13978BC0E2);
+      }
+      return new SchemaUntypedField(_Handle + _DistanceOffset!.Value);
+    }
   }
 
 

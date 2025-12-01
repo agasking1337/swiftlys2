@@ -17,15 +17,25 @@ internal partial class CTestBlendContainerImpl : CVoiceContainerBaseImpl, CTestB
   public CTestBlendContainerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FirstSoundOffset = new(() => Schema.GetOffset(0x3E7BF53C666B0138), LazyThreadSafetyMode.None);
+  private static nint? _FirstSoundOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> FirstSound {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_FirstSoundOffset.Value);
+    get {
+      if (_FirstSoundOffset == null) {
+        _FirstSoundOffset = Schema.GetOffset(0x3E7BF53C666B0138);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_FirstSoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SecondSoundOffset = new(() => Schema.GetOffset(0x3E7BF53CA2BC3E5C), LazyThreadSafetyMode.None);
+  private static nint? _SecondSoundOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SecondSound {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SecondSoundOffset.Value);
+    get {
+      if (_SecondSoundOffset == null) {
+        _SecondSoundOffset = Schema.GetOffset(0x3E7BF53CA2BC3E5C);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SecondSoundOffset!.Value);
+    }
   }
 
 

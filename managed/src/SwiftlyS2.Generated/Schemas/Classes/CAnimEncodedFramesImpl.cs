@@ -17,30 +17,55 @@ internal partial class CAnimEncodedFramesImpl : SchemaClass, CAnimEncodedFrames 
   public CAnimEncodedFramesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FileNameOffset = new(() => Schema.GetOffset(0x63992F5DC8D68508), LazyThreadSafetyMode.None);
+  private static nint? _FileNameOffset;
 
   public ref CBufferString FileName {
-    get => ref _Handle.AsRef<CBufferString>(_FileNameOffset.Value);
+    get {
+      if (_FileNameOffset == null) {
+        _FileNameOffset = Schema.GetOffset(0x63992F5DC8D68508);
+      }
+      return ref _Handle.AsRef<CBufferString>(_FileNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FramesOffset = new(() => Schema.GetOffset(0x63992F5DD2101EE3), LazyThreadSafetyMode.None);
+  private static nint? _FramesOffset;
 
   public ref int Frames {
-    get => ref _Handle.AsRef<int>(_FramesOffset.Value);
+    get {
+      if (_FramesOffset == null) {
+        _FramesOffset = Schema.GetOffset(0x63992F5DD2101EE3);
+      }
+      return ref _Handle.AsRef<int>(_FramesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FramesPerBlockOffset = new(() => Schema.GetOffset(0x63992F5DFFC5A547), LazyThreadSafetyMode.None);
+  private static nint? _FramesPerBlockOffset;
 
   public ref int FramesPerBlock {
-    get => ref _Handle.AsRef<int>(_FramesPerBlockOffset.Value);
+    get {
+      if (_FramesPerBlockOffset == null) {
+        _FramesPerBlockOffset = Schema.GetOffset(0x63992F5DFFC5A547);
+      }
+      return ref _Handle.AsRef<int>(_FramesPerBlockOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FrameblockArrayOffset = new(() => Schema.GetOffset(0x63992F5D2805E598), LazyThreadSafetyMode.None);
+  private static nint? _FrameblockArrayOffset;
 
   public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray {
-    get => ref _Handle.AsRef<CUtlVector<CAnimFrameBlockAnim>>(_FrameblockArrayOffset.Value);
+    get {
+      if (_FrameblockArrayOffset == null) {
+        _FrameblockArrayOffset = Schema.GetOffset(0x63992F5D2805E598);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAnimFrameBlockAnim>>(_FrameblockArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UsageDifferencesOffset = new(() => Schema.GetOffset(0x63992F5D27B13638), LazyThreadSafetyMode.None);
+  private static nint? _UsageDifferencesOffset;
 
   public CAnimEncodeDifference UsageDifferences {
-    get => new CAnimEncodeDifferenceImpl(_Handle + _UsageDifferencesOffset.Value);
+    get {
+      if (_UsageDifferencesOffset == null) {
+        _UsageDifferencesOffset = Schema.GetOffset(0x63992F5D27B13638);
+      }
+      return new CAnimEncodeDifferenceImpl(_Handle + _UsageDifferencesOffset!.Value);
+    }
   }
 
 

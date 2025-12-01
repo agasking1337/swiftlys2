@@ -17,73 +17,139 @@ internal partial class CBtActionAimImpl : CBtNodeImpl, CBtActionAim {
   public CBtActionAimImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SensorInputKeyOffset = new(() => Schema.GetOffset(0x43587513D2B0D4C1), LazyThreadSafetyMode.None);
+  private static nint? _SensorInputKeyOffset;
 
   public string SensorInputKey {
     get {
-      var ptr = _Handle.Read<nint>(_SensorInputKeyOffset.Value);
+      if (_SensorInputKeyOffset == null) {
+        _SensorInputKeyOffset = Schema.GetOffset(0x43587513D2B0D4C1);
+      }
+      var ptr = _Handle.Read<nint>(_SensorInputKeyOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SensorInputKeyOffset.Value, value);
+    set {
+      if (_SensorInputKeyOffset == null) {
+        _SensorInputKeyOffset = Schema.GetOffset(0x43587513D2B0D4C1);
+      }
+      Schema.SetString(_Handle, _SensorInputKeyOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AimReadyKeyOffset = new(() => Schema.GetOffset(0x435875136718A4C7), LazyThreadSafetyMode.None);
+  private static nint? _AimReadyKeyOffset;
 
   public string AimReadyKey {
     get {
-      var ptr = _Handle.Read<nint>(_AimReadyKeyOffset.Value);
+      if (_AimReadyKeyOffset == null) {
+        _AimReadyKeyOffset = Schema.GetOffset(0x435875136718A4C7);
+      }
+      var ptr = _Handle.Read<nint>(_AimReadyKeyOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AimReadyKeyOffset.Value, value);
+    set {
+      if (_AimReadyKeyOffset == null) {
+        _AimReadyKeyOffset = Schema.GetOffset(0x435875136718A4C7);
+      }
+      Schema.SetString(_Handle, _AimReadyKeyOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ZoomCooldownTimestampOffset = new(() => Schema.GetOffset(0x43587513F2898D9F), LazyThreadSafetyMode.None);
+  private static nint? _ZoomCooldownTimestampOffset;
 
   public ref float ZoomCooldownTimestamp {
-    get => ref _Handle.AsRef<float>(_ZoomCooldownTimestampOffset.Value);
+    get {
+      if (_ZoomCooldownTimestampOffset == null) {
+        _ZoomCooldownTimestampOffset = Schema.GetOffset(0x43587513F2898D9F);
+      }
+      return ref _Handle.AsRef<float>(_ZoomCooldownTimestampOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DoneAimingOffset = new(() => Schema.GetOffset(0x43587513F2C3ADDE), LazyThreadSafetyMode.None);
+  private static nint? _DoneAimingOffset;
 
   public ref bool DoneAiming {
-    get => ref _Handle.AsRef<bool>(_DoneAimingOffset.Value);
+    get {
+      if (_DoneAimingOffset == null) {
+        _DoneAimingOffset = Schema.GetOffset(0x43587513F2C3ADDE);
+      }
+      return ref _Handle.AsRef<bool>(_DoneAimingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LerpStartTimeOffset = new(() => Schema.GetOffset(0x43587513B67B575F), LazyThreadSafetyMode.None);
+  private static nint? _LerpStartTimeOffset;
 
   public ref float LerpStartTime {
-    get => ref _Handle.AsRef<float>(_LerpStartTimeOffset.Value);
+    get {
+      if (_LerpStartTimeOffset == null) {
+        _LerpStartTimeOffset = Schema.GetOffset(0x43587513B67B575F);
+      }
+      return ref _Handle.AsRef<float>(_LerpStartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextLookTargetLerpTimeOffset = new(() => Schema.GetOffset(0x43587513768D7F08), LazyThreadSafetyMode.None);
+  private static nint? _NextLookTargetLerpTimeOffset;
 
   public ref float NextLookTargetLerpTime {
-    get => ref _Handle.AsRef<float>(_NextLookTargetLerpTimeOffset.Value);
+    get {
+      if (_NextLookTargetLerpTimeOffset == null) {
+        _NextLookTargetLerpTimeOffset = Schema.GetOffset(0x43587513768D7F08);
+      }
+      return ref _Handle.AsRef<float>(_NextLookTargetLerpTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PenaltyReductionRatioOffset = new(() => Schema.GetOffset(0x43587513BB3B4A10), LazyThreadSafetyMode.None);
+  private static nint? _PenaltyReductionRatioOffset;
 
   public ref float PenaltyReductionRatio {
-    get => ref _Handle.AsRef<float>(_PenaltyReductionRatioOffset.Value);
+    get {
+      if (_PenaltyReductionRatioOffset == null) {
+        _PenaltyReductionRatioOffset = Schema.GetOffset(0x43587513BB3B4A10);
+      }
+      return ref _Handle.AsRef<float>(_PenaltyReductionRatioOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NextLookTargetOffset = new(() => Schema.GetOffset(0x43587513C1D3F3CE), LazyThreadSafetyMode.None);
+  private static nint? _NextLookTargetOffset;
 
   public ref QAngle NextLookTarget {
-    get => ref _Handle.AsRef<QAngle>(_NextLookTargetOffset.Value);
+    get {
+      if (_NextLookTargetOffset == null) {
+        _NextLookTargetOffset = Schema.GetOffset(0x43587513C1D3F3CE);
+      }
+      return ref _Handle.AsRef<QAngle>(_NextLookTargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AimTimerOffset = new(() => Schema.GetOffset(0x4358751330E31F47), LazyThreadSafetyMode.None);
+  private static nint? _AimTimerOffset;
 
   public CountdownTimer AimTimer {
-    get => new CountdownTimerImpl(_Handle + _AimTimerOffset.Value);
+    get {
+      if (_AimTimerOffset == null) {
+        _AimTimerOffset = Schema.GetOffset(0x4358751330E31F47);
+      }
+      return new CountdownTimerImpl(_Handle + _AimTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SniperHoldTimerOffset = new(() => Schema.GetOffset(0x43587513B206F2AC), LazyThreadSafetyMode.None);
+  private static nint? _SniperHoldTimerOffset;
 
   public CountdownTimer SniperHoldTimer {
-    get => new CountdownTimerImpl(_Handle + _SniperHoldTimerOffset.Value);
+    get {
+      if (_SniperHoldTimerOffset == null) {
+        _SniperHoldTimerOffset = Schema.GetOffset(0x43587513B206F2AC);
+      }
+      return new CountdownTimerImpl(_Handle + _SniperHoldTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FocusIntervalTimerOffset = new(() => Schema.GetOffset(0x43587513267063CB), LazyThreadSafetyMode.None);
+  private static nint? _FocusIntervalTimerOffset;
 
   public CountdownTimer FocusIntervalTimer {
-    get => new CountdownTimerImpl(_Handle + _FocusIntervalTimerOffset.Value);
+    get {
+      if (_FocusIntervalTimerOffset == null) {
+        _FocusIntervalTimerOffset = Schema.GetOffset(0x43587513267063CB);
+      }
+      return new CountdownTimerImpl(_Handle + _FocusIntervalTimerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AcquiredOffset = new(() => Schema.GetOffset(0x435875131D2FE5B5), LazyThreadSafetyMode.None);
+  private static nint? _AcquiredOffset;
 
   public ref bool Acquired {
-    get => ref _Handle.AsRef<bool>(_AcquiredOffset.Value);
+    get {
+      if (_AcquiredOffset == null) {
+        _AcquiredOffset = Schema.GetOffset(0x435875131D2FE5B5);
+      }
+      return ref _Handle.AsRef<bool>(_AcquiredOffset!.Value);
+    }
   }
 
 

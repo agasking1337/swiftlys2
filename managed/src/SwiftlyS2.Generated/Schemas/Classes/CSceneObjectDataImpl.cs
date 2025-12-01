@@ -17,35 +17,65 @@ internal partial class CSceneObjectDataImpl : SchemaClass, CSceneObjectData {
   public CSceneObjectDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinBoundsOffset = new(() => Schema.GetOffset(0x628AC6A9114799FE), LazyThreadSafetyMode.None);
+  private static nint? _MinBoundsOffset;
 
   public ref Vector MinBounds {
-    get => ref _Handle.AsRef<Vector>(_MinBoundsOffset.Value);
+    get {
+      if (_MinBoundsOffset == null) {
+        _MinBoundsOffset = Schema.GetOffset(0x628AC6A9114799FE);
+      }
+      return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxBoundsOffset = new(() => Schema.GetOffset(0x628AC6A9C0B4CE60), LazyThreadSafetyMode.None);
+  private static nint? _MaxBoundsOffset;
 
   public ref Vector MaxBounds {
-    get => ref _Handle.AsRef<Vector>(_MaxBoundsOffset.Value);
+    get {
+      if (_MaxBoundsOffset == null) {
+        _MaxBoundsOffset = Schema.GetOffset(0x628AC6A9C0B4CE60);
+      }
+      return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DrawCallsOffset = new(() => Schema.GetOffset(0x628AC6A9CA953770), LazyThreadSafetyMode.None);
+  private static nint? _DrawCallsOffset;
 
   public ref CUtlLeanVector<CMaterialDrawDescriptor, int> DrawCalls {
-    get => ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor, int>>(_DrawCallsOffset.Value);
+    get {
+      if (_DrawCallsOffset == null) {
+        _DrawCallsOffset = Schema.GetOffset(0x628AC6A9CA953770);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor, int>>(_DrawCallsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DrawBoundsOffset = new(() => Schema.GetOffset(0x628AC6A96CBBD6CE), LazyThreadSafetyMode.None);
+  private static nint? _DrawBoundsOffset;
 
   public ref CUtlLeanVector<AABB_t, int> DrawBounds {
-    get => ref _Handle.AsRef<CUtlLeanVector<AABB_t, int>>(_DrawBoundsOffset.Value);
+    get {
+      if (_DrawBoundsOffset == null) {
+        _DrawBoundsOffset = Schema.GetOffset(0x628AC6A96CBBD6CE);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<AABB_t, int>>(_DrawBoundsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MeshletsOffset = new(() => Schema.GetOffset(0x628AC6A928865C36), LazyThreadSafetyMode.None);
+  private static nint? _MeshletsOffset;
 
   public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets {
-    get => ref _Handle.AsRef<CUtlLeanVector<CMeshletDescriptor, int>>(_MeshletsOffset.Value);
+    get {
+      if (_MeshletsOffset == null) {
+        _MeshletsOffset = Schema.GetOffset(0x628AC6A928865C36);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CMeshletDescriptor, int>>(_MeshletsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintColorOffset = new(() => Schema.GetOffset(0x628AC6A950AFF21F), LazyThreadSafetyMode.None);
+  private static nint? _TintColorOffset;
 
   public ref Vector4D TintColor {
-    get => ref _Handle.AsRef<Vector4D>(_TintColorOffset.Value);
+    get {
+      if (_TintColorOffset == null) {
+        _TintColorOffset = Schema.GetOffset(0x628AC6A950AFF21F);
+      }
+      return ref _Handle.AsRef<Vector4D>(_TintColorOffset!.Value);
+    }
   }
 
 

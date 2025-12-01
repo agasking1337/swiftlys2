@@ -24,7 +24,6 @@
 #include <api/scripting/scripting.h>
 #include <core/managed/host/host.h>
 
-
 #include "managed/host/dynlib.h"
 #include "managed/host/strconv.h"
 
@@ -33,7 +32,6 @@
 #include <engine/fixes/entrypoint.h>
 #include <engine/gamesystem/gamesystem.h>
 
-
 #include <public/tier0/icommandline.h>
 #include <public/tier1/utlstringtoken.h>
 
@@ -41,16 +39,13 @@
 #include <api/shared/plat.h>
 #include <api/shared/string.h>
 
-
 #include <public/icvar.h>
 #include <public/tier1/KeyValues.h>
-
 
 #include <fmt/format.h>
 
 #include <public/engine/igameeventsystem.h>
 #include <s2binlib/s2binlib.h>
-
 
 #include <public/steam/steam_gameserver.h>
 
@@ -94,9 +89,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
 
 #ifdef _WIN32
     void* libServer = load_library((const char_t*)WIN_LINUX(StringWide((Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll"))).c_str(), (Plat_GetGameDirectory() + std::string("/csgo/bin/linuxsteamrt64/libserver.so")).c_str()));
-
     void* libEngine = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
-
     s2binlib_set_module_base_from_pointer("server", libServer);
     s2binlib_set_module_base_from_pointer("engine2", libEngine);
 #endif
@@ -109,25 +102,43 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
 
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
 
+    const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
+    if (logLevel)
+    {
+#ifdef _WIN32
+        _putenv_s("SWIFTLY_LOG_LEVEL", logLevel);
+#else
+        setenv("SWIFTLY_LOG_LEVEL", logLevel, 1);
+#endif
+    }
+
     if (GetCurrentGame() == "unknown")
     {
         auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-
         if (engine)
+        {
             logger->Error("Entrypoint", fmt::format("Unknown game detected. App ID: {}", engine->GetAppID()));
+        }
         else
+        {
             logger->Error("Entrypoint", "Unknown game detected. No engine interface available.");
-
+        }
         return false;
     }
 
     m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
     if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
+    {
         m_sCorePath += WIN_LINUX("\\", "/");
+    }
+    m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
+    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
+    {
+        m_sLogPath += WIN_LINUX("\\", "/");
+    }
 
     auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
     configuration->InitializeExamples();
-
     if (!configuration->Load())
     {
         logger->Error("Entrypoint", "Couldn't load the core configuration.");
@@ -138,7 +149,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
     sdkclass->Load();
 
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
     gamedata->GetOffsets()->Load(GetCurrentGame());
     gamedata->GetSignatures()->Load(GetCurrentGame());
     gamedata->GetPatches()->Load(GetCurrentGame());
@@ -163,8 +173,12 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
     auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
     consoleoutput->Initialize();
     if (bool* b = std::get_if<bool>(&configuration->GetValue("core.ConsoleFilter")))
+    {
         if (*b)
+        {
             consoleoutput->ToggleFilter();
+        }
+    }
 
     auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
     entsystem->Initialize();
@@ -231,7 +245,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
         crashreporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
     }
-    if (!InitializeDotNetAPI(scripting->GetNativeFunctions(), scripting->GetNativeFunctionsCount()))
+    if (!InitializeDotNetAPI(scripting->GetNativeFunctions(), scripting->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
     {
         auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
         crashreporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
@@ -288,7 +302,9 @@ bool SwiftlyCore::Unload()
 void GameServerSteamAPIActivatedHook(void* _this)
 {
     if (!CommandLine()->HasParm("-dedicated"))
+    {
         return;
+    }
 
     static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     playermanager->SteamAPIServerActivated();
@@ -308,9 +324,14 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_pLoopInitHook->GetOriginal())(_this, pKeyValues, pRegistry);
 
     g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
-    if (pKeyValues->FindKey("customgamemode")) {
+    if (pKeyValues->FindKey("customgamemode"))
+    {
         workshop_map = pKeyValues->GetString("customgamemode");
-    } else workshop_map = "";
+    }
+    else
+    {
+        workshop_map = "";
+    }
 
     return ret;
 }
@@ -331,13 +352,17 @@ void SwiftlyCore::OnMapLoad(std::string map_name)
     current_map = map_name;
 
     if (g_pOnMapLoadCallback)
+    {
         reinterpret_cast<void (*)(const char*)>(g_pOnMapLoadCallback)(map_name.c_str());
+    }
 }
 
 void SwiftlyCore::OnMapUnload()
 {
     if (g_pOnMapUnloadCallback)
+    {
         reinterpret_cast<void (*)(const char*)>(g_pOnMapUnloadCallback)(current_map.c_str());
+    }
 
     current_map = "";
 }
@@ -348,7 +373,9 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
 {
     auto it = g_mInterfacesCache.find(interface_name);
     if (it != g_mInterfacesCache.end())
+    {
         return it->second;
+    }
 
     void* ifaceptr = nullptr;
     void* ifaceCreate = nullptr;
@@ -382,6 +409,12 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
         ifaceCreate = get_export(lib, "CreateInterface");
         unload_library(lib);
     }
+    else if (FILESYSTEM_INTERFACE_VERSION == interface_name)
+    {
+        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\filesystem_stdio.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libfilesystem_stdio.so")).c_str()));
+        ifaceCreate = get_export(lib, "CreateInterface");
+        unload_library(lib);
+    }
     else
     {
         void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
@@ -395,7 +428,9 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
     }
 
     if (ifaceptr != nullptr)
-        g_mInterfacesCache.insert({ interface_name, ifaceptr });
+    {
+        g_mInterfacesCache.insert({interface_name, ifaceptr});
+    }
 
     return ifaceptr;
 }
@@ -409,7 +444,9 @@ std::string SwiftlyCore::GetCurrentGame()
 {
     auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
     if (!engine)
+    {
         return "unknown";
+    }
 
     switch (engine->GetAppID())
     {
@@ -424,7 +461,9 @@ int SwiftlyCore::GetMaxGameClients()
 {
     auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
     if (!engine)
+    {
         return 0;
+    }
 
     switch (engine->GetAppID())
     {

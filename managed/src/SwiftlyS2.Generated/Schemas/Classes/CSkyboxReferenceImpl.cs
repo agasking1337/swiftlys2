@@ -17,15 +17,25 @@ internal partial class CSkyboxReferenceImpl : CBaseEntityImpl, CSkyboxReference 
   public CSkyboxReferenceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WorldGroupIdOffset = new(() => Schema.GetOffset(0x98809790BECFAC7), LazyThreadSafetyMode.None);
+  private static nint? _WorldGroupIdOffset;
 
   public ref uint WorldGroupId {
-    get => ref _Handle.AsRef<uint>(_WorldGroupIdOffset.Value);
+    get {
+      if (_WorldGroupIdOffset == null) {
+        _WorldGroupIdOffset = Schema.GetOffset(0x98809790BECFAC7);
+      }
+      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SkyCameraOffset = new(() => Schema.GetOffset(0x988097906BB5B33), LazyThreadSafetyMode.None);
+  private static nint? _SkyCameraOffset;
 
   public ref CHandle<CSkyCamera> SkyCamera {
-    get => ref _Handle.AsRef<CHandle<CSkyCamera>>(_SkyCameraOffset.Value);
+    get {
+      if (_SkyCameraOffset == null) {
+        _SkyCameraOffset = Schema.GetOffset(0x988097906BB5B33);
+      }
+      return ref _Handle.AsRef<CHandle<CSkyCamera>>(_SkyCameraOffset!.Value);
+    }
   }
 
 

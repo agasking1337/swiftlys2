@@ -17,10 +17,15 @@ internal partial class CJiggleBoneUpdateNodeImpl : CUnaryUpdateNodeImpl, CJiggle
   public CJiggleBoneUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OpFixedDataOffset = new(() => Schema.GetOffset(0x6CA954296960AF8C), LazyThreadSafetyMode.None);
+  private static nint? _OpFixedDataOffset;
 
   public JiggleBoneSettingsList_t OpFixedData {
-    get => new JiggleBoneSettingsList_tImpl(_Handle + _OpFixedDataOffset.Value);
+    get {
+      if (_OpFixedDataOffset == null) {
+        _OpFixedDataOffset = Schema.GetOffset(0x6CA954296960AF8C);
+      }
+      return new JiggleBoneSettingsList_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    }
   }
 
 

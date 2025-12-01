@@ -17,24 +17,42 @@ internal partial class CHintMessageImpl : SchemaClass, CHintMessage {
   public CHintMessageImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HintStringOffset = new(() => Schema.GetOffset(0x7663729E433E2101), LazyThreadSafetyMode.None);
+  private static nint? _HintStringOffset;
 
   public string HintString {
     get {
-      var ptr = _Handle.Read<nint>(_HintStringOffset.Value);
+      if (_HintStringOffset == null) {
+        _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
+      }
+      var ptr = _Handle.Read<nint>(_HintStringOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _HintStringOffset.Value, value);
+    set {
+      if (_HintStringOffset == null) {
+        _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
+      }
+      Schema.SetString(_Handle, _HintStringOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ArgsOffset = new(() => Schema.GetOffset(0x7663729E5D6040DC), LazyThreadSafetyMode.None);
+  private static nint? _ArgsOffset;
 
   public ref CUtlVector<CString> Args {
-    get => ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset.Value);
+    get {
+      if (_ArgsOffset == null) {
+        _ArgsOffset = Schema.GetOffset(0x7663729E5D6040DC);
+      }
+      return ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0x7663729E3D9FF5AD), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0x7663729E3D9FF5AD);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
 
 

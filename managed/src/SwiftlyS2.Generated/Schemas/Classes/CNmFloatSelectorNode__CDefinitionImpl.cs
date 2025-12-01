@@ -17,30 +17,55 @@ internal partial class CNmFloatSelectorNode__CDefinitionImpl : CNmFloatValueNode
   public CNmFloatSelectorNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConditionNodeIndicesOffset = new(() => Schema.GetOffset(0xA387F8324A144D0F), LazyThreadSafetyMode.None);
+  private static nint? _ConditionNodeIndicesOffset;
 
   public SchemaUntypedField ConditionNodeIndices {
-    get => new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset.Value);
+    get {
+      if (_ConditionNodeIndicesOffset == null) {
+        _ConditionNodeIndicesOffset = Schema.GetOffset(0xA387F8324A144D0F);
+      }
+      return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ValuesOffset = new(() => Schema.GetOffset(0xA387F832FBEDDADB), LazyThreadSafetyMode.None);
+  private static nint? _ValuesOffset;
 
   public SchemaUntypedField Values {
-    get => new SchemaUntypedField(_Handle + _ValuesOffset.Value);
+    get {
+      if (_ValuesOffset == null) {
+        _ValuesOffset = Schema.GetOffset(0xA387F832FBEDDADB);
+      }
+      return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultValueOffset = new(() => Schema.GetOffset(0xA387F832700AB429), LazyThreadSafetyMode.None);
+  private static nint? _DefaultValueOffset;
 
   public ref float DefaultValue {
-    get => ref _Handle.AsRef<float>(_DefaultValueOffset.Value);
+    get {
+      if (_DefaultValueOffset == null) {
+        _DefaultValueOffset = Schema.GetOffset(0xA387F832700AB429);
+      }
+      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EaseTimeOffset = new(() => Schema.GetOffset(0xA387F832D0A54FCC), LazyThreadSafetyMode.None);
+  private static nint? _EaseTimeOffset;
 
   public ref float EaseTime {
-    get => ref _Handle.AsRef<float>(_EaseTimeOffset.Value);
+    get {
+      if (_EaseTimeOffset == null) {
+        _EaseTimeOffset = Schema.GetOffset(0xA387F832D0A54FCC);
+      }
+      return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EasingOpOffset = new(() => Schema.GetOffset(0xA387F832CF457EAF), LazyThreadSafetyMode.None);
+  private static nint? _EasingOpOffset;
 
   public ref NmEasingOperation_t EasingOp {
-    get => ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset.Value);
+    get {
+      if (_EasingOpOffset == null) {
+        _EasingOpOffset = Schema.GetOffset(0xA387F832CF457EAF);
+      }
+      return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+    }
   }
 
 

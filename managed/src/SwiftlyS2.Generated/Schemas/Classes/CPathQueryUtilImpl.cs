@@ -17,30 +17,55 @@ internal partial class CPathQueryUtilImpl : SchemaClass, CPathQueryUtil {
   public CPathQueryUtilImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _PathToEntityTransformOffset = new(() => Schema.GetOffset(0x52D1B6431A6FA220), LazyThreadSafetyMode.None);
+  private static nint? _PathToEntityTransformOffset;
 
   public ref CTransform PathToEntityTransform {
-    get => ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset.Value);
+    get {
+      if (_PathToEntityTransformOffset == null) {
+        _PathToEntityTransformOffset = Schema.GetOffset(0x52D1B6431A6FA220);
+      }
+      return ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathSamplePositionsOffset = new(() => Schema.GetOffset(0x52D1B643099F5ECC), LazyThreadSafetyMode.None);
+  private static nint? _PathSamplePositionsOffset;
 
   public ref CUtlVector<Vector> PathSamplePositions {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset.Value);
+    get {
+      if (_PathSamplePositionsOffset == null) {
+        _PathSamplePositionsOffset = Schema.GetOffset(0x52D1B643099F5ECC);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathSampleParametersOffset = new(() => Schema.GetOffset(0x52D1B6431D6E0D08), LazyThreadSafetyMode.None);
+  private static nint? _PathSampleParametersOffset;
 
   public ref CUtlVector<float> PathSampleParameters {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset.Value);
+    get {
+      if (_PathSampleParametersOffset == null) {
+        _PathSampleParametersOffset = Schema.GetOffset(0x52D1B6431D6E0D08);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathSampleDistancesOffset = new(() => Schema.GetOffset(0x52D1B6435680B274), LazyThreadSafetyMode.None);
+  private static nint? _PathSampleDistancesOffset;
 
   public ref CUtlVector<float> PathSampleDistances {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset.Value);
+    get {
+      if (_PathSampleDistancesOffset == null) {
+        _PathSampleDistancesOffset = Schema.GetOffset(0x52D1B6435680B274);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsClosedLoopOffset = new(() => Schema.GetOffset(0x52D1B6430806319B), LazyThreadSafetyMode.None);
+  private static nint? _IsClosedLoopOffset;
 
   public ref bool IsClosedLoop {
-    get => ref _Handle.AsRef<bool>(_IsClosedLoopOffset.Value);
+    get {
+      if (_IsClosedLoopOffset == null) {
+        _IsClosedLoopOffset = Schema.GetOffset(0x52D1B6430806319B);
+      }
+      return ref _Handle.AsRef<bool>(_IsClosedLoopOffset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class C_OP_GlobalLightImpl : CParticleFunctionOperatorImpl, C_O
   public C_OP_GlobalLightImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0xC02700C2B731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0xC02700C2B731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClampLowerRangeOffset = new(() => Schema.GetOffset(0xC02700C20F690326), LazyThreadSafetyMode.None);
+  private static nint? _ClampLowerRangeOffset;
 
   public ref bool ClampLowerRange {
-    get => ref _Handle.AsRef<bool>(_ClampLowerRangeOffset.Value);
+    get {
+      if (_ClampLowerRangeOffset == null) {
+        _ClampLowerRangeOffset = Schema.GetOffset(0xC02700C20F690326);
+      }
+      return ref _Handle.AsRef<bool>(_ClampLowerRangeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClampUpperRangeOffset = new(() => Schema.GetOffset(0xC02700C2815873B5), LazyThreadSafetyMode.None);
+  private static nint? _ClampUpperRangeOffset;
 
   public ref bool ClampUpperRange {
-    get => ref _Handle.AsRef<bool>(_ClampUpperRangeOffset.Value);
+    get {
+      if (_ClampUpperRangeOffset == null) {
+        _ClampUpperRangeOffset = Schema.GetOffset(0xC02700C2815873B5);
+      }
+      return ref _Handle.AsRef<bool>(_ClampUpperRangeOffset!.Value);
+    }
   }
 
 

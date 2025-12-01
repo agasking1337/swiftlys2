@@ -17,35 +17,65 @@ internal partial class C_OP_MovementMoveAlongSkinnedCPSnapshotImpl : CParticleFu
   public C_OP_MovementMoveAlongSkinnedCPSnapshotImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0xBF34A6C93F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0xBF34A6C93F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SnapshotControlPointNumberOffset = new(() => Schema.GetOffset(0xBF34A6C929D3EEDD), LazyThreadSafetyMode.None);
+  private static nint? _SnapshotControlPointNumberOffset;
 
   public ref int SnapshotControlPointNumber {
-    get => ref _Handle.AsRef<int>(_SnapshotControlPointNumberOffset.Value);
+    get {
+      if (_SnapshotControlPointNumberOffset == null) {
+        _SnapshotControlPointNumberOffset = Schema.GetOffset(0xBF34A6C929D3EEDD);
+      }
+      return ref _Handle.AsRef<int>(_SnapshotControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetNormalOffset = new(() => Schema.GetOffset(0xBF34A6C9542722AC), LazyThreadSafetyMode.None);
+  private static nint? _SetNormalOffset;
 
   public ref bool SetNormal {
-    get => ref _Handle.AsRef<bool>(_SetNormalOffset.Value);
+    get {
+      if (_SetNormalOffset == null) {
+        _SetNormalOffset = Schema.GetOffset(0xBF34A6C9542722AC);
+      }
+      return ref _Handle.AsRef<bool>(_SetNormalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetRadiusOffset = new(() => Schema.GetOffset(0xBF34A6C9918808D1), LazyThreadSafetyMode.None);
+  private static nint? _SetRadiusOffset;
 
   public ref bool SetRadius {
-    get => ref _Handle.AsRef<bool>(_SetRadiusOffset.Value);
+    get {
+      if (_SetRadiusOffset == null) {
+        _SetRadiusOffset = Schema.GetOffset(0xBF34A6C9918808D1);
+      }
+      return ref _Handle.AsRef<bool>(_SetRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0xBF34A6C9CF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CPerParticleFloatInput Interpolation {
-    get => new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0xBF34A6C9CF55B987);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TValueOffset = new(() => Schema.GetOffset(0xBF34A6C9B4CE908E), LazyThreadSafetyMode.None);
+  private static nint? _TValueOffset;
 
   public CPerParticleFloatInput TValue {
-    get => new CPerParticleFloatInputImpl(_Handle + _TValueOffset.Value);
+    get {
+      if (_TValueOffset == null) {
+        _TValueOffset = Schema.GetOffset(0xBF34A6C9B4CE908E);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _TValueOffset!.Value);
+    }
   }
 
 

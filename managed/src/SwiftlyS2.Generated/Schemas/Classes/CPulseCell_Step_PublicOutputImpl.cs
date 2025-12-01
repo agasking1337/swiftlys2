@@ -17,10 +17,15 @@ internal partial class CPulseCell_Step_PublicOutputImpl : CPulseCell_BaseFlowImp
   public CPulseCell_Step_PublicOutputImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OutputIndexOffset = new(() => Schema.GetOffset(0x40053C931E4D5BA0), LazyThreadSafetyMode.None);
+  private static nint? _OutputIndexOffset;
 
   public PulseRuntimeOutputIndex_t OutputIndex {
-    get => new PulseRuntimeOutputIndex_tImpl(_Handle + _OutputIndexOffset.Value);
+    get {
+      if (_OutputIndexOffset == null) {
+        _OutputIndexOffset = Schema.GetOffset(0x40053C931E4D5BA0);
+      }
+      return new PulseRuntimeOutputIndex_tImpl(_Handle + _OutputIndexOffset!.Value);
+    }
   }
 
 

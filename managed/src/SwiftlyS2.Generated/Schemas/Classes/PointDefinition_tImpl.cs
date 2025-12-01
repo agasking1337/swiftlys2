@@ -17,20 +17,35 @@ internal partial class PointDefinition_tImpl : SchemaClass, PointDefinition_t {
   public PointDefinition_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointOffset = new(() => Schema.GetOffset(0x731F83DF0D0DDF8C), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointOffset;
 
   public ref int ControlPoint {
-    get => ref _Handle.AsRef<int>(_ControlPointOffset.Value);
+    get {
+      if (_ControlPointOffset == null) {
+        _ControlPointOffset = Schema.GetOffset(0x731F83DF0D0DDF8C);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordsOffset = new(() => Schema.GetOffset(0x731F83DF30E716DE), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordsOffset;
 
   public ref bool LocalCoords {
-    get => ref _Handle.AsRef<bool>(_LocalCoordsOffset.Value);
+    get {
+      if (_LocalCoordsOffset == null) {
+        _LocalCoordsOffset = Schema.GetOffset(0x731F83DF30E716DE);
+      }
+      return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0x731F83DFFE159136), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref Vector Offset {
-    get => ref _Handle.AsRef<Vector>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0x731F83DFFE159136);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    }
   }
 
 

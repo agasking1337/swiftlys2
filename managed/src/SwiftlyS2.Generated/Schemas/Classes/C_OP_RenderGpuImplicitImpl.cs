@@ -17,45 +17,85 @@ internal partial class C_OP_RenderGpuImplicitImpl : CParticleFunctionRendererImp
   public C_OP_RenderGpuImplicitImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _UsePerParticleRadiusOffset = new(() => Schema.GetOffset(0xF780A8E2CB5B403), LazyThreadSafetyMode.None);
+  private static nint? _UsePerParticleRadiusOffset;
 
   public ref bool UsePerParticleRadius {
-    get => ref _Handle.AsRef<bool>(_UsePerParticleRadiusOffset.Value);
+    get {
+      if (_UsePerParticleRadiusOffset == null) {
+        _UsePerParticleRadiusOffset = Schema.GetOffset(0xF780A8E2CB5B403);
+      }
+      return ref _Handle.AsRef<bool>(_UsePerParticleRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VertexCountKbOffset = new(() => Schema.GetOffset(0xF780A8E6064907B), LazyThreadSafetyMode.None);
+  private static nint? _VertexCountKbOffset;
 
   public ref uint VertexCountKb {
-    get => ref _Handle.AsRef<uint>(_VertexCountKbOffset.Value);
+    get {
+      if (_VertexCountKbOffset == null) {
+        _VertexCountKbOffset = Schema.GetOffset(0xF780A8E6064907B);
+      }
+      return ref _Handle.AsRef<uint>(_VertexCountKbOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IndexCountKbOffset = new(() => Schema.GetOffset(0xF780A8E6CDECFF7), LazyThreadSafetyMode.None);
+  private static nint? _IndexCountKbOffset;
 
   public ref uint IndexCountKb {
-    get => ref _Handle.AsRef<uint>(_IndexCountKbOffset.Value);
+    get {
+      if (_IndexCountKbOffset == null) {
+        _IndexCountKbOffset = Schema.GetOffset(0xF780A8E6CDECFF7);
+      }
+      return ref _Handle.AsRef<uint>(_IndexCountKbOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GridSizeOffset = new(() => Schema.GetOffset(0xF780A8E456E2F5C), LazyThreadSafetyMode.None);
+  private static nint? _GridSizeOffset;
 
   public CParticleCollectionRendererFloatInput GridSize {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _GridSizeOffset.Value);
+    get {
+      if (_GridSizeOffset == null) {
+        _GridSizeOffset = Schema.GetOffset(0xF780A8E456E2F5C);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _GridSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusScaleOffset = new(() => Schema.GetOffset(0xF780A8E15F78967), LazyThreadSafetyMode.None);
+  private static nint? _RadiusScaleOffset;
 
   public CParticleCollectionRendererFloatInput RadiusScale {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _RadiusScaleOffset.Value);
+    get {
+      if (_RadiusScaleOffset == null) {
+        _RadiusScaleOffset = Schema.GetOffset(0xF780A8E15F78967);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsosurfaceThresholdOffset = new(() => Schema.GetOffset(0xF780A8E32E25824), LazyThreadSafetyMode.None);
+  private static nint? _IsosurfaceThresholdOffset;
 
   public CParticleCollectionRendererFloatInput IsosurfaceThreshold {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _IsosurfaceThresholdOffset.Value);
+    get {
+      if (_IsosurfaceThresholdOffset == null) {
+        _IsosurfaceThresholdOffset = Schema.GetOffset(0xF780A8E32E25824);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _IsosurfaceThresholdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleCPOffset = new(() => Schema.GetOffset(0xF780A8EDE3CC5E6), LazyThreadSafetyMode.None);
+  private static nint? _ScaleCPOffset;
 
   public ref int ScaleCP {
-    get => ref _Handle.AsRef<int>(_ScaleCPOffset.Value);
+    get {
+      if (_ScaleCPOffset == null) {
+        _ScaleCPOffset = Schema.GetOffset(0xF780A8EDE3CC5E6);
+      }
+      return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaterialOffset = new(() => Schema.GetOffset(0xF780A8E888CE42E), LazyThreadSafetyMode.None);
+  private static nint? _MaterialOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset.Value);
+    get {
+      if (_MaterialOffset == null) {
+        _MaterialOffset = Schema.GetOffset(0xF780A8E888CE42E);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    }
   }
 
 

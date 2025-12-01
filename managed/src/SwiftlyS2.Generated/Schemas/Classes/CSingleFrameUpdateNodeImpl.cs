@@ -17,25 +17,45 @@ internal partial class CSingleFrameUpdateNodeImpl : CLeafUpdateNodeImpl, CSingle
   public CSingleFrameUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ActionsOffset = new(() => Schema.GetOffset(0x5A65D6168D622684), LazyThreadSafetyMode.None);
+  private static nint? _ActionsOffset;
 
   public ref CUtlVector<SchemaUntypedField> Actions {
-    get => ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset.Value);
+    get {
+      if (_ActionsOffset == null) {
+        _ActionsOffset = Schema.GetOffset(0x5A65D6168D622684);
+      }
+      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PoseCacheHandleOffset = new(() => Schema.GetOffset(0x5A65D6164719447A), LazyThreadSafetyMode.None);
+  private static nint? _PoseCacheHandleOffset;
 
   public CPoseHandle PoseCacheHandle {
-    get => new CPoseHandleImpl(_Handle + _PoseCacheHandleOffset.Value);
+    get {
+      if (_PoseCacheHandleOffset == null) {
+        _PoseCacheHandleOffset = Schema.GetOffset(0x5A65D6164719447A);
+      }
+      return new CPoseHandleImpl(_Handle + _PoseCacheHandleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SequenceOffset = new(() => Schema.GetOffset(0x5A65D616E0A0598E), LazyThreadSafetyMode.None);
+  private static nint? _SequenceOffset;
 
   public HSequence Sequence {
-    get => new HSequenceImpl(_Handle + _SequenceOffset.Value);
+    get {
+      if (_SequenceOffset == null) {
+        _SequenceOffset = Schema.GetOffset(0x5A65D616E0A0598E);
+      }
+      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CycleOffset = new(() => Schema.GetOffset(0x5A65D6160C77829F), LazyThreadSafetyMode.None);
+  private static nint? _CycleOffset;
 
   public ref float Cycle {
-    get => ref _Handle.AsRef<float>(_CycleOffset.Value);
+    get {
+      if (_CycleOffset == null) {
+        _CycleOffset = Schema.GetOffset(0x5A65D6160C77829F);
+      }
+      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    }
   }
 
 

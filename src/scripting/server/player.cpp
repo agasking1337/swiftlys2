@@ -160,12 +160,16 @@ void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
 void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit)
 {
     if (playerid + 1 == entityidx)
+    {
         return;
+    }
 
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto player = playerManager->GetPlayer(playerid);
     if (!player)
+    {
         return;
+    }
 
     auto& bv = player->GetBlockedTransmittingBits();
 
@@ -173,30 +177,42 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
     if (shouldBlockTransmit)
     {
         bool wasEmpty = (bv.blockedMask[dword] == 0);
-        bv.blockedMask[dword] |= (1 << (entityidx % 64));
+        bv.blockedMask[dword] |= (1ULL << (entityidx % 64));
         if (wasEmpty)
+        {
             bv.activeMasks.push_back(dword);
+        }
     }
     else
     {
-        bv.blockedMask[dword] &= ~(1 << (entityidx % 64));
+        bv.blockedMask[dword] &= ~(1ULL << (entityidx % 64));
         if (bv.blockedMask[dword] == 0)
-            bv.activeMasks.erase(std::find(bv.activeMasks.begin(), bv.activeMasks.end(), dword));
+        {
+            auto it = std::find(bv.activeMasks.begin(), bv.activeMasks.end(), dword);
+            if (it != bv.activeMasks.end())
+            {
+                bv.activeMasks.erase(it);
+            }
+        }
     }
 }
 
 bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
 {
     if (playerid + 1 == entityidx)
+    {
         return false;
+    }
 
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto player = playerManager->GetPlayer(playerid);
     if (!player)
+    {
         return false;
+    }
 
     auto& bv = player->GetBlockedTransmittingBits();
-    return (bv.blockedMask[entityidx / 64] & (1 << (entityidx % 64))) != 0;
+    return (bv.blockedMask[entityidx / 64] & (1ULL << (entityidx % 64))) != 0;
 }
 
 void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
@@ -245,7 +261,7 @@ void Bridge_Player_TakeDamage(int playerid, void* dmginfo)
         return;
 
     static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    reinterpret_cast<int64_t (*)(void*, void*, void*)>(gamedata->GetSignatures()->Fetch("CBaseEntity::TakeDamage"))(player->GetPawn(), dmginfo, 0);
+    reinterpret_cast<int64_t(*)(void*, void*, void*)>(gamedata->GetSignatures()->Fetch("CBaseEntity::TakeDamage"))(player->GetPawn(), dmginfo, 0);
 }
 
 void Bridge_Player_Teleport(int playerid, Vector pos, QAngle angle, Vector vel)
@@ -317,7 +333,7 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
 
     ConCommandRef cmdRef(cmd[0]);
 
-    if (cmdRef.IsValidRef())
+    if (cmdRef.IsValidRef() && !cmdRef.IsFlagSet(FCVAR_SERVER_CAN_EXECUTE))
     {
         CCommandContext context(CommandTarget_t::CT_FIRST_SPLITSCREEN_CLIENT, CPlayerSlot(player->GetSlot()));
         cmdRef.Dispatch(context, cmd);
@@ -327,6 +343,16 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
         static auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
         engine->ClientCommand(player->GetSlot(), command);
     }
+}
+
+uint8_t Bridge_Player_IsFirstSpawn(int playerid)
+{
+    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto player = playerManager->GetPlayer(playerid);
+    if (!player)
+        return 0;
+
+    return player->IsFirstSpawn() ? 1 : 0;
 }
 
 DEFINE_NATIVE("Player.SendMessage", Bridge_Player_SendMessage);
@@ -354,3 +380,4 @@ DEFINE_NATIVE("Player.SetCenterMenuRender", Bridge_Player_SetCenterMenuRender);
 DEFINE_NATIVE("Player.ClearCenterMenuRender", Bridge_Player_ClearCenterMenuRender);
 DEFINE_NATIVE("Player.HasMenuShown", Bridge_Player_HasMenuShown);
 DEFINE_NATIVE("Player.ExecuteCommand", Bridge_Player_ExecuteCommand);
+DEFINE_NATIVE("Player.IsFirstSpawn", Bridge_Player_IsFirstSpawn);

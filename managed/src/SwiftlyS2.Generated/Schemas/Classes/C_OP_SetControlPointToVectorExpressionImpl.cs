@@ -17,35 +17,65 @@ internal partial class C_OP_SetControlPointToVectorExpressionImpl : CParticleFun
   public C_OP_SetControlPointToVectorExpressionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ExpressionOffset = new(() => Schema.GetOffset(0x67E9EFDE160B2427), LazyThreadSafetyMode.None);
+  private static nint? _ExpressionOffset;
 
   public ref VectorExpressionType_t Expression {
-    get => ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset.Value);
+    get {
+      if (_ExpressionOffset == null) {
+        _ExpressionOffset = Schema.GetOffset(0x67E9EFDE160B2427);
+      }
+      return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputCPOffset = new(() => Schema.GetOffset(0x67E9EFDE50DF5703), LazyThreadSafetyMode.None);
+  private static nint? _OutputCPOffset;
 
   public ref int OutputCP {
-    get => ref _Handle.AsRef<int>(_OutputCPOffset.Value);
+    get {
+      if (_OutputCPOffset == null) {
+        _OutputCPOffset = Schema.GetOffset(0x67E9EFDE50DF5703);
+      }
+      return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Input1Offset = new(() => Schema.GetOffset(0x67E9EFDEE17F27DA), LazyThreadSafetyMode.None);
+  private static nint? _Input1Offset;
 
   public CParticleCollectionVecInput Input1 {
-    get => new CParticleCollectionVecInputImpl(_Handle + _Input1Offset.Value);
+    get {
+      if (_Input1Offset == null) {
+        _Input1Offset = Schema.GetOffset(0x67E9EFDEE17F27DA);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _Input1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Input2Offset = new(() => Schema.GetOffset(0x67E9EFDEE07F2647), LazyThreadSafetyMode.None);
+  private static nint? _Input2Offset;
 
   public CParticleCollectionVecInput Input2 {
-    get => new CParticleCollectionVecInputImpl(_Handle + _Input2Offset.Value);
+    get {
+      if (_Input2Offset == null) {
+        _Input2Offset = Schema.GetOffset(0x67E9EFDEE07F2647);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _Input2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LerpOffset = new(() => Schema.GetOffset(0x67E9EFDE622FAB06), LazyThreadSafetyMode.None);
+  private static nint? _LerpOffset;
 
   public CPerParticleFloatInput Lerp {
-    get => new CPerParticleFloatInputImpl(_Handle + _LerpOffset.Value);
+    get {
+      if (_LerpOffset == null) {
+        _LerpOffset = Schema.GetOffset(0x67E9EFDE622FAB06);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizedOutputOffset = new(() => Schema.GetOffset(0x67E9EFDE0AA98C55), LazyThreadSafetyMode.None);
+  private static nint? _NormalizedOutputOffset;
 
   public ref bool NormalizedOutput {
-    get => ref _Handle.AsRef<bool>(_NormalizedOutputOffset.Value);
+    get {
+      if (_NormalizedOutputOffset == null) {
+        _NormalizedOutputOffset = Schema.GetOffset(0x67E9EFDE0AA98C55);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+    }
   }
 
 

@@ -17,29 +17,52 @@ internal partial class PermModelExtPart_tImpl : SchemaClass, PermModelExtPart_t 
   public PermModelExtPart_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TransformOffset = new(() => Schema.GetOffset(0xCA30851D6EC5209B), LazyThreadSafetyMode.None);
+  private static nint? _TransformOffset;
 
   public ref CTransform Transform {
-    get => ref _Handle.AsRef<CTransform>(_TransformOffset.Value);
+    get {
+      if (_TransformOffset == null) {
+        _TransformOffset = Schema.GetOffset(0xCA30851D6EC5209B);
+      }
+      return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xCA30851DCAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ParentOffset = new(() => Schema.GetOffset(0xCA30851D0AABB9D1), LazyThreadSafetyMode.None);
+  private static nint? _ParentOffset;
 
   public ref int Parent {
-    get => ref _Handle.AsRef<int>(_ParentOffset.Value);
+    get {
+      if (_ParentOffset == null) {
+        _ParentOffset = Schema.GetOffset(0xCA30851D0AABB9D1);
+      }
+      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RefModelOffset = new(() => Schema.GetOffset(0xCA30851D63E6E3DF), LazyThreadSafetyMode.None);
+  private static nint? _RefModelOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCModel> RefModel {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset.Value);
+    get {
+      if (_RefModelOffset == null) {
+        _RefModelOffset = Schema.GetOffset(0xCA30851D63E6E3DF);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class C_INIT_RandomAlphaImpl : CParticleFunctionInitializerImpl
   public C_INIT_RandomAlphaImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x3D7FD5BE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x3D7FD5BE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaMinOffset = new(() => Schema.GetOffset(0x3D7FD5BD7670531), LazyThreadSafetyMode.None);
+  private static nint? _AlphaMinOffset;
 
   public ref int AlphaMin {
-    get => ref _Handle.AsRef<int>(_AlphaMinOffset.Value);
+    get {
+      if (_AlphaMinOffset == null) {
+        _AlphaMinOffset = Schema.GetOffset(0x3D7FD5BD7670531);
+      }
+      return ref _Handle.AsRef<int>(_AlphaMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaMaxOffset = new(() => Schema.GetOffset(0x3D7FD5BE97AA93F), LazyThreadSafetyMode.None);
+  private static nint? _AlphaMaxOffset;
 
   public ref int AlphaMax {
-    get => ref _Handle.AsRef<int>(_AlphaMaxOffset.Value);
+    get {
+      if (_AlphaMaxOffset == null) {
+        _AlphaMaxOffset = Schema.GetOffset(0x3D7FD5BE97AA93F);
+      }
+      return ref _Handle.AsRef<int>(_AlphaMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaRandExponentOffset = new(() => Schema.GetOffset(0x3D7FD5BA2C243B5), LazyThreadSafetyMode.None);
+  private static nint? _AlphaRandExponentOffset;
 
   public ref float AlphaRandExponent {
-    get => ref _Handle.AsRef<float>(_AlphaRandExponentOffset.Value);
+    get {
+      if (_AlphaRandExponentOffset == null) {
+        _AlphaRandExponentOffset = Schema.GetOffset(0x3D7FD5BA2C243B5);
+      }
+      return ref _Handle.AsRef<float>(_AlphaRandExponentOffset!.Value);
+    }
   }
 
 

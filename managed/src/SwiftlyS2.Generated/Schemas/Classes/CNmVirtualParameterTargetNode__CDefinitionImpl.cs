@@ -17,10 +17,15 @@ internal partial class CNmVirtualParameterTargetNode__CDefinitionImpl : CNmTarge
   public CNmVirtualParameterTargetNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildNodeIdxOffset = new(() => Schema.GetOffset(0xB17F7CE05C29A73C), LazyThreadSafetyMode.None);
+  private static nint? _ChildNodeIdxOffset;
 
   public ref short ChildNodeIdx {
-    get => ref _Handle.AsRef<short>(_ChildNodeIdxOffset.Value);
+    get {
+      if (_ChildNodeIdxOffset == null) {
+        _ChildNodeIdxOffset = Schema.GetOffset(0xB17F7CE05C29A73C);
+      }
+      return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
+    }
   }
 
 

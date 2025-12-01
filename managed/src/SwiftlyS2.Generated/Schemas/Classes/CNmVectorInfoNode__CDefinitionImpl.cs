@@ -17,15 +17,25 @@ internal partial class CNmVectorInfoNode__CDefinitionImpl : CNmFloatValueNode__C
   public CNmVectorInfoNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InputValueNodeIdxOffset = new(() => Schema.GetOffset(0x80D82BB895E89F27), LazyThreadSafetyMode.None);
+  private static nint? _InputValueNodeIdxOffset;
 
   public ref short InputValueNodeIdx {
-    get => ref _Handle.AsRef<short>(_InputValueNodeIdxOffset.Value);
+    get {
+      if (_InputValueNodeIdxOffset == null) {
+        _InputValueNodeIdxOffset = Schema.GetOffset(0x80D82BB895E89F27);
+      }
+      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DesiredInfoOffset = new(() => Schema.GetOffset(0x80D82BB838B16675), LazyThreadSafetyMode.None);
+  private static nint? _DesiredInfoOffset;
 
   public ref CNmVectorInfoNode__Info_t DesiredInfo {
-    get => ref _Handle.AsRef<CNmVectorInfoNode__Info_t>(_DesiredInfoOffset.Value);
+    get {
+      if (_DesiredInfoOffset == null) {
+        _DesiredInfoOffset = Schema.GetOffset(0x80D82BB838B16675);
+      }
+      return ref _Handle.AsRef<CNmVectorInfoNode__Info_t>(_DesiredInfoOffset!.Value);
+    }
   }
 
 

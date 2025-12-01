@@ -17,30 +17,55 @@ internal partial class ParamSpan_tImpl : SchemaClass, ParamSpan_t {
   public ParamSpan_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SamplesOffset = new(() => Schema.GetOffset(0x5EE209D9364CA9DC), LazyThreadSafetyMode.None);
+  private static nint? _SamplesOffset;
 
   public ref CUtlVector<ParamSpanSample_t> Samples {
-    get => ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset.Value);
+    get {
+      if (_SamplesOffset == null) {
+        _SamplesOffset = Schema.GetOffset(0x5EE209D9364CA9DC);
+      }
+      return ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamOffset = new(() => Schema.GetOffset(0x5EE209D9679286A4), LazyThreadSafetyMode.None);
+  private static nint? _ParamOffset;
 
   public CAnimParamHandle Param {
-    get => new CAnimParamHandleImpl(_Handle + _ParamOffset.Value);
+    get {
+      if (_ParamOffset == null) {
+        _ParamOffset = Schema.GetOffset(0x5EE209D9679286A4);
+      }
+      return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamTypeOffset = new(() => Schema.GetOffset(0x5EE209D9F05DFDD9), LazyThreadSafetyMode.None);
+  private static nint? _ParamTypeOffset;
 
   public ref AnimParamType_t ParamType {
-    get => ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset.Value);
+    get {
+      if (_ParamTypeOffset == null) {
+        _ParamTypeOffset = Schema.GetOffset(0x5EE209D9F05DFDD9);
+      }
+      return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartCycleOffset = new(() => Schema.GetOffset(0x5EE209D9ABB46051), LazyThreadSafetyMode.None);
+  private static nint? _StartCycleOffset;
 
   public ref float StartCycle {
-    get => ref _Handle.AsRef<float>(_StartCycleOffset.Value);
+    get {
+      if (_StartCycleOffset == null) {
+        _StartCycleOffset = Schema.GetOffset(0x5EE209D9ABB46051);
+      }
+      return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndCycleOffset = new(() => Schema.GetOffset(0x5EE209D9176E8F62), LazyThreadSafetyMode.None);
+  private static nint? _EndCycleOffset;
 
   public ref float EndCycle {
-    get => ref _Handle.AsRef<float>(_EndCycleOffset.Value);
+    get {
+      if (_EndCycleOffset == null) {
+        _EndCycleOffset = Schema.GetOffset(0x5EE209D9176E8F62);
+      }
+      return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+    }
   }
 
 

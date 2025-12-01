@@ -17,28 +17,49 @@ internal partial class CInstructorEventEntityImpl : CPointEntityImpl, CInstructo
   public CInstructorEventEntityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x6DE6628874FF65FE), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _HintTargetEntityOffset = new(() => Schema.GetOffset(0x6DE662880024C1BE), LazyThreadSafetyMode.None);
+  private static nint? _HintTargetEntityOffset;
 
   public string HintTargetEntity {
     get {
-      var ptr = _Handle.Read<nint>(_HintTargetEntityOffset.Value);
+      if (_HintTargetEntityOffset == null) {
+        _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
+      }
+      var ptr = _Handle.Read<nint>(_HintTargetEntityOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _HintTargetEntityOffset.Value, value);
+    set {
+      if (_HintTargetEntityOffset == null) {
+        _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
+      }
+      Schema.SetString(_Handle, _HintTargetEntityOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetPlayerOffset = new(() => Schema.GetOffset(0x6DE66288BA425153), LazyThreadSafetyMode.None);
+  private static nint? _TargetPlayerOffset;
 
   public ref CHandle<CBasePlayerPawn> TargetPlayer {
-    get => ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset.Value);
+    get {
+      if (_TargetPlayerOffset == null) {
+        _TargetPlayerOffset = Schema.GetOffset(0x6DE66288BA425153);
+      }
+      return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset!.Value);
+    }
   }
 
 

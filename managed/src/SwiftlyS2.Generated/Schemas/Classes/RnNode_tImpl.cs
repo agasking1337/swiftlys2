@@ -17,25 +17,45 @@ internal partial class RnNode_tImpl : SchemaClass, RnNode_t {
   public RnNode_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MinOffset = new(() => Schema.GetOffset(0x7C7D54E2F4B0AA63), LazyThreadSafetyMode.None);
+  private static nint? _MinOffset;
 
   public ref Vector Min {
-    get => ref _Handle.AsRef<Vector>(_MinOffset.Value);
+    get {
+      if (_MinOffset == null) {
+        _MinOffset = Schema.GetOffset(0x7C7D54E2F4B0AA63);
+      }
+      return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChildrenOffset = new(() => Schema.GetOffset(0x7C7D54E2D0F4635E), LazyThreadSafetyMode.None);
+  private static nint? _ChildrenOffset;
 
   public ref uint Children {
-    get => ref _Handle.AsRef<uint>(_ChildrenOffset.Value);
+    get {
+      if (_ChildrenOffset == null) {
+        _ChildrenOffset = Schema.GetOffset(0x7C7D54E2D0F4635E);
+      }
+      return ref _Handle.AsRef<uint>(_ChildrenOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxOffset = new(() => Schema.GetOffset(0x7C7D54E2EAC4225D), LazyThreadSafetyMode.None);
+  private static nint? _MaxOffset;
 
   public ref Vector Max {
-    get => ref _Handle.AsRef<Vector>(_MaxOffset.Value);
+    get {
+      if (_MaxOffset == null) {
+        _MaxOffset = Schema.GetOffset(0x7C7D54E2EAC4225D);
+      }
+      return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TriangleOffsetOffset = new(() => Schema.GetOffset(0x7C7D54E2AFE22CE6), LazyThreadSafetyMode.None);
+  private static nint? _TriangleOffsetOffset;
 
   public ref uint TriangleOffset {
-    get => ref _Handle.AsRef<uint>(_TriangleOffsetOffset.Value);
+    get {
+      if (_TriangleOffsetOffset == null) {
+        _TriangleOffsetOffset = Schema.GetOffset(0x7C7D54E2AFE22CE6);
+      }
+      return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+    }
   }
 
 

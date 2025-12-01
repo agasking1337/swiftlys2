@@ -17,29 +17,52 @@ internal partial class CModelConfigImpl : SchemaClass, CModelConfig {
   public CModelConfigImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConfigNameOffset = new(() => Schema.GetOffset(0xF6401D5DA7B74064), LazyThreadSafetyMode.None);
+  private static nint? _ConfigNameOffset;
 
   public string ConfigName {
     get {
-      var ptr = _Handle.Read<nint>(_ConfigNameOffset.Value);
+      if (_ConfigNameOffset == null) {
+        _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
+      }
+      var ptr = _Handle.Read<nint>(_ConfigNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ConfigNameOffset.Value, value);
+    set {
+      if (_ConfigNameOffset == null) {
+        _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
+      }
+      Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ElementsOffset = new(() => Schema.GetOffset(0xF6401D5DC36D5D4C), LazyThreadSafetyMode.None);
+  private static nint? _ElementsOffset;
 
   public ref CUtlVector<PointerTo<CModelConfigElement>> Elements {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset.Value);
+    get {
+      if (_ElementsOffset == null) {
+        _ElementsOffset = Schema.GetOffset(0xF6401D5DC36D5D4C);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TopLevelOffset = new(() => Schema.GetOffset(0xF6401D5D0EC64BE2), LazyThreadSafetyMode.None);
+  private static nint? _TopLevelOffset;
 
   public ref bool TopLevel {
-    get => ref _Handle.AsRef<bool>(_TopLevelOffset.Value);
+    get {
+      if (_TopLevelOffset == null) {
+        _TopLevelOffset = Schema.GetOffset(0xF6401D5D0EC64BE2);
+      }
+      return ref _Handle.AsRef<bool>(_TopLevelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActiveInEditorByDefaultOffset = new(() => Schema.GetOffset(0xF6401D5D6E287741), LazyThreadSafetyMode.None);
+  private static nint? _ActiveInEditorByDefaultOffset;
 
   public ref bool ActiveInEditorByDefault {
-    get => ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset.Value);
+    get {
+      if (_ActiveInEditorByDefaultOffset == null) {
+        _ActiveInEditorByDefaultOffset = Schema.GetOffset(0xF6401D5D6E287741);
+      }
+      return ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset!.Value);
+    }
   }
 
 

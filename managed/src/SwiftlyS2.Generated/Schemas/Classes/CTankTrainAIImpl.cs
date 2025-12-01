@@ -17,56 +17,103 @@ internal partial class CTankTrainAIImpl : CPointEntityImpl, CTankTrainAI {
   public CTankTrainAIImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TrainOffset = new(() => Schema.GetOffset(0x25820826D58EE22F), LazyThreadSafetyMode.None);
+  private static nint? _TrainOffset;
 
   public ref CHandle<CFuncTrackTrain> Train {
-    get => ref _Handle.AsRef<CHandle<CFuncTrackTrain>>(_TrainOffset.Value);
+    get {
+      if (_TrainOffset == null) {
+        _TrainOffset = Schema.GetOffset(0x25820826D58EE22F);
+      }
+      return ref _Handle.AsRef<CHandle<CFuncTrackTrain>>(_TrainOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetEntityOffset = new(() => Schema.GetOffset(0x2582082625D042A9), LazyThreadSafetyMode.None);
+  private static nint? _TargetEntityOffset;
 
   public ref CHandle<CBaseEntity> TargetEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset.Value);
+    get {
+      if (_TargetEntityOffset == null) {
+        _TargetEntityOffset = Schema.GetOffset(0x2582082625D042A9);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundPlayingOffset = new(() => Schema.GetOffset(0x2582082658CF60D2), LazyThreadSafetyMode.None);
+  private static nint? _SoundPlayingOffset;
 
   public ref int SoundPlaying {
-    get => ref _Handle.AsRef<int>(_SoundPlayingOffset.Value);
+    get {
+      if (_SoundPlayingOffset == null) {
+        _SoundPlayingOffset = Schema.GetOffset(0x2582082658CF60D2);
+      }
+      return ref _Handle.AsRef<int>(_SoundPlayingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartSoundNameOffset = new(() => Schema.GetOffset(0x258208263F1AB605), LazyThreadSafetyMode.None);
+  private static nint? _StartSoundNameOffset;
 
   public string StartSoundName {
     get {
-      var ptr = _Handle.Read<nint>(_StartSoundNameOffset.Value);
+      if (_StartSoundNameOffset == null) {
+        _StartSoundNameOffset = Schema.GetOffset(0x258208263F1AB605);
+      }
+      var ptr = _Handle.Read<nint>(_StartSoundNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StartSoundNameOffset.Value, value);
+    set {
+      if (_StartSoundNameOffset == null) {
+        _StartSoundNameOffset = Schema.GetOffset(0x258208263F1AB605);
+      }
+      Schema.SetString(_Handle, _StartSoundNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _EngineSoundNameOffset = new(() => Schema.GetOffset(0x2582082627E36CD1), LazyThreadSafetyMode.None);
+  private static nint? _EngineSoundNameOffset;
 
   public string EngineSoundName {
     get {
-      var ptr = _Handle.Read<nint>(_EngineSoundNameOffset.Value);
+      if (_EngineSoundNameOffset == null) {
+        _EngineSoundNameOffset = Schema.GetOffset(0x2582082627E36CD1);
+      }
+      var ptr = _Handle.Read<nint>(_EngineSoundNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _EngineSoundNameOffset.Value, value);
+    set {
+      if (_EngineSoundNameOffset == null) {
+        _EngineSoundNameOffset = Schema.GetOffset(0x2582082627E36CD1);
+      }
+      Schema.SetString(_Handle, _EngineSoundNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _MovementSoundNameOffset = new(() => Schema.GetOffset(0x25820826F2195774), LazyThreadSafetyMode.None);
+  private static nint? _MovementSoundNameOffset;
 
   public string MovementSoundName {
     get {
-      var ptr = _Handle.Read<nint>(_MovementSoundNameOffset.Value);
+      if (_MovementSoundNameOffset == null) {
+        _MovementSoundNameOffset = Schema.GetOffset(0x25820826F2195774);
+      }
+      var ptr = _Handle.Read<nint>(_MovementSoundNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _MovementSoundNameOffset.Value, value);
+    set {
+      if (_MovementSoundNameOffset == null) {
+        _MovementSoundNameOffset = Schema.GetOffset(0x25820826F2195774);
+      }
+      Schema.SetString(_Handle, _MovementSoundNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetEntityNameOffset = new(() => Schema.GetOffset(0x25820826F88EC878), LazyThreadSafetyMode.None);
+  private static nint? _TargetEntityNameOffset;
 
   public string TargetEntityName {
     get {
-      var ptr = _Handle.Read<nint>(_TargetEntityNameOffset.Value);
+      if (_TargetEntityNameOffset == null) {
+        _TargetEntityNameOffset = Schema.GetOffset(0x25820826F88EC878);
+      }
+      var ptr = _Handle.Read<nint>(_TargetEntityNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TargetEntityNameOffset.Value, value);
+    set {
+      if (_TargetEntityNameOffset == null) {
+        _TargetEntityNameOffset = Schema.GetOffset(0x25820826F88EC878);
+      }
+      Schema.SetString(_Handle, _TargetEntityNameOffset!.Value, value);
+    }
   } 
 
 

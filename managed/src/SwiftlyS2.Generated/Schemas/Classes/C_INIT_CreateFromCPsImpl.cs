@@ -17,25 +17,45 @@ internal partial class C_INIT_CreateFromCPsImpl : CParticleFunctionInitializerIm
   public C_INIT_CreateFromCPsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IncrementOffset = new(() => Schema.GetOffset(0x2593FF962359F182), LazyThreadSafetyMode.None);
+  private static nint? _IncrementOffset;
 
   public ref int Increment {
-    get => ref _Handle.AsRef<int>(_IncrementOffset.Value);
+    get {
+      if (_IncrementOffset == null) {
+        _IncrementOffset = Schema.GetOffset(0x2593FF962359F182);
+      }
+      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinCPOffset = new(() => Schema.GetOffset(0x2593FF9663AFBE98), LazyThreadSafetyMode.None);
+  private static nint? _MinCPOffset;
 
   public ref int MinCP {
-    get => ref _Handle.AsRef<int>(_MinCPOffset.Value);
+    get {
+      if (_MinCPOffset == null) {
+        _MinCPOffset = Schema.GetOffset(0x2593FF9663AFBE98);
+      }
+      return ref _Handle.AsRef<int>(_MinCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxCPOffset = new(() => Schema.GetOffset(0x2593FF964C307D96), LazyThreadSafetyMode.None);
+  private static nint? _MaxCPOffset;
 
   public ref int MaxCP {
-    get => ref _Handle.AsRef<int>(_MaxCPOffset.Value);
+    get {
+      if (_MaxCPOffset == null) {
+        _MaxCPOffset = Schema.GetOffset(0x2593FF964C307D96);
+      }
+      return ref _Handle.AsRef<int>(_MaxCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DynamicCPCountOffset = new(() => Schema.GetOffset(0x2593FF96DF30CE38), LazyThreadSafetyMode.None);
+  private static nint? _DynamicCPCountOffset;
 
   public CParticleCollectionFloatInput DynamicCPCount {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _DynamicCPCountOffset.Value);
+    get {
+      if (_DynamicCPCountOffset == null) {
+        _DynamicCPCountOffset = Schema.GetOffset(0x2593FF96DF30CE38);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _DynamicCPCountOffset!.Value);
+    }
   }
 
 

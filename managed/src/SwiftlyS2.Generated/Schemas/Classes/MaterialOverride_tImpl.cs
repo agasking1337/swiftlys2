@@ -17,25 +17,45 @@ internal partial class MaterialOverride_tImpl : BaseSceneObjectOverride_tImpl, M
   public MaterialOverride_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SubSceneObjectOffset = new(() => Schema.GetOffset(0xFB7BFECB55C3CCBC), LazyThreadSafetyMode.None);
+  private static nint? _SubSceneObjectOffset;
 
   public ref uint SubSceneObject {
-    get => ref _Handle.AsRef<uint>(_SubSceneObjectOffset.Value);
+    get {
+      if (_SubSceneObjectOffset == null) {
+        _SubSceneObjectOffset = Schema.GetOffset(0xFB7BFECB55C3CCBC);
+      }
+      return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DrawCallIndexOffset = new(() => Schema.GetOffset(0xFB7BFECBFA5614D5), LazyThreadSafetyMode.None);
+  private static nint? _DrawCallIndexOffset;
 
   public ref uint DrawCallIndex {
-    get => ref _Handle.AsRef<uint>(_DrawCallIndexOffset.Value);
+    get {
+      if (_DrawCallIndexOffset == null) {
+        _DrawCallIndexOffset = Schema.GetOffset(0xFB7BFECBFA5614D5);
+      }
+      return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaterialOffset = new(() => Schema.GetOffset(0xFB7BFECB972B1076), LazyThreadSafetyMode.None);
+  private static nint? _MaterialOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset.Value);
+    get {
+      if (_MaterialOffset == null) {
+        _MaterialOffset = Schema.GetOffset(0xFB7BFECB972B1076);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearTintColorOffset = new(() => Schema.GetOffset(0xFB7BFECB6901D28C), LazyThreadSafetyMode.None);
+  private static nint? _LinearTintColorOffset;
 
   public ref Vector LinearTintColor {
-    get => ref _Handle.AsRef<Vector>(_LinearTintColorOffset.Value);
+    get {
+      if (_LinearTintColorOffset == null) {
+        _LinearTintColorOffset = Schema.GetOffset(0xFB7BFECB6901D28C);
+      }
+      return ref _Handle.AsRef<Vector>(_LinearTintColorOffset!.Value);
+    }
   }
 
 

@@ -17,40 +17,75 @@ internal partial class C_OP_RemapParticleCountOnScalarEndCapImpl : CParticleFunc
   public C_OP_RemapParticleCountOnScalarEndCapImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xA36B6C9DE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xA36B6C9DE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0xA36B6C9D85E92181), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref int InputMin {
-    get => ref _Handle.AsRef<int>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0xA36B6C9D85E92181);
+      }
+      return ref _Handle.AsRef<int>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0xA36B6C9D77FE262F), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref int InputMax {
-    get => ref _Handle.AsRef<int>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0xA36B6C9D77FE262F);
+      }
+      return ref _Handle.AsRef<int>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0xA36B6C9D5F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0xA36B6C9D5F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0xA36B6C9D51A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0xA36B6C9D51A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BackwardsOffset = new(() => Schema.GetOffset(0xA36B6C9D3EE875F5), LazyThreadSafetyMode.None);
+  private static nint? _BackwardsOffset;
 
   public ref bool Backwards {
-    get => ref _Handle.AsRef<bool>(_BackwardsOffset.Value);
+    get {
+      if (_BackwardsOffset == null) {
+        _BackwardsOffset = Schema.GetOffset(0xA36B6C9D3EE875F5);
+      }
+      return ref _Handle.AsRef<bool>(_BackwardsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetMethodOffset = new(() => Schema.GetOffset(0xA36B6C9DFB53C31E), LazyThreadSafetyMode.None);
+  private static nint? _SetMethodOffset;
 
   public ref ParticleSetMethod_t SetMethod {
-    get => ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset.Value);
+    get {
+      if (_SetMethodOffset == null) {
+        _SetMethodOffset = Schema.GetOffset(0xA36B6C9DFB53C31E);
+      }
+      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    }
   }
 
 

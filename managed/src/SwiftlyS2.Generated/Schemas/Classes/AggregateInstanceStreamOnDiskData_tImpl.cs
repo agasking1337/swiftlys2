@@ -17,15 +17,25 @@ internal partial class AggregateInstanceStreamOnDiskData_tImpl : SchemaClass, Ag
   public AggregateInstanceStreamOnDiskData_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DecodedSizeOffset = new(() => Schema.GetOffset(0x8EDB1298803205A0), LazyThreadSafetyMode.None);
+  private static nint? _DecodedSizeOffset;
 
   public ref uint DecodedSize {
-    get => ref _Handle.AsRef<uint>(_DecodedSizeOffset.Value);
+    get {
+      if (_DecodedSizeOffset == null) {
+        _DecodedSizeOffset = Schema.GetOffset(0x8EDB1298803205A0);
+      }
+      return ref _Handle.AsRef<uint>(_DecodedSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BufferDataOffset = new(() => Schema.GetOffset(0x8EDB1298ED884C43), LazyThreadSafetyMode.None);
+  private static nint? _BufferDataOffset;
 
   public ref CUtlBinaryBlock BufferData {
-    get => ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset.Value);
+    get {
+      if (_BufferDataOffset == null) {
+        _BufferDataOffset = Schema.GetOffset(0x8EDB1298ED884C43);
+      }
+      return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset!.Value);
+    }
   }
 
 

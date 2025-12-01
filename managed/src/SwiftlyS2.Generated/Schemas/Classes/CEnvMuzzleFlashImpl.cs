@@ -17,19 +17,32 @@ internal partial class CEnvMuzzleFlashImpl : CPointEntityImpl, CEnvMuzzleFlash {
   public CEnvMuzzleFlashImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x2EBDF9DEB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x2EBDF9DEB731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentAttachmentOffset = new(() => Schema.GetOffset(0x2EBDF9DE0061F288), LazyThreadSafetyMode.None);
+  private static nint? _ParentAttachmentOffset;
 
   public string ParentAttachment {
     get {
-      var ptr = _Handle.Read<nint>(_ParentAttachmentOffset.Value);
+      if (_ParentAttachmentOffset == null) {
+        _ParentAttachmentOffset = Schema.GetOffset(0x2EBDF9DE0061F288);
+      }
+      var ptr = _Handle.Read<nint>(_ParentAttachmentOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ParentAttachmentOffset.Value, value);
+    set {
+      if (_ParentAttachmentOffset == null) {
+        _ParentAttachmentOffset = Schema.GetOffset(0x2EBDF9DE0061F288);
+      }
+      Schema.SetString(_Handle, _ParentAttachmentOffset!.Value, value);
+    }
   } 
 
 

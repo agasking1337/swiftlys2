@@ -17,25 +17,45 @@ internal partial class CNmEventImpl : SchemaClass, CNmEvent {
   public CNmEventImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StartTimeSecondsOffset = new(() => Schema.GetOffset(0xF9871009C1FCF499), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeSecondsOffset;
 
   public ref float StartTimeSeconds {
-    get => ref _Handle.AsRef<float>(_StartTimeSecondsOffset.Value);
+    get {
+      if (_StartTimeSecondsOffset == null) {
+        _StartTimeSecondsOffset = Schema.GetOffset(0xF9871009C1FCF499);
+      }
+      return ref _Handle.AsRef<float>(_StartTimeSecondsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationSecondsOffset = new(() => Schema.GetOffset(0xF9871009917797C0), LazyThreadSafetyMode.None);
+  private static nint? _DurationSecondsOffset;
 
   public ref float DurationSeconds {
-    get => ref _Handle.AsRef<float>(_DurationSecondsOffset.Value);
+    get {
+      if (_DurationSecondsOffset == null) {
+        _DurationSecondsOffset = Schema.GetOffset(0xF9871009917797C0);
+      }
+      return ref _Handle.AsRef<float>(_DurationSecondsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SyncIDOffset = new(() => Schema.GetOffset(0xF987100915636837), LazyThreadSafetyMode.None);
+  private static nint? _SyncIDOffset;
 
   public ref CGlobalSymbol SyncID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset.Value);
+    get {
+      if (_SyncIDOffset == null) {
+        _SyncIDOffset = Schema.GetOffset(0xF987100915636837);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClientOnlyOffset = new(() => Schema.GetOffset(0xF9871009B39BA128), LazyThreadSafetyMode.None);
+  private static nint? _ClientOnlyOffset;
 
   public ref bool ClientOnly {
-    get => ref _Handle.AsRef<bool>(_ClientOnlyOffset.Value);
+    get {
+      if (_ClientOnlyOffset == null) {
+        _ClientOnlyOffset = Schema.GetOffset(0xF9871009B39BA128);
+      }
+      return ref _Handle.AsRef<bool>(_ClientOnlyOffset!.Value);
+    }
   }
 
 

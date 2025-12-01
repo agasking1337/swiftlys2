@@ -17,87 +17,166 @@ internal partial class CSoundEventEntityImpl : CBaseEntityImpl, CSoundEventEntit
   public CSoundEventEntityImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StartOnSpawnOffset = new(() => Schema.GetOffset(0x85BC270CDB2E6401), LazyThreadSafetyMode.None);
+  private static nint? _StartOnSpawnOffset;
 
   public ref bool StartOnSpawn {
-    get => ref _Handle.AsRef<bool>(_StartOnSpawnOffset.Value);
+    get {
+      if (_StartOnSpawnOffset == null) {
+        _StartOnSpawnOffset = Schema.GetOffset(0x85BC270CDB2E6401);
+      }
+      return ref _Handle.AsRef<bool>(_StartOnSpawnOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ToLocalPlayerOffset = new(() => Schema.GetOffset(0x85BC270CE46A0E6E), LazyThreadSafetyMode.None);
+  private static nint? _ToLocalPlayerOffset;
 
   public ref bool ToLocalPlayer {
-    get => ref _Handle.AsRef<bool>(_ToLocalPlayerOffset.Value);
+    get {
+      if (_ToLocalPlayerOffset == null) {
+        _ToLocalPlayerOffset = Schema.GetOffset(0x85BC270CE46A0E6E);
+      }
+      return ref _Handle.AsRef<bool>(_ToLocalPlayerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StopOnNewOffset = new(() => Schema.GetOffset(0x85BC270C87CBD5EE), LazyThreadSafetyMode.None);
+  private static nint? _StopOnNewOffset;
 
   public ref bool StopOnNew {
-    get => ref _Handle.AsRef<bool>(_StopOnNewOffset.Value);
+    get {
+      if (_StopOnNewOffset == null) {
+        _StopOnNewOffset = Schema.GetOffset(0x85BC270C87CBD5EE);
+      }
+      return ref _Handle.AsRef<bool>(_StopOnNewOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SaveRestoreOffset = new(() => Schema.GetOffset(0x85BC270C329D644A), LazyThreadSafetyMode.None);
+  private static nint? _SaveRestoreOffset;
 
   public ref bool SaveRestore {
-    get => ref _Handle.AsRef<bool>(_SaveRestoreOffset.Value);
+    get {
+      if (_SaveRestoreOffset == null) {
+        _SaveRestoreOffset = Schema.GetOffset(0x85BC270C329D644A);
+      }
+      return ref _Handle.AsRef<bool>(_SaveRestoreOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SavedIsPlayingOffset = new(() => Schema.GetOffset(0x85BC270CE283DF5A), LazyThreadSafetyMode.None);
+  private static nint? _SavedIsPlayingOffset;
 
   public ref bool SavedIsPlaying {
-    get => ref _Handle.AsRef<bool>(_SavedIsPlayingOffset.Value);
+    get {
+      if (_SavedIsPlayingOffset == null) {
+        _SavedIsPlayingOffset = Schema.GetOffset(0x85BC270CE283DF5A);
+      }
+      return ref _Handle.AsRef<bool>(_SavedIsPlayingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SavedElapsedTimeOffset = new(() => Schema.GetOffset(0x85BC270C581DEF93), LazyThreadSafetyMode.None);
+  private static nint? _SavedElapsedTimeOffset;
 
   public ref float SavedElapsedTime {
-    get => ref _Handle.AsRef<float>(_SavedElapsedTimeOffset.Value);
+    get {
+      if (_SavedElapsedTimeOffset == null) {
+        _SavedElapsedTimeOffset = Schema.GetOffset(0x85BC270C581DEF93);
+      }
+      return ref _Handle.AsRef<float>(_SavedElapsedTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SourceEntityNameOffset = new(() => Schema.GetOffset(0x85BC270C6C1387C0), LazyThreadSafetyMode.None);
+  private static nint? _SourceEntityNameOffset;
 
   public string SourceEntityName {
     get {
-      var ptr = _Handle.Read<nint>(_SourceEntityNameOffset.Value);
+      if (_SourceEntityNameOffset == null) {
+        _SourceEntityNameOffset = Schema.GetOffset(0x85BC270C6C1387C0);
+      }
+      var ptr = _Handle.Read<nint>(_SourceEntityNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SourceEntityNameOffset.Value, value);
+    set {
+      if (_SourceEntityNameOffset == null) {
+        _SourceEntityNameOffset = Schema.GetOffset(0x85BC270C6C1387C0);
+      }
+      Schema.SetString(_Handle, _SourceEntityNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AttachmentNameOffset = new(() => Schema.GetOffset(0x85BC270C667A37F3), LazyThreadSafetyMode.None);
+  private static nint? _AttachmentNameOffset;
 
   public string AttachmentName {
     get {
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset.Value);
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0x85BC270C667A37F3);
+      }
+      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _AttachmentNameOffset.Value, value);
+    set {
+      if (_AttachmentNameOffset == null) {
+        _AttachmentNameOffset = Schema.GetOffset(0x85BC270C667A37F3);
+      }
+      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OnGUIDChangedOffset = new(() => Schema.GetOffset(0x85BC270C2173B7A3), LazyThreadSafetyMode.None);
+  private static nint? _OnGUIDChangedOffset;
 
   public SchemaUntypedField OnGUIDChanged {
-    get => new SchemaUntypedField(_Handle + _OnGUIDChangedOffset.Value);
+    get {
+      if (_OnGUIDChangedOffset == null) {
+        _OnGUIDChangedOffset = Schema.GetOffset(0x85BC270C2173B7A3);
+      }
+      return new SchemaUntypedField(_Handle + _OnGUIDChangedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnSoundFinishedOffset = new(() => Schema.GetOffset(0x85BC270C35E97239), LazyThreadSafetyMode.None);
+  private static nint? _OnSoundFinishedOffset;
 
   public CEntityIOOutput OnSoundFinished {
-    get => new CEntityIOOutputImpl(_Handle + _OnSoundFinishedOffset.Value);
+    get {
+      if (_OnSoundFinishedOffset == null) {
+        _OnSoundFinishedOffset = Schema.GetOffset(0x85BC270C35E97239);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnSoundFinishedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClientCullRadiusOffset = new(() => Schema.GetOffset(0x85BC270CEC099542), LazyThreadSafetyMode.None);
+  private static nint? _ClientCullRadiusOffset;
 
   public ref float ClientCullRadius {
-    get => ref _Handle.AsRef<float>(_ClientCullRadiusOffset.Value);
+    get {
+      if (_ClientCullRadiusOffset == null) {
+        _ClientCullRadiusOffset = Schema.GetOffset(0x85BC270CEC099542);
+      }
+      return ref _Handle.AsRef<float>(_ClientCullRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundNameOffset = new(() => Schema.GetOffset(0x85BC270CB17EB157), LazyThreadSafetyMode.None);
+  private static nint? _SoundNameOffset;
 
   public string SoundName {
     get {
-      var ptr = _Handle.Read<nint>(_SoundNameOffset.Value);
+      if (_SoundNameOffset == null) {
+        _SoundNameOffset = Schema.GetOffset(0x85BC270CB17EB157);
+      }
+      var ptr = _Handle.Read<nint>(_SoundNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SoundNameOffset.Value, value);
+    set {
+      if (_SoundNameOffset == null) {
+        _SoundNameOffset = Schema.GetOffset(0x85BC270CB17EB157);
+      }
+      Schema.SetString(_Handle, _SoundNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _SourceOffset = new(() => Schema.GetOffset(0x85BC270C33D3CD82), LazyThreadSafetyMode.None);
+  private static nint? _SourceOffset;
 
   public ref CHandle<CEntityInstance> Source {
-    get => ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset.Value);
+    get {
+      if (_SourceOffset == null) {
+        _SourceOffset = Schema.GetOffset(0x85BC270C33D3CD82);
+      }
+      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EntityIndexSelectionOffset = new(() => Schema.GetOffset(0x85BC270CD23B423C), LazyThreadSafetyMode.None);
+  private static nint? _EntityIndexSelectionOffset;
 
   public ref int EntityIndexSelection {
-    get => ref _Handle.AsRef<int>(_EntityIndexSelectionOffset.Value);
+    get {
+      if (_EntityIndexSelectionOffset == null) {
+        _EntityIndexSelectionOffset = Schema.GetOffset(0x85BC270CD23B423C);
+      }
+      return ref _Handle.AsRef<int>(_EntityIndexSelectionOffset!.Value);
+    }
   }
 
 

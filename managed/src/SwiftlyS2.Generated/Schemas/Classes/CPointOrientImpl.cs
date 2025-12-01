@@ -17,44 +17,82 @@ internal partial class CPointOrientImpl : CBaseEntityImpl, CPointOrient {
   public CPointOrientImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SpawnTargetNameOffset = new(() => Schema.GetOffset(0x31E4EBC561780472), LazyThreadSafetyMode.None);
+  private static nint? _SpawnTargetNameOffset;
 
   public string SpawnTargetName {
     get {
-      var ptr = _Handle.Read<nint>(_SpawnTargetNameOffset.Value);
+      if (_SpawnTargetNameOffset == null) {
+        _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
+      }
+      var ptr = _Handle.Read<nint>(_SpawnTargetNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _SpawnTargetNameOffset.Value, value);
+    set {
+      if (_SpawnTargetNameOffset == null) {
+        _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
+      }
+      Schema.SetString(_Handle, _SpawnTargetNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TargetOffset = new(() => Schema.GetOffset(0x31E4EBC5CE35901A), LazyThreadSafetyMode.None);
+  private static nint? _TargetOffset;
 
   public ref CHandle<CBaseEntity> Target {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset.Value);
+    get {
+      if (_TargetOffset == null) {
+        _TargetOffset = Schema.GetOffset(0x31E4EBC5CE35901A);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActiveOffset = new(() => Schema.GetOffset(0x31E4EBC58334208F), LazyThreadSafetyMode.None);
+  private static nint? _ActiveOffset;
 
   public ref bool Active {
-    get => ref _Handle.AsRef<bool>(_ActiveOffset.Value);
+    get {
+      if (_ActiveOffset == null) {
+        _ActiveOffset = Schema.GetOffset(0x31E4EBC58334208F);
+      }
+      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GoalDirectionOffset = new(() => Schema.GetOffset(0x31E4EBC5EF8D5D0F), LazyThreadSafetyMode.None);
+  private static nint? _GoalDirectionOffset;
 
   public ref PointOrientGoalDirectionType_t GoalDirection {
-    get => ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset.Value);
+    get {
+      if (_GoalDirectionOffset == null) {
+        _GoalDirectionOffset = Schema.GetOffset(0x31E4EBC5EF8D5D0F);
+      }
+      return ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConstraintOffset = new(() => Schema.GetOffset(0x31E4EBC5A20016CE), LazyThreadSafetyMode.None);
+  private static nint? _ConstraintOffset;
 
   public ref PointOrientConstraint_t Constraint {
-    get => ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset.Value);
+    get {
+      if (_ConstraintOffset == null) {
+        _ConstraintOffset = Schema.GetOffset(0x31E4EBC5A20016CE);
+      }
+      return ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxTurnRateOffset = new(() => Schema.GetOffset(0x31E4EBC5860DD1C6), LazyThreadSafetyMode.None);
+  private static nint? _MaxTurnRateOffset;
 
   public ref float MaxTurnRate {
-    get => ref _Handle.AsRef<float>(_MaxTurnRateOffset.Value);
+    get {
+      if (_MaxTurnRateOffset == null) {
+        _MaxTurnRateOffset = Schema.GetOffset(0x31E4EBC5860DD1C6);
+      }
+      return ref _Handle.AsRef<float>(_MaxTurnRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastGameTimeOffset = new(() => Schema.GetOffset(0x31E4EBC591D10404), LazyThreadSafetyMode.None);
+  private static nint? _LastGameTimeOffset;
 
   public GameTime_t LastGameTime {
-    get => new GameTime_tImpl(_Handle + _LastGameTimeOffset.Value);
+    get {
+      if (_LastGameTimeOffset == null) {
+        _LastGameTimeOffset = Schema.GetOffset(0x31E4EBC591D10404);
+      }
+      return new GameTime_tImpl(_Handle + _LastGameTimeOffset!.Value);
+    }
   }
 
 

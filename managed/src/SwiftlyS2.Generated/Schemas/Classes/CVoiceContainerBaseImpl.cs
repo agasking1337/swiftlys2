@@ -17,16 +17,24 @@ internal partial class CVoiceContainerBaseImpl : SchemaClass, CVoiceContainerBas
   public CVoiceContainerBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SoundOffset = new(() => Schema.GetOffset(0x9D65DC3663C1A950), LazyThreadSafetyMode.None);
+  private static nint? _SoundOffset;
 
   public CVSound Sound {
-    get => new CVSoundImpl(_Handle + _SoundOffset.Value);
+    get {
+      if (_SoundOffset == null) {
+        _SoundOffset = Schema.GetOffset(0x9D65DC3663C1A950);
+      }
+      return new CVSoundImpl(_Handle + _SoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnvelopeAnalyzerOffset = new(() => Schema.GetOffset(0x9D65DC362102947D), LazyThreadSafetyMode.None);
+  private static nint? _EnvelopeAnalyzerOffset;
 
   public CVoiceContainerAnalysisBase? EnvelopeAnalyzer {
     get {
-      var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset.Value);
+      if (_EnvelopeAnalyzerOffset == null) {
+        _EnvelopeAnalyzerOffset = Schema.GetOffset(0x9D65DC362102947D);
+      }
+      var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset!.Value);
       return ptr.IsValidPtr() ? new CVoiceContainerAnalysisBaseImpl(ptr) : null;
     }
   }

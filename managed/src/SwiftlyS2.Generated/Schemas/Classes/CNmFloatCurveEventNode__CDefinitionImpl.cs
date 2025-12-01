@@ -17,25 +17,45 @@ internal partial class CNmFloatCurveEventNode__CDefinitionImpl : CNmFloatValueNo
   public CNmFloatCurveEventNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EventIDOffset = new(() => Schema.GetOffset(0x4512F5A69D798A72), LazyThreadSafetyMode.None);
+  private static nint? _EventIDOffset;
 
   public ref CGlobalSymbol EventID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset.Value);
+    get {
+      if (_EventIDOffset == null) {
+        _EventIDOffset = Schema.GetOffset(0x4512F5A69D798A72);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultNodeIdxOffset = new(() => Schema.GetOffset(0x4512F5A6C14C9521), LazyThreadSafetyMode.None);
+  private static nint? _DefaultNodeIdxOffset;
 
   public ref short DefaultNodeIdx {
-    get => ref _Handle.AsRef<short>(_DefaultNodeIdxOffset.Value);
+    get {
+      if (_DefaultNodeIdxOffset == null) {
+        _DefaultNodeIdxOffset = Schema.GetOffset(0x4512F5A6C14C9521);
+      }
+      return ref _Handle.AsRef<short>(_DefaultNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultValueOffset = new(() => Schema.GetOffset(0x4512F5A6700AB429), LazyThreadSafetyMode.None);
+  private static nint? _DefaultValueOffset;
 
   public ref float DefaultValue {
-    get => ref _Handle.AsRef<float>(_DefaultValueOffset.Value);
+    get {
+      if (_DefaultValueOffset == null) {
+        _DefaultValueOffset = Schema.GetOffset(0x4512F5A6700AB429);
+      }
+      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventConditionRulesOffset = new(() => Schema.GetOffset(0x4512F5A6A904315F), LazyThreadSafetyMode.None);
+  private static nint? _EventConditionRulesOffset;
 
   public CNmBitFlags EventConditionRules {
-    get => new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset.Value);
+    get {
+      if (_EventConditionRulesOffset == null) {
+        _EventConditionRulesOffset = Schema.GetOffset(0x4512F5A6A904315F);
+      }
+      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    }
   }
 
 

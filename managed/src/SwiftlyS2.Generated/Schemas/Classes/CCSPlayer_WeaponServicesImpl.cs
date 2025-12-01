@@ -17,80 +17,155 @@ internal partial class CCSPlayer_WeaponServicesImpl : CPlayer_WeaponServicesImpl
   public CCSPlayer_WeaponServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NextAttackOffset = new(() => Schema.GetOffset(0x13067CB23DFDCDEA), LazyThreadSafetyMode.None);
+  private static nint? _NextAttackOffset;
 
   public GameTime_t NextAttack {
-    get => new GameTime_tImpl(_Handle + _NextAttackOffset.Value);
+    get {
+      if (_NextAttackOffset == null) {
+        _NextAttackOffset = Schema.GetOffset(0x13067CB23DFDCDEA);
+      }
+      return new GameTime_tImpl(_Handle + _NextAttackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsLookingAtWeaponOffset = new(() => Schema.GetOffset(0x13067CB223393CBF), LazyThreadSafetyMode.None);
+  private static nint? _IsLookingAtWeaponOffset;
 
   public ref bool IsLookingAtWeapon {
-    get => ref _Handle.AsRef<bool>(_IsLookingAtWeaponOffset.Value);
+    get {
+      if (_IsLookingAtWeaponOffset == null) {
+        _IsLookingAtWeaponOffset = Schema.GetOffset(0x13067CB223393CBF);
+      }
+      return ref _Handle.AsRef<bool>(_IsLookingAtWeaponOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsHoldingLookAtWeaponOffset = new(() => Schema.GetOffset(0x13067CB2AF0F7486), LazyThreadSafetyMode.None);
+  private static nint? _IsHoldingLookAtWeaponOffset;
 
   public ref bool IsHoldingLookAtWeapon {
-    get => ref _Handle.AsRef<bool>(_IsHoldingLookAtWeaponOffset.Value);
+    get {
+      if (_IsHoldingLookAtWeaponOffset == null) {
+        _IsHoldingLookAtWeaponOffset = Schema.GetOffset(0x13067CB2AF0F7486);
+      }
+      return ref _Handle.AsRef<bool>(_IsHoldingLookAtWeaponOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SavedWeaponOffset = new(() => Schema.GetOffset(0x13067CB248BC7512), LazyThreadSafetyMode.None);
+  private static nint? _SavedWeaponOffset;
 
   public ref CHandle<CBasePlayerWeapon> SavedWeapon {
-    get => ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_SavedWeaponOffset.Value);
+    get {
+      if (_SavedWeaponOffset == null) {
+        _SavedWeaponOffset = Schema.GetOffset(0x13067CB248BC7512);
+      }
+      return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_SavedWeaponOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeToMeleeOffset = new(() => Schema.GetOffset(0x13067CB2B21B94A7), LazyThreadSafetyMode.None);
+  private static nint? _TimeToMeleeOffset;
 
   public ref int TimeToMelee {
-    get => ref _Handle.AsRef<int>(_TimeToMeleeOffset.Value);
+    get {
+      if (_TimeToMeleeOffset == null) {
+        _TimeToMeleeOffset = Schema.GetOffset(0x13067CB2B21B94A7);
+      }
+      return ref _Handle.AsRef<int>(_TimeToMeleeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeToSecondaryOffset = new(() => Schema.GetOffset(0x13067CB2CA0FD845), LazyThreadSafetyMode.None);
+  private static nint? _TimeToSecondaryOffset;
 
   public ref int TimeToSecondary {
-    get => ref _Handle.AsRef<int>(_TimeToSecondaryOffset.Value);
+    get {
+      if (_TimeToSecondaryOffset == null) {
+        _TimeToSecondaryOffset = Schema.GetOffset(0x13067CB2CA0FD845);
+      }
+      return ref _Handle.AsRef<int>(_TimeToSecondaryOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeToPrimaryOffset = new(() => Schema.GetOffset(0x13067CB2B1AFDA45), LazyThreadSafetyMode.None);
+  private static nint? _TimeToPrimaryOffset;
 
   public ref int TimeToPrimary {
-    get => ref _Handle.AsRef<int>(_TimeToPrimaryOffset.Value);
+    get {
+      if (_TimeToPrimaryOffset == null) {
+        _TimeToPrimaryOffset = Schema.GetOffset(0x13067CB2B1AFDA45);
+      }
+      return ref _Handle.AsRef<int>(_TimeToPrimaryOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeToSniperRifleOffset = new(() => Schema.GetOffset(0x13067CB2A9FF6B8C), LazyThreadSafetyMode.None);
+  private static nint? _TimeToSniperRifleOffset;
 
   public ref int TimeToSniperRifle {
-    get => ref _Handle.AsRef<int>(_TimeToSniperRifleOffset.Value);
+    get {
+      if (_TimeToSniperRifleOffset == null) {
+        _TimeToSniperRifleOffset = Schema.GetOffset(0x13067CB2A9FF6B8C);
+      }
+      return ref _Handle.AsRef<int>(_TimeToSniperRifleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsBeingGivenItemOffset = new(() => Schema.GetOffset(0x13067CB2D16DF82E), LazyThreadSafetyMode.None);
+  private static nint? _IsBeingGivenItemOffset;
 
   public ref bool IsBeingGivenItem {
-    get => ref _Handle.AsRef<bool>(_IsBeingGivenItemOffset.Value);
+    get {
+      if (_IsBeingGivenItemOffset == null) {
+        _IsBeingGivenItemOffset = Schema.GetOffset(0x13067CB2D16DF82E);
+      }
+      return ref _Handle.AsRef<bool>(_IsBeingGivenItemOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsPickingUpItemWithUseOffset = new(() => Schema.GetOffset(0x13067CB2833CCD8D), LazyThreadSafetyMode.None);
+  private static nint? _IsPickingUpItemWithUseOffset;
 
   public ref bool IsPickingUpItemWithUse {
-    get => ref _Handle.AsRef<bool>(_IsPickingUpItemWithUseOffset.Value);
+    get {
+      if (_IsPickingUpItemWithUseOffset == null) {
+        _IsPickingUpItemWithUseOffset = Schema.GetOffset(0x13067CB2833CCD8D);
+      }
+      return ref _Handle.AsRef<bool>(_IsPickingUpItemWithUseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PickedUpWeaponOffset = new(() => Schema.GetOffset(0x13067CB21EEE10C0), LazyThreadSafetyMode.None);
+  private static nint? _PickedUpWeaponOffset;
 
   public ref bool PickedUpWeapon {
-    get => ref _Handle.AsRef<bool>(_PickedUpWeaponOffset.Value);
+    get {
+      if (_PickedUpWeaponOffset == null) {
+        _PickedUpWeaponOffset = Schema.GetOffset(0x13067CB21EEE10C0);
+      }
+      return ref _Handle.AsRef<bool>(_PickedUpWeaponOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DisableAutoDeployOffset = new(() => Schema.GetOffset(0x13067CB2B208C90B), LazyThreadSafetyMode.None);
+  private static nint? _DisableAutoDeployOffset;
 
   public ref bool DisableAutoDeploy {
-    get => ref _Handle.AsRef<bool>(_DisableAutoDeployOffset.Value);
+    get {
+      if (_DisableAutoDeployOffset == null) {
+        _DisableAutoDeployOffset = Schema.GetOffset(0x13067CB2B208C90B);
+      }
+      return ref _Handle.AsRef<bool>(_DisableAutoDeployOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsPickingUpGroundWeaponOffset = new(() => Schema.GetOffset(0x13067CB2CA423D76), LazyThreadSafetyMode.None);
+  private static nint? _IsPickingUpGroundWeaponOffset;
 
   public ref bool IsPickingUpGroundWeapon {
-    get => ref _Handle.AsRef<bool>(_IsPickingUpGroundWeaponOffset.Value);
+    get {
+      if (_IsPickingUpGroundWeaponOffset == null) {
+        _IsPickingUpGroundWeaponOffset = Schema.GetOffset(0x13067CB2CA423D76);
+      }
+      return ref _Handle.AsRef<bool>(_IsPickingUpGroundWeaponOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NetworkAnimTimingOffset = new(() => Schema.GetOffset(0x13067CB253AFB9FA), LazyThreadSafetyMode.None);
+  private static nint? _NetworkAnimTimingOffset;
 
   public ref CUtlVector<byte> NetworkAnimTiming {
-    get => ref _Handle.AsRef<CUtlVector<byte>>(_NetworkAnimTimingOffset.Value);
+    get {
+      if (_NetworkAnimTimingOffset == null) {
+        _NetworkAnimTimingOffset = Schema.GetOffset(0x13067CB253AFB9FA);
+      }
+      return ref _Handle.AsRef<CUtlVector<byte>>(_NetworkAnimTimingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlockInspectUntilNextGraphUpdateOffset = new(() => Schema.GetOffset(0x13067CB2029ABB28), LazyThreadSafetyMode.None);
+  private static nint? _BlockInspectUntilNextGraphUpdateOffset;
 
   public ref bool BlockInspectUntilNextGraphUpdate {
-    get => ref _Handle.AsRef<bool>(_BlockInspectUntilNextGraphUpdateOffset.Value);
+    get {
+      if (_BlockInspectUntilNextGraphUpdateOffset == null) {
+        _BlockInspectUntilNextGraphUpdateOffset = Schema.GetOffset(0x13067CB2029ABB28);
+      }
+      return ref _Handle.AsRef<bool>(_BlockInspectUntilNextGraphUpdateOffset!.Value);
+    }
   }
 
   public void NextAttackUpdated() {

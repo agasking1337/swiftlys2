@@ -17,10 +17,15 @@ internal partial class CSoundEventMetaDataImpl : SchemaClass, CSoundEventMetaDat
   public CSoundEventMetaDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SoundEventVMixOffset = new(() => Schema.GetOffset(0xE03E2D8ED7B83398), LazyThreadSafetyMode.None);
+  private static nint? _SoundEventVMixOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCVMixListResource> SoundEventVMix {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVMixListResource>>(_SoundEventVMixOffset.Value);
+    get {
+      if (_SoundEventVMixOffset == null) {
+        _SoundEventVMixOffset = Schema.GetOffset(0xE03E2D8ED7B83398);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVMixListResource>>(_SoundEventVMixOffset!.Value);
+    }
   }
 
 

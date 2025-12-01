@@ -17,45 +17,85 @@ internal partial class FeAntiTunnelProbe_tImpl : SchemaClass, FeAntiTunnelProbe_
   public FeAntiTunnelProbe_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WeightOffset = new(() => Schema.GetOffset(0xBC54CE0BCFFC66CB), LazyThreadSafetyMode.None);
+  private static nint? _WeightOffset;
 
   public ref float Weight {
-    get => ref _Handle.AsRef<float>(_WeightOffset.Value);
+    get {
+      if (_WeightOffset == null) {
+        _WeightOffset = Schema.GetOffset(0xBC54CE0BCFFC66CB);
+      }
+      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0xBC54CE0BB8D52E48), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0xBC54CE0BB8D52E48);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProbeNodeOffset = new(() => Schema.GetOffset(0xBC54CE0B5F3CB12D), LazyThreadSafetyMode.None);
+  private static nint? _ProbeNodeOffset;
 
   public ref ushort ProbeNode {
-    get => ref _Handle.AsRef<ushort>(_ProbeNodeOffset.Value);
+    get {
+      if (_ProbeNodeOffset == null) {
+        _ProbeNodeOffset = Schema.GetOffset(0xBC54CE0B5F3CB12D);
+      }
+      return ref _Handle.AsRef<ushort>(_ProbeNodeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CountOffset = new(() => Schema.GetOffset(0xBC54CE0B67983E28), LazyThreadSafetyMode.None);
+  private static nint? _CountOffset;
 
   public ref ushort Count {
-    get => ref _Handle.AsRef<ushort>(_CountOffset.Value);
+    get {
+      if (_CountOffset == null) {
+        _CountOffset = Schema.GetOffset(0xBC54CE0B67983E28);
+      }
+      return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BeginOffset = new(() => Schema.GetOffset(0xBC54CE0BC630D75A), LazyThreadSafetyMode.None);
+  private static nint? _BeginOffset;
 
   public ref uint Begin {
-    get => ref _Handle.AsRef<uint>(_BeginOffset.Value);
+    get {
+      if (_BeginOffset == null) {
+        _BeginOffset = Schema.GetOffset(0xBC54CE0BC630D75A);
+      }
+      return ref _Handle.AsRef<uint>(_BeginOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActivationDistanceOffset = new(() => Schema.GetOffset(0xBC54CE0BEAB1A998), LazyThreadSafetyMode.None);
+  private static nint? _ActivationDistanceOffset;
 
   public ref float ActivationDistance {
-    get => ref _Handle.AsRef<float>(_ActivationDistanceOffset.Value);
+    get {
+      if (_ActivationDistanceOffset == null) {
+        _ActivationDistanceOffset = Schema.GetOffset(0xBC54CE0BEAB1A998);
+      }
+      return ref _Handle.AsRef<float>(_ActivationDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurvatureRadiusOffset = new(() => Schema.GetOffset(0xBC54CE0BADAE92BE), LazyThreadSafetyMode.None);
+  private static nint? _CurvatureRadiusOffset;
 
   public ref float CurvatureRadius {
-    get => ref _Handle.AsRef<float>(_CurvatureRadiusOffset.Value);
+    get {
+      if (_CurvatureRadiusOffset == null) {
+        _CurvatureRadiusOffset = Schema.GetOffset(0xBC54CE0BADAE92BE);
+      }
+      return ref _Handle.AsRef<float>(_CurvatureRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BiasOffset = new(() => Schema.GetOffset(0xBC54CE0B30667CD6), LazyThreadSafetyMode.None);
+  private static nint? _BiasOffset;
 
   public ref float Bias {
-    get => ref _Handle.AsRef<float>(_BiasOffset.Value);
+    get {
+      if (_BiasOffset == null) {
+        _BiasOffset = Schema.GetOffset(0xBC54CE0B30667CD6);
+      }
+      return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+    }
   }
 
 

@@ -17,50 +17,95 @@ internal partial class CEnvWindVolumeImpl : CBaseEntityImpl, CEnvWindVolume {
   public CEnvWindVolumeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ActiveOffset = new(() => Schema.GetOffset(0xCD7AC5418334208F), LazyThreadSafetyMode.None);
+  private static nint? _ActiveOffset;
 
   public ref bool Active {
-    get => ref _Handle.AsRef<bool>(_ActiveOffset.Value);
+    get {
+      if (_ActiveOffset == null) {
+        _ActiveOffset = Schema.GetOffset(0xCD7AC5418334208F);
+      }
+      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoxMinsOffset = new(() => Schema.GetOffset(0xCD7AC541D8201373), LazyThreadSafetyMode.None);
+  private static nint? _BoxMinsOffset;
 
   public ref Vector BoxMins {
-    get => ref _Handle.AsRef<Vector>(_BoxMinsOffset.Value);
+    get {
+      if (_BoxMinsOffset == null) {
+        _BoxMinsOffset = Schema.GetOffset(0xCD7AC541D8201373);
+      }
+      return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoxMaxsOffset = new(() => Schema.GetOffset(0xCD7AC541817A3B31), LazyThreadSafetyMode.None);
+  private static nint? _BoxMaxsOffset;
 
   public ref Vector BoxMaxs {
-    get => ref _Handle.AsRef<Vector>(_BoxMaxsOffset.Value);
+    get {
+      if (_BoxMaxsOffset == null) {
+        _BoxMaxsOffset = Schema.GetOffset(0xCD7AC541817A3B31);
+      }
+      return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartDisabledOffset = new(() => Schema.GetOffset(0xCD7AC54161ED0C4F), LazyThreadSafetyMode.None);
+  private static nint? _StartDisabledOffset;
 
   public ref bool StartDisabled {
-    get => ref _Handle.AsRef<bool>(_StartDisabledOffset.Value);
+    get {
+      if (_StartDisabledOffset == null) {
+        _StartDisabledOffset = Schema.GetOffset(0xCD7AC54161ED0C4F);
+      }
+      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShapeOffset = new(() => Schema.GetOffset(0xCD7AC54121208A02), LazyThreadSafetyMode.None);
+  private static nint? _ShapeOffset;
 
   public ref int Shape {
-    get => ref _Handle.AsRef<int>(_ShapeOffset.Value);
+    get {
+      if (_ShapeOffset == null) {
+        _ShapeOffset = Schema.GetOffset(0xCD7AC54121208A02);
+      }
+      return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WindSpeedMultiplierOffset = new(() => Schema.GetOffset(0xCD7AC541A22A3F81), LazyThreadSafetyMode.None);
+  private static nint? _WindSpeedMultiplierOffset;
 
   public ref float WindSpeedMultiplier {
-    get => ref _Handle.AsRef<float>(_WindSpeedMultiplierOffset.Value);
+    get {
+      if (_WindSpeedMultiplierOffset == null) {
+        _WindSpeedMultiplierOffset = Schema.GetOffset(0xCD7AC541A22A3F81);
+      }
+      return ref _Handle.AsRef<float>(_WindSpeedMultiplierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WindTurbulenceMultiplierOffset = new(() => Schema.GetOffset(0xCD7AC54120DA30CD), LazyThreadSafetyMode.None);
+  private static nint? _WindTurbulenceMultiplierOffset;
 
   public ref float WindTurbulenceMultiplier {
-    get => ref _Handle.AsRef<float>(_WindTurbulenceMultiplierOffset.Value);
+    get {
+      if (_WindTurbulenceMultiplierOffset == null) {
+        _WindTurbulenceMultiplierOffset = Schema.GetOffset(0xCD7AC54120DA30CD);
+      }
+      return ref _Handle.AsRef<float>(_WindTurbulenceMultiplierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WindSpeedVariationMultiplierOffset = new(() => Schema.GetOffset(0xCD7AC5416B9AC20C), LazyThreadSafetyMode.None);
+  private static nint? _WindSpeedVariationMultiplierOffset;
 
   public ref float WindSpeedVariationMultiplier {
-    get => ref _Handle.AsRef<float>(_WindSpeedVariationMultiplierOffset.Value);
+    get {
+      if (_WindSpeedVariationMultiplierOffset == null) {
+        _WindSpeedVariationMultiplierOffset = Schema.GetOffset(0xCD7AC5416B9AC20C);
+      }
+      return ref _Handle.AsRef<float>(_WindSpeedVariationMultiplierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WindDirectionVariationMultiplierOffset = new(() => Schema.GetOffset(0xCD7AC5417F3AB3AA), LazyThreadSafetyMode.None);
+  private static nint? _WindDirectionVariationMultiplierOffset;
 
   public ref float WindDirectionVariationMultiplier {
-    get => ref _Handle.AsRef<float>(_WindDirectionVariationMultiplierOffset.Value);
+    get {
+      if (_WindDirectionVariationMultiplierOffset == null) {
+        _WindDirectionVariationMultiplierOffset = Schema.GetOffset(0xCD7AC5417F3AB3AA);
+      }
+      return ref _Handle.AsRef<float>(_WindDirectionVariationMultiplierOffset!.Value);
+    }
   }
 
   public void ActiveUpdated() {

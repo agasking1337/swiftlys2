@@ -17,10 +17,15 @@ internal partial class CAttributeContainerImpl : CAttributeManagerImpl, CAttribu
   public CAttributeContainerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ItemOffset = new(() => Schema.GetOffset(0x554833CDDCE71866), LazyThreadSafetyMode.None);
+  private static nint? _ItemOffset;
 
   public CEconItemView Item {
-    get => new CEconItemViewImpl(_Handle + _ItemOffset.Value);
+    get {
+      if (_ItemOffset == null) {
+        _ItemOffset = Schema.GetOffset(0x554833CDDCE71866);
+      }
+      return new CEconItemViewImpl(_Handle + _ItemOffset!.Value);
+    }
   }
 
   public void ItemUpdated() {

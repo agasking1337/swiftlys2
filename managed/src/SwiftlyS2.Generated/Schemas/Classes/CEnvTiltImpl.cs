@@ -17,25 +17,45 @@ internal partial class CEnvTiltImpl : CPointEntityImpl, CEnvTilt {
   public CEnvTiltImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0xF90425169879A98D), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0xF90425169879A98D);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0xF90425167C5B0533), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0xF90425167C5B0533);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TiltTimeOffset = new(() => Schema.GetOffset(0xF9042516B3956BFF), LazyThreadSafetyMode.None);
+  private static nint? _TiltTimeOffset;
 
   public ref float TiltTime {
-    get => ref _Handle.AsRef<float>(_TiltTimeOffset.Value);
+    get {
+      if (_TiltTimeOffset == null) {
+        _TiltTimeOffset = Schema.GetOffset(0xF9042516B3956BFF);
+      }
+      return ref _Handle.AsRef<float>(_TiltTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StopTimeOffset = new(() => Schema.GetOffset(0xF90425166BFFEDC4), LazyThreadSafetyMode.None);
+  private static nint? _StopTimeOffset;
 
   public GameTime_t StopTime {
-    get => new GameTime_tImpl(_Handle + _StopTimeOffset.Value);
+    get {
+      if (_StopTimeOffset == null) {
+        _StopTimeOffset = Schema.GetOffset(0xF90425166BFFEDC4);
+      }
+      return new GameTime_tImpl(_Handle + _StopTimeOffset!.Value);
+    }
   }
 
 

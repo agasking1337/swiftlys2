@@ -17,25 +17,45 @@ internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_Outflo
   public CPulse_OutflowConnectionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SourceOutflowNameOffset = new(() => Schema.GetOffset(0x58023C685EA2FFCF), LazyThreadSafetyMode.None);
+  private static nint? _SourceOutflowNameOffset;
 
   public SchemaUntypedField SourceOutflowName {
-    get => new SchemaUntypedField(_Handle + _SourceOutflowNameOffset.Value);
+    get {
+      if (_SourceOutflowNameOffset == null) {
+        _SourceOutflowNameOffset = Schema.GetOffset(0x58023C685EA2FFCF);
+      }
+      return new SchemaUntypedField(_Handle + _SourceOutflowNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestChunkOffset = new(() => Schema.GetOffset(0x58023C68D6AC502E), LazyThreadSafetyMode.None);
+  private static nint? _DestChunkOffset;
 
   public PulseRuntimeChunkIndex_t DestChunk {
-    get => new PulseRuntimeChunkIndex_tImpl(_Handle + _DestChunkOffset.Value);
+    get {
+      if (_DestChunkOffset == null) {
+        _DestChunkOffset = Schema.GetOffset(0x58023C68D6AC502E);
+      }
+      return new PulseRuntimeChunkIndex_tImpl(_Handle + _DestChunkOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InstructionOffset = new(() => Schema.GetOffset(0x58023C6890E63133), LazyThreadSafetyMode.None);
+  private static nint? _InstructionOffset;
 
   public ref int Instruction {
-    get => ref _Handle.AsRef<int>(_InstructionOffset.Value);
+    get {
+      if (_InstructionOffset == null) {
+        _InstructionOffset = Schema.GetOffset(0x58023C6890E63133);
+      }
+      return ref _Handle.AsRef<int>(_InstructionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutflowRegisterMapOffset = new(() => Schema.GetOffset(0x58023C68F89A90F8), LazyThreadSafetyMode.None);
+  private static nint? _OutflowRegisterMapOffset;
 
   public PulseRegisterMap_t OutflowRegisterMap {
-    get => new PulseRegisterMap_tImpl(_Handle + _OutflowRegisterMapOffset.Value);
+    get {
+      if (_OutflowRegisterMapOffset == null) {
+        _OutflowRegisterMapOffset = Schema.GetOffset(0x58023C68F89A90F8);
+      }
+      return new PulseRegisterMap_tImpl(_Handle + _OutflowRegisterMapOffset!.Value);
+    }
   }
 
 

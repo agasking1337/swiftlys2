@@ -17,55 +17,105 @@ internal partial class C_INIT_RandomColorImpl : CParticleFunctionInitializerImpl
   public C_INIT_RandomColorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ColorMinOffset = new(() => Schema.GetOffset(0x90523A48552A5834), LazyThreadSafetyMode.None);
+  private static nint? _ColorMinOffset;
 
   public ref Color ColorMin {
-    get => ref _Handle.AsRef<Color>(_ColorMinOffset.Value);
+    get {
+      if (_ColorMinOffset == null) {
+        _ColorMinOffset = Schema.GetOffset(0x90523A48552A5834);
+      }
+      return ref _Handle.AsRef<Color>(_ColorMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorMaxOffset = new(() => Schema.GetOffset(0x90523A48433DC396), LazyThreadSafetyMode.None);
+  private static nint? _ColorMaxOffset;
 
   public ref Color ColorMax {
-    get => ref _Handle.AsRef<Color>(_ColorMaxOffset.Value);
+    get {
+      if (_ColorMaxOffset == null) {
+        _ColorMaxOffset = Schema.GetOffset(0x90523A48433DC396);
+      }
+      return ref _Handle.AsRef<Color>(_ColorMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintMinOffset = new(() => Schema.GetOffset(0x90523A4850B36A60), LazyThreadSafetyMode.None);
+  private static nint? _TintMinOffset;
 
   public ref Color TintMin {
-    get => ref _Handle.AsRef<Color>(_TintMinOffset.Value);
+    get {
+      if (_TintMinOffset == null) {
+        _TintMinOffset = Schema.GetOffset(0x90523A4850B36A60);
+      }
+      return ref _Handle.AsRef<Color>(_TintMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintMaxOffset = new(() => Schema.GetOffset(0x90523A4866A0054A), LazyThreadSafetyMode.None);
+  private static nint? _TintMaxOffset;
 
   public ref Color TintMax {
-    get => ref _Handle.AsRef<Color>(_TintMaxOffset.Value);
+    get {
+      if (_TintMaxOffset == null) {
+        _TintMaxOffset = Schema.GetOffset(0x90523A4866A0054A);
+      }
+      return ref _Handle.AsRef<Color>(_TintMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintPercOffset = new(() => Schema.GetOffset(0x90523A48E32BE3C6), LazyThreadSafetyMode.None);
+  private static nint? _TintPercOffset;
 
   public ref float TintPerc {
-    get => ref _Handle.AsRef<float>(_TintPercOffset.Value);
+    get {
+      if (_TintPercOffset == null) {
+        _TintPercOffset = Schema.GetOffset(0x90523A48E32BE3C6);
+      }
+      return ref _Handle.AsRef<float>(_TintPercOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UpdateThresholdOffset = new(() => Schema.GetOffset(0x90523A48A2303609), LazyThreadSafetyMode.None);
+  private static nint? _UpdateThresholdOffset;
 
   public ref float UpdateThreshold {
-    get => ref _Handle.AsRef<float>(_UpdateThresholdOffset.Value);
+    get {
+      if (_UpdateThresholdOffset == null) {
+        _UpdateThresholdOffset = Schema.GetOffset(0x90523A48A2303609);
+      }
+      return ref _Handle.AsRef<float>(_UpdateThresholdOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintCPOffset = new(() => Schema.GetOffset(0x90523A4854940ABB), LazyThreadSafetyMode.None);
+  private static nint? _TintCPOffset;
 
   public ref int TintCP {
-    get => ref _Handle.AsRef<int>(_TintCPOffset.Value);
+    get {
+      if (_TintCPOffset == null) {
+        _TintCPOffset = Schema.GetOffset(0x90523A4854940ABB);
+      }
+      return ref _Handle.AsRef<int>(_TintCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x90523A48E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x90523A48E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TintBlendModeOffset = new(() => Schema.GetOffset(0x90523A48B80E5314), LazyThreadSafetyMode.None);
+  private static nint? _TintBlendModeOffset;
 
   public ref ParticleColorBlendMode_t TintBlendMode {
-    get => ref _Handle.AsRef<ParticleColorBlendMode_t>(_TintBlendModeOffset.Value);
+    get {
+      if (_TintBlendModeOffset == null) {
+        _TintBlendModeOffset = Schema.GetOffset(0x90523A48B80E5314);
+      }
+      return ref _Handle.AsRef<ParticleColorBlendMode_t>(_TintBlendModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LightAmplificationOffset = new(() => Schema.GetOffset(0x90523A48C8D7C0AD), LazyThreadSafetyMode.None);
+  private static nint? _LightAmplificationOffset;
 
   public ref float LightAmplification {
-    get => ref _Handle.AsRef<float>(_LightAmplificationOffset.Value);
+    get {
+      if (_LightAmplificationOffset == null) {
+        _LightAmplificationOffset = Schema.GetOffset(0x90523A48C8D7C0AD);
+      }
+      return ref _Handle.AsRef<float>(_LightAmplificationOffset!.Value);
+    }
   }
 
 

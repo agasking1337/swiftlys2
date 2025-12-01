@@ -17,35 +17,65 @@ internal partial class C_OP_ColorInterpolateRandomImpl : CParticleFunctionOperat
   public C_OP_ColorInterpolateRandomImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ColorFadeMinOffset = new(() => Schema.GetOffset(0x6185EEC8EFCBE55A), LazyThreadSafetyMode.None);
+  private static nint? _ColorFadeMinOffset;
 
   public ref Color ColorFadeMin {
-    get => ref _Handle.AsRef<Color>(_ColorFadeMinOffset.Value);
+    get {
+      if (_ColorFadeMinOffset == null) {
+        _ColorFadeMinOffset = Schema.GetOffset(0x6185EEC8EFCBE55A);
+      }
+      return ref _Handle.AsRef<Color>(_ColorFadeMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorFadeMaxOffset = new(() => Schema.GetOffset(0x6185EEC8D9DF4A70), LazyThreadSafetyMode.None);
+  private static nint? _ColorFadeMaxOffset;
 
   public ref Color ColorFadeMax {
-    get => ref _Handle.AsRef<Color>(_ColorFadeMaxOffset.Value);
+    get {
+      if (_ColorFadeMaxOffset == null) {
+        _ColorFadeMaxOffset = Schema.GetOffset(0x6185EEC8D9DF4A70);
+      }
+      return ref _Handle.AsRef<Color>(_ColorFadeMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FadeStartTimeOffset = new(() => Schema.GetOffset(0x6185EEC886B28BFA), LazyThreadSafetyMode.None);
+  private static nint? _FadeStartTimeOffset;
 
   public ref float FadeStartTime {
-    get => ref _Handle.AsRef<float>(_FadeStartTimeOffset.Value);
+    get {
+      if (_FadeStartTimeOffset == null) {
+        _FadeStartTimeOffset = Schema.GetOffset(0x6185EEC886B28BFA);
+      }
+      return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FadeEndTimeOffset = new(() => Schema.GetOffset(0x6185EEC800D5CA4F), LazyThreadSafetyMode.None);
+  private static nint? _FadeEndTimeOffset;
 
   public ref float FadeEndTime {
-    get => ref _Handle.AsRef<float>(_FadeEndTimeOffset.Value);
+    get {
+      if (_FadeEndTimeOffset == null) {
+        _FadeEndTimeOffset = Schema.GetOffset(0x6185EEC800D5CA4F);
+      }
+      return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x6185EEC8E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x6185EEC8E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EaseInOutOffset = new(() => Schema.GetOffset(0x6185EEC85172CF48), LazyThreadSafetyMode.None);
+  private static nint? _EaseInOutOffset;
 
   public ref bool EaseInOut {
-    get => ref _Handle.AsRef<bool>(_EaseInOutOffset.Value);
+    get {
+      if (_EaseInOutOffset == null) {
+        _EaseInOutOffset = Schema.GetOffset(0x6185EEC85172CF48);
+      }
+      return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
+    }
   }
 
 

@@ -17,89 +17,172 @@ internal partial class CPathParticleRopeImpl : CBaseEntityImpl, CPathParticleRop
   public CPathParticleRopeImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StartActiveOffset = new(() => Schema.GetOffset(0xBC0C741B953CBC21), LazyThreadSafetyMode.None);
+  private static nint? _StartActiveOffset;
 
   public ref bool StartActive {
-    get => ref _Handle.AsRef<bool>(_StartActiveOffset.Value);
+    get {
+      if (_StartActiveOffset == null) {
+        _StartActiveOffset = Schema.GetOffset(0xBC0C741B953CBC21);
+      }
+      return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSimulationTimeOffset = new(() => Schema.GetOffset(0xBC0C741B80F036E5), LazyThreadSafetyMode.None);
+  private static nint? _MaxSimulationTimeOffset;
 
   public ref float MaxSimulationTime {
-    get => ref _Handle.AsRef<float>(_MaxSimulationTimeOffset.Value);
+    get {
+      if (_MaxSimulationTimeOffset == null) {
+        _MaxSimulationTimeOffset = Schema.GetOffset(0xBC0C741B80F036E5);
+      }
+      return ref _Handle.AsRef<float>(_MaxSimulationTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectNameOffset = new(() => Schema.GetOffset(0xBC0C741B82D2BFC7), LazyThreadSafetyMode.None);
+  private static nint? _EffectNameOffset;
 
   public string EffectName {
     get {
-      var ptr = _Handle.Read<nint>(_EffectNameOffset.Value);
+      if (_EffectNameOffset == null) {
+        _EffectNameOffset = Schema.GetOffset(0xBC0C741B82D2BFC7);
+      }
+      var ptr = _Handle.Read<nint>(_EffectNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _EffectNameOffset.Value, value);
+    set {
+      if (_EffectNameOffset == null) {
+        _EffectNameOffset = Schema.GetOffset(0xBC0C741B82D2BFC7);
+      }
+      Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PathNodes_NameOffset = new(() => Schema.GetOffset(0xBC0C741BFFAFA92F), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_NameOffset;
 
   public ref CUtlVector<SchemaUntypedField> PathNodes_Name {
-    get => ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset.Value);
+    get {
+      if (_PathNodes_NameOffset == null) {
+        _PathNodes_NameOffset = Schema.GetOffset(0xBC0C741BFFAFA92F);
+      }
+      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParticleSpacingOffset = new(() => Schema.GetOffset(0xBC0C741B66CCF542), LazyThreadSafetyMode.None);
+  private static nint? _ParticleSpacingOffset;
 
   public ref float ParticleSpacing {
-    get => ref _Handle.AsRef<float>(_ParticleSpacingOffset.Value);
+    get {
+      if (_ParticleSpacingOffset == null) {
+        _ParticleSpacingOffset = Schema.GetOffset(0xBC0C741B66CCF542);
+      }
+      return ref _Handle.AsRef<float>(_ParticleSpacingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SlackOffset = new(() => Schema.GetOffset(0xBC0C741B183285C9), LazyThreadSafetyMode.None);
+  private static nint? _SlackOffset;
 
   public ref float Slack {
-    get => ref _Handle.AsRef<float>(_SlackOffset.Value);
+    get {
+      if (_SlackOffset == null) {
+        _SlackOffset = Schema.GetOffset(0xBC0C741B183285C9);
+      }
+      return ref _Handle.AsRef<float>(_SlackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusOffset = new(() => Schema.GetOffset(0xBC0C741B5ACFC08D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusOffset;
 
   public ref float Radius {
-    get => ref _Handle.AsRef<float>(_RadiusOffset.Value);
+    get {
+      if (_RadiusOffset == null) {
+        _RadiusOffset = Schema.GetOffset(0xBC0C741B5ACFC08D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorTintOffset = new(() => Schema.GetOffset(0xBC0C741BD55CDDFD), LazyThreadSafetyMode.None);
+  private static nint? _ColorTintOffset;
 
   public ref Color ColorTint {
-    get => ref _Handle.AsRef<Color>(_ColorTintOffset.Value);
+    get {
+      if (_ColorTintOffset == null) {
+        _ColorTintOffset = Schema.GetOffset(0xBC0C741BD55CDDFD);
+      }
+      return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectStateOffset = new(() => Schema.GetOffset(0xBC0C741B4188A2AD), LazyThreadSafetyMode.None);
+  private static nint? _EffectStateOffset;
 
   public ref int EffectState {
-    get => ref _Handle.AsRef<int>(_EffectStateOffset.Value);
+    get {
+      if (_EffectStateOffset == null) {
+        _EffectStateOffset = Schema.GetOffset(0xBC0C741B4188A2AD);
+      }
+      return ref _Handle.AsRef<int>(_EffectStateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectIndexOffset = new(() => Schema.GetOffset(0xBC0C741B3C93DC73), LazyThreadSafetyMode.None);
+  private static nint? _EffectIndexOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset.Value);
+    get {
+      if (_EffectIndexOffset == null) {
+        _EffectIndexOffset = Schema.GetOffset(0xBC0C741B3C93DC73);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_PositionOffset = new(() => Schema.GetOffset(0xBC0C741BC84253C7), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_PositionOffset;
 
   public ref CUtlVector<Vector> PathNodes_Position {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_PositionOffset.Value);
+    get {
+      if (_PathNodes_PositionOffset == null) {
+        _PathNodes_PositionOffset = Schema.GetOffset(0xBC0C741BC84253C7);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_PositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_TangentInOffset = new(() => Schema.GetOffset(0xBC0C741B4CEA7F8E), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_TangentInOffset;
 
   public ref CUtlVector<Vector> PathNodes_TangentIn {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentInOffset.Value);
+    get {
+      if (_PathNodes_TangentInOffset == null) {
+        _PathNodes_TangentInOffset = Schema.GetOffset(0xBC0C741B4CEA7F8E);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentInOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_TangentOutOffset = new(() => Schema.GetOffset(0xBC0C741B218FA6AF), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_TangentOutOffset;
 
   public ref CUtlVector<Vector> PathNodes_TangentOut {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentOutOffset.Value);
+    get {
+      if (_PathNodes_TangentOutOffset == null) {
+        _PathNodes_TangentOutOffset = Schema.GetOffset(0xBC0C741B218FA6AF);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentOutOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_ColorOffset = new(() => Schema.GetOffset(0xBC0C741B6DB8C1DB), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_ColorOffset;
 
   public ref CUtlVector<Vector> PathNodes_Color {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_ColorOffset.Value);
+    get {
+      if (_PathNodes_ColorOffset == null) {
+        _PathNodes_ColorOffset = Schema.GetOffset(0xBC0C741B6DB8C1DB);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_ColorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_PinEnabledOffset = new(() => Schema.GetOffset(0xBC0C741B830E8AD8), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_PinEnabledOffset;
 
   public ref CUtlVector<bool> PathNodes_PinEnabled {
-    get => ref _Handle.AsRef<CUtlVector<bool>>(_PathNodes_PinEnabledOffset.Value);
+    get {
+      if (_PathNodes_PinEnabledOffset == null) {
+        _PathNodes_PinEnabledOffset = Schema.GetOffset(0xBC0C741B830E8AD8);
+      }
+      return ref _Handle.AsRef<CUtlVector<bool>>(_PathNodes_PinEnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathNodes_RadiusScaleOffset = new(() => Schema.GetOffset(0xBC0C741B593CB340), LazyThreadSafetyMode.None);
+  private static nint? _PathNodes_RadiusScaleOffset;
 
   public ref CUtlVector<float> PathNodes_RadiusScale {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_PathNodes_RadiusScaleOffset.Value);
+    get {
+      if (_PathNodes_RadiusScaleOffset == null) {
+        _PathNodes_RadiusScaleOffset = Schema.GetOffset(0xBC0C741B593CB340);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_PathNodes_RadiusScaleOffset!.Value);
+    }
   }
 
   public void ParticleSpacingUpdated() {

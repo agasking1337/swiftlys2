@@ -17,30 +17,55 @@ internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorI
   public C_OP_DragRelativeToPlaneImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DragAtPlaneOffset = new(() => Schema.GetOffset(0x9D049848176259A2), LazyThreadSafetyMode.None);
+  private static nint? _DragAtPlaneOffset;
 
   public CParticleCollectionFloatInput DragAtPlane {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _DragAtPlaneOffset.Value);
+    get {
+      if (_DragAtPlaneOffset == null) {
+        _DragAtPlaneOffset = Schema.GetOffset(0x9D049848176259A2);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _DragAtPlaneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FalloffOffset = new(() => Schema.GetOffset(0x9D049848FA143DCB), LazyThreadSafetyMode.None);
+  private static nint? _FalloffOffset;
 
   public CParticleCollectionFloatInput Falloff {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _FalloffOffset.Value);
+    get {
+      if (_FalloffOffset == null) {
+        _FalloffOffset = Schema.GetOffset(0x9D049848FA143DCB);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _FalloffOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DirectionalOffset = new(() => Schema.GetOffset(0x9D0498484C2A43E7), LazyThreadSafetyMode.None);
+  private static nint? _DirectionalOffset;
 
   public ref bool Directional {
-    get => ref _Handle.AsRef<bool>(_DirectionalOffset.Value);
+    get {
+      if (_DirectionalOffset == null) {
+        _DirectionalOffset = Schema.GetOffset(0x9D0498484C2A43E7);
+      }
+      return ref _Handle.AsRef<bool>(_DirectionalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlaneNormalOffset = new(() => Schema.GetOffset(0x9D04984821103682), LazyThreadSafetyMode.None);
+  private static nint? _PlaneNormalOffset;
 
   public CParticleCollectionVecInput PlaneNormal {
-    get => new CParticleCollectionVecInputImpl(_Handle + _PlaneNormalOffset.Value);
+    get {
+      if (_PlaneNormalOffset == null) {
+        _PlaneNormalOffset = Schema.GetOffset(0x9D04984821103682);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _PlaneNormalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0x9D0498483F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0x9D0498483F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
 
 

@@ -17,40 +17,75 @@ internal partial class C_OP_InheritFromParentParticlesV2Impl : CParticleFunction
   public C_OP_InheritFromParentParticlesV2Impl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0xF948CFAFB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public CPerParticleFloatInput Scale {
-    get => new CPerParticleFloatInputImpl(_Handle + _ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0xF948CFAFB731A42F);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xF948CFAFE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xF948CFAFE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IncrementOffset = new(() => Schema.GetOffset(0xF948CFAF2359F182), LazyThreadSafetyMode.None);
+  private static nint? _IncrementOffset;
 
   public CPerParticleFloatInput Increment {
-    get => new CPerParticleFloatInputImpl(_Handle + _IncrementOffset.Value);
+    get {
+      if (_IncrementOffset == null) {
+        _IncrementOffset = Schema.GetOffset(0xF948CFAF2359F182);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _IncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomDistributionOffset = new(() => Schema.GetOffset(0xF948CFAF830F6B38), LazyThreadSafetyMode.None);
+  private static nint? _RandomDistributionOffset;
 
   public ref bool RandomDistribution {
-    get => ref _Handle.AsRef<bool>(_RandomDistributionOffset.Value);
+    get {
+      if (_RandomDistributionOffset == null) {
+        _RandomDistributionOffset = Schema.GetOffset(0xF948CFAF830F6B38);
+      }
+      return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReverseOffset = new(() => Schema.GetOffset(0xF948CFAFEA4E22E5), LazyThreadSafetyMode.None);
+  private static nint? _ReverseOffset;
 
   public ref bool Reverse {
-    get => ref _Handle.AsRef<bool>(_ReverseOffset.Value);
+    get {
+      if (_ReverseOffset == null) {
+        _ReverseOffset = Schema.GetOffset(0xF948CFAFEA4E22E5);
+      }
+      return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MissingParentBehaviorOffset = new(() => Schema.GetOffset(0xF948CFAF9B0F277D), LazyThreadSafetyMode.None);
+  private static nint? _MissingParentBehaviorOffset;
 
   public ref MissingParentInheritBehavior_t MissingParentBehavior {
-    get => ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset.Value);
+    get {
+      if (_MissingParentBehaviorOffset == null) {
+        _MissingParentBehaviorOffset = Schema.GetOffset(0xF948CFAF9B0F277D);
+      }
+      return ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0xF948CFAFCF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CPerParticleFloatInput Interpolation {
-    get => new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0xF948CFAFCF55B987);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
 
 

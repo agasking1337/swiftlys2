@@ -17,20 +17,35 @@ internal partial class CInfoVisibilityBoxImpl : CBaseEntityImpl, CInfoVisibility
   public CInfoVisibilityBoxImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModeOffset = new(() => Schema.GetOffset(0xD226824F137F1E0E), LazyThreadSafetyMode.None);
+  private static nint? _ModeOffset;
 
   public ref int Mode {
-    get => ref _Handle.AsRef<int>(_ModeOffset.Value);
+    get {
+      if (_ModeOffset == null) {
+        _ModeOffset = Schema.GetOffset(0xD226824F137F1E0E);
+      }
+      return ref _Handle.AsRef<int>(_ModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoxSizeOffset = new(() => Schema.GetOffset(0xD226824FE553E487), LazyThreadSafetyMode.None);
+  private static nint? _BoxSizeOffset;
 
   public ref Vector BoxSize {
-    get => ref _Handle.AsRef<Vector>(_BoxSizeOffset.Value);
+    get {
+      if (_BoxSizeOffset == null) {
+        _BoxSizeOffset = Schema.GetOffset(0xD226824FE553E487);
+      }
+      return ref _Handle.AsRef<Vector>(_BoxSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledOffset = new(() => Schema.GetOffset(0xD226824F6154EB7E), LazyThreadSafetyMode.None);
+  private static nint? _EnabledOffset;
 
   public ref bool Enabled {
-    get => ref _Handle.AsRef<bool>(_EnabledOffset.Value);
+    get {
+      if (_EnabledOffset == null) {
+        _EnabledOffset = Schema.GetOffset(0xD226824F6154EB7E);
+      }
+      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    }
   }
 
   public void ModeUpdated() {

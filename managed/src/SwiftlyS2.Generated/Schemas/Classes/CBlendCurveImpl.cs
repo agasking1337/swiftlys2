@@ -17,15 +17,25 @@ internal partial class CBlendCurveImpl : SchemaClass, CBlendCurve {
   public CBlendCurveImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPoint1Offset = new(() => Schema.GetOffset(0x837A0008CD928165), LazyThreadSafetyMode.None);
+  private static nint? _ControlPoint1Offset;
 
   public ref float ControlPoint1 {
-    get => ref _Handle.AsRef<float>(_ControlPoint1Offset.Value);
+    get {
+      if (_ControlPoint1Offset == null) {
+        _ControlPoint1Offset = Schema.GetOffset(0x837A0008CD928165);
+      }
+      return ref _Handle.AsRef<float>(_ControlPoint1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPoint2Offset = new(() => Schema.GetOffset(0x837A0008CA927CAC), LazyThreadSafetyMode.None);
+  private static nint? _ControlPoint2Offset;
 
   public ref float ControlPoint2 {
-    get => ref _Handle.AsRef<float>(_ControlPoint2Offset.Value);
+    get {
+      if (_ControlPoint2Offset == null) {
+        _ControlPoint2Offset = Schema.GetOffset(0x837A0008CA927CAC);
+      }
+      return ref _Handle.AsRef<float>(_ControlPoint2Offset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class C_OP_DiffusionImpl : CParticleFunctionOperatorImpl, C_OP_
   public C_OP_DiffusionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RadiusScaleOffset = new(() => Schema.GetOffset(0x2D5ABEF4A7A20159), LazyThreadSafetyMode.None);
+  private static nint? _RadiusScaleOffset;
 
   public ref float RadiusScale {
-    get => ref _Handle.AsRef<float>(_RadiusScaleOffset.Value);
+    get {
+      if (_RadiusScaleOffset == null) {
+        _RadiusScaleOffset = Schema.GetOffset(0x2D5ABEF4A7A20159);
+      }
+      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x2D5ABEF4E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x2D5ABEF4E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VoxelGridResolutionOffset = new(() => Schema.GetOffset(0x2D5ABEF45AA7D7ED), LazyThreadSafetyMode.None);
+  private static nint? _VoxelGridResolutionOffset;
 
   public ref int VoxelGridResolution {
-    get => ref _Handle.AsRef<int>(_VoxelGridResolutionOffset.Value);
+    get {
+      if (_VoxelGridResolutionOffset == null) {
+        _VoxelGridResolutionOffset = Schema.GetOffset(0x2D5ABEF45AA7D7ED);
+      }
+      return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+    }
   }
 
 

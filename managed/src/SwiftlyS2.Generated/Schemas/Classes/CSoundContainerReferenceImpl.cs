@@ -17,21 +17,34 @@ internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContain
   public CSoundContainerReferenceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _UseReferenceOffset = new(() => Schema.GetOffset(0x4663CCA145BCD5C9), LazyThreadSafetyMode.None);
+  private static nint? _UseReferenceOffset;
 
   public ref bool UseReference {
-    get => ref _Handle.AsRef<bool>(_UseReferenceOffset.Value);
+    get {
+      if (_UseReferenceOffset == null) {
+        _UseReferenceOffset = Schema.GetOffset(0x4663CCA145BCD5C9);
+      }
+      return ref _Handle.AsRef<bool>(_UseReferenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundOffset = new(() => Schema.GetOffset(0x4663CCA14E1C4FB4), LazyThreadSafetyMode.None);
+  private static nint? _SoundOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset.Value);
+    get {
+      if (_SoundOffset == null) {
+        _SoundOffset = Schema.GetOffset(0x4663CCA14E1C4FB4);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Sound1Offset = new(() => Schema.GetOffset(0x4663CCA13D8D58B6), LazyThreadSafetyMode.None);
+  private static nint? _Sound1Offset;
 
   public CVoiceContainerBase? Sound1 {
     get {
-      var ptr = _Handle.Read<nint>(_Sound1Offset.Value);
+      if (_Sound1Offset == null) {
+        _Sound1Offset = Schema.GetOffset(0x4663CCA13D8D58B6);
+      }
+      var ptr = _Handle.Read<nint>(_Sound1Offset!.Value);
       return ptr.IsValidPtr() ? new CVoiceContainerBaseImpl(ptr) : null;
     }
   }

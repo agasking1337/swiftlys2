@@ -17,35 +17,65 @@ internal partial class C_INIT_CreateSequentialPathV2Impl : CParticleFunctionInit
   public C_INIT_CreateSequentialPathV2Impl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MaxDistanceOffset = new(() => Schema.GetOffset(0xEC06632A844E396A), LazyThreadSafetyMode.None);
+  private static nint? _MaxDistanceOffset;
 
   public CPerParticleFloatInput MaxDistance {
-    get => new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset.Value);
+    get {
+      if (_MaxDistanceOffset == null) {
+        _MaxDistanceOffset = Schema.GetOffset(0xEC06632A844E396A);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumToAssignOffset = new(() => Schema.GetOffset(0xEC06632AF73366BD), LazyThreadSafetyMode.None);
+  private static nint? _NumToAssignOffset;
 
   public CParticleCollectionFloatInput NumToAssign {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _NumToAssignOffset.Value);
+    get {
+      if (_NumToAssignOffset == null) {
+        _NumToAssignOffset = Schema.GetOffset(0xEC06632AF73366BD);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _NumToAssignOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LoopOffset = new(() => Schema.GetOffset(0xEC06632AC668A4CB), LazyThreadSafetyMode.None);
+  private static nint? _LoopOffset;
 
   public ref bool Loop {
-    get => ref _Handle.AsRef<bool>(_LoopOffset.Value);
+    get {
+      if (_LoopOffset == null) {
+        _LoopOffset = Schema.GetOffset(0xEC06632AC668A4CB);
+      }
+      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPPairsOffset = new(() => Schema.GetOffset(0xEC06632AA5D36D0F), LazyThreadSafetyMode.None);
+  private static nint? _CPPairsOffset;
 
   public ref bool CPPairs {
-    get => ref _Handle.AsRef<bool>(_CPPairsOffset.Value);
+    get {
+      if (_CPPairsOffset == null) {
+        _CPPairsOffset = Schema.GetOffset(0xEC06632AA5D36D0F);
+      }
+      return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SaveOffsetOffset = new(() => Schema.GetOffset(0xEC06632A43F64E5B), LazyThreadSafetyMode.None);
+  private static nint? _SaveOffsetOffset;
 
   public ref bool SaveOffset {
-    get => ref _Handle.AsRef<bool>(_SaveOffsetOffset.Value);
+    get {
+      if (_SaveOffsetOffset == null) {
+        _SaveOffsetOffset = Schema.GetOffset(0xEC06632A43F64E5B);
+      }
+      return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathParamsOffset = new(() => Schema.GetOffset(0xEC06632A3C10092C), LazyThreadSafetyMode.None);
+  private static nint? _PathParamsOffset;
 
   public CPathParameters PathParams {
-    get => new CPathParametersImpl(_Handle + _PathParamsOffset.Value);
+    get {
+      if (_PathParamsOffset == null) {
+        _PathParamsOffset = Schema.GetOffset(0xEC06632A3C10092C);
+      }
+      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    }
   }
 
 

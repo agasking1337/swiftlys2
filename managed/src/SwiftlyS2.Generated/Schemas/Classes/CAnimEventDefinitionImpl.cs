@@ -17,40 +17,75 @@ internal partial class CAnimEventDefinitionImpl : SchemaClass, CAnimEventDefinit
   public CAnimEventDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FrameOffset = new(() => Schema.GetOffset(0x27C8C8BC494AFF02), LazyThreadSafetyMode.None);
+  private static nint? _FrameOffset;
 
   public ref int Frame {
-    get => ref _Handle.AsRef<int>(_FrameOffset.Value);
+    get {
+      if (_FrameOffset == null) {
+        _FrameOffset = Schema.GetOffset(0x27C8C8BC494AFF02);
+      }
+      return ref _Handle.AsRef<int>(_FrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndFrameOffset = new(() => Schema.GetOffset(0x27C8C8BCEA91BD07), LazyThreadSafetyMode.None);
+  private static nint? _EndFrameOffset;
 
   public ref int EndFrame {
-    get => ref _Handle.AsRef<int>(_EndFrameOffset.Value);
+    get {
+      if (_EndFrameOffset == null) {
+        _EndFrameOffset = Schema.GetOffset(0x27C8C8BCEA91BD07);
+      }
+      return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CycleOffset = new(() => Schema.GetOffset(0x27C8C8BC0C77829F), LazyThreadSafetyMode.None);
+  private static nint? _CycleOffset;
 
   public ref float Cycle {
-    get => ref _Handle.AsRef<float>(_CycleOffset.Value);
+    get {
+      if (_CycleOffset == null) {
+        _CycleOffset = Schema.GetOffset(0x27C8C8BC0C77829F);
+      }
+      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DurationOffset = new(() => Schema.GetOffset(0x27C8C8BCBC5E3BAB), LazyThreadSafetyMode.None);
+  private static nint? _DurationOffset;
 
   public ref float Duration {
-    get => ref _Handle.AsRef<float>(_DurationOffset.Value);
+    get {
+      if (_DurationOffset == null) {
+        _DurationOffset = Schema.GetOffset(0x27C8C8BCBC5E3BAB);
+      }
+      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventDataOffset = new(() => Schema.GetOffset(0x27C8C8BC03E547A7), LazyThreadSafetyMode.None);
+  private static nint? _EventDataOffset;
 
   public SchemaUntypedField EventData {
-    get => new SchemaUntypedField(_Handle + _EventDataOffset.Value);
+    get {
+      if (_EventDataOffset == null) {
+        _EventDataOffset = Schema.GetOffset(0x27C8C8BC03E547A7);
+      }
+      return new SchemaUntypedField(_Handle + _EventDataOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LegacyOptionsOffset = new(() => Schema.GetOffset(0x27C8C8BCD613D4A1), LazyThreadSafetyMode.None);
+  private static nint? _LegacyOptionsOffset;
 
   public ref CBufferString LegacyOptions {
-    get => ref _Handle.AsRef<CBufferString>(_LegacyOptionsOffset.Value);
+    get {
+      if (_LegacyOptionsOffset == null) {
+        _LegacyOptionsOffset = Schema.GetOffset(0x27C8C8BCD613D4A1);
+      }
+      return ref _Handle.AsRef<CBufferString>(_LegacyOptionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventNameOffset = new(() => Schema.GetOffset(0x27C8C8BC464F847D), LazyThreadSafetyMode.None);
+  private static nint? _EventNameOffset;
 
   public ref CGlobalSymbol EventName {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_EventNameOffset.Value);
+    get {
+      if (_EventNameOffset == null) {
+        _EventNameOffset = Schema.GetOffset(0x27C8C8BC464F847D);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_EventNameOffset!.Value);
+    }
   }
 
 

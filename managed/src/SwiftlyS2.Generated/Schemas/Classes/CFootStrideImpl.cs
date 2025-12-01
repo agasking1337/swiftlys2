@@ -17,15 +17,25 @@ internal partial class CFootStrideImpl : SchemaClass, CFootStride {
   public CFootStrideImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DefinitionOffset = new(() => Schema.GetOffset(0x6093B6FA95E6F40), LazyThreadSafetyMode.None);
+  private static nint? _DefinitionOffset;
 
   public CFootCycleDefinition Definition {
-    get => new CFootCycleDefinitionImpl(_Handle + _DefinitionOffset.Value);
+    get {
+      if (_DefinitionOffset == null) {
+        _DefinitionOffset = Schema.GetOffset(0x6093B6FA95E6F40);
+      }
+      return new CFootCycleDefinitionImpl(_Handle + _DefinitionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TrajectoriesOffset = new(() => Schema.GetOffset(0x6093B6F7964C78C), LazyThreadSafetyMode.None);
+  private static nint? _TrajectoriesOffset;
 
   public CFootTrajectories Trajectories {
-    get => new CFootTrajectoriesImpl(_Handle + _TrajectoriesOffset.Value);
+    get {
+      if (_TrajectoriesOffset == null) {
+        _TrajectoriesOffset = Schema.GetOffset(0x6093B6F7964C78C);
+      }
+      return new CFootTrajectoriesImpl(_Handle + _TrajectoriesOffset!.Value);
+    }
   }
 
 

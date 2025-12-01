@@ -17,25 +17,45 @@ internal partial class C_OP_LockToSavedSequentialPathV2Impl : CParticleFunctionO
   public C_OP_LockToSavedSequentialPathV2Impl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FadeStartOffset = new(() => Schema.GetOffset(0x817A0CEE1A81343), LazyThreadSafetyMode.None);
+  private static nint? _FadeStartOffset;
 
   public ref float FadeStart {
-    get => ref _Handle.AsRef<float>(_FadeStartOffset.Value);
+    get {
+      if (_FadeStartOffset == null) {
+        _FadeStartOffset = Schema.GetOffset(0x817A0CEE1A81343);
+      }
+      return ref _Handle.AsRef<float>(_FadeStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FadeEndOffset = new(() => Schema.GetOffset(0x817A0CEBE7F4636), LazyThreadSafetyMode.None);
+  private static nint? _FadeEndOffset;
 
   public ref float FadeEnd {
-    get => ref _Handle.AsRef<float>(_FadeEndOffset.Value);
+    get {
+      if (_FadeEndOffset == null) {
+        _FadeEndOffset = Schema.GetOffset(0x817A0CEBE7F4636);
+      }
+      return ref _Handle.AsRef<float>(_FadeEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPPairsOffset = new(() => Schema.GetOffset(0x817A0CEA5D36D0F), LazyThreadSafetyMode.None);
+  private static nint? _CPPairsOffset;
 
   public ref bool CPPairs {
-    get => ref _Handle.AsRef<bool>(_CPPairsOffset.Value);
+    get {
+      if (_CPPairsOffset == null) {
+        _CPPairsOffset = Schema.GetOffset(0x817A0CEA5D36D0F);
+      }
+      return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PathParamsOffset = new(() => Schema.GetOffset(0x817A0CE3C10092C), LazyThreadSafetyMode.None);
+  private static nint? _PathParamsOffset;
 
   public CPathParameters PathParams {
-    get => new CPathParametersImpl(_Handle + _PathParamsOffset.Value);
+    get {
+      if (_PathParamsOffset == null) {
+        _PathParamsOffset = Schema.GetOffset(0x817A0CE3C10092C);
+      }
+      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    }
   }
 
 

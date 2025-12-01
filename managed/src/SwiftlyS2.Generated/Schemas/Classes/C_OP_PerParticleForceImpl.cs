@@ -17,20 +17,35 @@ internal partial class C_OP_PerParticleForceImpl : CParticleFunctionForceImpl, C
   public C_OP_PerParticleForceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ForceScaleOffset = new(() => Schema.GetOffset(0x70EFAEAD4817F390), LazyThreadSafetyMode.None);
+  private static nint? _ForceScaleOffset;
 
   public CPerParticleFloatInput ForceScale {
-    get => new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset.Value);
+    get {
+      if (_ForceScaleOffset == null) {
+        _ForceScaleOffset = Schema.GetOffset(0x70EFAEAD4817F390);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceOffset = new(() => Schema.GetOffset(0x70EFAEADE530B0A8), LazyThreadSafetyMode.None);
+  private static nint? _ForceOffset;
 
   public CPerParticleVecInput Force {
-    get => new CPerParticleVecInputImpl(_Handle + _ForceOffset.Value);
+    get {
+      if (_ForceOffset == null) {
+        _ForceOffset = Schema.GetOffset(0x70EFAEADE530B0A8);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _ForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOffset = new(() => Schema.GetOffset(0x70EFAEADEB661472), LazyThreadSafetyMode.None);
+  private static nint? _CPOffset;
 
   public ref int CP {
-    get => ref _Handle.AsRef<int>(_CPOffset.Value);
+    get {
+      if (_CPOffset == null) {
+        _CPOffset = Schema.GetOffset(0x70EFAEADEB661472);
+      }
+      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    }
   }
 
 

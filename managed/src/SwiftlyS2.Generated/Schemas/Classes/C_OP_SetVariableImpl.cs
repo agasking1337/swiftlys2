@@ -17,35 +17,65 @@ internal partial class C_OP_SetVariableImpl : CParticleFunctionPreEmissionImpl, 
   public C_OP_SetVariableImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _VariableReferenceOffset = new(() => Schema.GetOffset(0x9BAC801F3731E65A), LazyThreadSafetyMode.None);
+  private static nint? _VariableReferenceOffset;
 
   public CParticleVariableRef VariableReference {
-    get => new CParticleVariableRefImpl(_Handle + _VariableReferenceOffset.Value);
+    get {
+      if (_VariableReferenceOffset == null) {
+        _VariableReferenceOffset = Schema.GetOffset(0x9BAC801F3731E65A);
+      }
+      return new CParticleVariableRefImpl(_Handle + _VariableReferenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0x9BAC801F3A9ED669), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0x9BAC801F3A9ED669);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PositionOffsetOffset = new(() => Schema.GetOffset(0x9BAC801FC9C9DB1D), LazyThreadSafetyMode.None);
+  private static nint? _PositionOffsetOffset;
 
   public ref Vector PositionOffset {
-    get => ref _Handle.AsRef<Vector>(_PositionOffsetOffset.Value);
+    get {
+      if (_PositionOffsetOffset == null) {
+        _PositionOffsetOffset = Schema.GetOffset(0x9BAC801FC9C9DB1D);
+      }
+      return ref _Handle.AsRef<Vector>(_PositionOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotationOffsetOffset = new(() => Schema.GetOffset(0x9BAC801FD70314A4), LazyThreadSafetyMode.None);
+  private static nint? _RotationOffsetOffset;
 
   public ref QAngle RotationOffset {
-    get => ref _Handle.AsRef<QAngle>(_RotationOffsetOffset.Value);
+    get {
+      if (_RotationOffsetOffset == null) {
+        _RotationOffsetOffset = Schema.GetOffset(0x9BAC801FD70314A4);
+      }
+      return ref _Handle.AsRef<QAngle>(_RotationOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputOffset = new(() => Schema.GetOffset(0x9BAC801F1EA0ED5B), LazyThreadSafetyMode.None);
+  private static nint? _InputOffset;
 
   public CParticleCollectionVecInput Input {
-    get => new CParticleCollectionVecInputImpl(_Handle + _InputOffset.Value);
+    get {
+      if (_InputOffset == null) {
+        _InputOffset = Schema.GetOffset(0x9BAC801F1EA0ED5B);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _InputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FloatInputOffset = new(() => Schema.GetOffset(0x9BAC801F7107333B), LazyThreadSafetyMode.None);
+  private static nint? _FloatInputOffset;
 
   public CParticleCollectionFloatInput FloatInput {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _FloatInputOffset.Value);
+    get {
+      if (_FloatInputOffset == null) {
+        _FloatInputOffset = Schema.GetOffset(0x9BAC801F7107333B);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _FloatInputOffset!.Value);
+    }
   }
 
 

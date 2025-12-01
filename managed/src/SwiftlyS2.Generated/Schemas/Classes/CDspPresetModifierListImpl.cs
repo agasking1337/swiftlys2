@@ -17,19 +17,32 @@ internal partial class CDspPresetModifierListImpl : SchemaClass, CDspPresetModif
   public CDspPresetModifierListImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DspNameOffset = new(() => Schema.GetOffset(0x68EE16FD7E9A0D3), LazyThreadSafetyMode.None);
+  private static nint? _DspNameOffset;
 
   public string DspName {
     get {
-      var ptr = _Handle.Read<nint>(_DspNameOffset.Value);
+      if (_DspNameOffset == null) {
+        _DspNameOffset = Schema.GetOffset(0x68EE16FD7E9A0D3);
+      }
+      var ptr = _Handle.Read<nint>(_DspNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _DspNameOffset.Value, value);
+    set {
+      if (_DspNameOffset == null) {
+        _DspNameOffset = Schema.GetOffset(0x68EE16FD7E9A0D3);
+      }
+      Schema.SetString(_Handle, _DspNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ModifiersOffset = new(() => Schema.GetOffset(0x68EE16F541F1439), LazyThreadSafetyMode.None);
+  private static nint? _ModifiersOffset;
 
   public ref CUtlVector<CDSPMixgroupModifier> Modifiers {
-    get => ref _Handle.AsRef<CUtlVector<CDSPMixgroupModifier>>(_ModifiersOffset.Value);
+    get {
+      if (_ModifiersOffset == null) {
+        _ModifiersOffset = Schema.GetOffset(0x68EE16F541F1439);
+      }
+      return ref _Handle.AsRef<CUtlVector<CDSPMixgroupModifier>>(_ModifiersOffset!.Value);
+    }
   }
 
 

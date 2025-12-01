@@ -17,30 +17,55 @@ internal partial class C_OP_SelectivelyEnableChildrenImpl : CParticleFunctionPre
   public C_OP_SelectivelyEnableChildrenImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildGroupIDOffset = new(() => Schema.GetOffset(0x73804886E3F3C965), LazyThreadSafetyMode.None);
+  private static nint? _ChildGroupIDOffset;
 
   public CParticleCollectionFloatInput ChildGroupID {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ChildGroupIDOffset.Value);
+    get {
+      if (_ChildGroupIDOffset == null) {
+        _ChildGroupIDOffset = Schema.GetOffset(0x73804886E3F3C965);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ChildGroupIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FirstChildOffset = new(() => Schema.GetOffset(0x738048862DF4A8BD), LazyThreadSafetyMode.None);
+  private static nint? _FirstChildOffset;
 
   public CParticleCollectionFloatInput FirstChild {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _FirstChildOffset.Value);
+    get {
+      if (_FirstChildOffset == null) {
+        _FirstChildOffset = Schema.GetOffset(0x738048862DF4A8BD);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _FirstChildOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumChildrenToEnableOffset = new(() => Schema.GetOffset(0x738048868039247A), LazyThreadSafetyMode.None);
+  private static nint? _NumChildrenToEnableOffset;
 
   public CParticleCollectionFloatInput NumChildrenToEnable {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset.Value);
+    get {
+      if (_NumChildrenToEnableOffset == null) {
+        _NumChildrenToEnableOffset = Schema.GetOffset(0x738048868039247A);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayEndcapOnStopOffset = new(() => Schema.GetOffset(0x73804886CEC82FA1), LazyThreadSafetyMode.None);
+  private static nint? _PlayEndcapOnStopOffset;
 
   public ref bool PlayEndcapOnStop {
-    get => ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset.Value);
+    get {
+      if (_PlayEndcapOnStopOffset == null) {
+        _PlayEndcapOnStopOffset = Schema.GetOffset(0x73804886CEC82FA1);
+      }
+      return ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestroyImmediatelyOffset = new(() => Schema.GetOffset(0x7380488675F43101), LazyThreadSafetyMode.None);
+  private static nint? _DestroyImmediatelyOffset;
 
   public ref bool DestroyImmediately {
-    get => ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset.Value);
+    get {
+      if (_DestroyImmediatelyOffset == null) {
+        _DestroyImmediatelyOffset = Schema.GetOffset(0x7380488675F43101);
+      }
+      return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+    }
   }
 
 

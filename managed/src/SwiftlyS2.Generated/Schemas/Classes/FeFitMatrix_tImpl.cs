@@ -17,30 +17,55 @@ internal partial class FeFitMatrix_tImpl : SchemaClass, FeFitMatrix_t {
   public FeFitMatrix_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BoneOffset = new(() => Schema.GetOffset(0xB8804215DB90E18F), LazyThreadSafetyMode.None);
+  private static nint? _BoneOffset;
 
   public ref CTransform Bone {
-    get => ref _Handle.AsRef<CTransform>(_BoneOffset.Value);
+    get {
+      if (_BoneOffset == null) {
+        _BoneOffset = Schema.GetOffset(0xB8804215DB90E18F);
+      }
+      return ref _Handle.AsRef<CTransform>(_BoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CenterOffset = new(() => Schema.GetOffset(0xB88042157CA60028), LazyThreadSafetyMode.None);
+  private static nint? _CenterOffset;
 
   public ref Vector Center {
-    get => ref _Handle.AsRef<Vector>(_CenterOffset.Value);
+    get {
+      if (_CenterOffset == null) {
+        _CenterOffset = Schema.GetOffset(0xB88042157CA60028);
+      }
+      return ref _Handle.AsRef<Vector>(_CenterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndOffset = new(() => Schema.GetOffset(0xB8804215FE4CFBD6), LazyThreadSafetyMode.None);
+  private static nint? _EndOffset;
 
   public ref ushort End {
-    get => ref _Handle.AsRef<ushort>(_EndOffset.Value);
+    get {
+      if (_EndOffset == null) {
+        _EndOffset = Schema.GetOffset(0xB8804215FE4CFBD6);
+      }
+      return ref _Handle.AsRef<ushort>(_EndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NodeOffset = new(() => Schema.GetOffset(0xB8804215CD6694B9), LazyThreadSafetyMode.None);
+  private static nint? _NodeOffset;
 
   public ref ushort Node {
-    get => ref _Handle.AsRef<ushort>(_NodeOffset.Value);
+    get {
+      if (_NodeOffset == null) {
+        _NodeOffset = Schema.GetOffset(0xB8804215CD6694B9);
+      }
+      return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BeginDynamicOffset = new(() => Schema.GetOffset(0xB88042153F6B5607), LazyThreadSafetyMode.None);
+  private static nint? _BeginDynamicOffset;
 
   public ref ushort BeginDynamic {
-    get => ref _Handle.AsRef<ushort>(_BeginDynamicOffset.Value);
+    get {
+      if (_BeginDynamicOffset == null) {
+        _BeginDynamicOffset = Schema.GetOffset(0xB88042153F6B5607);
+      }
+      return ref _Handle.AsRef<ushort>(_BeginDynamicOffset!.Value);
+    }
   }
 
 

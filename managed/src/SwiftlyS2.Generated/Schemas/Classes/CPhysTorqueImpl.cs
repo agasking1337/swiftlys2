@@ -17,10 +17,15 @@ internal partial class CPhysTorqueImpl : CPhysForceImpl, CPhysTorque {
   public CPhysTorqueImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _AxisOffset = new(() => Schema.GetOffset(0x6EADFD042B06DE94), LazyThreadSafetyMode.None);
+  private static nint? _AxisOffset;
 
   public ref Vector Axis {
-    get => ref _Handle.AsRef<Vector>(_AxisOffset.Value);
+    get {
+      if (_AxisOffset == null) {
+        _AxisOffset = Schema.GetOffset(0x6EADFD042B06DE94);
+      }
+      return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+    }
   }
 
 

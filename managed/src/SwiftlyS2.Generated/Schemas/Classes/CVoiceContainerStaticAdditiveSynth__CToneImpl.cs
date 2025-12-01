@@ -17,20 +17,35 @@ internal partial class CVoiceContainerStaticAdditiveSynth__CToneImpl : SchemaCla
   public CVoiceContainerStaticAdditiveSynth__CToneImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HarmonicsOffset = new(() => Schema.GetOffset(0x1501082A3A08CDBF), LazyThreadSafetyMode.None);
+  private static nint? _HarmonicsOffset;
 
   public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics {
-    get => ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset.Value);
+    get {
+      if (_HarmonicsOffset == null) {
+        _HarmonicsOffset = Schema.GetOffset(0x1501082A3A08CDBF);
+      }
+      return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CurveOffset = new(() => Schema.GetOffset(0x1501082ABFFA0B34), LazyThreadSafetyMode.None);
+  private static nint? _CurveOffset;
 
   public SchemaUntypedField Curve {
-    get => new SchemaUntypedField(_Handle + _CurveOffset.Value);
+    get {
+      if (_CurveOffset == null) {
+        _CurveOffset = Schema.GetOffset(0x1501082ABFFA0B34);
+      }
+      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SyncInstancesOffset = new(() => Schema.GetOffset(0x1501082A21EE9902), LazyThreadSafetyMode.None);
+  private static nint? _SyncInstancesOffset;
 
   public ref bool SyncInstances {
-    get => ref _Handle.AsRef<bool>(_SyncInstancesOffset.Value);
+    get {
+      if (_SyncInstancesOffset == null) {
+        _SyncInstancesOffset = Schema.GetOffset(0x1501082A21EE9902);
+      }
+      return ref _Handle.AsRef<bool>(_SyncInstancesOffset!.Value);
+    }
   }
 
 

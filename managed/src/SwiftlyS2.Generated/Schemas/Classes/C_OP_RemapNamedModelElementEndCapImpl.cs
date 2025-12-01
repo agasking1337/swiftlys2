@@ -17,40 +17,75 @@ internal partial class C_OP_RemapNamedModelElementEndCapImpl : CParticleFunction
   public C_OP_RemapNamedModelElementEndCapImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModelOffset = new(() => Schema.GetOffset(0xC434ECD3E100C814), LazyThreadSafetyMode.None);
+  private static nint? _ModelOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset.Value);
+    get {
+      if (_ModelOffset == null) {
+        _ModelOffset = Schema.GetOffset(0xC434ECD3E100C814);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InNamesOffset = new(() => Schema.GetOffset(0xC434ECD3C6BEF30A), LazyThreadSafetyMode.None);
+  private static nint? _InNamesOffset;
 
   public ref CUtlVector<CUtlString> InNames {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_InNamesOffset.Value);
+    get {
+      if (_InNamesOffset == null) {
+        _InNamesOffset = Schema.GetOffset(0xC434ECD3C6BEF30A);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutNamesOffset = new(() => Schema.GetOffset(0xC434ECD34AEE2CFD), LazyThreadSafetyMode.None);
+  private static nint? _OutNamesOffset;
 
   public ref CUtlVector<CUtlString> OutNames {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutNamesOffset.Value);
+    get {
+      if (_OutNamesOffset == null) {
+        _OutNamesOffset = Schema.GetOffset(0xC434ECD34AEE2CFD);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FallbackNamesOffset = new(() => Schema.GetOffset(0xC434ECD35C686169), LazyThreadSafetyMode.None);
+  private static nint? _FallbackNamesOffset;
 
   public ref CUtlVector<CUtlString> FallbackNames {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_FallbackNamesOffset.Value);
+    get {
+      if (_FallbackNamesOffset == null) {
+        _FallbackNamesOffset = Schema.GetOffset(0xC434ECD35C686169);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FallbackNamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelFromRendererOffset = new(() => Schema.GetOffset(0xC434ECD3AEBA1F25), LazyThreadSafetyMode.None);
+  private static nint? _ModelFromRendererOffset;
 
   public ref bool ModelFromRenderer {
-    get => ref _Handle.AsRef<bool>(_ModelFromRendererOffset.Value);
+    get {
+      if (_ModelFromRendererOffset == null) {
+        _ModelFromRendererOffset = Schema.GetOffset(0xC434ECD3AEBA1F25);
+      }
+      return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldInputOffset = new(() => Schema.GetOffset(0xC434ECD3AE775669), LazyThreadSafetyMode.None);
+  private static nint? _FieldInputOffset;
 
   public ParticleAttributeIndex_t FieldInput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset.Value);
+    get {
+      if (_FieldInputOffset == null) {
+        _FieldInputOffset = Schema.GetOffset(0xC434ECD3AE775669);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xC434ECD3E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xC434ECD3E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
 
 

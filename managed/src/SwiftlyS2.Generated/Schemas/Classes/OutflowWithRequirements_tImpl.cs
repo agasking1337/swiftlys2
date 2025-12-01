@@ -17,25 +17,45 @@ internal partial class OutflowWithRequirements_tImpl : SchemaClass, OutflowWithR
   public OutflowWithRequirements_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConnectionOffset = new(() => Schema.GetOffset(0x5BFC4DD4D4CD5F59), LazyThreadSafetyMode.None);
+  private static nint? _ConnectionOffset;
 
   public CPulse_OutflowConnection Connection {
-    get => new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset.Value);
+    get {
+      if (_ConnectionOffset == null) {
+        _ConnectionOffset = Schema.GetOffset(0x5BFC4DD4D4CD5F59);
+      }
+      return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestinationFlowNodeIDOffset = new(() => Schema.GetOffset(0x5BFC4DD4C986A186), LazyThreadSafetyMode.None);
+  private static nint? _DestinationFlowNodeIDOffset;
 
   public PulseDocNodeID_t DestinationFlowNodeID {
-    get => new PulseDocNodeID_tImpl(_Handle + _DestinationFlowNodeIDOffset.Value);
+    get {
+      if (_DestinationFlowNodeIDOffset == null) {
+        _DestinationFlowNodeIDOffset = Schema.GetOffset(0x5BFC4DD4C986A186);
+      }
+      return new PulseDocNodeID_tImpl(_Handle + _DestinationFlowNodeIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RequirementNodeIDsOffset = new(() => Schema.GetOffset(0x5BFC4DD47DAC9EFE), LazyThreadSafetyMode.None);
+  private static nint? _RequirementNodeIDsOffset;
 
   public ref CUtlVector<PulseDocNodeID_t> RequirementNodeIDs {
-    get => ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset.Value);
+    get {
+      if (_RequirementNodeIDsOffset == null) {
+        _RequirementNodeIDsOffset = Schema.GetOffset(0x5BFC4DD47DAC9EFE);
+      }
+      return ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CursorStateBlockIndexOffset = new(() => Schema.GetOffset(0x5BFC4DD46CECC07B), LazyThreadSafetyMode.None);
+  private static nint? _CursorStateBlockIndexOffset;
 
   public ref CUtlVector<int> CursorStateBlockIndex {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset.Value);
+    get {
+      if (_CursorStateBlockIndexOffset == null) {
+        _CursorStateBlockIndexOffset = Schema.GetOffset(0x5BFC4DD46CECC07B);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset!.Value);
+    }
   }
 
 

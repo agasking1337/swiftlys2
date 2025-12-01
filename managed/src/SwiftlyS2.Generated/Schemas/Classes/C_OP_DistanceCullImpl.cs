@@ -17,30 +17,55 @@ internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_
   public C_OP_DistanceCullImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointOffset = new(() => Schema.GetOffset(0x7252AA520D0DDF8C), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointOffset;
 
   public ref int ControlPoint {
-    get => ref _Handle.AsRef<int>(_ControlPointOffset.Value);
+    get {
+      if (_ControlPointOffset == null) {
+        _ControlPointOffset = Schema.GetOffset(0x7252AA520D0DDF8C);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PointOffsetOffset = new(() => Schema.GetOffset(0x7252AA52300E046E), LazyThreadSafetyMode.None);
+  private static nint? _PointOffsetOffset;
 
   public ref Vector PointOffset {
-    get => ref _Handle.AsRef<Vector>(_PointOffsetOffset.Value);
+    get {
+      if (_PointOffsetOffset == null) {
+        _PointOffsetOffset = Schema.GetOffset(0x7252AA52300E046E);
+      }
+      return ref _Handle.AsRef<Vector>(_PointOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceOffset = new(() => Schema.GetOffset(0x7252AA5200DC4A68), LazyThreadSafetyMode.None);
+  private static nint? _DistanceOffset;
 
   public CParticleCollectionFloatInput Distance {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset.Value);
+    get {
+      if (_DistanceOffset == null) {
+        _DistanceOffset = Schema.GetOffset(0x7252AA5200DC4A68);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullInsideOffset = new(() => Schema.GetOffset(0x7252AA52293E00AD), LazyThreadSafetyMode.None);
+  private static nint? _CullInsideOffset;
 
   public ref bool CullInside {
-    get => ref _Handle.AsRef<bool>(_CullInsideOffset.Value);
+    get {
+      if (_CullInsideOffset == null) {
+        _CullInsideOffset = Schema.GetOffset(0x7252AA52293E00AD);
+      }
+      return ref _Handle.AsRef<bool>(_CullInsideOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttributeOffset = new(() => Schema.GetOffset(0x7252AA527FE8DE0B), LazyThreadSafetyMode.None);
+  private static nint? _AttributeOffset;
 
   public ParticleAttributeIndex_t Attribute {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset.Value);
+    get {
+      if (_AttributeOffset == null) {
+        _AttributeOffset = Schema.GetOffset(0x7252AA527FE8DE0B);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset!.Value);
+    }
   }
 
 

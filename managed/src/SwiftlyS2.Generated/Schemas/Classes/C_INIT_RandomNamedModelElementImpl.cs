@@ -17,35 +17,65 @@ internal partial class C_INIT_RandomNamedModelElementImpl : CParticleFunctionIni
   public C_INIT_RandomNamedModelElementImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ModelOffset = new(() => Schema.GetOffset(0xA3E776D5E100C814), LazyThreadSafetyMode.None);
+  private static nint? _ModelOffset;
 
   public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset.Value);
+    get {
+      if (_ModelOffset == null) {
+        _ModelOffset = Schema.GetOffset(0xA3E776D5E100C814);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NamesOffset = new(() => Schema.GetOffset(0xA3E776D50DA776AF), LazyThreadSafetyMode.None);
+  private static nint? _NamesOffset;
 
   public ref CUtlVector<CUtlString> Names {
-    get => ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset.Value);
+    get {
+      if (_NamesOffset == null) {
+        _NamesOffset = Schema.GetOffset(0xA3E776D50DA776AF);
+      }
+      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ShuffleOffset = new(() => Schema.GetOffset(0xA3E776D528BD2B2E), LazyThreadSafetyMode.None);
+  private static nint? _ShuffleOffset;
 
   public ref bool Shuffle {
-    get => ref _Handle.AsRef<bool>(_ShuffleOffset.Value);
+    get {
+      if (_ShuffleOffset == null) {
+        _ShuffleOffset = Schema.GetOffset(0xA3E776D528BD2B2E);
+      }
+      return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearOffset = new(() => Schema.GetOffset(0xA3E776D5B9313720), LazyThreadSafetyMode.None);
+  private static nint? _LinearOffset;
 
   public ref bool Linear {
-    get => ref _Handle.AsRef<bool>(_LinearOffset.Value);
+    get {
+      if (_LinearOffset == null) {
+        _LinearOffset = Schema.GetOffset(0xA3E776D5B9313720);
+      }
+      return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ModelFromRendererOffset = new(() => Schema.GetOffset(0xA3E776D5AEBA1F25), LazyThreadSafetyMode.None);
+  private static nint? _ModelFromRendererOffset;
 
   public ref bool ModelFromRenderer {
-    get => ref _Handle.AsRef<bool>(_ModelFromRendererOffset.Value);
+    get {
+      if (_ModelFromRendererOffset == null) {
+        _ModelFromRendererOffset = Schema.GetOffset(0xA3E776D5AEBA1F25);
+      }
+      return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xA3E776D5E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xA3E776D5E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
 
 

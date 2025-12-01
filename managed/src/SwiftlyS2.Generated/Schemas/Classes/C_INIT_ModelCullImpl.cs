@@ -17,34 +17,62 @@ internal partial class C_INIT_ModelCullImpl : CParticleFunctionInitializerImpl, 
   public C_INIT_ModelCullImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberOffset = new(() => Schema.GetOffset(0xE9ECCC6B3F31A6BD), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberOffset;
 
   public ref int ControlPointNumber {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberOffset.Value);
+    get {
+      if (_ControlPointNumberOffset == null) {
+        _ControlPointNumberOffset = Schema.GetOffset(0xE9ECCC6B3F31A6BD);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoundBoxOffset = new(() => Schema.GetOffset(0xE9ECCC6BAB65CDDC), LazyThreadSafetyMode.None);
+  private static nint? _BoundBoxOffset;
 
   public ref bool BoundBox {
-    get => ref _Handle.AsRef<bool>(_BoundBoxOffset.Value);
+    get {
+      if (_BoundBoxOffset == null) {
+        _BoundBoxOffset = Schema.GetOffset(0xE9ECCC6BAB65CDDC);
+      }
+      return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullOutsideOffset = new(() => Schema.GetOffset(0xE9ECCC6BA6EF9E04), LazyThreadSafetyMode.None);
+  private static nint? _CullOutsideOffset;
 
   public ref bool CullOutside {
-    get => ref _Handle.AsRef<bool>(_CullOutsideOffset.Value);
+    get {
+      if (_CullOutsideOffset == null) {
+        _CullOutsideOffset = Schema.GetOffset(0xE9ECCC6BA6EF9E04);
+      }
+      return ref _Handle.AsRef<bool>(_CullOutsideOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseBonesOffset = new(() => Schema.GetOffset(0xE9ECCC6B10D1938B), LazyThreadSafetyMode.None);
+  private static nint? _UseBonesOffset;
 
   public ref bool UseBones {
-    get => ref _Handle.AsRef<bool>(_UseBonesOffset.Value);
+    get {
+      if (_UseBonesOffset == null) {
+        _UseBonesOffset = Schema.GetOffset(0xE9ECCC6B10D1938B);
+      }
+      return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HitboxSetNameOffset = new(() => Schema.GetOffset(0xE9ECCC6B6A21BB0E), LazyThreadSafetyMode.None);
+  private static nint? _HitboxSetNameOffset;
 
   public string HitboxSetName {
     get {
-      var ptr = _Handle + _HitboxSetNameOffset.Value;
-      return Schema.GetString(ptr);
+        if (_HitboxSetNameOffset == null) {
+            _HitboxSetNameOffset = Schema.GetOffset(0xE9ECCC6B6A21BB0E);
+        }
+        var ptr = _Handle + _HitboxSetNameOffset!.Value;
+        return Schema.GetString(ptr);
     }
-    set => Schema.SetFixedString(_Handle, _HitboxSetNameOffset.Value, value, 128);
+    set {
+        if (_HitboxSetNameOffset == null) {
+            _HitboxSetNameOffset = Schema.GetOffset(0xE9ECCC6B6A21BB0E);
+        }
+        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+    }
   } 
 
 

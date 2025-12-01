@@ -17,25 +17,45 @@ internal partial class SummaryTakeDamageInfo_tImpl : SchemaClass, SummaryTakeDam
   public SummaryTakeDamageInfo_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SummarisedCountOffset = new(() => Schema.GetOffset(0x8A8061E2B62D7D04), LazyThreadSafetyMode.None);
+  private static nint? _SummarisedCountOffset;
 
   public ref int SummarisedCount {
-    get => ref _Handle.AsRef<int>(_SummarisedCountOffset.Value);
+    get {
+      if (_SummarisedCountOffset == null) {
+        _SummarisedCountOffset = Schema.GetOffset(0x8A8061E2B62D7D04);
+      }
+      return ref _Handle.AsRef<int>(_SummarisedCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InfoOffset = new(() => Schema.GetOffset(0x8A8061E20FB40705), LazyThreadSafetyMode.None);
+  private static nint? _InfoOffset;
 
   public ref CTakeDamageInfo Info {
-    get => ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset.Value);
+    get {
+      if (_InfoOffset == null) {
+        _InfoOffset = Schema.GetOffset(0x8A8061E20FB40705);
+      }
+      return ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ResultOffset = new(() => Schema.GetOffset(0x8A8061E20A377624), LazyThreadSafetyMode.None);
+  private static nint? _ResultOffset;
 
   public ref CTakeDamageResult Result {
-    get => ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset.Value);
+    get {
+      if (_ResultOffset == null) {
+        _ResultOffset = Schema.GetOffset(0x8A8061E20A377624);
+      }
+      return ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetOffset = new(() => Schema.GetOffset(0x8A8061E295A3933A), LazyThreadSafetyMode.None);
+  private static nint? _TargetOffset;
 
   public ref CHandle<CBaseEntity> Target {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset.Value);
+    get {
+      if (_TargetOffset == null) {
+        _TargetOffset = Schema.GetOffset(0x8A8061E295A3933A);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+    }
   }
 
 

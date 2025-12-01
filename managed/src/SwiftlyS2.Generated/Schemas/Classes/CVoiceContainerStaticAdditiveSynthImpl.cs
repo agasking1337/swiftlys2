@@ -17,10 +17,15 @@ internal partial class CVoiceContainerStaticAdditiveSynthImpl : CVoiceContainerB
   public CVoiceContainerStaticAdditiveSynthImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TonesOffset = new(() => Schema.GetOffset(0xE9663E55BAE6D716), LazyThreadSafetyMode.None);
+  private static nint? _TonesOffset;
 
   public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone> Tones {
-    get => ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone>>(_TonesOffset.Value);
+    get {
+      if (_TonesOffset == null) {
+        _TonesOffset = Schema.GetOffset(0xE9663E55BAE6D716);
+      }
+      return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone>>(_TonesOffset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class CGeneralSpinImpl : CParticleFunctionOperatorImpl, CGenera
   public CGeneralSpinImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SpinRateDegreesOffset = new(() => Schema.GetOffset(0xFC0422E2BF9AC820), LazyThreadSafetyMode.None);
+  private static nint? _SpinRateDegreesOffset;
 
   public ref int SpinRateDegrees {
-    get => ref _Handle.AsRef<int>(_SpinRateDegreesOffset.Value);
+    get {
+      if (_SpinRateDegreesOffset == null) {
+        _SpinRateDegreesOffset = Schema.GetOffset(0xFC0422E2BF9AC820);
+      }
+      return ref _Handle.AsRef<int>(_SpinRateDegreesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinRateMinDegreesOffset = new(() => Schema.GetOffset(0xFC0422E2F3639852), LazyThreadSafetyMode.None);
+  private static nint? _SpinRateMinDegreesOffset;
 
   public ref int SpinRateMinDegrees {
-    get => ref _Handle.AsRef<int>(_SpinRateMinDegreesOffset.Value);
+    get {
+      if (_SpinRateMinDegreesOffset == null) {
+        _SpinRateMinDegreesOffset = Schema.GetOffset(0xFC0422E2F3639852);
+      }
+      return ref _Handle.AsRef<int>(_SpinRateMinDegreesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinRateStopTimeOffset = new(() => Schema.GetOffset(0xFC0422E28365AFDE), LazyThreadSafetyMode.None);
+  private static nint? _SpinRateStopTimeOffset;
 
   public ref float SpinRateStopTime {
-    get => ref _Handle.AsRef<float>(_SpinRateStopTimeOffset.Value);
+    get {
+      if (_SpinRateStopTimeOffset == null) {
+        _SpinRateStopTimeOffset = Schema.GetOffset(0xFC0422E28365AFDE);
+      }
+      return ref _Handle.AsRef<float>(_SpinRateStopTimeOffset!.Value);
+    }
   }
 
 

@@ -17,75 +17,145 @@ internal partial class CSequenceGroupDataImpl : SchemaClass, CSequenceGroupData 
   public CSequenceGroupDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xF2F9B8263D22D49), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public ref CBufferString Name {
-    get => ref _Handle.AsRef<CBufferString>(_NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xF2F9B8263D22D49);
+      }
+      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0xF2F9B82CE6E9C28), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public ref uint Flags {
-    get => ref _Handle.AsRef<uint>(_FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0xF2F9B82CE6E9C28);
+      }
+      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSequenceNameArrayOffset = new(() => Schema.GetOffset(0xF2F9B820E9F09FF), LazyThreadSafetyMode.None);
+  private static nint? _LocalSequenceNameArrayOffset;
 
   public ref CUtlVector<CBufferString> LocalSequenceNameArray {
-    get => ref _Handle.AsRef<CUtlVector<CBufferString>>(_LocalSequenceNameArrayOffset.Value);
+    get {
+      if (_LocalSequenceNameArrayOffset == null) {
+        _LocalSequenceNameArrayOffset = Schema.GetOffset(0xF2F9B820E9F09FF);
+      }
+      return ref _Handle.AsRef<CUtlVector<CBufferString>>(_LocalSequenceNameArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalS1SeqDescArrayOffset = new(() => Schema.GetOffset(0xF2F9B828BEF5ECB), LazyThreadSafetyMode.None);
+  private static nint? _LocalS1SeqDescArrayOffset;
 
   public ref CUtlVector<CSeqS1SeqDesc> LocalS1SeqDescArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqS1SeqDesc>>(_LocalS1SeqDescArrayOffset.Value);
+    get {
+      if (_LocalS1SeqDescArrayOffset == null) {
+        _LocalS1SeqDescArrayOffset = Schema.GetOffset(0xF2F9B828BEF5ECB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqS1SeqDesc>>(_LocalS1SeqDescArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalMultiSeqDescArrayOffset = new(() => Schema.GetOffset(0xF2F9B82DC0E5EC6), LazyThreadSafetyMode.None);
+  private static nint? _LocalMultiSeqDescArrayOffset;
 
   public ref CUtlVector<CSeqS1SeqDesc> LocalMultiSeqDescArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqS1SeqDesc>>(_LocalMultiSeqDescArrayOffset.Value);
+    get {
+      if (_LocalMultiSeqDescArrayOffset == null) {
+        _LocalMultiSeqDescArrayOffset = Schema.GetOffset(0xF2F9B82DC0E5EC6);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqS1SeqDesc>>(_LocalMultiSeqDescArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalSynthAnimDescArrayOffset = new(() => Schema.GetOffset(0xF2F9B82BD6C1F83), LazyThreadSafetyMode.None);
+  private static nint? _LocalSynthAnimDescArrayOffset;
 
   public ref CUtlVector<CSeqSynthAnimDesc> LocalSynthAnimDescArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqSynthAnimDesc>>(_LocalSynthAnimDescArrayOffset.Value);
+    get {
+      if (_LocalSynthAnimDescArrayOffset == null) {
+        _LocalSynthAnimDescArrayOffset = Schema.GetOffset(0xF2F9B82BD6C1F83);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqSynthAnimDesc>>(_LocalSynthAnimDescArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCmdSeqDescArrayOffset = new(() => Schema.GetOffset(0xF2F9B822371FDAB), LazyThreadSafetyMode.None);
+  private static nint? _LocalCmdSeqDescArrayOffset;
 
   public ref CUtlVector<CSeqCmdSeqDesc> LocalCmdSeqDescArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqCmdSeqDesc>>(_LocalCmdSeqDescArrayOffset.Value);
+    get {
+      if (_LocalCmdSeqDescArrayOffset == null) {
+        _LocalCmdSeqDescArrayOffset = Schema.GetOffset(0xF2F9B822371FDAB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqCmdSeqDesc>>(_LocalCmdSeqDescArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalBoneMaskArrayOffset = new(() => Schema.GetOffset(0xF2F9B82C880268F), LazyThreadSafetyMode.None);
+  private static nint? _LocalBoneMaskArrayOffset;
 
   public ref CUtlVector<CSeqBoneMaskList> LocalBoneMaskArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqBoneMaskList>>(_LocalBoneMaskArrayOffset.Value);
+    get {
+      if (_LocalBoneMaskArrayOffset == null) {
+        _LocalBoneMaskArrayOffset = Schema.GetOffset(0xF2F9B82C880268F);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqBoneMaskList>>(_LocalBoneMaskArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalScaleSetArrayOffset = new(() => Schema.GetOffset(0xF2F9B8241FDCDAB), LazyThreadSafetyMode.None);
+  private static nint? _LocalScaleSetArrayOffset;
 
   public ref CUtlVector<CSeqScaleSet> LocalScaleSetArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqScaleSet>>(_LocalScaleSetArrayOffset.Value);
+    get {
+      if (_LocalScaleSetArrayOffset == null) {
+        _LocalScaleSetArrayOffset = Schema.GetOffset(0xF2F9B8241FDCDAB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqScaleSet>>(_LocalScaleSetArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalBoneNameArrayOffset = new(() => Schema.GetOffset(0xF2F9B82B86CAC56), LazyThreadSafetyMode.None);
+  private static nint? _LocalBoneNameArrayOffset;
 
   public ref CUtlVector<CBufferString> LocalBoneNameArray {
-    get => ref _Handle.AsRef<CUtlVector<CBufferString>>(_LocalBoneNameArrayOffset.Value);
+    get {
+      if (_LocalBoneNameArrayOffset == null) {
+        _LocalBoneNameArrayOffset = Schema.GetOffset(0xF2F9B82B86CAC56);
+      }
+      return ref _Handle.AsRef<CUtlVector<CBufferString>>(_LocalBoneNameArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalNodeNameOffset = new(() => Schema.GetOffset(0xF2F9B82EDCB530F), LazyThreadSafetyMode.None);
+  private static nint? _LocalNodeNameOffset;
 
   public ref CBufferString LocalNodeName {
-    get => ref _Handle.AsRef<CBufferString>(_LocalNodeNameOffset.Value);
+    get {
+      if (_LocalNodeNameOffset == null) {
+        _LocalNodeNameOffset = Schema.GetOffset(0xF2F9B82EDCB530F);
+      }
+      return ref _Handle.AsRef<CBufferString>(_LocalNodeNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalPoseParamArrayOffset = new(() => Schema.GetOffset(0xF2F9B82FF654A73), LazyThreadSafetyMode.None);
+  private static nint? _LocalPoseParamArrayOffset;
 
   public ref CUtlVector<CSeqPoseParamDesc> LocalPoseParamArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqPoseParamDesc>>(_LocalPoseParamArrayOffset.Value);
+    get {
+      if (_LocalPoseParamArrayOffset == null) {
+        _LocalPoseParamArrayOffset = Schema.GetOffset(0xF2F9B82FF654A73);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqPoseParamDesc>>(_LocalPoseParamArrayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _KeyValuesOffset = new(() => Schema.GetOffset(0xF2F9B8221578BC2), LazyThreadSafetyMode.None);
+  private static nint? _KeyValuesOffset;
 
   public SchemaUntypedField KeyValues {
-    get => new SchemaUntypedField(_Handle + _KeyValuesOffset.Value);
+    get {
+      if (_KeyValuesOffset == null) {
+        _KeyValuesOffset = Schema.GetOffset(0xF2F9B8221578BC2);
+      }
+      return new SchemaUntypedField(_Handle + _KeyValuesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalIKAutoplayLockArrayOffset = new(() => Schema.GetOffset(0xF2F9B82AD4D3FFB), LazyThreadSafetyMode.None);
+  private static nint? _LocalIKAutoplayLockArrayOffset;
 
   public ref CUtlVector<CSeqIKLock> LocalIKAutoplayLockArray {
-    get => ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_LocalIKAutoplayLockArrayOffset.Value);
+    get {
+      if (_LocalIKAutoplayLockArrayOffset == null) {
+        _LocalIKAutoplayLockArrayOffset = Schema.GetOffset(0xF2F9B82AD4D3FFB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_LocalIKAutoplayLockArrayOffset!.Value);
+    }
   }
 
 

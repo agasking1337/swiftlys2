@@ -17,30 +17,55 @@ internal partial class C_INIT_InheritFromParentParticlesImpl : CParticleFunction
   public C_INIT_InheritFromParentParticlesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0xF97C3548B731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0xF97C3548B731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xF97C3548E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xF97C3548E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IncrementOffset = new(() => Schema.GetOffset(0xF97C35482359F182), LazyThreadSafetyMode.None);
+  private static nint? _IncrementOffset;
 
   public ref int Increment {
-    get => ref _Handle.AsRef<int>(_IncrementOffset.Value);
+    get {
+      if (_IncrementOffset == null) {
+        _IncrementOffset = Schema.GetOffset(0xF97C35482359F182);
+      }
+      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomDistributionOffset = new(() => Schema.GetOffset(0xF97C3548830F6B38), LazyThreadSafetyMode.None);
+  private static nint? _RandomDistributionOffset;
 
   public ref bool RandomDistribution {
-    get => ref _Handle.AsRef<bool>(_RandomDistributionOffset.Value);
+    get {
+      if (_RandomDistributionOffset == null) {
+        _RandomDistributionOffset = Schema.GetOffset(0xF97C3548830F6B38);
+      }
+      return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RandomSeedOffset = new(() => Schema.GetOffset(0xF97C35486388F067), LazyThreadSafetyMode.None);
+  private static nint? _RandomSeedOffset;
 
   public ref int RandomSeed {
-    get => ref _Handle.AsRef<int>(_RandomSeedOffset.Value);
+    get {
+      if (_RandomSeedOffset == null) {
+        _RandomSeedOffset = Schema.GetOffset(0xF97C35486388F067);
+      }
+      return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+    }
   }
 
 

@@ -17,25 +17,45 @@ internal partial class C_OP_CullImpl : CParticleFunctionOperatorImpl, C_OP_Cull 
   public C_OP_CullImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CullPercOffset = new(() => Schema.GetOffset(0xD1E3C83568069ED3), LazyThreadSafetyMode.None);
+  private static nint? _CullPercOffset;
 
   public ref float CullPerc {
-    get => ref _Handle.AsRef<float>(_CullPercOffset.Value);
+    get {
+      if (_CullPercOffset == null) {
+        _CullPercOffset = Schema.GetOffset(0xD1E3C83568069ED3);
+      }
+      return ref _Handle.AsRef<float>(_CullPercOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullStartOffset = new(() => Schema.GetOffset(0xD1E3C835AB265851), LazyThreadSafetyMode.None);
+  private static nint? _CullStartOffset;
 
   public ref float CullStart {
-    get => ref _Handle.AsRef<float>(_CullStartOffset.Value);
+    get {
+      if (_CullStartOffset == null) {
+        _CullStartOffset = Schema.GetOffset(0xD1E3C835AB265851);
+      }
+      return ref _Handle.AsRef<float>(_CullStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullEndOffset = new(() => Schema.GetOffset(0xD1E3C835B8217F50), LazyThreadSafetyMode.None);
+  private static nint? _CullEndOffset;
 
   public ref float CullEnd {
-    get => ref _Handle.AsRef<float>(_CullEndOffset.Value);
+    get {
+      if (_CullEndOffset == null) {
+        _CullEndOffset = Schema.GetOffset(0xD1E3C835B8217F50);
+      }
+      return ref _Handle.AsRef<float>(_CullEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CullExpOffset = new(() => Schema.GetOffset(0xD1E3C835BFF46C4A), LazyThreadSafetyMode.None);
+  private static nint? _CullExpOffset;
 
   public ref float CullExp {
-    get => ref _Handle.AsRef<float>(_CullExpOffset.Value);
+    get {
+      if (_CullExpOffset == null) {
+        _CullExpOffset = Schema.GetOffset(0xD1E3C835BFF46C4A);
+      }
+      return ref _Handle.AsRef<float>(_CullExpOffset!.Value);
+    }
   }
 
 

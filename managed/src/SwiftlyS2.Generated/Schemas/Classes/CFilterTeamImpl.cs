@@ -17,10 +17,15 @@ internal partial class CFilterTeamImpl : CBaseFilterImpl, CFilterTeam {
   public CFilterTeamImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FilterTeamOffset = new(() => Schema.GetOffset(0x46DA651D4D36160F), LazyThreadSafetyMode.None);
+  private static nint? _FilterTeamOffset;
 
   public ref int FilterTeam {
-    get => ref _Handle.AsRef<int>(_FilterTeamOffset.Value);
+    get {
+      if (_FilterTeamOffset == null) {
+        _FilterTeamOffset = Schema.GetOffset(0x46DA651D4D36160F);
+      }
+      return ref _Handle.AsRef<int>(_FilterTeamOffset!.Value);
+    }
   }
 
 

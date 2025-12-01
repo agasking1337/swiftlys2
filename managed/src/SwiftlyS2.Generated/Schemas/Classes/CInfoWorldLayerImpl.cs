@@ -17,48 +17,89 @@ internal partial class CInfoWorldLayerImpl : CBaseEntityImpl, CInfoWorldLayer {
   public CInfoWorldLayerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OutputOnEntitiesSpawnedOffset = new(() => Schema.GetOffset(0x74C9C61B31420D1E), LazyThreadSafetyMode.None);
+  private static nint? _OutputOnEntitiesSpawnedOffset;
 
   public CEntityIOOutput OutputOnEntitiesSpawned {
-    get => new CEntityIOOutputImpl(_Handle + _OutputOnEntitiesSpawnedOffset.Value);
+    get {
+      if (_OutputOnEntitiesSpawnedOffset == null) {
+        _OutputOnEntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61B31420D1E);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OutputOnEntitiesSpawnedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldNameOffset = new(() => Schema.GetOffset(0x74C9C61B29890DD8), LazyThreadSafetyMode.None);
+  private static nint? _WorldNameOffset;
 
   public string WorldName {
     get {
-      var ptr = _Handle.Read<nint>(_WorldNameOffset.Value);
+      if (_WorldNameOffset == null) {
+        _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
+      }
+      var ptr = _Handle.Read<nint>(_WorldNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _WorldNameOffset.Value, value);
+    set {
+      if (_WorldNameOffset == null) {
+        _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
+      }
+      Schema.SetString(_Handle, _WorldNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _LayerNameOffset = new(() => Schema.GetOffset(0x74C9C61BEABDA295), LazyThreadSafetyMode.None);
+  private static nint? _LayerNameOffset;
 
   public string LayerName {
     get {
-      var ptr = _Handle.Read<nint>(_LayerNameOffset.Value);
+      if (_LayerNameOffset == null) {
+        _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
+      }
+      var ptr = _Handle.Read<nint>(_LayerNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LayerNameOffset.Value, value);
+    set {
+      if (_LayerNameOffset == null) {
+        _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
+      }
+      Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _WorldLayerVisibleOffset = new(() => Schema.GetOffset(0x74C9C61BA9B3715E), LazyThreadSafetyMode.None);
+  private static nint? _WorldLayerVisibleOffset;
 
   public ref bool WorldLayerVisible {
-    get => ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset.Value);
+    get {
+      if (_WorldLayerVisibleOffset == null) {
+        _WorldLayerVisibleOffset = Schema.GetOffset(0x74C9C61BA9B3715E);
+      }
+      return ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EntitiesSpawnedOffset = new(() => Schema.GetOffset(0x74C9C61BAEF9D6C8), LazyThreadSafetyMode.None);
+  private static nint? _EntitiesSpawnedOffset;
 
   public ref bool EntitiesSpawned {
-    get => ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset.Value);
+    get {
+      if (_EntitiesSpawnedOffset == null) {
+        _EntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61BAEF9D6C8);
+      }
+      return ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CreateAsChildSpawnGroupOffset = new(() => Schema.GetOffset(0x74C9C61B6D553CD3), LazyThreadSafetyMode.None);
+  private static nint? _CreateAsChildSpawnGroupOffset;
 
   public ref bool CreateAsChildSpawnGroup {
-    get => ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset.Value);
+    get {
+      if (_CreateAsChildSpawnGroupOffset == null) {
+        _CreateAsChildSpawnGroupOffset = Schema.GetOffset(0x74C9C61B6D553CD3);
+      }
+      return ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LayerSpawnGroupOffset = new(() => Schema.GetOffset(0x74C9C61B56D4B70E), LazyThreadSafetyMode.None);
+  private static nint? _LayerSpawnGroupOffset;
 
   public ref uint LayerSpawnGroup {
-    get => ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset.Value);
+    get {
+      if (_LayerSpawnGroupOffset == null) {
+        _LayerSpawnGroupOffset = Schema.GetOffset(0x74C9C61B56D4B70E);
+      }
+      return ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset!.Value);
+    }
   }
 
   public void WorldNameUpdated() {

@@ -17,45 +17,85 @@ internal partial class C_OP_RemapSpeedtoCPImpl : CParticleFunctionPreEmissionImp
   public C_OP_RemapSpeedtoCPImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InControlPointNumberOffset = new(() => Schema.GetOffset(0x15A0E8C3E7CB99DE), LazyThreadSafetyMode.None);
+  private static nint? _InControlPointNumberOffset;
 
   public ref int InControlPointNumber {
-    get => ref _Handle.AsRef<int>(_InControlPointNumberOffset.Value);
+    get {
+      if (_InControlPointNumberOffset == null) {
+        _InControlPointNumberOffset = Schema.GetOffset(0x15A0E8C3E7CB99DE);
+      }
+      return ref _Handle.AsRef<int>(_InControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutControlPointNumberOffset = new(() => Schema.GetOffset(0x15A0E8C3D021D73F), LazyThreadSafetyMode.None);
+  private static nint? _OutControlPointNumberOffset;
 
   public ref int OutControlPointNumber {
-    get => ref _Handle.AsRef<int>(_OutControlPointNumberOffset.Value);
+    get {
+      if (_OutControlPointNumberOffset == null) {
+        _OutControlPointNumberOffset = Schema.GetOffset(0x15A0E8C3D021D73F);
+      }
+      return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOffset = new(() => Schema.GetOffset(0x15A0E8C3C257B93B), LazyThreadSafetyMode.None);
+  private static nint? _FieldOffset;
 
   public ref int Field {
-    get => ref _Handle.AsRef<int>(_FieldOffset.Value);
+    get {
+      if (_FieldOffset == null) {
+        _FieldOffset = Schema.GetOffset(0x15A0E8C3C257B93B);
+      }
+      return ref _Handle.AsRef<int>(_FieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0x15A0E8C3E88A0D0F), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref float InputMin {
-    get => ref _Handle.AsRef<float>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0x15A0E8C3E88A0D0F);
+      }
+      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0x15A0E8C3D6766901), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref float InputMax {
-    get => ref _Handle.AsRef<float>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0x15A0E8C3D6766901);
+      }
+      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0x15A0E8C35F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0x15A0E8C35F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0x15A0E8C351A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0x15A0E8C351A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseDeltaVOffset = new(() => Schema.GetOffset(0x15A0E8C389609F7C), LazyThreadSafetyMode.None);
+  private static nint? _UseDeltaVOffset;
 
   public ref bool UseDeltaV {
-    get => ref _Handle.AsRef<bool>(_UseDeltaVOffset.Value);
+    get {
+      if (_UseDeltaVOffset == null) {
+        _UseDeltaVOffset = Schema.GetOffset(0x15A0E8C389609F7C);
+      }
+      return ref _Handle.AsRef<bool>(_UseDeltaVOffset!.Value);
+    }
   }
 
 

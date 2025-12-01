@@ -17,25 +17,45 @@ internal partial class CBloodImpl : CPointEntityImpl, CBlood {
   public CBloodImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SprayAnglesOffset = new(() => Schema.GetOffset(0x68CF460A2BDF444E), LazyThreadSafetyMode.None);
+  private static nint? _SprayAnglesOffset;
 
   public ref QAngle SprayAngles {
-    get => ref _Handle.AsRef<QAngle>(_SprayAnglesOffset.Value);
+    get {
+      if (_SprayAnglesOffset == null) {
+        _SprayAnglesOffset = Schema.GetOffset(0x68CF460A2BDF444E);
+      }
+      return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SprayDirOffset = new(() => Schema.GetOffset(0x68CF460A0A8A2531), LazyThreadSafetyMode.None);
+  private static nint? _SprayDirOffset;
 
   public ref Vector SprayDir {
-    get => ref _Handle.AsRef<Vector>(_SprayDirOffset.Value);
+    get {
+      if (_SprayDirOffset == null) {
+        _SprayDirOffset = Schema.GetOffset(0x68CF460A0A8A2531);
+      }
+      return ref _Handle.AsRef<Vector>(_SprayDirOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AmountOffset = new(() => Schema.GetOffset(0x68CF460A187D1B1B), LazyThreadSafetyMode.None);
+  private static nint? _AmountOffset;
 
   public ref float Amount {
-    get => ref _Handle.AsRef<float>(_AmountOffset.Value);
+    get {
+      if (_AmountOffset == null) {
+        _AmountOffset = Schema.GetOffset(0x68CF460A187D1B1B);
+      }
+      return ref _Handle.AsRef<float>(_AmountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ColorOffset = new(() => Schema.GetOffset(0x68CF460AD7D017D8), LazyThreadSafetyMode.None);
+  private static nint? _ColorOffset;
 
   public ref BloodType Color {
-    get => ref _Handle.AsRef<BloodType>(_ColorOffset.Value);
+    get {
+      if (_ColorOffset == null) {
+        _ColorOffset = Schema.GetOffset(0x68CF460AD7D017D8);
+      }
+      return ref _Handle.AsRef<BloodType>(_ColorOffset!.Value);
+    }
   }
 
 

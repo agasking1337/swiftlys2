@@ -17,25 +17,45 @@ internal partial class CRelativeLocationImpl : SchemaClass, CRelativeLocation {
   public CRelativeLocationImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0xA25CE2418ED6D5CD), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref RelativeLocationType_t Type {
-    get => ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0xA25CE2418ED6D5CD);
+      }
+      return ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RelativeOffsetOffset = new(() => Schema.GetOffset(0xA25CE241B6F2D296), LazyThreadSafetyMode.None);
+  private static nint? _RelativeOffsetOffset;
 
   public ref Vector RelativeOffset {
-    get => ref _Handle.AsRef<Vector>(_RelativeOffsetOffset.Value);
+    get {
+      if (_RelativeOffsetOffset == null) {
+        _RelativeOffsetOffset = Schema.GetOffset(0xA25CE241B6F2D296);
+      }
+      return ref _Handle.AsRef<Vector>(_RelativeOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldSpacePosOffset = new(() => Schema.GetOffset(0xA25CE2410A43E96B), LazyThreadSafetyMode.None);
+  private static nint? _WorldSpacePosOffset;
 
   public ref Vector WorldSpacePos {
-    get => ref _Handle.AsRef<Vector>(_WorldSpacePosOffset.Value);
+    get {
+      if (_WorldSpacePosOffset == null) {
+        _WorldSpacePosOffset = Schema.GetOffset(0xA25CE2410A43E96B);
+      }
+      return ref _Handle.AsRef<Vector>(_WorldSpacePosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EntityOffset = new(() => Schema.GetOffset(0xA25CE2416EBADCB0), LazyThreadSafetyMode.None);
+  private static nint? _EntityOffset;
 
   public ref CHandle<CBaseEntity> Entity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset.Value);
+    get {
+      if (_EntityOffset == null) {
+        _EntityOffset = Schema.GetOffset(0xA25CE2416EBADCB0);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    }
   }
 
 

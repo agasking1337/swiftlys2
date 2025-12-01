@@ -17,25 +17,45 @@ internal partial class CPulseCell_Outflow_ListenForAnimgraphTagImpl : CPulseCell
   public CPulseCell_Outflow_ListenForAnimgraphTagImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OnStartOffset = new(() => Schema.GetOffset(0xAD79BF78C3FE848C), LazyThreadSafetyMode.None);
+  private static nint? _OnStartOffset;
 
   public CPulse_ResumePoint OnStart {
-    get => new CPulse_ResumePointImpl(_Handle + _OnStartOffset.Value);
+    get {
+      if (_OnStartOffset == null) {
+        _OnStartOffset = Schema.GetOffset(0xAD79BF78C3FE848C);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnEndOffset = new(() => Schema.GetOffset(0xAD79BF78B88A4375), LazyThreadSafetyMode.None);
+  private static nint? _OnEndOffset;
 
   public CPulse_ResumePoint OnEnd {
-    get => new CPulse_ResumePointImpl(_Handle + _OnEndOffset.Value);
+    get {
+      if (_OnEndOffset == null) {
+        _OnEndOffset = Schema.GetOffset(0xAD79BF78B88A4375);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnCanceledOffset = new(() => Schema.GetOffset(0xAD79BF78F02162DB), LazyThreadSafetyMode.None);
+  private static nint? _OnCanceledOffset;
 
   public CPulse_ResumePoint OnCanceled {
-    get => new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset.Value);
+    get {
+      if (_OnCanceledOffset == null) {
+        _OnCanceledOffset = Schema.GetOffset(0xAD79BF78F02162DB);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TagNameOffset = new(() => Schema.GetOffset(0xAD79BF78647DC278), LazyThreadSafetyMode.None);
+  private static nint? _TagNameOffset;
 
   public ref CGlobalSymbol TagName {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_TagNameOffset.Value);
+    get {
+      if (_TagNameOffset == null) {
+        _TagNameOffset = Schema.GetOffset(0xAD79BF78647DC278);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_TagNameOffset!.Value);
+    }
   }
 
 

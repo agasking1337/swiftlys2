@@ -17,20 +17,35 @@ internal partial class CPulseCell_Inflow_EntOutputHandlerImpl : CPulseCell_Inflo
   public CPulseCell_Inflow_EntOutputHandlerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SourceEntityOffset = new(() => Schema.GetOffset(0x8C9310C4AD2DB063), LazyThreadSafetyMode.None);
+  private static nint? _SourceEntityOffset;
 
   public SchemaUntypedField SourceEntity {
-    get => new SchemaUntypedField(_Handle + _SourceEntityOffset.Value);
+    get {
+      if (_SourceEntityOffset == null) {
+        _SourceEntityOffset = Schema.GetOffset(0x8C9310C4AD2DB063);
+      }
+      return new SchemaUntypedField(_Handle + _SourceEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SourceOutputOffset = new(() => Schema.GetOffset(0x8C9310C42D46D7F5), LazyThreadSafetyMode.None);
+  private static nint? _SourceOutputOffset;
 
   public SchemaUntypedField SourceOutput {
-    get => new SchemaUntypedField(_Handle + _SourceOutputOffset.Value);
+    get {
+      if (_SourceOutputOffset == null) {
+        _SourceOutputOffset = Schema.GetOffset(0x8C9310C42D46D7F5);
+      }
+      return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExpectedParamTypeOffset = new(() => Schema.GetOffset(0x8C9310C41C1CB8A6), LazyThreadSafetyMode.None);
+  private static nint? _ExpectedParamTypeOffset;
 
   public SchemaUntypedField ExpectedParamType {
-    get => new SchemaUntypedField(_Handle + _ExpectedParamTypeOffset.Value);
+    get {
+      if (_ExpectedParamTypeOffset == null) {
+        _ExpectedParamTypeOffset = Schema.GetOffset(0x8C9310C41C1CB8A6);
+      }
+      return new SchemaUntypedField(_Handle + _ExpectedParamTypeOffset!.Value);
+    }
   }
 
 

@@ -17,40 +17,75 @@ internal partial class CSeqAutoLayerImpl : SchemaClass, CSeqAutoLayer {
   public CSeqAutoLayerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LocalReferenceOffset = new(() => Schema.GetOffset(0x1506328FC8D571D9), LazyThreadSafetyMode.None);
+  private static nint? _LocalReferenceOffset;
 
   public ref short LocalReference {
-    get => ref _Handle.AsRef<short>(_LocalReferenceOffset.Value);
+    get {
+      if (_LocalReferenceOffset == null) {
+        _LocalReferenceOffset = Schema.GetOffset(0x1506328FC8D571D9);
+      }
+      return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalPoseOffset = new(() => Schema.GetOffset(0x1506328F70BF8111), LazyThreadSafetyMode.None);
+  private static nint? _LocalPoseOffset;
 
   public ref short LocalPose {
-    get => ref _Handle.AsRef<short>(_LocalPoseOffset.Value);
+    get {
+      if (_LocalPoseOffset == null) {
+        _LocalPoseOffset = Schema.GetOffset(0x1506328F70BF8111);
+      }
+      return ref _Handle.AsRef<short>(_LocalPoseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FlagsOffset = new(() => Schema.GetOffset(0x1506328FDC74A14C), LazyThreadSafetyMode.None);
+  private static nint? _FlagsOffset;
 
   public CSeqAutoLayerFlag Flags {
-    get => new CSeqAutoLayerFlagImpl(_Handle + _FlagsOffset.Value);
+    get {
+      if (_FlagsOffset == null) {
+        _FlagsOffset = Schema.GetOffset(0x1506328FDC74A14C);
+      }
+      return new CSeqAutoLayerFlagImpl(_Handle + _FlagsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartOffset = new(() => Schema.GetOffset(0x1506328FA539BEFF), LazyThreadSafetyMode.None);
+  private static nint? _StartOffset;
 
   public ref float Start {
-    get => ref _Handle.AsRef<float>(_StartOffset.Value);
+    get {
+      if (_StartOffset == null) {
+        _StartOffset = Schema.GetOffset(0x1506328FA539BEFF);
+      }
+      return ref _Handle.AsRef<float>(_StartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PeakOffset = new(() => Schema.GetOffset(0x1506328F5BAE16B2), LazyThreadSafetyMode.None);
+  private static nint? _PeakOffset;
 
   public ref float Peak {
-    get => ref _Handle.AsRef<float>(_PeakOffset.Value);
+    get {
+      if (_PeakOffset == null) {
+        _PeakOffset = Schema.GetOffset(0x1506328F5BAE16B2);
+      }
+      return ref _Handle.AsRef<float>(_PeakOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TailOffset = new(() => Schema.GetOffset(0x1506328FCF8F4203), LazyThreadSafetyMode.None);
+  private static nint? _TailOffset;
 
   public ref float Tail {
-    get => ref _Handle.AsRef<float>(_TailOffset.Value);
+    get {
+      if (_TailOffset == null) {
+        _TailOffset = Schema.GetOffset(0x1506328FCF8F4203);
+      }
+      return ref _Handle.AsRef<float>(_TailOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndOffset = new(() => Schema.GetOffset(0x1506328F5B29CFCA), LazyThreadSafetyMode.None);
+  private static nint? _EndOffset;
 
   public ref float End {
-    get => ref _Handle.AsRef<float>(_EndOffset.Value);
+    get {
+      if (_EndOffset == null) {
+        _EndOffset = Schema.GetOffset(0x1506328F5B29CFCA);
+      }
+      return ref _Handle.AsRef<float>(_EndOffset!.Value);
+    }
   }
 
 

@@ -48,8 +48,9 @@ internal static class EventPublisher
             NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
             NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
             NativeEvents.RegisterOnClientProcessUsercmdsCallback((nint)(delegate* unmanaged< int, nint, int, byte, float, void >)&OnClientProcessUsercmds);
-            NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, byte >)&OnEntityTakeDamage);
+            NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, nint, byte >)&OnEntityTakeDamage);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
+            NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
             NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
             NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
             NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
@@ -475,7 +476,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static byte OnEntityTakeDamage( nint entityPtr, nint takeDamageInfoPtr )
+    public static byte OnEntityTakeDamage( nint entityPtr, nint takeDamageInfoPtr, nint takeDamageResultPtr )
     {
         if (_subscribers.Count == 0) return 1;
         try
@@ -485,7 +486,8 @@ internal static class EventPublisher
                 var entity = new CEntityInstanceImpl(entityPtr);
                 OnEntityTakeDamageEvent @event = new() {
                     Entity = entity,
-                    _infoPtr = takeDamageInfoPtr
+                    _infoPtr = takeDamageInfoPtr,
+                    _resultPtr = takeDamageResultPtr
                 };
                 foreach (var subscriber in _subscribers)
                 {
@@ -526,6 +528,24 @@ internal static class EventPublisher
                 subscriber.InvokeOnPrecacheResource(@event);
             }
         }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return;
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnStartupServer( )
+    {
+        if (_subscribers.Count == 0) return;
+        try
+        {
+            foreach (var subscriber in _subscribers)
+            {
+                subscriber.InvokeOnStartupServer();
+            }
+        } 
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(e)) return;
@@ -733,6 +753,23 @@ internal static class EventPublisher
             foreach (var subscriber in _subscribers)
             {
                 subscriber.InvokeOnPlayerPawnPostThinkHook(@event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return;
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void InvokeOnEntityIdentityAcceptInputHook( OnEntityIdentityAcceptInputHookEvent @event )
+    {
+        if (_subscribers.Count == 0) return;
+        try
+        {
+            foreach (var subscriber in _subscribers)
+            {
+                subscriber.InvokeOnEntityIdentityAcceptInputHook(@event);
             }
         }
         catch (Exception e)

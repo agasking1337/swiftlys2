@@ -17,20 +17,35 @@ internal partial class TagSpan_tImpl : SchemaClass, TagSpan_t {
   public TagSpan_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TagIndexOffset = new(() => Schema.GetOffset(0xA2611404D66997C9), LazyThreadSafetyMode.None);
+  private static nint? _TagIndexOffset;
 
   public ref int TagIndex {
-    get => ref _Handle.AsRef<int>(_TagIndexOffset.Value);
+    get {
+      if (_TagIndexOffset == null) {
+        _TagIndexOffset = Schema.GetOffset(0xA2611404D66997C9);
+      }
+      return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartCycleOffset = new(() => Schema.GetOffset(0xA26114043A764D4F), LazyThreadSafetyMode.None);
+  private static nint? _StartCycleOffset;
 
   public ref float StartCycle {
-    get => ref _Handle.AsRef<float>(_StartCycleOffset.Value);
+    get {
+      if (_StartCycleOffset == null) {
+        _StartCycleOffset = Schema.GetOffset(0xA26114043A764D4F);
+      }
+      return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndCycleOffset = new(() => Schema.GetOffset(0xA26114040B523694), LazyThreadSafetyMode.None);
+  private static nint? _EndCycleOffset;
 
   public ref float EndCycle {
-    get => ref _Handle.AsRef<float>(_EndCycleOffset.Value);
+    get {
+      if (_EndCycleOffset == null) {
+        _EndCycleOffset = Schema.GetOffset(0xA26114040B523694);
+      }
+      return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+    }
   }
 
 

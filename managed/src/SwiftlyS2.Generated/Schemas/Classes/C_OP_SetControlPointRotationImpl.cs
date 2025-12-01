@@ -17,25 +17,45 @@ internal partial class C_OP_SetControlPointRotationImpl : CParticleFunctionPreEm
   public C_OP_SetControlPointRotationImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _RotAxisOffset = new(() => Schema.GetOffset(0x8F20B2F891872163), LazyThreadSafetyMode.None);
+  private static nint? _RotAxisOffset;
 
   public CParticleCollectionVecInput RotAxis {
-    get => new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset.Value);
+    get {
+      if (_RotAxisOffset == null) {
+        _RotAxisOffset = Schema.GetOffset(0x8F20B2F891872163);
+      }
+      return new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotRateOffset = new(() => Schema.GetOffset(0x8F20B2F86747B556), LazyThreadSafetyMode.None);
+  private static nint? _RotRateOffset;
 
   public CParticleCollectionFloatInput RotRate {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset.Value);
+    get {
+      if (_RotRateOffset == null) {
+        _RotRateOffset = Schema.GetOffset(0x8F20B2F86747B556);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOffset = new(() => Schema.GetOffset(0x8F20B2F8EB661472), LazyThreadSafetyMode.None);
+  private static nint? _CPOffset;
 
   public ref int CP {
-    get => ref _Handle.AsRef<int>(_CPOffset.Value);
+    get {
+      if (_CPOffset == null) {
+        _CPOffset = Schema.GetOffset(0x8F20B2F8EB661472);
+      }
+      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCPOffset = new(() => Schema.GetOffset(0x8F20B2F8ACAAFF8F), LazyThreadSafetyMode.None);
+  private static nint? _LocalCPOffset;
 
   public ref int LocalCP {
-    get => ref _Handle.AsRef<int>(_LocalCPOffset.Value);
+    get {
+      if (_LocalCPOffset == null) {
+        _LocalCPOffset = Schema.GetOffset(0x8F20B2F8ACAAFF8F);
+      }
+      return ref _Handle.AsRef<int>(_LocalCPOffset!.Value);
+    }
   }
 
 

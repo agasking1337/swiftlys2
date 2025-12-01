@@ -17,10 +17,15 @@ internal partial class CAnimGraphControllerBaseImpl : SchemaClass, CAnimGraphCon
   public CAnimGraphControllerBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ParamsToResetInPostGraphUpdateOffset = new(() => Schema.GetOffset(0x1AA25B60A3E3A289), LazyThreadSafetyMode.None);
+  private static nint? _ParamsToResetInPostGraphUpdateOffset;
 
   public SchemaUntypedField ParamsToResetInPostGraphUpdate {
-    get => new SchemaUntypedField(_Handle + _ParamsToResetInPostGraphUpdateOffset.Value);
+    get {
+      if (_ParamsToResetInPostGraphUpdateOffset == null) {
+        _ParamsToResetInPostGraphUpdateOffset = Schema.GetOffset(0x1AA25B60A3E3A289);
+      }
+      return new SchemaUntypedField(_Handle + _ParamsToResetInPostGraphUpdateOffset!.Value);
+    }
   }
 
 

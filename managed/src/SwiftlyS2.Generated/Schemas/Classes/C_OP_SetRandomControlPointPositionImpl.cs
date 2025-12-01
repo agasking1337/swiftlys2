@@ -17,45 +17,85 @@ internal partial class C_OP_SetRandomControlPointPositionImpl : CParticleFunctio
   public C_OP_SetRandomControlPointPositionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _UseWorldLocationOffset = new(() => Schema.GetOffset(0x4E797BEAF371AED7), LazyThreadSafetyMode.None);
+  private static nint? _UseWorldLocationOffset;
 
   public ref bool UseWorldLocation {
-    get => ref _Handle.AsRef<bool>(_UseWorldLocationOffset.Value);
+    get {
+      if (_UseWorldLocationOffset == null) {
+        _UseWorldLocationOffset = Schema.GetOffset(0x4E797BEAF371AED7);
+      }
+      return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OrientOffset = new(() => Schema.GetOffset(0x4E797BEA7CD61854), LazyThreadSafetyMode.None);
+  private static nint? _OrientOffset;
 
   public ref bool Orient {
-    get => ref _Handle.AsRef<bool>(_OrientOffset.Value);
+    get {
+      if (_OrientOffset == null) {
+        _OrientOffset = Schema.GetOffset(0x4E797BEA7CD61854);
+      }
+      return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CP1Offset = new(() => Schema.GetOffset(0x4E797BEAD4B1E579), LazyThreadSafetyMode.None);
+  private static nint? _CP1Offset;
 
   public ref int CP1 {
-    get => ref _Handle.AsRef<int>(_CP1Offset.Value);
+    get {
+      if (_CP1Offset == null) {
+        _CP1Offset = Schema.GetOffset(0x4E797BEAD4B1E579);
+      }
+      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HeadLocationOffset = new(() => Schema.GetOffset(0x4E797BEAA8ECDA78), LazyThreadSafetyMode.None);
+  private static nint? _HeadLocationOffset;
 
   public ref int HeadLocation {
-    get => ref _Handle.AsRef<int>(_HeadLocationOffset.Value);
+    get {
+      if (_HeadLocationOffset == null) {
+        _HeadLocationOffset = Schema.GetOffset(0x4E797BEAA8ECDA78);
+      }
+      return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReRandomRateOffset = new(() => Schema.GetOffset(0x4E797BEA98F44A13), LazyThreadSafetyMode.None);
+  private static nint? _ReRandomRateOffset;
 
   public CParticleCollectionFloatInput ReRandomRate {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ReRandomRateOffset.Value);
+    get {
+      if (_ReRandomRateOffset == null) {
+        _ReRandomRateOffset = Schema.GetOffset(0x4E797BEA98F44A13);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ReRandomRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPMinPosOffset = new(() => Schema.GetOffset(0x4E797BEA4E9C9B68), LazyThreadSafetyMode.None);
+  private static nint? _CPMinPosOffset;
 
   public ref Vector CPMinPos {
-    get => ref _Handle.AsRef<Vector>(_CPMinPosOffset.Value);
+    get {
+      if (_CPMinPosOffset == null) {
+        _CPMinPosOffset = Schema.GetOffset(0x4E797BEA4E9C9B68);
+      }
+      return ref _Handle.AsRef<Vector>(_CPMinPosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPMaxPosOffset = new(() => Schema.GetOffset(0x4E797BEA4FFBFD72), LazyThreadSafetyMode.None);
+  private static nint? _CPMaxPosOffset;
 
   public ref Vector CPMaxPos {
-    get => ref _Handle.AsRef<Vector>(_CPMaxPosOffset.Value);
+    get {
+      if (_CPMaxPosOffset == null) {
+        _CPMaxPosOffset = Schema.GetOffset(0x4E797BEA4FFBFD72);
+      }
+      return ref _Handle.AsRef<Vector>(_CPMaxPosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InterpolationOffset = new(() => Schema.GetOffset(0x4E797BEACF55B987), LazyThreadSafetyMode.None);
+  private static nint? _InterpolationOffset;
 
   public CParticleCollectionFloatInput Interpolation {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset.Value);
+    get {
+      if (_InterpolationOffset == null) {
+        _InterpolationOffset = Schema.GetOffset(0x4E797BEACF55B987);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    }
   }
 
 

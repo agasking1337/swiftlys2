@@ -17,15 +17,25 @@ internal partial class CNmStateMachineNode__CDefinitionImpl : CNmPoseNode__CDefi
   public CNmStateMachineNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StateDefinitionsOffset = new(() => Schema.GetOffset(0xA73F392775230B54), LazyThreadSafetyMode.None);
+  private static nint? _StateDefinitionsOffset;
 
   public SchemaUntypedField StateDefinitions {
-    get => new SchemaUntypedField(_Handle + _StateDefinitionsOffset.Value);
+    get {
+      if (_StateDefinitionsOffset == null) {
+        _StateDefinitionsOffset = Schema.GetOffset(0xA73F392775230B54);
+      }
+      return new SchemaUntypedField(_Handle + _StateDefinitionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultStateIndexOffset = new(() => Schema.GetOffset(0xA73F39276C1EC5ED), LazyThreadSafetyMode.None);
+  private static nint? _DefaultStateIndexOffset;
 
   public ref short DefaultStateIndex {
-    get => ref _Handle.AsRef<short>(_DefaultStateIndexOffset.Value);
+    get {
+      if (_DefaultStateIndexOffset == null) {
+        _DefaultStateIndexOffset = Schema.GetOffset(0xA73F39276C1EC5ED);
+      }
+      return ref _Handle.AsRef<short>(_DefaultStateIndexOffset!.Value);
+    }
   }
 
 

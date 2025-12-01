@@ -17,40 +17,75 @@ internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOp
   public C_OP_RemapDirectionToCPToVectorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPOffset = new(() => Schema.GetOffset(0x80443C5BEB661472), LazyThreadSafetyMode.None);
+  private static nint? _CPOffset;
 
   public ref int CP {
-    get => ref _Handle.AsRef<int>(_CPOffset.Value);
+    get {
+      if (_CPOffset == null) {
+        _CPOffset = Schema.GetOffset(0x80443C5BEB661472);
+      }
+      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x80443C5BE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x80443C5BE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleOffset = new(() => Schema.GetOffset(0x80443C5BB731A42F), LazyThreadSafetyMode.None);
+  private static nint? _ScaleOffset;
 
   public ref float Scale {
-    get => ref _Handle.AsRef<float>(_ScaleOffset.Value);
+    get {
+      if (_ScaleOffset == null) {
+        _ScaleOffset = Schema.GetOffset(0x80443C5BB731A42F);
+      }
+      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetRotOffset = new(() => Schema.GetOffset(0x80443C5BB414F849), LazyThreadSafetyMode.None);
+  private static nint? _OffsetRotOffset;
 
   public ref float OffsetRot {
-    get => ref _Handle.AsRef<float>(_OffsetRotOffset.Value);
+    get {
+      if (_OffsetRotOffset == null) {
+        _OffsetRotOffset = Schema.GetOffset(0x80443C5BB414F849);
+      }
+      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetAxisOffset = new(() => Schema.GetOffset(0x80443C5BFAB4918F), LazyThreadSafetyMode.None);
+  private static nint? _OffsetAxisOffset;
 
   public ref Vector OffsetAxis {
-    get => ref _Handle.AsRef<Vector>(_OffsetAxisOffset.Value);
+    get {
+      if (_OffsetAxisOffset == null) {
+        _OffsetAxisOffset = Schema.GetOffset(0x80443C5BFAB4918F);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NormalizeOffset = new(() => Schema.GetOffset(0x80443C5B48BC424C), LazyThreadSafetyMode.None);
+  private static nint? _NormalizeOffset;
 
   public ref bool Normalize {
-    get => ref _Handle.AsRef<bool>(_NormalizeOffset.Value);
+    get {
+      if (_NormalizeOffset == null) {
+        _NormalizeOffset = Schema.GetOffset(0x80443C5B48BC424C);
+      }
+      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldStrengthOffset = new(() => Schema.GetOffset(0x80443C5BDBA3663E), LazyThreadSafetyMode.None);
+  private static nint? _FieldStrengthOffset;
 
   public ParticleAttributeIndex_t FieldStrength {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldStrengthOffset.Value);
+    get {
+      if (_FieldStrengthOffset == null) {
+        _FieldStrengthOffset = Schema.GetOffset(0x80443C5BDBA3663E);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldStrengthOffset!.Value);
+    }
   }
 
 

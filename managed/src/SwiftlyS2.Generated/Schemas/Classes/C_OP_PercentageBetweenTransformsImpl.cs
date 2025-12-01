@@ -17,55 +17,105 @@ internal partial class C_OP_PercentageBetweenTransformsImpl : CParticleFunctionO
   public C_OP_PercentageBetweenTransformsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0x37F3E6E6E5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0x37F3E6E6E5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0x37F3E6E6E88A0D0F), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref float InputMin {
-    get => ref _Handle.AsRef<float>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0x37F3E6E6E88A0D0F);
+      }
+      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0x37F3E6E6D6766901), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref float InputMax {
-    get => ref _Handle.AsRef<float>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0x37F3E6E6D6766901);
+      }
+      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0x37F3E6E65F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0x37F3E6E65F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0x37F3E6E651A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0x37F3E6E651A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransformStartOffset = new(() => Schema.GetOffset(0x37F3E6E6D94FA7F9), LazyThreadSafetyMode.None);
+  private static nint? _TransformStartOffset;
 
   public CParticleTransformInput TransformStart {
-    get => new CParticleTransformInputImpl(_Handle + _TransformStartOffset.Value);
+    get {
+      if (_TransformStartOffset == null) {
+        _TransformStartOffset = Schema.GetOffset(0x37F3E6E6D94FA7F9);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransformEndOffset = new(() => Schema.GetOffset(0x37F3E6E60C3277C8), LazyThreadSafetyMode.None);
+  private static nint? _TransformEndOffset;
 
   public CParticleTransformInput TransformEnd {
-    get => new CParticleTransformInputImpl(_Handle + _TransformEndOffset.Value);
+    get {
+      if (_TransformEndOffset == null) {
+        _TransformEndOffset = Schema.GetOffset(0x37F3E6E60C3277C8);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SetMethodOffset = new(() => Schema.GetOffset(0x37F3E6E6FB53C31E), LazyThreadSafetyMode.None);
+  private static nint? _SetMethodOffset;
 
   public ref ParticleSetMethod_t SetMethod {
-    get => ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset.Value);
+    get {
+      if (_SetMethodOffset == null) {
+        _SetMethodOffset = Schema.GetOffset(0x37F3E6E6FB53C31E);
+      }
+      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ActiveRangeOffset = new(() => Schema.GetOffset(0x37F3E6E63FA53B84), LazyThreadSafetyMode.None);
+  private static nint? _ActiveRangeOffset;
 
   public ref bool ActiveRange {
-    get => ref _Handle.AsRef<bool>(_ActiveRangeOffset.Value);
+    get {
+      if (_ActiveRangeOffset == null) {
+        _ActiveRangeOffset = Schema.GetOffset(0x37F3E6E63FA53B84);
+      }
+      return ref _Handle.AsRef<bool>(_ActiveRangeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadialCheckOffset = new(() => Schema.GetOffset(0x37F3E6E6496187DE), LazyThreadSafetyMode.None);
+  private static nint? _RadialCheckOffset;
 
   public ref bool RadialCheck {
-    get => ref _Handle.AsRef<bool>(_RadialCheckOffset.Value);
+    get {
+      if (_RadialCheckOffset == null) {
+        _RadialCheckOffset = Schema.GetOffset(0x37F3E6E6496187DE);
+      }
+      return ref _Handle.AsRef<bool>(_RadialCheckOffset!.Value);
+    }
   }
 
 

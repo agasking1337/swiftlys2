@@ -17,25 +17,45 @@ internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowIm
   public CPulseCell_TimelineImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TimelineEventsOffset = new(() => Schema.GetOffset(0xF1185F93C91CDDC3), LazyThreadSafetyMode.None);
+  private static nint? _TimelineEventsOffset;
 
   public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents {
-    get => ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset.Value);
+    get {
+      if (_TimelineEventsOffset == null) {
+        _TimelineEventsOffset = Schema.GetOffset(0xF1185F93C91CDDC3);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WaitForChildOutflowsOffset = new(() => Schema.GetOffset(0xF1185F933F8E29C6), LazyThreadSafetyMode.None);
+  private static nint? _WaitForChildOutflowsOffset;
 
   public ref bool WaitForChildOutflows {
-    get => ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset.Value);
+    get {
+      if (_WaitForChildOutflowsOffset == null) {
+        _WaitForChildOutflowsOffset = Schema.GetOffset(0xF1185F933F8E29C6);
+      }
+      return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnFinishedOffset = new(() => Schema.GetOffset(0xF1185F938D903E5E), LazyThreadSafetyMode.None);
+  private static nint? _OnFinishedOffset;
 
   public CPulse_ResumePoint OnFinished {
-    get => new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset.Value);
+    get {
+      if (_OnFinishedOffset == null) {
+        _OnFinishedOffset = Schema.GetOffset(0xF1185F938D903E5E);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnCanceledOffset = new(() => Schema.GetOffset(0xF1185F93F02162DB), LazyThreadSafetyMode.None);
+  private static nint? _OnCanceledOffset;
 
   public CPulse_ResumePoint OnCanceled {
-    get => new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset.Value);
+    get {
+      if (_OnCanceledOffset == null) {
+        _OnCanceledOffset = Schema.GetOffset(0xF1185F93F02162DB);
+      }
+      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    }
   }
 
 

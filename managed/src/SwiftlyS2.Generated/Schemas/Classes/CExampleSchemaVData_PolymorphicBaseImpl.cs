@@ -17,10 +17,15 @@ internal partial class CExampleSchemaVData_PolymorphicBaseImpl : SchemaClass, CE
   public CExampleSchemaVData_PolymorphicBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _BaseOffset = new(() => Schema.GetOffset(0x2CEB124160282B7C), LazyThreadSafetyMode.None);
+  private static nint? _BaseOffset;
 
   public ref int Base {
-    get => ref _Handle.AsRef<int>(_BaseOffset.Value);
+    get {
+      if (_BaseOffset == null) {
+        _BaseOffset = Schema.GetOffset(0x2CEB124160282B7C);
+      }
+      return ref _Handle.AsRef<int>(_BaseOffset!.Value);
+    }
   }
 
 

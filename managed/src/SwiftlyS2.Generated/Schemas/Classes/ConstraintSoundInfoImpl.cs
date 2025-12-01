@@ -17,57 +17,106 @@ internal partial class ConstraintSoundInfoImpl : SchemaClass, ConstraintSoundInf
   public ConstraintSoundInfoImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SamplerOffset = new(() => Schema.GetOffset(0x79068C49FCCD6193), LazyThreadSafetyMode.None);
+  private static nint? _SamplerOffset;
 
   public VelocitySampler Sampler {
-    get => new VelocitySamplerImpl(_Handle + _SamplerOffset.Value);
+    get {
+      if (_SamplerOffset == null) {
+        _SamplerOffset = Schema.GetOffset(0x79068C49FCCD6193);
+      }
+      return new VelocitySamplerImpl(_Handle + _SamplerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundProfileOffset = new(() => Schema.GetOffset(0x79068C49D9300921), LazyThreadSafetyMode.None);
+  private static nint? _SoundProfileOffset;
 
   public SimpleConstraintSoundProfile SoundProfile {
-    get => new SimpleConstraintSoundProfileImpl(_Handle + _SoundProfileOffset.Value);
+    get {
+      if (_SoundProfileOffset == null) {
+        _SoundProfileOffset = Schema.GetOffset(0x79068C49D9300921);
+      }
+      return new SimpleConstraintSoundProfileImpl(_Handle + _SoundProfileOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForwardAxisOffset = new(() => Schema.GetOffset(0x79068C49DC95B25F), LazyThreadSafetyMode.None);
+  private static nint? _ForwardAxisOffset;
 
   public ref Vector ForwardAxis {
-    get => ref _Handle.AsRef<Vector>(_ForwardAxisOffset.Value);
+    get {
+      if (_ForwardAxisOffset == null) {
+        _ForwardAxisOffset = Schema.GetOffset(0x79068C49DC95B25F);
+      }
+      return ref _Handle.AsRef<Vector>(_ForwardAxisOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TravelSoundFwdOffset = new(() => Schema.GetOffset(0x79068C497A65F069), LazyThreadSafetyMode.None);
+  private static nint? _TravelSoundFwdOffset;
 
   public string TravelSoundFwd {
     get {
-      var ptr = _Handle.Read<nint>(_TravelSoundFwdOffset.Value);
+      if (_TravelSoundFwdOffset == null) {
+        _TravelSoundFwdOffset = Schema.GetOffset(0x79068C497A65F069);
+      }
+      var ptr = _Handle.Read<nint>(_TravelSoundFwdOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TravelSoundFwdOffset.Value, value);
+    set {
+      if (_TravelSoundFwdOffset == null) {
+        _TravelSoundFwdOffset = Schema.GetOffset(0x79068C497A65F069);
+      }
+      Schema.SetString(_Handle, _TravelSoundFwdOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TravelSoundBackOffset = new(() => Schema.GetOffset(0x79068C49506B73E3), LazyThreadSafetyMode.None);
+  private static nint? _TravelSoundBackOffset;
 
   public string TravelSoundBack {
     get {
-      var ptr = _Handle.Read<nint>(_TravelSoundBackOffset.Value);
+      if (_TravelSoundBackOffset == null) {
+        _TravelSoundBackOffset = Schema.GetOffset(0x79068C49506B73E3);
+      }
+      var ptr = _Handle.Read<nint>(_TravelSoundBackOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TravelSoundBackOffset.Value, value);
+    set {
+      if (_TravelSoundBackOffset == null) {
+        _TravelSoundBackOffset = Schema.GetOffset(0x79068C49506B73E3);
+      }
+      Schema.SetString(_Handle, _TravelSoundBackOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ReversalSoundsOffset = new(() => Schema.GetOffset(0x79068C49F5164187), LazyThreadSafetyMode.None);
+  private static nint? _ReversalSoundsOffset;
 
   public string ReversalSounds {
     get {
-      var ptr = _Handle.Read<nint>(_ReversalSoundsOffset.Value);
+      if (_ReversalSoundsOffset == null) {
+        _ReversalSoundsOffset = Schema.GetOffset(0x79068C49F5164187);
+      }
+      var ptr = _Handle.Read<nint>(_ReversalSoundsOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ReversalSoundsOffset.Value, value);
+    set {
+      if (_ReversalSoundsOffset == null) {
+        _ReversalSoundsOffset = Schema.GetOffset(0x79068C49F5164187);
+      }
+      Schema.SetString(_Handle, _ReversalSoundsOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _PlayTravelSoundOffset = new(() => Schema.GetOffset(0x79068C49FF3432DE), LazyThreadSafetyMode.None);
+  private static nint? _PlayTravelSoundOffset;
 
   public ref bool PlayTravelSound {
-    get => ref _Handle.AsRef<bool>(_PlayTravelSoundOffset.Value);
+    get {
+      if (_PlayTravelSoundOffset == null) {
+        _PlayTravelSoundOffset = Schema.GetOffset(0x79068C49FF3432DE);
+      }
+      return ref _Handle.AsRef<bool>(_PlayTravelSoundOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PlayReversalSoundOffset = new(() => Schema.GetOffset(0x79068C4941EF4324), LazyThreadSafetyMode.None);
+  private static nint? _PlayReversalSoundOffset;
 
   public ref bool PlayReversalSound {
-    get => ref _Handle.AsRef<bool>(_PlayReversalSoundOffset.Value);
+    get {
+      if (_PlayReversalSoundOffset == null) {
+        _PlayReversalSoundOffset = Schema.GetOffset(0x79068C4941EF4324);
+      }
+      return ref _Handle.AsRef<bool>(_PlayReversalSoundOffset!.Value);
+    }
   }
 
 

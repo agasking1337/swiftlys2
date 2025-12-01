@@ -17,25 +17,45 @@ internal partial class C_OP_RemapTransformOrientationToYawImpl : CParticleFuncti
   public C_OP_RemapTransformOrientationToYawImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TransformInputOffset = new(() => Schema.GetOffset(0xA0DF014CB3FDC289), LazyThreadSafetyMode.None);
+  private static nint? _TransformInputOffset;
 
   public CParticleTransformInput TransformInput {
-    get => new CParticleTransformInputImpl(_Handle + _TransformInputOffset.Value);
+    get {
+      if (_TransformInputOffset == null) {
+        _TransformInputOffset = Schema.GetOffset(0xA0DF014CB3FDC289);
+      }
+      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FieldOutputOffset = new(() => Schema.GetOffset(0xA0DF014CE5729606), LazyThreadSafetyMode.None);
+  private static nint? _FieldOutputOffset;
 
   public ParticleAttributeIndex_t FieldOutput {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset.Value);
+    get {
+      if (_FieldOutputOffset == null) {
+        _FieldOutputOffset = Schema.GetOffset(0xA0DF014CE5729606);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RotOffsetOffset = new(() => Schema.GetOffset(0xA0DF014CD1EA9CDF), LazyThreadSafetyMode.None);
+  private static nint? _RotOffsetOffset;
 
   public ref float RotOffset {
-    get => ref _Handle.AsRef<float>(_RotOffsetOffset.Value);
+    get {
+      if (_RotOffsetOffset == null) {
+        _RotOffsetOffset = Schema.GetOffset(0xA0DF014CD1EA9CDF);
+      }
+      return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinStrengthOffset = new(() => Schema.GetOffset(0xA0DF014C12520F26), LazyThreadSafetyMode.None);
+  private static nint? _SpinStrengthOffset;
 
   public ref float SpinStrength {
-    get => ref _Handle.AsRef<float>(_SpinStrengthOffset.Value);
+    get {
+      if (_SpinStrengthOffset == null) {
+        _SpinStrengthOffset = Schema.GetOffset(0xA0DF014C12520F26);
+      }
+      return ref _Handle.AsRef<float>(_SpinStrengthOffset!.Value);
+    }
   }
 
 

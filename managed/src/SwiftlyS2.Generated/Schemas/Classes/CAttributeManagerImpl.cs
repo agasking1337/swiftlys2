@@ -17,35 +17,65 @@ internal partial class CAttributeManagerImpl : SchemaClass, CAttributeManager {
   public CAttributeManagerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ProvidersOffset = new(() => Schema.GetOffset(0x7FCB380DA07F345D), LazyThreadSafetyMode.None);
+  private static nint? _ProvidersOffset;
 
   public ref CUtlVector<CHandle<CBaseEntity>> Providers {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ProvidersOffset.Value);
+    get {
+      if (_ProvidersOffset == null) {
+        _ProvidersOffset = Schema.GetOffset(0x7FCB380DA07F345D);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ProvidersOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReapplyProvisionParityOffset = new(() => Schema.GetOffset(0x7FCB380D2F68110B), LazyThreadSafetyMode.None);
+  private static nint? _ReapplyProvisionParityOffset;
 
   public ref int ReapplyProvisionParity {
-    get => ref _Handle.AsRef<int>(_ReapplyProvisionParityOffset.Value);
+    get {
+      if (_ReapplyProvisionParityOffset == null) {
+        _ReapplyProvisionParityOffset = Schema.GetOffset(0x7FCB380D2F68110B);
+      }
+      return ref _Handle.AsRef<int>(_ReapplyProvisionParityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OuterOffset = new(() => Schema.GetOffset(0x7FCB380D30AE9FA2), LazyThreadSafetyMode.None);
+  private static nint? _OuterOffset;
 
   public ref CHandle<CBaseEntity> Outer {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_OuterOffset.Value);
+    get {
+      if (_OuterOffset == null) {
+        _OuterOffset = Schema.GetOffset(0x7FCB380D30AE9FA2);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OuterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PreventLoopbackOffset = new(() => Schema.GetOffset(0x7FCB380D2CE71CA4), LazyThreadSafetyMode.None);
+  private static nint? _PreventLoopbackOffset;
 
   public ref bool PreventLoopback {
-    get => ref _Handle.AsRef<bool>(_PreventLoopbackOffset.Value);
+    get {
+      if (_PreventLoopbackOffset == null) {
+        _PreventLoopbackOffset = Schema.GetOffset(0x7FCB380D2CE71CA4);
+      }
+      return ref _Handle.AsRef<bool>(_PreventLoopbackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProviderTypeOffset = new(() => Schema.GetOffset(0x7FCB380DD5677CB4), LazyThreadSafetyMode.None);
+  private static nint? _ProviderTypeOffset;
 
   public ref attributeprovidertypes_t ProviderType {
-    get => ref _Handle.AsRef<attributeprovidertypes_t>(_ProviderTypeOffset.Value);
+    get {
+      if (_ProviderTypeOffset == null) {
+        _ProviderTypeOffset = Schema.GetOffset(0x7FCB380DD5677CB4);
+      }
+      return ref _Handle.AsRef<attributeprovidertypes_t>(_ProviderTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CachedResultsOffset = new(() => Schema.GetOffset(0x7FCB380D3CD4B7CB), LazyThreadSafetyMode.None);
+  private static nint? _CachedResultsOffset;
 
   public ref CUtlVector<CAttributeManager__cached_attribute_float_t> CachedResults {
-    get => ref _Handle.AsRef<CUtlVector<CAttributeManager__cached_attribute_float_t>>(_CachedResultsOffset.Value);
+    get {
+      if (_CachedResultsOffset == null) {
+        _CachedResultsOffset = Schema.GetOffset(0x7FCB380D3CD4B7CB);
+      }
+      return ref _Handle.AsRef<CUtlVector<CAttributeManager__cached_attribute_float_t>>(_CachedResultsOffset!.Value);
+    }
   }
 
   public void ReapplyProvisionParityUpdated() {

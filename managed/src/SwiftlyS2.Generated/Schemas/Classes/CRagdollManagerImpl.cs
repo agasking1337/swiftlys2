@@ -17,25 +17,45 @@ internal partial class CRagdollManagerImpl : CBaseEntityImpl, CRagdollManager {
   public CRagdollManagerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CurrentMaxRagdollCountOffset = new(() => Schema.GetOffset(0x3C67654C8544F4A7), LazyThreadSafetyMode.None);
+  private static nint? _CurrentMaxRagdollCountOffset;
 
   public ref byte CurrentMaxRagdollCount {
-    get => ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset.Value);
+    get {
+      if (_CurrentMaxRagdollCountOffset == null) {
+        _CurrentMaxRagdollCountOffset = Schema.GetOffset(0x3C67654C8544F4A7);
+      }
+      return ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxRagdollCountOffset = new(() => Schema.GetOffset(0x3C67654CC3A8C254), LazyThreadSafetyMode.None);
+  private static nint? _MaxRagdollCountOffset;
 
   public ref int MaxRagdollCount {
-    get => ref _Handle.AsRef<int>(_MaxRagdollCountOffset.Value);
+    get {
+      if (_MaxRagdollCountOffset == null) {
+        _MaxRagdollCountOffset = Schema.GetOffset(0x3C67654CC3A8C254);
+      }
+      return ref _Handle.AsRef<int>(_MaxRagdollCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SaveImportantOffset = new(() => Schema.GetOffset(0x3C67654CB7710746), LazyThreadSafetyMode.None);
+  private static nint? _SaveImportantOffset;
 
   public ref bool SaveImportant {
-    get => ref _Handle.AsRef<bool>(_SaveImportantOffset.Value);
+    get {
+      if (_SaveImportantOffset == null) {
+        _SaveImportantOffset = Schema.GetOffset(0x3C67654CB7710746);
+      }
+      return ref _Handle.AsRef<bool>(_SaveImportantOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CanTakeDamageOffset = new(() => Schema.GetOffset(0x3C67654C64446233), LazyThreadSafetyMode.None);
+  private static nint? _CanTakeDamageOffset;
 
   public ref bool CanTakeDamage {
-    get => ref _Handle.AsRef<bool>(_CanTakeDamageOffset.Value);
+    get {
+      if (_CanTakeDamageOffset == null) {
+        _CanTakeDamageOffset = Schema.GetOffset(0x3C67654C64446233);
+      }
+      return ref _Handle.AsRef<bool>(_CanTakeDamageOffset!.Value);
+    }
   }
 
   public void CurrentMaxRagdollCountUpdated() {

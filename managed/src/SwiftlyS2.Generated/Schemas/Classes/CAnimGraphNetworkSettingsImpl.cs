@@ -17,10 +17,15 @@ internal partial class CAnimGraphNetworkSettingsImpl : CAnimGraphSettingsGroupIm
   public CAnimGraphNetworkSettingsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NetworkingEnabledOffset = new(() => Schema.GetOffset(0xAF5ADE2491EF35E0), LazyThreadSafetyMode.None);
+  private static nint? _NetworkingEnabledOffset;
 
   public ref bool NetworkingEnabled {
-    get => ref _Handle.AsRef<bool>(_NetworkingEnabledOffset.Value);
+    get {
+      if (_NetworkingEnabledOffset == null) {
+        _NetworkingEnabledOffset = Schema.GetOffset(0xAF5ADE2491EF35E0);
+      }
+      return ref _Handle.AsRef<bool>(_NetworkingEnabledOffset!.Value);
+    }
   }
 
 

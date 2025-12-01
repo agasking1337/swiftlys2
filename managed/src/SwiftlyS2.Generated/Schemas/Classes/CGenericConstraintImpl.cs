@@ -17,245 +17,485 @@ internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericCon
   public CGenericConstraintImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _LinearMotionXOffset = new(() => Schema.GetOffset(0x1698284879962AA2), LazyThreadSafetyMode.None);
+  private static nint? _LinearMotionXOffset;
 
   public ref JointMotion_t LinearMotionX {
-    get => ref _Handle.AsRef<JointMotion_t>(_LinearMotionXOffset.Value);
+    get {
+      if (_LinearMotionXOffset == null) {
+        _LinearMotionXOffset = Schema.GetOffset(0x1698284879962AA2);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearMotionYOffset = new(() => Schema.GetOffset(0x169828487A962C35), LazyThreadSafetyMode.None);
+  private static nint? _LinearMotionYOffset;
 
   public ref JointMotion_t LinearMotionY {
-    get => ref _Handle.AsRef<JointMotion_t>(_LinearMotionYOffset.Value);
+    get {
+      if (_LinearMotionYOffset == null) {
+        _LinearMotionYOffset = Schema.GetOffset(0x169828487A962C35);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearMotionZOffset = new(() => Schema.GetOffset(0x169828487796277C), LazyThreadSafetyMode.None);
+  private static nint? _LinearMotionZOffset;
 
   public ref JointMotion_t LinearMotionZ {
-    get => ref _Handle.AsRef<JointMotion_t>(_LinearMotionZOffset.Value);
+    get {
+      if (_LinearMotionZOffset == null) {
+        _LinearMotionZOffset = Schema.GetOffset(0x169828487796277C);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearFrequencyXOffset = new(() => Schema.GetOffset(0x16982848D427BA04), LazyThreadSafetyMode.None);
+  private static nint? _LinearFrequencyXOffset;
 
   public ref float LinearFrequencyX {
-    get => ref _Handle.AsRef<float>(_LinearFrequencyXOffset.Value);
+    get {
+      if (_LinearFrequencyXOffset == null) {
+        _LinearFrequencyXOffset = Schema.GetOffset(0x16982848D427BA04);
+      }
+      return ref _Handle.AsRef<float>(_LinearFrequencyXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearFrequencyYOffset = new(() => Schema.GetOffset(0x16982848D527BB97), LazyThreadSafetyMode.None);
+  private static nint? _LinearFrequencyYOffset;
 
   public ref float LinearFrequencyY {
-    get => ref _Handle.AsRef<float>(_LinearFrequencyYOffset.Value);
+    get {
+      if (_LinearFrequencyYOffset == null) {
+        _LinearFrequencyYOffset = Schema.GetOffset(0x16982848D527BB97);
+      }
+      return ref _Handle.AsRef<float>(_LinearFrequencyYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearFrequencyZOffset = new(() => Schema.GetOffset(0x16982848D627BD2A), LazyThreadSafetyMode.None);
+  private static nint? _LinearFrequencyZOffset;
 
   public ref float LinearFrequencyZ {
-    get => ref _Handle.AsRef<float>(_LinearFrequencyZOffset.Value);
+    get {
+      if (_LinearFrequencyZOffset == null) {
+        _LinearFrequencyZOffset = Schema.GetOffset(0x16982848D627BD2A);
+      }
+      return ref _Handle.AsRef<float>(_LinearFrequencyZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearDampingRatioXOffset = new(() => Schema.GetOffset(0x16982848075BA1D5), LazyThreadSafetyMode.None);
+  private static nint? _LinearDampingRatioXOffset;
 
   public ref float LinearDampingRatioX {
-    get => ref _Handle.AsRef<float>(_LinearDampingRatioXOffset.Value);
+    get {
+      if (_LinearDampingRatioXOffset == null) {
+        _LinearDampingRatioXOffset = Schema.GetOffset(0x16982848075BA1D5);
+      }
+      return ref _Handle.AsRef<float>(_LinearDampingRatioXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearDampingRatioYOffset = new(() => Schema.GetOffset(0x16982848065BA042), LazyThreadSafetyMode.None);
+  private static nint? _LinearDampingRatioYOffset;
 
   public ref float LinearDampingRatioY {
-    get => ref _Handle.AsRef<float>(_LinearDampingRatioYOffset.Value);
+    get {
+      if (_LinearDampingRatioYOffset == null) {
+        _LinearDampingRatioYOffset = Schema.GetOffset(0x16982848065BA042);
+      }
+      return ref _Handle.AsRef<float>(_LinearDampingRatioYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LinearDampingRatioZOffset = new(() => Schema.GetOffset(0x16982848055B9EAF), LazyThreadSafetyMode.None);
+  private static nint? _LinearDampingRatioZOffset;
 
   public ref float LinearDampingRatioZ {
-    get => ref _Handle.AsRef<float>(_LinearDampingRatioZOffset.Value);
+    get {
+      if (_LinearDampingRatioZOffset == null) {
+        _LinearDampingRatioZOffset = Schema.GetOffset(0x16982848055B9EAF);
+      }
+      return ref _Handle.AsRef<float>(_LinearDampingRatioZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxLinearImpulseXOffset = new(() => Schema.GetOffset(0x16982848DA6330BF), LazyThreadSafetyMode.None);
+  private static nint? _MaxLinearImpulseXOffset;
 
   public ref float MaxLinearImpulseX {
-    get => ref _Handle.AsRef<float>(_MaxLinearImpulseXOffset.Value);
+    get {
+      if (_MaxLinearImpulseXOffset == null) {
+        _MaxLinearImpulseXOffset = Schema.GetOffset(0x16982848DA6330BF);
+      }
+      return ref _Handle.AsRef<float>(_MaxLinearImpulseXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxLinearImpulseYOffset = new(() => Schema.GetOffset(0x16982848D9632F2C), LazyThreadSafetyMode.None);
+  private static nint? _MaxLinearImpulseYOffset;
 
   public ref float MaxLinearImpulseY {
-    get => ref _Handle.AsRef<float>(_MaxLinearImpulseYOffset.Value);
+    get {
+      if (_MaxLinearImpulseYOffset == null) {
+        _MaxLinearImpulseYOffset = Schema.GetOffset(0x16982848D9632F2C);
+      }
+      return ref _Handle.AsRef<float>(_MaxLinearImpulseYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxLinearImpulseZOffset = new(() => Schema.GetOffset(0x16982848DC6333E5), LazyThreadSafetyMode.None);
+  private static nint? _MaxLinearImpulseZOffset;
 
   public ref float MaxLinearImpulseZ {
-    get => ref _Handle.AsRef<float>(_MaxLinearImpulseZOffset.Value);
+    get {
+      if (_MaxLinearImpulseZOffset == null) {
+        _MaxLinearImpulseZOffset = Schema.GetOffset(0x16982848DC6333E5);
+      }
+      return ref _Handle.AsRef<float>(_MaxLinearImpulseZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeXOffset = new(() => Schema.GetOffset(0x16982848D1BE25CB), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeXOffset;
 
   public ref float BreakAfterTimeX {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeXOffset.Value);
+    get {
+      if (_BreakAfterTimeXOffset == null) {
+        _BreakAfterTimeXOffset = Schema.GetOffset(0x16982848D1BE25CB);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeYOffset = new(() => Schema.GetOffset(0x16982848D0BE2438), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeYOffset;
 
   public ref float BreakAfterTimeY {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeYOffset.Value);
+    get {
+      if (_BreakAfterTimeYOffset == null) {
+        _BreakAfterTimeYOffset = Schema.GetOffset(0x16982848D0BE2438);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeZOffset = new(() => Schema.GetOffset(0x16982848D3BE28F1), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeZOffset;
 
   public ref float BreakAfterTimeZ {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeZOffset.Value);
+    get {
+      if (_BreakAfterTimeZOffset == null) {
+        _BreakAfterTimeZOffset = Schema.GetOffset(0x16982848D3BE28F1);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeStartTimeXOffset = new(() => Schema.GetOffset(0x169828480B0683A6), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeStartTimeXOffset;
 
   public GameTime_t BreakAfterTimeStartTimeX {
-    get => new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeXOffset.Value);
+    get {
+      if (_BreakAfterTimeStartTimeXOffset == null) {
+        _BreakAfterTimeStartTimeXOffset = Schema.GetOffset(0x169828480B0683A6);
+      }
+      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeStartTimeYOffset = new(() => Schema.GetOffset(0x169828480C068539), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeStartTimeYOffset;
 
   public GameTime_t BreakAfterTimeStartTimeY {
-    get => new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeYOffset.Value);
+    get {
+      if (_BreakAfterTimeStartTimeYOffset == null) {
+        _BreakAfterTimeStartTimeYOffset = Schema.GetOffset(0x169828480C068539);
+      }
+      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeStartTimeZOffset = new(() => Schema.GetOffset(0x1698284809068080), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeStartTimeZOffset;
 
   public GameTime_t BreakAfterTimeStartTimeZ {
-    get => new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeZOffset.Value);
+    get {
+      if (_BreakAfterTimeStartTimeZOffset == null) {
+        _BreakAfterTimeStartTimeZOffset = Schema.GetOffset(0x1698284809068080);
+      }
+      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeThresholdXOffset = new(() => Schema.GetOffset(0x16982848EA81B5D4), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeThresholdXOffset;
 
   public ref float BreakAfterTimeThresholdX {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeThresholdXOffset.Value);
+    get {
+      if (_BreakAfterTimeThresholdXOffset == null) {
+        _BreakAfterTimeThresholdXOffset = Schema.GetOffset(0x16982848EA81B5D4);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeThresholdYOffset = new(() => Schema.GetOffset(0x16982848EB81B767), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeThresholdYOffset;
 
   public ref float BreakAfterTimeThresholdY {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeThresholdYOffset.Value);
+    get {
+      if (_BreakAfterTimeThresholdYOffset == null) {
+        _BreakAfterTimeThresholdYOffset = Schema.GetOffset(0x16982848EB81B767);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BreakAfterTimeThresholdZOffset = new(() => Schema.GetOffset(0x16982848EC81B8FA), LazyThreadSafetyMode.None);
+  private static nint? _BreakAfterTimeThresholdZOffset;
 
   public ref float BreakAfterTimeThresholdZ {
-    get => ref _Handle.AsRef<float>(_BreakAfterTimeThresholdZOffset.Value);
+    get {
+      if (_BreakAfterTimeThresholdZOffset == null) {
+        _BreakAfterTimeThresholdZOffset = Schema.GetOffset(0x16982848EC81B8FA);
+      }
+      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceXOffset = new(() => Schema.GetOffset(0x1698284842CA87EB), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceXOffset;
 
   public ref float NotifyForceX {
-    get => ref _Handle.AsRef<float>(_NotifyForceXOffset.Value);
+    get {
+      if (_NotifyForceXOffset == null) {
+        _NotifyForceXOffset = Schema.GetOffset(0x1698284842CA87EB);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceYOffset = new(() => Schema.GetOffset(0x1698284841CA8658), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceYOffset;
 
   public ref float NotifyForceY {
-    get => ref _Handle.AsRef<float>(_NotifyForceYOffset.Value);
+    get {
+      if (_NotifyForceYOffset == null) {
+        _NotifyForceYOffset = Schema.GetOffset(0x1698284841CA8658);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceZOffset = new(() => Schema.GetOffset(0x1698284844CA8B11), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceZOffset;
 
   public ref float NotifyForceZ {
-    get => ref _Handle.AsRef<float>(_NotifyForceZOffset.Value);
+    get {
+      if (_NotifyForceZOffset == null) {
+        _NotifyForceZOffset = Schema.GetOffset(0x1698284844CA8B11);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceMinTimeXOffset = new(() => Schema.GetOffset(0x169828482CB94C2E), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceMinTimeXOffset;
 
   public ref float NotifyForceMinTimeX {
-    get => ref _Handle.AsRef<float>(_NotifyForceMinTimeXOffset.Value);
+    get {
+      if (_NotifyForceMinTimeXOffset == null) {
+        _NotifyForceMinTimeXOffset = Schema.GetOffset(0x169828482CB94C2E);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceMinTimeXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceMinTimeYOffset = new(() => Schema.GetOffset(0x169828482DB94DC1), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceMinTimeYOffset;
 
   public ref float NotifyForceMinTimeY {
-    get => ref _Handle.AsRef<float>(_NotifyForceMinTimeYOffset.Value);
+    get {
+      if (_NotifyForceMinTimeYOffset == null) {
+        _NotifyForceMinTimeYOffset = Schema.GetOffset(0x169828482DB94DC1);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceMinTimeYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceMinTimeZOffset = new(() => Schema.GetOffset(0x169828482AB94908), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceMinTimeZOffset;
 
   public ref float NotifyForceMinTimeZ {
-    get => ref _Handle.AsRef<float>(_NotifyForceMinTimeZOffset.Value);
+    get {
+      if (_NotifyForceMinTimeZOffset == null) {
+        _NotifyForceMinTimeZOffset = Schema.GetOffset(0x169828482AB94908);
+      }
+      return ref _Handle.AsRef<float>(_NotifyForceMinTimeZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceLastTimeXOffset = new(() => Schema.GetOffset(0x169828485B7371B4), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceLastTimeXOffset;
 
   public GameTime_t NotifyForceLastTimeX {
-    get => new GameTime_tImpl(_Handle + _NotifyForceLastTimeXOffset.Value);
+    get {
+      if (_NotifyForceLastTimeXOffset == null) {
+        _NotifyForceLastTimeXOffset = Schema.GetOffset(0x169828485B7371B4);
+      }
+      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceLastTimeYOffset = new(() => Schema.GetOffset(0x169828485C737347), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceLastTimeYOffset;
 
   public GameTime_t NotifyForceLastTimeY {
-    get => new GameTime_tImpl(_Handle + _NotifyForceLastTimeYOffset.Value);
+    get {
+      if (_NotifyForceLastTimeYOffset == null) {
+        _NotifyForceLastTimeYOffset = Schema.GetOffset(0x169828485C737347);
+      }
+      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceLastTimeZOffset = new(() => Schema.GetOffset(0x169828485D7374DA), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceLastTimeZOffset;
 
   public GameTime_t NotifyForceLastTimeZ {
-    get => new GameTime_tImpl(_Handle + _NotifyForceLastTimeZOffset.Value);
+    get {
+      if (_NotifyForceLastTimeZOffset == null) {
+        _NotifyForceLastTimeZOffset = Schema.GetOffset(0x169828485D7374DA);
+      }
+      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AxisNotifiedXOffset = new(() => Schema.GetOffset(0x169828483F5088F4), LazyThreadSafetyMode.None);
+  private static nint? _AxisNotifiedXOffset;
 
   public ref bool AxisNotifiedX {
-    get => ref _Handle.AsRef<bool>(_AxisNotifiedXOffset.Value);
+    get {
+      if (_AxisNotifiedXOffset == null) {
+        _AxisNotifiedXOffset = Schema.GetOffset(0x169828483F5088F4);
+      }
+      return ref _Handle.AsRef<bool>(_AxisNotifiedXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AxisNotifiedYOffset = new(() => Schema.GetOffset(0x1698284840508A87), LazyThreadSafetyMode.None);
+  private static nint? _AxisNotifiedYOffset;
 
   public ref bool AxisNotifiedY {
-    get => ref _Handle.AsRef<bool>(_AxisNotifiedYOffset.Value);
+    get {
+      if (_AxisNotifiedYOffset == null) {
+        _AxisNotifiedYOffset = Schema.GetOffset(0x1698284840508A87);
+      }
+      return ref _Handle.AsRef<bool>(_AxisNotifiedYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AxisNotifiedZOffset = new(() => Schema.GetOffset(0x1698284841508C1A), LazyThreadSafetyMode.None);
+  private static nint? _AxisNotifiedZOffset;
 
   public ref bool AxisNotifiedZ {
-    get => ref _Handle.AsRef<bool>(_AxisNotifiedZOffset.Value);
+    get {
+      if (_AxisNotifiedZOffset == null) {
+        _AxisNotifiedZOffset = Schema.GetOffset(0x1698284841508C1A);
+      }
+      return ref _Handle.AsRef<bool>(_AxisNotifiedZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularMotionXOffset = new(() => Schema.GetOffset(0x16982848F5DC3335), LazyThreadSafetyMode.None);
+  private static nint? _AngularMotionXOffset;
 
   public ref JointMotion_t AngularMotionX {
-    get => ref _Handle.AsRef<JointMotion_t>(_AngularMotionXOffset.Value);
+    get {
+      if (_AngularMotionXOffset == null) {
+        _AngularMotionXOffset = Schema.GetOffset(0x16982848F5DC3335);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularMotionYOffset = new(() => Schema.GetOffset(0x16982848F4DC31A2), LazyThreadSafetyMode.None);
+  private static nint? _AngularMotionYOffset;
 
   public ref JointMotion_t AngularMotionY {
-    get => ref _Handle.AsRef<JointMotion_t>(_AngularMotionYOffset.Value);
+    get {
+      if (_AngularMotionYOffset == null) {
+        _AngularMotionYOffset = Schema.GetOffset(0x16982848F4DC31A2);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularMotionZOffset = new(() => Schema.GetOffset(0x16982848F3DC300F), LazyThreadSafetyMode.None);
+  private static nint? _AngularMotionZOffset;
 
   public ref JointMotion_t AngularMotionZ {
-    get => ref _Handle.AsRef<JointMotion_t>(_AngularMotionZOffset.Value);
+    get {
+      if (_AngularMotionZOffset == null) {
+        _AngularMotionZOffset = Schema.GetOffset(0x16982848F3DC300F);
+      }
+      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularFrequencyXOffset = new(() => Schema.GetOffset(0x1698284874F93B19), LazyThreadSafetyMode.None);
+  private static nint? _AngularFrequencyXOffset;
 
   public ref float AngularFrequencyX {
-    get => ref _Handle.AsRef<float>(_AngularFrequencyXOffset.Value);
+    get {
+      if (_AngularFrequencyXOffset == null) {
+        _AngularFrequencyXOffset = Schema.GetOffset(0x1698284874F93B19);
+      }
+      return ref _Handle.AsRef<float>(_AngularFrequencyXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularFrequencyYOffset = new(() => Schema.GetOffset(0x1698284873F93986), LazyThreadSafetyMode.None);
+  private static nint? _AngularFrequencyYOffset;
 
   public ref float AngularFrequencyY {
-    get => ref _Handle.AsRef<float>(_AngularFrequencyYOffset.Value);
+    get {
+      if (_AngularFrequencyYOffset == null) {
+        _AngularFrequencyYOffset = Schema.GetOffset(0x1698284873F93986);
+      }
+      return ref _Handle.AsRef<float>(_AngularFrequencyYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularFrequencyZOffset = new(() => Schema.GetOffset(0x1698284872F937F3), LazyThreadSafetyMode.None);
+  private static nint? _AngularFrequencyZOffset;
 
   public ref float AngularFrequencyZ {
-    get => ref _Handle.AsRef<float>(_AngularFrequencyZOffset.Value);
+    get {
+      if (_AngularFrequencyZOffset == null) {
+        _AngularFrequencyZOffset = Schema.GetOffset(0x1698284872F937F3);
+      }
+      return ref _Handle.AsRef<float>(_AngularFrequencyZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularDampingRatioXOffset = new(() => Schema.GetOffset(0x169828486B71C0CE), LazyThreadSafetyMode.None);
+  private static nint? _AngularDampingRatioXOffset;
 
   public ref float AngularDampingRatioX {
-    get => ref _Handle.AsRef<float>(_AngularDampingRatioXOffset.Value);
+    get {
+      if (_AngularDampingRatioXOffset == null) {
+        _AngularDampingRatioXOffset = Schema.GetOffset(0x169828486B71C0CE);
+      }
+      return ref _Handle.AsRef<float>(_AngularDampingRatioXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularDampingRatioYOffset = new(() => Schema.GetOffset(0x169828486C71C261), LazyThreadSafetyMode.None);
+  private static nint? _AngularDampingRatioYOffset;
 
   public ref float AngularDampingRatioY {
-    get => ref _Handle.AsRef<float>(_AngularDampingRatioYOffset.Value);
+    get {
+      if (_AngularDampingRatioYOffset == null) {
+        _AngularDampingRatioYOffset = Schema.GetOffset(0x169828486C71C261);
+      }
+      return ref _Handle.AsRef<float>(_AngularDampingRatioYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AngularDampingRatioZOffset = new(() => Schema.GetOffset(0x169828486971BDA8), LazyThreadSafetyMode.None);
+  private static nint? _AngularDampingRatioZOffset;
 
   public ref float AngularDampingRatioZ {
-    get => ref _Handle.AsRef<float>(_AngularDampingRatioZOffset.Value);
+    get {
+      if (_AngularDampingRatioZOffset == null) {
+        _AngularDampingRatioZOffset = Schema.GetOffset(0x169828486971BDA8);
+      }
+      return ref _Handle.AsRef<float>(_AngularDampingRatioZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxAngularImpulseXOffset = new(() => Schema.GetOffset(0x169828489B259BC6), LazyThreadSafetyMode.None);
+  private static nint? _MaxAngularImpulseXOffset;
 
   public ref float MaxAngularImpulseX {
-    get => ref _Handle.AsRef<float>(_MaxAngularImpulseXOffset.Value);
+    get {
+      if (_MaxAngularImpulseXOffset == null) {
+        _MaxAngularImpulseXOffset = Schema.GetOffset(0x169828489B259BC6);
+      }
+      return ref _Handle.AsRef<float>(_MaxAngularImpulseXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxAngularImpulseYOffset = new(() => Schema.GetOffset(0x169828489C259D59), LazyThreadSafetyMode.None);
+  private static nint? _MaxAngularImpulseYOffset;
 
   public ref float MaxAngularImpulseY {
-    get => ref _Handle.AsRef<float>(_MaxAngularImpulseYOffset.Value);
+    get {
+      if (_MaxAngularImpulseYOffset == null) {
+        _MaxAngularImpulseYOffset = Schema.GetOffset(0x169828489C259D59);
+      }
+      return ref _Handle.AsRef<float>(_MaxAngularImpulseYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxAngularImpulseZOffset = new(() => Schema.GetOffset(0x16982848992598A0), LazyThreadSafetyMode.None);
+  private static nint? _MaxAngularImpulseZOffset;
 
   public ref float MaxAngularImpulseZ {
-    get => ref _Handle.AsRef<float>(_MaxAngularImpulseZOffset.Value);
+    get {
+      if (_MaxAngularImpulseZOffset == null) {
+        _MaxAngularImpulseZOffset = Schema.GetOffset(0x16982848992598A0);
+      }
+      return ref _Handle.AsRef<float>(_MaxAngularImpulseZOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceReachedXOffset = new(() => Schema.GetOffset(0x169828486707AE55), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceReachedXOffset;
 
   public CEntityIOOutput NotifyForceReachedX {
-    get => new CEntityIOOutputImpl(_Handle + _NotifyForceReachedXOffset.Value);
+    get {
+      if (_NotifyForceReachedXOffset == null) {
+        _NotifyForceReachedXOffset = Schema.GetOffset(0x169828486707AE55);
+      }
+      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedXOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceReachedYOffset = new(() => Schema.GetOffset(0x169828486607ACC2), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceReachedYOffset;
 
   public CEntityIOOutput NotifyForceReachedY {
-    get => new CEntityIOOutputImpl(_Handle + _NotifyForceReachedYOffset.Value);
+    get {
+      if (_NotifyForceReachedYOffset == null) {
+        _NotifyForceReachedYOffset = Schema.GetOffset(0x169828486607ACC2);
+      }
+      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedYOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NotifyForceReachedZOffset = new(() => Schema.GetOffset(0x169828486507AB2F), LazyThreadSafetyMode.None);
+  private static nint? _NotifyForceReachedZOffset;
 
   public CEntityIOOutput NotifyForceReachedZ {
-    get => new CEntityIOOutputImpl(_Handle + _NotifyForceReachedZOffset.Value);
+    get {
+      if (_NotifyForceReachedZOffset == null) {
+        _NotifyForceReachedZOffset = Schema.GetOffset(0x169828486507AB2F);
+      }
+      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedZOffset!.Value);
+    }
   }
 
 

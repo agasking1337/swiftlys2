@@ -17,25 +17,45 @@ internal partial class constraint_hingeparams_tImpl : SchemaClass, constraint_hi
   public constraint_hingeparams_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _WorldPositionOffset = new(() => Schema.GetOffset(0x790804C3F16C2360), LazyThreadSafetyMode.None);
+  private static nint? _WorldPositionOffset;
 
   public ref Vector WorldPosition {
-    get => ref _Handle.AsRef<Vector>(_WorldPositionOffset.Value);
+    get {
+      if (_WorldPositionOffset == null) {
+        _WorldPositionOffset = Schema.GetOffset(0x790804C3F16C2360);
+      }
+      return ref _Handle.AsRef<Vector>(_WorldPositionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldAxisDirectionOffset = new(() => Schema.GetOffset(0x790804C3637CEB43), LazyThreadSafetyMode.None);
+  private static nint? _WorldAxisDirectionOffset;
 
   public ref Vector WorldAxisDirection {
-    get => ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset.Value);
+    get {
+      if (_WorldAxisDirectionOffset == null) {
+        _WorldAxisDirectionOffset = Schema.GetOffset(0x790804C3637CEB43);
+      }
+      return ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HingeAxisOffset = new(() => Schema.GetOffset(0x790804C33BD096FD), LazyThreadSafetyMode.None);
+  private static nint? _HingeAxisOffset;
 
   public constraint_axislimit_t HingeAxis {
-    get => new constraint_axislimit_tImpl(_Handle + _HingeAxisOffset.Value);
+    get {
+      if (_HingeAxisOffset == null) {
+        _HingeAxisOffset = Schema.GetOffset(0x790804C33BD096FD);
+      }
+      return new constraint_axislimit_tImpl(_Handle + _HingeAxisOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConstraintOffset = new(() => Schema.GetOffset(0x790804C3B822E25A), LazyThreadSafetyMode.None);
+  private static nint? _ConstraintOffset;
 
   public constraint_breakableparams_t Constraint {
-    get => new constraint_breakableparams_tImpl(_Handle + _ConstraintOffset.Value);
+    get {
+      if (_ConstraintOffset == null) {
+        _ConstraintOffset = Schema.GetOffset(0x790804C3B822E25A);
+      }
+      return new constraint_breakableparams_tImpl(_Handle + _ConstraintOffset!.Value);
+    }
   }
 
 

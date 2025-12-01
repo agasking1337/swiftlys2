@@ -17,19 +17,32 @@ internal partial class CTonemapTriggerImpl : CBaseTriggerImpl, CTonemapTrigger {
   public CTonemapTriggerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TonemapControllerNameOffset = new(() => Schema.GetOffset(0x82562698C641A282), LazyThreadSafetyMode.None);
+  private static nint? _TonemapControllerNameOffset;
 
   public string TonemapControllerName {
     get {
-      var ptr = _Handle.Read<nint>(_TonemapControllerNameOffset.Value);
+      if (_TonemapControllerNameOffset == null) {
+        _TonemapControllerNameOffset = Schema.GetOffset(0x82562698C641A282);
+      }
+      var ptr = _Handle.Read<nint>(_TonemapControllerNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TonemapControllerNameOffset.Value, value);
+    set {
+      if (_TonemapControllerNameOffset == null) {
+        _TonemapControllerNameOffset = Schema.GetOffset(0x82562698C641A282);
+      }
+      Schema.SetString(_Handle, _TonemapControllerNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TonemapControllerOffset = new(() => Schema.GetOffset(0x82562698F5E1A34F), LazyThreadSafetyMode.None);
+  private static nint? _TonemapControllerOffset;
 
   public ref CHandle<CEntityInstance> TonemapController {
-    get => ref _Handle.AsRef<CHandle<CEntityInstance>>(_TonemapControllerOffset.Value);
+    get {
+      if (_TonemapControllerOffset == null) {
+        _TonemapControllerOffset = Schema.GetOffset(0x82562698F5E1A34F);
+      }
+      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_TonemapControllerOffset!.Value);
+    }
   }
 
 

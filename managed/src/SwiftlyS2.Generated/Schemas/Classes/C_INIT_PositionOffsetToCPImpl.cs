@@ -17,20 +17,35 @@ internal partial class C_INIT_PositionOffsetToCPImpl : CParticleFunctionInitiali
   public C_INIT_PositionOffsetToCPImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ControlPointNumberStartOffset = new(() => Schema.GetOffset(0x5976F1BC33DBA947), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberStartOffset;
 
   public ref int ControlPointNumberStart {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberStartOffset.Value);
+    get {
+      if (_ControlPointNumberStartOffset == null) {
+        _ControlPointNumberStartOffset = Schema.GetOffset(0x5976F1BC33DBA947);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberStartOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ControlPointNumberEndOffset = new(() => Schema.GetOffset(0x5976F1BC6527E5A2), LazyThreadSafetyMode.None);
+  private static nint? _ControlPointNumberEndOffset;
 
   public ref int ControlPointNumberEnd {
-    get => ref _Handle.AsRef<int>(_ControlPointNumberEndOffset.Value);
+    get {
+      if (_ControlPointNumberEndOffset == null) {
+        _ControlPointNumberEndOffset = Schema.GetOffset(0x5976F1BC6527E5A2);
+      }
+      return ref _Handle.AsRef<int>(_ControlPointNumberEndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalCoordsOffset = new(() => Schema.GetOffset(0x5976F1BC30E716DE), LazyThreadSafetyMode.None);
+  private static nint? _LocalCoordsOffset;
 
   public ref bool LocalCoords {
-    get => ref _Handle.AsRef<bool>(_LocalCoordsOffset.Value);
+    get {
+      if (_LocalCoordsOffset == null) {
+        _LocalCoordsOffset = Schema.GetOffset(0x5976F1BC30E716DE);
+      }
+      return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+    }
   }
 
 

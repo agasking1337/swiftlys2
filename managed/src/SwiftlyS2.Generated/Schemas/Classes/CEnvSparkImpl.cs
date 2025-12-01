@@ -17,30 +17,55 @@ internal partial class CEnvSparkImpl : CPointEntityImpl, CEnvSpark {
   public CEnvSparkImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DelayOffset = new(() => Schema.GetOffset(0x3BACCABA7D68FD6E), LazyThreadSafetyMode.None);
+  private static nint? _DelayOffset;
 
   public ref float Delay {
-    get => ref _Handle.AsRef<float>(_DelayOffset.Value);
+    get {
+      if (_DelayOffset == null) {
+        _DelayOffset = Schema.GetOffset(0x3BACCABA7D68FD6E);
+      }
+      return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MagnitudeOffset = new(() => Schema.GetOffset(0x3BACCABA0C71BDF1), LazyThreadSafetyMode.None);
+  private static nint? _MagnitudeOffset;
 
   public ref int Magnitude {
-    get => ref _Handle.AsRef<int>(_MagnitudeOffset.Value);
+    get {
+      if (_MagnitudeOffset == null) {
+        _MagnitudeOffset = Schema.GetOffset(0x3BACCABA0C71BDF1);
+      }
+      return ref _Handle.AsRef<int>(_MagnitudeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TrailLengthOffset = new(() => Schema.GetOffset(0x3BACCABA65AAB1A7), LazyThreadSafetyMode.None);
+  private static nint? _TrailLengthOffset;
 
   public ref int TrailLength {
-    get => ref _Handle.AsRef<int>(_TrailLengthOffset.Value);
+    get {
+      if (_TrailLengthOffset == null) {
+        _TrailLengthOffset = Schema.GetOffset(0x3BACCABA65AAB1A7);
+      }
+      return ref _Handle.AsRef<int>(_TrailLengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x3BACCABA18853D59), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref int Type {
-    get => ref _Handle.AsRef<int>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x3BACCABA18853D59);
+      }
+      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnSparkOffset = new(() => Schema.GetOffset(0x3BACCABA67E1EE5D), LazyThreadSafetyMode.None);
+  private static nint? _OnSparkOffset;
 
   public CEntityIOOutput OnSpark {
-    get => new CEntityIOOutputImpl(_Handle + _OnSparkOffset.Value);
+    get {
+      if (_OnSparkOffset == null) {
+        _OnSparkOffset = Schema.GetOffset(0x3BACCABA67E1EE5D);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnSparkOffset!.Value);
+    }
   }
 
 

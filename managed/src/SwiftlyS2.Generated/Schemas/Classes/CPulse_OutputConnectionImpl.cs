@@ -17,25 +17,45 @@ internal partial class CPulse_OutputConnectionImpl : SchemaClass, CPulse_OutputC
   public CPulse_OutputConnectionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SourceOutputOffset = new(() => Schema.GetOffset(0x6DEBCD452D46D7F5), LazyThreadSafetyMode.None);
+  private static nint? _SourceOutputOffset;
 
   public SchemaUntypedField SourceOutput {
-    get => new SchemaUntypedField(_Handle + _SourceOutputOffset.Value);
+    get {
+      if (_SourceOutputOffset == null) {
+        _SourceOutputOffset = Schema.GetOffset(0x6DEBCD452D46D7F5);
+      }
+      return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetEntityOffset = new(() => Schema.GetOffset(0x6DEBCD45948B1533), LazyThreadSafetyMode.None);
+  private static nint? _TargetEntityOffset;
 
   public SchemaUntypedField TargetEntity {
-    get => new SchemaUntypedField(_Handle + _TargetEntityOffset.Value);
+    get {
+      if (_TargetEntityOffset == null) {
+        _TargetEntityOffset = Schema.GetOffset(0x6DEBCD45948B1533);
+      }
+      return new SchemaUntypedField(_Handle + _TargetEntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetInputOffset = new(() => Schema.GetOffset(0x6DEBCD45F1A0003C), LazyThreadSafetyMode.None);
+  private static nint? _TargetInputOffset;
 
   public SchemaUntypedField TargetInput {
-    get => new SchemaUntypedField(_Handle + _TargetInputOffset.Value);
+    get {
+      if (_TargetInputOffset == null) {
+        _TargetInputOffset = Schema.GetOffset(0x6DEBCD45F1A0003C);
+      }
+      return new SchemaUntypedField(_Handle + _TargetInputOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParamOffset = new(() => Schema.GetOffset(0x6DEBCD45E85FEBB2), LazyThreadSafetyMode.None);
+  private static nint? _ParamOffset;
 
   public SchemaUntypedField Param {
-    get => new SchemaUntypedField(_Handle + _ParamOffset.Value);
+    get {
+      if (_ParamOffset == null) {
+        _ParamOffset = Schema.GetOffset(0x6DEBCD45E85FEBB2);
+      }
+      return new SchemaUntypedField(_Handle + _ParamOffset!.Value);
+    }
   }
 
 

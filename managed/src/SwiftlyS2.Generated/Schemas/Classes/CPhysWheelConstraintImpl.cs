@@ -17,65 +17,125 @@ internal partial class CPhysWheelConstraintImpl : CPhysConstraintImpl, CPhysWhee
   public CPhysWheelConstraintImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SuspensionFrequencyOffset = new(() => Schema.GetOffset(0x597D72C29D467E68), LazyThreadSafetyMode.None);
+  private static nint? _SuspensionFrequencyOffset;
 
   public ref float SuspensionFrequency {
-    get => ref _Handle.AsRef<float>(_SuspensionFrequencyOffset.Value);
+    get {
+      if (_SuspensionFrequencyOffset == null) {
+        _SuspensionFrequencyOffset = Schema.GetOffset(0x597D72C29D467E68);
+      }
+      return ref _Handle.AsRef<float>(_SuspensionFrequencyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SuspensionDampingRatioOffset = new(() => Schema.GetOffset(0x597D72C2C2F8EAE3), LazyThreadSafetyMode.None);
+  private static nint? _SuspensionDampingRatioOffset;
 
   public ref float SuspensionDampingRatio {
-    get => ref _Handle.AsRef<float>(_SuspensionDampingRatioOffset.Value);
+    get {
+      if (_SuspensionDampingRatioOffset == null) {
+        _SuspensionDampingRatioOffset = Schema.GetOffset(0x597D72C2C2F8EAE3);
+      }
+      return ref _Handle.AsRef<float>(_SuspensionDampingRatioOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SuspensionHeightOffsetOffset = new(() => Schema.GetOffset(0x597D72C2B6CA3042), LazyThreadSafetyMode.None);
+  private static nint? _SuspensionHeightOffsetOffset;
 
   public ref float SuspensionHeightOffset {
-    get => ref _Handle.AsRef<float>(_SuspensionHeightOffsetOffset.Value);
+    get {
+      if (_SuspensionHeightOffsetOffset == null) {
+        _SuspensionHeightOffsetOffset = Schema.GetOffset(0x597D72C2B6CA3042);
+      }
+      return ref _Handle.AsRef<float>(_SuspensionHeightOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableSuspensionLimitOffset = new(() => Schema.GetOffset(0x597D72C2B8A9BDC2), LazyThreadSafetyMode.None);
+  private static nint? _EnableSuspensionLimitOffset;
 
   public ref bool EnableSuspensionLimit {
-    get => ref _Handle.AsRef<bool>(_EnableSuspensionLimitOffset.Value);
+    get {
+      if (_EnableSuspensionLimitOffset == null) {
+        _EnableSuspensionLimitOffset = Schema.GetOffset(0x597D72C2B8A9BDC2);
+      }
+      return ref _Handle.AsRef<bool>(_EnableSuspensionLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinSuspensionOffsetOffset = new(() => Schema.GetOffset(0x597D72C2B94341AB), LazyThreadSafetyMode.None);
+  private static nint? _MinSuspensionOffsetOffset;
 
   public ref float MinSuspensionOffset {
-    get => ref _Handle.AsRef<float>(_MinSuspensionOffsetOffset.Value);
+    get {
+      if (_MinSuspensionOffsetOffset == null) {
+        _MinSuspensionOffsetOffset = Schema.GetOffset(0x597D72C2B94341AB);
+      }
+      return ref _Handle.AsRef<float>(_MinSuspensionOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSuspensionOffsetOffset = new(() => Schema.GetOffset(0x597D72C22EABFDE9), LazyThreadSafetyMode.None);
+  private static nint? _MaxSuspensionOffsetOffset;
 
   public ref float MaxSuspensionOffset {
-    get => ref _Handle.AsRef<float>(_MaxSuspensionOffsetOffset.Value);
+    get {
+      if (_MaxSuspensionOffsetOffset == null) {
+        _MaxSuspensionOffsetOffset = Schema.GetOffset(0x597D72C22EABFDE9);
+      }
+      return ref _Handle.AsRef<float>(_MaxSuspensionOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableSteeringLimitOffset = new(() => Schema.GetOffset(0x597D72C25B75B454), LazyThreadSafetyMode.None);
+  private static nint? _EnableSteeringLimitOffset;
 
   public ref bool EnableSteeringLimit {
-    get => ref _Handle.AsRef<bool>(_EnableSteeringLimitOffset.Value);
+    get {
+      if (_EnableSteeringLimitOffset == null) {
+        _EnableSteeringLimitOffset = Schema.GetOffset(0x597D72C25B75B454);
+      }
+      return ref _Handle.AsRef<bool>(_EnableSteeringLimitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinSteeringAngleOffset = new(() => Schema.GetOffset(0x597D72C230EFC46D), LazyThreadSafetyMode.None);
+  private static nint? _MinSteeringAngleOffset;
 
   public ref float MinSteeringAngle {
-    get => ref _Handle.AsRef<float>(_MinSteeringAngleOffset.Value);
+    get {
+      if (_MinSteeringAngleOffset == null) {
+        _MinSteeringAngleOffset = Schema.GetOffset(0x597D72C230EFC46D);
+      }
+      return ref _Handle.AsRef<float>(_MinSteeringAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSteeringAngleOffset = new(() => Schema.GetOffset(0x597D72C2BA43F487), LazyThreadSafetyMode.None);
+  private static nint? _MaxSteeringAngleOffset;
 
   public ref float MaxSteeringAngle {
-    get => ref _Handle.AsRef<float>(_MaxSteeringAngleOffset.Value);
+    get {
+      if (_MaxSteeringAngleOffset == null) {
+        _MaxSteeringAngleOffset = Schema.GetOffset(0x597D72C2BA43F487);
+      }
+      return ref _Handle.AsRef<float>(_MaxSteeringAngleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SteeringAxisFrictionOffset = new(() => Schema.GetOffset(0x597D72C24D13EF6B), LazyThreadSafetyMode.None);
+  private static nint? _SteeringAxisFrictionOffset;
 
   public ref float SteeringAxisFriction {
-    get => ref _Handle.AsRef<float>(_SteeringAxisFrictionOffset.Value);
+    get {
+      if (_SteeringAxisFrictionOffset == null) {
+        _SteeringAxisFrictionOffset = Schema.GetOffset(0x597D72C24D13EF6B);
+      }
+      return ref _Handle.AsRef<float>(_SteeringAxisFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SpinAxisFrictionOffset = new(() => Schema.GetOffset(0x597D72C266B468FC), LazyThreadSafetyMode.None);
+  private static nint? _SpinAxisFrictionOffset;
 
   public ref float SpinAxisFriction {
-    get => ref _Handle.AsRef<float>(_SpinAxisFrictionOffset.Value);
+    get {
+      if (_SpinAxisFrictionOffset == null) {
+        _SpinAxisFrictionOffset = Schema.GetOffset(0x597D72C266B468FC);
+      }
+      return ref _Handle.AsRef<float>(_SpinAxisFrictionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SteeringMimicsEntityOffset = new(() => Schema.GetOffset(0x597D72C2CD5E886D), LazyThreadSafetyMode.None);
+  private static nint? _SteeringMimicsEntityOffset;
 
   public ref CHandle<CBaseEntity> SteeringMimicsEntity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_SteeringMimicsEntityOffset.Value);
+    get {
+      if (_SteeringMimicsEntityOffset == null) {
+        _SteeringMimicsEntityOffset = Schema.GetOffset(0x597D72C2CD5E886D);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SteeringMimicsEntityOffset!.Value);
+    }
   }
 
 

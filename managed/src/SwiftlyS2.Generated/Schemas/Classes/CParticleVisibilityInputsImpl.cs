@@ -17,100 +17,195 @@ internal partial class CParticleVisibilityInputsImpl : SchemaClass, CParticleVis
   public CParticleVisibilityInputsImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CameraBiasOffset = new(() => Schema.GetOffset(0xF3FC60F57CAF2EE5), LazyThreadSafetyMode.None);
+  private static nint? _CameraBiasOffset;
 
   public ref float CameraBias {
-    get => ref _Handle.AsRef<float>(_CameraBiasOffset.Value);
+    get {
+      if (_CameraBiasOffset == null) {
+        _CameraBiasOffset = Schema.GetOffset(0xF3FC60F57CAF2EE5);
+      }
+      return ref _Handle.AsRef<float>(_CameraBiasOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPinOffset = new(() => Schema.GetOffset(0xF3FC60F5CAA9CA3D), LazyThreadSafetyMode.None);
+  private static nint? _CPinOffset;
 
   public ref int CPin {
-    get => ref _Handle.AsRef<int>(_CPinOffset.Value);
+    get {
+      if (_CPinOffset == null) {
+        _CPinOffset = Schema.GetOffset(0xF3FC60F5CAA9CA3D);
+      }
+      return ref _Handle.AsRef<int>(_CPinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ProxyRadiusOffset = new(() => Schema.GetOffset(0xF3FC60F55BDAD4C7), LazyThreadSafetyMode.None);
+  private static nint? _ProxyRadiusOffset;
 
   public ref float ProxyRadius {
-    get => ref _Handle.AsRef<float>(_ProxyRadiusOffset.Value);
+    get {
+      if (_ProxyRadiusOffset == null) {
+        _ProxyRadiusOffset = Schema.GetOffset(0xF3FC60F55BDAD4C7);
+      }
+      return ref _Handle.AsRef<float>(_ProxyRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMinOffset = new(() => Schema.GetOffset(0xF3FC60F5E88A0D0F), LazyThreadSafetyMode.None);
+  private static nint? _InputMinOffset;
 
   public ref float InputMin {
-    get => ref _Handle.AsRef<float>(_InputMinOffset.Value);
+    get {
+      if (_InputMinOffset == null) {
+        _InputMinOffset = Schema.GetOffset(0xF3FC60F5E88A0D0F);
+      }
+      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputMaxOffset = new(() => Schema.GetOffset(0xF3FC60F5D6766901), LazyThreadSafetyMode.None);
+  private static nint? _InputMaxOffset;
 
   public ref float InputMax {
-    get => ref _Handle.AsRef<float>(_InputMaxOffset.Value);
+    get {
+      if (_InputMaxOffset == null) {
+        _InputMaxOffset = Schema.GetOffset(0xF3FC60F5D6766901);
+      }
+      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InputPixelVisFadeOffset = new(() => Schema.GetOffset(0xF3FC60F521E711C1), LazyThreadSafetyMode.None);
+  private static nint? _InputPixelVisFadeOffset;
 
   public ref float InputPixelVisFade {
-    get => ref _Handle.AsRef<float>(_InputPixelVisFadeOffset.Value);
+    get {
+      if (_InputPixelVisFadeOffset == null) {
+        _InputPixelVisFadeOffset = Schema.GetOffset(0xF3FC60F521E711C1);
+      }
+      return ref _Handle.AsRef<float>(_InputPixelVisFadeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NoPixelVisibilityFallbackOffset = new(() => Schema.GetOffset(0xF3FC60F586460B8E), LazyThreadSafetyMode.None);
+  private static nint? _NoPixelVisibilityFallbackOffset;
 
   public ref float NoPixelVisibilityFallback {
-    get => ref _Handle.AsRef<float>(_NoPixelVisibilityFallbackOffset.Value);
+    get {
+      if (_NoPixelVisibilityFallbackOffset == null) {
+        _NoPixelVisibilityFallbackOffset = Schema.GetOffset(0xF3FC60F586460B8E);
+      }
+      return ref _Handle.AsRef<float>(_NoPixelVisibilityFallbackOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceInputMinOffset = new(() => Schema.GetOffset(0xF3FC60F5D734ED90), LazyThreadSafetyMode.None);
+  private static nint? _DistanceInputMinOffset;
 
   public ref float DistanceInputMin {
-    get => ref _Handle.AsRef<float>(_DistanceInputMinOffset.Value);
+    get {
+      if (_DistanceInputMinOffset == null) {
+        _DistanceInputMinOffset = Schema.GetOffset(0xF3FC60F5D734ED90);
+      }
+      return ref _Handle.AsRef<float>(_DistanceInputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistanceInputMaxOffset = new(() => Schema.GetOffset(0xF3FC60F5CD21561A), LazyThreadSafetyMode.None);
+  private static nint? _DistanceInputMaxOffset;
 
   public ref float DistanceInputMax {
-    get => ref _Handle.AsRef<float>(_DistanceInputMaxOffset.Value);
+    get {
+      if (_DistanceInputMaxOffset == null) {
+        _DistanceInputMaxOffset = Schema.GetOffset(0xF3FC60F5CD21561A);
+      }
+      return ref _Handle.AsRef<float>(_DistanceInputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DotInputMinOffset = new(() => Schema.GetOffset(0xF3FC60F5AD21DD8A), LazyThreadSafetyMode.None);
+  private static nint? _DotInputMinOffset;
 
   public ref float DotInputMin {
-    get => ref _Handle.AsRef<float>(_DotInputMinOffset.Value);
+    get {
+      if (_DotInputMinOffset == null) {
+        _DotInputMinOffset = Schema.GetOffset(0xF3FC60F5AD21DD8A);
+      }
+      return ref _Handle.AsRef<float>(_DotInputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DotInputMaxOffset = new(() => Schema.GetOffset(0xF3FC60F5B7357500), LazyThreadSafetyMode.None);
+  private static nint? _DotInputMaxOffset;
 
   public ref float DotInputMax {
-    get => ref _Handle.AsRef<float>(_DotInputMaxOffset.Value);
+    get {
+      if (_DotInputMaxOffset == null) {
+        _DotInputMaxOffset = Schema.GetOffset(0xF3FC60F5B7357500);
+      }
+      return ref _Handle.AsRef<float>(_DotInputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DotCPAnglesOffset = new(() => Schema.GetOffset(0xF3FC60F50D0315CB), LazyThreadSafetyMode.None);
+  private static nint? _DotCPAnglesOffset;
 
   public ref bool DotCPAngles {
-    get => ref _Handle.AsRef<bool>(_DotCPAnglesOffset.Value);
+    get {
+      if (_DotCPAnglesOffset == null) {
+        _DotCPAnglesOffset = Schema.GetOffset(0xF3FC60F50D0315CB);
+      }
+      return ref _Handle.AsRef<bool>(_DotCPAnglesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DotCameraAnglesOffset = new(() => Schema.GetOffset(0xF3FC60F5A84A80CF), LazyThreadSafetyMode.None);
+  private static nint? _DotCameraAnglesOffset;
 
   public ref bool DotCameraAngles {
-    get => ref _Handle.AsRef<bool>(_DotCameraAnglesOffset.Value);
+    get {
+      if (_DotCameraAnglesOffset == null) {
+        _DotCameraAnglesOffset = Schema.GetOffset(0xF3FC60F5A84A80CF);
+      }
+      return ref _Handle.AsRef<bool>(_DotCameraAnglesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaScaleMinOffset = new(() => Schema.GetOffset(0xF3FC60F53AEC0597), LazyThreadSafetyMode.None);
+  private static nint? _AlphaScaleMinOffset;
 
   public ref float AlphaScaleMin {
-    get => ref _Handle.AsRef<float>(_AlphaScaleMinOffset.Value);
+    get {
+      if (_AlphaScaleMinOffset == null) {
+        _AlphaScaleMinOffset = Schema.GetOffset(0xF3FC60F53AEC0597);
+      }
+      return ref _Handle.AsRef<float>(_AlphaScaleMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AlphaScaleMaxOffset = new(() => Schema.GetOffset(0xF3FC60F548FFA359), LazyThreadSafetyMode.None);
+  private static nint? _AlphaScaleMaxOffset;
 
   public ref float AlphaScaleMax {
-    get => ref _Handle.AsRef<float>(_AlphaScaleMaxOffset.Value);
+    get {
+      if (_AlphaScaleMaxOffset == null) {
+        _AlphaScaleMaxOffset = Schema.GetOffset(0xF3FC60F548FFA359);
+      }
+      return ref _Handle.AsRef<float>(_AlphaScaleMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusScaleMinOffset = new(() => Schema.GetOffset(0xF3FC60F53A308DB3), LazyThreadSafetyMode.None);
+  private static nint? _RadiusScaleMinOffset;
 
   public ref float RadiusScaleMin {
-    get => ref _Handle.AsRef<float>(_RadiusScaleMinOffset.Value);
+    get {
+      if (_RadiusScaleMinOffset == null) {
+        _RadiusScaleMinOffset = Schema.GetOffset(0xF3FC60F53A308DB3);
+      }
+      return ref _Handle.AsRef<float>(_RadiusScaleMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusScaleMaxOffset = new(() => Schema.GetOffset(0xF3FC60F55044380D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusScaleMaxOffset;
 
   public ref float RadiusScaleMax {
-    get => ref _Handle.AsRef<float>(_RadiusScaleMaxOffset.Value);
+    get {
+      if (_RadiusScaleMaxOffset == null) {
+        _RadiusScaleMaxOffset = Schema.GetOffset(0xF3FC60F55044380D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusScaleMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusScaleFOVBaseOffset = new(() => Schema.GetOffset(0xF3FC60F521D6B3D5), LazyThreadSafetyMode.None);
+  private static nint? _RadiusScaleFOVBaseOffset;
 
   public ref float RadiusScaleFOVBase {
-    get => ref _Handle.AsRef<float>(_RadiusScaleFOVBaseOffset.Value);
+    get {
+      if (_RadiusScaleFOVBaseOffset == null) {
+        _RadiusScaleFOVBaseOffset = Schema.GetOffset(0xF3FC60F521D6B3D5);
+      }
+      return ref _Handle.AsRef<float>(_RadiusScaleFOVBaseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RightEyeOffset = new(() => Schema.GetOffset(0xF3FC60F5D4BB0DBA), LazyThreadSafetyMode.None);
+  private static nint? _RightEyeOffset;
 
   public ref bool RightEye {
-    get => ref _Handle.AsRef<bool>(_RightEyeOffset.Value);
+    get {
+      if (_RightEyeOffset == null) {
+        _RightEyeOffset = Schema.GetOffset(0xF3FC60F5D4BB0DBA);
+      }
+      return ref _Handle.AsRef<bool>(_RightEyeOffset!.Value);
+    }
   }
 
 

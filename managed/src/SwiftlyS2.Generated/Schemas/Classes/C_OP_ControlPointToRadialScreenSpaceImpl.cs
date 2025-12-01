@@ -17,30 +17,55 @@ internal partial class C_OP_ControlPointToRadialScreenSpaceImpl : CParticleFunct
   public C_OP_ControlPointToRadialScreenSpaceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CPInOffset = new(() => Schema.GetOffset(0xF5E82FE8CAF7E91D), LazyThreadSafetyMode.None);
+  private static nint? _CPInOffset;
 
   public ref int CPIn {
-    get => ref _Handle.AsRef<int>(_CPInOffset.Value);
+    get {
+      if (_CPInOffset == null) {
+        _CPInOffset = Schema.GetOffset(0xF5E82FE8CAF7E91D);
+      }
+      return ref _Handle.AsRef<int>(_CPInOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CP1PosOffset = new(() => Schema.GetOffset(0xF5E82FE8408288D9), LazyThreadSafetyMode.None);
+  private static nint? _CP1PosOffset;
 
   public ref Vector CP1Pos {
-    get => ref _Handle.AsRef<Vector>(_CP1PosOffset.Value);
+    get {
+      if (_CP1PosOffset == null) {
+        _CP1PosOffset = Schema.GetOffset(0xF5E82FE8408288D9);
+      }
+      return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOutOffset = new(() => Schema.GetOffset(0xF5E82FE8BAE50826), LazyThreadSafetyMode.None);
+  private static nint? _CPOutOffset;
 
   public ref int CPOut {
-    get => ref _Handle.AsRef<int>(_CPOutOffset.Value);
+    get {
+      if (_CPOutOffset == null) {
+        _CPOutOffset = Schema.GetOffset(0xF5E82FE8BAE50826);
+      }
+      return ref _Handle.AsRef<int>(_CPOutOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPOutFieldOffset = new(() => Schema.GetOffset(0xF5E82FE8A29393C2), LazyThreadSafetyMode.None);
+  private static nint? _CPOutFieldOffset;
 
   public ref int CPOutField {
-    get => ref _Handle.AsRef<int>(_CPOutFieldOffset.Value);
+    get {
+      if (_CPOutFieldOffset == null) {
+        _CPOutFieldOffset = Schema.GetOffset(0xF5E82FE8A29393C2);
+      }
+      return ref _Handle.AsRef<int>(_CPOutFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPSSPosOutOffset = new(() => Schema.GetOffset(0xF5E82FE881CD01AE), LazyThreadSafetyMode.None);
+  private static nint? _CPSSPosOutOffset;
 
   public ref int CPSSPosOut {
-    get => ref _Handle.AsRef<int>(_CPSSPosOutOffset.Value);
+    get {
+      if (_CPSSPosOutOffset == null) {
+        _CPSSPosOutOffset = Schema.GetOffset(0xF5E82FE881CD01AE);
+      }
+      return ref _Handle.AsRef<int>(_CPSSPosOutOffset!.Value);
+    }
   }
 
 

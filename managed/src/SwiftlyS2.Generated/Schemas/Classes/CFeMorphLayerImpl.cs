@@ -17,44 +17,82 @@ internal partial class CFeMorphLayerImpl : SchemaClass, CFeMorphLayer {
   public CFeMorphLayerImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0xB30F1160CAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _NameHashOffset = new(() => Schema.GetOffset(0xB30F1160DE15EEFE), LazyThreadSafetyMode.None);
+  private static nint? _NameHashOffset;
 
   public ref uint NameHash {
-    get => ref _Handle.AsRef<uint>(_NameHashOffset.Value);
+    get {
+      if (_NameHashOffset == null) {
+        _NameHashOffset = Schema.GetOffset(0xB30F1160DE15EEFE);
+      }
+      return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NodesOffset = new(() => Schema.GetOffset(0xB30F1160EBA045DA), LazyThreadSafetyMode.None);
+  private static nint? _NodesOffset;
 
   public ref CUtlVector<ushort> Nodes {
-    get => ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset.Value);
+    get {
+      if (_NodesOffset == null) {
+        _NodesOffset = Schema.GetOffset(0xB30F1160EBA045DA);
+      }
+      return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InitPosOffset = new(() => Schema.GetOffset(0xB30F11608D152323), LazyThreadSafetyMode.None);
+  private static nint? _InitPosOffset;
 
   public ref CUtlVector<Vector> InitPos {
-    get => ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset.Value);
+    get {
+      if (_InitPosOffset == null) {
+        _InitPosOffset = Schema.GetOffset(0xB30F11608D152323);
+      }
+      return ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GravityOffset = new(() => Schema.GetOffset(0xB30F1160790C70C5), LazyThreadSafetyMode.None);
+  private static nint? _GravityOffset;
 
   public ref CUtlVector<float> Gravity {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset.Value);
+    get {
+      if (_GravityOffset == null) {
+        _GravityOffset = Schema.GetOffset(0xB30F1160790C70C5);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GoalStrengthOffset = new(() => Schema.GetOffset(0xB30F1160686343FF), LazyThreadSafetyMode.None);
+  private static nint? _GoalStrengthOffset;
 
   public ref CUtlVector<float> GoalStrength {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset.Value);
+    get {
+      if (_GoalStrengthOffset == null) {
+        _GoalStrengthOffset = Schema.GetOffset(0xB30F1160686343FF);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GoalDampingOffset = new(() => Schema.GetOffset(0xB30F11600F3CA820), LazyThreadSafetyMode.None);
+  private static nint? _GoalDampingOffset;
 
   public ref CUtlVector<float> GoalDamping {
-    get => ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset.Value);
+    get {
+      if (_GoalDampingOffset == null) {
+        _GoalDampingOffset = Schema.GetOffset(0xB30F11600F3CA820);
+      }
+      return ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset!.Value);
+    }
   }
 
 

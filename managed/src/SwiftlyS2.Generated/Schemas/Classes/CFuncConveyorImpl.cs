@@ -17,54 +17,102 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor {
   public CFuncConveyorImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ConveyorModelsOffset = new(() => Schema.GetOffset(0x6E29EBA973AE4DBB), LazyThreadSafetyMode.None);
+  private static nint? _ConveyorModelsOffset;
 
   public string ConveyorModels {
     get {
-      var ptr = _Handle.Read<nint>(_ConveyorModelsOffset.Value);
+      if (_ConveyorModelsOffset == null) {
+        _ConveyorModelsOffset = Schema.GetOffset(0x6E29EBA973AE4DBB);
+      }
+      var ptr = _Handle.Read<nint>(_ConveyorModelsOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ConveyorModelsOffset.Value, value);
+    set {
+      if (_ConveyorModelsOffset == null) {
+        _ConveyorModelsOffset = Schema.GetOffset(0x6E29EBA973AE4DBB);
+      }
+      Schema.SetString(_Handle, _ConveyorModelsOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _TransitionDurationSecondsOffset = new(() => Schema.GetOffset(0x6E29EBA9D5E92B1D), LazyThreadSafetyMode.None);
+  private static nint? _TransitionDurationSecondsOffset;
 
   public ref float TransitionDurationSeconds {
-    get => ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset.Value);
+    get {
+      if (_TransitionDurationSecondsOffset == null) {
+        _TransitionDurationSecondsOffset = Schema.GetOffset(0x6E29EBA9D5E92B1D);
+      }
+      return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveEntitySpaceOffset = new(() => Schema.GetOffset(0x6E29EBA9325319F9), LazyThreadSafetyMode.None);
+  private static nint? _MoveEntitySpaceOffset;
 
   public ref QAngle MoveEntitySpace {
-    get => ref _Handle.AsRef<QAngle>(_MoveEntitySpaceOffset.Value);
+    get {
+      if (_MoveEntitySpaceOffset == null) {
+        _MoveEntitySpaceOffset = Schema.GetOffset(0x6E29EBA9325319F9);
+      }
+      return ref _Handle.AsRef<QAngle>(_MoveEntitySpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveDirEntitySpaceOffset = new(() => Schema.GetOffset(0x6E29EBA98181512A), LazyThreadSafetyMode.None);
+  private static nint? _MoveDirEntitySpaceOffset;
 
   public ref Vector MoveDirEntitySpace {
-    get => ref _Handle.AsRef<Vector>(_MoveDirEntitySpaceOffset.Value);
+    get {
+      if (_MoveDirEntitySpaceOffset == null) {
+        _MoveDirEntitySpaceOffset = Schema.GetOffset(0x6E29EBA98181512A);
+      }
+      return ref _Handle.AsRef<Vector>(_MoveDirEntitySpaceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TargetSpeedOffset = new(() => Schema.GetOffset(0x6E29EBA99C627845), LazyThreadSafetyMode.None);
+  private static nint? _TargetSpeedOffset;
 
   public ref float TargetSpeed {
-    get => ref _Handle.AsRef<float>(_TargetSpeedOffset.Value);
+    get {
+      if (_TargetSpeedOffset == null) {
+        _TargetSpeedOffset = Schema.GetOffset(0x6E29EBA99C627845);
+      }
+      return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionStartTickOffset = new(() => Schema.GetOffset(0x6E29EBA9FB464AF3), LazyThreadSafetyMode.None);
+  private static nint? _TransitionStartTickOffset;
 
   public GameTick_t TransitionStartTick {
-    get => new GameTick_tImpl(_Handle + _TransitionStartTickOffset.Value);
+    get {
+      if (_TransitionStartTickOffset == null) {
+        _TransitionStartTickOffset = Schema.GetOffset(0x6E29EBA9FB464AF3);
+      }
+      return new GameTick_tImpl(_Handle + _TransitionStartTickOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionDurationTicksOffset = new(() => Schema.GetOffset(0x6E29EBA9B99437D4), LazyThreadSafetyMode.None);
+  private static nint? _TransitionDurationTicksOffset;
 
   public ref int TransitionDurationTicks {
-    get => ref _Handle.AsRef<int>(_TransitionDurationTicksOffset.Value);
+    get {
+      if (_TransitionDurationTicksOffset == null) {
+        _TransitionDurationTicksOffset = Schema.GetOffset(0x6E29EBA9B99437D4);
+      }
+      return ref _Handle.AsRef<int>(_TransitionDurationTicksOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TransitionStartSpeedOffset = new(() => Schema.GetOffset(0x6E29EBA97456F6D7), LazyThreadSafetyMode.None);
+  private static nint? _TransitionStartSpeedOffset;
 
   public ref float TransitionStartSpeed {
-    get => ref _Handle.AsRef<float>(_TransitionStartSpeedOffset.Value);
+    get {
+      if (_TransitionStartSpeedOffset == null) {
+        _TransitionStartSpeedOffset = Schema.GetOffset(0x6E29EBA97456F6D7);
+      }
+      return ref _Handle.AsRef<float>(_TransitionStartSpeedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConveyorModels1Offset = new(() => Schema.GetOffset(0x6E29EBA9BAB755A8), LazyThreadSafetyMode.None);
+  private static nint? _ConveyorModels1Offset;
 
   public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1 {
-    get => ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ConveyorModels1Offset.Value);
+    get {
+      if (_ConveyorModels1Offset == null) {
+        _ConveyorModels1Offset = Schema.GetOffset(0x6E29EBA9BAB755A8);
+      }
+      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ConveyorModels1Offset!.Value);
+    }
   }
 
   public void MoveDirEntitySpaceUpdated() {

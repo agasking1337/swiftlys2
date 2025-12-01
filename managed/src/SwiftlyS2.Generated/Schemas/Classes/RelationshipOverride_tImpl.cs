@@ -17,15 +17,25 @@ internal partial class RelationshipOverride_tImpl : Relationship_tImpl, Relation
   public RelationshipOverride_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EntityOffset = new(() => Schema.GetOffset(0x2EECEBE0D33FF5DA), LazyThreadSafetyMode.None);
+  private static nint? _EntityOffset;
 
   public ref CHandle<CBaseEntity> Entity {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset.Value);
+    get {
+      if (_EntityOffset == null) {
+        _EntityOffset = Schema.GetOffset(0x2EECEBE0D33FF5DA);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClassTypeOffset = new(() => Schema.GetOffset(0x2EECEBE040A47427), LazyThreadSafetyMode.None);
+  private static nint? _ClassTypeOffset;
 
   public ref Class_T ClassType {
-    get => ref _Handle.AsRef<Class_T>(_ClassTypeOffset.Value);
+    get {
+      if (_ClassTypeOffset == null) {
+        _ClassTypeOffset = Schema.GetOffset(0x2EECEBE040A47427);
+      }
+      return ref _Handle.AsRef<Class_T>(_ClassTypeOffset!.Value);
+    }
   }
 
 

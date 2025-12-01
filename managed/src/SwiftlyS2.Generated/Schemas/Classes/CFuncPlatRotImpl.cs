@@ -17,15 +17,25 @@ internal partial class CFuncPlatRotImpl : CFuncPlatImpl, CFuncPlatRot {
   public CFuncPlatRotImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EndOffset = new(() => Schema.GetOffset(0xF566498E5B29CFCA), LazyThreadSafetyMode.None);
+  private static nint? _EndOffset;
 
   public ref QAngle End {
-    get => ref _Handle.AsRef<QAngle>(_EndOffset.Value);
+    get {
+      if (_EndOffset == null) {
+        _EndOffset = Schema.GetOffset(0xF566498E5B29CFCA);
+      }
+      return ref _Handle.AsRef<QAngle>(_EndOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartOffset = new(() => Schema.GetOffset(0xF566498EA539BEFF), LazyThreadSafetyMode.None);
+  private static nint? _StartOffset;
 
   public ref QAngle Start {
-    get => ref _Handle.AsRef<QAngle>(_StartOffset.Value);
+    get {
+      if (_StartOffset == null) {
+        _StartOffset = Schema.GetOffset(0xF566498EA539BEFF);
+      }
+      return ref _Handle.AsRef<QAngle>(_StartOffset!.Value);
+    }
   }
 
 

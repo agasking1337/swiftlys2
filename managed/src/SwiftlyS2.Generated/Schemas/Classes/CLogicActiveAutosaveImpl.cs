@@ -17,25 +17,45 @@ internal partial class CLogicActiveAutosaveImpl : CLogicAutosaveImpl, CLogicActi
   public CLogicActiveAutosaveImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TriggerHitPointsOffset = new(() => Schema.GetOffset(0x9BBDEF887D8FAE5B), LazyThreadSafetyMode.None);
+  private static nint? _TriggerHitPointsOffset;
 
   public ref int TriggerHitPoints {
-    get => ref _Handle.AsRef<int>(_TriggerHitPointsOffset.Value);
+    get {
+      if (_TriggerHitPointsOffset == null) {
+        _TriggerHitPointsOffset = Schema.GetOffset(0x9BBDEF887D8FAE5B);
+      }
+      return ref _Handle.AsRef<int>(_TriggerHitPointsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TimeToTriggerOffset = new(() => Schema.GetOffset(0x9BBDEF880C3F780D), LazyThreadSafetyMode.None);
+  private static nint? _TimeToTriggerOffset;
 
   public ref float TimeToTrigger {
-    get => ref _Handle.AsRef<float>(_TimeToTriggerOffset.Value);
+    get {
+      if (_TimeToTriggerOffset == null) {
+        _TimeToTriggerOffset = Schema.GetOffset(0x9BBDEF880C3F780D);
+      }
+      return ref _Handle.AsRef<float>(_TimeToTriggerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x9BBDEF8867FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public GameTime_t StartTime {
-    get => new GameTime_tImpl(_Handle + _StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x9BBDEF8867FE9DC4);
+      }
+      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DangerousTimeOffset = new(() => Schema.GetOffset(0x9BBDEF8819BC5644), LazyThreadSafetyMode.None);
+  private static nint? _DangerousTimeOffset;
 
   public ref float DangerousTime {
-    get => ref _Handle.AsRef<float>(_DangerousTimeOffset.Value);
+    get {
+      if (_DangerousTimeOffset == null) {
+        _DangerousTimeOffset = Schema.GetOffset(0x9BBDEF8819BC5644);
+      }
+      return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
+    }
   }
 
 

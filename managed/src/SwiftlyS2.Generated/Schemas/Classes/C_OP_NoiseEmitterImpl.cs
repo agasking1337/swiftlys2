@@ -17,80 +17,155 @@ internal partial class C_OP_NoiseEmitterImpl : CParticleFunctionEmitterImpl, C_O
   public C_OP_NoiseEmitterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EmissionDurationOffset = new(() => Schema.GetOffset(0x42B1C7990181C90), LazyThreadSafetyMode.None);
+  private static nint? _EmissionDurationOffset;
 
   public ref float EmissionDuration {
-    get => ref _Handle.AsRef<float>(_EmissionDurationOffset.Value);
+    get {
+      if (_EmissionDurationOffset == null) {
+        _EmissionDurationOffset = Schema.GetOffset(0x42B1C7990181C90);
+      }
+      return ref _Handle.AsRef<float>(_EmissionDurationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x42B1C7967FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public ref float StartTime {
-    get => ref _Handle.AsRef<float>(_StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x42B1C7967FE9DC4);
+      }
+      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EmissionScaleOffset = new(() => Schema.GetOffset(0x42B1C7953003112), LazyThreadSafetyMode.None);
+  private static nint? _EmissionScaleOffset;
 
   public ref float EmissionScale {
-    get => ref _Handle.AsRef<float>(_EmissionScaleOffset.Value);
+    get {
+      if (_EmissionScaleOffset == null) {
+        _EmissionScaleOffset = Schema.GetOffset(0x42B1C7953003112);
+      }
+      return ref _Handle.AsRef<float>(_EmissionScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleControlPointOffset = new(() => Schema.GetOffset(0x42B1C79B0577A70), LazyThreadSafetyMode.None);
+  private static nint? _ScaleControlPointOffset;
 
   public ref int ScaleControlPoint {
-    get => ref _Handle.AsRef<int>(_ScaleControlPointOffset.Value);
+    get {
+      if (_ScaleControlPointOffset == null) {
+        _ScaleControlPointOffset = Schema.GetOffset(0x42B1C79B0577A70);
+      }
+      return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleControlPointFieldOffset = new(() => Schema.GetOffset(0x42B1C79360C613C), LazyThreadSafetyMode.None);
+  private static nint? _ScaleControlPointFieldOffset;
 
   public ref int ScaleControlPointField {
-    get => ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset.Value);
+    get {
+      if (_ScaleControlPointFieldOffset == null) {
+        _ScaleControlPointFieldOffset = Schema.GetOffset(0x42B1C79360C613C);
+      }
+      return ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldNoisePointOffset = new(() => Schema.GetOffset(0x42B1C79BE38A15B), LazyThreadSafetyMode.None);
+  private static nint? _WorldNoisePointOffset;
 
   public ref int WorldNoisePoint {
-    get => ref _Handle.AsRef<int>(_WorldNoisePointOffset.Value);
+    get {
+      if (_WorldNoisePointOffset == null) {
+        _WorldNoisePointOffset = Schema.GetOffset(0x42B1C79BE38A15B);
+      }
+      return ref _Handle.AsRef<int>(_WorldNoisePointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AbsValOffset = new(() => Schema.GetOffset(0x42B1C79AD2CCF0A), LazyThreadSafetyMode.None);
+  private static nint? _AbsValOffset;
 
   public ref bool AbsVal {
-    get => ref _Handle.AsRef<bool>(_AbsValOffset.Value);
+    get {
+      if (_AbsValOffset == null) {
+        _AbsValOffset = Schema.GetOffset(0x42B1C79AD2CCF0A);
+      }
+      return ref _Handle.AsRef<bool>(_AbsValOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AbsValInvOffset = new(() => Schema.GetOffset(0x42B1C79024BCB79), LazyThreadSafetyMode.None);
+  private static nint? _AbsValInvOffset;
 
   public ref bool AbsValInv {
-    get => ref _Handle.AsRef<bool>(_AbsValInvOffset.Value);
+    get {
+      if (_AbsValInvOffset == null) {
+        _AbsValInvOffset = Schema.GetOffset(0x42B1C79024BCB79);
+      }
+      return ref _Handle.AsRef<bool>(_AbsValInvOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0x42B1C797F14BA34), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref float Offset {
-    get => ref _Handle.AsRef<float>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0x42B1C797F14BA34);
+      }
+      return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMinOffset = new(() => Schema.GetOffset(0x42B1C795F8D7716), LazyThreadSafetyMode.None);
+  private static nint? _OutputMinOffset;
 
   public ref float OutputMin {
-    get => ref _Handle.AsRef<float>(_OutputMinOffset.Value);
+    get {
+      if (_OutputMinOffset == null) {
+        _OutputMinOffset = Schema.GetOffset(0x42B1C795F8D7716);
+      }
+      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputMaxOffset = new(() => Schema.GetOffset(0x42B1C7951A0E8C4), LazyThreadSafetyMode.None);
+  private static nint? _OutputMaxOffset;
 
   public ref float OutputMax {
-    get => ref _Handle.AsRef<float>(_OutputMaxOffset.Value);
+    get {
+      if (_OutputMaxOffset == null) {
+        _OutputMaxOffset = Schema.GetOffset(0x42B1C7951A0E8C4);
+      }
+      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NoiseScaleOffset = new(() => Schema.GetOffset(0x42B1C7932FE2EF3), LazyThreadSafetyMode.None);
+  private static nint? _NoiseScaleOffset;
 
   public ref float NoiseScale {
-    get => ref _Handle.AsRef<float>(_NoiseScaleOffset.Value);
+    get {
+      if (_NoiseScaleOffset == null) {
+        _NoiseScaleOffset = Schema.GetOffset(0x42B1C7932FE2EF3);
+      }
+      return ref _Handle.AsRef<float>(_NoiseScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldNoiseScaleOffset = new(() => Schema.GetOffset(0x42B1C79A5AC912D), LazyThreadSafetyMode.None);
+  private static nint? _WorldNoiseScaleOffset;
 
   public ref float WorldNoiseScale {
-    get => ref _Handle.AsRef<float>(_WorldNoiseScaleOffset.Value);
+    get {
+      if (_WorldNoiseScaleOffset == null) {
+        _WorldNoiseScaleOffset = Schema.GetOffset(0x42B1C79A5AC912D);
+      }
+      return ref _Handle.AsRef<float>(_WorldNoiseScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OffsetLocOffset = new(() => Schema.GetOffset(0x42B1C79EFAB26AC), LazyThreadSafetyMode.None);
+  private static nint? _OffsetLocOffset;
 
   public ref Vector OffsetLoc {
-    get => ref _Handle.AsRef<Vector>(_OffsetLocOffset.Value);
+    get {
+      if (_OffsetLocOffset == null) {
+        _OffsetLocOffset = Schema.GetOffset(0x42B1C79EFAB26AC);
+      }
+      return ref _Handle.AsRef<Vector>(_OffsetLocOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WorldTimeScaleOffset = new(() => Schema.GetOffset(0x42B1C79314F4986), LazyThreadSafetyMode.None);
+  private static nint? _WorldTimeScaleOffset;
 
   public ref float WorldTimeScale {
-    get => ref _Handle.AsRef<float>(_WorldTimeScaleOffset.Value);
+    get {
+      if (_WorldTimeScaleOffset == null) {
+        _WorldTimeScaleOffset = Schema.GetOffset(0x42B1C79314F4986);
+      }
+      return ref _Handle.AsRef<float>(_WorldTimeScaleOffset!.Value);
+    }
   }
 
 

@@ -17,68 +17,126 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
   public CBaseAnimGraphImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _InitiallyPopulateInterpHistoryOffset = new(() => Schema.GetOffset(0xE501DB1E3087361C), LazyThreadSafetyMode.None);
+  private static nint? _InitiallyPopulateInterpHistoryOffset;
 
   public ref bool InitiallyPopulateInterpHistory {
-    get => ref _Handle.AsRef<bool>(_InitiallyPopulateInterpHistoryOffset.Value);
+    get {
+      if (_InitiallyPopulateInterpHistoryOffset == null) {
+        _InitiallyPopulateInterpHistoryOffset = Schema.GetOffset(0xE501DB1E3087361C);
+      }
+      return ref _Handle.AsRef<bool>(_InitiallyPopulateInterpHistoryOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChoreoServicesOffset = new(() => Schema.GetOffset(0xE501DB1E89C6D559), LazyThreadSafetyMode.None);
+  private static nint? _ChoreoServicesOffset;
 
   public IChoreoServices? ChoreoServices {
     get {
-      var ptr = _Handle.Read<nint>(_ChoreoServicesOffset.Value);
+      if (_ChoreoServicesOffset == null) {
+        _ChoreoServicesOffset = Schema.GetOffset(0xE501DB1E89C6D559);
+      }
+      var ptr = _Handle.Read<nint>(_ChoreoServicesOffset!.Value);
       return ptr.IsValidPtr() ? new IChoreoServicesImpl(ptr) : null;
     }
   }
-  private static readonly Lazy<nint> _AnimGraphUpdateEnabledOffset = new(() => Schema.GetOffset(0xE501DB1E724F7FEE), LazyThreadSafetyMode.None);
+  private static nint? _AnimGraphUpdateEnabledOffset;
 
   public ref bool AnimGraphUpdateEnabled {
-    get => ref _Handle.AsRef<bool>(_AnimGraphUpdateEnabledOffset.Value);
+    get {
+      if (_AnimGraphUpdateEnabledOffset == null) {
+        _AnimGraphUpdateEnabledOffset = Schema.GetOffset(0xE501DB1E724F7FEE);
+      }
+      return ref _Handle.AsRef<bool>(_AnimGraphUpdateEnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSlopeDistanceOffset = new(() => Schema.GetOffset(0xE501DB1E531F618D), LazyThreadSafetyMode.None);
+  private static nint? _MaxSlopeDistanceOffset;
 
   public ref float MaxSlopeDistance {
-    get => ref _Handle.AsRef<float>(_MaxSlopeDistanceOffset.Value);
+    get {
+      if (_MaxSlopeDistanceOffset == null) {
+        _MaxSlopeDistanceOffset = Schema.GetOffset(0xE501DB1E531F618D);
+      }
+      return ref _Handle.AsRef<float>(_MaxSlopeDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastSlopeCheckPosOffset = new(() => Schema.GetOffset(0xE501DB1E586A5E32), LazyThreadSafetyMode.None);
+  private static nint? _LastSlopeCheckPosOffset;
 
   public ref Vector LastSlopeCheckPos {
-    get => ref _Handle.AsRef<Vector>(_LastSlopeCheckPosOffset.Value);
+    get {
+      if (_LastSlopeCheckPosOffset == null) {
+        _LastSlopeCheckPosOffset = Schema.GetOffset(0xE501DB1E586A5E32);
+      }
+      return ref _Handle.AsRef<Vector>(_LastSlopeCheckPosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AnimationUpdateScheduledOffset = new(() => Schema.GetOffset(0xE501DB1E49747BCF), LazyThreadSafetyMode.None);
+  private static nint? _AnimationUpdateScheduledOffset;
 
   public ref bool AnimationUpdateScheduled {
-    get => ref _Handle.AsRef<bool>(_AnimationUpdateScheduledOffset.Value);
+    get {
+      if (_AnimationUpdateScheduledOffset == null) {
+        _AnimationUpdateScheduledOffset = Schema.GetOffset(0xE501DB1E49747BCF);
+      }
+      return ref _Handle.AsRef<bool>(_AnimationUpdateScheduledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceOffset = new(() => Schema.GetOffset(0xE501DB1E566BD764), LazyThreadSafetyMode.None);
+  private static nint? _ForceOffset;
 
   public ref Vector Force {
-    get => ref _Handle.AsRef<Vector>(_ForceOffset.Value);
+    get {
+      if (_ForceOffset == null) {
+        _ForceOffset = Schema.GetOffset(0xE501DB1E566BD764);
+      }
+      return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ForceBoneOffset = new(() => Schema.GetOffset(0xE501DB1EDDAC019E), LazyThreadSafetyMode.None);
+  private static nint? _ForceBoneOffset;
 
   public ref int ForceBone {
-    get => ref _Handle.AsRef<int>(_ForceBoneOffset.Value);
+    get {
+      if (_ForceBoneOffset == null) {
+        _ForceBoneOffset = Schema.GetOffset(0xE501DB1EDDAC019E);
+      }
+      return ref _Handle.AsRef<int>(_ForceBoneOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RagdollPoseOffset = new(() => Schema.GetOffset(0xE501DB1E49F01F45), LazyThreadSafetyMode.None);
+  private static nint? _RagdollPoseOffset;
 
   public PhysicsRagdollPose_t RagdollPose {
-    get => new PhysicsRagdollPose_tImpl(_Handle + _RagdollPoseOffset.Value);
+    get {
+      if (_RagdollPoseOffset == null) {
+        _RagdollPoseOffset = Schema.GetOffset(0xE501DB1E49F01F45);
+      }
+      return new PhysicsRagdollPose_tImpl(_Handle + _RagdollPoseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RagdollEnabledOffset = new(() => Schema.GetOffset(0xE501DB1E03EA7599), LazyThreadSafetyMode.None);
+  private static nint? _RagdollEnabledOffset;
 
   public ref bool RagdollEnabled {
-    get => ref _Handle.AsRef<bool>(_RagdollEnabledOffset.Value);
+    get {
+      if (_RagdollEnabledOffset == null) {
+        _RagdollEnabledOffset = Schema.GetOffset(0xE501DB1E03EA7599);
+      }
+      return ref _Handle.AsRef<bool>(_RagdollEnabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RagdollClientSideOffset = new(() => Schema.GetOffset(0xE501DB1EB6A5159C), LazyThreadSafetyMode.None);
+  private static nint? _RagdollClientSideOffset;
 
   public ref bool RagdollClientSide {
-    get => ref _Handle.AsRef<bool>(_RagdollClientSideOffset.Value);
+    get {
+      if (_RagdollClientSideOffset == null) {
+        _RagdollClientSideOffset = Schema.GetOffset(0xE501DB1EB6A5159C);
+      }
+      return ref _Handle.AsRef<bool>(_RagdollClientSideOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XParentedRagdollRootInEntitySpaceOffset = new(() => Schema.GetOffset(0xE501DB1EFC4C1401), LazyThreadSafetyMode.None);
+  private static nint? _XParentedRagdollRootInEntitySpaceOffset;
 
   public ref CTransform XParentedRagdollRootInEntitySpace {
-    get => ref _Handle.AsRef<CTransform>(_XParentedRagdollRootInEntitySpaceOffset.Value);
+    get {
+      if (_XParentedRagdollRootInEntitySpaceOffset == null) {
+        _XParentedRagdollRootInEntitySpaceOffset = Schema.GetOffset(0xE501DB1EFC4C1401);
+      }
+      return ref _Handle.AsRef<CTransform>(_XParentedRagdollRootInEntitySpaceOffset!.Value);
+    }
   }
 
   public void InitiallyPopulateInterpHistoryUpdated() {

@@ -17,10 +17,15 @@ internal partial class CStopwatchBaseImpl : CSimpleSimTimerImpl, CStopwatchBase 
   public CStopwatchBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _IsRunningOffset = new(() => Schema.GetOffset(0x80DA66DCF34F2570), LazyThreadSafetyMode.None);
+  private static nint? _IsRunningOffset;
 
   public ref bool IsRunning {
-    get => ref _Handle.AsRef<bool>(_IsRunningOffset.Value);
+    get {
+      if (_IsRunningOffset == null) {
+        _IsRunningOffset = Schema.GetOffset(0x80DA66DCF34F2570);
+      }
+      return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
+    }
   }
 
 

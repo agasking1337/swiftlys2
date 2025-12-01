@@ -17,75 +17,145 @@ internal partial class CRenderGroomImpl : SchemaClass, CRenderGroom {
   public CRenderGroomImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _HairsOffset = new(() => Schema.GetOffset(0xC3F698B4E7C4901E), LazyThreadSafetyMode.None);
+  private static nint? _HairsOffset;
 
   public ref CUtlVector<RenderHairStrandInfo_t> Hairs {
-    get => ref _Handle.AsRef<CUtlVector<RenderHairStrandInfo_t>>(_HairsOffset.Value);
+    get {
+      if (_HairsOffset == null) {
+        _HairsOffset = Schema.GetOffset(0xC3F698B4E7C4901E);
+      }
+      return ref _Handle.AsRef<CUtlVector<RenderHairStrandInfo_t>>(_HairsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HairPositionOffsetsOffset = new(() => Schema.GetOffset(0xC3F698B40BA9FF3E), LazyThreadSafetyMode.None);
+  private static nint? _HairPositionOffsetsOffset;
 
   public ref CUtlVector<uint> HairPositionOffsets {
-    get => ref _Handle.AsRef<CUtlVector<uint>>(_HairPositionOffsetsOffset.Value);
+    get {
+      if (_HairPositionOffsetsOffset == null) {
+        _HairPositionOffsetsOffset = Schema.GetOffset(0xC3F698B40BA9FF3E);
+      }
+      return ref _Handle.AsRef<CUtlVector<uint>>(_HairPositionOffsetsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SimParamsMatOffset = new(() => Schema.GetOffset(0xC3F698B4E9EE5886), LazyThreadSafetyMode.None);
+  private static nint? _SimParamsMatOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIMaterial2> SimParamsMat {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SimParamsMatOffset.Value);
+    get {
+      if (_SimParamsMatOffset == null) {
+        _SimParamsMatOffset = Schema.GetOffset(0xC3F698B4E9EE5886);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SimParamsMatOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrandSegmentCountHistOffset = new(() => Schema.GetOffset(0xC3F698B4D2E373B9), LazyThreadSafetyMode.None);
+  private static nint? _StrandSegmentCountHistOffset;
 
   public ref CUtlVector<int> StrandSegmentCountHist {
-    get => ref _Handle.AsRef<CUtlVector<int>>(_StrandSegmentCountHistOffset.Value);
+    get {
+      if (_StrandSegmentCountHistOffset == null) {
+        _StrandSegmentCountHistOffset = Schema.GetOffset(0xC3F698B4D2E373B9);
+      }
+      return ref _Handle.AsRef<CUtlVector<int>>(_StrandSegmentCountHistOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSegmentsPerHairStrandOffset = new(() => Schema.GetOffset(0xC3F698B43675C4E2), LazyThreadSafetyMode.None);
+  private static nint? _MaxSegmentsPerHairStrandOffset;
 
   public ref int MaxSegmentsPerHairStrand {
-    get => ref _Handle.AsRef<int>(_MaxSegmentsPerHairStrandOffset.Value);
+    get {
+      if (_MaxSegmentsPerHairStrandOffset == null) {
+        _MaxSegmentsPerHairStrandOffset = Schema.GetOffset(0xC3F698B43675C4E2);
+      }
+      return ref _Handle.AsRef<int>(_MaxSegmentsPerHairStrandOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GuideHairCountOffset = new(() => Schema.GetOffset(0xC3F698B41D073EAE), LazyThreadSafetyMode.None);
+  private static nint? _GuideHairCountOffset;
 
   public ref int GuideHairCount {
-    get => ref _Handle.AsRef<int>(_GuideHairCountOffset.Value);
+    get {
+      if (_GuideHairCountOffset == null) {
+        _GuideHairCountOffset = Schema.GetOffset(0xC3F698B41D073EAE);
+      }
+      return ref _Handle.AsRef<int>(_GuideHairCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HairCountOffset = new(() => Schema.GetOffset(0xC3F698B498FBF2A4), LazyThreadSafetyMode.None);
+  private static nint? _HairCountOffset;
 
   public ref int HairCount {
-    get => ref _Handle.AsRef<int>(_HairCountOffset.Value);
+    get {
+      if (_HairCountOffset == null) {
+        _HairCountOffset = Schema.GetOffset(0xC3F698B498FBF2A4);
+      }
+      return ref _Handle.AsRef<int>(_HairCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TotalVertexCountOffset = new(() => Schema.GetOffset(0xC3F698B40CA035E2), LazyThreadSafetyMode.None);
+  private static nint? _TotalVertexCountOffset;
 
   public ref int TotalVertexCount {
-    get => ref _Handle.AsRef<int>(_TotalVertexCountOffset.Value);
+    get {
+      if (_TotalVertexCountOffset == null) {
+        _TotalVertexCountOffset = Schema.GetOffset(0xC3F698B40CA035E2);
+      }
+      return ref _Handle.AsRef<int>(_TotalVertexCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TotalSegmentCountOffset = new(() => Schema.GetOffset(0xC3F698B4AE009BD1), LazyThreadSafetyMode.None);
+  private static nint? _TotalSegmentCountOffset;
 
   public ref int TotalSegmentCount {
-    get => ref _Handle.AsRef<int>(_TotalSegmentCountOffset.Value);
+    get {
+      if (_TotalSegmentCountOffset == null) {
+        _TotalSegmentCountOffset = Schema.GetOffset(0xC3F698B4AE009BD1);
+      }
+      return ref _Handle.AsRef<int>(_TotalSegmentCountOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GroomGroupIDOffset = new(() => Schema.GetOffset(0xC3F698B4AD482815), LazyThreadSafetyMode.None);
+  private static nint? _GroomGroupIDOffset;
 
   public ref int GroomGroupID {
-    get => ref _Handle.AsRef<int>(_GroomGroupIDOffset.Value);
+    get {
+      if (_GroomGroupIDOffset == null) {
+        _GroomGroupIDOffset = Schema.GetOffset(0xC3F698B4AD482815);
+      }
+      return ref _Handle.AsRef<int>(_GroomGroupIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachBoneIdxOffset = new(() => Schema.GetOffset(0xC3F698B4466DE8A1), LazyThreadSafetyMode.None);
+  private static nint? _AttachBoneIdxOffset;
 
   public ref int AttachBoneIdx {
-    get => ref _Handle.AsRef<int>(_AttachBoneIdxOffset.Value);
+    get {
+      if (_AttachBoneIdxOffset == null) {
+        _AttachBoneIdxOffset = Schema.GetOffset(0xC3F698B4466DE8A1);
+      }
+      return ref _Handle.AsRef<int>(_AttachBoneIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachMeshIdxOffset = new(() => Schema.GetOffset(0xC3F698B4ABA5B148), LazyThreadSafetyMode.None);
+  private static nint? _AttachMeshIdxOffset;
 
   public ref int AttachMeshIdx {
-    get => ref _Handle.AsRef<int>(_AttachMeshIdxOffset.Value);
+    get {
+      if (_AttachMeshIdxOffset == null) {
+        _AttachMeshIdxOffset = Schema.GetOffset(0xC3F698B4ABA5B148);
+      }
+      return ref _Handle.AsRef<int>(_AttachMeshIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _AttachMeshDrawCallIdxOffset = new(() => Schema.GetOffset(0xC3F698B4E3082962), LazyThreadSafetyMode.None);
+  private static nint? _AttachMeshDrawCallIdxOffset;
 
   public ref int AttachMeshDrawCallIdx {
-    get => ref _Handle.AsRef<int>(_AttachMeshDrawCallIdxOffset.Value);
+    get {
+      if (_AttachMeshDrawCallIdxOffset == null) {
+        _AttachMeshDrawCallIdxOffset = Schema.GetOffset(0xC3F698B4E3082962);
+      }
+      return ref _Handle.AsRef<int>(_AttachMeshDrawCallIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnableSimulationOffset = new(() => Schema.GetOffset(0xC3F698B4AC53FD21), LazyThreadSafetyMode.None);
+  private static nint? _EnableSimulationOffset;
 
   public ref bool EnableSimulation {
-    get => ref _Handle.AsRef<bool>(_EnableSimulationOffset.Value);
+    get {
+      if (_EnableSimulationOffset == null) {
+        _EnableSimulationOffset = Schema.GetOffset(0xC3F698B4AC53FD21);
+      }
+      return ref _Handle.AsRef<bool>(_EnableSimulationOffset!.Value);
+    }
   }
 
 

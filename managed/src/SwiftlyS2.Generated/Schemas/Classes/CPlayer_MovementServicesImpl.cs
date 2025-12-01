@@ -17,76 +17,141 @@ internal partial class CPlayer_MovementServicesImpl : CPlayerPawnComponentImpl, 
   public CPlayer_MovementServicesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ImpulseOffset = new(() => Schema.GetOffset(0xD5BDF2892107CA68), LazyThreadSafetyMode.None);
+  private static nint? _ImpulseOffset;
 
   public ref int Impulse {
-    get => ref _Handle.AsRef<int>(_ImpulseOffset.Value);
+    get {
+      if (_ImpulseOffset == null) {
+        _ImpulseOffset = Schema.GetOffset(0xD5BDF2892107CA68);
+      }
+      return ref _Handle.AsRef<int>(_ImpulseOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ButtonsOffset = new(() => Schema.GetOffset(0xD5BDF28998CCEF82), LazyThreadSafetyMode.None);
+  private static nint? _ButtonsOffset;
 
   public CInButtonState Buttons {
-    get => new CInButtonStateImpl(_Handle + _ButtonsOffset.Value);
+    get {
+      if (_ButtonsOffset == null) {
+        _ButtonsOffset = Schema.GetOffset(0xD5BDF28998CCEF82);
+      }
+      return new CInButtonStateImpl(_Handle + _ButtonsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _QueuedButtonDownMaskOffset = new(() => Schema.GetOffset(0xD5BDF28939CFB260), LazyThreadSafetyMode.None);
+  private static nint? _QueuedButtonDownMaskOffset;
 
   public ref ulong QueuedButtonDownMask {
-    get => ref _Handle.AsRef<ulong>(_QueuedButtonDownMaskOffset.Value);
+    get {
+      if (_QueuedButtonDownMaskOffset == null) {
+        _QueuedButtonDownMaskOffset = Schema.GetOffset(0xD5BDF28939CFB260);
+      }
+      return ref _Handle.AsRef<ulong>(_QueuedButtonDownMaskOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _QueuedButtonChangeMaskOffset = new(() => Schema.GetOffset(0xD5BDF289FC832F1C), LazyThreadSafetyMode.None);
+  private static nint? _QueuedButtonChangeMaskOffset;
 
   public ref ulong QueuedButtonChangeMask {
-    get => ref _Handle.AsRef<ulong>(_QueuedButtonChangeMaskOffset.Value);
+    get {
+      if (_QueuedButtonChangeMaskOffset == null) {
+        _QueuedButtonChangeMaskOffset = Schema.GetOffset(0xD5BDF289FC832F1C);
+      }
+      return ref _Handle.AsRef<ulong>(_QueuedButtonChangeMaskOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ButtonDoublePressedOffset = new(() => Schema.GetOffset(0xD5BDF289E6C8CA6E), LazyThreadSafetyMode.None);
+  private static nint? _ButtonDoublePressedOffset;
 
   public ref ulong ButtonDoublePressed {
-    get => ref _Handle.AsRef<ulong>(_ButtonDoublePressedOffset.Value);
+    get {
+      if (_ButtonDoublePressedOffset == null) {
+        _ButtonDoublePressedOffset = Schema.GetOffset(0xD5BDF289E6C8CA6E);
+      }
+      return ref _Handle.AsRef<ulong>(_ButtonDoublePressedOffset!.Value);
+    }
   }
   public ISchemaFixedArray<uint> ButtonPressedCmdNumber {
     get => new SchemaFixedArray<uint>(_Handle, 0xD5BDF289A7854580, 64, 4, 4);
   }
-  private static readonly Lazy<nint> _LastCommandNumberProcessedOffset = new(() => Schema.GetOffset(0xD5BDF2899927F73D), LazyThreadSafetyMode.None);
+  private static nint? _LastCommandNumberProcessedOffset;
 
   public ref uint LastCommandNumberProcessed {
-    get => ref _Handle.AsRef<uint>(_LastCommandNumberProcessedOffset.Value);
+    get {
+      if (_LastCommandNumberProcessedOffset == null) {
+        _LastCommandNumberProcessedOffset = Schema.GetOffset(0xD5BDF2899927F73D);
+      }
+      return ref _Handle.AsRef<uint>(_LastCommandNumberProcessedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ToggleButtonDownMaskOffset = new(() => Schema.GetOffset(0xD5BDF28907E86F99), LazyThreadSafetyMode.None);
+  private static nint? _ToggleButtonDownMaskOffset;
 
   public ref ulong ToggleButtonDownMask {
-    get => ref _Handle.AsRef<ulong>(_ToggleButtonDownMaskOffset.Value);
+    get {
+      if (_ToggleButtonDownMaskOffset == null) {
+        _ToggleButtonDownMaskOffset = Schema.GetOffset(0xD5BDF28907E86F99);
+      }
+      return ref _Handle.AsRef<ulong>(_ToggleButtonDownMaskOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxspeedOffset = new(() => Schema.GetOffset(0xD5BDF289468F90F2), LazyThreadSafetyMode.None);
+  private static nint? _MaxspeedOffset;
 
   public ref float Maxspeed {
-    get => ref _Handle.AsRef<float>(_MaxspeedOffset.Value);
+    get {
+      if (_MaxspeedOffset == null) {
+        _MaxspeedOffset = Schema.GetOffset(0xD5BDF289468F90F2);
+      }
+      return ref _Handle.AsRef<float>(_MaxspeedOffset!.Value);
+    }
   }
   public ISchemaFixedArray<float> ForceSubtickMoveWhen {
     get => new SchemaFixedArray<float>(_Handle, 0xD5BDF28999115A07, 4, 4, 4);
   }
-  private static readonly Lazy<nint> _ForwardMoveOffset = new(() => Schema.GetOffset(0xD5BDF289806C78A9), LazyThreadSafetyMode.None);
+  private static nint? _ForwardMoveOffset;
 
   public ref float ForwardMove {
-    get => ref _Handle.AsRef<float>(_ForwardMoveOffset.Value);
+    get {
+      if (_ForwardMoveOffset == null) {
+        _ForwardMoveOffset = Schema.GetOffset(0xD5BDF289806C78A9);
+      }
+      return ref _Handle.AsRef<float>(_ForwardMoveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LeftMoveOffset = new(() => Schema.GetOffset(0xD5BDF289C4CF0D13), LazyThreadSafetyMode.None);
+  private static nint? _LeftMoveOffset;
 
   public ref float LeftMove {
-    get => ref _Handle.AsRef<float>(_LeftMoveOffset.Value);
+    get {
+      if (_LeftMoveOffset == null) {
+        _LeftMoveOffset = Schema.GetOffset(0xD5BDF289C4CF0D13);
+      }
+      return ref _Handle.AsRef<float>(_LeftMoveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UpMoveOffset = new(() => Schema.GetOffset(0xD5BDF289B1E2D2B7), LazyThreadSafetyMode.None);
+  private static nint? _UpMoveOffset;
 
   public ref float UpMove {
-    get => ref _Handle.AsRef<float>(_UpMoveOffset.Value);
+    get {
+      if (_UpMoveOffset == null) {
+        _UpMoveOffset = Schema.GetOffset(0xD5BDF289B1E2D2B7);
+      }
+      return ref _Handle.AsRef<float>(_UpMoveOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LastMovementImpulsesOffset = new(() => Schema.GetOffset(0xD5BDF2890B87214C), LazyThreadSafetyMode.None);
+  private static nint? _LastMovementImpulsesOffset;
 
   public ref Vector LastMovementImpulses {
-    get => ref _Handle.AsRef<Vector>(_LastMovementImpulsesOffset.Value);
+    get {
+      if (_LastMovementImpulsesOffset == null) {
+        _LastMovementImpulsesOffset = Schema.GetOffset(0xD5BDF2890B87214C);
+      }
+      return ref _Handle.AsRef<Vector>(_LastMovementImpulsesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OldViewAnglesOffset = new(() => Schema.GetOffset(0xD5BDF28935A27A27), LazyThreadSafetyMode.None);
+  private static nint? _OldViewAnglesOffset;
 
   public ref QAngle OldViewAngles {
-    get => ref _Handle.AsRef<QAngle>(_OldViewAnglesOffset.Value);
+    get {
+      if (_OldViewAnglesOffset == null) {
+        _OldViewAnglesOffset = Schema.GetOffset(0xD5BDF28935A27A27);
+      }
+      return ref _Handle.AsRef<QAngle>(_OldViewAnglesOffset!.Value);
+    }
   }
 
   public void ToggleButtonDownMaskUpdated() {

@@ -17,29 +17,52 @@ internal partial class CMorphConstraintImpl : CBaseConstraintImpl, CMorphConstra
   public CMorphConstraintImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _TargetMorphOffset = new(() => Schema.GetOffset(0xC24859C39FF7D337), LazyThreadSafetyMode.None);
+  private static nint? _TargetMorphOffset;
 
   public string TargetMorph {
     get {
-      var ptr = _Handle.Read<nint>(_TargetMorphOffset.Value);
+      if (_TargetMorphOffset == null) {
+        _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
+      }
+      var ptr = _Handle.Read<nint>(_TargetMorphOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _TargetMorphOffset.Value, value);
+    set {
+      if (_TargetMorphOffset == null) {
+        _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
+      }
+      Schema.SetString(_Handle, _TargetMorphOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _SlaveChannelOffset = new(() => Schema.GetOffset(0xC24859C3A439DE4F), LazyThreadSafetyMode.None);
+  private static nint? _SlaveChannelOffset;
 
   public ref int SlaveChannel {
-    get => ref _Handle.AsRef<int>(_SlaveChannelOffset.Value);
+    get {
+      if (_SlaveChannelOffset == null) {
+        _SlaveChannelOffset = Schema.GetOffset(0xC24859C3A439DE4F);
+      }
+      return ref _Handle.AsRef<int>(_SlaveChannelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinOffset = new(() => Schema.GetOffset(0xC24859C33B1A5649), LazyThreadSafetyMode.None);
+  private static nint? _MinOffset;
 
   public ref float Min {
-    get => ref _Handle.AsRef<float>(_MinOffset.Value);
+    get {
+      if (_MinOffset == null) {
+        _MinOffset = Schema.GetOffset(0xC24859C33B1A5649);
+      }
+      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxOffset = new(() => Schema.GetOffset(0xC24859C32D06B887), LazyThreadSafetyMode.None);
+  private static nint? _MaxOffset;
 
   public ref float Max {
-    get => ref _Handle.AsRef<float>(_MaxOffset.Value);
+    get {
+      if (_MaxOffset == null) {
+        _MaxOffset = Schema.GetOffset(0xC24859C32D06B887);
+      }
+      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+    }
   }
 
 

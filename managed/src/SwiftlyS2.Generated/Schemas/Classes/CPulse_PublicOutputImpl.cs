@@ -17,24 +17,42 @@ internal partial class CPulse_PublicOutputImpl : SchemaClass, CPulse_PublicOutpu
   public CPulse_PublicOutputImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x74B3BCA4CAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public SchemaUntypedField Name {
-    get => new SchemaUntypedField(_Handle + _NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x74B3BCA4CAE8A266);
+      }
+      return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DescriptionOffset = new(() => Schema.GetOffset(0x74B3BCA4678744E9), LazyThreadSafetyMode.None);
+  private static nint? _DescriptionOffset;
 
   public string Description {
     get {
-      var ptr = _Handle.Read<nint>(_DescriptionOffset.Value);
+      if (_DescriptionOffset == null) {
+        _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
+      }
+      var ptr = _Handle.Read<nint>(_DescriptionOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _DescriptionOffset.Value, value);
+    set {
+      if (_DescriptionOffset == null) {
+        _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
+      }
+      Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _ArgsOffset = new(() => Schema.GetOffset(0x74B3BCA4DAB98BBC), LazyThreadSafetyMode.None);
+  private static nint? _ArgsOffset;
 
   public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
-    get => ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset.Value);
+    get {
+      if (_ArgsOffset == null) {
+        _ArgsOffset = Schema.GetOffset(0x74B3BCA4DAB98BBC);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+    }
   }
 
 

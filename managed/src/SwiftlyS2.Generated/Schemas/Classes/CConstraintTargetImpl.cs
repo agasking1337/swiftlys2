@@ -17,39 +17,72 @@ internal partial class CConstraintTargetImpl : SchemaClass, CConstraintTarget {
   public CConstraintTargetImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _OffsetOffset = new(() => Schema.GetOffset(0x8A562794DB445327), LazyThreadSafetyMode.None);
+  private static nint? _OffsetOffset;
 
   public ref Quaternion Offset {
-    get => ref _Handle.AsRef<Quaternion>(_OffsetOffset.Value);
+    get {
+      if (_OffsetOffset == null) {
+        _OffsetOffset = Schema.GetOffset(0x8A562794DB445327);
+      }
+      return ref _Handle.AsRef<Quaternion>(_OffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Offset1Offset = new(() => Schema.GetOffset(0x8A562794FE159136), LazyThreadSafetyMode.None);
+  private static nint? _Offset1Offset;
 
   public ref Vector Offset1 {
-    get => ref _Handle.AsRef<Vector>(_Offset1Offset.Value);
+    get {
+      if (_Offset1Offset == null) {
+        _Offset1Offset = Schema.GetOffset(0x8A562794FE159136);
+      }
+      return ref _Handle.AsRef<Vector>(_Offset1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BoneHashOffset = new(() => Schema.GetOffset(0x8A562794D4010F03), LazyThreadSafetyMode.None);
+  private static nint? _BoneHashOffset;
 
   public ref uint BoneHash {
-    get => ref _Handle.AsRef<uint>(_BoneHashOffset.Value);
+    get {
+      if (_BoneHashOffset == null) {
+        _BoneHashOffset = Schema.GetOffset(0x8A562794D4010F03);
+      }
+      return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x8A56279463D22D49), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x8A56279463D22D49);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x8A56279463D22D49);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _WeightOffset = new(() => Schema.GetOffset(0x8A5627947B81E7AB), LazyThreadSafetyMode.None);
+  private static nint? _WeightOffset;
 
   public ref float Weight {
-    get => ref _Handle.AsRef<float>(_WeightOffset.Value);
+    get {
+      if (_WeightOffset == null) {
+        _WeightOffset = Schema.GetOffset(0x8A5627947B81E7AB);
+      }
+      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsAttachmentOffset = new(() => Schema.GetOffset(0x8A562794794BF658), LazyThreadSafetyMode.None);
+  private static nint? _IsAttachmentOffset;
 
   public ref bool IsAttachment {
-    get => ref _Handle.AsRef<bool>(_IsAttachmentOffset.Value);
+    get {
+      if (_IsAttachmentOffset == null) {
+        _IsAttachmentOffset = Schema.GetOffset(0x8A562794794BF658);
+      }
+      return ref _Handle.AsRef<bool>(_IsAttachmentOffset!.Value);
+    }
   }
 
 

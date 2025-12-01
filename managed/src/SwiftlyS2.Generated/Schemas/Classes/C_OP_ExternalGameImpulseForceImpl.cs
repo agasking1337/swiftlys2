@@ -17,30 +17,55 @@ internal partial class C_OP_ExternalGameImpulseForceImpl : CParticleFunctionForc
   public C_OP_ExternalGameImpulseForceImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ForceScaleOffset = new(() => Schema.GetOffset(0x9579EDD64817F390), LazyThreadSafetyMode.None);
+  private static nint? _ForceScaleOffset;
 
   public CPerParticleFloatInput ForceScale {
-    get => new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset.Value);
+    get {
+      if (_ForceScaleOffset == null) {
+        _ForceScaleOffset = Schema.GetOffset(0x9579EDD64817F390);
+      }
+      return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RopesOffset = new(() => Schema.GetOffset(0x9579EDD63A651EDA), LazyThreadSafetyMode.None);
+  private static nint? _RopesOffset;
 
   public ref bool Ropes {
-    get => ref _Handle.AsRef<bool>(_RopesOffset.Value);
+    get {
+      if (_RopesOffset == null) {
+        _RopesOffset = Schema.GetOffset(0x9579EDD63A651EDA);
+      }
+      return ref _Handle.AsRef<bool>(_RopesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RopesZOnlyOffset = new(() => Schema.GetOffset(0x9579EDD686709BB2), LazyThreadSafetyMode.None);
+  private static nint? _RopesZOnlyOffset;
 
   public ref bool RopesZOnly {
-    get => ref _Handle.AsRef<bool>(_RopesZOnlyOffset.Value);
+    get {
+      if (_RopesZOnlyOffset == null) {
+        _RopesZOnlyOffset = Schema.GetOffset(0x9579EDD686709BB2);
+      }
+      return ref _Handle.AsRef<bool>(_RopesZOnlyOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExplosionsOffset = new(() => Schema.GetOffset(0x9579EDD64CD39BC9), LazyThreadSafetyMode.None);
+  private static nint? _ExplosionsOffset;
 
   public ref bool Explosions {
-    get => ref _Handle.AsRef<bool>(_ExplosionsOffset.Value);
+    get {
+      if (_ExplosionsOffset == null) {
+        _ExplosionsOffset = Schema.GetOffset(0x9579EDD64CD39BC9);
+      }
+      return ref _Handle.AsRef<bool>(_ExplosionsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParticlesOffset = new(() => Schema.GetOffset(0x9579EDD6B287A104), LazyThreadSafetyMode.None);
+  private static nint? _ParticlesOffset;
 
   public ref bool Particles {
-    get => ref _Handle.AsRef<bool>(_ParticlesOffset.Value);
+    get {
+      if (_ParticlesOffset == null) {
+        _ParticlesOffset = Schema.GetOffset(0x9579EDD6B287A104);
+      }
+      return ref _Handle.AsRef<bool>(_ParticlesOffset!.Value);
+    }
   }
 
 

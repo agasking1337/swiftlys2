@@ -20,25 +20,45 @@ internal partial class audioparams_tImpl : SchemaClass, audioparams_t {
   public ISchemaFixedArray<Vector> LocalSound {
     get => new SchemaFixedArray<Vector>(_Handle, 0x6D349E3CCE184A47, 8, 12, 4);
   }
-  private static readonly Lazy<nint> _SoundscapeIndexOffset = new(() => Schema.GetOffset(0x6D349E3C046FCFEE), LazyThreadSafetyMode.None);
+  private static nint? _SoundscapeIndexOffset;
 
   public ref int SoundscapeIndex {
-    get => ref _Handle.AsRef<int>(_SoundscapeIndexOffset.Value);
+    get {
+      if (_SoundscapeIndexOffset == null) {
+        _SoundscapeIndexOffset = Schema.GetOffset(0x6D349E3C046FCFEE);
+      }
+      return ref _Handle.AsRef<int>(_SoundscapeIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _LocalBitsOffset = new(() => Schema.GetOffset(0x6D349E3C1DE85B60), LazyThreadSafetyMode.None);
+  private static nint? _LocalBitsOffset;
 
   public ref byte LocalBits {
-    get => ref _Handle.AsRef<byte>(_LocalBitsOffset.Value);
+    get {
+      if (_LocalBitsOffset == null) {
+        _LocalBitsOffset = Schema.GetOffset(0x6D349E3C1DE85B60);
+      }
+      return ref _Handle.AsRef<byte>(_LocalBitsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundscapeEntityListIndexOffset = new(() => Schema.GetOffset(0x6D349E3CA4E4FB9B), LazyThreadSafetyMode.None);
+  private static nint? _SoundscapeEntityListIndexOffset;
 
   public ref int SoundscapeEntityListIndex {
-    get => ref _Handle.AsRef<int>(_SoundscapeEntityListIndexOffset.Value);
+    get {
+      if (_SoundscapeEntityListIndexOffset == null) {
+        _SoundscapeEntityListIndexOffset = Schema.GetOffset(0x6D349E3CA4E4FB9B);
+      }
+      return ref _Handle.AsRef<int>(_SoundscapeEntityListIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SoundEventHashOffset = new(() => Schema.GetOffset(0x6D349E3C335E17CC), LazyThreadSafetyMode.None);
+  private static nint? _SoundEventHashOffset;
 
   public ref uint SoundEventHash {
-    get => ref _Handle.AsRef<uint>(_SoundEventHashOffset.Value);
+    get {
+      if (_SoundEventHashOffset == null) {
+        _SoundEventHashOffset = Schema.GetOffset(0x6D349E3C335E17CC);
+      }
+      return ref _Handle.AsRef<uint>(_SoundEventHashOffset!.Value);
+    }
   }
 
   public void LocalSoundUpdated() {

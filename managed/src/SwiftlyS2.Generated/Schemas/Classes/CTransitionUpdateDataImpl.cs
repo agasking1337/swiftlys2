@@ -17,25 +17,45 @@ internal partial class CTransitionUpdateDataImpl : SchemaClass, CTransitionUpdat
   public CTransitionUpdateDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _SrcStateIndexOffset = new(() => Schema.GetOffset(0xF3F18D08D2AF559E), LazyThreadSafetyMode.None);
+  private static nint? _SrcStateIndexOffset;
 
   public ref byte SrcStateIndex {
-    get => ref _Handle.AsRef<byte>(_SrcStateIndexOffset.Value);
+    get {
+      if (_SrcStateIndexOffset == null) {
+        _SrcStateIndexOffset = Schema.GetOffset(0xF3F18D08D2AF559E);
+      }
+      return ref _Handle.AsRef<byte>(_SrcStateIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DestStateIndexOffset = new(() => Schema.GetOffset(0xF3F18D0876246C8A), LazyThreadSafetyMode.None);
+  private static nint? _DestStateIndexOffset;
 
   public ref byte DestStateIndex {
-    get => ref _Handle.AsRef<byte>(_DestStateIndexOffset.Value);
+    get {
+      if (_DestStateIndexOffset == null) {
+        _DestStateIndexOffset = Schema.GetOffset(0xF3F18D0876246C8A);
+      }
+      return ref _Handle.AsRef<byte>(_DestStateIndexOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _HandshakeMaskToDisableFirstOffset = new(() => Schema.GetOffset(0xF3F18D08E58422C5), LazyThreadSafetyMode.None);
+  private static nint? _HandshakeMaskToDisableFirstOffset;
 
   public SchemaUntypedField HandshakeMaskToDisableFirst {
-    get => new SchemaUntypedField(_Handle + _HandshakeMaskToDisableFirstOffset.Value);
+    get {
+      if (_HandshakeMaskToDisableFirstOffset == null) {
+        _HandshakeMaskToDisableFirstOffset = Schema.GetOffset(0xF3F18D08E58422C5);
+      }
+      return new SchemaUntypedField(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0xF3F18D083A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public SchemaUntypedField Disabled {
-    get => new SchemaUntypedField(_Handle + _DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0xF3F18D083A7C5965);
+      }
+      return new SchemaUntypedField(_Handle + _DisabledOffset!.Value);
+    }
   }
 
 

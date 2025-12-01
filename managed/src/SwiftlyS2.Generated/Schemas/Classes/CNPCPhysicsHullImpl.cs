@@ -17,45 +17,85 @@ internal partial class CNPCPhysicsHullImpl : SchemaClass, CNPCPhysicsHull {
   public CNPCPhysicsHullImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x6C27881963D22D49), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public ref CGlobalSymbol Name {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_NameOffset.Value);
+    get {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x6C27881963D22D49);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TypeOffset = new(() => Schema.GetOffset(0x6C27881921B39888), LazyThreadSafetyMode.None);
+  private static nint? _TypeOffset;
 
   public ref NPCPhysicsHullType_t Type {
-    get => ref _Handle.AsRef<NPCPhysicsHullType_t>(_TypeOffset.Value);
+    get {
+      if (_TypeOffset == null) {
+        _TypeOffset = Schema.GetOffset(0x6C27881921B39888);
+      }
+      return ref _Handle.AsRef<NPCPhysicsHullType_t>(_TypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CapsuleHeightOffset = new(() => Schema.GetOffset(0x6C278819043CF691), LazyThreadSafetyMode.None);
+  private static nint? _CapsuleHeightOffset;
 
   public ref float CapsuleHeight {
-    get => ref _Handle.AsRef<float>(_CapsuleHeightOffset.Value);
+    get {
+      if (_CapsuleHeightOffset == null) {
+        _CapsuleHeightOffset = Schema.GetOffset(0x6C278819043CF691);
+      }
+      return ref _Handle.AsRef<float>(_CapsuleHeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CapsuleRadiusOffset = new(() => Schema.GetOffset(0x6C278819A1A593D0), LazyThreadSafetyMode.None);
+  private static nint? _CapsuleRadiusOffset;
 
   public ref float CapsuleRadius {
-    get => ref _Handle.AsRef<float>(_CapsuleRadiusOffset.Value);
+    get {
+      if (_CapsuleRadiusOffset == null) {
+        _CapsuleRadiusOffset = Schema.GetOffset(0x6C278819A1A593D0);
+      }
+      return ref _Handle.AsRef<float>(_CapsuleRadiusOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CapsuleCenter1Offset = new(() => Schema.GetOffset(0x6C278819A5E81978), LazyThreadSafetyMode.None);
+  private static nint? _CapsuleCenter1Offset;
 
   public ref Vector CapsuleCenter1 {
-    get => ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset.Value);
+    get {
+      if (_CapsuleCenter1Offset == null) {
+        _CapsuleCenter1Offset = Schema.GetOffset(0x6C278819A5E81978);
+      }
+      return ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CapsuleCenter2Offset = new(() => Schema.GetOffset(0x6C278819A8E81E31), LazyThreadSafetyMode.None);
+  private static nint? _CapsuleCenter2Offset;
 
   public ref Vector CapsuleCenter2 {
-    get => ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset.Value);
+    get {
+      if (_CapsuleCenter2Offset == null) {
+        _CapsuleCenter2Offset = Schema.GetOffset(0x6C278819A8E81E31);
+      }
+      return ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GroundBoxHeightOffset = new(() => Schema.GetOffset(0x6C2788195B2D099E), LazyThreadSafetyMode.None);
+  private static nint? _GroundBoxHeightOffset;
 
   public ref float GroundBoxHeight {
-    get => ref _Handle.AsRef<float>(_GroundBoxHeightOffset.Value);
+    get {
+      if (_GroundBoxHeightOffset == null) {
+        _GroundBoxHeightOffset = Schema.GetOffset(0x6C2788195B2D099E);
+      }
+      return ref _Handle.AsRef<float>(_GroundBoxHeightOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GroundBoxWidthOffset = new(() => Schema.GetOffset(0x6C2788194A30F5E3), LazyThreadSafetyMode.None);
+  private static nint? _GroundBoxWidthOffset;
 
   public ref float GroundBoxWidth {
-    get => ref _Handle.AsRef<float>(_GroundBoxWidthOffset.Value);
+    get {
+      if (_GroundBoxWidthOffset == null) {
+        _GroundBoxWidthOffset = Schema.GetOffset(0x6C2788194A30F5E3);
+      }
+      return ref _Handle.AsRef<float>(_GroundBoxWidthOffset!.Value);
+    }
   }
 
 

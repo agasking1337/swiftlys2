@@ -17,29 +17,52 @@ internal partial class ParticleNamedValueSource_tImpl : SchemaClass, ParticleNam
   public ParticleNamedValueSource_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _NameOffset = new(() => Schema.GetOffset(0x740B6BEFCAE8A266), LazyThreadSafetyMode.None);
+  private static nint? _NameOffset;
 
   public string Name {
     get {
-      var ptr = _Handle.Read<nint>(_NameOffset.Value);
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
+      }
+      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _NameOffset.Value, value);
+    set {
+      if (_NameOffset == null) {
+        _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
+      }
+      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _IsPublicOffset = new(() => Schema.GetOffset(0x740B6BEFD2D88EB0), LazyThreadSafetyMode.None);
+  private static nint? _IsPublicOffset;
 
   public ref bool IsPublic {
-    get => ref _Handle.AsRef<bool>(_IsPublicOffset.Value);
+    get {
+      if (_IsPublicOffset == null) {
+        _IsPublicOffset = Schema.GetOffset(0x740B6BEFD2D88EB0);
+      }
+      return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ValueTypeOffset = new(() => Schema.GetOffset(0x740B6BEFC2A673CA), LazyThreadSafetyMode.None);
+  private static nint? _ValueTypeOffset;
 
   public SchemaUntypedField ValueType {
-    get => new SchemaUntypedField(_Handle + _ValueTypeOffset.Value);
+    get {
+      if (_ValueTypeOffset == null) {
+        _ValueTypeOffset = Schema.GetOffset(0x740B6BEFC2A673CA);
+      }
+      return new SchemaUntypedField(_Handle + _ValueTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DefaultConfigOffset = new(() => Schema.GetOffset(0x740B6BEF05A58128), LazyThreadSafetyMode.None);
+  private static nint? _DefaultConfigOffset;
 
   public ParticleNamedValueConfiguration_t DefaultConfig {
-    get => new ParticleNamedValueConfiguration_tImpl(_Handle + _DefaultConfigOffset.Value);
+    get {
+      if (_DefaultConfigOffset == null) {
+        _DefaultConfigOffset = Schema.GetOffset(0x740B6BEF05A58128);
+      }
+      return new ParticleNamedValueConfiguration_tImpl(_Handle + _DefaultConfigOffset!.Value);
+    }
   }
 
 

@@ -17,30 +17,55 @@ internal partial class CLogicRelayImpl : CLogicalEntityImpl, CLogicRelay {
   public CLogicRelayImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0x15CFD4B93A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0x15CFD4B93A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WaitForRefireOffset = new(() => Schema.GetOffset(0x15CFD4B9AB85983A), LazyThreadSafetyMode.None);
+  private static nint? _WaitForRefireOffset;
 
   public ref bool WaitForRefire {
-    get => ref _Handle.AsRef<bool>(_WaitForRefireOffset.Value);
+    get {
+      if (_WaitForRefireOffset == null) {
+        _WaitForRefireOffset = Schema.GetOffset(0x15CFD4B9AB85983A);
+      }
+      return ref _Handle.AsRef<bool>(_WaitForRefireOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TriggerOnceOffset = new(() => Schema.GetOffset(0x15CFD4B981D75586), LazyThreadSafetyMode.None);
+  private static nint? _TriggerOnceOffset;
 
   public ref bool TriggerOnce {
-    get => ref _Handle.AsRef<bool>(_TriggerOnceOffset.Value);
+    get {
+      if (_TriggerOnceOffset == null) {
+        _TriggerOnceOffset = Schema.GetOffset(0x15CFD4B981D75586);
+      }
+      return ref _Handle.AsRef<bool>(_TriggerOnceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FastRetriggerOffset = new(() => Schema.GetOffset(0x15CFD4B91AD2302E), LazyThreadSafetyMode.None);
+  private static nint? _FastRetriggerOffset;
 
   public ref bool FastRetrigger {
-    get => ref _Handle.AsRef<bool>(_FastRetriggerOffset.Value);
+    get {
+      if (_FastRetriggerOffset == null) {
+        _FastRetriggerOffset = Schema.GetOffset(0x15CFD4B91AD2302E);
+      }
+      return ref _Handle.AsRef<bool>(_FastRetriggerOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PassthoughCallerOffset = new(() => Schema.GetOffset(0x15CFD4B969DA94C8), LazyThreadSafetyMode.None);
+  private static nint? _PassthoughCallerOffset;
 
   public ref bool PassthoughCaller {
-    get => ref _Handle.AsRef<bool>(_PassthoughCallerOffset.Value);
+    get {
+      if (_PassthoughCallerOffset == null) {
+        _PassthoughCallerOffset = Schema.GetOffset(0x15CFD4B969DA94C8);
+      }
+      return ref _Handle.AsRef<bool>(_PassthoughCallerOffset!.Value);
+    }
   }
 
 

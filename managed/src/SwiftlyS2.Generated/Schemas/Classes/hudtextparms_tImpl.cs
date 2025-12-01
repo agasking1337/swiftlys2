@@ -17,35 +17,65 @@ internal partial class hudtextparms_tImpl : SchemaClass, hudtextparms_t {
   public hudtextparms_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _Color1Offset = new(() => Schema.GetOffset(0x827B8DBF36F4EB4B), LazyThreadSafetyMode.None);
+  private static nint? _Color1Offset;
 
   public ref Color Color1 {
-    get => ref _Handle.AsRef<Color>(_Color1Offset.Value);
+    get {
+      if (_Color1Offset == null) {
+        _Color1Offset = Schema.GetOffset(0x827B8DBF36F4EB4B);
+      }
+      return ref _Handle.AsRef<Color>(_Color1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _Color2Offset = new(() => Schema.GetOffset(0x827B8DBF37F4ECDE), LazyThreadSafetyMode.None);
+  private static nint? _Color2Offset;
 
   public ref Color Color2 {
-    get => ref _Handle.AsRef<Color>(_Color2Offset.Value);
+    get {
+      if (_Color2Offset == null) {
+        _Color2Offset = Schema.GetOffset(0x827B8DBF37F4ECDE);
+      }
+      return ref _Handle.AsRef<Color>(_Color2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectOffset = new(() => Schema.GetOffset(0x827B8DBF6E6E8D54), LazyThreadSafetyMode.None);
+  private static nint? _EffectOffset;
 
   public ref byte Effect {
-    get => ref _Handle.AsRef<byte>(_EffectOffset.Value);
+    get {
+      if (_EffectOffset == null) {
+        _EffectOffset = Schema.GetOffset(0x827B8DBF6E6E8D54);
+      }
+      return ref _Handle.AsRef<byte>(_EffectOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChannelOffset = new(() => Schema.GetOffset(0x827B8DBF21C252A4), LazyThreadSafetyMode.None);
+  private static nint? _ChannelOffset;
 
   public ref byte Channel {
-    get => ref _Handle.AsRef<byte>(_ChannelOffset.Value);
+    get {
+      if (_ChannelOffset == null) {
+        _ChannelOffset = Schema.GetOffset(0x827B8DBF21C252A4);
+      }
+      return ref _Handle.AsRef<byte>(_ChannelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _XOffset = new(() => Schema.GetOffset(0x827B8DBFFD0C5087), LazyThreadSafetyMode.None);
+  private static nint? _XOffset;
 
   public ref float X {
-    get => ref _Handle.AsRef<float>(_XOffset.Value);
+    get {
+      if (_XOffset == null) {
+        _XOffset = Schema.GetOffset(0x827B8DBFFD0C5087);
+      }
+      return ref _Handle.AsRef<float>(_XOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YOffset = new(() => Schema.GetOffset(0x827B8DBFFC0C4EF4), LazyThreadSafetyMode.None);
+  private static nint? _YOffset;
 
   public ref float Y {
-    get => ref _Handle.AsRef<float>(_YOffset.Value);
+    get {
+      if (_YOffset == null) {
+        _YOffset = Schema.GetOffset(0x827B8DBFFC0C4EF4);
+      }
+      return ref _Handle.AsRef<float>(_YOffset!.Value);
+    }
   }
 
 

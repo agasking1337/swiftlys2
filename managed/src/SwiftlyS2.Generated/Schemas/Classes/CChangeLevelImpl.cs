@@ -17,48 +17,89 @@ internal partial class CChangeLevelImpl : CBaseTriggerImpl, CChangeLevel {
   public CChangeLevelImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _MapNameOffset = new(() => Schema.GetOffset(0x52008134CE11EF47), LazyThreadSafetyMode.None);
+  private static nint? _MapNameOffset;
 
   public string MapName {
     get {
-      var ptr = _Handle.Read<nint>(_MapNameOffset.Value);
+      if (_MapNameOffset == null) {
+        _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
+      }
+      var ptr = _Handle.Read<nint>(_MapNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _MapNameOffset.Value, value);
+    set {
+      if (_MapNameOffset == null) {
+        _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
+      }
+      Schema.SetString(_Handle, _MapNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _LandmarkNameOffset = new(() => Schema.GetOffset(0x520081342DEE941D), LazyThreadSafetyMode.None);
+  private static nint? _LandmarkNameOffset;
 
   public string LandmarkName {
     get {
-      var ptr = _Handle.Read<nint>(_LandmarkNameOffset.Value);
+      if (_LandmarkNameOffset == null) {
+        _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
+      }
+      var ptr = _Handle.Read<nint>(_LandmarkNameOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _LandmarkNameOffset.Value, value);
+    set {
+      if (_LandmarkNameOffset == null) {
+        _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
+      }
+      Schema.SetString(_Handle, _LandmarkNameOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _OnChangeLevelOffset = new(() => Schema.GetOffset(0x52008134EED57EDE), LazyThreadSafetyMode.None);
+  private static nint? _OnChangeLevelOffset;
 
   public CEntityIOOutput OnChangeLevel {
-    get => new CEntityIOOutputImpl(_Handle + _OnChangeLevelOffset.Value);
+    get {
+      if (_OnChangeLevelOffset == null) {
+        _OnChangeLevelOffset = Schema.GetOffset(0x52008134EED57EDE);
+      }
+      return new CEntityIOOutputImpl(_Handle + _OnChangeLevelOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TouchedOffset = new(() => Schema.GetOffset(0x520081342BF07839), LazyThreadSafetyMode.None);
+  private static nint? _TouchedOffset;
 
   public ref bool Touched {
-    get => ref _Handle.AsRef<bool>(_TouchedOffset.Value);
+    get {
+      if (_TouchedOffset == null) {
+        _TouchedOffset = Schema.GetOffset(0x520081342BF07839);
+      }
+      return ref _Handle.AsRef<bool>(_TouchedOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NoTouchOffset = new(() => Schema.GetOffset(0x520081343004899D), LazyThreadSafetyMode.None);
+  private static nint? _NoTouchOffset;
 
   public ref bool NoTouch {
-    get => ref _Handle.AsRef<bool>(_NoTouchOffset.Value);
+    get {
+      if (_NoTouchOffset == null) {
+        _NoTouchOffset = Schema.GetOffset(0x520081343004899D);
+      }
+      return ref _Handle.AsRef<bool>(_NoTouchOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NewChapterOffset = new(() => Schema.GetOffset(0x520081342D184126), LazyThreadSafetyMode.None);
+  private static nint? _NewChapterOffset;
 
   public ref bool NewChapter {
-    get => ref _Handle.AsRef<bool>(_NewChapterOffset.Value);
+    get {
+      if (_NewChapterOffset == null) {
+        _NewChapterOffset = Schema.GetOffset(0x520081342D184126);
+      }
+      return ref _Handle.AsRef<bool>(_NewChapterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OnChangeLevelFiredOffset = new(() => Schema.GetOffset(0x520081341173C672), LazyThreadSafetyMode.None);
+  private static nint? _OnChangeLevelFiredOffset;
 
   public ref bool OnChangeLevelFired {
-    get => ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset.Value);
+    get {
+      if (_OnChangeLevelFiredOffset == null) {
+        _OnChangeLevelFiredOffset = Schema.GetOffset(0x520081341173C672);
+      }
+      return ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset!.Value);
+    }
   }
 
 

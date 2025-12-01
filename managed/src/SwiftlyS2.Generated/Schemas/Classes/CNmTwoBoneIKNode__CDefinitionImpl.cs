@@ -17,35 +17,65 @@ internal partial class CNmTwoBoneIKNode__CDefinitionImpl : CNmPassthroughNode__C
   public CNmTwoBoneIKNode__CDefinitionImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EffectorBoneIDOffset = new(() => Schema.GetOffset(0x4D36C61F7F221CB6), LazyThreadSafetyMode.None);
+  private static nint? _EffectorBoneIDOffset;
 
   public ref CGlobalSymbol EffectorBoneID {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset.Value);
+    get {
+      if (_EffectorBoneIDOffset == null) {
+        _EffectorBoneIDOffset = Schema.GetOffset(0x4D36C61F7F221CB6);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EffectorTargetNodeIdxOffset = new(() => Schema.GetOffset(0x4D36C61FD6B9B943), LazyThreadSafetyMode.None);
+  private static nint? _EffectorTargetNodeIdxOffset;
 
   public ref short EffectorTargetNodeIdx {
-    get => ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset.Value);
+    get {
+      if (_EffectorTargetNodeIdxOffset == null) {
+        _EffectorTargetNodeIdxOffset = Schema.GetOffset(0x4D36C61FD6B9B943);
+      }
+      return ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EnabledNodeIdxOffset = new(() => Schema.GetOffset(0x4D36C61FF7CDF5E9), LazyThreadSafetyMode.None);
+  private static nint? _EnabledNodeIdxOffset;
 
   public ref short EnabledNodeIdx {
-    get => ref _Handle.AsRef<short>(_EnabledNodeIdxOffset.Value);
+    get {
+      if (_EnabledNodeIdxOffset == null) {
+        _EnabledNodeIdxOffset = Schema.GetOffset(0x4D36C61FF7CDF5E9);
+      }
+      return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendTimeSecondsOffset = new(() => Schema.GetOffset(0x4D36C61F6D3A08FC), LazyThreadSafetyMode.None);
+  private static nint? _BlendTimeSecondsOffset;
 
   public ref float BlendTimeSeconds {
-    get => ref _Handle.AsRef<float>(_BlendTimeSecondsOffset.Value);
+    get {
+      if (_BlendTimeSecondsOffset == null) {
+        _BlendTimeSecondsOffset = Schema.GetOffset(0x4D36C61F6D3A08FC);
+      }
+      return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlendModeOffset = new(() => Schema.GetOffset(0x4D36C61F8D5006AB), LazyThreadSafetyMode.None);
+  private static nint? _BlendModeOffset;
 
   public ref NmIKBlendMode_t BlendMode {
-    get => ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset.Value);
+    get {
+      if (_BlendModeOffset == null) {
+        _BlendModeOffset = Schema.GetOffset(0x4D36C61F8D5006AB);
+      }
+      return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsTargetInWorldSpaceOffset = new(() => Schema.GetOffset(0x4D36C61F5F56E0C5), LazyThreadSafetyMode.None);
+  private static nint? _IsTargetInWorldSpaceOffset;
 
   public ref bool IsTargetInWorldSpace {
-    get => ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset.Value);
+    get {
+      if (_IsTargetInWorldSpaceOffset == null) {
+        _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x4D36C61F5F56E0C5);
+      }
+      return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+    }
   }
 
 

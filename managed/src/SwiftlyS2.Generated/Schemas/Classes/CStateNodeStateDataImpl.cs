@@ -17,20 +17,35 @@ internal partial class CStateNodeStateDataImpl : SchemaClass, CStateNodeStateDat
   public CStateNodeStateDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildOffset = new(() => Schema.GetOffset(0x6AB991A04A0B773F), LazyThreadSafetyMode.None);
+  private static nint? _ChildOffset;
 
   public CAnimUpdateNodeRef Child {
-    get => new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset.Value);
+    get {
+      if (_ChildOffset == null) {
+        _ChildOffset = Schema.GetOffset(0x6AB991A04A0B773F);
+      }
+      return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExclusiveRootMotionOffset = new(() => Schema.GetOffset(0x6AB991A019C8014D), LazyThreadSafetyMode.None);
+  private static nint? _ExclusiveRootMotionOffset;
 
   public SchemaUntypedField ExclusiveRootMotion {
-    get => new SchemaUntypedField(_Handle + _ExclusiveRootMotionOffset.Value);
+    get {
+      if (_ExclusiveRootMotionOffset == null) {
+        _ExclusiveRootMotionOffset = Schema.GetOffset(0x6AB991A019C8014D);
+      }
+      return new SchemaUntypedField(_Handle + _ExclusiveRootMotionOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ExclusiveRootMotionFirstFrameOffset = new(() => Schema.GetOffset(0x6AB991A0220BA45A), LazyThreadSafetyMode.None);
+  private static nint? _ExclusiveRootMotionFirstFrameOffset;
 
   public SchemaUntypedField ExclusiveRootMotionFirstFrame {
-    get => new SchemaUntypedField(_Handle + _ExclusiveRootMotionFirstFrameOffset.Value);
+    get {
+      if (_ExclusiveRootMotionFirstFrameOffset == null) {
+        _ExclusiveRootMotionFirstFrameOffset = Schema.GetOffset(0x6AB991A0220BA45A);
+      }
+      return new SchemaUntypedField(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+    }
   }
 
 

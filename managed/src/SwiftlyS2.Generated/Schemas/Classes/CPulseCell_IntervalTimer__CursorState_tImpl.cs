@@ -17,30 +17,55 @@ internal partial class CPulseCell_IntervalTimer__CursorState_tImpl : SchemaClass
   public CPulseCell_IntervalTimer__CursorState_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x63BF122697B5FA8E), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public GameTime_t StartTime {
-    get => new GameTime_tImpl(_Handle + _StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x63BF122697B5FA8E);
+      }
+      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndTimeOffset = new(() => Schema.GetOffset(0x63BF12267AA8F56B), LazyThreadSafetyMode.None);
+  private static nint? _EndTimeOffset;
 
   public GameTime_t EndTime {
-    get => new GameTime_tImpl(_Handle + _EndTimeOffset.Value);
+    get {
+      if (_EndTimeOffset == null) {
+        _EndTimeOffset = Schema.GetOffset(0x63BF12267AA8F56B);
+      }
+      return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WaitIntervalOffset = new(() => Schema.GetOffset(0x63BF122677B6B563), LazyThreadSafetyMode.None);
+  private static nint? _WaitIntervalOffset;
 
   public ref float WaitInterval {
-    get => ref _Handle.AsRef<float>(_WaitIntervalOffset.Value);
+    get {
+      if (_WaitIntervalOffset == null) {
+        _WaitIntervalOffset = Schema.GetOffset(0x63BF122677B6B563);
+      }
+      return ref _Handle.AsRef<float>(_WaitIntervalOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _WaitIntervalHighOffset = new(() => Schema.GetOffset(0x63BF12267540534F), LazyThreadSafetyMode.None);
+  private static nint? _WaitIntervalHighOffset;
 
   public ref float WaitIntervalHigh {
-    get => ref _Handle.AsRef<float>(_WaitIntervalHighOffset.Value);
+    get {
+      if (_WaitIntervalHighOffset == null) {
+        _WaitIntervalHighOffset = Schema.GetOffset(0x63BF12267540534F);
+      }
+      return ref _Handle.AsRef<float>(_WaitIntervalHighOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CompleteOnNextWakeOffset = new(() => Schema.GetOffset(0x63BF122684615952), LazyThreadSafetyMode.None);
+  private static nint? _CompleteOnNextWakeOffset;
 
   public ref bool CompleteOnNextWake {
-    get => ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset.Value);
+    get {
+      if (_CompleteOnNextWakeOffset == null) {
+        _CompleteOnNextWakeOffset = Schema.GetOffset(0x63BF122684615952);
+      }
+      return ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset!.Value);
+    }
   }
 
 

@@ -17,20 +17,35 @@ internal partial class CInfoPlayerStartImpl : CPointEntityImpl, CInfoPlayerStart
   public CInfoPlayerStartImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DisabledOffset = new(() => Schema.GetOffset(0xE0799D713A7C5965), LazyThreadSafetyMode.None);
+  private static nint? _DisabledOffset;
 
   public ref bool Disabled {
-    get => ref _Handle.AsRef<bool>(_DisabledOffset.Value);
+    get {
+      if (_DisabledOffset == null) {
+        _DisabledOffset = Schema.GetOffset(0xE0799D713A7C5965);
+      }
+      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _IsMasterOffset = new(() => Schema.GetOffset(0xE0799D71DE5719A3), LazyThreadSafetyMode.None);
+  private static nint? _IsMasterOffset;
 
   public ref bool IsMaster {
-    get => ref _Handle.AsRef<bool>(_IsMasterOffset.Value);
+    get {
+      if (_IsMasterOffset == null) {
+        _IsMasterOffset = Schema.GetOffset(0xE0799D71DE5719A3);
+      }
+      return ref _Handle.AsRef<bool>(_IsMasterOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PawnSubclassOffset = new(() => Schema.GetOffset(0xE0799D7190AFB5EF), LazyThreadSafetyMode.None);
+  private static nint? _PawnSubclassOffset;
 
   public ref CGlobalSymbol PawnSubclass {
-    get => ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset.Value);
+    get {
+      if (_PawnSubclassOffset == null) {
+        _PawnSubclassOffset = Schema.GetOffset(0xE0799D7190AFB5EF);
+      }
+      return ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset!.Value);
+    }
   }
 
 

@@ -17,75 +17,145 @@ internal partial class CPulseGraphDefImpl : SchemaClass, CPulseGraphDef {
   public CPulseGraphDefImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DomainIdentifierOffset = new(() => Schema.GetOffset(0x2A792CD89A57EDFA), LazyThreadSafetyMode.None);
+  private static nint? _DomainIdentifierOffset;
 
   public SchemaUntypedField DomainIdentifier {
-    get => new SchemaUntypedField(_Handle + _DomainIdentifierOffset.Value);
+    get {
+      if (_DomainIdentifierOffset == null) {
+        _DomainIdentifierOffset = Schema.GetOffset(0x2A792CD89A57EDFA);
+      }
+      return new SchemaUntypedField(_Handle + _DomainIdentifierOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DomainSubTypeOffset = new(() => Schema.GetOffset(0x2A792CD83A580FB9), LazyThreadSafetyMode.None);
+  private static nint? _DomainSubTypeOffset;
 
   public SchemaUntypedField DomainSubType {
-    get => new SchemaUntypedField(_Handle + _DomainSubTypeOffset.Value);
+    get {
+      if (_DomainSubTypeOffset == null) {
+        _DomainSubTypeOffset = Schema.GetOffset(0x2A792CD83A580FB9);
+      }
+      return new SchemaUntypedField(_Handle + _DomainSubTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentMapNameOffset = new(() => Schema.GetOffset(0x2A792CD8A9A81AA2), LazyThreadSafetyMode.None);
+  private static nint? _ParentMapNameOffset;
 
   public SchemaUntypedField ParentMapName {
-    get => new SchemaUntypedField(_Handle + _ParentMapNameOffset.Value);
+    get {
+      if (_ParentMapNameOffset == null) {
+        _ParentMapNameOffset = Schema.GetOffset(0x2A792CD8A9A81AA2);
+      }
+      return new SchemaUntypedField(_Handle + _ParentMapNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentXmlNameOffset = new(() => Schema.GetOffset(0x2A792CD80689878D), LazyThreadSafetyMode.None);
+  private static nint? _ParentXmlNameOffset;
 
   public SchemaUntypedField ParentXmlName {
-    get => new SchemaUntypedField(_Handle + _ParentXmlNameOffset.Value);
+    get {
+      if (_ParentXmlNameOffset == null) {
+        _ParentXmlNameOffset = Schema.GetOffset(0x2A792CD80689878D);
+      }
+      return new SchemaUntypedField(_Handle + _ParentXmlNameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ChunksOffset = new(() => Schema.GetOffset(0x2A792CD8CCAED623), LazyThreadSafetyMode.None);
+  private static nint? _ChunksOffset;
 
   public ref CUtlVector<PointerTo<CPulse_Chunk>> Chunks {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_Chunk>>>(_ChunksOffset.Value);
+    get {
+      if (_ChunksOffset == null) {
+        _ChunksOffset = Schema.GetOffset(0x2A792CD8CCAED623);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_Chunk>>>(_ChunksOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CellsOffset = new(() => Schema.GetOffset(0x2A792CD8739C8132), LazyThreadSafetyMode.None);
+  private static nint? _CellsOffset;
 
   public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CPulseCell_Base>>>(_CellsOffset.Value);
+    get {
+      if (_CellsOffset == null) {
+        _CellsOffset = Schema.GetOffset(0x2A792CD8739C8132);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CPulseCell_Base>>>(_CellsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VarsOffset = new(() => Schema.GetOffset(0x2A792CD8845ACC37), LazyThreadSafetyMode.None);
+  private static nint? _VarsOffset;
 
   public ref CUtlVector<CPulse_Variable> Vars {
-    get => ref _Handle.AsRef<CUtlVector<CPulse_Variable>>(_VarsOffset.Value);
+    get {
+      if (_VarsOffset == null) {
+        _VarsOffset = Schema.GetOffset(0x2A792CD8845ACC37);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulse_Variable>>(_VarsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _PublicOutputsOffset = new(() => Schema.GetOffset(0x2A792CD8F0A9E7DA), LazyThreadSafetyMode.None);
+  private static nint? _PublicOutputsOffset;
 
   public ref CUtlVector<CPulse_PublicOutput> PublicOutputs {
-    get => ref _Handle.AsRef<CUtlVector<CPulse_PublicOutput>>(_PublicOutputsOffset.Value);
+    get {
+      if (_PublicOutputsOffset == null) {
+        _PublicOutputsOffset = Schema.GetOffset(0x2A792CD8F0A9E7DA);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulse_PublicOutput>>(_PublicOutputsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InvokeBindingsOffset = new(() => Schema.GetOffset(0x2A792CD8828E222B), LazyThreadSafetyMode.None);
+  private static nint? _InvokeBindingsOffset;
 
   public ref CUtlVector<PointerTo<CPulse_InvokeBinding>> InvokeBindings {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_InvokeBinding>>>(_InvokeBindingsOffset.Value);
+    get {
+      if (_InvokeBindingsOffset == null) {
+        _InvokeBindingsOffset = Schema.GetOffset(0x2A792CD8828E222B);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_InvokeBinding>>>(_InvokeBindingsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CallInfosOffset = new(() => Schema.GetOffset(0x2A792CD8EBB65CE6), LazyThreadSafetyMode.None);
+  private static nint? _CallInfosOffset;
 
   public ref CUtlVector<PointerTo<CPulse_CallInfo>> CallInfos {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_CallInfo>>>(_CallInfosOffset.Value);
+    get {
+      if (_CallInfosOffset == null) {
+        _CallInfosOffset = Schema.GetOffset(0x2A792CD8EBB65CE6);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_CallInfo>>>(_CallInfosOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ConstantsOffset = new(() => Schema.GetOffset(0x2A792CD83ACB72E2), LazyThreadSafetyMode.None);
+  private static nint? _ConstantsOffset;
 
   public ref CUtlVector<CPulse_Constant> Constants {
-    get => ref _Handle.AsRef<CUtlVector<CPulse_Constant>>(_ConstantsOffset.Value);
+    get {
+      if (_ConstantsOffset == null) {
+        _ConstantsOffset = Schema.GetOffset(0x2A792CD83ACB72E2);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulse_Constant>>(_ConstantsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DomainValuesOffset = new(() => Schema.GetOffset(0x2A792CD8AA783E57), LazyThreadSafetyMode.None);
+  private static nint? _DomainValuesOffset;
 
   public ref CUtlVector<CPulse_DomainValue> DomainValues {
-    get => ref _Handle.AsRef<CUtlVector<CPulse_DomainValue>>(_DomainValuesOffset.Value);
+    get {
+      if (_DomainValuesOffset == null) {
+        _DomainValuesOffset = Schema.GetOffset(0x2A792CD8AA783E57);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulse_DomainValue>>(_DomainValuesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BlackboardReferencesOffset = new(() => Schema.GetOffset(0x2A792CD8AC9DF456), LazyThreadSafetyMode.None);
+  private static nint? _BlackboardReferencesOffset;
 
   public ref CUtlVector<CPulse_BlackboardReference> BlackboardReferences {
-    get => ref _Handle.AsRef<CUtlVector<CPulse_BlackboardReference>>(_BlackboardReferencesOffset.Value);
+    get {
+      if (_BlackboardReferencesOffset == null) {
+        _BlackboardReferencesOffset = Schema.GetOffset(0x2A792CD8AC9DF456);
+      }
+      return ref _Handle.AsRef<CUtlVector<CPulse_BlackboardReference>>(_BlackboardReferencesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OutputConnectionsOffset = new(() => Schema.GetOffset(0x2A792CD843CD6C85), LazyThreadSafetyMode.None);
+  private static nint? _OutputConnectionsOffset;
 
   public ref CUtlVector<PointerTo<CPulse_OutputConnection>> OutputConnections {
-    get => ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_OutputConnection>>>(_OutputConnectionsOffset.Value);
+    get {
+      if (_OutputConnectionsOffset == null) {
+        _OutputConnectionsOffset = Schema.GetOffset(0x2A792CD843CD6C85);
+      }
+      return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_OutputConnection>>>(_OutputConnectionsOffset!.Value);
+    }
   }
 
 

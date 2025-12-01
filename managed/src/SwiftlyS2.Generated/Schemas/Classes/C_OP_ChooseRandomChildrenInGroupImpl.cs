@@ -17,15 +17,25 @@ internal partial class C_OP_ChooseRandomChildrenInGroupImpl : CParticleFunctionP
   public C_OP_ChooseRandomChildrenInGroupImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ChildGroupIDOffset = new(() => Schema.GetOffset(0xF79CD816E3F3C965), LazyThreadSafetyMode.None);
+  private static nint? _ChildGroupIDOffset;
 
   public ref int ChildGroupID {
-    get => ref _Handle.AsRef<int>(_ChildGroupIDOffset.Value);
+    get {
+      if (_ChildGroupIDOffset == null) {
+        _ChildGroupIDOffset = Schema.GetOffset(0xF79CD816E3F3C965);
+      }
+      return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _NumberOfChildrenOffset = new(() => Schema.GetOffset(0xF79CD8160275D868), LazyThreadSafetyMode.None);
+  private static nint? _NumberOfChildrenOffset;
 
   public CParticleCollectionFloatInput NumberOfChildren {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _NumberOfChildrenOffset.Value);
+    get {
+      if (_NumberOfChildrenOffset == null) {
+        _NumberOfChildrenOffset = Schema.GetOffset(0xF79CD8160275D868);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _NumberOfChildrenOffset!.Value);
+    }
   }
 
 

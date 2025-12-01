@@ -17,30 +17,55 @@ internal partial class CMorphRectDataImpl : SchemaClass, CMorphRectData {
   public CMorphRectDataImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _XLeftDstOffset = new(() => Schema.GetOffset(0xB12257C224FC92D5), LazyThreadSafetyMode.None);
+  private static nint? _XLeftDstOffset;
 
   public ref short XLeftDst {
-    get => ref _Handle.AsRef<short>(_XLeftDstOffset.Value);
+    get {
+      if (_XLeftDstOffset == null) {
+        _XLeftDstOffset = Schema.GetOffset(0xB12257C224FC92D5);
+      }
+      return ref _Handle.AsRef<short>(_XLeftDstOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _YTopDstOffset = new(() => Schema.GetOffset(0xB12257C291EBF0D2), LazyThreadSafetyMode.None);
+  private static nint? _YTopDstOffset;
 
   public ref short YTopDst {
-    get => ref _Handle.AsRef<short>(_YTopDstOffset.Value);
+    get {
+      if (_YTopDstOffset == null) {
+        _YTopDstOffset = Schema.GetOffset(0xB12257C291EBF0D2);
+      }
+      return ref _Handle.AsRef<short>(_YTopDstOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UWidthSrcOffset = new(() => Schema.GetOffset(0xB12257C29F37ECB8), LazyThreadSafetyMode.None);
+  private static nint? _UWidthSrcOffset;
 
   public ref float UWidthSrc {
-    get => ref _Handle.AsRef<float>(_UWidthSrcOffset.Value);
+    get {
+      if (_UWidthSrcOffset == null) {
+        _UWidthSrcOffset = Schema.GetOffset(0xB12257C29F37ECB8);
+      }
+      return ref _Handle.AsRef<float>(_UWidthSrcOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VHeightSrcOffset = new(() => Schema.GetOffset(0xB12257C230C84BA2), LazyThreadSafetyMode.None);
+  private static nint? _VHeightSrcOffset;
 
   public ref float VHeightSrc {
-    get => ref _Handle.AsRef<float>(_VHeightSrcOffset.Value);
+    get {
+      if (_VHeightSrcOffset == null) {
+        _VHeightSrcOffset = Schema.GetOffset(0xB12257C230C84BA2);
+      }
+      return ref _Handle.AsRef<float>(_VHeightSrcOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _BundleDatasOffset = new(() => Schema.GetOffset(0xB12257C255A3B6A2), LazyThreadSafetyMode.None);
+  private static nint? _BundleDatasOffset;
 
   public ref CUtlVector<CMorphBundleData> BundleDatas {
-    get => ref _Handle.AsRef<CUtlVector<CMorphBundleData>>(_BundleDatasOffset.Value);
+    get {
+      if (_BundleDatasOffset == null) {
+        _BundleDatasOffset = Schema.GetOffset(0xB12257C255A3B6A2);
+      }
+      return ref _Handle.AsRef<CUtlVector<CMorphBundleData>>(_BundleDatasOffset!.Value);
+    }
   }
 
 

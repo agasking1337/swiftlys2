@@ -17,15 +17,25 @@ internal partial class FeBandBendLimit_tImpl : SchemaClass, FeBandBendLimit_t {
   public FeBandBendLimit_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _DistMinOffset = new(() => Schema.GetOffset(0xB667406005D5EE89), LazyThreadSafetyMode.None);
+  private static nint? _DistMinOffset;
 
   public ref float DistMin {
-    get => ref _Handle.AsRef<float>(_DistMinOffset.Value);
+    get {
+      if (_DistMinOffset == null) {
+        _DistMinOffset = Schema.GetOffset(0xB667406005D5EE89);
+      }
+      return ref _Handle.AsRef<float>(_DistMinOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DistMaxOffset = new(() => Schema.GetOffset(0xB6674060F7C250C7), LazyThreadSafetyMode.None);
+  private static nint? _DistMaxOffset;
 
   public ref float DistMax {
-    get => ref _Handle.AsRef<float>(_DistMaxOffset.Value);
+    get {
+      if (_DistMaxOffset == null) {
+        _DistMaxOffset = Schema.GetOffset(0xB6674060F7C250C7);
+      }
+      return ref _Handle.AsRef<float>(_DistMaxOffset!.Value);
+    }
   }
   public ISchemaFixedArray<ushort> Node {
     get => new SchemaFixedArray<ushort>(_Handle, 0xB6674060CD6694B9, 6, 2, 2);

@@ -17,34 +17,62 @@ internal partial class C_OP_CreateParticleSystemRendererImpl : CParticleFunction
   public C_OP_CreateParticleSystemRendererImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EffectOffset = new(() => Schema.GetOffset(0xB86C827DC5CEB052), LazyThreadSafetyMode.None);
+  private static nint? _EffectOffset;
 
   public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect {
-    get => ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectOffset.Value);
+    get {
+      if (_EffectOffset == null) {
+        _EffectOffset = Schema.GetOffset(0xB86C827DC5CEB052);
+      }
+      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventTypeOffset = new(() => Schema.GetOffset(0xB86C827DE1F9AA93), LazyThreadSafetyMode.None);
+  private static nint? _EventTypeOffset;
 
   public ref EventTypeSelection_t EventType {
-    get => ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset.Value);
+    get {
+      if (_EventTypeOffset == null) {
+        _EventTypeOffset = Schema.GetOffset(0xB86C827DE1F9AA93);
+      }
+      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CPsOffset = new(() => Schema.GetOffset(0xB86C827DE280356F), LazyThreadSafetyMode.None);
+  private static nint? _CPsOffset;
 
   public ref CUtlLeanVector<CPAssignment_t, int> CPs {
-    get => ref _Handle.AsRef<CUtlLeanVector<CPAssignment_t, int>>(_CPsOffset.Value);
+    get {
+      if (_CPsOffset == null) {
+        _CPsOffset = Schema.GetOffset(0xB86C827DE280356F);
+      }
+      return ref _Handle.AsRef<CUtlLeanVector<CPAssignment_t, int>>(_CPsOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParticleConfigOffset = new(() => Schema.GetOffset(0xB86C827D467A5C4C), LazyThreadSafetyMode.None);
+  private static nint? _ParticleConfigOffset;
 
   public string ParticleConfig {
     get {
-      var ptr = _Handle.Read<nint>(_ParticleConfigOffset.Value);
+      if (_ParticleConfigOffset == null) {
+        _ParticleConfigOffset = Schema.GetOffset(0xB86C827D467A5C4C);
+      }
+      var ptr = _Handle.Read<nint>(_ParticleConfigOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _ParticleConfigOffset.Value, value);
+    set {
+      if (_ParticleConfigOffset == null) {
+        _ParticleConfigOffset = Schema.GetOffset(0xB86C827D467A5C4C);
+      }
+      Schema.SetString(_Handle, _ParticleConfigOffset!.Value, value);
+    }
   } 
-  private static readonly Lazy<nint> _AggregationPosOffset = new(() => Schema.GetOffset(0xB86C827D49456289), LazyThreadSafetyMode.None);
+  private static nint? _AggregationPosOffset;
 
   public CPerParticleVecInput AggregationPos {
-    get => new CPerParticleVecInputImpl(_Handle + _AggregationPosOffset.Value);
+    get {
+      if (_AggregationPosOffset == null) {
+        _AggregationPosOffset = Schema.GetOffset(0xB86C827D49456289);
+      }
+      return new CPerParticleVecInputImpl(_Handle + _AggregationPosOffset!.Value);
+    }
   }
 
 

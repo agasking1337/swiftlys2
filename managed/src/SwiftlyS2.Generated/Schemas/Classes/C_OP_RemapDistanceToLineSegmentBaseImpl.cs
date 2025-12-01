@@ -17,30 +17,55 @@ internal partial class C_OP_RemapDistanceToLineSegmentBaseImpl : CParticleFuncti
   public C_OP_RemapDistanceToLineSegmentBaseImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _CP0Offset = new(() => Schema.GetOffset(0xD8219F7AD3B1E3E6), LazyThreadSafetyMode.None);
+  private static nint? _CP0Offset;
 
   public ref int CP0 {
-    get => ref _Handle.AsRef<int>(_CP0Offset.Value);
+    get {
+      if (_CP0Offset == null) {
+        _CP0Offset = Schema.GetOffset(0xD8219F7AD3B1E3E6);
+      }
+      return ref _Handle.AsRef<int>(_CP0Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _CP1Offset = new(() => Schema.GetOffset(0xD8219F7AD4B1E579), LazyThreadSafetyMode.None);
+  private static nint? _CP1Offset;
 
   public ref int CP1 {
-    get => ref _Handle.AsRef<int>(_CP1Offset.Value);
+    get {
+      if (_CP1Offset == null) {
+        _CP1Offset = Schema.GetOffset(0xD8219F7AD4B1E579);
+      }
+      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinInputValueOffset = new(() => Schema.GetOffset(0xD8219F7ABDB4BC64), LazyThreadSafetyMode.None);
+  private static nint? _MinInputValueOffset;
 
   public ref float MinInputValue {
-    get => ref _Handle.AsRef<float>(_MinInputValueOffset.Value);
+    get {
+      if (_MinInputValueOffset == null) {
+        _MinInputValueOffset = Schema.GetOffset(0xD8219F7ABDB4BC64);
+      }
+      return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxInputValueOffset = new(() => Schema.GetOffset(0xD8219F7A3EF75C2A), LazyThreadSafetyMode.None);
+  private static nint? _MaxInputValueOffset;
 
   public ref float MaxInputValue {
-    get => ref _Handle.AsRef<float>(_MaxInputValueOffset.Value);
+    get {
+      if (_MaxInputValueOffset == null) {
+        _MaxInputValueOffset = Schema.GetOffset(0xD8219F7A3EF75C2A);
+      }
+      return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InfiniteLineOffset = new(() => Schema.GetOffset(0xD8219F7A9C5BC47F), LazyThreadSafetyMode.None);
+  private static nint? _InfiniteLineOffset;
 
   public ref bool InfiniteLine {
-    get => ref _Handle.AsRef<bool>(_InfiniteLineOffset.Value);
+    get {
+      if (_InfiniteLineOffset == null) {
+        _InfiniteLineOffset = Schema.GetOffset(0xD8219F7A9C5BC47F);
+      }
+      return ref _Handle.AsRef<bool>(_InfiniteLineOffset!.Value);
+    }
   }
 
 

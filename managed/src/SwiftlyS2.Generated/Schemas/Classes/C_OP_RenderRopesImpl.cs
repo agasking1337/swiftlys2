@@ -17,165 +17,325 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
   public C_OP_RenderRopesImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EnableFadingAndClampingOffset = new(() => Schema.GetOffset(0x9BCDD8B21BC56ADD), LazyThreadSafetyMode.None);
+  private static nint? _EnableFadingAndClampingOffset;
 
   public ref bool EnableFadingAndClamping {
-    get => ref _Handle.AsRef<bool>(_EnableFadingAndClampingOffset.Value);
+    get {
+      if (_EnableFadingAndClampingOffset == null) {
+        _EnableFadingAndClampingOffset = Schema.GetOffset(0x9BCDD8B21BC56ADD);
+      }
+      return ref _Handle.AsRef<bool>(_EnableFadingAndClampingOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinSizeOffset = new(() => Schema.GetOffset(0x9BCDD8B2BDC3B198), LazyThreadSafetyMode.None);
+  private static nint? _MinSizeOffset;
 
   public ref float MinSize {
-    get => ref _Handle.AsRef<float>(_MinSizeOffset.Value);
+    get {
+      if (_MinSizeOffset == null) {
+        _MinSizeOffset = Schema.GetOffset(0x9BCDD8B2BDC3B198);
+      }
+      return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxSizeOffset = new(() => Schema.GetOffset(0x9BCDD8B28CA4E6BE), LazyThreadSafetyMode.None);
+  private static nint? _MaxSizeOffset;
 
   public ref float MaxSize {
-    get => ref _Handle.AsRef<float>(_MaxSizeOffset.Value);
+    get {
+      if (_MaxSizeOffset == null) {
+        _MaxSizeOffset = Schema.GetOffset(0x9BCDD8B28CA4E6BE);
+      }
+      return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartFadeSizeOffset = new(() => Schema.GetOffset(0x9BCDD8B2BA251D92), LazyThreadSafetyMode.None);
+  private static nint? _StartFadeSizeOffset;
 
   public ref float StartFadeSize {
-    get => ref _Handle.AsRef<float>(_StartFadeSizeOffset.Value);
+    get {
+      if (_StartFadeSizeOffset == null) {
+        _StartFadeSizeOffset = Schema.GetOffset(0x9BCDD8B2BA251D92);
+      }
+      return ref _Handle.AsRef<float>(_StartFadeSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndFadeSizeOffset = new(() => Schema.GetOffset(0x9BCDD8B22D3FD423), LazyThreadSafetyMode.None);
+  private static nint? _EndFadeSizeOffset;
 
   public ref float EndFadeSize {
-    get => ref _Handle.AsRef<float>(_EndFadeSizeOffset.Value);
+    get {
+      if (_EndFadeSizeOffset == null) {
+        _EndFadeSizeOffset = Schema.GetOffset(0x9BCDD8B22D3FD423);
+      }
+      return ref _Handle.AsRef<float>(_EndFadeSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartFadeDotOffset = new(() => Schema.GetOffset(0x9BCDD8B2A5D81E0E), LazyThreadSafetyMode.None);
+  private static nint? _StartFadeDotOffset;
 
   public ref float StartFadeDot {
-    get => ref _Handle.AsRef<float>(_StartFadeDotOffset.Value);
+    get {
+      if (_StartFadeDotOffset == null) {
+        _StartFadeDotOffset = Schema.GetOffset(0x9BCDD8B2A5D81E0E);
+      }
+      return ref _Handle.AsRef<float>(_StartFadeDotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EndFadeDotOffset = new(() => Schema.GetOffset(0x9BCDD8B2D549B121), LazyThreadSafetyMode.None);
+  private static nint? _EndFadeDotOffset;
 
   public ref float EndFadeDot {
-    get => ref _Handle.AsRef<float>(_EndFadeDotOffset.Value);
+    get {
+      if (_EndFadeDotOffset == null) {
+        _EndFadeDotOffset = Schema.GetOffset(0x9BCDD8B2D549B121);
+      }
+      return ref _Handle.AsRef<float>(_EndFadeDotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _RadiusTaperOffset = new(() => Schema.GetOffset(0x9BCDD8B26362520D), LazyThreadSafetyMode.None);
+  private static nint? _RadiusTaperOffset;
 
   public ref float RadiusTaper {
-    get => ref _Handle.AsRef<float>(_RadiusTaperOffset.Value);
+    get {
+      if (_RadiusTaperOffset == null) {
+        _RadiusTaperOffset = Schema.GetOffset(0x9BCDD8B26362520D);
+      }
+      return ref _Handle.AsRef<float>(_RadiusTaperOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MinTesselationOffset = new(() => Schema.GetOffset(0x9BCDD8B2ECCEE8B4), LazyThreadSafetyMode.None);
+  private static nint? _MinTesselationOffset;
 
   public ref int MinTesselation {
-    get => ref _Handle.AsRef<int>(_MinTesselationOffset.Value);
+    get {
+      if (_MinTesselationOffset == null) {
+        _MinTesselationOffset = Schema.GetOffset(0x9BCDD8B2ECCEE8B4);
+      }
+      return ref _Handle.AsRef<int>(_MinTesselationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxTesselationOffset = new(() => Schema.GetOffset(0x9BCDD8B2B609C442), LazyThreadSafetyMode.None);
+  private static nint? _MaxTesselationOffset;
 
   public ref int MaxTesselation {
-    get => ref _Handle.AsRef<int>(_MaxTesselationOffset.Value);
+    get {
+      if (_MaxTesselationOffset == null) {
+        _MaxTesselationOffset = Schema.GetOffset(0x9BCDD8B2B609C442);
+      }
+      return ref _Handle.AsRef<int>(_MaxTesselationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TessScaleOffset = new(() => Schema.GetOffset(0x9BCDD8B2EE9C9570), LazyThreadSafetyMode.None);
+  private static nint? _TessScaleOffset;
 
   public ref float TessScale {
-    get => ref _Handle.AsRef<float>(_TessScaleOffset.Value);
+    get {
+      if (_TessScaleOffset == null) {
+        _TessScaleOffset = Schema.GetOffset(0x9BCDD8B2EE9C9570);
+      }
+      return ref _Handle.AsRef<float>(_TessScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureVWorldSizeOffset = new(() => Schema.GetOffset(0x9BCDD8B230B8BF35), LazyThreadSafetyMode.None);
+  private static nint? _TextureVWorldSizeOffset;
 
   public CParticleCollectionRendererFloatInput TextureVWorldSize {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVWorldSizeOffset.Value);
+    get {
+      if (_TextureVWorldSizeOffset == null) {
+        _TextureVWorldSizeOffset = Schema.GetOffset(0x9BCDD8B230B8BF35);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVWorldSizeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureVScrollRateOffset = new(() => Schema.GetOffset(0x9BCDD8B2DC8A591B), LazyThreadSafetyMode.None);
+  private static nint? _TextureVScrollRateOffset;
 
   public CParticleCollectionRendererFloatInput TextureVScrollRate {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVScrollRateOffset.Value);
+    get {
+      if (_TextureVScrollRateOffset == null) {
+        _TextureVScrollRateOffset = Schema.GetOffset(0x9BCDD8B2DC8A591B);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVScrollRateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureVOffsetOffset = new(() => Schema.GetOffset(0x9BCDD8B21502ED5B), LazyThreadSafetyMode.None);
+  private static nint? _TextureVOffsetOffset;
 
   public CParticleCollectionRendererFloatInput TextureVOffset {
-    get => new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVOffsetOffset.Value);
+    get {
+      if (_TextureVOffsetOffset == null) {
+        _TextureVOffsetOffset = Schema.GetOffset(0x9BCDD8B21502ED5B);
+      }
+      return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVOffsetOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _TextureVParamsCPOffset = new(() => Schema.GetOffset(0x9BCDD8B2264B3E6B), LazyThreadSafetyMode.None);
+  private static nint? _TextureVParamsCPOffset;
 
   public ref int TextureVParamsCP {
-    get => ref _Handle.AsRef<int>(_TextureVParamsCPOffset.Value);
+    get {
+      if (_TextureVParamsCPOffset == null) {
+        _TextureVParamsCPOffset = Schema.GetOffset(0x9BCDD8B2264B3E6B);
+      }
+      return ref _Handle.AsRef<int>(_TextureVParamsCPOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClampVOffset = new(() => Schema.GetOffset(0x9BCDD8B2D02C13FE), LazyThreadSafetyMode.None);
+  private static nint? _ClampVOffset;
 
   public ref bool ClampV {
-    get => ref _Handle.AsRef<bool>(_ClampVOffset.Value);
+    get {
+      if (_ClampVOffset == null) {
+        _ClampVOffset = Schema.GetOffset(0x9BCDD8B2D02C13FE);
+      }
+      return ref _Handle.AsRef<bool>(_ClampVOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleCP1Offset = new(() => Schema.GetOffset(0x9BCDD8B2B0AB7175), LazyThreadSafetyMode.None);
+  private static nint? _ScaleCP1Offset;
 
   public ref int ScaleCP1 {
-    get => ref _Handle.AsRef<int>(_ScaleCP1Offset.Value);
+    get {
+      if (_ScaleCP1Offset == null) {
+        _ScaleCP1Offset = Schema.GetOffset(0x9BCDD8B2B0AB7175);
+      }
+      return ref _Handle.AsRef<int>(_ScaleCP1Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleCP2Offset = new(() => Schema.GetOffset(0x9BCDD8B2ADAB6CBC), LazyThreadSafetyMode.None);
+  private static nint? _ScaleCP2Offset;
 
   public ref int ScaleCP2 {
-    get => ref _Handle.AsRef<int>(_ScaleCP2Offset.Value);
+    get {
+      if (_ScaleCP2Offset == null) {
+        _ScaleCP2Offset = Schema.GetOffset(0x9BCDD8B2ADAB6CBC);
+      }
+      return ref _Handle.AsRef<int>(_ScaleCP2Offset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleVSizeByControlPointDistanceOffset = new(() => Schema.GetOffset(0x9BCDD8B22B989321), LazyThreadSafetyMode.None);
+  private static nint? _ScaleVSizeByControlPointDistanceOffset;
 
   public ref float ScaleVSizeByControlPointDistance {
-    get => ref _Handle.AsRef<float>(_ScaleVSizeByControlPointDistanceOffset.Value);
+    get {
+      if (_ScaleVSizeByControlPointDistanceOffset == null) {
+        _ScaleVSizeByControlPointDistanceOffset = Schema.GetOffset(0x9BCDD8B22B989321);
+      }
+      return ref _Handle.AsRef<float>(_ScaleVSizeByControlPointDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleVScrollByControlPointDistanceOffset = new(() => Schema.GetOffset(0x9BCDD8B2E2B0C749), LazyThreadSafetyMode.None);
+  private static nint? _ScaleVScrollByControlPointDistanceOffset;
 
   public ref float ScaleVScrollByControlPointDistance {
-    get => ref _Handle.AsRef<float>(_ScaleVScrollByControlPointDistanceOffset.Value);
+    get {
+      if (_ScaleVScrollByControlPointDistanceOffset == null) {
+        _ScaleVScrollByControlPointDistanceOffset = Schema.GetOffset(0x9BCDD8B2E2B0C749);
+      }
+      return ref _Handle.AsRef<float>(_ScaleVScrollByControlPointDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScaleVOffsetByControlPointDistanceOffset = new(() => Schema.GetOffset(0x9BCDD8B271D6B21B), LazyThreadSafetyMode.None);
+  private static nint? _ScaleVOffsetByControlPointDistanceOffset;
 
   public ref float ScaleVOffsetByControlPointDistance {
-    get => ref _Handle.AsRef<float>(_ScaleVOffsetByControlPointDistanceOffset.Value);
+    get {
+      if (_ScaleVOffsetByControlPointDistanceOffset == null) {
+        _ScaleVOffsetByControlPointDistanceOffset = Schema.GetOffset(0x9BCDD8B271D6B21B);
+      }
+      return ref _Handle.AsRef<float>(_ScaleVOffsetByControlPointDistanceOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _UseScalarForTextureCoordinateOffset = new(() => Schema.GetOffset(0x9BCDD8B2BE8C7688), LazyThreadSafetyMode.None);
+  private static nint? _UseScalarForTextureCoordinateOffset;
 
   public ref bool UseScalarForTextureCoordinate {
-    get => ref _Handle.AsRef<bool>(_UseScalarForTextureCoordinateOffset.Value);
+    get {
+      if (_UseScalarForTextureCoordinateOffset == null) {
+        _UseScalarForTextureCoordinateOffset = Schema.GetOffset(0x9BCDD8B2BE8C7688);
+      }
+      return ref _Handle.AsRef<bool>(_UseScalarForTextureCoordinateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScalarFieldForTextureCoordinateOffset = new(() => Schema.GetOffset(0x9BCDD8B2455C28F7), LazyThreadSafetyMode.None);
+  private static nint? _ScalarFieldForTextureCoordinateOffset;
 
   public ParticleAttributeIndex_t ScalarFieldForTextureCoordinate {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _ScalarFieldForTextureCoordinateOffset.Value);
+    get {
+      if (_ScalarFieldForTextureCoordinateOffset == null) {
+        _ScalarFieldForTextureCoordinateOffset = Schema.GetOffset(0x9BCDD8B2455C28F7);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _ScalarFieldForTextureCoordinateOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ScalarAttributeTextureCoordScaleOffset = new(() => Schema.GetOffset(0x9BCDD8B279F074DD), LazyThreadSafetyMode.None);
+  private static nint? _ScalarAttributeTextureCoordScaleOffset;
 
   public ref float ScalarAttributeTextureCoordScale {
-    get => ref _Handle.AsRef<float>(_ScalarAttributeTextureCoordScaleOffset.Value);
+    get {
+      if (_ScalarAttributeTextureCoordScaleOffset == null) {
+        _ScalarAttributeTextureCoordScaleOffset = Schema.GetOffset(0x9BCDD8B279F074DD);
+      }
+      return ref _Handle.AsRef<float>(_ScalarAttributeTextureCoordScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ReverseOrderOffset = new(() => Schema.GetOffset(0x9BCDD8B212C75F97), LazyThreadSafetyMode.None);
+  private static nint? _ReverseOrderOffset;
 
   public ref bool ReverseOrder {
-    get => ref _Handle.AsRef<bool>(_ReverseOrderOffset.Value);
+    get {
+      if (_ReverseOrderOffset == null) {
+        _ReverseOrderOffset = Schema.GetOffset(0x9BCDD8B212C75F97);
+      }
+      return ref _Handle.AsRef<bool>(_ReverseOrderOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ClosedLoopOffset = new(() => Schema.GetOffset(0x9BCDD8B27C20D1AB), LazyThreadSafetyMode.None);
+  private static nint? _ClosedLoopOffset;
 
   public ref bool ClosedLoop {
-    get => ref _Handle.AsRef<bool>(_ClosedLoopOffset.Value);
+    get {
+      if (_ClosedLoopOffset == null) {
+        _ClosedLoopOffset = Schema.GetOffset(0x9BCDD8B27C20D1AB);
+      }
+      return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SplitFieldOffset = new(() => Schema.GetOffset(0x9BCDD8B205F58FA9), LazyThreadSafetyMode.None);
+  private static nint? _SplitFieldOffset;
 
   public ParticleAttributeIndex_t SplitField {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _SplitFieldOffset.Value);
+    get {
+      if (_SplitFieldOffset == null) {
+        _SplitFieldOffset = Schema.GetOffset(0x9BCDD8B205F58FA9);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _SplitFieldOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SortBySegmentIDOffset = new(() => Schema.GetOffset(0x9BCDD8B246C71BC4), LazyThreadSafetyMode.None);
+  private static nint? _SortBySegmentIDOffset;
 
   public ref bool SortBySegmentID {
-    get => ref _Handle.AsRef<bool>(_SortBySegmentIDOffset.Value);
+    get {
+      if (_SortBySegmentIDOffset == null) {
+        _SortBySegmentIDOffset = Schema.GetOffset(0x9BCDD8B246C71BC4);
+      }
+      return ref _Handle.AsRef<bool>(_SortBySegmentIDOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _OrientationTypeOffset = new(() => Schema.GetOffset(0x9BCDD8B2931FA045), LazyThreadSafetyMode.None);
+  private static nint? _OrientationTypeOffset;
 
   public ref ParticleOrientationChoiceList_t OrientationType {
-    get => ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset.Value);
+    get {
+      if (_OrientationTypeOffset == null) {
+        _OrientationTypeOffset = Schema.GetOffset(0x9BCDD8B2931FA045);
+      }
+      return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _VectorFieldForOrientationOffset = new(() => Schema.GetOffset(0x9BCDD8B2D2DFF7F5), LazyThreadSafetyMode.None);
+  private static nint? _VectorFieldForOrientationOffset;
 
   public ParticleAttributeIndex_t VectorFieldForOrientation {
-    get => new ParticleAttributeIndex_tImpl(_Handle + _VectorFieldForOrientationOffset.Value);
+    get {
+      if (_VectorFieldForOrientationOffset == null) {
+        _VectorFieldForOrientationOffset = Schema.GetOffset(0x9BCDD8B2D2DFF7F5);
+      }
+      return new ParticleAttributeIndex_tImpl(_Handle + _VectorFieldForOrientationOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _DrawAsOpaqueOffset = new(() => Schema.GetOffset(0x9BCDD8B23556AEE4), LazyThreadSafetyMode.None);
+  private static nint? _DrawAsOpaqueOffset;
 
   public ref bool DrawAsOpaque {
-    get => ref _Handle.AsRef<bool>(_DrawAsOpaqueOffset.Value);
+    get {
+      if (_DrawAsOpaqueOffset == null) {
+        _DrawAsOpaqueOffset = Schema.GetOffset(0x9BCDD8B23556AEE4);
+      }
+      return ref _Handle.AsRef<bool>(_DrawAsOpaqueOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _GenerateNormalsOffset = new(() => Schema.GetOffset(0x9BCDD8B20FBDD8F6), LazyThreadSafetyMode.None);
+  private static nint? _GenerateNormalsOffset;
 
   public ref bool GenerateNormals {
-    get => ref _Handle.AsRef<bool>(_GenerateNormalsOffset.Value);
+    get {
+      if (_GenerateNormalsOffset == null) {
+        _GenerateNormalsOffset = Schema.GetOffset(0x9BCDD8B20FBDD8F6);
+      }
+      return ref _Handle.AsRef<bool>(_GenerateNormalsOffset!.Value);
+    }
   }
 
 

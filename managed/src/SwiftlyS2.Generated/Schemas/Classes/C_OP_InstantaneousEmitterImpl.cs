@@ -17,49 +17,92 @@ internal partial class C_OP_InstantaneousEmitterImpl : CParticleFunctionEmitterI
   public C_OP_InstantaneousEmitterImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _ParticlesToEmitOffset = new(() => Schema.GetOffset(0x39132039B1A158C6), LazyThreadSafetyMode.None);
+  private static nint? _ParticlesToEmitOffset;
 
   public CParticleCollectionFloatInput ParticlesToEmit {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ParticlesToEmitOffset.Value);
+    get {
+      if (_ParticlesToEmitOffset == null) {
+        _ParticlesToEmitOffset = Schema.GetOffset(0x39132039B1A158C6);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ParticlesToEmitOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x3913203967FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public CParticleCollectionFloatInput StartTime {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x3913203967FE9DC4);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _InitFromKilledParentParticlesOffset = new(() => Schema.GetOffset(0x39132039269B492F), LazyThreadSafetyMode.None);
+  private static nint? _InitFromKilledParentParticlesOffset;
 
   public ref float InitFromKilledParentParticles {
-    get => ref _Handle.AsRef<float>(_InitFromKilledParentParticlesOffset.Value);
+    get {
+      if (_InitFromKilledParentParticlesOffset == null) {
+        _InitFromKilledParentParticlesOffset = Schema.GetOffset(0x39132039269B492F);
+      }
+      return ref _Handle.AsRef<float>(_InitFromKilledParentParticlesOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _EventTypeOffset = new(() => Schema.GetOffset(0x39132039E1F9AA93), LazyThreadSafetyMode.None);
+  private static nint? _EventTypeOffset;
 
   public ref EventTypeSelection_t EventType {
-    get => ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset.Value);
+    get {
+      if (_EventTypeOffset == null) {
+        _EventTypeOffset = Schema.GetOffset(0x39132039E1F9AA93);
+      }
+      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _ParentParticleScaleOffset = new(() => Schema.GetOffset(0x3913203967144ED5), LazyThreadSafetyMode.None);
+  private static nint? _ParentParticleScaleOffset;
 
   public CParticleCollectionFloatInput ParentParticleScale {
-    get => new CParticleCollectionFloatInputImpl(_Handle + _ParentParticleScaleOffset.Value);
+    get {
+      if (_ParentParticleScaleOffset == null) {
+        _ParentParticleScaleOffset = Schema.GetOffset(0x3913203967144ED5);
+      }
+      return new CParticleCollectionFloatInputImpl(_Handle + _ParentParticleScaleOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MaxEmittedPerFrameOffset = new(() => Schema.GetOffset(0x3913203970B62EBB), LazyThreadSafetyMode.None);
+  private static nint? _MaxEmittedPerFrameOffset;
 
   public ref int MaxEmittedPerFrame {
-    get => ref _Handle.AsRef<int>(_MaxEmittedPerFrameOffset.Value);
+    get {
+      if (_MaxEmittedPerFrameOffset == null) {
+        _MaxEmittedPerFrameOffset = Schema.GetOffset(0x3913203970B62EBB);
+      }
+      return ref _Handle.AsRef<int>(_MaxEmittedPerFrameOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _SnapshotControlPointOffset = new(() => Schema.GetOffset(0x39132039192638EC), LazyThreadSafetyMode.None);
+  private static nint? _SnapshotControlPointOffset;
 
   public ref int SnapshotControlPoint {
-    get => ref _Handle.AsRef<int>(_SnapshotControlPointOffset.Value);
+    get {
+      if (_SnapshotControlPointOffset == null) {
+        _SnapshotControlPointOffset = Schema.GetOffset(0x39132039192638EC);
+      }
+      return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StrSnapshotSubsetOffset = new(() => Schema.GetOffset(0x39132039BD8A8E5E), LazyThreadSafetyMode.None);
+  private static nint? _StrSnapshotSubsetOffset;
 
   public string StrSnapshotSubset {
     get {
-      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset.Value);
+      if (_StrSnapshotSubsetOffset == null) {
+        _StrSnapshotSubsetOffset = Schema.GetOffset(0x39132039BD8A8E5E);
+      }
+      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value);
       return Schema.GetString(ptr);
     }
-    set => Schema.SetString(_Handle, _StrSnapshotSubsetOffset.Value, value);
+    set {
+      if (_StrSnapshotSubsetOffset == null) {
+        _StrSnapshotSubsetOffset = Schema.GetOffset(0x39132039BD8A8E5E);
+      }
+      Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
+    }
   } 
 
 

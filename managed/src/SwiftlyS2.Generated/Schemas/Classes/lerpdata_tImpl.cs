@@ -17,35 +17,65 @@ internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t {
   public lerpdata_tImpl(nint handle) : base(handle) {
   }
 
-  private static readonly Lazy<nint> _EntOffset = new(() => Schema.GetOffset(0x70C58DAB8BBDB334), LazyThreadSafetyMode.None);
+  private static nint? _EntOffset;
 
   public ref CHandle<CBaseEntity> Ent {
-    get => ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset.Value);
+    get {
+      if (_EntOffset == null) {
+        _EntOffset = Schema.GetOffset(0x70C58DAB8BBDB334);
+      }
+      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _MoveTypeOffset = new(() => Schema.GetOffset(0x70C58DAB90BCCC1C), LazyThreadSafetyMode.None);
+  private static nint? _MoveTypeOffset;
 
   public ref MoveType_t MoveType {
-    get => ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset.Value);
+    get {
+      if (_MoveTypeOffset == null) {
+        _MoveTypeOffset = Schema.GetOffset(0x70C58DAB90BCCC1C);
+      }
+      return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartTimeOffset = new(() => Schema.GetOffset(0x70C58DAB67FE9DC4), LazyThreadSafetyMode.None);
+  private static nint? _StartTimeOffset;
 
   public GameTime_t StartTime {
-    get => new GameTime_tImpl(_Handle + _StartTimeOffset.Value);
+    get {
+      if (_StartTimeOffset == null) {
+        _StartTimeOffset = Schema.GetOffset(0x70C58DAB67FE9DC4);
+      }
+      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartOriginOffset = new(() => Schema.GetOffset(0x70C58DAB7C574331), LazyThreadSafetyMode.None);
+  private static nint? _StartOriginOffset;
 
   public ref Vector StartOrigin {
-    get => ref _Handle.AsRef<Vector>(_StartOriginOffset.Value);
+    get {
+      if (_StartOriginOffset == null) {
+        _StartOriginOffset = Schema.GetOffset(0x70C58DAB7C574331);
+      }
+      return ref _Handle.AsRef<Vector>(_StartOriginOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _StartRotOffset = new(() => Schema.GetOffset(0x70C58DAB6246A06D), LazyThreadSafetyMode.None);
+  private static nint? _StartRotOffset;
 
   public ref Quaternion StartRot {
-    get => ref _Handle.AsRef<Quaternion>(_StartRotOffset.Value);
+    get {
+      if (_StartRotOffset == null) {
+        _StartRotOffset = Schema.GetOffset(0x70C58DAB6246A06D);
+      }
+      return ref _Handle.AsRef<Quaternion>(_StartRotOffset!.Value);
+    }
   }
-  private static readonly Lazy<nint> _FXIndexOffset = new(() => Schema.GetOffset(0x70C58DAB1E8452FD), LazyThreadSafetyMode.None);
+  private static nint? _FXIndexOffset;
 
   public ParticleIndex_t FXIndex {
-    get => new ParticleIndex_tImpl(_Handle + _FXIndexOffset.Value);
+    get {
+      if (_FXIndexOffset == null) {
+        _FXIndexOffset = Schema.GetOffset(0x70C58DAB1E8452FD);
+      }
+      return new ParticleIndex_tImpl(_Handle + _FXIndexOffset!.Value);
+    }
   }
 
 
